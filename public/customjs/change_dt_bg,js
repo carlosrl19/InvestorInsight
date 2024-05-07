@@ -1,0 +1,9 @@
+function changeTheme(theme) {
+    if (theme === 'dark') {
+        // Cambia el estilo del Datatable para el tema oscuro
+        document.getElementById('datatable').classList.add('datatable-dark');
+    } else if (theme === 'light') {
+        // Cambia el estilo del Datatable para el tema claro
+        document.getElementById('datatable').classList.remove('datatable-dark');
+    }
+}

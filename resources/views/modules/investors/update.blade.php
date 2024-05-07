@@ -9,28 +9,10 @@ Editar información
 @endsection
 
 @section('content')
-
-    @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" style="margin-left: 18vh; margin-right: 18vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="4000">
-        <strong>{{ session('success') }}</strong>
-    </div>
-    @endif
-    
-    @if ($errors->any())
-    <div class="alert alert-danger alert-dismissible" alert-dismissible fade show" style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="10000">
-        <strong>El formulario contiene los siguientes errores:</strong>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
     <div class="container-xl">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('investor.update', ['investor' => $investor->id]) }}" novalidate>
+                <form method="POST" action="{{ route('investor.update', ['investor' => $investor]) }}" novalidate>
                     @method('PUT')
                     @csrf
                     <div class="row mb-3 align-items-end">
