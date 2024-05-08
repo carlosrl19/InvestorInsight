@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('investor_dni');
             $table->string('investor_phone');
             $table->string('investor_reference');
-            $table->string('investor_status');
+            $table->boolean('investor_status')->default(1);
             $table->timestamps();
         });
     }

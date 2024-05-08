@@ -12,3 +12,6 @@ Route::resource('investor', 'App\Http\Controllers\InvestorController')->names('i
 
 // Commission Agent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');
+
+// Projects Agent
+Route::resource('project', 'App\Http\Controllers\ProjectController')->names('project');
