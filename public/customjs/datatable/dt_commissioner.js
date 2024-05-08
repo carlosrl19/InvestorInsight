@@ -146,7 +146,7 @@
             lengthMenu: "Mostrando _MENU_ registros por página",
             infoFiltered: "- Filtrado de _MAX_ registros.",
             info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-            emptyTable: "No se encontraron registros de inversionistas para mostrar.",
+            emptyTable: "No se encontraron registros de comisionistas para mostrar.",
             zeroRecords:
                 "No se encontraron registros que coincidan con la búsqueda.",
         },

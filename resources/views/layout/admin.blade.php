@@ -101,7 +101,7 @@
                           <a class="dropdown-item" href="{{ route("investor.index")}}">
                             <small>->&nbsp;</small>Inversionistas
                           </a>
-                          <a class="dropdown-item" href="">
+                          <a class="dropdown-item" href="{{ route("commission_agent.index")}}">
                             <small>->&nbsp;</small>Comisionistas
                           </a>
                         </div>

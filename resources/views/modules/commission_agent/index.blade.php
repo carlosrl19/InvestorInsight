@@ -13,12 +13,12 @@ Listado principal
 @endsection
 
 @section('title')
-Inversionistas
+Comisionistas
 @endsection
 
 @section('create')
 <a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-team">
-    + Nuevo inversionista
+    + Nuevo comisionista
 </a>
 @endsection
 
@@ -52,29 +52,19 @@ Inversionistas
                     <th>Nº Identidad</th>
                     <th>Teléfono</th>
                     <th>Referido por</th>
-                    <th>Estado / Disposición</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                    @foreach($investor as $i => $investor)
+                    @foreach($commission_agents as $i => $commission_agent)
                     <tr>
                         <td>{{ ++$i }}</td>
-                        <td>{{ $investor->investor_name }}</td>
-                        <td>{{ $investor->investor_dni }}</td>
-                        <td>{{ $investor->investor_phone }}</td>
-                        <td>{{ $investor->investor_reference }}</td>
+                        <td>{{ $commission_agent->commissioner_name }}</td>
+                        <td>{{ $commission_agent->commissioner_dni }}</td>
+                        <td>{{ $commission_agent->commissioner_phone }}</td>
+                        <td>{{ $commission_agent->commissioner_reference }}</td>
                         <td>
-                            @if($investor->investor_status == '1')
-                                <span class="badge bg-success me-1"></span> Disponible
-                            @elseif($investor->investor_status == '0')
-                                <span class="badge bg-orange me-1"></span> No disponible
-                            @else
-                                <span class="badge bg-red me-1"></span> Estado inválido
-                            @endif
-                        </td>
-                        <td>
-                            @include('modules.investors._delete')
+                            @include('modules.commission_agent._delete')
                             
                             <div class="btn-list flex-nowrap">
                                 <div class="dropdown">
@@ -88,11 +78,11 @@ Inversionistas
                                             &nbsp;Historial de inversionista
                                         </a>
                                         <small class="text-muted dropdown-item">Modificaciones</small>
-                                        <a class="dropdown-item" href="{{ route('investor.edit', $investor) }}">
+                                        <a class="dropdown-item" href="{{ route('commission_agent.edit', $commission_agent) }}">
                                             <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
                                             &nbsp;Actualizar información
                                         </a>
-                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $investor->id }}">
+                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $commission_agent->id }}">
                                             <svg class="text-red"  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
                                             &nbsp;Eliminar inversionista
                                         </a>
@@ -108,7 +98,7 @@ Inversionistas
     </div>
 </div>
 
-@include('modules.investors._create')
+@include('modules.commission_agent._create')
 @endsection
 
 @section('scripts')
@@ -119,6 +109,6 @@ Inversionistas
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_investor.js') }}"></script>
+<script src="{{ asset('customjs/datatable/dt_commissioner.js') }}"></script>
 
 @endsection
