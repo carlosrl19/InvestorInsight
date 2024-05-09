@@ -13,9 +13,7 @@ class Project extends Model
         'project_end_date',
         'project_investment',
         'project_total_worked_days',
-        'project_state',
-        'inversors_id',
-        'inversors_investment_amount',
-        'inversors_profit_perc',
+        'project_status',
+        'project_final_note',
     ];
 }

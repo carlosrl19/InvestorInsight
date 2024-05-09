@@ -54,6 +54,7 @@
 .select2-container .select2-search--inline .select2-search__field {
     box-sizing: border-box;
     border: none;
+    color: #333;
     font-size: 100%;
     margin-top: 5px;
     margin-left: 5px;
@@ -263,6 +264,7 @@
     .select2-selection--multiple
     .select2-selection__choice {
     background-color: #e4e4e4;
+    color: #333;
     border: 1px solid #aaa;
     border-radius: 4px;
     box-sizing: border-box;
