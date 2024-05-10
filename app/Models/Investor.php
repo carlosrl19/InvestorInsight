@@ -11,6 +11,7 @@ class Investor extends Model
         'investor_dni',
         'investor_phone',
         'investor_reference',
+        'investor_balance',
         'investor_status',
     ];
 }

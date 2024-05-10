@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('investor_name');
             $table->string('investor_dni');
             $table->string('investor_phone');
+            $table->decimal('investor_balance', 12,2); // max = 999,999,999.99
             $table->string('investor_reference');
             $table->boolean('investor_status')->default(1);
             $table->timestamps();

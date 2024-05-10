@@ -19,7 +19,6 @@ return new class extends Migration
             $table->boolean('project_status');
             $table->string('project_final_note')->nullable();
             $table->unsignedBigInteger('investor_id');
-            $table->decimal('investor_investment');
             $table->timestamps();
         });
     }

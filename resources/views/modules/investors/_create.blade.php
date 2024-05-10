@@ -37,6 +37,19 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
+                                <input type="number" name="investor_balance" step="any" value="{{ old('investor_balance') }}" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror"/>
+                                @error('investor_balance')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <label for="investor_balance">Saldo monetario</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-end">
+                        <div class="col">
+                            <div class="form-floating">
                                 <input type="text" name="investor_phone" value="{{ old('investor_phone') }}" id="investor_phone" class="form-control @error('investor_phone') is-invalid @enderror" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
                                 @error('investor_phone')
                                     <span class="invalid-feedback" role="alert">

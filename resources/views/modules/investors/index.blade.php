@@ -46,23 +46,29 @@ Inversionistas
       <div class="card-body">
         <table id="example" class="display table table-bordered">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>#</th>
                     <th>Nombre inversionista</th>
                     <th>Nº Identidad</th>
                     <th>Teléfono</th>
+                    <th>Saldo actual</th>
                     <th>Referido por</th>
-                    <th>Estado / Disposición</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                     @foreach($investor as $i => $investor)
-                    <tr>
+                    <tr class="text-center">
                         <td>{{ ++$i }}</td>
                         <td>{{ $investor->investor_name }}</td>
                         <td>{{ $investor->investor_dni }}</td>
                         <td>{{ $investor->investor_phone }}</td>
+                        @if($investor->investor_balance == 0)
+                            <td><span class="text-light badge bg-red">Lps. {{ number_format($investor->investor_balance,2) }}</span></td>
+                        @else
+                            <td>Lps. {{ number_format($investor->investor_balance,2) }}</td>
+                        @endif
                         <td>{{ $investor->investor_reference }}</td>
                         <td>
                             @if($investor->investor_status == '1')

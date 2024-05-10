@@ -15,6 +15,7 @@ class UpdateRequest extends FormRequest
             'investor_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/|unique:investors,investor_dni,' . $investorId . '',
             'investor_phone' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|unique:investors,investor_phone,' . $investorId . '',
             'investor_reference' => 'string|min:3|max:55|regex:/^[^\d]+$/',
+            'investor_balance' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'investor_status' => 'required|min:0|max:1',
         ];
     }
@@ -51,6 +52,12 @@ class UpdateRequest extends FormRequest
             'investor_reference.regex' => 'El recomendante no puede contener números ni símbolos.',
             'investor_reference.min' => 'El recomendante debe contener al menos 3 letras.',
             'investor_reference.max' => 'El recomendante no puede exceder 55 letras.',
+
+            // Investor balance messages
+            'investor_balance.required' => 'El saldo de la cuenta es obligatorio.',
+            'investor_balance.numeric' => 'El saldo de la cuenta solo debe contener números.',
+            'investor_balance.regex' => 'El saldo de la cuenta no puede contener letras ni símbolos.',
+            'investor_balance.min' => 'El saldo de la cuenta debe ser mayor o igual a 0.',
 
             // Investor status messages
             'investor_status.required' => 'El estado de disponibilidad del inversionista es obligatorio.',

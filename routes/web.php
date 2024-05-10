@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 // Dashboard
-Route::get('/', function() {
-    return view('modules.dashboard.index');
-});
+Route::resource('dashboard', 'App\Http\Controllers\DashboardController')->names('dashboard');
 
 // Investor
 Route::resource('investor', 'App\Http\Controllers\InvestorController')->names('investor');

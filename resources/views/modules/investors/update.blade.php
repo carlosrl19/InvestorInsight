@@ -34,9 +34,36 @@ Editar información /&nbsp;<b class="text-muted">{{ $investor->investor_name }}<
                                 </span>
                             @enderror
                         </div>
+                        <div class="col">
+                            <label class="form-label" for="investor_balance">Saldo monetario</label>
+                            <input type="number" value="{{ $investor->investor_balance }}" name="investor_balance" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror"/>
+                            @error('investor_balance')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <input type="hidden" name="investor_status" value="1">
                     </div>
                     <div class="row mb-3 align-items-end">
+                        <div class="col">
+                            <div class="form-label">Estado / Disposición a proyectos</div>
+                            <div>
+                                <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="investor_status" value="1" {{ $investor->investor_status == 1 ? 'checked' : '' }}>
+                                    <span class="form-check-label">Disponible</span>
+                                </label>
+                                <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="investor_status" value="0" {{ $investor->investor_status == 0 ? 'checked' : '' }}>
+                                    <span class="form-check-label">No disponible</span>
+                                </label>
+                            </div>
+                            @error('investor_status')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <div class="col">
                             <label class="form-label" for="investor_phone">Nº teléfono</label>
                             <input type="text" name="investor_phone" value="{{ $investor->investor_phone }}" id="investor_phone" class="form-control @error('investor_phone') is-invalid @enderror" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
