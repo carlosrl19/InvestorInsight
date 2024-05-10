@@ -13,8 +13,8 @@
                     <p class="text-left">Esta intentando eliminar a un inversionista, esta acción no se puede deshacer y eliminará el inversionista <strong style="text-transform: uppercase">{{ $investor->investor_name }}</strong>.</p>
 
                     <div class="mt-4 text-left">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Confirmar acción</button>
                     </div>
                 </div>
             </form>
