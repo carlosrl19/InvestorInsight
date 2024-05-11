@@ -11,7 +11,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="55" value="{{ old('commissioner_name') }}" name="commissioner_name" id="commissioner_name" class="form-control @error('commissioner_name') is-invalid @enderror" placeholder="Ingrese el nombre del comisionista" autocomplete="off"/>
+                                <input type="text" maxlength="55" name="commissioner_name" value="{{ old('commissioner_name') }}" id="commissioner_name" class="form-control @error('commissioner_name') is-invalid @enderror" autocomplete="off"/>
                                 @error('commissioner_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -22,8 +22,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="13" value="{{ old('commissioner_dni') }}" name="commissioner_dni" id="commissioner_dni" class="form-control @error('commissioner_dni') is-invalid @enderror" placeholder="Ingrese el número de identidad" autocomplete="off"/>
-                                @error('commissioner_dni')
+                                <input type="text" maxlength="13" name="commissioner_dni" value="{{ old('commissioner_dni') }}" id="commissioner_dni" class="form-control @error('commissioner_dni') is-invalid @enderror" autocomplete="off"/>
+                                @error('commissioner_dni')investor_name
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -46,13 +46,13 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="55" value="{{ old('commissioner_reference') }}" name="commissioner_reference" id="commissioner_reference" class="form-control @error('commissioner_reference') is-invalid @enderror" placeholder="Ingrese el nombre del recomendor" autocomplete="off"/>
-                                @error('commissioner_reference')
+                                <input type="text" maxlength="55" name="commissioner_reference" value="{{ old('commissioner_reference') }}" id="commissioner_reference" class="form-control @error('commissioner_reference') is-invalid @enderror" autocomplete="off"/>
+                                @error('commissioner_reference')investor_name
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label for="commissioner_reference">Referido por</label>
+                                <label for="commissioner_reference">Recomendado por</label>
                             </div>
                         </div>
                     </div>

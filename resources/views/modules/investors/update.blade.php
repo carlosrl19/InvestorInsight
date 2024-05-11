@@ -74,7 +74,7 @@ Editar información /&nbsp;<b class="text-muted">{{ $investor->investor_name }}<
                             @enderror
                         </div>
                         <div class="col">
-                            <label class="form-label" for="investor_reference">Referido por</label>
+                            <label class="form-label" for="investor_reference">Recomendado por</label>
                             <input type="text" maxlength="55" value="{{ $investor->investor_reference }}" name="investor_reference" id="investor_reference" class="form-control @error('investor_reference') is-invalid @enderror" placeholder="Ingrese el nombre del recomendor" autocomplete="off"/>
                             @error('investor_reference')
                                 <span class="invalid-feedback" role="alert">

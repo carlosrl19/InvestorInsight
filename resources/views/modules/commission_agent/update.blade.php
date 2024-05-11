@@ -47,7 +47,7 @@ Editar información /&nbsp;<b class="text-muted">{{ $commission_agent->commissio
                             @enderror
                         </div>
                         <div class="col">
-                            <label class="form-label" for="commissioner_reference">Referido por</label>
+                            <label class="form-label" for="commissioner_reference">Recomendado por</label>
                             <input type="text" maxlength="55" value="{{ $commission_agent->commissioner_reference }}" name="commissioner_reference" id="commissioner_reference" class="form-control @error('commissioner_reference') is-invalid @enderror" placeholder="Ingrese el nombre del recomendor" autocomplete="off"/>
                             @error('commissioner_reference')
                                 <span class="invalid-feedback" role="alert">

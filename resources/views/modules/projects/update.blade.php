@@ -47,7 +47,7 @@ Editar información /&nbsp;<b class="text-muted">{{ $project->project_name }}<b/
                             @enderror
                         </div>
                         <div class="col">
-                            <label class="form-label" for="project_reference">Referido por</label>
+                            <label class="form-label" for="project_reference">Recomendado por</label>
                             <input type="text" maxlength="55" value="{{ $project->project_reference }}" name="project_reference" id="project_reference" class="form-control @error('project_reference') is-invalid @enderror" placeholder="Ingrese el nombre del recomendor" autocomplete="off"/>
                             @error('project_reference')
                                 <span class="invalid-feedback" role="alert">

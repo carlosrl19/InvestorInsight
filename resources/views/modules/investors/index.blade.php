@@ -52,7 +52,7 @@ Inversionistas
                     <th>Nº Identidad</th>
                     <th>Teléfono</th>
                     <th>Saldo actual</th>
-                    <th>Referido por</th>
+                    <th>Recomendación</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
