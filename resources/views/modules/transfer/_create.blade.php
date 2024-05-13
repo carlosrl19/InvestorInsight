@@ -23,7 +23,7 @@
 
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="30" name="transfer_bank" step="any" value="{{ old('transfer_bank') }}" id="transfer_bank" class="form-control @error('transfer_bank') is-invalid @enderror" autocomplete="off"/>
+                                <input type="text" maxlength="30" name="transfer_bank" value="{{ old('transfer_bank') }}" id="transfer_bank" class="form-control @error('transfer_bank') is-invalid @enderror" autocomplete="off"/>
                                 @error('transfer_bank')investor_name
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -36,18 +36,24 @@
                     </div>
                     <div class="row mb-3 align-items-end">
                         <div class="col">
-                            <div class="card">
-                                <div class="card-header">
-                                    Seleccione el inversionista
-                                </div>
-                                <div class="card-body">
-                                    <select type="text" class="form-select">
-                                    @foreach ($investors as $investor)                                    
-                                        <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
-                                    @endforeach
-                                    </select>
-                                </div>
+                            <div class="form-floating">
+                                <input type="date" name="transfer_date" style="font-size: 10px;" value="{{ \Carbon\Carbon::now()->toDateString() }}" id="transfer_date" class="form-control @error('project_name') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->toDateString() }}" max="{{ \Carbon\Carbon::now()->toDateString() }}" readonly/>
+                                @error('transfer_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <label class="form-label" for="transfer_date"><small>Fecha de transferencia</small></label>
                             </div>
+                        </div>
+                        <div class="col" style="border: 1px solid lightgray; border-radius: 2px">
+                            <label for="investor_id" class="mb-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Inversionistas</label>
+                            <select type="text" name="investor_id" class="form-select" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
+                                <option selected disabled>Seleccione el inversionista</option>
+                                @foreach ($investors as $investor)                                    
+                                    <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="row mb-3 align-items-end">
@@ -64,13 +70,13 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="255" name="transfer_description" step="any" value="{{ old('transfer_description') }}" id="transfer_description" class="form-control @error('transfer_description') is-invalid @enderror" autocomplete="off"/>
+                                <textarea class="form-control @error('transfer_description') is-invalid @enderror" autocomplete="off" maxlength="255" name="transfer_description" id="transfer_description" data-bs-toggle="autosize"> </textarea>
                                 @error('transfer_description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label for="transfer_description">Descripción de transferencia</label>
+                                <label for="transfer_description">Comentarios</label>
                             </div>
                         </div>
                     </div>

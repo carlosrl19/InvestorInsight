@@ -19,6 +19,7 @@ class UpdateRequest extends FormRequest
             'transfer_code' => 'required|string|min:3|max:35|regex:/^[a-zA-Z0-9]+$/|unique:transfer,transfer_code,' . $tranferId . '',
             'transfer_bank' => 'required|string|min:3|max:30|regex:/^[^\d]+$/',
             'investor_id' => 'required|numeric|exists:investors,id',
+            'transfer_date' => 'required|date',
             'transfer_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'transfer_description' => 'string',
         ];
@@ -46,6 +47,10 @@ class UpdateRequest extends FormRequest
             'investor_id.required' => 'El inversionista es obligatorio.',
             'investor_id.numeric' => 'El id del inversionista solo debe contener números.',
             'investor_id.exists' => 'El inversionista no existe en la base de datos.',
+
+            // Transfer date messages
+            'transfer_date.required' => 'La fecha de transferencia es obligatoria.',
+            'transfer_date.date' => 'Debe ingresar un formato de fecha válido para la transferencia.',
 
             // Investor name messages
             'transfer_amount.numeric' => 'El monto de la transferencia solo debe contener números.',

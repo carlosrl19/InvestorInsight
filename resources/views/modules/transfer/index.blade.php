@@ -48,6 +48,7 @@ Transferencias
             <thead>
                 <tr class="text-center">
                     <th>#</th>
+                    <th>Fecha</th>
                     <th>Banco</th>
                     <th>Código transferencia</th>
                     <th>Inversionista</th>
@@ -55,15 +56,16 @@ Transferencias
                 </tr>
             </thead>
             <tbody>
-                    @foreach($transfers as $i => $transfer)
-                    <tr class="text-center">
-                        <td>{{ ++$i }}</td>
-                        <td>{{ $transfer->transfer_bank }}</td>
-                        <td>{{ $transfer->transfer_code }}</td>
-                        <td>{{ $investor->investor_name }}</td>
-                        <td>{{ $transfer->transfer_amount }}</td>
-                    </tr>
-                    @endforeach
+                @foreach($transfers as $i => $transfer)
+                <tr class="text-center">
+                    <td>{{ ++$i }}</td>
+                    <td>{{ $transfer->transfer_date }}</td>
+                    <td>{{ $transfer->transfer_bank }}</td>
+                    <td>{{ $transfer->transfer_code }}</td>
+                    <td><a href="{{ route('investor.show', $transfer->investor_id) }}"  title="Ver historial de {{ $transfer->investor->investor_name }}" data-bs-toggle="tooltip" data-bs-placement="bottom">{{ $transfer->investor->investor_name }}</a></td>
+                    <td>Lps. {{ number_format($transfer->transfer_amount,2) }}</td>
+                </tr>
+                @endforeach
             </tbody>
         </table>
       </div>

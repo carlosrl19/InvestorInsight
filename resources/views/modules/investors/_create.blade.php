@@ -24,7 +24,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" maxlength="13" name="investor_dni" value="{{ old('investor_dni') }}" id="investor_dni" class="form-control @error('investor_dni') is-invalid @enderror" autocomplete="off"/>
-                                @error('investor_dni')investor_name
+                                @error('investor_dni')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -59,17 +59,23 @@
                                 <label for="investor_phone">Nº teléfono</label>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="form-floating">
-                                <input type="text" maxlength="55" name="investor_reference" value="{{ old('investor_reference') }}" id="investor_reference" class="form-control @error('investor_reference') is-invalid @enderror" autocomplete="off"/>
-                                @error('investor_reference')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <label for="investor_reference">Recomendado por</label>
-                            </div>
-                        </div>
+                        <div class="mb-3">
+                            <label for="investor_reference" class="mb-2 mt-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Recomendado por</label>
+                            <select type="text" class="form-select" id="select-optgroups" name="investor_reference" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
+                                <optgroup label="Inversionistas">
+                                    <option value="Sin recomendación">Sin recomendación</option>
+                                  @foreach ($investors as $investor)
+                                      <option value="{{ $investor->investor_name }}">{{ $investor->investor_name }}</option>
+                                  @endforeach
+                                </optgroup>
+                                
+                                <optgroup label="Comisionistas">
+                                    @foreach ($commissioners as $commissioner)
+                                        <option value="{{ $commissioner->id }}">{{ $commissioner->commissioner_name }}</option>
+                                    @endforeach
+                                </optgroup>
+                            </select>
+                          </div>
                     </div>
                     <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-teal">Guardar</button>

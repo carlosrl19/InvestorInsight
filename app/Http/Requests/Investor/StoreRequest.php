@@ -12,7 +12,7 @@ class StoreRequest extends FormRequest
             'investor_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:investors',
             'investor_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/|unique:investors',
             'investor_phone' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|unique:investors',
-            'investor_reference' => 'string|min:3|max:55|regex:/^[^\d]+$/',
+            'investor_reference' => 'required|string|min:3|max:55|regex:/^[^\d]+$/',
             'investor_balance' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'investor_status' => 'required|min:0|max:1',
         ];
