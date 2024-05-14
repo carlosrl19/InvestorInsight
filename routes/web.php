@@ -24,6 +24,7 @@ Route::resource('transfer', 'App\Http\Controllers\TransferController')->names('t
 
 // Credit note
 Route::resource('credit_note', 'App\Http\Controllers\CreditNoteController')->names('credit_note');
+Route::get('credit_note/{id}/report', 'App\Http\Controllers\CreditNoteController@showReport')->name('credit_note.report');
 
 /*------------------------
     Project   Module

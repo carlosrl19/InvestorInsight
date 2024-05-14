@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;      
 use App\Models\CreditNote;
 use App\Http\Requests\CreditNote\StoreRequest;
 use App\Models\Investor;
+use Dompdf\Options;
+use Dompdf\Dompdf;
 
 class CreditNoteController extends Controller
 {
@@ -13,12 +16,23 @@ class CreditNoteController extends Controller
     {
         $creditNotes = CreditNote::get();
         $investors = Investor::get();
-        return view ("modules.credit_note.index", compact("creditNotes", "investors"));
+        return view('modules.credit_note.index', compact('creditNotes', 'investors'));
     }
 
     public function create()
     {
         return view('modules.credit_note._create');
+    }
+
+    public function showReport($id) {
+        $creditNote = CreditNote::findOrFail($id);
+    
+        $pdf = new Dompdf();
+        $pdf->loadHtml(view('modules.credit_note._report', compact('creditNote')));
+        $pdf->setPaper('A4', 'portrait');
+    
+        $pdf->render();
+        return $pdf->stream("reporte.pdf");
     }
 
     public function store(StoreRequest $request)
@@ -53,10 +67,5 @@ class CreditNoteController extends Controller
             
             return redirect()->back()->withErrors(['error' => 'Ocurrió un error inesperado al intentar guardar la transferencia. Si el problema persiste, contacte al servicio técnico.'])->withInput();
         }
-    }
-
-    public function show(CreditNote $creditNote)
-    {
-        //
     }
 }

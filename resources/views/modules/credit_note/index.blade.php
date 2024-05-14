@@ -52,6 +52,7 @@ Notas crédito
                     <th>Inversionista</th>
                     <th>Monto nota crédito</th>
                     <th>Comentarios / motivos de nota crédito</th>
+                    <th>Imprimir NC</th>
                 </tr>
             </thead>
             <tbody>
@@ -70,6 +71,9 @@ Notas crédito
                     </td>
                     <td>Lps. {{ number_format($creditNote->creditNote_amount,2) }}</td>
                     <td>{{ $creditNote->creditNote_description }}</td>
+                    <td>
+                        <a href="{{ route('credit_note.report', $creditNote->id) }}" class="btn btn-sm btn-red">NC</a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
