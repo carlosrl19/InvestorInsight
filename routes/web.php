@@ -22,6 +22,9 @@ Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentControl
 // Transfer
 Route::resource('transfer', 'App\Http\Controllers\TransferController')->names('transfer');
 
+// Credit note
+Route::resource('credit_note', 'App\Http\Controllers\CreditNoteController')->names('credit_note');
+
 /*------------------------
     Project   Module
 =========================*/

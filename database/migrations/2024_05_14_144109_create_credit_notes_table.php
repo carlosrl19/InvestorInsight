@@ -8,20 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('transfer', function (Blueprint $table) {
+        Schema::create('credit_notes', function (Blueprint $table) {
             $table->id();
-            $table->string('transfer_code');
-            $table->string('transfer_bank');
             $table->unsignedInteger('investor_id');
-            $table->decimal('transfer_amount', 10,2);
-            $table->string('transfer_description');
-            $table->dateTime('transfer_date');
+            $table->decimal('creditNote_amount', 10,2);
+            $table->string('creditNote_description');
+            $table->dateTime('creditNote_date');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('transfer');
+        Schema::dropIfExists('credit_notes');
     }
 };

@@ -4,20 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Transfer extends Model
+class CreditNote extends Model
 {
-    protected $table = 'transfer';
-
     public function investor(){
         return $this->belongsTo(Investor::class, 'investor_id', 'id');
     }
-
+    
     protected $fillable = [
-        'transfer_code',
-        'transfer_bank',
+        'creditNote_date',
         'investor_id',
-        'transfer_amount',
-        'transfer_date',
-        'transfer_description',
+        'creditNote_amount',
+        'creditNote_description',
     ];
 }

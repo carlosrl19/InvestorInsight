@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Investor\StoreRequest;
 use App\Http\Requests\Investor\UpdateRequest;
 use App\Models\CommissionAgent;
+use App\Models\CreditNote;
 use App\Models\Investor;
 use App\Models\Transfer;
 
@@ -35,15 +36,56 @@ class InvestorController extends Controller
     {
         $investor = Investor::findOrFail($id);
         $transfers = Transfer::where('investor_id', $investor->id)->orderBy('transfer_date')->get();
-        
-        $currentBalance = $investor->investor_balance; // Saldo inicial
-        
+        $creditNotes = CreditNote::where('investor_id', $investor->id)->orderBy('creditNote_date')->get();
+    
+        // Combine transfers and credit notes in a single collection and order them by date
+        $events = collect();
+    
         foreach ($transfers as $transfer) {
-            // Calcula el nuevo saldo sumando o restando el monto de la transferencia
-            $transfer->current_balance = $currentBalance += $transfer->transfer_amount;
+            $events->push((object)[
+                'date' => $transfer->transfer_date,
+                'type' => 'transfer',
+                'amount' => $transfer->transfer_amount,
+                'description' => $transfer->transfer_description,
+                'bank' => $transfer->transfer_bank,
+                'original_model' => $transfer
+            ]);
         }
-        
-        return view('modules.investors.show', compact('investor', 'transfers'));
+    
+        foreach ($creditNotes as $creditNote) {
+            $events->push((object)[
+                'date' => $creditNote->creditNote_date,
+                'type' => 'creditNote',
+                'amount' => -$creditNote->creditNote_amount,
+                'description' => $creditNote->creditNote_description,
+                'bank' => null,
+                'original_model' => $creditNote
+            ]);
+        }
+    
+        $events = $events->sortBy('date');
+    
+        // Calculate the current balance from zero, reflecting all transactions
+        $currentBalance = 0;
+        foreach ($events as $event) {
+            $currentBalance += $event->amount;
+            $event->current_balance = $currentBalance;
+        }
+    
+        // Separate the events into transfers and credit notes again for displaying in tables
+        $transfers = $events->where('type', 'transfer')->map(function ($event) {
+            $transfer = $event->original_model;
+            $transfer->current_balance = $event->current_balance;
+            return $transfer;
+        });
+    
+        $creditNotes = $events->where('type', 'creditNote')->map(function ($event) {
+            $creditNote = $event->original_model;
+            $creditNote->current_balance = $event->current_balance;
+            return $creditNote;
+        });
+    
+        return view('modules.investors.show', compact('investor', 'transfers', 'creditNotes'));
     }
     
 

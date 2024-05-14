@@ -19,7 +19,7 @@ Dashboard
                 <div class="row align-items-center">
                   <div class="col-auto">
                     <span class="bg-primary text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/currency-dollar -->
-                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users-group"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" /><path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M17 10h2a2 2 0 0 1 2 2v1" /><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M3 13v-1a2 2 0 0 1 2 -2h2" /></svg>                    </span>
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users-group"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" /><path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M17 10h2a2 2 0 0 1 2 2v1" /><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M3 13v-1a2 2 0 0 1 2 -2h2" /></svg>                    </span>
                   </div>
                   <div class="col">
                     <div class="font-weight-medium">
@@ -39,7 +39,7 @@ Dashboard
                 <div class="row align-items-center">
                   <div class="col-auto">
                     <span class="bg-green text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
-                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>                    </span>
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>                    </span>
                   </div>
                   <div class="col">
                     <div class="font-weight-medium">
@@ -59,7 +59,7 @@ Dashboard
                 <div class="row align-items-center">
                   <div class="col-auto">
                     <span class="bg-twitter text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-twitter -->
-                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-stack-front"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 4l-8 4l8 4l8 -4l-8 -4" fill="currentColor" /><path d="M8 14l-4 2l8 4l8 -4l-4 -2" /><path d="M8 10l-4 2l8 4l8 -4l-4 -2" /></svg>                  </div>
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-stack-front"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 4l-8 4l8 4l8 -4l-8 -4" fill="currentColor" /><path d="M8 14l-4 2l8 4l8 -4l-4 -2" /><path d="M8 10l-4 2l8 4l8 -4l-4 -2" /></svg>                  </div>
                   <div class="col">
                     <div class="font-weight-medium">
                       {{ $project }}
@@ -82,298 +82,99 @@ Dashboard
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
-        <div class="row row-cards">
-          <div class="col-12">
-            <div class="card" style="height: 28rem">
-            <div class="card-header">
-              <h3 class="card-title">Historial de transferencias</h3>
-            </div>
-              <div class="card-body card-body-scrollable card-body-scrollable-shadow">
-                <div class="divide-y">
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar">JL</span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Jeffie Lewzey</strong> commented on your <strong>"I'm not a witch."</strong> post.
-                        </div>
-                        <div class="text-muted">yesterday</div>
-                      </div>
-                      <div class="col-auto align-self-center">
-                        <div class="badge bg-primary"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/002m.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          It's <strong>Mallory Hulme</strong>'s birthday. Wish him well!
-                        </div>
-                        <div class="text-muted">2 days ago</div>
-                      </div>
-                      <div class="col-auto align-self-center">
-                        <div class="badge bg-primary"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/003m.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Dunn Slane</strong> posted <strong>"Well, what do you want?"</strong>.
-                        </div>
-                        <div class="text-muted">today</div>
-                      </div>
-                      <div class="col-auto align-self-center">
-                        <div class="badge bg-primary"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/000f.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Emmy Levet</strong> created a new project <strong>Morning alarm clock</strong>.
-                        </div>
-                        <div class="text-muted">4 days ago</div>
-                      </div>
-                      <div class="col-auto align-self-center">
-                        <div class="badge bg-primary"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/001f.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Maryjo Lebarree</strong> liked your photo.
-                        </div>
-                        <div class="text-muted">2 days ago</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar">EP</span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Egan Poetz</strong> registered new client as <strong>Trilia</strong>.
-                        </div>
-                        <div class="text-muted">yesterday</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/002f.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Kellie Skingley</strong> closed a new deal on project <strong>Pen Pineapple Apple Pen</strong>.
-                        </div>
-                        <div class="text-muted">2 days ago</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/003f.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Christabel Charlwood</strong> created a new project for <strong>Wikibox</strong>.
-                        </div>
-                        <div class="text-muted">4 days ago</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar">HS</span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Haskel Shelper</strong> change status of <strong>Tabler Icons</strong> from <strong>open</strong> to <strong>closed</strong>.
-                        </div>
-                        <div class="text-muted">today</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/006m.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Lorry Mion</strong> liked <strong>Tabler UI Kit</strong>.
-                        </div>
-                        <div class="text-muted">yesterday</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/004f.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Leesa Beaty</strong> posted new video.
-                        </div>
-                        <div class="text-muted">2 days ago</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/007m.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Perren Keemar</strong> and 3 others followed you.
-                        </div>
-                        <div class="text-muted">2 days ago</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar">SA</span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Sunny Airey</strong> upload 3 new photos to category <strong>Inspirations</strong>.
-                        </div>
-                        <div class="text-muted">2 days ago</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/009m.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Geoffry Flaunders</strong> made a <strong>$10</strong> donation.
-                        </div>
-                        <div class="text-muted">2 days ago</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/010m.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Thatcher Keel</strong> created a profile.
-                        </div>
-                        <div class="text-muted">3 days ago</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/005f.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Dyann Escala</strong> hosted the event <strong>Tabler UI Birthday</strong>.
-                        </div>
-                        <div class="text-muted">4 days ago</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar" style="background-image: url(./static/avatars/006f.jpg)"></span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Avivah Mugleston</strong> mentioned you on <strong>Best of 2020</strong>.
-                        </div>
-                        <div class="text-muted">2 days ago</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar">AA</span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Arlie Armstead</strong> sent a Review Request to <strong>Amanda Blake</strong>.
-                        </div>
-                        <div class="text-muted">2 days ago</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="row row-cards">
-          <div class="col-12">
-            <div class="card" style="height: 28rem">
-            <div class="card-header">
-              <h3 class="card-title">Historial de pagarés</h3>
-            </div>
-              <div class="card-body card-body-scrollable card-body-scrollable-shadow">
-                <div class="divide-y">
-                  <div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <span class="avatar">JL</span>
-                      </div>
-                      <div class="col">
-                        <div class="text-truncate">
-                          <strong>Jeffie Lewzey</strong> commented on your <strong>"I'm not a witch."</strong> post.
-                        </div>
-                        <div class="text-muted">yesterday</div>
-                      </div>
-                      <div class="col-auto align-self-center">
-                        <div class="badge bg-primary"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+		<div class="col-lg-6">
+			<div class="row row-cards">
+				<div class="col-12">
+					<div class="card" style="height: 28rem">
+						<div class="card-header">
+							<h3 class="card-title">Ultimas transferencias<sup>(25)</sup></h3>
+						</div>
+						<div class="card-body card-body-scrollable card-body-scrollable-shadow">
+							<div class="divide-y">
+								<div>
+									<div class="row">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th>Fecha</th>
+													<th>Inversionista</th>
+													<th>Banco</th>
+													<th>Monto</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach ($transfers as $transfer)												
+												<tr>
+													<td>{{ $transfer->transfer_date }}</td>
+													<td>
+														<a href="{{ route('investor.show', $transfer->investor_id) }}">{{ $transfer->investor->investor_name }}
+															<small>
+																<sup>
+																	<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
+																</sup>
+															</small>
+														</a>
+													</td>
+													<td>{{ $transfer->transfer_bank }}</td>
+													<td class="text-green">Lps. {{ number_format($transfer->transfer_amount,2) }}</td>
+												</tr>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="row row-cards">
+				<div class="col-12">
+					<div class="card" style="height: 28rem">
+						<div class="card-header">
+							<h3 class="card-title">Ultimas notas crédito<sup>(25)</sup></h3>
+						</div>
+						<div class="card-body card-body-scrollable card-body-scrollable-shadow">
+							<div class="divide-y">
+								<div>
+									<div class="row">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th>Fecha</th>
+													<th>Inversionista</th>
+													<th>Monto</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach ($creditNotes as $creditNote)												
+												<tr>
+													<td>{{ $creditNote->creditNote_date }}</td>
+													<td>
+														<a href="{{ route('investor.show', $creditNote->investor_id) }}">{{ $creditNote->investor->investor_name }}
+															<small>
+																<sup>
+																	<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
+																</sup>
+															</small>
+														</a>
+													</td>
+													<td class="text-red">Lps. {{ number_format($creditNote->creditNote_amount,2) }}</td>
+												</tr>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
 </div>
 @endsection

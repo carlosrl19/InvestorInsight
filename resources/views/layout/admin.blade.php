@@ -125,7 +125,7 @@
                           <a class="dropdown-item" href="./cookie-banner.html">
                             <small>->&nbsp;</small>Pagarés
                           </a>                         
-                          <a class="dropdown-item" href="./pricing-table.html">
+                          <a class="dropdown-item" href="{{ route('credit_note.index') }}">
                             <small>->&nbsp;</small>Notas crédito
                           </a>
                         </div>

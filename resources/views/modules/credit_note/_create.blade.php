@@ -2,56 +2,34 @@
    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #52524E">
             <div class="modal-header">
-                <h5 class="modal-title">Nueva transferencia</h5>
+                <h5 class="modal-title">Nueva nota crédito</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('transfer.store')}}" method="POST">
+                <form action="{{ route('credit_note.store')}}" method="POST">
                     @csrf
                     <div class="row mb-3 align-items-end">
-                        <div class="col">
-                            <div class="form-floating">
-                                <input type="text" maxlength="35" name="transfer_code"  value="{{ old('transfer_code') }}" id="transfer_code" class="form-control text-uppercase @error('transfer_code') is-invalid @enderror" autocomplete="off"/>
-                                @error('transfer_code')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <label for="transfer_code">Código de transferencia</label>
-                            </div>
-                        </div>
 
-                        <div class="col">
-                            <div class="form-floating">
-                                <input type="text" maxlength="30" name="transfer_bank" value="{{ old('transfer_bank') }}" id="transfer_bank" class="form-control text-uppercase @error('transfer_bank') is-invalid @enderror" autocomplete="off"/>
-                                @error('transfer_bank')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <label for="transfer_bank">Banco / Modo de transferencia</label>
-                            </div>
-                        </div>
-                        <input type="hidden" name="investor_status" value="1">
                     </div>
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
                                 <input type="datetime-local" 
-                                    name="transfer_date" 
+                                    name="creditNote_date" 
                                     style="font-size: 10px;" 
                                     value="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
-                                    id="transfer_date"
+                                    id="creditNote_date"
                                     min="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
                                     max="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
-                                    class="form-control @error('transfer_date') is-invalid @enderror" 
+                                    class="form-control @error('creditNote_date') is-invalid @enderror" 
                                     readonly />
-                                @error('transfer_date')
+                                @error('creditNote_date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label class="form-label" for="transfer_date"><small>Fecha de transferencia</small></label>
+
+                                <label class="form-label" for="creditNote_date"><small>Fecha de nota crédito</small></label>
                             </div>
                         </div>
                         <div class="col" style="border: 1px solid lightgray; border-radius: 2px">
@@ -67,24 +45,24 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="number" step="any" name="transfer_amount" value="{{ old('transfer_amount') }}" id="transfer_amount" class="form-control @error('transfer_amount') is-invalid @enderror"/>
-                                @error('transfer_amount')
+                                <input type="number" step="any" name="creditNote_amount" value="{{ old('creditNote_amount') }}" id="creditNote_amount" class="form-control @error('creditNote_amount') is-invalid @enderror"/>
+                                @error('creditNote_amount')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label for="transfer_amount">Monto de transferencia</label>
+                                <label for="creditNote_amount">Monto total de nota crédito</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="form-control @error('transfer_description') is-invalid @enderror" autocomplete="off" maxlength="255" name="transfer_description" id="transfer_description" data-bs-toggle="autosize"> </textarea>
-                                @error('transfer_description')
+                                <textarea class="form-control @error('creditNote_description') is-invalid @enderror" autocomplete="off" maxlength="255" name="creditNote_description" id="creditNote_description" data-bs-toggle="autosize"> </textarea>
+                                @error('creditNote_description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label for="transfer_description">Comentarios</label>
+                                <label for="creditNote_description">Comentarios</label>
                             </div>
                         </div>
                     </div>
