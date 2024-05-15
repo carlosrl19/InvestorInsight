@@ -27,12 +27,30 @@ class CreditNoteController extends Controller
     public function showReport($id) {
         $creditNote = CreditNote::findOrFail($id);
     
-        $pdf = new Dompdf();
+        // Configuración de opciones para Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        
+        // Opcion que habilita la carga de imagenes
+        $options->set('chroot', realpath(''));
+        
+        // Crear instancia de Dompdf con las opciones configuradas
+        $pdf = new Dompdf($options);
+    
+        // Cargar el contenido de la vista en Dompdf
         $pdf->loadHtml(view('modules.credit_note._report', compact('creditNote')));
+    
+        // Establecer el tamaño y la orientación del papel
         $pdf->setPaper('A4', 'portrait');
     
+        // Renderizar el PDF
         $pdf->render();
-        return $pdf->stream("reporte.pdf");
+    
+        // Devolver el PDF en línea
+        return response($pdf->output(), 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'inline; filename="Nota crédito.pdf"');
     }
 
     public function store(StoreRequest $request)
