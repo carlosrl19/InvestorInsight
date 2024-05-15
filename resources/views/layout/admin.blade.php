@@ -123,6 +123,9 @@
                             <small>->&nbsp;</small>Transferencias
                           </a>
                           <a class="dropdown-item" href="./cookie-banner.html">
+                            <small>->&nbsp;</small>Acuses
+                          </a>   
+                          <a class="dropdown-item" href="./cookie-banner.html">
                             <small>->&nbsp;</small>Pagarés
                           </a>                         
                           <a class="dropdown-item" href="{{ route('credit_note.index') }}">

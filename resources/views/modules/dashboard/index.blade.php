@@ -88,7 +88,7 @@ Dashboard
 				<div class="col-12">
 					<div class="card" style="height: 28rem">
 						<div class="card-header">
-							<h3 class="card-title">Ultimas transferencias<sup>(25)</sup></h3>
+							<h3 class="card-title">Ultimas transferencias<sup class="text-muted"> (últimas 25)</sup></h3>
 						</div>
 						<div class="card-body card-body-scrollable card-body-scrollable-shadow">
 							<div class="divide-y">
@@ -135,7 +135,7 @@ Dashboard
 				<div class="col-12">
 					<div class="card" style="height: 28rem">
 						<div class="card-header">
-							<h3 class="card-title">Ultimas notas crédito<sup>(25)</sup></h3>
+							<h3 class="card-title">Ultimas notas crédito<sup class="text-muted"> (últimas 25)</sup></h3>
 						</div>
 						<div class="card-body card-body-scrollable card-body-scrollable-shadow">
 							<div class="divide-y">

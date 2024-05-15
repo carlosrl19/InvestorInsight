@@ -9,6 +9,7 @@ use App\Http\Requests\CreditNote\StoreRequest;
 use App\Models\Investor;
 use Dompdf\Options;
 use Dompdf\Dompdf;
+use Carbon\Carbon;
 
 class CreditNoteController extends Controller
 {
@@ -16,6 +17,7 @@ class CreditNoteController extends Controller
     {
         $creditNotes = CreditNote::get();
         $investors = Investor::get();
+
         return view('modules.credit_note.index', compact('creditNotes', 'investors'));
     }
 
@@ -26,6 +28,15 @@ class CreditNoteController extends Controller
 
     public function showReport($id) {
         $creditNote = CreditNote::findOrFail($id);
+
+        // Configurar el locale en Carbon
+        Carbon::setLocale('es');
+
+        // Obtener la fecha actual en español
+        $fecha = Carbon::now()->setTimezone('America/Costa_Rica');
+        $dia = $fecha->format('d');
+        $mes = $fecha->translatedFormat('F'); // 'F' para nombre completo del mes
+        $anio = $fecha->format('Y');
     
         // Configuración de opciones para Dompdf
         $options = new Options();
@@ -39,7 +50,7 @@ class CreditNoteController extends Controller
         $pdf = new Dompdf($options);
     
         // Cargar el contenido de la vista en Dompdf
-        $pdf->loadHtml(view('modules.credit_note._report', compact('creditNote')));
+        $pdf->loadHtml(view('modules.credit_note._report', compact('creditNote', 'dia', 'mes', 'anio')));
     
         // Establecer el tamaño y la orientación del papel
         $pdf->setPaper('A4', 'portrait');
