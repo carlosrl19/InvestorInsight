@@ -48,6 +48,7 @@ Notas crédito
                 <thead>
                     <tr class="text-center">
                         <th>#</th>
+                        <th>ID único</th>
                         <th>Fecha</th>
                         <th>Inversionista</th>
                         <th>Monto nota crédito</th>
@@ -59,6 +60,7 @@ Notas crédito
                     @foreach($creditNotes as $i => $creditNote)
                     <tr class="text-center">
                         <td>{{ ++$i }}</td>
+                        <td>{{ $creditNote->creditNote_code }}</td>
                         <td>{{ $creditNote->creditNote_date }}</td>
                         <td>
                             <a href="{{ route('investor.show', $creditNote->investor_id) }}">{{ $creditNote->investor->investor_name }}

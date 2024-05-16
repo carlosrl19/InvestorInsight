@@ -14,6 +14,7 @@ class CreditNote extends Model
         'creditNote_date',
         'investor_id',
         'creditNote_amount',
+        'creditNote_code',
         'creditNote_description',
     ];
 }

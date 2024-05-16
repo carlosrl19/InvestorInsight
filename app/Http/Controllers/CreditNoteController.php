@@ -71,12 +71,18 @@ class CreditNoteController extends Controller
         try {
             // Encuentra al inversionista por su ID
             $investor = Investor::findOrFail($request->investor_id);
+
+            // Verifica si el monto de la nota de crédito es mayor que el saldo del inversionista
+            if ($request->creditNote_amount > $investor->investor_balance) {
+                return redirect()->back()->withErrors(['creditNote_amount' => 'El monto de la nota de crédito no puede ser mayor que el saldo del inversionista (Lps. '. $investor->investor_balance. ').'])->withInput();
+            }
             
             // Crea la nueva nota crédito
             $transfer = CreditNote::create([
                 'creditNote_date' => $request->creditNote_date,
                 'investor_id' => $request->investor_id,
                 'creditNote_amount' => $request->creditNote_amount,
+                'creditNote_code' => $request->creditNote_code,
                 'creditNote_description' => $request->creditNote_description,
             ]);
     

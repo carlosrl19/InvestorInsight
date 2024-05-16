@@ -13,6 +13,7 @@ return new class extends Migration
             $table->unsignedInteger('investor_id');
             $table->decimal('creditNote_amount', 10,2);
             $table->string('creditNote_description');
+            $table->string('creditNote_code');
             $table->dateTime('creditNote_date');
             $table->timestamps();
         });

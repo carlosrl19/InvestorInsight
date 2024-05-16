@@ -56,16 +56,31 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="form-control @error('creditNote_description') is-invalid @enderror" autocomplete="off" maxlength="255" name="creditNote_description" id="creditNote_description" data-bs-toggle="autosize"> </textarea>
-                                @error('creditNote_description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <label for="creditNote_description">Comentarios</label>
+                                <input type="text" readonly class="form-control @error('creditNote_code') is-invalid @enderror" id="creditNote_code"
+                                    name="creditNote_code" value="NC{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('YmdHms')}}" autocomplete="off"
+                                    style="text-transform: uppercase; background-color: white; font-size: clamp(0.7rem, 3vw, 0.8rem)">
+                                    @error('creditNote_code')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <label for="creditNote_code">ID único nota crédito</label>
                             </div>
                         </div>
                     </div>
+                    <div class="row mb-3 align-items-end">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <textarea class="form-control @error('creditNote_description') is-invalid @enderror" autocomplete="off" maxlength="255" name="creditNote_description" id="creditNote_description" data-bs-toggle="autosize"> </textarea>
+                                    @error('creditNote_description')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <label for="creditNote_description">Comentarios</label>
+                                </div>
+                            </div>
+                        </div>
                     <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-teal">Guardar</button>
                 </form>
