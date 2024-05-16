@@ -20,7 +20,7 @@ class Investor extends Model
         'investor_name',
         'investor_dni',
         'investor_phone',
-        'investor_reference',
+        'investor_reference_id',
         'investor_balance',
         'investor_status',
     ];

@@ -14,7 +14,7 @@ class UpdateRequest extends FormRequest
             'investor_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:investors,investor_name,' . $investorId . '',
             'investor_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/|unique:investors,investor_dni,' . $investorId . '',
             'investor_phone' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|unique:investors,investor_phone,' . $investorId . '',
-            'investor_reference' => 'string|min:3|max:55|regex:/^[^\d]+$/',
+            'investor_reference_id' => 'required|numeric|exists:investors,id',
             'investor_balance' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'investor_status' => 'required|min:0|max:1',
         ];
@@ -47,11 +47,10 @@ class UpdateRequest extends FormRequest
             'investor_phone.min' => 'El número de teléfono debe contener al menos 8 digitos.',
             'investor_phone.max' => 'El número de teléfono no puede exceder 8 digitos.',
 
-            // Investor name messages
-            'investor_reference.string' => 'El recomendante solo debe contener letras.',
-            'investor_reference.regex' => 'El recomendante no puede contener números ni símbolos.',
-            'investor_reference.min' => 'El recomendante debe contener al menos 3 letras.',
-            'investor_reference.max' => 'El recomendante no puede exceder 55 letras.',
+            // Investor id messages
+            'investor_reference_id.required' => 'El inversionista recomendante es obligatorio.',
+            'investor_reference_id.numeric' => 'El id del inversionista recomendante solo debe contener números.',
+            'investor_reference_id.exists' => 'El inversionista recomendante no existe en la base de datos.',
 
             // Investor balance messages
             'investor_balance.required' => 'El saldo de la cuenta es obligatorio.',

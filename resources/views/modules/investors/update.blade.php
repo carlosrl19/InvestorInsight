@@ -74,14 +74,21 @@ Editar información /&nbsp;<b class="text-muted">{{ $investor->investor_name }}<
                             @enderror
                         </div>
                         <div class="col">
-                            <label class="form-label" for="investor_reference">Recomendado por</label>
-                            <input type="text" maxlength="55" value="{{ $investor->investor_reference }}" name="investor_reference" id="investor_reference" class="form-control @error('investor_reference') is-invalid @enderror" placeholder="Ingrese el nombre del recomendor" autocomplete="off"/>
-                            @error('investor_reference')
+                            <label class="form-label" for="investor_reference_id">Recomendado por</label>
+                            <select class="form-select js-example-basic-multiple" name="investor_reference_id" style="font-size: clamp(0.6rem, 3vh, 0.7rem); width: 100%">
+                                @foreach ($investors as $inv)
+                                    <option value="{{ $inv->id }}" {{ $inv->id == $investor->investor_reference_id ? 'selected' : '' }}>
+                                        {{ $inv->investor_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('investor_reference_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
+
                     </div>
                     <a href="{{ route('investor.index') }}" class="btn btn-dark me-auto">Volver</a>
                     <button type="submit" class="btn btn-teal">Guardar cambios</button>

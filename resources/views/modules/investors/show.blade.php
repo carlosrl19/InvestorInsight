@@ -47,6 +47,13 @@
 Inversionistas
 @endsection
 
+@section('create')
+<button class="btn" onclick="goBack()" style="background-color: transparent; margin-right: 5px">
+    &nbsp;<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-back-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg>
+    Volver
+</button>
+@endsection
+
 @section('title')
 Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_name }}</b>
 @endsection
@@ -65,7 +72,16 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                     <div id="collapse-1" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
                         <div class="accordion-body pt-0">
                             <strong>{{ $investor->investor_name }}</strong> es un inversionista con número de identidad <strong>{{ $investor->investor_dni }}</strong>, número de teléfono <strong>{{ $investor->investor_phone }}</strong>.
-                            Recomendado por <strong>{{ $investor->investor_reference }}</strong>, tiene un saldo actual de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
+                            Recomendado por
+                            <strong>
+                                @if($referenceInvestor)
+                                <a href="{{ route('investor.show', ['investor' => $referenceInvestor->id]) }}">
+                                    <strong>{{ $referenceInvestor->investor_name }}</strong>
+                                </a>
+                                @else
+                                    <strong class="text-red">Sin recomendación</strong>
+                                @endif
+                            </strong>, tiene un saldo actual de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
                         </div>
                     </div>
                 </div>
@@ -179,4 +195,8 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('customjs/return_redirect.js')}}"></script>
 @endsection
