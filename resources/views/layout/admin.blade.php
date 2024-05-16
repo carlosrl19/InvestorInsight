@@ -122,7 +122,7 @@
                           <a class="dropdown-item" href="{{ route('transfer.index') }}">
                             <small>->&nbsp;</small>Transferencias
                           </a>  
-                          <a class="dropdown-item" href="./cookie-banner.html">
+                          <a class="dropdown-item" href="{{ route('promissory_note.index') }}">
                             <small>->&nbsp;</small>Pagarés
                           </a>
                           <a class="dropdown-item" href="{{ route('credit_note.index') }}">

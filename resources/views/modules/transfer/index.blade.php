@@ -52,7 +52,7 @@ Transferencias
                 <tr class="text-center">
                     <th>#</th>
                     <th>Fecha</th>
-                    <th>Banco</th>
+                    <th>Banco / Modo de transferencia</th>
                     <th>Código transferencia</th>
                     <th>Inversionista</th>
                     <th>Monto transferencia</th>
