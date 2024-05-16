@@ -36,7 +36,7 @@
 
 	<!-- Legal footer -->
 	<div class="footer mt-6">
-		Este documento contiene la firma y sello oficial de la empresa <i>ROBENIOR</i>. Cualquier uso no autorizado, reproducción, alteración o falsificación de esta firma o sello constituirá una violación de los derechos de propiedad intelectual de la empresa y será sujeto a acciones legales.
+		Este documento contiene la firma y sello oficial de la empresa Inversiones ROBENIOR. Cualquier uso no autorizado, reproducción, alteración o falsificación de esta firma o sello constituirá una violación de los derechos de propiedad intelectual de la empresa y será sujeto a acciones legales.
 		Se advierte a toda persona que tenga acceso a este documento que el uso indebido de la firma o sello de la empresa será considerado como un acto ilícito y se procederá legalmente en consecuencia.
 		Por favor, respete la integridad y autenticidad de los elementos de identificación de la empresa contenidos en este documento.
 	</div>

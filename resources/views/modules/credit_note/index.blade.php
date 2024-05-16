@@ -6,6 +6,9 @@
 <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
 
+<!-- Select2 -->
+<link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
+
 @endsection
 
 @section('pretitle')
@@ -53,7 +56,7 @@ Notas crédito
                         <th>Inversionista</th>
                         <th>Monto nota crédito</th>
                         <th>Comentarios / motivos de nota crédito</th>
-                        <th>Imprimir NC</th>
+                        <th>Exportar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,7 +78,7 @@ Notas crédito
                         <td style="max-width: 50px;">{{ $creditNote->creditNote_description }}</td>
                         <td>
                             <a href="{{ route('credit_note.report', $creditNote->id) }}" class="btn btn-red" data-toggle="modal" data-target="#pdfModal">
-                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-printer"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>    
+                                &nbsp;&nbsp;&nbsp;<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-printer"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>    
                             </a>
                         </td>
                     </tr>
@@ -127,4 +130,8 @@ Notas crédito
         $(this).find('#pdf-frame').attr('src', '');
     });
 </script>
+
+<!-- Select2 -->
+<script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
+<script src="{{ asset('customjs/select2/s2_projects.js') }}"></script>
 @endsection

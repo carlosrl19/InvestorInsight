@@ -83,10 +83,10 @@
                                 <div class="form-floating">
                                     <div class="card">
                                         <div class="card-header">Selección de inversionistas</div>
-                                        <select class="js-example-basic-multiple form-control" name="" id="" multiple="multiple">
-                                            @foreach ($investors as $investor)
-                                                <option value="{{ $investor->id }}">{{ $investor->investor_name}}</option>
-                                            
+                                        <select class="form-select js-example-basic-multiple" name="investor_id" style="font-size: clamp(0.6rem, 3vh, 0.7rem); width: 100%" multiple="multiple">
+                                            <option></option>
+                                            @foreach ($investors as $investor)                                    
+                                                <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

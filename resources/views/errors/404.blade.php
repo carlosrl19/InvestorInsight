@@ -22,14 +22,14 @@
   <body  class=" border-top-wide border-primary d-flex flex-column">
     <script src="./dist/js/demo-theme.min.js"></script>
     <div class="page page-center">
-      <div class="container-tight py-4">
+      <div class="container-tight">
         <div class="empty">
+          <p class="empty-title">¡Vaya, parece que algo salió mal!</p>
           <div style="width: 450px; margin-bottom: -50px;">
             <img src="{{ asset('static/404-error.png') }}" alt="">
           </div>
-          <p class="empty-title">Oops!</p>
           <p class="empty-subtitle text-muted">
-            "Oops, parece que la página que estás buscando no existe. Por favor, intenta nuevamente o busca algo más en el sistema."
+            "Oops, parece que la página que estás buscando no existe. Por favor, intenta nuevamente dentro de un momento, si el problema persiste contacta al soporte técnico para que puedan solucionarlo."
           </p>
           <div class="empty-action">
             <a href="{{ route('dashboard.index') }}" class="btn btn-sm btn-outline-red">

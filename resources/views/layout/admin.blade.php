@@ -121,15 +121,15 @@
                         <div class="dropdown-menu-column">
                           <a class="dropdown-item" href="{{ route('transfer.index') }}">
                             <small>->&nbsp;</small>Transferencias
+                          </a>  
+                          <a class="dropdown-item" href="./cookie-banner.html">
+                            <small>->&nbsp;</small>Pagarés
+                          </a>
+                          <a class="dropdown-item" href="{{ route('credit_note.index') }}">
+                            <small>->&nbsp;</small>Notas crédito
                           </a>
                           <a class="dropdown-item" href="./cookie-banner.html">
                             <small>->&nbsp;</small>Finiquitos
-                          </a>   
-                          <a class="dropdown-item" href="./cookie-banner.html">
-                            <small>->&nbsp;</small>Pagarés
-                          </a>                         
-                          <a class="dropdown-item" href="{{ route('credit_note.index') }}">
-                            <small>->&nbsp;</small>Notas crédito
                           </a>
                         </div>
                       </div>

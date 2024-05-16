@@ -9,9 +9,6 @@
                 <form action="{{ route('credit_note.store')}}" method="POST">
                     @csrf
                     <div class="row mb-3 align-items-end">
-
-                    </div>
-                    <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
                                 <input type="datetime-local" 
@@ -32,10 +29,10 @@
                                 <label class="form-label" for="creditNote_date"><small>Fecha de nota crédito</small></label>
                             </div>
                         </div>
-                        <div class="col" style="border: 1px solid lightgray; border-radius: 2px">
-                            <label for="investor_id" class="mb-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Inversionistas</label>
-                            <select type="text" name="investor_id" class="form-select" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
-                                <option selected disabled>Seleccione el inversionista</option>
+                        <div class="col" style="border: 1px solid #DADFE5; border-radius: 4px">
+                            <label for="investor_id" class="mb-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Inversionistas</label><br>
+                            <select class="form-select js-example-basic-multiple" name="investor_id" style="font-size: clamp(0.6rem, 3vh, 0.7rem); width: 100%">
+                                <option></option>
                                 @foreach ($investors as $investor)                                    
                                     <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
                                 @endforeach
