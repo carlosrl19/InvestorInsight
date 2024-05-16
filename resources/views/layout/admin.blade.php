@@ -123,7 +123,7 @@
                             <small>->&nbsp;</small>Transferencias
                           </a>
                           <a class="dropdown-item" href="./cookie-banner.html">
-                            <small>->&nbsp;</small>Acuses
+                            <small>->&nbsp;</small>Finiquitos
                           </a>   
                           <a class="dropdown-item" href="./cookie-banner.html">
                             <small>->&nbsp;</small>Pagarés
