@@ -88,7 +88,7 @@ Inversionistas
                                     </small>
                                 </a>
                             @else
-                                <strong class="text-red">Sin referencias</strong>
+                                <strong class="text-red">Sin recomendación</strong>
                             @endif
                         </td>
                         <td>

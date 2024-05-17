@@ -40,6 +40,12 @@
                                 <label class="form-label" for="promissoryNote_emission_date"><small>Fecha de emisión del pagaré</small></label>
                             </div>
                         </div>
+                        <input type="hidden" name="promissoryNote_status" value="0">
+                        @error('promissoryNote_status')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" readonly class="form-control @error('promissoryNote_code') is-invalid @enderror" id="promissoryNote_code"

@@ -16,5 +16,6 @@ class PromissoryNote extends Model
         'promissoryNote_final_date',
         'promissoryNote_amount',
         'promissoryNote_code',
+        'promissoryNote_status',
     ];
 }

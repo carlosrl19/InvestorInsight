@@ -54,7 +54,8 @@ Pagarés
                         <th>ID único</th>
                         <th>Fecha de pago</th>
                         <th>Inversionista</th>
-                        <th>Monto nota crédito</th>
+                        <th>Monto pagaré</th>
+                        <th>Estado pagaré</th>
                         <th>Exportar</th>
                     </tr>
                 </thead>
@@ -74,6 +75,15 @@ Pagarés
                             </a>
                         </td>
                         <td>Lps. {{ number_format($promissoryNote->promissoryNote_amount,2) }}</td>
+                        <td>
+                            @if($promissoryNote->promissoryNote_status == '1')
+                                <span class="badge bg-success me-1"></span> Pagado
+                            @elseif($promissoryNote->promissoryNote_status == '0')
+                                <span class="badge bg-orange me-1"></span> No pagado
+                            @else
+                                <span class="badge bg-red me-1"></span> Estado inválido
+                            @endif
+                        </td>
                         <td>
                             <a href="{{ route('promissory_note.report', $promissoryNote->id) }}" class="btn btn-red" data-toggle="modal" data-target="#pdfModal">
                                 &nbsp;&nbsp;&nbsp;<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-printer"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>    

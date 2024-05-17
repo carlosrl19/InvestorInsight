@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('promissoryNote_emission_date');
             $table->date('promissoryNote_final_date');
             $table->string('promissoryNote_code');
+            $table->boolean('promissoryNote_status');
             $table->timestamps();
         });
     }

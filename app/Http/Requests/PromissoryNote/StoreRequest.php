@@ -20,6 +20,7 @@ class StoreRequest extends FormRequest
             'promissoryNote_emission_date' => 'required|date_format:Y-m-d',
             'promissoryNote_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'promissoryNote_code' => 'required|string|min:16|max:16|regex:/^[a-zA-Z0-9]+$/|unique:promissory_notes,promissoryNote_code',
+            'promissoryNote_status' => 'required|min:0|max:1',
         ];
     }
 
@@ -44,6 +45,11 @@ class StoreRequest extends FormRequest
             'promissoryNote_amount.numeric' => 'El monto del pagaré solo debe contener números.',
             'promissoryNote_amount.regex' => 'El monto del pagaré no puede contener letras ni símbolos.',
             'promissoryNote_amount.min' => 'El monto del pagaré debe ser mayor a 0 lps.',
+
+            // Investor status messages
+            'investor_status.required' => 'El estado de disponibilidad del pagaré es obligatorio.',
+            'investor_status.min' => 'El estado de disponibilidad del pagaré debe ser "1" para Pagado',
+            'investor_status.max' => 'El estado de disponibilidad del pagaré debe ser "0" para No pagado',
         ];
     }
 }
