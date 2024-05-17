@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    public function investor(){
+        return $this->belongsTo(Investor::class, 'investor_id', 'id');
+    }
+
     protected $fillable = [
+        'project_code',
         'project_name',
         'project_estimated_time',
         'project_start_date',
@@ -14,6 +19,8 @@ class Project extends Model
         'project_investment',
         'project_total_worked_days',
         'project_status',
-        'project_final_note',
+        'investor_id',
+        'investor_investment',
+        'project_description',
     ];
 }

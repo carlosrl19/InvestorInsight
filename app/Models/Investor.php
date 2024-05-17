@@ -16,6 +16,11 @@ class Investor extends Model
         return $this->hasMany(CreditNote::class, 'id');
     }
 
+    public function project()
+    {
+        return $this->hasMany(Project::class, 'id');
+    }
+
     protected $fillable = [
         'investor_name',
         'investor_dni',

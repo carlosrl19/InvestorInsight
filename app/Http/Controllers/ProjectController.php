@@ -18,7 +18,7 @@ class ProjectController extends Controller
 
     public function create()
     {
-        //
+        return view('modules.projects._create');
     }
 
     public function store(StoreRequest $request)
@@ -47,6 +47,6 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         Project::destroy($id);
-        return redirect()->route('project.index')->with('success', 'Inversionista eliminado exitosamente.');
+        return redirect()->route('project.index')->with('success', 'Proyecto eliminado exitosamente.');
     }
 }

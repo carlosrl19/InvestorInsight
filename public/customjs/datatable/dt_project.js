@@ -43,7 +43,7 @@
             infoFiltered: "- Filtrado de _MAX_ registros.",
             sInfoEmpty: "Sin registros para mostrar",
             info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-            emptyTable: "No se encontraron registros de comisionistas para mostrar.",
+            emptyTable: "No se encontraron registros de proyectos para mostrar.",
             zeroRecords:
                 "No se encontraron registros que coincidan con la búsqueda.",
         },

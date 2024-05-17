@@ -12,7 +12,7 @@
 
             // Personaliza el mensaje de búsqueda
             search: "Buscar",
-            searchPlaceholder: "Buscar transferencias",
+            searchPlaceholder: "Buscar transferencias ...",
 
             // Personaliza el mensaje de cantidad de filas mostradas
             lengthMenu: "Mostrando _MENU_ registros por página",
@@ -49,7 +49,7 @@
 
             // Personaliza el mensaje de búsqueda
             search: "Buscar",
-            searchPlaceholder: "Buscar nota crédito",
+            searchPlaceholder: "Buscar nota crédito ...",
 
             // Personaliza el mensaje de cantidad de filas mostradas
             lengthMenu: "Mostrando _MENU_ registros por página",

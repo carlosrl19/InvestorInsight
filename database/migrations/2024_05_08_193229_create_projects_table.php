@@ -11,14 +11,19 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('project_name');
+            $table->string('project_code');
             $table->string('project_estimated_time');
+            
             $table->date('project_start_date');
             $table->date('project_end_date');
+            
             $table->decimal('project_investment', 12,2); // max = 999,999,999.99
-            $table->integer('project_total_worked_days')->nullable();
-            $table->boolean('project_status');
-            $table->string('project_final_note')->nullable();
+            $table->decimal('investor_investment', 12,2); // max = 999,999,999.99
             $table->unsignedBigInteger('investor_id');
+
+            $table->boolean('project_status');
+            $table->integer('project_total_worked_days')->nullable();
+            $table->string('project_description');
             $table->timestamps();
         });
     }

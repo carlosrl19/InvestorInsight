@@ -54,7 +54,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" readonly class="form-control @error('creditNote_code') is-invalid @enderror" id="creditNote_code"
-                                    name="creditNote_code" value="NC{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('YmdHms')}}" autocomplete="off"
+                                    name="creditNote_code" value="NC{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('smHdmY')}}" autocomplete="off"
                                     style="text-transform: uppercase; background-color: white; font-size: clamp(0.7rem, 3vw, 0.8rem)">
                                     @error('creditNote_code')
                                         <span class="invalid-feedback" role="alert">
