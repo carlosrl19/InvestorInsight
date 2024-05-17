@@ -145,6 +145,7 @@
             // Personaliza el mensaje de cantidad de filas mostradas
             lengthMenu: "Mostrando _MENU_ registros por página",
             infoFiltered: "- Filtrado de _MAX_ registros.",
+            sInfoEmpty: "Sin registros para mostrar",
             info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
             emptyTable: "No se encontraron registros de transferencias para mostrar.",
             zeroRecords:

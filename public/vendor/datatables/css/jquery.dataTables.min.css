@@ -301,6 +301,7 @@ table.dataTable td {
 .dataTables_wrapper .dataTables_filter {
     float: right;
     text-align: right;
+    margin-bottom: 3vh;
 }
 .dataTables_wrapper .dataTables_filter input {
     margin-left: 0.5em;

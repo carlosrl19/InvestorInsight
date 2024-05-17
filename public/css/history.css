@@ -1,0 +1,38 @@
+.angry-grid {
+   display: grid; 
+
+   grid-template-rows: 1fr 1fr 1fr;
+   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+   
+   gap: 10px;
+   height: 100%;
+}
+  
+#item-0 {
+
+   grid-row-start: 1;
+   grid-column-start: 1;
+
+   grid-row-end: 4;
+   grid-column-end: 2;
+   
+}
+
+#item-1 {
+
+   grid-row-start: 1;
+   grid-column-start: 3;
+
+   grid-row-end: 4;
+   grid-column-end: 4;
+   
+}
+
+#item-2 {
+   background-color: #76F99F; 
+   grid-row-start: 1;
+   grid-column-start: 5;
+   grid-row-end: 4;
+   grid-column-end: 6;
+   
+}

@@ -1,46 +1,11 @@
 @extends('layout.admin')
 
 @section('head')
-<style>
-.angry-grid {
-   display: grid; 
+<!-- Datatable CSS -->
+<link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
 
-   grid-template-rows: 1fr 1fr 1fr;
-   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-   
-   gap: 10px;
-   height: 100%;
-}
-  
-#item-0 {
-
-   grid-row-start: 1;
-   grid-column-start: 1;
-
-   grid-row-end: 4;
-   grid-column-end: 2;
-   
-}
-
-#item-1 {
-
-   grid-row-start: 1;
-   grid-column-start: 3;
-
-   grid-row-end: 4;
-   grid-column-end: 4;
-   
-}
-
-#item-2 {
-   background-color: #76F99F; 
-   grid-row-start: 1;
-   grid-column-start: 5;
-   grid-row-end: 4;
-   grid-column-end: 6;
-   
-}
-</style>
+<link rel="stylesheet" href="{{ asset('css/history.css') }}">
 @endsection
 
 @section('pretitle')
@@ -105,7 +70,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="text-truncate">
-                                                        <table class="table table-bordered" style="width: 100%;">
+                                                        <table id="example1" class="display table table-bordered">
                                                             <thead>
                                                             <tr>
                                                                 <th>Fecha</th>
@@ -159,7 +124,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                         <div class="row">
                                         <div class="col">
                                             <div class="text-truncate">
-                                                <table class="table table-bordered">
+                                                <table id="example2" class="display table table-bordered">
                                                     <thead>
                                                     <tr>
                                                         <th>Fecha</th>
@@ -198,5 +163,11 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
 @endsection
 
 @section('scripts')
+<!-- Redirect button -->
 <script src="{{ asset('customjs/return_redirect.js')}}"></script>
+
+<!-- Datatable -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+<script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('customjs/datatable/dt_history.js')}}"></script>
 @endsection
