@@ -63,7 +63,7 @@ class CreditNoteController extends Controller
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="Nota crédito.pdf"');
     }
-
+    
     public function store(StoreRequest $request)
     {
         DB::beginTransaction();

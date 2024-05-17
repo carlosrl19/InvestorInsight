@@ -10727,6 +10727,10 @@ textarea.form-control-lg {
   --tblr-text-opacity: 1;
 }
 
+.text-underline{
+  text-decoration: underline;
+}
+
 .text-primary-emphasis {
   color: var(--tblr-primary-text-emphasis) !important;
 }

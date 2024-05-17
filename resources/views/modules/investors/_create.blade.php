@@ -37,7 +37,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="number" name="investor_balance" step="any" value="{{ old('investor_balance') }}" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror"/>
+                                <input type="number" name="investor_balance" step="any" readonly value="0.00" title="Si el inversionista tiene saldo existente y se está agregando al sistema por primera vez, agregue el saldo monetario como una transferencia y agregue el comentario referente a que ya era un saldo existente." data-bs-toggle="tooltip" data-bs-placement="right" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror"/>
                                 @error('investor_balance')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -66,12 +66,6 @@
                                   @foreach ($investors as $investor)
                                       <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
                                   @endforeach
-                                </optgroup>
-                                
-                                <optgroup label="Comisionistas">
-                                    @foreach ($commissioners as $commissioner)
-                                        <option value="{{ $commissioner->id }}">{{ $commissioner->commissioner_name }}</option>
-                                    @endforeach
                                 </optgroup>
                             </select>
                             @error('investor_reference_id')

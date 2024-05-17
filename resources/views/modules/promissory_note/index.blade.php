@@ -52,7 +52,7 @@ Pagarés
                     <tr class="text-center">
                         <th>#</th>
                         <th>ID único</th>
-                        <th>Fecha</th>
+                        <th>Fecha de pago</th>
                         <th>Inversionista</th>
                         <th>Monto nota crédito</th>
                         <th>Exportar</th>
@@ -65,7 +65,7 @@ Pagarés
                         <td>{{ $promissoryNote->promissoryNote_code }}</td>
                         <td>{{ $promissoryNote->promissoryNote_final_date }}</td>
                         <td>
-                            <a href="{{ route('investor.show', $promissoryNote->investor_id) }}">{{ $promissoryNote->investor->investor_name }}
+                            <a href="{{ route('investor.show', $promissoryNote->investor) }}">{{ $promissoryNote->investor->investor_name }}
                                 <small>
                                     <sup>
                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
@@ -75,7 +75,7 @@ Pagarés
                         </td>
                         <td>Lps. {{ number_format($promissoryNote->promissoryNote_amount,2) }}</td>
                         <td>
-                            <a href="{{ route('credit_note.report', $promissoryNote->id) }}" class="btn btn-red" data-toggle="modal" data-target="#pdfModal">
+                            <a href="{{ route('promissory_note.report', $promissoryNote->id) }}" class="btn btn-red" data-toggle="modal" data-target="#pdfModal">
                                 &nbsp;&nbsp;&nbsp;<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-printer"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>    
                             </a>
                         </td>
