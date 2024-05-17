@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('promissory_notes', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('investor_id');
-            $table->decimal('promissoryNote_amount', 10,2);
+            $table->decimal('promissoryNote_amount', 10,0);
             $table->date('promissoryNote_emission_date');
             $table->date('promissoryNote_final_date');
             $table->string('promissoryNote_code');

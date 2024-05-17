@@ -3,14 +3,15 @@
     <div class="title-note mt-center">PAGARE L {{ number_format($promissoryNote->promissoryNote_amount,2 ) }}</div>
     <!-- Credit's note body -->
     <div class="body-note mt-4 mb-4">Yo: <strong class="text-uppercase text-underline">{{ $promissoryNote->investor->investor_name }}</strong>, mayor de edad, hondureño y con documento Nacional de identificación número <strong class="text-underline">{{ $promissoryNote->investor->investor_dni }}</strong>, 
-        con domicilio en la ciudad de San Pedro Sula, departamento de Cortés, Honduras, <strong>PAGARÉ INCONDICIONALMENTE</strong> la cantidad de <strong class="text-underline">{{$amountLetras}} EXACTO</strong> (<strong class="text-underline">L. {{ number_format($promissoryNote->promissoryNote_amount,2) }}</strong>) 
+        con domicilio en la ciudad de San Pedro Sula, departamento de Cortés, Honduras, <strong>PAGARÉ INCONDICIONALMENTE</strong> la cantidad de <strong class="text-underline">{{$amountLetras}} EXACTO</strong> (<strong class="text-underline">L. {{ number_format($promissoryNote->promissoryNote_amount,0) }}</strong>) 
         a favor del señor <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, mayor de edad, hondureño, soltero y comerciante, con documento Nacional de identificación número <strong class="text-underline">0801199907469</strong>, pago que haré efectivo el día <strong class="text-uppercase text-underline">{{ \Carbon\Carbon::parse($promissoryNote->promissoryNote_final_date)->translatedFormat('d F Y') }}</strong> (<strong class="text-underline">{{ \Carbon\Carbon::parse($promissoryNote->promissoryNote_final_date)->translatedFormat('d/m/Y') }}</strong>).
         
         <br>
         <br>
         En fe de lo anterior, firmo el presente <strong>PAGARÉ</strong> en la ciudad de San Pedro Sula, del departamento de Cortés a los {{ $dia }} días del mes de {{ $mes }} del año {{ $anio }}.
     </div>
-  
+    <br>
+
     <!-- Credit's note Robenior signature -->
     <div class="mt-6 ml-center">&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px" style="position: absolute; margin-top: -25px">
         <br>_________________
