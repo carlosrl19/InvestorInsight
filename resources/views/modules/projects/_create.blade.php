@@ -71,9 +71,7 @@
                                     <label class="form-label" for="project_end_date"><small>Fecha de cierre del proyecto</small></label>
                                 </div>
                             </div>
-
                             <input readonly style="display: none;" type="number" name="project_total_worked_days" value="0" id="project_total_worked_days" class="form-control @error('project_total_worked_days') is-invalid @enderror" autocomplete="off"/>
-
                         </div>
                     </fieldset>
 
