@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    public function investor(){
-        return $this->belongsTo(Investor::class, 'investor_id', 'id');
-    }
-
     protected $fillable = [
         'project_code',
         'project_name',
@@ -23,4 +19,8 @@ class Project extends Model
         'investor_investment',
         'project_description',
     ];
+
+    public function investor(){
+        return $this->belongsTo(Investor::class, 'investor_id', 'id');
+    }
 }

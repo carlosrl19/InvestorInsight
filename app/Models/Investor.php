@@ -18,7 +18,8 @@ class Investor extends Model
 
     public function project()
     {
-        return $this->hasMany(Project::class, 'id');
+        return $this->hasMany(Project::class, 'investor_id', 'id');
+
     }
 
     protected $fillable = [

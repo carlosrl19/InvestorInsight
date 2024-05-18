@@ -62,7 +62,7 @@
                             </div>
                             <div class="col" style="display: none;">
                                 <div class="form-floating">
-                                    <input readonly type="date" name="project_end_date" value="{{ old('project_estimated_time') }}" id="project_end_date" class="form-control @error('project_estimated_time') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->toDateString() }}"/>
+                                    <input readonly type="date" name="project_end_date" value="{{ old('project_end_date') }}" id="project_end_date" class="form-control @error('project_estimated_time') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->toDateString() }}"/>
                                     @error('project_end_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -76,39 +76,57 @@
 
                     <!-- Step 2 -->
                     <fieldset>
-                        <h3 class="text-center text-muted"><span style="border: 2px solid #637282; padding: 5px 10px 5px 10px; border-radius: 50px">2</span> Inversión</h3>
-                        <div class="row mb-3 align-items-end">
-                            <input type="hidden" name="project_status" value="1">
-                            <div class="col">
+                        <h3 class="text-center text-muted"><span style="border: 2px solid #637282; padding: 5px 10px 5px 10px; border-radius: 50px">2</span> Inversionistas</h3>
+                        <input type="hidden" name="project_status" value="1">
+                        
+                        <!-- Project total investment -->
+                        <input readonly style="display: none;" type="number" name="project_investment" value="{{ old('project_investment') }}" id="project_investment" class="form-control @error('project_investment') is-invalid @enderror" autocomplete="off"/>
+                        @error('project_investment')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        
+                        <div class="row mb-3 mt-3 align-items-end">
+                            <div class="col-11">
                                 <div class="form-floating">
-                                    <input readonly type="number" name="project_investment" value="{{ old('project_investment') }}" id="project_investment" class="form-control @error('project_investment') is-invalid @enderror" autocomplete="off"/>
-                                    @error('project_investment')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <label class="form-label" for="project_investment"><small>Inversión del proyecto (Lempiras)</small></label>
+                                    <select class="form-select js-example-basic-multiple" id="investor_select" style="font-size: clamp(0.6rem, 3vh, 0.7rem); width: 100%">
+                                        <option></option>
+                                        @foreach ($investors as $investor)
+                                            @if($investor->investor_status == 1)
+                                                <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mb-3 align-items-end">
-                            <div class="col">
-                                <div class="form-floating">
-                                    <div class="card">
-                                        <div class="card-header">Listado de inversionistas disponibles para proyectos <button type="button" class="btn btn-primary" style="margin: auto;" id="add_investor_btn"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M16 19h6" /><path d="M19 16v6" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4" /></svg></button></div>
-                                        <select class="form-select js-example-basic-multiple" id="investor_select" style="font-size: clamp(0.6rem, 3vh, 0.7rem); width: 100%">
-                                            <option></option>
-                                            @foreach ($investors as $investor)
-                                                @if($investor->investor_status == 1)
-                                                    <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
+                            <div class="col-1 d-flex justify-content-end" style="margin-bottom: 1vh">
+                                <button type="button" title="Agregar inversionista seleccionado al proyecto" data-bs-toggle="tooltip" data-bs-placement="top" class="btn btn-md text-white" id="add_button_container" onclick="addInvestor()" style="background-color: gray; border: none; padding: 5px 0px 5px 5px">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                                        <path d="M16 19h6"></path>
+                                        <path d="M19 16v6"></path>
+                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
-                        <div id="investors_container"></div>
+
+                        <!-- Project's selected investor -->
+                        <table class="table table-bordered" id="project_investors_table" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th title="Info: Columna para mostrar el nombre del inversionista" data-bs-toggle="tooltip" data-bs-placement="left">Inversionista</th>
+                                    <th title="Info: Columna para mostrar el monto de inversión del inversionista para el proyecto" data-bs-toggle="tooltip" data-bs-placement="top">Monto de inversión (Lps)</th>
+                                    <th title="Info: Columna para mostrar botón de remover inversionista de los inversionistas seleccionados para formar parte del proyecto" data-bs-toggle="tooltip" data-bs-placement="right">Eliminar</th>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                </tr>
+                            </tbody>
+                        </table>
                     </fieldset>
 
                     <!-- Step 3 -->
@@ -141,68 +159,4 @@
    </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const investorSelect = document.getElementById('investor_select');
-        const addInvestorBtn = document.getElementById('add_investor_btn');
-        const investorsContainer = document.getElementById('investors_container');
-        const projectInvestmentInput = document.getElementById('project_investment');
-
-        let investorIndex = 0;
-
-        addInvestorBtn.addEventListener('click', function () {
-            const selectedInvestorId = investorSelect.value;
-            const selectedInvestorName = investorSelect.options[investorSelect.selectedIndex].text;
-
-            if (selectedInvestorId) {
-                // Create the new investor entry
-                const investorDiv = document.createElement('div');
-                investorDiv.classList.add('row', 'mb-3', 'align-items-end');
-                investorDiv.innerHTML = `
-                    <div class="col" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
-                        <div class="form-floating">
-                            <input type="text" readonly class="form-control" value="${selectedInvestorName}" />
-                            <input type="hidden" name="investors[${investorIndex}][id]" value="${selectedInvestorId}" />
-                            <label class="form-label"><small>Inversionista</small></label>
-                        </div>
-                    </div>
-                    <div class="col" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
-                        <div class="form-floating">
-                            <input type="number" name="investors[${investorIndex}][investment]" class="form-control investor-investment" placeholder="Inversión del inversionista" autocomplete="off" />
-                            <label class="form-label"><small>Inversión (Lempiras)</small></label>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <button type="button" class="btn btn-danger remove-investor-btn">Eliminar</button>
-                    </div>
-                `;
-
-                investorsContainer.appendChild(investorDiv);
-                investorIndex++;
-
-                // Disable the selected option
-                investorSelect.querySelector(`option[value="${selectedInvestorId}"]`).disabled = true;
-                investorSelect.value = '';
-
-                // Add event listener to the remove button
-                investorDiv.querySelector('.remove-investor-btn').addEventListener('click', function () {
-                    investorsContainer.removeChild(investorDiv);
-                    // Enable the option again
-                    investorSelect.querySelector(`option[value="${selectedInvestorId}"]`).disabled = false;
-                    calculateTotalInvestment();
-                });
-
-                // Add event listener to the investment input
-                investorDiv.querySelector('.investor-investment').addEventListener('input', calculateTotalInvestment);
-            }
-        });
-
-        function calculateTotalInvestment() {
-            let totalInvestment = 0;
-            document.querySelectorAll('.investor-investment').forEach(function(input) {
-                totalInvestment += parseFloat(input.value) || 0;
-            });
-            projectInvestmentInput.value = totalInvestment.toFixed(2);
-        }
-    });
-</script>
+<script src="{{ asset('customjs/projects/investors.js') }}"></script>

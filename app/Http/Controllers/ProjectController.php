@@ -23,8 +23,18 @@ class ProjectController extends Controller
 
     public function store(StoreRequest $request)
     {
-        Project::create($request->all());
-        return redirect()->route('project.index')->with('success', 'Proyecto creado exitosamente.');
+        $investorId = $request->investor_id;
+        $investor_investment = $request->investor_investment;
+    
+        // Iteration on names and percentages to store them in the database
+        for ($i = 0; $i < count($investorId); $i++) {
+            $project = new Project();
+            $project->investor_id = $investorId[$i];
+            $project->investor_investment = $investor_investment[$i];
+            $project->save();
+        }
+    
+        return redirect()->route('project.index')->with('success', 'Proyecto creado de manera exitosa.');
     }
 
     public function show(Project $project)
