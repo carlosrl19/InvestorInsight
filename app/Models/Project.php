@@ -23,4 +23,5 @@ class Project extends Model
     public function investor(){
         return $this->belongsTo(Investor::class, 'investor_id', 'id');
     }
+    
 }
