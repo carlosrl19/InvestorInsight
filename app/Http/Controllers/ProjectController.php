@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Project\StoreRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\Project\UpdateRequest;
 use App\Models\Investor;
 use App\Models\Project;
@@ -21,21 +21,48 @@ class ProjectController extends Controller
         return view('modules.projects._create');
     }
 
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
-        $investorId = $request->investor_id;
-        $investor_investment = $request->investor_investment;
+        // Validar los datos del formulario manualmente
+        $validatedData = $request->validate([
+            'project_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:projects,project_name',
+            'project_code' => 'required|string|min:16|max:16|regex:/^[a-zA-Z0-9]+$/|unique:projects,project_code',
+            'project_estimated_time' => 'required|numeric',
+            'project_start_date' => 'required|date_format:Y-m-d',
+            'project_end_date' => 'required|date_format:Y-m-d',
+            'project_investment' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
+            'project_total_worked_days' => 'numeric|min:0|nullable',
+            'project_status' => 'required|in:0,1',
+            'investor_id.*' => 'required|numeric|exists:investors,id',
+            'investor_investment.*' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
+            'project_description' => 'required|string|min:3|max:255',
+        ]);
+    
+        // Si llega a este punto, los datos han sido validados correctamente
+        // Continúa con el proceso de almacenamiento en la base de datos
+        $investorId = $validatedData['investor_id'];
+        $investor_investment = $validatedData['investor_investment'];
     
         // Iteration on names and percentages to store them in the database
         for ($i = 0; $i < count($investorId); $i++) {
             $project = new Project();
+            $project->project_name = $validatedData['project_name'];
+            $project->project_code = $validatedData['project_code'];
+            $project->project_estimated_time = $validatedData['project_estimated_time'];
+            $project->project_start_date = $validatedData['project_start_date'];
+            $project->project_end_date = $validatedData['project_end_date'];
+            $project->project_investment = $validatedData['project_investment'];
+            $project->project_total_worked_days = $validatedData['project_total_worked_days'];
+            $project->project_status = $validatedData['project_status'];
             $project->investor_id = $investorId[$i];
             $project->investor_investment = $investor_investment[$i];
+            $project->project_description = $validatedData['project_description'];
             $project->save();
         }
-    
+        
         return redirect()->route('project.index')->with('success', 'Proyecto creado de manera exitosa.');
     }
+       
 
     public function show(Project $project)
     {
