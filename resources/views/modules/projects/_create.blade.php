@@ -144,6 +144,7 @@
         const investorSelect = document.getElementById('investor_select');
         const addInvestorBtn = document.getElementById('add_investor_btn');
         const investorsContainer = document.getElementById('investors_container');
+        const projectInvestmentInput = document.getElementById('project_investment');
 
         let investorIndex = 0;
 
@@ -156,21 +157,21 @@
                 const investorDiv = document.createElement('div');
                 investorDiv.classList.add('row', 'mb-3', 'align-items-end');
                 investorDiv.innerHTML = `
-                    <div class="col">
+                    <div class="col" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
                         <div class="form-floating">
                             <input type="text" readonly class="form-control" value="${selectedInvestorName}" />
                             <input type="hidden" name="investors[${investorIndex}][id]" value="${selectedInvestorId}" />
                             <label class="form-label"><small>Inversionista</small></label>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
                         <div class="form-floating">
-                            <input type="number" name="investors[${investorIndex}][investment]" class="form-control" placeholder="Inversión del inversionista" autocomplete="off" />
-                            <label class="form-label"><small>Inversión en lempiras</small></label>
+                            <input type="number" name="investors[${investorIndex}][investment]" class="form-control investor-investment" placeholder="Inversión del inversionista" autocomplete="off" />
+                            <label class="form-label"><small>Inversión (Lempiras)</small></label>
                         </div>
                     </div>
                     <div class="col-auto">
-                        <button type="button" class="btn btn-sm btn-danger remove-investor-btn"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg></button>
+                        <button type="button" class="btn btn-danger remove-investor-btn">Eliminar</button>
                     </div>
                 `;
 
@@ -186,8 +187,20 @@
                     investorsContainer.removeChild(investorDiv);
                     // Enable the option again
                     investorSelect.querySelector(`option[value="${selectedInvestorId}"]`).disabled = false;
+                    calculateTotalInvestment();
                 });
+
+                // Add event listener to the investment input
+                investorDiv.querySelector('.investor-investment').addEventListener('input', calculateTotalInvestment);
             }
         });
+
+        function calculateTotalInvestment() {
+            let totalInvestment = 0;
+            document.querySelectorAll('.investor-investment').forEach(function(input) {
+                totalInvestment += parseFloat(input.value) || 0;
+            });
+            projectInvestmentInput.value = totalInvestment.toFixed(2);
+        }
     });
 </script>

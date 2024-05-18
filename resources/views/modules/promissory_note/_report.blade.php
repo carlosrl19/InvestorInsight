@@ -13,7 +13,7 @@
     <br>
 
     <!-- Credit's note Robenior signature -->
-    <div class="mt-6 ml-center">&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px" style="position: absolute; margin-top: -25px">
+    <div class="mt-6 ml-center">&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="90px" style="position: absolute; margin-top: 10px; transform: rotate(25deg)">
         <br>_________________
         <br><span>DNI: <strong class="text-underline">0801199907469</strong></span>
     </div>
