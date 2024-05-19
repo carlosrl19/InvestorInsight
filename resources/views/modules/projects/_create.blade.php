@@ -81,7 +81,7 @@
                         <input type="hidden" name="project_status" value="1">
                         
                         <!-- Project total investment -->
-                        <input readonly style="display: none;" type="number" name="project_investment" value="{{ old('project_investment') }}" id="project_investment" class="form-control @error('project_investment') is-invalid @enderror" autocomplete="off"/>
+                        <input readonly title="Inversión total del proyecto" data-bs-toggle="tooltip" data-bs-placement="right" type="number" name="project_investment" value="{{ old('project_investment') }}" id="project_investment" class="form-control @error('project_investment') is-invalid @enderror" autocomplete="off"/>
                         @error('project_investment')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -118,9 +118,9 @@
                         <table class="table table-bordered" id="project_investors_table" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th title="Info: Columna para mostrar el nombre del inversionista" data-bs-toggle="tooltip" data-bs-placement="left">Inversionista</th>
-                                    <th title="Info: Columna para mostrar el monto de inversión del inversionista para el proyecto" data-bs-toggle="tooltip" data-bs-placement="top">Monto de inversión (Lps)</th>
-                                    <th title="Info: Columna para mostrar botón de remover inversionista de los inversionistas seleccionados para formar parte del proyecto" data-bs-toggle="tooltip" data-bs-placement="right">Eliminar</th>
+                                    <th>Inversionista</th>
+                                    <th>Monto de inversión (Lps)</th>
+                                    <th>Eliminar</th>
                                 </th>
                             </thead>
                             <tbody>
