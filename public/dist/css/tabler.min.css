@@ -10863,7 +10863,13 @@ fieldset:disabled .btn {
     --tblr-text-opacity: 1;
 }
 .text-underline{
-    text-decoration: underline;
+   text-decoration: underline;
+}
+.text-md{
+    font-size: clamp(0.7rem, 6vh, 0.85rem);
+}
+.text-sm{
+    font-size: clamp(0.6rem, 6vh, 0.7rem);
 }
 .text-primary-emphasis {
     color: var(--tblr-primary-text-emphasis) !important;
@@ -20814,6 +20820,16 @@ a.card-title:hover {
     border-radius: var(--tblr-card-border-radius) var(--tblr-card-border-radius)
         0 0;
 }
+
+.card-status-start-md {
+    position: absolute;
+    right: auto;
+    bottom: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: var(--tblr-card-border-radius) 0 0 var(--tblr-card-border-radius);
+  }
+
 .card-status-start {
     position: absolute;
     right: auto;

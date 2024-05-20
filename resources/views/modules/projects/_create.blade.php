@@ -1,5 +1,5 @@
 <div class="modal modal-blur fade" id="modal-team" tabindex="-1" role="dialog" aria-hidden="true">
-   <div class="modal-dialog modal-dialog-centered" role="document">
+   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #52524E">
             <div class="modal-header">
                 <h5 class="modal-title">Agregar nuevo proyecto</h5>
@@ -23,8 +23,6 @@
                                     <label class="form-label" for="project_name"><small>Nombre del proyecto</small></label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mb-3 align-items-end">
                             <div class="col">
                                 <div class="form-floating">
                                     <input type="date" name="project_start_date" value="{{ old('project_start_date') }}" id="project_start_date" class="form-control @error('project_name') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->toDateString() }}"/>
@@ -36,6 +34,21 @@
                                     <label class="form-label" for="project_start_date"><small>Fecha inicial del proyecto</small></label>
                                 </div>
                             </div>
+                            <div class="col" style="display: none">
+                                <div class="form-floating">
+                                    <input type="text" readonly class="form-control @error('project_code') is-invalid @enderror" id="project_code"
+                                        name="project_code" value="PY{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('smHdmY')}}" autocomplete="off"
+                                        style="text-transform: uppercase; color: #52524E; font-size: clamp(0.7rem, 3vw, 0.8rem)">
+                                        @error('project_code')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <label for="project_code">ID único</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3 align-items-end">
                             <div class="col">
                                 <div class="form-floating">
                                     <input type="number" min="1" name="project_estimated_time" value="{{ old('project_estimated_time') }}" id="project_estimated_time" class="form-control @error('project_estimated_time') is-invalid @enderror" autocomplete="off"/>
@@ -47,28 +60,21 @@
                                     <label class="form-label" for="project_estimated_time"><small>SM (tiempo estimado en semanas)</small></label>
                                 </div>
                             </div>
-                            <div class="col" style="display: none;">
+                            <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" readonly class="form-control @error('project_code') is-invalid @enderror" id="project_code"
-                                        name="project_code" value="PY{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('smHdmY')}}" autocomplete="off"
-                                        style="text-transform: uppercase; background-color: white; font-size: clamp(0.7rem, 3vw, 0.8rem)">
-                                        @error('project_code')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        <label for="project_code">ID único nota crédito</label>
-                                </div>
-                            </div>
-                            <div class="col" style="display: none;">
-                                <div class="form-floating">
-                                    <input readonly type="date" name="project_end_date" value="{{ old('project_end_date') }}" id="project_end_date" class="form-control @error('project_estimated_time') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->toDateString() }}"/>
+                                    <input type="date" name="project_end_date" value="{{ old('project_end_date') }}" id="project_end_date" class="form-control @error('project_estimated_time') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->toDateString() }}"/>
                                     @error('project_end_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                     <label class="form-label" for="project_end_date"><small>Fecha de cierre del proyecto</small></label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" id="result" class="form-control" readonly>
+                                    <label class="form-label" for="total_work_days"><small>Días de trabajo</small></label>
                                 </div>
                             </div>
                             <input readonly style="display: none;" type="number" name="project_total_worked_days" value="0" id="project_total_worked_days" class="form-control @error('project_total_worked_days') is-invalid @enderror" autocomplete="off"/>
@@ -81,7 +87,7 @@
                         <input type="hidden" name="project_status" value="1">
                         
                         <!-- Project total investment -->
-                        <input readonly title="Inversión total del proyecto" data-bs-toggle="tooltip" data-bs-placement="right" type="number" name="project_investment" value="{{ old('project_investment') }}" id="project_investment" class="form-control @error('project_investment') is-invalid @enderror" autocomplete="off"/>
+                        <input readonly title="Inversión total del proyecto" data-bs-toggle="tooltip" data-bs-placement="right" type="number" name="project_investment" value="0.00" id="project_investment" class="form-control @error('project_investment') is-invalid @enderror" autocomplete="off"/>
                         @error('project_investment')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -119,7 +125,9 @@
                             <thead>
                                 <tr>
                                     <th>Inversionista</th>
-                                    <th>Monto de inversión (Lps)</th>
+                                    <th>Capital</th>
+                                    <th>% ganancia</th>
+                                    <th>Total ganancia</th>
                                     <th>Eliminar</th>
                                 </th>
                             </thead>

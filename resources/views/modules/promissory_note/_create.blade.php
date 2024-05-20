@@ -40,7 +40,7 @@
                                 <label class="form-label" for="promissoryNote_emission_date"><small>Fecha de emisión del pagaré</small></label>
                             </div>
                         </div>
-                        <input type="hidden" name="promissoryNote_status" value="0">
+                        <input type="hidden" name="promissoryNote_status" value="1">
                         @error('promissoryNote_status')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

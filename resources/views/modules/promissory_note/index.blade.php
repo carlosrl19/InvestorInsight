@@ -50,7 +50,6 @@ Pagarés
             <table id="example" class="display table table-bordered">
                 <thead>
                     <tr class="text-center">
-                        <th>#</th>
                         <th>ID único</th>
                         <th>Fecha de pago</th>
                         <th>Inversionista</th>
@@ -60,9 +59,8 @@ Pagarés
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($promissoryNotes as $i => $promissoryNote)
+                    @foreach($promissoryNotes as $promissoryNote)
                     <tr class="text-center">
-                        <td>{{ ++$i }}</td>
                         <td>{{ $promissoryNote->promissoryNote_code }}</td>
                         <td>{{ $promissoryNote->promissoryNote_final_date }}</td>
                         <td>
@@ -77,9 +75,9 @@ Pagarés
                         <td>Lps. {{ number_format($promissoryNote->promissoryNote_amount,2) }}</td>
                         <td>
                             @if($promissoryNote->promissoryNote_status == '1')
-                                <span class="badge bg-success me-1"></span> Pagado
+                                <span class="badge bg-success me-1"></span> Emitido
                             @elseif($promissoryNote->promissoryNote_status == '0')
-                                <span class="badge bg-orange me-1"></span> No pagado
+                                <span class="badge bg-orange me-1"></span> No emitido
                             @else
                                 <span class="badge bg-red me-1"></span> Estado inválido
                             @endif

@@ -95,10 +95,15 @@ class InvestorController extends Controller
     
         // Obtener todos los proyectos activos en los que el inversor forma parte
         $activeProjects = Project::where('investor_id', $investor->id)
-                                 ->where('project_status', 1)
-                                 ->get();
+        ->where('project_status', 1)
+        ->get();
+        
+        // Obtener todos los proyectos finalizado en los que el inversor forma parte
+        $completedProjects = Project::where('investor_id', $investor->id)
+        ->where('project_status', 0)
+        ->get();
     
-        return view('modules.investors.show', compact('investor', 'transfers', 'creditNotes', 'referenceInvestor', 'activeProjects'));
+        return view('modules.investors.show', compact('investor', 'transfers', 'creditNotes', 'referenceInvestor', 'activeProjects', 'completedProjects'));
     }
         
     public function edit($id)

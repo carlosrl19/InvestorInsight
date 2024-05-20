@@ -9,7 +9,7 @@
 @endsection
 
 @section('pretitle')
-Proyectos /&nbsp;<b class="text-muted">{{ $project->project_name }}</b>
+Proyectos
 @endsection
 
 @section('create')
@@ -20,6 +20,7 @@ Proyectos /&nbsp;<b class="text-muted">{{ $project->project_name }}</b>
 @endsection
 
 @section('title')
+Información del proyecto/&nbsp;<b class="text-muted text-md">{{ $project->project_name }}</b>
 @endsection
 
 @section('content')
@@ -29,16 +30,16 @@ Proyectos /&nbsp;<b class="text-muted">{{ $project->project_name }}</b>
             <div class="card">
                 <div class="container mt-2">
                     <div class="row mb-3">
-                        <h3>Información general</h3>
-                        <div class="col-md-6">
-                            <p><div class="badge bg-success mt-1"></div>&nbsp;Nombre del proyecto: {{ $project->project_name }}</p>
-                            <p><div class="badge bg-success mt-1"></div>&nbsp;Código único: {{ $project->project_code }}</p>
+                        <h3>Información general del proyecto</h3>
+                        <div class="col-md-3">
+                            <p><div class="badge bg-success mt-1"></div>&nbsp;Proyecto: {{ $project->project_name }}</p>
+                            <p><div class="badge bg-success mt-1"></div>&nbsp;Código: {{ $project->project_code }}</p>
                             <p><div class="badge bg-success mt-1"></div>&nbsp;Inversión total: Lps. {{ number_format($project->project_investment,2) }}</p>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha inicio: {{ $project->project_start_date }}</p>
                             <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha cierre: {{ $project->project_end_date }}</p>
-                            <p><div class="badge bg-success mt-1"></div>&nbsp;Comentarios del proyecto: {{ $project->project_description }}</p>
+                            <p><div class="badge bg-success mt-1"></div>&nbsp;Comentarios: {{ $project->project_description }}</p>
                         </div>
                     </div>
                     <h3>Inversionistas del proyecto</h3>
@@ -46,6 +47,7 @@ Proyectos /&nbsp;<b class="text-muted">{{ $project->project_name }}</b>
                         @foreach($investors as $investor)
                             <div class="col-md-3 mb-3">
                                 <div class="card">
+                                    <div class="card-status-start-md bg-primary"></div>
                                     <div class="card-body">
                                         <a href="{{ route('investor.show', $investor) }}">
                                             {{ $investor->investor_name }}

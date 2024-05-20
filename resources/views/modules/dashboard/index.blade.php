@@ -20,7 +20,7 @@ Dashboard
     <div class="row row-deck row-cards">
       <div class="col-12">
         <div class="row row-cards">
-          <div class="col-sm-6 col-lg-4">
+          <div class="col-sm-6 col-lg-6">
             <div class="card card-sm">
               <div class="card-body">
                 <div class="row align-items-center">
@@ -40,7 +40,7 @@ Dashboard
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-lg-4">
+          <div class="col-sm-6 col-lg-6">
             <div class="card card-sm">
               <div class="card-body">
                 <div class="row align-items-center">
@@ -54,25 +54,6 @@ Dashboard
                     </div>
                     <div class="text-muted">
                       Nº comisionistas afiliados
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4">
-            <div class="card card-sm">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <span class="bg-twitter text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-twitter -->
-                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-stack-front"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 4l-8 4l8 4l8 -4l-8 -4" fill="currentColor" /><path d="M8 14l-4 2l8 4l8 -4l-4 -2" /><path d="M8 10l-4 2l8 4l8 -4l-4 -2" /></svg>                  </div>
-                  <div class="col">
-                    <div class="font-weight-medium">
-                      {{ $project }}
-                    </div>
-                    <div class="text-muted">
-                      Proyectos ingresados al sistema
                     </div>
                   </div>
                 </div>

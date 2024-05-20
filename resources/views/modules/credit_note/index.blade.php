@@ -50,7 +50,6 @@ Notas crédito
             <table id="example" class="display table table-bordered">
                 <thead>
                     <tr class="text-center">
-                        <th>#</th>
                         <th>ID único</th>
                         <th>Fecha</th>
                         <th>Inversionista</th>
@@ -60,9 +59,8 @@ Notas crédito
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($creditNotes as $i => $creditNote)
+                    @foreach($creditNotes as $creditNote)
                     <tr class="text-center">
-                        <td>{{ ++$i }}</td>
                         <td>{{ $creditNote->creditNote_code }}</td>
                         <td>{{ $creditNote->creditNote_date }}</td>
                         <td>

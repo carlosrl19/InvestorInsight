@@ -26,7 +26,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
 @section('content')
 <div class="container-xl">
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             <div class="card mb-2">
                 <div class="card-body">
                     <div class="accordion" id="accordion-example">
@@ -56,7 +56,8 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                 </div>
             </div>
         </div>
-
+    </div>
+    <div class="row">
         <div class="col-6">
             <div class="card mb-2">
                 <div class="card-body">
@@ -73,14 +74,15 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                         <thead>
                                             <tr>
                                                 <th>Proyecto</th>
+                                                <th>%</th>
                                                 <th>Total invertido</th>
-                                                <th>Ganancia esperada</th>
+                                                <th>Ganancia</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($activeProjects as $project)
                                                 <tr>
-                                                    <td>
+                                                    <td style="font-size: clamp(0.6rem, 6vh, 0.7rem)">
                                                         <a href="{{ route('project.show', $project) }}">
                                                             {{ $project->project_name }}
                                                             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link">
@@ -90,8 +92,57 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                                             </svg>
                                                         </a>
                                                     </td>
-                                                    <td>Lps. {{ number_format($project->investor_investment,2) }}</td>
-                                                    <td>X cantidad esperada</td>
+                                                    <td style="font-size: clamp(0.6rem, 6vh, 0.7rem)">{{ number_format($project->investor_profit_perc,0) }}%</td>
+                                                    <td style="font-size: clamp(0.6rem, 6vh, 0.7rem)">Lps. {{ number_format($project->investor_investment,2) }}</td>
+                                                    <td class="text-success" style="font-size: clamp(0.6rem, 6vh, 0.7rem)">Lps. {{ number_format($project->investor_investment * $project->investor_profit_perc / 100,2) }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <div class="accordion" id="accordion-example">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading-1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="true">
+                                <h4>Historial de proyectos finalizados</h4>
+                            </button>
+                            </h2>
+                            <div id="collapse-2" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
+                                <div class="accordion-body pt-0">
+                                    <table id="example1" class="display table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Proyecto</th>
+                                                <th>%</th>
+                                                <th>Total invertido</th>
+                                                <th>Ganancia final</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($completedProjects as $project)
+                                                <tr>
+                                                    <td style="font-size: clamp(0.6rem, 6vh, 0.7rem)">
+                                                        <a href="{{ route('project.show', $project) }}">
+                                                            {{ $project->project_name }}
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-link">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" />
+                                                                <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
+                                                                <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
+                                                            </svg>
+                                                        </a>
+                                                    </td>
+                                                    <td style="font-size: clamp(0.6rem, 6vh, 0.7rem)">{{ number_format($project->investor_profit_perc, 0) }}%</td>
+                                                    <td style="font-size: clamp(0.6rem, 6vh, 0.7rem)">Lps. {{ number_format($project->investor_investment, 2) }}</td>
+                                                    <td class="text-success" style="font-size: clamp(0.6rem, 6vh, 0.7rem)">Lps. {{ number_format($project->investor_investment * $project->investor_profit_perc / 100, 2) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -121,7 +172,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="text-truncate">
-                                                        <table id="example1" class="display table table-bordered">
+                                                        <table id="example2" class="display table table-bordered">
                                                             <thead>
                                                             <tr>
                                                                 <th>Fecha</th>
@@ -175,7 +226,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                         <div class="row">
                                         <div class="col">
                                             <div class="text-truncate">
-                                                <table id="example2" class="display table table-bordered">
+                                                <table id="example3" class="display table table-bordered">
                                                     <thead>
                                                     <tr>
                                                         <th>Fecha</th>

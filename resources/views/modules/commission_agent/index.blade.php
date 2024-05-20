@@ -47,8 +47,7 @@ Comisionistas
         <table id="example" class="display table table-bordered">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Nombre inversionista</th>
+                    <th>Nombre comisionista</th>
                     <th>Nº Identidad</th>
                     <th>Teléfono</th>
                     <th>Recomendación</th>
@@ -56,9 +55,8 @@ Comisionistas
                 </tr>
             </thead>
             <tbody>
-                    @foreach($commission_agents as $i => $commission_agent)
+                    @foreach($commission_agents as $commission_agent)
                     <tr>
-                        <td>{{ ++$i }}</td>
                         <td>{{ $commission_agent->commissioner_name }}</td>
                         <td>{{ $commission_agent->commissioner_dni }}</td>
                         <td>{{ $commission_agent->commissioner_phone }}</td>

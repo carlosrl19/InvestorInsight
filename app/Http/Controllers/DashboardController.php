@@ -14,10 +14,9 @@ class DashboardController extends Controller
     public function index(){
         $investors = Investor::count();
         $commissioner = CommissionAgent::count();
-        $project = Project::count();
         $transfers = Transfer::latest()->take(15)->get();
         $creditNotes = CreditNote::latest()->take(15)->get();
 
-        return view('modules.dashboard.index', compact('investors', 'commissioner', 'project', 'transfers', 'creditNotes'));
+        return view('modules.dashboard.index', compact('investors', 'commissioner', 'transfers', 'creditNotes'));
     }
 }

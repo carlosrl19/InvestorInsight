@@ -50,7 +50,6 @@ Transferencias
         <table id="example" class="display table table-bordered">
             <thead>
                 <tr class="text-center">
-                    <th>#</th>
                     <th>Fecha</th>
                     <th>Banco / Modo de transferencia</th>
                     <th>Código transferencia</th>
@@ -59,9 +58,8 @@ Transferencias
                 </tr>
             </thead>
             <tbody>
-                @foreach($transfers as $i => $transfer)
+                @foreach($transfers as $transfer)
                 <tr class="text-center">
-                    <td>{{ ++$i }}</td>
                     <td>{{ $transfer->transfer_date }}</td>
                     <td class="text-uppercase">{{ $transfer->transfer_bank }}</td>
                     <td class="text-uppercase">{{ $transfer->transfer_code }}</td>

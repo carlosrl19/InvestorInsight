@@ -19,6 +19,7 @@ return new class extends Migration
             
             $table->decimal('project_investment', 12,2); // max = 999,999,999.99
             $table->decimal('investor_investment', 12,2); // max = 999,999,999.99
+            $table->integer('investor_profit_perc');
             $table->unsignedBigInteger('investor_id');
 
             $table->boolean('project_status');

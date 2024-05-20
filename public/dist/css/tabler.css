@@ -20523,6 +20523,15 @@ Card status
   border-radius: var(--tblr-card-border-radius) 0 0 var(--tblr-card-border-radius);
 }
 
+.card-status-start-md {
+  position: absolute;
+  right: auto;
+  bottom: 0;
+  width: 4px;
+  height: 100%;
+  border-radius: var(--tblr-card-border-radius) 0 0 var(--tblr-card-border-radius);
+}
+
 .card-status-bottom {
   position: absolute;
   top: initial;

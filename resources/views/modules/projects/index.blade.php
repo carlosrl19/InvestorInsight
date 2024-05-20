@@ -50,7 +50,6 @@ Proyectos
         <table id="example" class="display table table-bordered">
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>Nombre proyecto</th>
                     <th>SM <small>(tiempo estimado)</small></th>
                     <th>Fecha inicio</th>
@@ -69,7 +68,6 @@ Proyectos
                         $project = $projectGroup->first();
                     @endphp
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
                         <td>
                             <a href="{{ route('project.show', $project) }}">
                                 {{ $project->project_name }}
@@ -78,7 +76,7 @@ Proyectos
                         <td>{{ $project->project_estimated_time }} semanas</td>
                         <td>{{ $project->project_start_date }}</td>
                         <td>{{ $project->project_end_date }}</td>
-                        <td>L. {{ number_format($project->project_investment) }}</td>
+                        <td>L. {{ number_format($project->project_investment,2) }}</td>
                         <td>
                             @if($project->project_status == '1')
                                 <span class="badge bg-success me-1">En proceso</span>

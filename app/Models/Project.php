@@ -17,6 +17,7 @@ class Project extends Model
         'project_status',
         'investor_id',
         'investor_investment',
+        'investor_profit_perc',
         'project_description',
     ];
 

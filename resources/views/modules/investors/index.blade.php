@@ -47,7 +47,6 @@ Inversionistas
         <table id="example" class="display table table-bordered">
             <thead>
                 <tr class="text-center">
-                    <th>#</th>
                     <th>Nombre inversionista</th>
                     <th>Nº Identidad</th>
                     <th>Teléfono</th>
@@ -58,9 +57,8 @@ Inversionistas
                 </tr>
             </thead>
             <tbody>
-                @foreach($investors as $i => $investor)
+                @foreach($investors as $investor)
                     <tr class="text-center">
-                        <td>{{ ++$i }}</td>
                         <td>
                             <a href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}
                             <small>
