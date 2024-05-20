@@ -70,7 +70,11 @@ Proyectos
                     @endphp
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $project->project_name }}</td>
+                        <td>
+                            <a href="{{ route('project.show', $project) }}">
+                                {{ $project->project_name }}
+                            </a>
+                        </td>
                         <td>{{ $project->project_estimated_time }} semanas</td>
                         <td>{{ $project->project_start_date }}</td>
                         <td>{{ $project->project_end_date }}</td>

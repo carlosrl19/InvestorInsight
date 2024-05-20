@@ -8,6 +8,7 @@ use App\Models\CommissionAgent;
 use App\Models\CreditNote;
 use App\Models\Investor;
 use App\Models\Transfer;
+use App\Models\Project;
 
 class InvestorController extends Controller
 {
@@ -91,10 +92,15 @@ class InvestorController extends Controller
             $creditNote->current_balance = $event->current_balance;
             return $creditNote;
         });
-        
-        return view('modules.investors.show', compact('investor', 'transfers', 'creditNotes', 'referenceInvestor'));
-    }
     
+        // Obtener todos los proyectos activos en los que el inversor forma parte
+        $activeProjects = Project::where('investor_id', $investor->id)
+                                 ->where('project_status', 1)
+                                 ->get();
+    
+        return view('modules.investors.show', compact('investor', 'transfers', 'creditNotes', 'referenceInvestor', 'activeProjects'));
+    }
+        
     public function edit($id)
     {
         $investor = Investor::findOrFail($id);

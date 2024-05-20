@@ -25,28 +25,79 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
 
 @section('content')
 <div class="container-xl">
-    <div class="card mb-2">
-        <div class="card-body">
-            <div class="accordion" id="accordion-example">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading-1">
-                    <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true">
-                        <h4>Información general del inversionista</h4>
-                    </button>
-                    </h2>
-                    <div id="collapse-1" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
-                        <div class="accordion-body pt-0">
-                            <strong>{{ $investor->investor_name }}</strong> es un inversionista con número de identidad <strong>{{ $investor->investor_dni }}</strong>, número de teléfono <strong>{{ $investor->investor_phone }}</strong>.
-                            Recomendado por
-                            <strong>
-                                @if($referenceInvestor)
-                                <a href="{{ route('investor.show', ['investor' => $referenceInvestor->id]) }}">
-                                    <strong>{{ $referenceInvestor->investor_name }}</strong>
-                                </a>
-                                @else
-                                    <strong class="text-red">Sin recomendación</strong>
-                                @endif
-                            </strong>, tiene un saldo actual de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
+    <div class="row">
+        <div class="col-6">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <div class="accordion" id="accordion-example">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading-1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true">
+                                <h4>Información general del inversionista</h4>
+                            </button>
+                            </h2>
+                            <div id="collapse-1" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
+                                <div class="accordion-body pt-0">
+                                    <strong>{{ $investor->investor_name }}</strong> es un inversionista con número de identidad <strong>{{ $investor->investor_dni }}</strong>, número de teléfono <strong>{{ $investor->investor_phone }}</strong>.
+                                    Recomendado por
+                                    <strong>
+                                    @if($referenceInvestor)
+                                    <a href="{{ route('investor.show', ['investor' => $referenceInvestor->id]) }}">
+                                        <strong>{{ $referenceInvestor->investor_name }}</strong>
+                                    </a>
+                                    @else
+                                    <strong class="text-red">(no tiene recomendación)</strong>,
+                                    @endif
+                                    </strong> tiene un saldo actual de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <div class="accordion" id="accordion-example">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading-1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="true">
+                                <h4>Proyectos en proceso</h4>
+                            </button>
+                            </h2>
+                            <div id="collapse-2" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
+                                <div class="accordion-body pt-0">
+                                    <table id="example0" class="display table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Proyecto</th>
+                                                <th>Total invertido</th>
+                                                <th>Ganancia esperada</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($activeProjects as $project)
+                                                <tr>
+                                                    <td>
+                                                        <a href="{{ route('project.show', $project) }}">
+                                                            {{ $project->project_name }}
+                                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" />
+                                                                <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
+                                                                <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
+                                                            </svg>
+                                                        </a>
+                                                    </td>
+                                                    <td>Lps. {{ number_format($project->investor_investment,2) }}</td>
+                                                    <td>X cantidad esperada</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

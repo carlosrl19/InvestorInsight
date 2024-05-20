@@ -62,12 +62,24 @@ class ProjectController extends Controller
         
         return redirect()->route('project.index')->with('success', 'Proyecto creado de manera exitosa.');
     }
-       
 
-    public function show(Project $project)
+    public function show($id)
     {
-        //
+        // Encuentra el proyecto por su ID
+        $project = Project::findOrFail($id);
+    
+        // Encuentra todos los inversores donde el project_name coincide con el del proyecto encontrado
+        $investors = Project::where('project_name', $project->project_name)->with('investor') // Eager load the investor relationship
+            ->get()
+            ->pluck('investor');
+    
+        // Pasa los inversores y el proyecto a la vista
+        return view('modules.projects.show', [
+            'project' => $project,
+            'investors' => $investors
+        ]);
     }
+    
 
     public function edit($id)
     {
