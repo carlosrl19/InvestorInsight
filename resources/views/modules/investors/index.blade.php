@@ -48,6 +48,7 @@ Inversionistas
             <thead>
                 <tr class="text-center">
                     <th>Nombre inversionista</th>
+                    <th>Empresa</th>
                     <th>Nº Identidad</th>
                     <th>Teléfono</th>
                     <th>Saldo actual</th>
@@ -68,6 +69,7 @@ Inversionistas
 							</small>
                             </a>
                         </td>
+                        <td>{{ $investor->investor_company_name }}</td>
                         <td>{{ $investor->investor_dni }}</td>
                         <td>{{ $investor->investor_phone }}</td>
                         @if($investor->investor_balance == 0)

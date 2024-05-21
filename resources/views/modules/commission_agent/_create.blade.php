@@ -44,17 +44,6 @@
                                 <label for="commissioner_phone">Nº teléfono</label>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="form-floating">
-                                <input type="text" maxlength="55" name="commissioner_reference" value="{{ old('commissioner_reference') }}" id="commissioner_reference" class="form-control @error('commissioner_reference') is-invalid @enderror" autocomplete="off"/>
-                                @error('commissioner_reference')investor_name
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <label for="commissioner_reference">Recomendado por</label>
-                            </div>
-                        </div>
                     </div>
                     <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-teal">Guardar nuevo comisionista</button>

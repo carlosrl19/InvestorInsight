@@ -1,7 +1,18 @@
+// Investors select2 init
 $(document).ready(function() {
-  $(".js-example-basic-multiple").select2({
+  $(".select2-investors").select2({
     dropdownParent: $("#modal-team"),
     placeholder: "Seleccione un inversionista",
+    allowClear: true,
+    language: "es",
+  });
+});
+
+// Commission agents select2 init
+$(document).ready(function() {
+  $(".select2-commissioners").select2({
+    dropdownParent: $("#modal-team"),
+    placeholder: "Seleccione los comisionistas",
     allowClear: true,
     language: "es",
   });

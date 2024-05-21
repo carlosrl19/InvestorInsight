@@ -46,8 +46,6 @@
                                 <label for="investor_balance">Saldo monetario</label>
                             </div>
                         </div>
-                    </div>
-                    <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="investor_phone" value="{{ old('investor_phone') }}" id="investor_phone" class="form-control @error('investor_phone') is-invalid @enderror" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
@@ -59,20 +57,43 @@
                                 <label for="investor_phone">Nº teléfono</label>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="investor_reference_id" class="mb-2 mt-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Recomendado por</label>
-                            <select type="text" class="form-select" id="select-optgroups" name="investor_reference_id" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
-                                <optgroup label="Inversionistas">
-                                  @foreach ($investors as $investor)
-                                      <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
-                                  @endforeach
-                                </optgroup>
-                            </select>
-                            @error('investor_reference_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                    </div>
+                    <div class="row mb-3 align-items-end">
+                        <div class="col">
+                            <div class="form-floating">
+                                <div class="mb-3">
+                                    <label for="investor_reference_id" class="mb-2 mt-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Recomendado por</label>
+                                    <select type="text" class="form-select" id="select-optgroups" name="investor_reference_id" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
+                                        <optgroup label="Inversionistas">
+                                        @foreach ($investors as $investor)
+                                            <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
+                                        @endforeach
+                                        </optgroup>
+                                    </select>
+                                    @error('investor_reference_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <div class="mb-3">
+                                    <label for="investor_company_name" class="mb-2 mt-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Afiliado</label>
+                                    <select type="text" class="form-select" id="select-optgroups" name="investor_company_name" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
+                                        <option value="Marsella">Marsella</option>
+                                        <option value="Jaguer">Jaguer</option>
+                                        <option value="Future Capital">Future Capital</option>
+                                    </select>
+                                    @error('investor_company_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Cancelar</button>

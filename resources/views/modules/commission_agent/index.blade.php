@@ -50,7 +50,6 @@ Comisionistas
                     <th>Nombre comisionista</th>
                     <th>Nº Identidad</th>
                     <th>Teléfono</th>
-                    <th>Recomendación</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -60,7 +59,6 @@ Comisionistas
                         <td>{{ $commission_agent->commissioner_name }}</td>
                         <td>{{ $commission_agent->commissioner_dni }}</td>
                         <td>{{ $commission_agent->commissioner_phone }}</td>
-                        <td>{{ $commission_agent->commissioner_reference }}</td>
                         <td>
                             @include('modules.commission_agent._delete')
                             

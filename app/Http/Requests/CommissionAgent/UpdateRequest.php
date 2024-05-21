@@ -19,7 +19,6 @@ class UpdateRequest extends FormRequest
             'commissioner_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:commission_agents,commissioner_name,' . $commissionerId . '',
             'commissioner_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/|unique:commission_agents,commissioner_dni,' . $commissionerId . '',
             'commissioner_phone' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|unique:commission_agents,commissioner_phone,' . $commissionerId . '',
-            'commissioner_reference' => 'string|min:3|max:55|regex:/^[^\d]+$/',
         ];
     }
 
@@ -49,12 +48,6 @@ class UpdateRequest extends FormRequest
             'commissioner_phone.regex' => 'El número de teléfono no puede contener letras ni símbolos.',
             'commissioner_phone.min' => 'El número de teléfono debe contener al menos 8 digitos.',
             'commissioner_phone.max' => 'El número de teléfono no puede exceder 8 digitos.',
-
-            // Commissioner agent name messages
-            'commissioner_reference.string' => 'El recomendante solo debe contener letras.',
-            'commissioner_reference.regex' => 'El recomendante no puede contener números ni símbolos.',
-            'commissioner_reference.min' => 'El recomendante debe contener al menos 3 letras.',
-            'commissioner_reference.max' => 'El recomendante no puede exceder 55 letras.',
         ];
     }
 }

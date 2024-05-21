@@ -39,7 +39,30 @@ $(document).ready(function(){
     }
 
     function validateStep(stepIndex){
-        // Add your validation logic here
-        return true;
+        var isValid = true;
+        var currentFieldset = $(steps[stepIndex]);
+    
+        // Valida cada campo del paso actual
+        currentFieldset.find("input, textarea, select").each(function(){
+            if($(this).val() === ""){
+                isValid = false;
+                $(this).addClass("is-invalid");
+            } else {
+                $(this).removeClass("is-invalid");
+                $(this).addClass("is-valid");
+            }
+        });
+    
+        // Valida el campo de selección de inversionistas
+        var investorSelect = currentFieldset.find(".select2-investors");
+        if(investorSelect.val() === null){
+            isValid = false;
+            investorSelect.addClass("is-invalid");
+            investorSelect.addClass("bg-danger");
+        } else {
+            investorSelect.removeClass("is-invalid");
+        }
+    
+        return isValid;
     }
-});
+})

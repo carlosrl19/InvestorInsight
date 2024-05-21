@@ -13,7 +13,6 @@ return new class extends Migration
             $table->string('commissioner_name');
             $table->string('commissioner_dni');
             $table->string('commissioner_phone');
-            $table->string('commissioner_reference');
             $table->timestamps();
         });
     }

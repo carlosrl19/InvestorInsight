@@ -10,6 +10,5 @@ class CommissionAgent extends Model
         'commissioner_name',
         'commissioner_dni',
         'commissioner_phone',
-        'commissioner_reference'
     ];
 }

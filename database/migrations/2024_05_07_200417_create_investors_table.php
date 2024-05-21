@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('investors', function (Blueprint $table) {
             $table->id();
             $table->string('investor_name');
+            $table->string('investor_company_name');
             $table->string('investor_dni');
             $table->string('investor_phone');
             $table->decimal('investor_balance', 12,2); // max = 999,999,999.99

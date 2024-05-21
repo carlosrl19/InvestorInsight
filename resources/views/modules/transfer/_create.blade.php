@@ -11,19 +11,37 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="35" name="transfer_code"  value="{{ old('transfer_code') }}" id="transfer_code" class="form-control text-uppercase @error('transfer_code') is-invalid @enderror" autocomplete="off"/>
-                                @error('transfer_code')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input type="text" maxlength="35" name="transfer_code" value="{{ $generatedCode }}" id="transfer_code" class="form-control text-uppercase" readonly>
                                 <label for="transfer_code">Código de transferencia</label>
                             </div>
                         </div>
 
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="30" name="transfer_bank" value="{{ old('transfer_bank') }}" id="transfer_bank" class="form-control text-uppercase @error('transfer_bank') is-invalid @enderror" autocomplete="off"/>
+                                <select name="transfer_bank" id="select-optgroups" class="form-control @error('transfer_bank') is-invalid @enderror" autocomplete="off">
+                                    <optgroup label="Bancos">
+                                        <option value="Banco Atlántida">Banco Atlántida</option>
+                                        <option value="Banco Azteca de Honduras">Banco Azteca de Honduras</option>
+                                        <option value="Banco de América Central Honduras">Banco de América Central Honduras</option>
+                                        <option value="Banco de Desarrollo Rural Honduras">Banco de Desarrollo Rural Honduras</option>
+                                        <option value="Banco de Honduras">Banco de Honduras</option>
+                                        <option value="Banco de Los Trabajadores">Banco de Los Trabajadores</option>
+                                        <option value="Banco de Occidente">Banco de Occidente</option>
+                                        <option value="Banco Davivienda Honduras">Banco Davivienda Honduras</option>
+                                        <option value="Banco Financiera Centroamericana">Banco Financiera Centroamericana</option>
+                                        <option value="Banco Financiera Comercial Hondureña">Banco Financiera Comercial Hondureña</option>
+                                        <option value="Banco Hondureño del Café">Banco Hondureño del Café</option>
+                                        <option value="Banco Lafise Honduras">Banco Lafise Honduras</option>
+                                        <option value="Banco del País">Banco del País</option>
+                                        <option value="Banco Popular">Banco Popular</option>
+                                        <option value="Banco Promérica">Banco Promérica</option>
+                                    </optgroup>
+                                    <optgroup label="Otros métodos">
+                                        <option value="PayPal">PayPal</option>
+                                        <option value="Efectivo">Efectivo</option>
+                                        <option value="Otro">Otro</option>
+                                    </optgroup>
+                                </select>
                                 @error('transfer_bank')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -32,7 +50,6 @@
                                 <label for="transfer_bank">Banco / Modo de transferencia</label>
                             </div>
                         </div>
-                        <input type="hidden" name="investor_status" value="1">
                     </div>
                     <div class="row mb-3 align-items-end">
                         <div class="col">
@@ -56,10 +73,12 @@
                         </div>
                         <div class="col" style="border: 1px solid lightgray; border-radius: 2px">
                             <label for="investor_id" class="mb-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Inversionistas</label>
-                            <select class="form-select js-example-basic-multiple" name="investor_id" style="font-size: clamp(0.6rem, 3vh, 0.7rem); width: 100%">
+                            <select class="form-select select2-investors" name="investor_id" id="investor_select" style="font-size: clamp(0.6rem, 3vh, 0.7rem); width: 100%">
                                 <option></option>
-                                @foreach ($investors as $investor)                                    
-                                    <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
+                                @foreach ($investors as $investor)
+                                    @if($investor->investor_status == 1)
+                                        <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

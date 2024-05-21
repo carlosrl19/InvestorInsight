@@ -14,7 +14,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'transfer_code' => 'required|string|min:3|max:35|regex:/^[a-zA-Z0-9]+$/|unique:transfer',
+            'transfer_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:transfer',
             'transfer_bank' => 'required|string|min:3|max:30|regex:/^[^\d]+$/',
             'investor_id' => 'required|numeric|exists:investors,id',
             'transfer_date' => 'required|date_format:Y-m-d\TH:i:s',

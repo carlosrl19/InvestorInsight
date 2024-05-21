@@ -6,6 +6,7 @@ use App\Http\Requests\Transfer\StoreRequest;
 use Illuminate\Support\Facades\DB;      
 use App\Models\Transfer;
 use App\Models\Investor;
+use Illuminate\Support\Str;
 
 class TransferController extends Controller
 {
@@ -13,7 +14,8 @@ class TransferController extends Controller
     {
         $investors = Investor::get();
         $transfers = Transfer::get();
-        return view('modules.transfer.index', compact('investors', 'transfers'));
+        $generatedCode = strtoupper(Str::random(12));
+        return view('modules.transfer.index', compact('investors', 'transfers', 'generatedCode'));
     }
 
     public function create()
@@ -28,10 +30,11 @@ class TransferController extends Controller
         try {
             // Encuentra al inversionista por su ID
             $investor = Investor::findOrFail($request->investor_id);
-            
+            $generatedCode = strtoupper(Str::random(12)); // Genera un código aleatorio de 12 caracteres
+
             // Crea la nueva transferencia
             $transfer = Transfer::create([
-                'transfer_code' => $request->transfer_code,
+                'transfer_code' => $generatedCode,
                 'transfer_bank' => $request->transfer_bank,
                 'investor_id' => $request->investor_id,
                 'transfer_date' => $request->transfer_date,

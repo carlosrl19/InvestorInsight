@@ -12,6 +12,7 @@ class UpdateRequest extends FormRequest
 
         return [
             'investor_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:investors,investor_name,' . $investorId . '',
+            'investor_company_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/',
             'investor_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/|unique:investors,investor_dni,' . $investorId . '',
             'investor_phone' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|unique:investors,investor_phone,' . $investorId . '',
             'investor_reference_id' => 'required|numeric|exists:investors,id',
@@ -30,6 +31,13 @@ class UpdateRequest extends FormRequest
             'investor_name.regex' => 'El nombre no puede contener números ni símbolos.',
             'investor_name.min' => 'El nombre debe contener al menos 3 letras.',
             'investor_name.max' => 'El nombre no puede exceder 55 letras.',
+
+            // Company name messages
+            'investor_company_name.required' => 'El nombre de la empresa afiliada es obligatorio.',
+            'investor_company_name.string' => 'El nombre de la empresa afiliada solo debe contener letras.',
+            'investor_company_name.regex' => 'El nombre de la empresa afiliada no puede contener números ni símbolos.',
+            'investor_company_name.min' => 'El nombre de la empresa afiliada debe contener al menos 3 letras.',
+            'investor_company_name.max' => 'El nombre de la empresa afiliada no puede exceder 55 letras.',
 
             // Investor dni messages
             'investor_dni.required' => 'El DNI es obligatorio.',
