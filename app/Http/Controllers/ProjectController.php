@@ -57,7 +57,7 @@ class ProjectController extends Controller
 
             // Transfer rules
             'transfer_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:transfer,transfer_code',
-            'transfer_bank' => 'required|string|min:3|max:30|regex:/^[^\d]+$/',
+            'transfer_bank' => 'required|string|min:6|max:36|regex:/^[^\d]+$/',
             'transfer_date' => 'required|date_format:Y-m-d\TH:i:s',
             'transfer_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'transfer_description' => 'required|string|min:3|max:255',
@@ -122,7 +122,7 @@ class ProjectController extends Controller
             'transfer_description' => $validatedData['transfer_description'],
         ]);
         
-        return redirect()->route('project.index')->with('success', 'Proyecto y transferencia creados de manera exitosa.');
+        return redirect()->route('project.index')->with('success', 'Proyecto, pagaré y transferencia creados de manera exitosa.');
     }
     public function show($id)
     {
