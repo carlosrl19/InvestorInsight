@@ -21,10 +21,7 @@ function addInvestor() {
       <input type="hidden" name="investor_id[]" value="${investorId}">
     </td>
     <td>
-      <input type="number" step="1" name="investor_profit_perc[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="% ganancia" min="10" class="form-control" required oninput="calculateInvestorProfit(this)">
-    </td>
-    <td>
-      <input type="number" name="investor_profit[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" class="form-control" readonly>
+      <input type="number" name="investor_profit[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia total de inversión" min="1" class="form-control" required">
     </td>
     <td>
       <button type="button" class="btn btn-md btn-danger" style="border: none; padding: 5px 0px 5px 10px" onclick="removeInvestorRow(this)" data-investor-id="${investorId}">
@@ -40,7 +37,7 @@ function addInvestor() {
     </td>`;
 
   document.querySelector('#project_investors_table tbody').appendChild(newRow);
-  selectedInvestor.disabled = true;
+  selectedInvestor.readonly = true;
   calculateTotalInvestment();
 }
 
@@ -60,21 +57,6 @@ function calculateTotalInvestment() {
   document.getElementById('project_investment').value = totalInvestment.toFixed(2);
 }
 
-// Calculate investor profit function
-function calculateInvestorProfit(input) {
-  const row = input.closest('tr');
-  const investmentInput = row.querySelector('input[name="investor_investment[]"]');
-  const profitPercentInput = row.querySelector('input[name="investor_profit_perc[]"]');
-  const profitInput = row.querySelector('input[name="investor_profit[]"]');
-
-  const investment = parseFloat(investmentInput.value || 0);
-  const profitPercent = parseFloat(profitPercentInput.value || 0);
-
-  const profit = investment * (profitPercent / 100);
-  profitInput.value = profit.toFixed(2);
-
-  calculateTotalInvestment();
-}
 
 // Update investor investment amount in real time
 document.getElementById('transfer_amount').addEventListener('input', function() {
@@ -115,9 +97,6 @@ function addCommissioner() {
     <td>
       <input type="number" name="commissioner_commission[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Comisión" min="1" class="form-control" required>
       <input type="hidden" name="commissioner_id[]" value="${commissionerId}">
-    </td>
-    <td>
-      <input type="number" step="1" name="commissioner_profit_perc[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="% ganancia" class="form-control" required>
     </td>
     <td>
       <button type="button" class="btn btn-md btn-danger" style="border: none; padding: 5px 0px 5px 10px" onclick="removeCommissionerRow(this)" data-commissioner-id="${commissionerId}">

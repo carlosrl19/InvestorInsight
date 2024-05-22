@@ -17,10 +17,9 @@ class Project extends Model
         'project_status',
         'investor_id',
         'investor_investment',
-        'investor_profit_perc',
+        'investor_profit',
         'commissioner_id',
-        'commissioner_profit_perc',
-        'commissioner_commission',
+        'commissioner_profit',
         'project_description',
     ];
 

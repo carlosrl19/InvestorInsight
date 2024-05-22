@@ -19,12 +19,11 @@ return new class extends Migration
 
             // Investors
             $table->decimal('investor_investment', 12,2); // max = 999,999,999.99 
-            $table->integer('investor_profit_perc');
+            $table->integer('investor_profit');
             $table->unsignedBigInteger('investor_id');
 
             // Commission agent
             $table->decimal('commissioner_commission', 12,2); // max = 999,999,999.99 
-            $table->integer('commissioner_profit_perc');
             $table->unsignedBigInteger('commissioner_id');
 
             $table->boolean('project_status');

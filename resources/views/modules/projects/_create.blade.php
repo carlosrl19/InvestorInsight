@@ -262,7 +262,6 @@
                                 <tr>
                                     <th>Inversionista</th>
                                     <th title="Para modificar este capital de inversión debe modificar el monto del pagaré" data-bs-toggle="tooltip" data-bs-placement="top">Capital de inversión</th>
-                                    <th>Porcentaje de ganancia</th>
                                     <th>Ganancia total</th>
                                     <th>Eliminar</th>
                                 </th>
@@ -278,7 +277,6 @@
                             <thead>
                                 <tr>
                                     <th>Comisionista</th>
-                                    <th>Porcentaje de comisión</th>
                                     <th>Comisión</th>
                                     <th>Eliminar</th>
                                 </th>
