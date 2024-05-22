@@ -12,7 +12,6 @@ return new class extends Migration
             $table->id();
             $table->string('project_name');
             $table->string('project_code');
-            $table->string('project_estimated_time');
             $table->date('project_start_date');
             $table->date('project_end_date');
             $table->decimal('project_investment', 12,2); // max = 999,999,999.99
@@ -27,7 +26,6 @@ return new class extends Migration
             $table->unsignedBigInteger('commissioner_id');
 
             $table->boolean('project_status');
-            $table->integer('project_total_worked_days')->nullable();
             $table->string('project_description');
             $table->timestamps();
         });

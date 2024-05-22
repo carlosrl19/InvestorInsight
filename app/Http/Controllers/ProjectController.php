@@ -37,11 +37,9 @@ class ProjectController extends Controller
             // Project rules
             'project_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:projects,project_name',
             'project_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:projects,project_code',
-            'project_estimated_time' => 'required|numeric',
             'project_start_date' => 'required|date_format:Y-m-d',
             'project_end_date' => 'required|date_format:Y-m-d',
             'project_investment' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
-            'project_total_worked_days' => 'numeric|min:0|nullable',
             'project_status' => 'required|in:0,1',
             'project_description' => 'required|string|min:3|max:255',
     
@@ -76,11 +74,9 @@ class ProjectController extends Controller
                 $project = new Project();
                 $project->project_name = $validatedData['project_name'];
                 $project->project_code = $validatedData['project_code'];
-                $project->project_estimated_time = $validatedData['project_estimated_time'];
                 $project->project_start_date = $validatedData['project_start_date'];
                 $project->project_end_date = $validatedData['project_end_date'];
                 $project->project_investment = $validatedData['project_investment'];
-                $project->project_total_worked_days = $validatedData['project_total_worked_days'];
                 $project->project_status = $validatedData['project_status'];
                 $project->project_description = $validatedData['project_description'];
                 $project->investor_id = $invId;

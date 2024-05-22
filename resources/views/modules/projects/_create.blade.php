@@ -58,17 +58,6 @@
                         <div class="row mb-3 align-items-end">
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="number" min="1" name="project_estimated_time" value="{{ old('project_estimated_time') }}" id="project_estimated_time" class="form-control @error('project_estimated_time') is-invalid @enderror" autocomplete="off"/>
-                                    @error('project_estimated_time')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <label class="form-label" for="project_estimated_time"><small>SM (tiempo estimado en semanas)</small></label>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-floating">
                                     <input type="date" name="project_end_date" value="{{ old('project_end_date') }}" id="project_end_date" class="form-control @error('project_estimated_time') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->toDateString() }}"/>
                                     @error('project_end_date')
                                         <span class="invalid-feedback" role="alert">
@@ -85,7 +74,6 @@
                                     <label class="form-label" for="total_work_days"><small>Días de trabajo</small></label>
                                 </div>
                             </div>
-                            <input readonly style="display: none;" type="number" name="project_total_worked_days" value="0" id="project_total_worked_days" class="form-control @error('project_total_worked_days') is-invalid @enderror" autocomplete="off"/>
                         </div>
                     </fieldset>
 
@@ -267,8 +255,7 @@
                                 </th>
                             </thead>
                             <tbody>
-                                <tr>
-                                </tr>
+                                <!-- Dinamically row creation -->
                             </tbody>
                         </table>
 
@@ -282,8 +269,7 @@
                                 </th>
                             </thead>
                             <tbody>
-                                <tr>
-                                </tr>
+                                <!-- Dinamically row creation -->
                             </tbody>
                         </table>
                     </fieldset>

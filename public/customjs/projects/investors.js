@@ -10,6 +10,12 @@ function addInvestor() {
     return;
   }
 
+  // Verificar si ya se ha agregado una fila
+  if (document.querySelectorAll('#project_investors_table tbody tr').length > 0) {
+    alert("Solo se permite agregar una fila.");
+    return;
+  }
+
   // Obtener el valor actualizado del campo transfer_amount
   const transferAmount = document.getElementById('transfer_amount').value;
 
@@ -68,11 +74,27 @@ document.getElementById('transfer_amount').addEventListener('input', function() 
 });
 
 // Calculate work days
-document.getElementById('project_estimated_time').addEventListener('input', function() {
-  var weeks = parseInt(this.value);
-  var days = weeks * 7;
+document.getElementById('project_start_date').addEventListener('change', function() {
+  var startDate = new Date(this.value);
+  var endDate = new Date(document.getElementById('project_end_date').value);
 
-  document.getElementById('result').value = days;
+  // Calcular la diferencia en milisegundos
+  var diffInMs = endDate - startDate;
+
+  // Convertir a días
+  var diffInDays = diffInMs / (1000 * 60 * 60 * 24) + 1;
+
+  document.getElementById('result').value = diffInDays;
+})
+
+// Disable dates before start date in project_end_date 
+document.getElementById('project_start_date').addEventListener('change', function() {
+  var startDate = new Date(this.value);
+  var minEndDate = new Date(startDate.getTime() + 24 * 60 * 60 * 1000); // Agregar un día a la fecha de inicio
+
+  var minEndDateStr = minEndDate.toISOString().split('T')[0]; // Formatear la fecha mínima
+
+  document.getElementById('project_end_date').min = minEndDateStr;
 });
 
 
@@ -80,7 +102,6 @@ document.getElementById('project_estimated_time').addEventListener('input', func
 //  Commissioners Agent
 //-------------------------
 
-// Add new row with commissioner
 function addCommissioner() {
   const commissionerSelect = document.getElementById('commissioner_select');
   const selectedCommissioner = commissionerSelect.options[commissionerSelect.selectedIndex];
@@ -88,6 +109,12 @@ function addCommissioner() {
 
   if (!commissionerId || document.querySelector(`input[name="commissioner_id[]"][value="${commissionerId}"]`)) {
     alert(commissionerId ? "¡Este comisionista ya ha sido seleccionado!" : "¡Por favor, seleccione un comisionista!");
+    return;
+  }
+
+  // Verificar si ya se han agregado dos filas
+  if (document.querySelectorAll('#project_commissioners_table tbody tr').length >= 2) {
+    alert("Solo se permiten agregar dos filas.");
     return;
   }
 
