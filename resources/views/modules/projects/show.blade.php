@@ -20,7 +20,7 @@ Proyectos
 @endsection
 
 @section('title')
-Información del proyecto/&nbsp;<b class="text-muted text-md">{{ $project->project_name }}</b>
+Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name }}</b>
 @endsection
 
 @section('content')
@@ -39,29 +39,50 @@ Información del proyecto/&nbsp;<b class="text-muted text-md">{{ $project->proje
                         <div class="col-md-4">
                             <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha inicio: {{ $project->project_start_date }}</p>
                             <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha cierre: {{ $project->project_end_date }}</p>
-                            <p><div class="badge bg-success mt-1"></div>&nbsp;Comentarios: {{ $project->project_description }}</p>
                         </div>
                     </div>
                     <h3>Inversionistas del proyecto</h3>
                     <div class="row">
-                        @foreach($investors as $investor)
+                        @foreach($project->investors as $investor)
                             <div class="col-md-3 mb-3">
                                 <div class="card">
                                     <div class="card-status-start-md bg-primary"></div>
                                     <div class="card-body">
                                         <a href="{{ route('investor.show', $investor) }}">
                                             {{ $investor->investor_name }}
-                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-link">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M9 15l6 -6" />
                                                 <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
                                                 <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
-                                            </svg>
+                                            </svg><br>
+                                            <span class="badge bg-success mt-2">Ganancia total: Lps. {{ number_format($investor->pivot->investor_profit,2) }}</span>
+                                            <span class="badge bg-cyan mt-2">50%: Lps. {{ number_format($investor->pivot->investor_profit / 2,2) }}</span>
                                         </a>
                                     </div>
                                 </div>
-                            @if ($loop->iteration % 4 == 0)
-                                </div><div class="row">
-                            @endif
+                            </div>
+                        @endforeach
+                    </div>
+                    <h3>Comisionistas del proyecto</h3>
+                    <div class="row">
+                        @foreach($project->commissioners as $commissioner)
+                            <div class="col-md-3 mb-3">
+                                <div class="card">
+                                    <div class="card-status-start-md bg-secondary"></div>
+                                    <div class="card-body">
+                                        <a href="{{ route('commission_agent.show', $commissioner) }}">
+                                            {{ $commissioner->commissioner_name }}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-link">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M9 15l6 -6" />
+                                                <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
+                                                <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
+                                            </svg><br>
+                                            <span class="badge bg-secondary mt-2">Comisión: Lps. {{ number_format($commissioner->pivot->commissioner_commission,2) }}</span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -70,6 +91,7 @@ Información del proyecto/&nbsp;<b class="text-muted text-md">{{ $project->proje
         </div>
     </div>
 </div>
+
 @endsection
 
 @section('scripts')

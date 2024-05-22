@@ -19,7 +19,7 @@ class StoreRequest extends FormRequest
             'investor_id' => 'required|numeric|exists:investors,id',
             'transfer_date' => 'required|date_format:Y-m-d\TH:i:s',
             'transfer_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
-            'transfer_description' => 'required|string|min:3|max:255',
+            'transfer_comment' => 'required|string|min:3|max:255',
         ];
     }
 
@@ -56,10 +56,10 @@ class StoreRequest extends FormRequest
             'transfer_amount.min' => 'El monto de la transferencia debe ser mayor a 0 lps.',
 
             // Transfer description messages
-            'transfer_description.required' => 'Los comentarios de la transferencia es obligatoria.',
-            'transfer_description.min' => 'Los comentarios de la transferencia debe contener al menos 3 letras.',
-            'transfer_description.max' => 'Los comentarios de la transferencia no puede exceder 255 letras.',
-            'transfer_description.string' => 'Los comentarios de la transferencia solo debe contener letras, números y/o símbolos.',
+            'transfer_comment.required' => 'Los comentarios de la transferencia son obligatorios.',
+            'transfer_comment.min' => 'Los comentarios de la transferencia deben contener al menos 3 letras.',
+            'transfer_comment.max' => 'Los comentarios de la transferencia no pueden exceder 255 letras.',
+            'transfer_comment.string' => 'Los comentarios de la transferencia solo deben contener letras, números y/o símbolos.',
         ];
     }
 }

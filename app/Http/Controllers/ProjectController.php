@@ -18,8 +18,9 @@ class ProjectController extends Controller
     {
         $projects = Project::get();
         $investors = Investor::get();
-        $generatedCode = strtoupper(Str::random(12)); // Transfer random code
         $commissioners = CommissionAgent::get();
+        $generatedCode = strtoupper(Str::random(12)); // Transfer random code
+
         return view('modules.projects.index', compact('projects', 'investors', 'commissioners', 'generatedCode'));
     }
 
@@ -41,9 +42,10 @@ class ProjectController extends Controller
             'project_code' => $validatedData['project_code'],
             'project_start_date' => $validatedData['project_start_date'],
             'project_end_date' => $validatedData['project_end_date'],
+            'project_work_days' => $validatedData['project_work_days'],
             'project_investment' => $validatedData['project_investment'],
             'project_status' => $validatedData['project_status'],
-            'project_description' => $validatedData['project_description'],
+            'project_comment' => $validatedData['project_comment'],
         ]);
     
         // Asociar inversionistas con el proyecto
@@ -80,7 +82,7 @@ class ProjectController extends Controller
             'investor_id' => $validatedData['investor_id'][0], // Asumiendo que la transferencia está relacionada con el primer inversionista
             'transfer_date' => $validatedData['transfer_date'],
             'transfer_amount' => $validatedData['transfer_amount'],
-            'transfer_description' => $validatedData['transfer_description'],
+            'transfer_comment' => $validatedData['transfer_comment'],
         ]);
     
         return redirect()->route('project.index')->with('success', 'Proyecto, pagaré y transferencia creados de manera exitosa.');
@@ -88,10 +90,12 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-        // Encuentra el proyecto por su ID
         $project = Project::findOrFail($id);
-        return view('modules.projects.show', compact('project'));
+        $investors = $project->investors;
+        $commissioners = $project->commissioners;
+        return view('modules.projects.show', compact('project', 'investors', 'commissioners'));
     }
+    
     
     public function edit($id)
     {

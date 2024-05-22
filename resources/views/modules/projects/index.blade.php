@@ -6,9 +6,6 @@
 <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
 
-<!-- Select2 -->
-<link href="{{ asset('vendor/select2/select2.min.css') }}" rel="stylesheet">
-
 @endsection
 
 @section('pretitle')
@@ -136,8 +133,4 @@ Proyectos
 
 <!-- Final date -->
 <script src="{{ asset('customjs/projects/steps_form.js') }}"></script>
-
-<!-- Select2 -->
-<script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
-<script src="{{ asset('customjs/select2/s2_projects.js') }}"></script>
 @endsection

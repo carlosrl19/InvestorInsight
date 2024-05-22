@@ -52,17 +52,7 @@ $(document).ready(function(){
                 $(this).addClass("is-valid");
             }
         });
-    
-        // Valida el campo de selección de inversionistas
-        var investorSelect = currentFieldset.find(".select2-investors");
-        if(investorSelect.val() === null){
-            isValid = false;
-            investorSelect.addClass("is-invalid");
-            investorSelect.addClass("bg-danger");
-        } else {
-            investorSelect.removeClass("is-invalid");
-        }
-    
+        
         return isValid;
     }
 })

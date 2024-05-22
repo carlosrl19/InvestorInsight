@@ -14,9 +14,10 @@ return new class extends Migration
             $table->string('project_code');
             $table->date('project_start_date');
             $table->date('project_end_date');
+            $table->integer('project_work_days');
             $table->decimal('project_investment', 12,2); // max = 999,999,999.99
             $table->boolean('project_status');
-            $table->string('project_description');
+            $table->string('project_comment');
             $table->timestamps();
         });
     }

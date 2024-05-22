@@ -66,7 +66,7 @@
                                     <select type="text" class="form-select" id="select-optgroups" name="investor_reference_id" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
                                         <optgroup label="Inversionistas">
                                         @foreach ($investors as $investor)
-                                            <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
+                                            <option value="{{ $investor->id }}" {{ old('investor_reference_id') == $investor->id ? 'selected' : '' }}>{{ $investor->investor_name }}</option>
                                         @endforeach
                                         </optgroup>
                                     </select>
@@ -83,9 +83,9 @@
                                 <div class="mb-3">
                                     <label for="investor_company_name" class="mb-2 mt-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Afiliado</label>
                                     <select type="text" class="form-select" id="select-optgroups" name="investor_company_name" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
-                                        <option value="Marsella">Marsella</option>
-                                        <option value="Jaguer">Jaguer</option>
-                                        <option value="Future Capital">Future Capital</option>
+                                        <option value="Marsella" {{ old('investor_company_name') == 'Marsella' ? 'selected' : '' }}>Marsella</option>
+                                        <option value="Jaguer" {{ old('investor_company_name') == 'Jaguer' ? 'selected' : '' }}>Jaguer</option>
+                                        <option value="Future Capital" {{ old('investor_company_name') == 'Future Capital' ? 'selected' : '' }}>Future Capital</option>
                                     </select>
                                     @error('investor_company_name')
                                         <span class="invalid-feedback" role="alert">

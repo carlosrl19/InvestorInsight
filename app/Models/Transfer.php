@@ -16,6 +16,6 @@ class Transfer extends Model
         'investor_id',
         'transfer_amount',
         'transfer_date',
-        'transfer_description',
+        'transfer_comment',
     ];
 }

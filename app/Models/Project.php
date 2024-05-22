@@ -11,9 +11,10 @@ class Project extends Model
         'project_name',
         'project_start_date',
         'project_end_date',
+        'project_work_days',
         'project_investment',
         'project_status',
-        'project_description',
+        'project_comment',
     ];
 
     public function investors()
