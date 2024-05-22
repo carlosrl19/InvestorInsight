@@ -13,16 +13,20 @@ class Project extends Model
         'project_end_date',
         'project_investment',
         'project_status',
-        'investor_id',
-        'investor_investment',
-        'investor_profit',
-        'commissioner_id',
-        'commissioner_profit',
         'project_description',
     ];
 
-    public function investor(){
-        return $this->belongsTo(Investor::class, 'investor_id', 'id');
+    public function investors()
+    {
+        return $this->belongsToMany(Investor::class, 'project_investor')
+                    ->withPivot('investor_investment', 'investor_profit')
+                    ->withTimestamps();
     }
-    
+
+    public function commissioners()
+    {
+        return $this->belongsToMany(CommissionAgent::class, 'project_commissioner', 'project_id', 'commissioner_id')
+                    ->withPivot('commissioner_commission')
+                    ->withTimestamps();
+    }
 }

@@ -24,3 +24,4 @@ Route::get('promissory_note/{id}/report', 'App\Http\Controllers\PromissoryNoteCo
 
 // Projects
 Route::resource('project', 'App\Http\Controllers\ProjectController')->names('project');
+Route::get('project/{id}/report', 'App\Http\Controllers\ProjectController@showReport')->name('project.report');

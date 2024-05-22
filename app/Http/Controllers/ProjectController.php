@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CommissionAgent;
 use Illuminate\Http\Request;
+use App\Http\Requests\Project\StoreRequest;
 use App\Http\Requests\Project\UpdateRequest;
 use App\Models\Investor;
 use App\Models\Project;
@@ -27,84 +28,56 @@ class ProjectController extends Controller
         return view('modules.projects._create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $generatedCode = strtoupper(Str::random(12));
-        
+    
         // Validar los datos del formulario manualmente
-        $validatedData = $request->validate([
+        $validatedData = $request->validated();
     
-            // Project rules
-            'project_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:projects,project_name',
-            'project_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:projects,project_code',
-            'project_start_date' => 'required|date_format:Y-m-d',
-            'project_end_date' => 'required|date_format:Y-m-d',
-            'project_investment' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
-            'project_status' => 'required|in:0,1',
-            'project_description' => 'required|string|min:3|max:255',
-    
-            // Investor array rules
-            'investor_id.*' => 'required|numeric|exists:investors,id',
-            'investor_investment.*' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
-            'investor_profit.*' => 'required|numeric|min:10|regex:/^\d+(\.\d{1,2})?$/',
-    
-            // Commissioner agent rules
-            'commissioner_id.*' => 'required|numeric|exists:investors,id',
-            'commissioner_commission.*' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
-    
-            // Transfer rules
-            'transfer_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:transfer,transfer_code',
-            'transfer_bank' => 'required|string|min:6|max:36|regex:/^[^\d]+$/',
-            'transfer_date' => 'required|date_format:Y-m-d\TH:i:s',
-            'transfer_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
-            'transfer_description' => 'required|string|min:3|max:255',
+        // Crear proyecto
+        $project = Project::create([
+            'project_name' => $validatedData['project_name'],
+            'project_code' => $validatedData['project_code'],
+            'project_start_date' => $validatedData['project_start_date'],
+            'project_end_date' => $validatedData['project_end_date'],
+            'project_investment' => $validatedData['project_investment'],
+            'project_status' => $validatedData['project_status'],
+            'project_description' => $validatedData['project_description'],
         ]);
     
-        // Si llega a este punto, los datos han sido validados correctamente se continúa con el proceso
-        $investorId = $validatedData['investor_id'];
-        $investor_investment = $validatedData['investor_investment'];
-        $investor_profit = $validatedData['investor_profit'];
+        // Asociar inversionistas con el proyecto
+        foreach ($validatedData['investor_id'] as $i => $invId) {
+            $project->investors()->attach($invId, [
+                'investor_investment' => $validatedData['investor_investment'][$i],
+                'investor_profit' => $validatedData['investor_profit'][$i],
+            ]);
     
-        $commissionerId = $validatedData['commissioner_id'];
-        $commissioner_commission = $validatedData['commissioner_commission'];
+            // Crear pagaré para cada inversionista del proyecto
+            $promissoryNoteCode = \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Ymd') . str_pad($i + 1, 4, '0', STR_PAD_LEFT);
     
-        // Iterar sobre los inversionistas y comisionistas y crear un registro por cada combinación
-        foreach ($investorId as $i => $invId) {
-            foreach ($commissionerId as $j => $comId) {
-                $project = new Project();
-                $project->project_name = $validatedData['project_name'];
-                $project->project_code = $validatedData['project_code'];
-                $project->project_start_date = $validatedData['project_start_date'];
-                $project->project_end_date = $validatedData['project_end_date'];
-                $project->project_investment = $validatedData['project_investment'];
-                $project->project_status = $validatedData['project_status'];
-                $project->project_description = $validatedData['project_description'];
-                $project->investor_id = $invId;
-                $project->investor_investment = $investor_investment[$i];
-                $project->investor_profit = $investor_profit[$i];
-                $project->commissioner_id = $comId;
-                $project->commissioner_commission = $commissioner_commission[$j];
-                $project->save();
-        
-                // Crear pagaré para cada inversionista del proyecto
-                $promissoryNoteCode = \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Ymd') . str_pad($i + 1, 4, '0', STR_PAD_LEFT);
-        
-                PromissoryNote::create([
-                    'investor_id' => $invId,
-                    'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
-                    'promissoryNote_final_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->addMonth()->format('Y-m-d'),
-                    'promissoryNote_amount' => $investor_investment[$i],
-                    'promissoryNote_code' => $promissoryNoteCode,
-                    'promissoryNote_status' => 1,
-                ]);
-            }
+            PromissoryNote::create([
+                'investor_id' => $invId,
+                'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
+                'promissoryNote_final_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->addMonth()->format('Y-m-d'),
+                'promissoryNote_amount' => $validatedData['investor_investment'][$i],
+                'promissoryNote_code' => $promissoryNoteCode,
+                'promissoryNote_status' => 1,
+            ]);
+        }
+    
+        // Asociar comisionistas con el proyecto
+        foreach ($validatedData['commissioner_id'] as $j => $comId) {
+            $project->commissioners()->attach($comId, [
+                'commissioner_commission' => $validatedData['commissioner_commission'][$j],
+            ]);
         }
     
         // Crear transferencia
         Transfer::create([
             'transfer_code' => $generatedCode,
             'transfer_bank' => $validatedData['transfer_bank'],
-            'investor_id' => $investorId[0], // Asumiendo que la transferencia está relacionada con el primer inversionista
+            'investor_id' => $validatedData['investor_id'][0], // Asumiendo que la transferencia está relacionada con el primer inversionista
             'transfer_date' => $validatedData['transfer_date'],
             'transfer_amount' => $validatedData['transfer_amount'],
             'transfer_description' => $validatedData['transfer_description'],
@@ -112,22 +85,12 @@ class ProjectController extends Controller
     
         return redirect()->route('project.index')->with('success', 'Proyecto, pagaré y transferencia creados de manera exitosa.');
     }
-    
+
     public function show($id)
     {
         // Encuentra el proyecto por su ID
         $project = Project::findOrFail($id);
-    
-        // Encuentra todos los inversores donde el project_name coincide con el del proyecto encontrado
-        $investors = Project::where('project_name', $project->project_name)->with('investor') // Eager load the investor relationship
-            ->get()
-            ->pluck('investor');
-    
-        // Pasa los inversores y el proyecto a la vista
-        return view('modules.projects.show', [
-            'project' => $project,
-            'investors' => $investors
-        ]);
+        return view('modules.projects.show', compact('project'));
     }
     
     public function edit($id)

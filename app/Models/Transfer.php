@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transfer extends Model
 {
-    protected $table = 'transfer';
-
     public function investor(){
         return $this->belongsTo(Investor::class, 'investor_id', 'id');
     }

@@ -73,19 +73,30 @@ document.getElementById('transfer_amount').addEventListener('input', function() 
   calculateTotalInvestment();
 });
 
-// Calculate work days
-document.getElementById('project_start_date').addEventListener('change', function() {
-  var startDate = new Date(this.value);
+// Calcular la diferencia en días entre startDate y endDate
+function calcularDiferencia() {
+  var startDate = new Date(document.getElementById('project_start_date').value);
   var endDate = new Date(document.getElementById('project_end_date').value);
+
+  // Verificar si las fechas son válidas
+  if (isNaN(startDate) || isNaN(endDate)) {
+    document.getElementById('result').value = '';
+    return;
+  }
 
   // Calcular la diferencia en milisegundos
   var diffInMs = endDate - startDate;
 
-  // Convertir a días
-  var diffInDays = diffInMs / (1000 * 60 * 60 * 24) + 1;
+  // Convertir a días (sumando 1 para incluir ambos extremos)
+  var diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24)) + 1;
 
   document.getElementById('result').value = diffInDays;
-})
+}
+
+// Escuchar cambios en las fechas
+document.getElementById('project_start_date').addEventListener('change', calcularDiferencia);
+document.getElementById('project_end_date').addEventListener('change', calcularDiferencia);
+
 
 // Disable dates before start date in project_end_date 
 document.getElementById('project_start_date').addEventListener('change', function() {

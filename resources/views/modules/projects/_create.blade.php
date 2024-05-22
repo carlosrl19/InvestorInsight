@@ -70,7 +70,7 @@
                             <div class="col">
                                 <div class="form-floating">
                                     <div class="card-status-start bg-primary"></div>
-                                    <input type="text" id="result" class="form-control" readonly>
+                                    <input type="text" id="result" value="{{old('result')}}" class="form-control" readonly>
                                     <label class="form-label" for="total_work_days"><small>Días de trabajo</small></label>
                                 </div>
                             </div>

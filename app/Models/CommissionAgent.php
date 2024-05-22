@@ -11,4 +11,11 @@ class CommissionAgent extends Model
         'commissioner_dni',
         'commissioner_phone',
     ];
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_commissioner', 'commissioner_id', 'project_id')
+                    ->withPivot('commissioner_commission')
+                    ->withTimestamps();
+    }
 }

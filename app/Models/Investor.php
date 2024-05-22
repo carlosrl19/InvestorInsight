@@ -6,22 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Investor extends Model
 {
-    public function transfer()
-    {
-        return $this->hasMany(Transfer::class, 'id');
-    }
-
-    public function credit_note()
-    {
-        return $this->hasMany(CreditNote::class, 'id');
-    }
-
-    public function project()
-    {
-        return $this->hasMany(Project::class, 'investor_id', 'id');
-
-    }
-
     protected $fillable = [
         'investor_name',
         'investor_company_name',
@@ -31,4 +15,22 @@ class Investor extends Model
         'investor_balance',
         'investor_status',
     ];
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_investor')
+                    ->withPivot('investor_investment', 'investor_profit')
+                    ->withTimestamps();
+    }
+    
+    public function credit_note()
+    {
+        return $this->hasMany(CreditNote::class, 'id');
+    }
+
+
+    public function transfers()
+    {
+        return $this->hasMany(Transfer::class);
+    }
 }
