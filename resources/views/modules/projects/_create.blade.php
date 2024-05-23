@@ -48,7 +48,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="date" name="project_start_date" value="{{ old('project_start_date') }}" id="project_start_date" class="form-control @error('project_start_date') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->toDateString() }}" onchange="validateStep()"/>
+                                    <input type="date" name="project_start_date" value="{{ old('project_start_date') }}" id="project_start_date" class="form-control @error('project_start_date') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->subDays(10)->toDateString() }}" onchange="validateStep()"/>
                                     @error('project_start_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -64,7 +64,7 @@
                         <div class="row mb-3 align-items-end">
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="date" name="project_end_date" value="{{ old('project_end_date') }}" id="project_end_date" class="form-control @error('project_end_date') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->toDateString() }}" onchange="validateStep()"/>
+                                    <input type="date" name="project_end_date" value="{{ old('project_end_date') }}" id="project_end_date" class="form-control @error('project_end_date') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->addDays(1)->toDateString() }}" onchange="validateStep()"/>
                                     @error('project_end_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -154,7 +154,6 @@
                                     <div class="card-status-start bg-primary"></div>
                                     <input type="datetime-local" 
                                         name="transfer_date" 
-                                        style="font-size: 10px;" 
                                         value="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
                                         id="transfer_date"
                                         min="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
@@ -258,12 +257,11 @@
                         <table class="table table-bordered" id="project_investors_table" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th>Inversionista</th>
-                                    <th title="Para modificar este capital de inversión debe modificar el monto del pagaré" data-bs-toggle="tooltip" data-bs-placement="top">Capital de inversión</th>
-                                    <th>Porcentaje ganancia</th>
-                                    <th>Ganancia total</th>
-                                    <th>Ganancia inversionista</th>
-                                    <th>Eliminar</th>
+                                    <th>INVERSIONISTA</th>
+                                    <th>CAPITAL DE INVERSIÓN</th>
+                                    <th>GANANCIA TOTAL DEL PROYECTO</th>
+                                    <th>GANANCIA INVERSIONISTA PRINCIPAL</th>
+                                    <th></th>
                                 </th>
                             </thead>
                             <tbody>
@@ -272,13 +270,12 @@
                         </table>
 
                         <!-- Project's selected investor -->
-                        <table class="table table-bordered table-responsive" id="project_commissioners_table" style="width: 100%">
+                        <table class="table table-bordered table-striped" id="project_commissioners_table">
                             <thead>
                                 <tr>
-                                    <th>Comisionista</th>
-                                    <th>Porcentaje comisión</th>
-                                    <th>Comisión</th>
-                                    <th>Eliminar</th>
+                                    <th>COMISIONISTA</th>
+                                    <th>COMISIÓN</th>
+                                    <th></th>
                                 </th>
                             </thead>
                             <tbody>

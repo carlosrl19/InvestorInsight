@@ -15,7 +15,7 @@ class StoreRequest extends FormRequest
     {
         return [
             // Project rules
-            'project_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:projects,project_name',
+            'project_name' => 'required|string|min:3|max:55|regex:/^[a-zA-Z0-9\s]+$/|unique:projects,project_name',
             'project_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:projects,project_code',
             'project_start_date' => 'required|date_format:Y-m-d|after_or_equal:today',
             'project_end_date' => 'required|date_format:Y-m-d|after:project_start_date',
@@ -47,10 +47,10 @@ class StoreRequest extends FormRequest
         return [
             // Project name messages
             'project_name.required' => 'El nombre del proyecto es obligatorio.',
-            'project_name.string' => 'El nombre del proyecto solo debe contener letras.',
+            'project_name.string' => 'El nombre del proyecto solo debe contener letras y/o números.',
             'project_name.min' => 'El nombre del proyecto debe tener al menos 3 caracteres.',
             'project_name.max' => 'El nombre del proyecto no puede tener más de 55 caracteres.',
-            'project_name.regex' => 'El nombre del proyecto no puede contener números ni símbolos.',
+            'project_name.regex' => 'El nombre del proyecto no puede contener símbolos.',
             'project_name.unique' => 'El nombre del proyecto ya existe.',
 
             // Project code messages

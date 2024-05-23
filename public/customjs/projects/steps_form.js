@@ -72,10 +72,10 @@ $(document).ready(function(){
                         field.addClass("is-invalid");
                         errorSpan.text('El nombre del proyecto no puede tener más de 55 caracteres.');
                         $("#" + fieldName.replace('_', '-') + "-error").show();
-                    } else if (!/^[a-zA-Z\s]*$/.test(value)) {
+                    } else if (!/^[a-zA-Z0-9\s]*$/.test(value)) {
                         isValid = false;
                         field.addClass("is-invalid");
-                        errorSpan.text('El nombre del proyecto no puede contener números ni símbolos.');
+                        errorSpan.text('El nombre del proyecto no puede contener símbolos.');
                         $("#" + fieldName.replace('_', '-') + "-error").show();
                     } else {
                         field.addClass("is-valid");
@@ -105,13 +105,16 @@ $(document).ready(function(){
         endDateError.text('');
         workDaysError.text('');
     
-        // Validar fecha de inicio
+       // Validar fecha de inicio
         if (startDate) {
-            var now = new Date().toISOString().split('T')[0];
-            if (new Date(startDate) < new Date(now)) {
+            var now = new Date();
+            now.setDate(now.getDate() - 10); // Restar 10 días a la fecha actual
+            var tenDaysAgo = now.toISOString().split('T')[0];
+
+            if (new Date(startDate) < new Date(tenDaysAgo)) {
                 isValid = false;
                 startDateInput.addClass("is-invalid");
-                startDateError.text('La fecha de inicio del proyecto no puede ser anterior a la fecha actual.');
+                startDateError.text('La fecha de inicio del proyecto no puede ser anterior a 10 días desde la fecha actual.');
                 $('#start-date-error').show();
             } else {
                 startDateInput.removeClass("is-invalid");

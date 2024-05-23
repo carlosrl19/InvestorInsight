@@ -24,13 +24,10 @@ function addInvestor() {
       <input type="hidden" name="investor_id[]" value="${investorId}">
     </td>
     <td>
-      <input type="number" name="investor_profit[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Porcentaje de ganancia" min="1" class="form-control" required">
+      <input type="number" name="investor_profit[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia total del proyecto" min="1" class="form-control" required">
     </td>
     <td>
-      <input type="number" name="investor_profit_perc[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia total de inversión" min="1" max="50" class="form-control" required oninput="validateTotalPercentage()">
-    </td>
-    <td>
-      <input type="number" readonly name="investor_final_profit[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia final" min="1" class="form-control">
+      <input type="number" readonly name="investor_final_profit[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia inversionista principal" min="1" class="form-control">
     </td>
     <td>
       <button type="button" class="btn btn-md btn-danger" style="border: none; padding: 5px 0px 5px 10px" onclick="removeInvestorRow(this)" data-investor-id="${investorId}">
@@ -49,7 +46,6 @@ function addInvestor() {
   selectedInvestor.disabled = true;
 
   const investorProfitInput = newRow.querySelector('input[name="investor_profit[]"]');
-  const investorProfitPercInput = newRow.querySelector('input[name="investor_profit_perc[]"]');
   const investorFinalProfitInput = newRow.querySelector('input[name="investor_final_profit[]"]');
 
   investorProfitInput.addEventListener('input', calculateInvestorFinalProfit);
@@ -57,26 +53,11 @@ function addInvestor() {
 
   function calculateInvestorFinalProfit() {
     const investorProfit = parseFloat(investorProfitInput.value) || 0;
-    const investorProfitPerc = parseFloat(investorProfitPercInput.value) || 0;
-    const investorFinalProfit = investorProfit * (investorProfitPerc / 100);
+    const investorFinalProfit = investorProfit  / 2;
     investorFinalProfitInput.value = investorFinalProfit.toFixed(2);
   }
 
   calculateTotalInvestment();
-}
-
-function validateTotalPercentage() {
-  const investorProfitPerc = parseFloat(document.querySelector('input[name="investor_profit_perc[]"]').value) || 0;
-  const commissionerPercInputs = document.querySelectorAll('input[name="commissioner_commission_perc[]"]');
-  let totalCommissionerPerc = 0;
-
-  commissionerPercInputs.forEach(input => {
-    totalCommissionerPerc += parseFloat(input.value) || 0;
-  });
-
-  if (investorProfitPerc + totalCommissionerPerc > 100) {
-    alert("El porcentaje total de ganancia y comisión no puede exceder el 100%");
-  }
 }
 
 // Remove investor
@@ -128,17 +109,15 @@ function calcularDiferencia() {
 document.getElementById('project_start_date').addEventListener('change', calcularDiferencia);
 document.getElementById('project_end_date').addEventListener('change', calcularDiferencia);
 
-
 // Disable dates before start date in project_end_date 
 document.getElementById('project_start_date').addEventListener('change', function() {
   var startDate = new Date(this.value);
-  var minEndDate = new Date(startDate.getTime() + 24 * 60 * 60 * 1000); // Agregar un día a la fecha de inicio
+  var minEndDate = new Date(startDate.getTime() + 24 * 60 * 60 * 1000);
 
   var minEndDateStr = minEndDate.toISOString().split('T')[0]; // Formatear la fecha mínima
 
   document.getElementById('project_end_date').min = minEndDateStr;
 });
-
 
 //-------------------------
 //  Commissioners Agent
@@ -154,6 +133,7 @@ function addCommissioner() {
     return;
   }
 
+  // Verificar si ya se han agregado dos filas
   if (document.querySelectorAll('#project_commissioners_table tbody tr').length >= 2) {
     alert("Solo se permiten agregar dos filas.");
     return;
@@ -163,7 +143,7 @@ function addCommissioner() {
   newRow.innerHTML = `
     <td>${selectedCommissioner.text}</td>
     <td>
-      <input type="number" name="commissioner_commission_perc[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Porcentaje de comisión" min="10" max="40" class="form-control" required oninput="validateTotalPercentage()">
+      <input type="number" name="commissioner_commission_perc[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Porcentaje de comisión" min="10" max="40" class="form-control" required>
     </td>
     <td>
       <input type="number" name="commissioner_commission[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Comisión" min="1" class="form-control" required>
@@ -184,20 +164,6 @@ function addCommissioner() {
 
   document.querySelector('#project_commissioners_table tbody').appendChild(newRow);
   selectedCommissioner.disabled = true;
-}
-
-function validateTotalPercentage() {
-  const investorProfitPerc = parseFloat(document.querySelector('input[name="investor_profit_perc[]"]').value) || 0;
-  const commissionerPercInputs = document.querySelectorAll('input[name="commissioner_commission_perc[]"]');
-  let totalCommissionerPerc = 0;
-
-  commissionerPercInputs.forEach(input => {
-    totalCommissionerPerc += parseFloat(input.value) || 0;
-  });
-
-  if (investorProfitPerc + totalCommissionerPerc > 100) {
-    alert("El porcentaje total de ganancia y comisión no puede exceder el 100%");
-  }
 }
 
 // Remove commissioner
