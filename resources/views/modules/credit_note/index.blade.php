@@ -85,11 +85,12 @@ Notas crédito
             </table>
 
             <!-- Modal -->
-            <div class="modal fade modal-blur" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+            <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="pdfModalLabel">Previsualización de nota crédito</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <iframe id="pdf-frame" style="width:100%; height:500px;" src=""></iframe>

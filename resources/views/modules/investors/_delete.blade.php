@@ -1,4 +1,4 @@
-<div class="modal modal-blur fade" id="deleteModal{{ $investor->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $investor->id }}" aria-hidden="true">
+<div class="modal modal-blur fade" id="deleteModal{{ $investor->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $investor->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #883939">
             <div class="modal-header">

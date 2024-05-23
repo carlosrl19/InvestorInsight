@@ -1,5 +1,5 @@
-<div class="modal modal-blur fade" id="modal-team" tabindex="-1" role="dialog" aria-hidden="true">
-   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+<div class="modal modal-blur fade" id="modal-team" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #52524E">
             <div class="modal-header">
                 <h5 class="modal-title">Agregar nuevo proyecto</h5>
@@ -40,17 +40,23 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                    <span class="invalid-feedback" role="alert" id="project-name-error" style="display: none;">
+                                        <strong></strong>
+                                    </span>
                                     <label class="form-label" for="project_name"><small>Nombre del proyecto</small></label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="date" name="project_start_date" value="{{ old('project_start_date') }}" id="project_start_date" class="form-control @error('project_name') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->toDateString() }}"/>
+                                    <input type="date" name="project_start_date" value="{{ old('project_start_date') }}" id="project_start_date" class="form-control @error('project_start_date') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->toDateString() }}" onchange="validateStep()"/>
                                     @error('project_start_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                    <span class="invalid-feedback" role="alert" id="start-date-error" style="display: none;">
+                                        <strong></strong>
+                                    </span>
                                     <label class="form-label" for="project_start_date"><small>Fecha inicial del proyecto</small></label>
                                 </div>
                             </div>
@@ -58,21 +64,32 @@
                         <div class="row mb-3 align-items-end">
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="date" name="project_end_date" value="{{ old('project_end_date') }}" id="project_end_date" class="form-control @error('project_estimated_time') is-invalid @enderror"/>
+                                    <input type="date" name="project_end_date" value="{{ old('project_end_date') }}" id="project_end_date" class="form-control @error('project_end_date') is-invalid @enderror" min="{{ \Carbon\Carbon::now()->toDateString() }}" onchange="validateStep()"/>
                                     @error('project_end_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                    <span class="invalid-feedback" role="alert" id="end-date-error" style="display: none;">
+                                        <strong></strong>
+                                    </span>
                                     <label class="form-label" for="project_end_date"><small>Fecha de cierre del proyecto</small></label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
                                     <div class="card-status-start bg-primary"></div>
-                                    <input type="text" id="result" name="project_work_days" value="{{old('project_work_days')}}" class="form-control" readonly>
+                                    <input type="text" id="project_work_days" name="project_work_days" value="{{old('project_work_days')}}" class="form-control" readonly onchange="validateStep()">
+                                    @error('project_end_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                     <label class="form-label" for="total_work_days"><small>Días de trabajo</small></label>
                                 </div>
+                                <span class="invalid-feedback" role="alert" id="work-days-error" style="display: none;">
+                                    <strong></strong>
+                                </span>
                             </div>
                         </div>
                     </fieldset>
@@ -215,7 +232,7 @@
                             </div>
                             <div class="col-5">
                                 <div class="form-floating">
-                                    <select class="form-select" id="commissioner_select" style="font-size: clamp(0.6rem, 3vh, 0.8rem); width: 100%">
+                                    <select class="form-select" id="commissioner_select" style="font-size: clamp(0.6rem, 3vh, 0.8rem);">
                                         @foreach ($commissioners as $commissioner)
                                             <option value="{{ $commissioner->id }}" {{ old('commissioner_select') == $commissioner->id ? 'selected' : '' }}>{{ $commissioner->commissioner_name }}</option>
                                         @endforeach
@@ -224,7 +241,7 @@
                                 </div>
                             </div>
                             <div class="col-1">
-                                <button type="button" title="Agregar comisionista seleccionado al proyecto" data-bs-toggle="tooltip" data-bs-placement="top" class="btn btn-md btn-primary text-white" id="add_button_container" onclick="addCommissioner()" style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
+                                <button type="button" title="Agregar comisionista seleccionado al proyecto" data-bs-toggle="tooltip" data-bs-placement="top" class="btn btn-primary text-white" id="add_button_container" onclick="addCommissioner()" style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
                                     &nbsp;<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users-plus">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                         <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -243,7 +260,9 @@
                                 <tr>
                                     <th>Inversionista</th>
                                     <th title="Para modificar este capital de inversión debe modificar el monto del pagaré" data-bs-toggle="tooltip" data-bs-placement="top">Capital de inversión</th>
+                                    <th>Porcentaje ganancia</th>
                                     <th>Ganancia total</th>
+                                    <th>Ganancia inversionista</th>
                                     <th>Eliminar</th>
                                 </th>
                             </thead>
@@ -253,10 +272,11 @@
                         </table>
 
                         <!-- Project's selected investor -->
-                        <table class="table table-bordered" id="project_commissioners_table" style="width: 100%">
+                        <table class="table table-bordered table-responsive" id="project_commissioners_table" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>Comisionista</th>
+                                    <th>Porcentaje comisión</th>
                                     <th>Comisión</th>
                                     <th>Eliminar</th>
                                 </th>

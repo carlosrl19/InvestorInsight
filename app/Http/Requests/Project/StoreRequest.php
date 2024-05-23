@@ -50,7 +50,7 @@ class StoreRequest extends FormRequest
             'project_name.string' => 'El nombre del proyecto solo debe contener letras.',
             'project_name.min' => 'El nombre del proyecto debe tener al menos 3 caracteres.',
             'project_name.max' => 'El nombre del proyecto no puede tener más de 55 caracteres.',
-            'project_name.regex' => 'El nombre del proyecto no puede contener números.',
+            'project_name.regex' => 'El nombre del proyecto no puede contener números ni símbolos.',
             'project_name.unique' => 'El nombre del proyecto ya existe.',
 
             // Project code messages

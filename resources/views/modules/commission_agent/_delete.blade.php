@@ -1,4 +1,4 @@
-<div class="modal modal-blur fade" id="deleteModal{{ $commission_agent->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $commission_agent->id }}" aria-hidden="true">
+<div class="modal modal-blur fade" data-bs-backdrop="static" data-bs-keyboard="false" id="deleteModal{{ $commission_agent->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $commission_agent->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #883939">
             <div class="modal-header">
