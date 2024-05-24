@@ -14,6 +14,7 @@ return new class extends Migration
             $table->foreignId('investor_id')->constrained()->onDelete('cascade');
             $table->decimal('investor_investment', 15, 2);
             $table->decimal('investor_profit', 15, 2);
+            $table->decimal('investor_final_profit', 15, 2);
             $table->timestamps();
         });
     }

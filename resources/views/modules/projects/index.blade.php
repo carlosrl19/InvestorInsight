@@ -131,6 +131,6 @@ Proyectos
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('customjs/datatable/dt_project.js') }}"></script>
 
-<!-- Final date -->
+<!-- Form steps -->
 <script src="{{ asset('customjs/projects/steps_form.js') }}"></script>
 @endsection

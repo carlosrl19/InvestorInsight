@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <form action="{{ route('transfer.store')}}" method="POST">
                     @csrf
-                    <div class="row mb-3 align-items-end">
+                    <div class="row mb-3 align-items-end" style="display: none;">
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" maxlength="35" name="transfer_code" value="{{ $generatedCode }}" id="transfer_code" class="form-control text-uppercase" readonly>
@@ -19,27 +19,15 @@
                         <div class="col">
                             <div class="form-floating">
                                 <select name="transfer_bank" id="select-optgroups" class="form-control @error('transfer_bank') is-invalid @enderror" autocomplete="off">
-                                    <optgroup label="Bancos">
-                                        <option value="Banco Atlántida">Banco Atlántida</option>
-                                        <option value="Banco Azteca de Honduras">Banco Azteca de Honduras</option>
-                                        <option value="Banco de América Central Honduras">Banco de América Central Honduras</option>
-                                        <option value="Banco de Desarrollo Rural Honduras">Banco de Desarrollo Rural Honduras</option>
-                                        <option value="Banco de Honduras">Banco de Honduras</option>
-                                        <option value="Banco de Los Trabajadores">Banco de Los Trabajadores</option>
-                                        <option value="Banco de Occidente">Banco de Occidente</option>
-                                        <option value="Banco Davivienda Honduras">Banco Davivienda Honduras</option>
-                                        <option value="Banco Financiera Centroamericana">Banco Financiera Centroamericana</option>
-                                        <option value="Banco Financiera Comercial Hondureña">Banco Financiera Comercial Hondureña</option>
-                                        <option value="Banco Hondureño del Café">Banco Hondureño del Café</option>
-                                        <option value="Banco Lafise Honduras">Banco Lafise Honduras</option>
-                                        <option value="Banco del País">Banco del País</option>
-                                        <option value="Banco Popular">Banco Popular</option>
-                                        <option value="Banco Promérica">Banco Promérica</option>
-                                    </optgroup>
                                     <optgroup label="Otros métodos">
-                                        <option value="PayPal">PayPal</option>
-                                        <option value="Efectivo">Efectivo</option>
-                                        <option value="Otro">Otro</option>
+                                        @foreach(['Remesas', 'Efectivo'] as $method)
+                                            <option value="{{ $method }}" {{ old('transfer_bank') == $method ? 'selected' : '' }}>{{ $method }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                    <optgroup label="Bancos">
+                                        @foreach(['Banco Atlántida', 'Banco Azteca de Honduras', 'Banco de América Central Honduras', 'Banco de Desarrollo Rural Honduras', 'Banco de Honduras', 'Banco de Los Trabajadores', 'Banco de Occidente', 'Banco Davivienda Honduras', 'Banco Financiera Centroamericana', 'Banco Financiera Comercial Hondureña', 'Banco Hondureño del Café', 'Banco Lafise Honduras', 'Banco del País', 'Banco Popular', 'Banco Promérica'] as $bank)
+                                            <option value="{{ $bank }}" {{ old('transfer_bank') == $bank ? 'selected' : '' }}>{{ $bank }}</option>
+                                        @endforeach
                                     </optgroup>
                                 </select>
                                 @error('transfer_bank')
@@ -47,12 +35,15 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                <span class="invalid-feedback" role="alert" id="transfer-bank-error" style="display: none;">
+                                    <strong></strong>
+                                </span>
                                 <label for="transfer_bank">Banco / Modo de transferencia</label>
                             </div>
                         </div>
                     </div>
                     <div class="row mb-3 align-items-end">
-                        <div class="col">
+                        <div class="col" style="display: none;">
                             <div class="form-floating">
                                 <input type="datetime-local" 
                                     name="transfer_date" 
@@ -71,19 +62,19 @@
                                 <label class="form-label" for="transfer_date"><small>Fecha de transferencia</small></label>
                             </div>
                         </div>
-                        <div class="col" style="border: 1px solid lightgray; border-radius: 2px">
-                            <label for="investor_id" class="mb-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Inversionistas</label>
-                            <select class="form-select select2-investors" name="investor_id" id="investor_select" style="font-size: clamp(0.6rem, 3vh, 0.7rem); width: 100%">
-                                <option></option>
-                                @foreach ($investors as $investor)
-                                    @if($investor->investor_status == 1)
-                                        <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
+
+                       <div class="col">
+                            <div class="form-floating">
+                                <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;">
+                                    @foreach ($investors as $investor)
+                                        <option value="{{ $investor->id }}" {{ old('investor_id') == $investor->id ? 'selected' : '' }}>
+                                            {{ $investor->investor_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <label for="investor_id">Inversionistas</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
                                 <input type="number" step="any" name="transfer_amount" value="{{ old('transfer_amount') }}" id="transfer_amount" class="form-control @error('transfer_amount') is-invalid @enderror"/>
@@ -95,15 +86,17 @@
                                 <label for="transfer_amount">Monto de transferencia</label>
                             </div>
                         </div>
+                    </div>
+                    <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="form-control @error('transfer_description') is-invalid @enderror" autocomplete="off" maxlength="255" name="transfer_description" id="transfer_description" data-bs-toggle="autosize"> </textarea>
-                                @error('transfer_description')
+                                <textarea class="form-control @error('transfer_comment') is-invalid @enderror" autocomplete="off" maxlength="255" name="transfer_comment" id="transfer_comment" style="resize: none; height: 100px"> </textarea>
+                                @error('transfer_comment')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label for="transfer_description">Comentarios</label>
+                                <label for="transfer_comment">Comentarios</label>
                             </div>
                         </div>
                     </div>

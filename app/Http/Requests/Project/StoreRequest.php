@@ -17,7 +17,7 @@ class StoreRequest extends FormRequest
             // Project rules
             'project_name' => 'required|string|min:3|max:55|regex:/^[a-zA-Z0-9\s]+$/|unique:projects,project_name',
             'project_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:projects,project_code',
-            'project_start_date' => 'required|date_format:Y-m-d|after_or_equal:today',
+            'project_start_date' => 'required|date_format:Y-m-d|after_or_equal:' . date('Y-m-d', strtotime('-10 days')),
             'project_end_date' => 'required|date_format:Y-m-d|after:project_start_date',
             'project_work_days' => 'required|numeric|min:1|regex:/^\d+$/',
             'project_investment' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
@@ -25,9 +25,10 @@ class StoreRequest extends FormRequest
             'project_comment' => 'required|string|min:3|max:255',
 
             // Investor rules
-            'investor_id.*' => 'required|numeric|exists:investors,id',
-            'investor_investment.*' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
-            'investor_profit.*' => 'required|numeric|min:10|regex:/^\d+(\.\d{1,2})?$/',
+            'investor_id' => 'required|numeric|exists:investors,id',
+            'investor_investment' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
+            'investor_profit' => 'required|numeric|min:10|regex:/^\d+(\.\d{1,2})?$/',
+            'investor_final_profit' => 'required|numeric|min:10|regex:/^\d+(\.\d{1,2})?$/',
 
             // Commissioner rules
             'commissioner_id.*' => 'required|numeric|exists:commission_agents,id',
@@ -37,7 +38,7 @@ class StoreRequest extends FormRequest
             'transfer_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:transfers,transfer_code',
             'transfer_bank' => 'required|string|min:6|max:36|regex:/^[^\d]+$/',
             'transfer_date' => 'required|date_format:Y-m-d\TH:i:s',
-            'transfer_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
+            'transfer_amount' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
             'transfer_comment' => 'required|string|min:3|max:255',
         ];
     }
@@ -64,7 +65,7 @@ class StoreRequest extends FormRequest
             // Project start date messages
             'project_start_date.required' => 'La fecha de inicio del proyecto es obligatoria.',
             'project_start_date.date_format' => 'La fecha de inicio del proyecto debe tener el formato Y-m-d.',
-            'project_start_date.after_or_equal' => 'La fecha de inicio del proyecto no puede ser anterior a la fecha actual.',
+            'project_start_date.after_or_equal' => 'La fecha de inicio del proyecto no puede ser anterior a 10 días desde la fecha actual.',
             
             // Project end date messages
             'project_end_date.required' => 'La fecha de fin del proyecto es obligatoria.',
@@ -74,7 +75,7 @@ class StoreRequest extends FormRequest
             // Project investment messages
             'project_work_days.required' => 'Los días de trabajo del proyecto son obligatorios.',
             'project_work_days.numeric' => 'Los días de trabajo del proyecto solo debe contener números.',
-            'project_work_days.min' => 'Los día de trabajo del proyecto no pueden ser menores a 1.',
+            'project_work_days.min' => 'El total de días de trabajo del proyecto no puede ser menor a 1.',
             'project_work_days.regex' => 'Los días de trabajo del proyecto no puede contener letras ni símbolos.',
             
             // Project investment messages
@@ -94,21 +95,27 @@ class StoreRequest extends FormRequest
             'project_comment.max' => 'Los comentarios adicionales del proyecto no pueden tener más de 255 caracteres.',
 
             // Investor array id messages
-            'investor_id.*.required' => 'El ID del inversionista es obligatorio.',
-            'investor_id.*.numeric' => 'El ID del inversionista debe ser un número.',
-            'investor_id.*.exists' => 'El inversionista seleccionado no existe.',
+            'investor_id.required' => 'El ID del inversionista es obligatorio.',
+            'investor_id.numeric' => 'El ID del inversionista debe ser un número.',
+            'investor_id.exists' => 'El inversionista seleccionado no existe.',
             
             // Investor array investment messages
-            'investor_investment.*.required' => 'La inversión del inversionista es obligatoria.',
-            'investor_investment.*.numeric' => 'La inversión del inversionista debe ser un número.',
-            'investor_investment.*.min' => 'La inversión del inversionista debe ser al menos 1.',
-            'investor_investment.*.regex' => 'La inversión del inversionista debe tener hasta dos decimales.',
+            'investor_investment.required' => 'La inversión del inversionista es obligatoria.',
+            'investor_investment.numeric' => 'La inversión del inversionista debe ser un número.',
+            'investor_investment.min' => 'La inversión del inversionista debe ser al menos 1.',
+            'investor_investment.regex' => 'La inversión del inversionista debe tener hasta dos decimales.',
             
             // Investor array profit messages
-            'investor_profit.*.required' => 'El beneficio del inversionista es obligatorio.',
-            'investor_profit.*.numeric' => 'El beneficio del inversionista debe ser un número.',
-            'investor_profit.*.min' => 'El beneficio del inversionista debe ser al menos 10.',
-            'investor_profit.*.regex' => 'El beneficio del inversionista debe tener hasta dos decimales.',
+            'investor_profit.required' => 'La ganancia total del proyecto es obligatorio.',
+            'investor_profit.numeric' => 'La ganancia total del proyecto debe ser un número.',
+            'investor_profit.min' => 'La ganancia total del proyecto debe ser al menos 10.',
+            'investor_profit.regex' => 'La ganancia total del proyecto debe tener hasta dos decimales.',
+
+            // Investor array profit messages
+            'investor_final_profit.required' => 'La ganancia del inversionista principal es obligatoria.',
+            'investor_final_profit.numeric' => 'La ganancia del inversionista principal debe ser un número.',
+            'investor_final_profit.min' => 'La ganancia del inversionista principal debe ser al menos 10.',
+            'investor_final_profit.regex' => 'La ganancia del inversionista principal debe tener hasta dos decimales.',
 
             // Commissioner array id messages
             'commissioner_id.*.required' => 'El ID del comisionista es obligatorio.',
@@ -131,10 +138,10 @@ class StoreRequest extends FormRequest
             
             // Transfer bank messages
             'transfer_bank.required' => 'El banco de transferencia es obligatorio.',
-            'transfer_bank.string' => 'El banco de transferencia solo debe contener letras.',
+            'transfer_bank.string' => 'El banco de transferencia solo debe contener letras y espacios.',
             'transfer_bank.min' => 'El banco de transferencia debe tener al menos 6 caracteres.',
             'transfer_bank.max' => 'El banco de transferencia no puede tener más de 36 caracteres.',
-            'transfer_bank.regex' => 'El banco de transferencia no puede contener números.',
+            'transfer_bank.regex' => 'El banco de transferencia no puede contener números ni símbolos.',
             
             // Transfer date messages
             'transfer_date.required' => 'La fecha de transferencia es obligatoria.',
@@ -143,8 +150,8 @@ class StoreRequest extends FormRequest
             // Transfer amount messages
             'transfer_amount.required' => 'El monto de transferencia es obligatorio.',
             'transfer_amount.numeric' => 'El monto de transferencia debe ser un número.',
-            'transfer_amount.min' => 'El monto de transferencia no puede ser negativo.',
-            'transfer_amount.regex' => 'El monto de transferencia debe tener hasta dos decimales.',
+            'transfer_amount.min' => 'El monto de transferencia debe ser igual o mayor a 1',
+            'transfer_amount.regex' => 'El monto de transferencia debe tener máximo hasta dos decimales.',
             
             // Transfer description messages
             'transfer_comment.required' => 'Los comentarios de la transferencia son obligatorios.',

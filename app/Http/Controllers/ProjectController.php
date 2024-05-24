@@ -49,25 +49,47 @@ class ProjectController extends Controller
         ]);
     
         // Asociar inversionistas con el proyecto
-        foreach ($validatedData['investor_id'] as $i => $invId) {
+        if (is_array($validatedData['investor_id'])) {
+            foreach ($validatedData['investor_id'] as $i => $invId) {
+                $project->investors()->attach($invId, [
+                    'investor_investment' => $validatedData['investor_investment'][$i],
+                    'investor_profit' => $validatedData['investor_profit'][$i],
+                ]);
+
+                // Crear pagaré para cada inversionista del proyecto
+                $promissoryNoteCode = \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Ymd') . str_pad($i + 1, 4, '0', STR_PAD_LEFT);
+
+                PromissoryNote::create([
+                    'investor_id' => $invId,
+                    'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
+                    'promissoryNote_final_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->addMonth()->format('Y-m-d'),
+                    'promissoryNote_amount' => $validatedData['investor_investment'][$i],
+                    'promissoryNote_code' => $promissoryNoteCode,
+                    'promissoryNote_status' => 1,
+                ]);
+            }
+        } else {
+            // Solo hay un inversionista
+            $invId = $validatedData['investor_id'];
             $project->investors()->attach($invId, [
-                'investor_investment' => $validatedData['investor_investment'][$i],
-                'investor_profit' => $validatedData['investor_profit'][$i],
+                'investor_investment' => $validatedData['investor_investment'],
+                'investor_profit' => $validatedData['investor_profit'],
+                'investor_final_profit' => $validatedData['investor_final_profit'],
             ]);
-    
-            // Crear pagaré para cada inversionista del proyecto
-            $promissoryNoteCode = \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Ymd') . str_pad($i + 1, 4, '0', STR_PAD_LEFT);
-    
+
+            // Crear pagaré para el inversionista del proyecto
+            $promissoryNoteCode = \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Ymd') . '0001';
+
             PromissoryNote::create([
                 'investor_id' => $invId,
                 'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
                 'promissoryNote_final_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->addMonth()->format('Y-m-d'),
-                'promissoryNote_amount' => $validatedData['investor_investment'][$i],
+                'promissoryNote_amount' => $validatedData['investor_investment'],
                 'promissoryNote_code' => $promissoryNoteCode,
                 'promissoryNote_status' => 1,
             ]);
         }
-    
+
         // Asociar comisionistas con el proyecto
         foreach ($validatedData['commissioner_id'] as $j => $comId) {
             $project->commissioners()->attach($comId, [

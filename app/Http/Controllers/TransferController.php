@@ -39,7 +39,7 @@ class TransferController extends Controller
                 'investor_id' => $request->investor_id,
                 'transfer_date' => $request->transfer_date,
                 'transfer_amount' => $request->transfer_amount,
-                'transfer_description' => $request->transfer_description,
+                'transfer_comment' => $request->transfer_comment,
             ]);
     
             // Actualiza el saldo del inversionista sumando el monto de la transferencia
