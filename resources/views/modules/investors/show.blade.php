@@ -80,23 +80,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($activeProjects as $project)
-                                                <tr>
-                                                    <td style="font-size: clamp(0.6rem, 6vh, 0.7rem)">
-                                                        <a href="{{ route('project.show', $project) }}">
-                                                            {{ $project->project_name }}
-                                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" />
-                                                                <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
-                                                                <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
-                                                            </svg>
-                                                        </a>
-                                                    </td>
-                                                    <td style="font-size: clamp(0.6rem, 6vh, 0.7rem)">{{ number_format($project->investor_profit_perc,0) }}%</td>
-                                                    <td style="font-size: clamp(0.6rem, 6vh, 0.7rem)">Lps. {{ number_format($project->investor_investment,2) }}</td>
-                                                    <td class="text-success" style="font-size: clamp(0.6rem, 6vh, 0.7rem)">Lps. {{ number_format($project->investor_investment * $project->investor_profit_perc / 100,2) }}</td>
-                                                </tr>
-                                            @endforeach
+                                           
                                         </tbody>
                                     </table>
                                 </div>
@@ -128,23 +112,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($completedProjects as $project)
-                                                <tr>
-                                                    <td style="font-size: clamp(0.6rem, 6vh, 0.7rem)">
-                                                        <a href="{{ route('project.show', $project) }}">
-                                                            {{ $project->project_name }}
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-link">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" />
-                                                                <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
-                                                                <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
-                                                            </svg>
-                                                        </a>
-                                                    </td>
-                                                    <td style="font-size: clamp(0.6rem, 6vh, 0.7rem)">{{ number_format($project->investor_profit_perc, 0) }}%</td>
-                                                    <td style="font-size: clamp(0.6rem, 6vh, 0.7rem)">Lps. {{ number_format($project->investor_investment, 2) }}</td>
-                                                    <td class="text-success" style="font-size: clamp(0.6rem, 6vh, 0.7rem)">Lps. {{ number_format($project->investor_investment * $project->investor_profit_perc / 100, 2) }}</td>
-                                                </tr>
-                                            @endforeach
+                                           
                                         </tbody>
                                     </table>
                                 </div>
@@ -191,7 +159,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                                                     <td class="text-green">Lps. {{ number_format($transfer->transfer_amount, 2) }}</td>
                                                                     <td>Lps. {{ number_format($transfer->current_balance - $transfer->transfer_amount, 2) }}</td>
                                                                     <td>Lps. {{ number_format($transfer->current_balance, 2) }}</td>
-                                                                    <td title="Comentario: {{ $transfer->transfer_description }}" data-bs-toggle="tooltip" data-bs-placement="right" class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i>Ver comentarios ...</i></td>
+                                                                    <td title="Comentario: {{ $transfer->transfer_comment }}" data-bs-toggle="tooltip" data-bs-placement="right" class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i>Ver comentarios ...</i></td>
                                                                 </tr>
                                                                 @endforeach
                                                             </tbody>

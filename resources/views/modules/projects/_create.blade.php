@@ -235,7 +235,7 @@
                         </table>
 
                         <div class="row mb-3 alig-items-end">
-                            <div class="col-4">
+                            <div class="col-11">
                                 <div class="form-floating">
                                     <select class="form-select" id="commissioner_select" style="font-size: clamp(0.6rem, 3vh, 0.8rem);">
                                         @foreach ($commissioners as $commissioner)
@@ -246,7 +246,7 @@
                                 </div>
                             </div>
                             <div class="col-1">
-                                <button type="button" title="Agregar comisionista seleccionado al proyecto" data-bs-toggle="tooltip" data-bs-placement="top" class="btn btn-primary text-white" id="add_button_container" onclick="addCommissioner()" style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
+                                <button type="button" title="Agregar comisionista seleccionado al proyecto" data-bs-toggle="tooltip" data-bs-placement="top" class="btn btn-primary mt-3 text-white" id="add_button_container" onclick="addCommissioner()" style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
                                     &nbsp;<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users-plus">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                         <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />

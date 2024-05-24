@@ -42,15 +42,15 @@ class InvestorController extends Controller
         $investor = Investor::findOrFail($id);
         $transfers = Transfer::where('investor_id', $investor->id)->orderBy('transfer_date')->get();
         $creditNotes = CreditNote::where('investor_id', $investor->id)->orderBy('creditNote_date')->get();
-    
+
         // Cargar el inversor de referencia
         $referenceInvestor = Investor::find($investor->investor_reference_id);
-    
+
         // Combine transfers and credit notes in a single collection and order them by date
         $events = collect();
-        
+
         foreach ($transfers as $transfer) {
-            $events->push((object)[
+            $events->push((object) [
                 'date' => $transfer->transfer_date,
                 'type' => 'transfer',
                 'amount' => $transfer->transfer_amount,
@@ -59,9 +59,9 @@ class InvestorController extends Controller
                 'original_model' => $transfer
             ]);
         }
-        
+
         foreach ($creditNotes as $creditNote) {
-            $events->push((object)[
+            $events->push((object) [
                 'date' => $creditNote->creditNote_date,
                 'type' => 'creditNote',
                 'amount' => -$creditNote->creditNote_amount,
@@ -70,48 +70,38 @@ class InvestorController extends Controller
                 'original_model' => $creditNote
             ]);
         }
-        
+
         $events = $events->sortBy('date');
-        
+
         // Calculate the current balance from zero, reflecting all transactions
         $currentBalance = 0;
         foreach ($events as $event) {
             $currentBalance += $event->amount;
             $event->current_balance = $currentBalance;
         }
-        
+
         // Separate the events into transfers and credit notes again for displaying in tables
         $transfers = $events->where('type', 'transfer')->map(function ($event) {
             $transfer = $event->original_model;
             $transfer->current_balance = $event->current_balance;
             return $transfer;
         });
-        
+
         $creditNotes = $events->where('type', 'creditNote')->map(function ($event) {
             $creditNote = $event->original_model;
             $creditNote->current_balance = $event->current_balance;
             return $creditNote;
         });
-    
-        // Obtener todos los proyectos activos en los que el inversor forma parte
-        $activeProjects = Project::where('investor_id', $investor->id)
-        ->where('project_status', 1)
-        ->get();
-        
-        // Obtener todos los proyectos finalizado en los que el inversor forma parte
-        $completedProjects = Project::where('investor_id', $investor->id)
-        ->where('project_status', 0)
-        ->get();
-    
-        return view('modules.investors.show', compact('investor', 'transfers', 'creditNotes', 'referenceInvestor', 'activeProjects', 'completedProjects'));
+
+        return view('modules.investors.show', compact('investor', 'transfers', 'creditNotes', 'referenceInvestor'));
     }
-        
+
     public function edit($id)
     {
         $investor = Investor::findOrFail($id);
         $investors = Investor::where('id', '!=', $id)->get(); // Excluir al inversor que se está editando
         return view('modules.investors.update', compact('investor', 'investors'));
-    }    
+    }
 
     public function update(UpdateRequest $request, Investor $investor)
     {

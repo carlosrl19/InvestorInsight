@@ -63,7 +63,7 @@
         responsive: true,
         paginate: false,
         info: false,
-        searching: true,
+        searching: false,
         lengthChange: false,
         aLengthMenu: [
             [10, 20, 50],

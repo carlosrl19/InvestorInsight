@@ -47,6 +47,15 @@ Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name 
                             <div class="col-md-3 mb-3">
                                 <div class="card">
                                     <div class="card-status-start-md bg-primary"></div>
+                                    <div class="card-stamp">
+                                        <div class="card-stamp-icon bg-primary">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-number-1">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                            <path d="M13 20v-16l-5 5" />
+                                        </svg>
+                                        </div>
+                                    </div>
                                     <div class="card-body">
                                         <a href="{{ route('investor.show', $investor) }}">
                                             {{ $investor->investor_name }}
@@ -56,7 +65,7 @@ Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name 
                                                 <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
                                                 <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
                                             </svg><br>
-                                            <span class="badge bg-success mt-2">Ganancia total: Lps. {{ number_format($investor->pivot->investor_profit,2) }}</span>
+                                            <span class="badge bg-success mt-2">Ganancia: Lps. {{ number_format($investor->pivot->investor_profit,2) }}</span>
                                             <span class="badge bg-cyan mt-2">50%: Lps. {{ number_format($investor->pivot->investor_profit / 2,2) }}</span>
                                         </a>
                                     </div>
@@ -66,10 +75,28 @@ Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name 
                     </div>
                     <h3>Comisionistas del proyecto</h3>
                     <div class="row">
-                        @foreach($project->commissioners as $commissioner)
+                        @foreach($project->commissioners as $key => $commissioner)
                             <div class="col-md-3 mb-3">
                                 <div class="card">
                                     <div class="card-status-start-md bg-secondary"></div>
+                                    <div class="card-stamp">
+                                        <div class="card-stamp-icon bg-primary">
+                                            @if($key == 1) <!-- Verifica si es el segundo card -->
+                                                <!-- Imagen SVG para el segundo card -->
+                                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-number-3">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <path d="M12 12a4 4 0 1 0 -4 -4" />
+                                                    <path d="M8 16a4 4 0 1 0 4 -4" />
+                                                </svg>
+                                            @else
+                                                <!-- Imagen SVG original -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-number-2">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <path d="M8 8a4 4 0 1 1 8 0c0 1.098 -.564 2.025 -1.159 2.815l-6.841 9.185h8" />
+                                                </svg>
+                                            @endif
+                                        </div>
+                                    </div>
                                     <div class="card-body">
                                         <a href="{{ route('commission_agent.show', $commissioner) }}">
                                             {{ $commissioner->commissioner_name }}
