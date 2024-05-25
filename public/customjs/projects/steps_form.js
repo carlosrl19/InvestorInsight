@@ -63,9 +63,14 @@ $(document).ready(function() {
         var isValid = true;
 
         // Validaciones del primer paso
+        var projectName = currentFieldset.find('#project_name').val();
         var startDate = currentFieldset.find('#project_start_date').val();
         var endDate = currentFieldset.find('#project_end_date').val();
+
+        var projectNameInput = currentFieldset.find('#project_name');
+        var projectNameError = currentFieldset.find('#project-name-error strong');
         var startDateInput = currentFieldset.find('#project_start_date');
+
         var startDateError = currentFieldset.find('#start-date-error strong');
         var endDateInput = currentFieldset.find('#project_end_date');
         var endDateError = currentFieldset.find('#end-date-error strong');
@@ -73,40 +78,63 @@ $(document).ready(function() {
         var workDaysInput = currentFieldset.find('#project_work_days');
         var workDaysError = currentFieldset.find('#work-days-error strong');
 
+        projectNameError.text('');
         startDateError.text('');
         endDateError.text('');
         workDaysError.text('');
+
+        if (!projectName) {
+            isValid = false;
+            projectNameInput.addClass("is-invalid");
+            projectNameError.text('El nombre del proyecto es obligatorio.');
+            $('#project-name-error').show();
+        }   
+        else if (projectName.length > 55) {
+            isValid = false;
+            projectNameInput.addClass("is-invalid");
+            projectNameError.text('El nombre del proyecto no puede exceder los 55 caracteres.');
+            $('#project-name-error').show();
+        }
+        else if (projectName.length < 3) {
+            isValid = false;
+            projectNameInput.addClass("is-invalid");
+            projectNameError.text('El nombre del proyecto debe contener al menos 3 caracteres.');
+            $('#project-name-error').show();
+        }
+        else {
+            projectNameInput.removeClass("is-invalid");
+            projectNameInput.addClass("is-valid");
+            $('#project-name-error').hide();
+        }
 
         if (!startDate) {
             isValid = false;
             startDateInput.addClass("is-invalid");
             startDateError.text('La fecha de inicio del proyecto es obligatoria.');
             $('#start-date-error').show();
-        } else {
+        } 
+        else {
             var now = new Date();
             now.setDate(now.getDate() - 10);
-            var tenDaysAgo = now.toISOString().split('T')[0];
-
-            if (new Date(startDate) < new Date(tenDaysAgo)) {
+          
+            if (new Date(startDate) < now) {
                 isValid = false;
                 startDateInput.addClass("is-invalid");
                 startDateError.text('La fecha de inicio del proyecto no puede ser anterior a 10 días desde la fecha actual.');
                 $('#start-date-error').show();
-            } else if (startDate && endDate) {
-                if (new Date(startDate) >= new Date(endDate)) {
-                    isValid = false;
-                    startDateInput.addClass("is-invalid");
-                    startDateError.text('La fecha de inicio del proyecto debe ser menor a la fecha de cierre del mismo.');
-                    $('#start-date-error').show();
-                } else {
-                    startDateInput.removeClass("is-invalid");
-                    $('#start-date-error').hide();
-                }
-            } else {
+            } 
+            else if (endDate && new Date(startDate) >= new Date(endDate)) {
+                isValid = false;
+                startDateInput.addClass("is-invalid");
+                startDateError.text('La fecha de inicio del proyecto debe ser menor a la fecha de cierre del mismo.');
+                $('#start-date-error').show();
+            } 
+            else {
                 startDateInput.removeClass("is-invalid");
+                startDateInput.addClass("is-valid");
                 $('#start-date-error').hide();
             }
-        }
+        }          
 
         if (!endDate) {
             isValid = false;
@@ -121,6 +149,7 @@ $(document).ready(function() {
                 $('#end-date-error').show();
             } else {
                 endDateInput.removeClass("is-invalid");
+                endDateInput.addClass("is-valid");
                 $('#end-date-error').hide();
             }
         }
@@ -139,6 +168,7 @@ $(document).ready(function() {
                 $('#work-days-error').show();
             } else {
                 workDaysInput.removeClass("is-invalid");
+                workDaysInput.addClass("is-valid");
                 $('#work-days-error').hide();
             }
         }
@@ -151,31 +181,57 @@ $(document).ready(function() {
     
         // Validaciones del segundo paso
         var transferDate = currentFieldset.find('#transfer_date').val();
-        var transferDateInput = currentFieldset.find('#transfer_date');
-        var transferDateError = currentFieldset.find('#transfer-date-error strong');
-    
         var transferBank = currentFieldset.find('#transfer_bank').val();
-        var transferBankInput = currentFieldset.find('#transfer_bank');
-        var transferBankError = currentFieldset.find('#transfer-bank-error strong');
-    
         var transferAmount = currentFieldset.find('#transfer_amount').val();
-        var transferAmountInput = currentFieldset.find('#transfer_amount');
-        var transferAmountError = currentFieldset.find('#transfer-amount-error strong');
-    
         var transferComment = currentFieldset.find('#transfer_comment').val();
+
+        var investorInput = currentFieldset.find('#investor_id');
+        var transferDateInput = currentFieldset.find('#transfer_date');
+        var transferBankInput = currentFieldset.find('#transfer_bank');
+        var transferAmountInput = currentFieldset.find('#transfer_amount');
         var transferCommentInput = currentFieldset.find('#transfer_comment');
+
+        var investorError = currentFieldset.find('#investor-id-error strong');
+        var transferDateError = currentFieldset.find('#transfer-date-error strong');
+        var transferBankError = currentFieldset.find('#transfer-bank-error strong');
+        var transferAmountError = currentFieldset.find('#transfer-amount-error strong');
         var transferCommentError = currentFieldset.find('#transfer-comment-error strong');
-    
+
+        investorError.text('');
         transferDateError.text('');
         transferBankError.text('');
         transferAmountError.text('');
         transferCommentError.text('');
+        
+        // investor_id select
+        var isValidInvestor = false;
+        $('#investor_id option').each(function() {
+            if ($(this).is(':selected') && $(this).val() !== '') {
+                isValidInvestor = true;
+            }
+        });
+
+        if (!isValidInvestor) {
+            isValid = false;
+            investorInput.addClass("is-invalid");
+            investorError.text('Por favor, seleccione un inversionista.');
+            $('#investor-id-error').show();
+        } else {
+            investorInput.removeClass("is-invalid");
+            investorInput.addClass('is-valid');
+            $('#investor-id-error').hide();
+        }
+        // ivestor_id: La razón del por qué es distinto a las demás validaciones es debido a que el select es nu búcle for each de investors
     
         if (!transferDate) {
             isValid = false;
             transferDateInput.addClass("is-invalid");
             transferDateError.text('La fecha de transferencia es obligatoria.');
             $('#transfer-date-error').show();
+        } else{
+            transferDateInput.removeClass('is-invalid');
+            transferDateInput.addClass('is-valid');
+            $('#transfer-date-error').hide();
         }
 
         if (!transferBank) {
@@ -200,7 +256,7 @@ $(document).ready(function() {
             $('#transfer-bank-error').show();
         } else {
             transferBankInput.removeClass("is-invalid");
-            transferBankError.text('');
+            transferBankInput.addClass('is-valid');
             $('#transfer-bank-error').hide();
         }        
     
@@ -209,13 +265,18 @@ $(document).ready(function() {
             transferAmountInput.addClass("is-invalid");
             transferAmountError.text('El monto de transferencia es obligatorio.');
             $('#transfer-amount-error').show();
-        } else {
+        }
+        else {
             var transferAmountNumber = parseFloat(transferAmount);
             if (isNaN(transferAmountNumber) || transferAmountNumber <= 0) {
                 isValid = false;
                 transferAmountInput.addClass("is-invalid");
-                transferAmountError.text('El monto de transferencia debe ser igual o mayor a 1.');
+                transferAmountError.text('El monto de transferencia debe ser un número válido y mayor a 0.');
                 $('#transfer-amount-error').show();
+            } else {
+                transferAmountInput.removeClass("is-invalid");
+                transferAmountInput.addClass('is-valid');
+                $('#transfer-amount-error').hide();
             }
         }
     
@@ -224,14 +285,24 @@ $(document).ready(function() {
             transferCommentInput.addClass("is-invalid");
             transferCommentError.text('El comentario de la transferencia es obligatorio.');
             $('#transfer-comment-error').show();
-        } else {
-            if (transferComment.length > 255) {
-                isValid = false;
-                transferCommentInput.addClass("is-invalid");
-                transferCommentError.text('El comentario no puede exceder los 255 caracteres.');
-                $('#transfer-comment-error').show();
-            }
         }
+        else if (transferComment.length > 255) {
+            isValid = false;
+            transferCommentInput.addClass("is-invalid");
+            transferCommentError.text('El comentario no puede exceder los 255 caracteres.');
+            $('#transfer-comment-error').show();
+        }
+        else if (transferComment.length < 3) {
+            isValid = false;
+            transferCommentInput.addClass("is-invalid");
+            transferCommentError.text('El comentario debe contener al menos 3 caracteres.');
+            $('#transfer-comment-error').show();
+        } 
+        else {
+            transferCommentInput.removeClass("is-invalid");
+            transferCommentInput.addClass('is-valid');
+            $('#transfer-comment-error').hide();
+        }          
 
         return isValid;
     }

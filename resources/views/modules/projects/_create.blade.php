@@ -22,7 +22,7 @@
                                 <div class="form-floating">
                                     <div class="card-status-start bg-primary"></div>
                                     <input type="text" readonly class="form-control @error('project_code') is-invalid @enderror" id="project_code"
-                                    name="project_code" value="{{ $generatedCode }}" autocomplete="off"
+                                    name="project_code" value="{{ $generatedCode }}" autocomplete="off" minlength="12" maxlength="12"
                                     style="text-transform: uppercase; color: #52524E; font-size: clamp(0.7rem, 3vw, 0.8rem)">
                                     @error('project_code')
                                         <span class="invalid-feedback" role="alert">
@@ -34,7 +34,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" name="project_name" value="{{ old('project_name') }}" id="project_name" class="form-control @error('project_name') is-invalid @enderror" autocomplete="off"/>
+                                    <input type="text" name="project_name" value="{{ old('project_name') }}" id="project_name" class="form-control @error('project_name') is-invalid @enderror" autocomplete="off" maxlength="55"/>
                                     @error('project_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -115,7 +115,8 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;" onchange="updateInvestor()">
+                                    <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;" onchange="updateInvestor()" required>
+                                        <option value="" selected disabled>Seleccione un inversionista</option>
                                         @foreach ($investors as $investor)
                                             <option value="{{ $investor->id }}" {{ old('investor_id') == $investor->id ? 'selected' : '' }}>
                                                 {{ $investor->investor_name }}
@@ -123,7 +124,7 @@
                                         @endforeach
                                     </select>
                                     <label for="investor_id">Inversionistas</label>
-                                    <span class="invalid-feedback" role="alert" id="investor_id-error" style="display: none;">
+                                    <span class="invalid-feedback" role="alert" id="investor-id-error" style="display: none;">
                                         <strong></strong>
                                     </span>
                                 </div>
@@ -132,6 +133,7 @@
                             <div class="col">
                                 <div class="form-floating">
                                     <select name="transfer_bank" id="transfer_bank" class="form-control @error('transfer_bank') is-invalid @enderror" autocomplete="off">
+                                        <option value="" selected disabled>Seleccione un banco o método de transferencia</option>
                                         <optgroup label="Otros métodos">
                                             @foreach(['Remesas', 'Efectivo'] as $method)
                                                 <option value="{{ $method }}" {{ old('transfer_bank') == $method ? 'selected' : '' }}>{{ $method }}</option>
@@ -157,7 +159,7 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="number" step="any" name="transfer_amount" value="{{ old('transfer_amount') }}" id="transfer_amount" class="form-control @error('transfer_amount') is-invalid @enderror"/>
+                                    <input type="number" min="0" name="transfer_amount" value="{{ old('transfer_amount') }}" id="transfer_amount" class="form-control @error('transfer_amount') is-invalid @enderror"/>
                                     @error('transfer_amount')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -194,7 +196,7 @@
                         <div class="row mb-3 align-items-end">
                             <div class="col">
                                 <div class="form-floating">
-                                    <textarea class="form-control @error('transfer_comment') is-invalid @enderror" autocomplete="off" maxlength="255" name="transfer_comment" id="transfer_comment" style="resize: none; height: 100px">{{ old('transfer_comment')}}</textarea>
+                                    <textarea maxlength="255" class="form-control @error('transfer_comment') is-invalid @enderror" autocomplete="off" maxlength="255" name="transfer_comment" id="transfer_comment" style="resize: none; height: 100px">{{ old('transfer_comment')}}</textarea>
                                     @error('transfer_comment')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -238,6 +240,7 @@
                             <div class="col-11">
                                 <div class="form-floating">
                                     <select class="form-select" id="commissioner_select" style="font-size: clamp(0.6rem, 3vh, 0.8rem);">
+                                        <option value="" selected disabled>Seleccione un inversionista</option>
                                         @foreach ($commissioners as $commissioner)
                                             <option value="{{ $commissioner->id }}" {{ old('commissioner_select') == $commissioner->id ? 'selected' : '' }}>{{ $commissioner->commissioner_name }}</option>
                                         @endforeach
