@@ -115,18 +115,16 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;" onchange="updateInvestor()" required>
-                                        <option value="" selected disabled>Seleccione un inversionista</option>
-                                        @foreach ($investors as $investor)
-                                            <option value="{{ $investor->id }}" {{ old('investor_id') == $investor->id ? 'selected' : '' }}>
-                                                {{ $investor->investor_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <label for="investor_id">Inversionistas</label>
-                                    <span class="invalid-feedback" role="alert" id="investor-id-error" style="display: none;">
+                                    <input type="number" min="0" name="transfer_amount" value="{{ old('transfer_amount') }}" id="transfer_amount" class="form-control @error('transfer_amount') is-invalid @enderror"/>
+                                    @error('transfer_amount')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <span class="invalid-feedback" role="alert" id="transfer-amount-error" style="display: none;">
                                         <strong></strong>
                                     </span>
+                                    <label for="transfer_amount">Monto de transferencia</label>
                                 </div>
                             </div>
 
@@ -159,16 +157,18 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="number" min="0" name="transfer_amount" value="{{ old('transfer_amount') }}" id="transfer_amount" class="form-control @error('transfer_amount') is-invalid @enderror"/>
-                                    @error('transfer_amount')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <span class="invalid-feedback" role="alert" id="transfer-amount-error" style="display: none;">
+                                    <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;" onchange="updateInvestor()" required>
+                                        <option value="" selected disabled>Seleccione un inversionista</option>
+                                        @foreach ($investors as $investor)
+                                            <option value="{{ $investor->id }}" {{ old('investor_id') == $investor->id ? 'selected' : '' }}>
+                                                {{ $investor->investor_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <label for="investor_id">Inversionistas</label>
+                                    <span class="invalid-feedback" role="alert" id="investor-id-error" style="display: none;">
                                         <strong></strong>
                                     </span>
-                                    <label for="transfer_amount">Monto de transferencia</label>
                                 </div>
                             </div>
                         </div>

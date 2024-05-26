@@ -88,7 +88,13 @@ $(document).ready(function() {
             projectNameInput.addClass("is-invalid");
             projectNameError.text('El nombre del proyecto es obligatorio.');
             $('#project-name-error').show();
-        }   
+        }
+        else if (projectName.trim().length === 0) {
+            isValid = false;
+            projectNameInput.addClass("is-invalid");
+            projectNameError.text('El nombre del proyecto no puede contener solo espacios.');
+            $('#project-name-error').show();
+        }
         else if (projectName.length > 55) {
             isValid = false;
             projectNameInput.addClass("is-invalid");
@@ -99,6 +105,12 @@ $(document).ready(function() {
             isValid = false;
             projectNameInput.addClass("is-invalid");
             projectNameError.text('El nombre del proyecto debe contener al menos 3 caracteres.');
+            $('#project-name-error').show();
+        }
+        else if (!/^[a-zA-Z0-9\s]+$/.test(projectName)) {
+            isValid = false;
+            projectNameInput.addClass("is-invalid");
+            projectNameError.text('El nombre del proyecto solo puede contener letras, números y espacios.');
             $('#project-name-error').show();
         }
         else {
@@ -115,7 +127,7 @@ $(document).ready(function() {
         } 
         else {
             var now = new Date();
-            now.setDate(now.getDate() - 10);
+            now.setDate(now.getDate() - 11);
           
             if (new Date(startDate) < now) {
                 isValid = false;

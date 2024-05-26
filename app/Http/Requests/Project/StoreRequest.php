@@ -27,8 +27,8 @@ class StoreRequest extends FormRequest
             // Investor rules
             'investor_id' => 'required|numeric|exists:investors,id',
             'investor_investment' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
-            'investor_profit' => 'required|numeric|min:10|regex:/^\d+(\.\d{1,2})?$/',
-            'investor_final_profit' => 'required|numeric|min:10|regex:/^\d+(\.\d{1,2})?$/',
+            'investor_profit' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
+            'investor_final_profit' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
 
             // Commissioner rules
             'commissioner_id.*' => 'required|numeric|exists:commission_agents,id',
@@ -108,13 +108,13 @@ class StoreRequest extends FormRequest
             // Investor array profit messages
             'investor_profit.required' => 'La ganancia total del proyecto es obligatorio.',
             'investor_profit.numeric' => 'La ganancia total del proyecto debe ser un número.',
-            'investor_profit.min' => 'La ganancia total del proyecto debe ser al menos 10.',
+            'investor_profit.min' => 'La ganancia total del proyecto debe ser al menos 1.',
             'investor_profit.regex' => 'La ganancia total del proyecto debe tener hasta dos decimales.',
 
             // Investor array profit messages
             'investor_final_profit.required' => 'La ganancia del inversionista principal es obligatoria.',
             'investor_final_profit.numeric' => 'La ganancia del inversionista principal debe ser un número.',
-            'investor_final_profit.min' => 'La ganancia del inversionista principal debe ser al menos 10.',
+            'investor_final_profit.min' => 'La ganancia del inversionista principal debe ser al menos 1.',
             'investor_final_profit.regex' => 'La ganancia del inversionista principal debe tener hasta dos decimales.',
 
             // Commissioner array id messages

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\CommissionAgent;
-use Illuminate\Http\Request;
 use App\Http\Requests\Project\StoreRequest;
 use App\Http\Requests\Project\UpdateRequest;
 use App\Models\Investor;
@@ -16,7 +15,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::get();
+        $projects = Project::with('investors')->get();
         $investors = Investor::get();
         $commissioners = CommissionAgent::get();
         $generatedCode = strtoupper(Str::random(12)); // Transfer random code
@@ -117,7 +116,24 @@ class ProjectController extends Controller
         $commissioners = $project->commissioners;
         return view('modules.projects.show', compact('project', 'investors', 'commissioners'));
     }
+
+    public function finishProject(Project $project)
+    {
+        // Update the project status
+        $project->project_status = '0';
+        $project->save();
     
+        // Redirect or return a response
+        return redirect()->route('project.index')->with('success', 'Proyecto finalizado exitosamente.');
+    }
+
+    public function closeProject(Project $project)
+    {
+        $project->project_status = '2';
+        $project->save();
+
+        return redirect()->route('project.index')->with('success', 'Proyecto cerrado correctamente.');
+    }
     
     public function edit($id)
     {

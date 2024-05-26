@@ -25,3 +25,5 @@ Route::get('promissory_note/{id}/report', 'App\Http\Controllers\PromissoryNoteCo
 // Projects
 Route::resource('project', 'App\Http\Controllers\ProjectController')->names('project');
 Route::get('project/{id}/report', 'App\Http\Controllers\ProjectController@showReport')->name('project.report');
+Route::post('project/{project}/finish', 'App\Http\Controllers\ProjectController@finishProject')->name('project.finish');
+Route::post('/project/{project}/close', 'App\Http\Controllers\ProjectController@closeProject')->name('project.close');
