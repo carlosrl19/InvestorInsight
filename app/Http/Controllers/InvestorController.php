@@ -8,7 +8,6 @@ use App\Models\CommissionAgent;
 use App\Models\CreditNote;
 use App\Models\Investor;
 use App\Models\Transfer;
-use App\Models\Project;
 
 class InvestorController extends Controller
 {
