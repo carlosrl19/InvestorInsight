@@ -27,3 +27,4 @@ Route::resource('project', 'App\Http\Controllers\ProjectController')->names('pro
 Route::get('project/{id}/report', 'App\Http\Controllers\ProjectController@showReport')->name('project.report');
 Route::post('project/{project}/finish', 'App\Http\Controllers\ProjectController@finishProject')->name('project.finish');
 Route::post('/project/{project}/close', 'App\Http\Controllers\ProjectController@closeProject')->name('project.close');
+Route::get('excel/{project}', 'App\Http\Controllers\ProjectController@export')->name('project.excel');

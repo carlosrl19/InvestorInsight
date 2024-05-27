@@ -10,6 +10,8 @@ use App\Models\Project;
 use App\Models\Transfer;
 use App\Models\PromissoryNote;
 use Illuminate\Support\Str;
+use App\Exports\CustomExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProjectController extends Controller
 {
@@ -115,6 +117,11 @@ class ProjectController extends Controller
         $investors = $project->investors;
         $commissioners = $project->commissioners;
         return view('modules.projects.show', compact('project', 'investors', 'commissioners'));
+    }
+
+    public function export($id)
+    {
+        return Excel::download(new CustomExport($id), 'Excel.xlsx');
     }
 
     public function finishProject(Project $project)
