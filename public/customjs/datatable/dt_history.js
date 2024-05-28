@@ -1,3 +1,4 @@
+// Active projects init
 (function($) {
     "use strict"
 
@@ -35,6 +36,7 @@
     });
 })(jQuery);
 
+// Projects init
 (function($) {
     "use strict"
 
@@ -72,7 +74,7 @@
     });
 })(jQuery);
 
-
+// Transfer init
 (function($) {
     "use strict"
 
@@ -101,7 +103,7 @@
         responsive: true,
         paginate: false,
         info: false,
-        searching: true,
+        searching: false,
         lengthChange: false,
         aLengthMenu: [
             [10, 20, 50],
@@ -110,6 +112,7 @@
     });
 })(jQuery);
 
+// Credit note init
 (function($) {
     "use strict"
 
@@ -138,7 +141,7 @@
         responsive: true,
         paginate: false,
         info: true,
-        searching: true,
+        searching: false,
         lengthChange: false,
         aLengthMenu: [
             [10, 20, 50],
