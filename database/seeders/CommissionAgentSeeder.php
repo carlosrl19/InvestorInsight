@@ -12,23 +12,9 @@ class CommissionAgentSeeder extends Seeder
     {
         CommissionAgent::create(
             [
-                'commissioner_name'=>'Julio Martínez',
-                'commissioner_dni'=>'1203198705991',
-                'commissioner_phone'=>'37889900',
-            ]
-        );
-        CommissionAgent::create(
-            [
-                'commissioner_name'=>'Luisa Gómez',
-                'commissioner_dni'=>'1203198805992',
-                'commissioner_phone'=>'87889901',
-            ]
-        );
-        CommissionAgent::create(
-            [
-                'commissioner_name'=>'Carolina López',
-                'commissioner_dni'=>'1203198905993',
-                'commissioner_phone'=>'97889902',
+                'commissioner_name'=>'Junior Alexis Ayala Guerrero',
+                'commissioner_dni'=>'0801199907469',
+                'commissioner_phone'=>'31559105',
             ]
         );
     }

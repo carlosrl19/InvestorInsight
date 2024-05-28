@@ -6,10 +6,11 @@ use App\Models\Project;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\WithProperties;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class CustomExport implements FromView, WithEvents
+class CustomExport implements FromView, WithProperties, WithEvents
 {
     protected $projectId;
 
@@ -29,12 +30,24 @@ class CustomExport implements FromView, WithEvents
         ]);
     }
 
+    public function properties(): array
+    {
+        return [
+            'title' => 'Excel de proyecto',
+            'creator' => 'Investor Insight',
+        ];
+    }
+
     public function registerEvents(): array
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
                 $sheet = $event->sheet->getDelegate();
                 $sheet->mergeCells('B2:C2');
+
+                // Protection / Security
+                $sheet->getProtection()->setPassword('H14_Pkz*7v0%'); // Set password
+                $event->sheet->getProtection()->setSheet(true); // Set protection to excel
             },
         ];
     }

@@ -51,7 +51,7 @@ Inversionistas
                     <th>Empresa</th>
                     <th>Nº Identidad</th>
                     <th>Teléfono</th>
-                    <th>Saldo actual</th>
+                    <th>Capital</th>
                     <th>Recomendación</th>
                     <th>Estado</th>
                     <th>Acciones</th>

@@ -48,8 +48,8 @@ Proyectos
                 <thead>
                     <tr>
                         <th>Nombre proyecto</th>
-                        <th>Fecha inicio</th>
-                        <th>Fecha cierre <small>(previsto)</small></th>
+                        <th>Inicio</th>
+                        <th>Cierre <small>(previsto)</small></th>
                         <th>inversionista</th>
                         <th>Inversión</th>
                         <th>Ganancia total</th>
@@ -207,7 +207,7 @@ Proyectos
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Cerrado"?
+                                            ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Cerrado"? Utilice esta opción únicamente cuando un proyecto tenga conflictos para llevarse a cabo y no se pueda seguir con el mismo hasta finalizarse.
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

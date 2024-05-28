@@ -2,12 +2,6 @@
     <thead>
         <tr>
             <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -15,10 +9,21 @@
         <tr>
             <td></td>
             @foreach($project->investors as $investor)
-                <td style="font-size: 14px; width: 150px; font-weight: bold; background-color: #fff; text-align: center; text-decoration: underline;">PROYECTO {{ $project->project_name }} - {{ $investor->investor_name }}</td>
+                <td style="font-size: 14px; width: 150px; font-weight: bold; background-color: #fff; text-align: center; text-decoration: underline;">PROYECTO {{ $project->project_name }}</td>
             @endforeach
-            <td style="background-color: #fff; width: 220px;"></td>
-            <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 100px; text-align: center; text-decoration: underline;">TRABAJANDO</td>
+            <td style="background-color: #fff; width: 200px;"></td>
+            <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 160px; text-align: center; text-decoration: underline;">
+                @if($project->project_status == 0)
+                    EN PROCESO
+                @elseif($project->project_status == 1)
+                    FINALIZADO
+                @elseif($project->project_status == 2)
+                    CERRADO
+                @else
+                    DESCONOCIDO
+                @endif
+            </td>
+            <td style="background-color: #fff;"></td>
             <td style="background-color: #fff;"></td>
             <td style="background-color: #fff;"></td>
             <td style="background-color: #fff;"></td>
@@ -27,7 +32,7 @@
         
         <!-- Blank rows 1 -->
         <tr>
-            <td style="background-color: #fff"></td>
+            <td></td>
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
@@ -40,7 +45,7 @@
         
         <!-- Blank rows 2 -->
         <tr>
-            <td style="background-color: #fff"></td>
+            <td></td>
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>

@@ -55,11 +55,12 @@ class ProjectController extends Controller
                 $project->investors()->attach($invId, [
                     'investor_investment' => $validatedData['investor_investment'][$i],
                     'investor_profit' => $validatedData['investor_profit'][$i],
+                    'investor_final_profit' => $validatedData['investor_final_profit'][$i],
                 ]);
-
+    
                 // Crear pagaré para cada inversionista del proyecto
                 $promissoryNoteCode = \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Ymd') . str_pad($i + 1, 4, '0', STR_PAD_LEFT);
-
+    
                 PromissoryNote::create([
                     'investor_id' => $invId,
                     'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
@@ -77,10 +78,10 @@ class ProjectController extends Controller
                 'investor_profit' => $validatedData['investor_profit'],
                 'investor_final_profit' => $validatedData['investor_final_profit'],
             ]);
-
+    
             // Crear pagaré para el inversionista del proyecto
             $promissoryNoteCode = \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Ymd') . '0001';
-
+    
             PromissoryNote::create([
                 'investor_id' => $invId,
                 'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
@@ -90,7 +91,7 @@ class ProjectController extends Controller
                 'promissoryNote_status' => 1,
             ]);
         }
-
+    
         // Asociar comisionistas con el proyecto
         foreach ($validatedData['commissioner_id'] as $j => $comId) {
             $project->commissioners()->attach($comId, [
@@ -102,7 +103,7 @@ class ProjectController extends Controller
         Transfer::create([
             'transfer_code' => $generatedCode,
             'transfer_bank' => $validatedData['transfer_bank'],
-            'investor_id' => $validatedData['investor_id'][0], // Asumiendo que la transferencia está relacionada con el primer inversionista
+            'investor_id' => is_array($validatedData['investor_id']) ? $validatedData['investor_id'][0] : $validatedData['investor_id'], // Asumiendo que la transferencia está relacionada con el primer inversionista
             'transfer_date' => $validatedData['transfer_date'],
             'transfer_amount' => $validatedData['transfer_amount'],
             'transfer_comment' => $validatedData['transfer_comment'],
@@ -110,6 +111,7 @@ class ProjectController extends Controller
     
         return redirect()->route('project.index')->with('success', 'Proyecto, pagaré y transferencia creados de manera exitosa.');
     }
+    
 
     public function show($id)
     {
@@ -129,6 +131,12 @@ class ProjectController extends Controller
         // Update the project status
         $project->project_status = '0';
         $project->save();
+    
+        // Sumar el investor_final_investment al investor_balance de cada inversor asociado al proyecto
+        foreach ($project->investors as $investor) {
+            $investor->investor_balance += $investor->pivot->investor_final_profit;
+            $investor->save();
+        }
     
         // Redirect or return a response
         return redirect()->route('project.index')->with('success', 'Proyecto finalizado exitosamente.');

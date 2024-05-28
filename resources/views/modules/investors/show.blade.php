@@ -48,7 +48,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                     @else
                                     <strong class="text-red">(no tiene recomendación)</strong>,
                                     @endif
-                                    </strong> tiene un saldo actual de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
+                                    </strong> tiene un capital de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
                                 </div>
                             </div>
                         </div>
@@ -146,7 +146,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                                                 <th>Fecha</th>
                                                                 <th>Banco</th>
                                                                 <th>Monto transferencia</th>
-                                                                <th>Saldo actual</th>
+                                                                <th>Capital</th>
                                                                 <th>Nuevo saldo</th>
                                                                 <th>Comentarios</th>
                                                             </tr>
@@ -199,7 +199,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                                     <tr>
                                                         <th>Fecha</th>
                                                         <th>Monto nota crédito</th>
-                                                        <th>Saldo actual</th>
+                                                        <th>Capital</th>
                                                         <th>Nuevo saldo</th>
                                                         <th>Comentarios</th>
                                                     </tr>
