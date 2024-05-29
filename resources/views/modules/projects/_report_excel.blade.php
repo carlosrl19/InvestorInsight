@@ -65,8 +65,8 @@
             <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 120px">GANANCIA TOTAL</td>
             <td style="background-color: #fff; color: #375623; font-size: 12px; font-weight: bold; width: 230px">COMISIÓN {{ $investor->investor_name }} 50%</td>
             @if(isset($project->commissioners[1]))
-                <td style="background-color: #fff; font-size: 12px; font-weight: bold; width: 220px">COMISIÓN {{ $commissioners[0]->commissioner_name }} 10%</td>
-                <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 170px">COMISIÓN {{ $commissioners->get(1)->commissioner_name ?? '-' }} 40%</td>
+                <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 170px">COMISIÓN {{ $commissioners->get(1)->commissioner_name ?? '-' }} 10%</td>
+                <td style="background-color: #fff; font-size: 12px; font-weight: bold; width: 220px">COMISIÓN {{ $commissioners[0]->commissioner_name }} 40%</td>
             @else
                 <td style="background-color: #fff; font-size: 12px; font-weight: bold; width: 220px">COMISIÓN {{ $commissioners[0]->commissioner_name }} 50%</td>
             @endif

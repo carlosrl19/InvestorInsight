@@ -115,7 +115,7 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="number" min="0" name="transfer_amount" value="{{ old('transfer_amount') }}" id="transfer_amount" class="form-control @error('transfer_amount') is-invalid @enderror"/>
+                                    <input type="number" min="0" name="transfer_amount" id="transfer_amount" class="form-control @error('transfer_amount') is-invalid @enderror"/>
                                     @error('transfer_amount')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -134,12 +134,12 @@
                                         <option value="" selected disabled>Seleccione un banco o método de transferencia</option>
                                         <optgroup label="Otros métodos">
                                             @foreach(['Remesas', 'Efectivo'] as $method)
-                                                <option value="{{ $method }}" {{ old('transfer_bank') == $method ? 'selected' : '' }}>{{ $method }}</option>
+                                                <option value="{{ $method }}">{{ $method }}</option>
                                             @endforeach
                                         </optgroup>
                                         <optgroup label="Bancos">
                                             @foreach(['Banco Atlántida', 'Banco Azteca de Honduras', 'Banco de América Central Honduras', 'Banco de Desarrollo Rural Honduras', 'Banco de Honduras', 'Banco de Los Trabajadores', 'Banco de Occidente', 'Banco Davivienda Honduras', 'Banco Financiera Centroamericana', 'Banco Financiera Comercial Hondureña', 'Banco Hondureño del Café', 'Banco Lafise Honduras', 'Banco del País', 'Banco Popular', 'Banco Promérica'] as $bank)
-                                                <option value="{{ $bank }}" {{ old('transfer_bank') == $bank ? 'selected' : '' }}>{{ $bank }}</option>
+                                                <option value="{{ $bank }}">{{ $bank }}</option>
                                             @endforeach
                                         </optgroup>
                                     </select>
@@ -160,7 +160,7 @@
                                     <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;" onchange="updateInvestor()" required>
                                         <option value="" selected disabled>Seleccione un inversionista</option>
                                         @foreach ($investors as $investor)
-                                            <option value="{{ $investor->id }}" {{ old('investor_id') == $investor->id ? 'selected' : '' }}>
+                                            <option value="{{ $investor->id }}">
                                                 {{ $investor->investor_name }}
                                             </option>
                                         @endforeach
@@ -228,7 +228,7 @@
                                     <th>INVERSIONISTA PRINCIPAL</th>
                                     <th>CAPITAL DE INVERSIÓN</th>
                                     <th>GANANCIA TOTAL DEL PROYECTO</th>
-                                    <th>GANANCIA INVERSIONISTA PRINCIPAL</th>
+                                    <th>GANANCIA INVERSIONISTA PRINCIPAL (50%)</th>
                                 </th>
                             </thead>
                             <tbody>
@@ -269,11 +269,33 @@
                                     <thead>
                                         <tr>
                                             <th>COMISIONISTA</th>
-                                            <th>COMISIÓN</th>
+                                            <th>COMISIÓN TOTAL</th>
                                             <th></th>
                                         </th>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                            <td>Junior Alexis Ayala Guerrero</td>
+                                            <td>
+                                                <input type="number" name="commissioner_commission[]" id="commissioner_commission_jr" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Comisión" min="1" class="form-control" required readonly>
+                                                <input type="hidden" name="commissioner_id[]" value="1">
+                                                <span class="invalid-feedback" role="alert" id="commissioner-commission-jr-error" style="display: none;">
+                                                    <strong></strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-md btn-danger" style="border: none; padding: 5px 0px 5px 10px" onclick="removeCommissionerRow(this)" data-commissioner-id="1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M4 7l16 0"></path>
+                                                    <path d="M10 11l0 6"></path>
+                                                    <path d="M14 11l0 6"></path>
+                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                                </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
                                         <!-- Dinamically row creation -->
                                     </tbody>
                                 </table>
@@ -284,26 +306,30 @@
                     <!-- Step 4 Comment -->
                     <fieldset>
                         <h4 class="text-center text-muted">
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-5">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-4">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                            <path d="M10 15a1 1 0 0 0 1 1h2a1 1 0 0 0 1 -1v-2a1 1 0 0 0 -1 -1h-3v-4h4" />
-                        </svg> Comentarios adicionales <span style="float: right">Paso 4/4</span>
+                            <path d="M10 8v3a1 1 0 0 0 1 1h3" />
+                            <path d="M14 8v8" />
+                        </svg> Comentarios adicionales <span style="float: right; font-size: clamp(0.6rem, 6vh, 0.7rem)">Paso 4/4</span>
                         </h4>
                         <div class="row mb-3 align-items-end">
-                            <div class="col">
-                                <div class="form-floating">
-                                    <textarea maxlength="255" style="overflow: hidden; overflow-wrap: break-word; resize: none; text-align: start; height: 100px" 
-                                    name="project_comment" id="project_comment" class="form-control @error('project_comment') is-invalid @enderror" autocomplete="off"/>{{ old('project_comment') }}</textarea>
-                                    @error('project_comment')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <label class="form-label" for="project_comment"><small>Comentarios adicionales al proyecto</small></label>
-                                </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea maxlength="255" style="overflow: hidden; height: 100px" 
+                                        name="project_comment" id="project_comment" class="form-control @error('project_comment') is-invalid @enderror" autocomplete="off">{{ old('project_comment') }}</textarea>
+                                @error('project_comment')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <span class="invalid-feedback" role="alert" id="project-comment-error" style="display: none;">
+                                    <strong></strong>
+                                </span>
+                                <label class="form-label" for="project_comment"><small>Comentarios adicionales al proyecto</small></label>
                             </div>
                         </div>
+                    </div>
                     </fieldset>
                     
                     <!-- Buttons -->

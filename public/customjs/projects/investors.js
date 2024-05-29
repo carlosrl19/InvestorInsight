@@ -29,21 +29,21 @@ function addInvestor(investorId, investorName) {
   newRow.innerHTML = `
       <td>${investorName}</td>
       <td>
-          <input type="number" readonly name="project_investment" value="${transferAmount}" style="font-size: clamp(0.6rem, 6vh, 0.68rem); display: none" placeholder="Capital de inversión" min="1" class="form-control" required oninput="calculateTotalInvestment()">
-          <input type="number" readonly name="investor_investment" value="${transferAmount}" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Capital de inversión" min="1" class="form-control" required oninput="calculateTotalInvestment()">
-          <input type="hidden" name="investor_id" value="${investorId}">
-          <span class="invalid-feedback" role="alert" id="investor-investment-error" style="display: none;">
-              <strong></strong>
-          </span>
+      <input type="number" readonly name="project_investment" value="${transferAmount}" style="font-size: clamp(0.6rem, 6vh, 0.68rem); display: none" placeholder="Capital de inversión" min="1" class="form-control" required oninput="calculateTotalInvestment()">
+      <input type="number" readonly name="investor_investment" id="investor_investment" value="${transferAmount}" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Capital de inversión" min="1" class="form-control" required oninput="calculateTotalInvestment()">
+      <span class="invalid-feedback" role="alert" id="investor-investment-error" style="display: none;">
+          <strong></strong>
+      </span>
+      <input type="hidden" name="investor_id" value="${investorId}">
       </td>
       <td>
-          <input type="number" name="investor_profit" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia total del proyecto" min="1" class="form-control" required">
+          <input type="number" name="investor_profit" id="investor_profit" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia total del proyecto" min="1" class="form-control" required">
           <span class="invalid-feedback" role="alert" id="investor-profit-error" style="display: none;">
               <strong></strong>
           </span>
       </td>
       <td>
-          <input type="number" readonly name="investor_final_profit" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia inversionista principal" min="1" class="form-control">
+          <input type="number" readonly name="investor_final_profit" id="investor_final_profit" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia inversionista principal" min="1" class="form-control">
           <span class="invalid-feedback" role="alert" id="investor-final-profit-error" style="display: none;">
               <strong></strong>
           </span>
@@ -83,7 +83,6 @@ function addInvestor(investorId, investorName) {
 
   calculateTotalInvestment();
 }
-
 
 // Calculate project_investment
 function calculateTotalInvestment() {
@@ -131,8 +130,11 @@ function addCommissioner() {
   newRow.innerHTML = `
     <td>${selectedCommissioner.text}</td>
     <td>
-      <input type="number" name="commissioner_commission[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Comisión" min="1" class="form-control" required readonly>
+      <input type="number" name="commissioner_commission[]" id="commissioner_commission" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Comisión total del comisionista" min="1" class="form-control" required readonly>
       <input type="hidden" name="commissioner_id[]" value="${commissionerId}">
+      <span class="invalid-feedback" role="alert" id="commissioner-commission-error" style="display: none;">
+        <strong></strong>
+    </span>
     </td>
     <td>
       <button type="button" class="btn btn-md btn-danger" style="border: none; padding: 5px 0px 5px 10px" onclick="removeCommissionerRow(this)" data-commissioner-id="${commissionerId}">
@@ -157,6 +159,15 @@ function addCommissioner() {
       investorProfitInput.dispatchEvent(event);
   }
 }
+
+// Disabled commission_agent default
+document.addEventListener('DOMContentLoaded', (event) => {
+  const commissionerSelect = document.getElementById('commissioner_select');
+  const juniorOption = commissionerSelect.querySelector('option[value="1"]');
+  if (juniorOption) {
+    juniorOption.disabled = true;
+  }
+});
 
 // Remove commissioner
 function removeCommissionerRow(button) {

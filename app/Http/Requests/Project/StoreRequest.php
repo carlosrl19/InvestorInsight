@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Project;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class StoreRequest extends FormRequest
 {
@@ -160,4 +161,42 @@ class StoreRequest extends FormRequest
             'transfer_comment.max' => 'Los comentarios de la transferencia no puede tener más de 255 caracteres.',
         ];
     }
+
+    // Custom Laravel validation rules
+    protected function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $investorProfit = $this->input('investor_profit');
+            $investorFinalProfit = $this->input('investor_final_profit');
+            $commissionerCommissions = $this->input('commissioner_commission', []);
+    
+            // Validar si investor_final_profit es igual al 50% de investor_investment
+            if ($investorFinalProfit != $investorProfit * 0.5) {
+                $validator->errors()->add('investor_final_profit', 'La ganancia final del inversionista debe ser el 50% de la ganancia total del proyecto.');
+            }
+    
+            // Contar el número de comisionistas
+            $numCommissioners = count($commissionerCommissions);
+    
+            // Si solo hay un comisionista
+            if ($numCommissioners == 1) {
+                // Validar que su comisión sea el 50% del investor_profit
+                if ($commissionerCommissions[0] != $investorProfit * 0.5) {
+                    $validator->errors()->add('commissioner_commission.0', 'Si solamente hay un comisionista en el proyecto, debe recibir el 50% de la ganancia total del proyecto.');
+                }
+            } elseif ($numCommissioners == 2) {
+                // Si hay dos comisionistas, el primero recibe el 40% y el segundo el 10%
+                $commissioner1Commission = $commissionerCommissions[0];
+                $commissioner2Commission = $commissionerCommissions[1];
+    
+                if ($commissioner1Commission != $investorProfit * 0.4) {
+                    $validator->errors()->add('commissioner_commission.0', 'El primer comisionista debe recibir el 40% de la ganancia total del proyecto.');
+                }
+    
+                if ($commissioner2Commission != $investorProfit * 0.1) {
+                    $validator->errors()->add('commissioner_commission.1', 'El segundo comisionista debe recibir el 10% de la ganancia total del proyecto.');
+                }
+            }
+        });
+    }    
 }

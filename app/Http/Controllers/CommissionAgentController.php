@@ -48,10 +48,16 @@ class CommissionAgentController extends Controller
         return redirect()->route("commission_agent.index")->with("success", "Comisionista actualizado exitosamente.");
     }
 
-
     public function destroy($id)
     {
-        CommissionAgent::destroy($id);
+        $commissionAgent = CommissionAgent::find($id);
+    
+        if (($commissionAgent->id == 1 && $commissionAgent->commissioner_name == 'Junior Alexis Ayala Guerrero')) {
+            return redirect()->route('commission_agent.index')->with('error', 'No se puede eliminar a Junior Alexis Ayala Guerrero de los comisionistas.');
+        }
+    
+        $commissionAgent->delete();
+    
         return redirect()->route('commission_agent.index')->with('success', 'Comisionista eliminado exitosamente.');
     }
 }

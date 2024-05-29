@@ -111,7 +111,6 @@ class ProjectController extends Controller
     
         return redirect()->route('project.index')->with('success', 'Proyecto, pagaré y transferencia creados de manera exitosa.');
     }
-    
 
     public function show($id)
     {
@@ -123,7 +122,7 @@ class ProjectController extends Controller
 
     public function export($id)
     {
-        return Excel::download(new CustomExport($id), 'Excel.xlsx');
+        return Excel::download(new CustomExport($id), 'Excel de proyecto.xlsx');
     }
 
     public function finishProject(Project $project)

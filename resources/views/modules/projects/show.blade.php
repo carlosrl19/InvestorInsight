@@ -44,7 +44,7 @@ Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name 
                     <h3>Inversionistas del proyecto</h3>
                     <div class="row">
                         @foreach($project->investors as $investor)
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <div class="card">
                                     <div class="card-status-start-md bg-primary"></div>
                                     <div class="card-stamp">
@@ -76,7 +76,7 @@ Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name 
                     <h3>Comisionistas del proyecto</h3>
                     <div class="row">
                         @foreach($project->commissioners as $key => $commissioner)
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <div class="card">
                                     <div class="card-status-start-md bg-secondary"></div>
                                     <div class="card-stamp">

@@ -6,6 +6,9 @@
 <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
 
+<!-- Animation to badge -->
+<link href="{{ asset('/css/project.css') }}" rel="stylesheet">
+
 @endsection
 
 @section('pretitle')
@@ -67,8 +70,8 @@ Proyectos
                             $project = $projectGroup->first();
                         @endphp
                         <tr>
-                            <td>
-                                <a href="{{ route('project.show', $project) }}">
+                            <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
+                                <a href="{{ route('project.show', $project) }}" title="{{ $project->project_name }}" data-bs-toggle="tooltip" data-bs-placement="right">
                                     {{ $project->project_name }}
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -111,7 +114,7 @@ Proyectos
                                         </svg> Finalizado
                                     </span>
                                 @elseif($project->project_status == '1')
-                                    <span class="badge bg-cyan me-1" data-bs-toggle="modal" data-bs-target="#finishModal{{ $project->id }}">
+                                    <span class="badge bg-cyan me-1 project-active" data-bs-toggle="modal" data-bs-target="#finishModal{{ $project->id }}">
                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-lock-open">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                             <path d="M5 11m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
@@ -141,7 +144,7 @@ Proyectos
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Finalizado"?
+                                            ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Finalizado"? Utilice esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -207,7 +210,7 @@ Proyectos
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Cerrado"? Utilice esta opción únicamente cuando un proyecto tenga conflictos para llevarse a cabo y no se pueda seguir con el mismo hasta finalizarse.
+                                            ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Cerrado"? Utilice esta opción únicamente cuando un proyecto tenga conflictos para llevarse a cabo y no se pueda seguir con el mismo.
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
