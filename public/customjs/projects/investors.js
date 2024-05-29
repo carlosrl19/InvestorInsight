@@ -1,4 +1,3 @@
-// Add new row with investor
 function updateInvestor() {
   const investorSelect = document.getElementById('investor_id');
   const selectedInvestor = investorSelect.options[investorSelect.selectedIndex];
@@ -60,12 +59,31 @@ function addInvestor(investorId, investorName) {
 
   function calculateInvestorFinalProfit() {
       const investorProfit = parseFloat(investorProfitInput.value) || 0;
-      const investorFinalProfit = investorProfit / 2;
-      investorFinalProfitInput.value = investorFinalProfit;
+      const investorFinalProfit = 0.5 * investorProfit;
+      investorFinalProfitInput.value = investorFinalProfit.toFixed(2);
+
+      const commissioners = document.querySelectorAll('#project_commissioners_table tbody tr');
+      let commissionerCommissions = 0;
+
+      commissioners.forEach((commissioner, index) => {
+          const commissionInput = commissioner.querySelector('input[name="commissioner_commission[]"]');
+          let commission = 0;
+          if (index === 0) {
+              commission = commissioners.length === 1 ? 0.5 * investorProfit : 0.4 * investorProfit;
+          } else if (index === 1) {
+              commission = 0.1 * investorProfit;
+          }
+          commissionInput.value = commission.toFixed(2);
+          commissionerCommissions += commission;
+      });
+
+      const updatedInvestorFinalProfit = investorProfit - commissionerCommissions;
+      investorFinalProfitInput.value = updatedInvestorFinalProfit.toFixed(2);
   }
 
   calculateTotalInvestment();
 }
+
 
 // Calculate project_investment
 function calculateTotalInvestment() {
@@ -79,9 +97,14 @@ function calculateTotalInvestment() {
 document.getElementById('transfer_amount').addEventListener('input', function() {
   const transferAmount = this.value;
   document.querySelectorAll('input[name="investor_investment"]').forEach(input => {
-    input.value = transferAmount;
+      input.value = transferAmount;
   });
   calculateTotalInvestment();
+  const investorProfitInput = document.querySelector('input[name="investor_profit"]');
+  if (investorProfitInput) {
+      const event = new Event('input');
+      investorProfitInput.dispatchEvent(event);
+  }
 });
 
 //-------------------------
@@ -94,21 +117,21 @@ function addCommissioner() {
   const commissionerId = selectedCommissioner.value;
 
   if (!commissionerId || document.querySelector(`input[name="commissioner_id[]"][value="${commissionerId}"]`)) {
-    alert(commissionerId ? "¡Este comisionista ya ha sido seleccionado!" : "¡Por favor, seleccione un comisionista!");
-    return;
+      alert(commissionerId ? "¡Este comisionista ya ha sido seleccionado!" : "¡Por favor, seleccione un comisionista!");
+      return;
   }
 
   // Verificar si ya se han agregado dos filas
   if (document.querySelectorAll('#project_commissioners_table tbody tr').length >= 2) {
-    alert("Solo se permiten agregar dos filas.");
-    return;
+      alert("Solo se permiten agregar dos filas.");
+      return;
   }
 
   const newRow = document.createElement('tr');
   newRow.innerHTML = `
     <td>${selectedCommissioner.text}</td>
     <td>
-      <input type="number" name="commissioner_commission[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Comisión" min="1" class="form-control" required>
+      <input type="number" name="commissioner_commission[]" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Comisión" min="1" class="form-control" required readonly>
       <input type="hidden" name="commissioner_id[]" value="${commissionerId}">
     </td>
     <td>
@@ -126,6 +149,13 @@ function addCommissioner() {
 
   document.querySelector('#project_commissioners_table tbody').appendChild(newRow);
   selectedCommissioner.disabled = true;
+
+  // Recalculate investor final profit
+  const investorProfitInput = document.querySelector('input[name="investor_profit"]');
+  if (investorProfitInput) {
+      const event = new Event('input');
+      investorProfitInput.dispatchEvent(event);
+  }
 }
 
 // Remove commissioner
@@ -134,4 +164,11 @@ function removeCommissionerRow(button) {
   const rowToRemove = button.closest('tr');
   document.getElementById('commissioner_select').querySelector(`option[value="${commissionerId}"]`).disabled = false;
   rowToRemove.remove();
+
+  // Recalculate investor final profit
+  const investorProfitInput = document.querySelector('input[name="investor_profit"]');
+  if (investorProfitInput) {
+      const event = new Event('input');
+      investorProfitInput.dispatchEvent(event);
+  }
 }

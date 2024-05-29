@@ -14,9 +14,9 @@
             <td style="background-color: #fff; width: 200px;"></td>
             <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 160px; text-align: center; text-decoration: underline;">
                 @if($project->project_status == 0)
-                    EN PROCESO
-                @elseif($project->project_status == 1)
                     FINALIZADO
+                @elseif($project->project_status == 1)
+                    EN PROCESO
                 @elseif($project->project_status == 2)
                     CERRADO
                 @else
