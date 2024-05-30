@@ -172,7 +172,7 @@ class StoreRequest extends FormRequest
     
             // Validar si investor_final_profit es igual al 50% de investor_investment
             if ($investorFinalProfit != $investorProfit * 0.5) {
-                $validator->errors()->add('investor_final_profit', 'La ganancia final del inversionista debe ser el 50% de la ganancia total del proyecto.');
+                $validator->errors()->add('investor_final_profit', 'La ganancia del inversionista principal debe ser el 50% de la ganancia total del proyecto.');
             }
     
             // Contar el número de comisionistas

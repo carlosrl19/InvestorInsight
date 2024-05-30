@@ -53,7 +53,7 @@ Proyectos
                         <th>Nombre proyecto</th>
                         <th>Inicio</th>
                         <th>Cierre <small>(previsto)</small></th>
-                        <th>inversionista</th>
+                        <th>Inversionista</th>
                         <th>Inversión</th>
                         <th>Ganancia total</th>
                         <th>Excel</th>
@@ -71,7 +71,7 @@ Proyectos
                         @endphp
                         <tr>
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
-                                <a href="{{ route('project.show', $project) }}" title="{{ $project->project_name }}" data-bs-toggle="tooltip" data-bs-placement="right">
+                                <a href="{{ route('project.show', $project) }}">
                                     {{ $project->project_name }}
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>

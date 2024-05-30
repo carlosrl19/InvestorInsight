@@ -63,7 +63,7 @@
                     d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
                 </svg>
               </a>
-              <div class="nav-item dropdown d-none d-md-flex me-3">
+              <div class="nav-item dropdown d-none d-md-flex me-3" title="SIN PROGRAMAR" data-bs-toggle="tooltip" data-bs-placement="bottom">
                 <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1"
                   aria-label="Show notifications">
                   <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
@@ -78,7 +78,7 @@
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
                   <div class="card" style="width: 50vh;">
                     <div class="card-header">
-                      <h3 class="card-title">Pagarés pendientes</h3>
+                      <h3 class="card-title">Pendientes</h3>
                     </div>
                     <div class="list-group list-group-flush list-group-hoverable">
                       <div class="list-group-item">
@@ -88,7 +88,7 @@
                           <div class="col">
                             <a href="#" class="text-body d-block" style="font-size: clamp(0.7rem, 6vh, 0.8rem)">Pagaré #202405290001</a>
                             <div class="d-block text-muted mt-n1" style="font-size: clamp(0.6rem, 6vh, 0.6rem)">
-                              La fecha de pago es el día 2024-06-29 (miércoles).
+                              La fecha de pago es el día 2024-06-29.
                             </div>
                           </div>
                         </div>
