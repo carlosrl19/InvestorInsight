@@ -365,33 +365,34 @@ $(document).ready(function () {
     // Validations to step 3
     function validateStep3(currentFieldset) {
         var isValid = true;
-
+    
         var investorInvestment = currentFieldset.find("#investor_investment").val();
         var investorInvestmentInput = currentFieldset.find("#investor_investment");
         var investorInvestmentError = currentFieldset.find("#investor-investment-error strong");
-
+    
         var investorProfit = currentFieldset.find("#investor_profit").val();
         var investorProfitInput = currentFieldset.find("#investor_profit");
         var investorProfitError = currentFieldset.find("#investor-profit-error strong");
-
+    
         var investorFinalProfit = currentFieldset.find("#investor_final_profit").val();
         var investorFinalProfitInput = currentFieldset.find("#investor_final_profit");
         var investorFinalProfitError = currentFieldset.find("#investor-final-profit-error strong");
-
+    
         var commissionerCommissionJr = currentFieldset.find("#commissioner_commission_jr").val();
         var commissionerCommissionJrInput = currentFieldset.find("#commissioner_commission_jr");
         var commissionerCommissionJrError = currentFieldset.find("#commissioner-commission-jr-error strong");
-
-        var commissionerCommission = currentFieldset.find("#commissioner_commission").val();
-        var commissionerCommissionInput = currentFieldset.find("#commissioner_commission");
-        var commissionerCommissionError = currentFieldset.find("#commissioner-commission-error strong");
-
+    
+        var commissionerCommissions = currentFieldset.find("input[name='commissioner_commission[]']").not("#commissioner_commission_jr");
+        var commissionerCommissionsValid = true;
+    
         investorInvestmentError.text("");
         investorProfitError.text("");
         investorFinalProfitError.text("");
         commissionerCommissionJrError.text("");
-        commissionerCommissionError.text("");
-
+        commissionerCommissions.each(function() {
+            $(this).next("span.invalid-feedback").find("strong").text("");
+        });
+    
         if (!investorInvestment) {
             isValid = false;
             investorInvestmentInput.addClass("is-invalid");
@@ -407,10 +408,10 @@ $(document).ready(function () {
             } else {
                 investorInvestmentInput.removeClass("is-invalid");
                 investorInvestmentInput.addClass("is-valid");
-                $("#investor-investment-errorr").hide();
+                $("#investor-investment-error").hide();
             }
         }
-
+    
         if (!investorProfit) {
             isValid = false;
             investorProfitInput.addClass("is-invalid");
@@ -418,10 +419,10 @@ $(document).ready(function () {
             $("#investor-profit-error").show();
         } else {
             investorProfitInput.removeClass("is-invalid");
-            investorProfitError.addClass("is-valid");
+            investorProfitInput.addClass("is-valid");
             $("#investor-profit-error").hide();
         }
-
+    
         if (!investorFinalProfit) {
             isValid = false;
             investorFinalProfitInput.addClass("is-invalid");
@@ -440,7 +441,7 @@ $(document).ready(function () {
                 $("#investor-final-profit-error").hide();
             }
         }
-
+    
         if (!commissionerCommissionJr) {
             isValid = false;
             commissionerCommissionJrInput.addClass("is-invalid");
@@ -459,28 +460,37 @@ $(document).ready(function () {
                 $("#commissioner-commission-jr-error").hide();
             }
         }
-
-        if (!commissionerCommission) {
-            isValid = false;
-            commissionerCommissionInput.addClass("is-invalid");
-            commissionerCommissionError.text("La comisión del comisionista es obligatoria.");
-            $("#commissioner-commission-error").show();
-        } else {
-            var commissionerCommissionAmountNumber = parseFloat(commissionerCommission);
-            if (isNaN(commissionerCommissionAmountNumber) || commissionerCommissionAmountNumber <= 0) {
-                isValid = false;
+    
+        commissionerCommissions.each(function() {
+            var commissionerCommissionInput = $(this);
+            var commissionerCommissionError = commissionerCommissionInput.next("span.invalid-feedback").find("strong");
+            var commissionerCommission = commissionerCommissionInput.val();
+    
+            if (!commissionerCommission) {
+                commissionerCommissionsValid = false;
                 commissionerCommissionInput.addClass("is-invalid");
-                commissionerCommissionError.text("La comisión del comisionista debe ser un número válido y mayor a 0.");
-                $("#commissioner-commission-error").show();
+                commissionerCommissionError.text("La comisión del comisionista es obligatoria.");
+                commissionerCommissionInput.next("span.invalid-feedback").show();
             } else {
-                commissionerCommissionInput.removeClass("is-invalid");
-                commissionerCommissionInput.addClass("is-valid");
-                $("#commissioner-commission-error").hide();
+                var commissionerCommissionAmountNumber = parseFloat(commissionerCommission);
+                if (isNaN(commissionerCommissionAmountNumber) || commissionerCommissionAmountNumber <= 0) {
+                    commissionerCommissionsValid = false;
+                    commissionerCommissionInput.addClass("is-invalid");
+                    commissionerCommissionError.text("La comisión del comisionista debe ser un número válido y mayor a 0.");
+                    commissionerCommissionInput.next("span.invalid-feedback").show();
+                } else {
+                    commissionerCommissionInput.removeClass("is-invalid");
+                    commissionerCommissionInput.addClass("is-valid");
+                    commissionerCommissionInput.next("span.invalid-feedback").hide();
+                }
             }
-        }
-
+        });
+    
+        isValid = isValid && commissionerCommissionsValid;
+    
         return isValid;
     }
+    
 
     // Validations to step 4
     function validateStep4(currentFieldset) {
