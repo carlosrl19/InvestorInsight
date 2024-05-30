@@ -20,7 +20,7 @@
                             <div class="form-floating">
                                 <select name="transfer_bank" id="select-optgroups" class="form-control @error('transfer_bank') is-invalid @enderror" autocomplete="off">
                                     <optgroup label="Otros métodos">
-                                        @foreach(['Remesas', 'Efectivo'] as $method)
+                                        @foreach(['Remesas', 'Tarjeta', 'Efectivo'] as $method)
                                             <option value="{{ $method }}" {{ old('transfer_bank') == $method ? 'selected' : '' }}>{{ $method }}</option>
                                         @endforeach
                                     </optgroup>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
 
-                       <div class="col">
+                        <div class="col">
                             <div class="form-floating">
                                 <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;">
                                     @foreach ($investors as $investor)

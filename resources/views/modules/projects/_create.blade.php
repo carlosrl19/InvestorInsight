@@ -133,7 +133,7 @@
                                     <select name="transfer_bank" id="transfer_bank" class="form-control @error('transfer_bank') is-invalid @enderror" autocomplete="off">
                                         <option value="" selected disabled>Seleccione un banco o método de transferencia</option>
                                         <optgroup label="Otros métodos">
-                                            @foreach(['Remesas', 'Efectivo'] as $method)
+                                            @foreach(['Remesas', 'Efectivo', 'Tarjetas'] as $method)
                                                 <option value="{{ $method }}">{{ $method }}</option>
                                             @endforeach
                                         </optgroup>
@@ -316,7 +316,7 @@
                         <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <textarea maxlength="255" style="overflow: hidden; height: 100px" 
+                                <textarea maxlength="255" style="overflow: hidden; height: 100px; resize: none" 
                                         name="project_comment" id="project_comment" class="form-control @error('project_comment') is-invalid @enderror" autocomplete="off">{{ old('project_comment') }}</textarea>
                                 @error('project_comment')
                                     <span class="invalid-feedback" role="alert">

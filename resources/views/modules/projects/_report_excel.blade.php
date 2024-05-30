@@ -16,7 +16,7 @@
                 @if($project->project_status == 0)
                     FINALIZADO
                 @elseif($project->project_status == 1)
-                    EN PROCESO
+                    TRABAJANDO
                 @elseif($project->project_status == 2)
                     CERRADO
                 @else

@@ -10,6 +10,7 @@ use App\Models\Investor;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class CreditNoteController extends Controller
 {
@@ -17,8 +18,9 @@ class CreditNoteController extends Controller
     {
         $creditNotes = CreditNote::get();
         $investors = Investor::get();
+        $creditNoteCode = strtoupper(Str::random(12)); // Credit note random code
 
-        return view('modules.credit_note.index', compact('creditNotes', 'investors'));
+        return view('modules.credit_note.index', compact('creditNotes', 'investors', 'creditNoteCode'));
     }
 
     public function create()
@@ -71,6 +73,7 @@ class CreditNoteController extends Controller
         try {
             // Encuentra al inversionista por su ID
             $investor = Investor::findOrFail($request->investor_id);
+            $creditNoteCode = strtoupper(Str::random(12)); // Credit note random code
 
             // Verifica si el monto de la nota de crédito es mayor que el saldo del inversionista
             if ($request->creditNote_amount > $investor->investor_balance) {
@@ -82,7 +85,7 @@ class CreditNoteController extends Controller
                 'creditNote_date' => $request->creditNote_date,
                 'investor_id' => $request->investor_id,
                 'creditNote_amount' => $request->creditNote_amount,
-                'creditNote_code' => $request->creditNote_code,
+                'creditNote_code' => $creditNoteCode,
                 'creditNote_description' => $request->creditNote_description,
             ]);
     

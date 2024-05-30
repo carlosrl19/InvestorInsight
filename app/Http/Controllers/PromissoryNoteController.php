@@ -9,6 +9,7 @@ use Dompdf\Options;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
 use Luecano\NumeroALetras\NumeroALetras;
+use Illuminate\Support\Str;
 
 class PromissoryNoteController extends Controller
 {
@@ -16,8 +17,9 @@ class PromissoryNoteController extends Controller
     {
         $promissoryNotes = PromissoryNote::get();
         $investors = Investor::get();
+        $promissoryCode = strtoupper(Str::random(12)); // Promissory note random code
 
-        return view("modules.promissory_note.index", compact("promissoryNotes","investors"));
+        return view("modules.promissory_note.index", compact("promissoryNotes", "investors", "promissoryCode"));
     }
     public function create()
     {

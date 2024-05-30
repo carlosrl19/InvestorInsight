@@ -49,7 +49,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" readonly class="form-control @error('promissoryNote_code') is-invalid @enderror" id="promissoryNote_code"
-                                    name="promissoryNote_code" value="PG{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('YmdHms')}}" autocomplete="off"
+                                    name="promissoryNote_code" value="{{ $promissoryCode }}" autocomplete="off"
                                     style="text-transform: uppercase; background-color: white; font-size: clamp(0.7rem, 3vw, 0.8rem)">
                                     @error('promissoryNote_code')
                                         <span class="invalid-feedback" role="alert">

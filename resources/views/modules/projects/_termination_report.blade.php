@@ -1,53 +1,30 @@
 <div class="main">
 	<!-- Finiquito title -->
-	<div class="title-note mt-center">
+	<div class="title-note ml-2 mt-center">
 		FINIQUITO DE PROYECTO
 	</div>
 
 	<!-- Finiquito body -->
 	<div class="body-note mt-4 mb-4">
-		Por medio del presente documento, las partes abajo firmantes, compuesta por el Inversionista [Nombre del
-		Inversionista] y los Comisionistas [Nombre del Comisionista 1] y [Nombre del Comisionista 2], dejan constancia
-		de la finalización del proyecto denominado "[Nombre del Proyecto]".
-		El Inversionista reconoce haber recibido de los Comisionistas un informe exhaustivo y detallado sobre las
-		actividades realizadas, los resultados obtenidos y las metas alcanzadas durante la ejecución del proyecto.<br><br>
+		Por medio del presente documento, el Inversionista [Nombre del Inversionista] y JUNIOR ALEXIS AYALA GUERRERO, dejan constancia de la finalización del proyecto denominado
+		"[Nombre del Proyecto]".
 
-		Dicho informe ha sido revisado y aprobado por el Inversionista, quien se declara plenamente satisfecho con el
-		desempeño y logros de los Comisionistas.
-		Asimismo, el Inversionista manifiesta haber recibido de los Comisionistas toda la información y documentación
-		relevante relacionada con el proyecto, incluyendo registros financieros, contratos, permisos y autorizaciones,
-		en formato físico y digital, quedando a su disposición para consulta y resguardo.<br><br>
-
-		En virtud de lo anterior, las partes acuerdan dar por concluido el proyecto "[Nombre del Proyecto]" de mutuo
-		acuerdo, sin pendientes o reclamaciones entre ellas. El Inversionista y los Comisionistas se otorgan el más
-		amplio finiquito, liberación y descargo que en derecho proceda, renunciando a cualquier reclamo, demanda o
-		acción presente o futura relacionada con el proyecto.
+		En virtud de lo anterior, el Inversionista y el señor JUNIOR ALEXIS AYALA GUERRERO acuerdan dar por concluido el proyecto "[Nombre
+		del Proyecto]" de mutuo acuerdo, sin pendientes o reclamaciones entre ellas, así como alguna acción presente o
+		futura relacionada con el proyecto.
 	</div>
 
 	<!-- Finiquito issue date -->
 	<div class="mt-4">
-	En la ciudad de San Pedro Sula, del departamento de Cortés a los [X] días del mes de [X] del año [X].
+		En la ciudad de San Pedro Sula, del departamento de Cortés a los [X] días del mes de [X] del año [X].
 	</div>
 
 	<!-- Finiquito signatures -->
 	<div class="mt-4 ml-center">
 		&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px"
-			style="position: absolute; margin-top: -25px"><br>
-		____________________<br>
-		&nbsp;&nbsp;[Nombre Inversionista]<br>
-		<strong style="margin-left: 30px">Inversionista</strong><br><br>
-
-		&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px"
-			style="position: absolute; margin-top: -15px; transform: rotate(20deg)"><br>
-		_____________________<br>
-		&nbsp;&nbsp;[Nombre Comisionista 1]<br>
-		<strong style="margin-left: 30px">Comisionista 1</strong><br><br>
-
-		&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px"
-			style="position: absolute; margin-top: -15px; transform: rotate(200deg)"><br>
-			_____________________<br>
-		&nbsp;&nbsp;[Nombre Comisionista 2]<br>
-		<strong style="margin-left: 30px">Comisionista 2</strong>
+			style="position: absolute; margin-top: -35px; transform: rotate(20deg)">
+		<span style="margin-left: -30px">__________________________</span><br>
+		Junior Alexis Ayala Guerrero<br>
 	</div>
 
 	<!-- Legal footer -->

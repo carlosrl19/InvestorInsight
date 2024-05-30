@@ -20,7 +20,7 @@ class ProjectController extends Controller
         $projects = Project::with('investors')->get();
         $investors = Investor::get();
         $commissioners = CommissionAgent::get();
-        $generatedCode = strtoupper(Str::random(12)); // Transfer random code
+        $generatedCode = strtoupper(Str::random(12)); // Random code
 
         return view('modules.projects.index', compact('projects', 'investors', 'commissioners', 'generatedCode'));
     }
@@ -59,7 +59,7 @@ class ProjectController extends Controller
                 ]);
     
                 // Crear pagaré para cada inversionista del proyecto
-                $promissoryNoteCode = \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Ymd') . str_pad($i + 1, 4, '0', STR_PAD_LEFT);
+                $promissoryNoteCode = $generatedCode;
     
                 PromissoryNote::create([
                     'investor_id' => $invId,
@@ -80,7 +80,7 @@ class ProjectController extends Controller
             ]);
     
             // Crear pagaré para el inversionista del proyecto
-            $promissoryNoteCode = \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Ymd') . '0001';
+            $promissoryNoteCode = $generatedCode;
     
             PromissoryNote::create([
                 'investor_id' => $invId,

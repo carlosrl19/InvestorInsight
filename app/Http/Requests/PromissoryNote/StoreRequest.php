@@ -19,7 +19,7 @@ class StoreRequest extends FormRequest
             'promissoryNote_final_date' => 'required|date_format:Y-m-d',
             'promissoryNote_emission_date' => 'required|date_format:Y-m-d',
             'promissoryNote_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
-            'promissoryNote_code' => 'required|string|min:16|max:16|regex:/^[a-zA-Z0-9]+$/|unique:promissory_notes,promissoryNote_code',
+            'promissoryNote_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:promissory_notes,promissoryNote_code',
             'promissoryNote_status' => 'required|min:0|max:1',
         ];
     }
@@ -45,6 +45,14 @@ class StoreRequest extends FormRequest
             'promissoryNote_amount.numeric' => 'El monto del pagaré solo debe contener números.',
             'promissoryNote_amount.regex' => 'El monto del pagaré no puede contener letras ni símbolos.',
             'promissoryNote_amount.min' => 'El monto del pagaré debe ser mayor a 0 lps.',
+
+            // Promissory note code messages
+            'promissoryNote_code.required' => 'El código del pagaré es obligatorio.',
+            'promissoryNote_code.unique' => 'El código del pagaré ya existe.',
+            'promissoryNote_code.string' => 'El código del pagaré solo debe contener letras y/o números.',
+            'promissoryNote_code.regex' => 'El código del pagaré no puede contener símbolos.',
+            'promissoryNote_code.min' => 'El código del pagaré debe contener al menos 12 letras.',
+            'promissoryNote_code.max' => 'El código del pagaré no puede exceder 12 letras.',
 
             // Investor status messages
             'investor_status.required' => 'El estado de disponibilidad del pagaré es obligatorio.',

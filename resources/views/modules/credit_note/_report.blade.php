@@ -1,4 +1,10 @@
 <div class="main">
+
+	<!-- Code container -->
+	<div class="code-container">
+		<span>#{{ $creditNote->creditNote_code }}</span>
+	</div>
+	
 	<!-- Credit's note title -->
 	<div class="title-note mt-center">
 		NOTA CREDITO POR LPS {{ number_format($creditNote->creditNote_amount,2 ) }}
@@ -48,6 +54,20 @@
 		text-align: justify;
 	}
 
+	.code-container{
+		background-color: darkgrey;
+		border-radius: 5px;
+		padding-left: 15px;
+		padding-right: 15px;
+		padding-top: 3px;
+		opacity: 0.3;
+		float: right;
+		padding-bottom: 3px;
+		font-size: 10px;
+		color: black;
+		font-style: italic;
+	}
+
 	.body-note{
 		font-size: 16px;
 	}
@@ -65,7 +85,7 @@
 	}
 
 	.mt-center {
-		margin-top: 35% !important;
+		margin-top: 7% !important;
 	}
 
 	.mb-2 {

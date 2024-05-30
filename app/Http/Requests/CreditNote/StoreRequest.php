@@ -17,7 +17,7 @@ class StoreRequest extends FormRequest
             'investor_id' => 'required|numeric|exists:investors,id',
             'creditNote_date' => 'required|date_format:Y-m-d\TH:i:s',
             'creditNote_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
-            'creditNote_code' => 'required|string|min:16|max:16|regex:/^[a-zA-Z0-9]+$/|unique:credit_notes,creditNote_code',
+            'creditNote_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:credit_notes,creditNote_code',
             'creditNote_description' => 'required|string|min:3|max:255',
         ];
     }
@@ -30,8 +30,8 @@ class StoreRequest extends FormRequest
             'creditNote_code.unique' => 'El código de la nota de crédito ya existe.',
             'creditNote_code.string' => 'El código de la nota de crédito solo debe contener letras y/o números.',
             'creditNote_code.regex' => 'El código de la nota de crédito no puede contener símbolos.',
-            'creditNote_code.min' => 'El código de la nota de crédito debe contener al menos 16 letras.',
-            'creditNote_code.max' => 'El código de la nota de crédito no puede exceder 16 letras.',
+            'creditNote_code.min' => 'El código de la nota de crédito debe contener al menos 12 letras.',
+            'creditNote_code.max' => 'El código de la nota de crédito no puede exceder 12 letras.',
 
             // Investor id messages
             'investor_id.required' => 'El inversionista es obligatorio.',
