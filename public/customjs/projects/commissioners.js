@@ -6,15 +6,23 @@ function addCommissioner() {
     const commissionerId = selectedCommissioner.value;
   
     if (!commissionerId || document.querySelector(`input[name="commissioner_id[]"][value="${commissionerId}"]`)) {
-        alert(commissionerId ? "¡Este comisionista ya ha sido seleccionado!" : "¡Por favor, seleccione un comisionista!");
+        const message = commissionerId ? "Este comisionista ya ha sido seleccionado." : "Por favor, seleccione un comisionista.";
+        new Toast({
+            message: message,
+            type: 'danger'
+        });
         return;
-    }
+    }    
   
     // Verificar si ya se han agregado dos filas
-    if (document.querySelectorAll('#project_commissioners_table tbody tr').length >= 2) {
-        alert("Solo se permiten agregar dos filas.");
+    const commissionerRows = document.querySelectorAll('#project_commissioners_table tbody tr');
+    if (commissionerRows.length >= 2) {
+        new Toast({
+            message: 'Solamente puede seleccionar dos comisionistas.',
+            type: 'danger'
+        });
         return;
-    }
+    }    
   
     const newRow = document.createElement('tr');
     newRow.innerHTML = `
@@ -58,6 +66,11 @@ function addCommissioner() {
       juniorOption.disabled = true;
     }
   });
+
+    // Deshabilitar el select si ya hay dos filas
+    if (commissionerRows.length + 1 == 2) {
+        commissionerSelect.disabled = true;
+    }
   
   // Remove commissioner
   function removeCommissionerRow(button) {

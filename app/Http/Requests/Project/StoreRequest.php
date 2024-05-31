@@ -124,10 +124,15 @@ class StoreRequest extends FormRequest
             'commissioner_id.*.exists' => 'El comisionista seleccionado no existe.',
             
             // Commissioner array commissions messages
-            'commissioner_commission.*.required' => 'La comisión del comisionista es obligatoria.',
-            'commissioner_commission.*.numeric' => 'La comisión del comisionista debe ser un número.',
-            'commissioner_commission.*.min' => 'La comisión del comisionista debe ser al menos 1.',
-            'commissioner_commission.*.regex' => 'La comisión del comisionista debe tener hasta dos decimales.',
+            'commissioner_commission.0.required' => 'La comisión del primer comisionista es obligatoria.',
+            'commissioner_commission.0.numeric' => 'La comisión del primer comisionista debe ser un número.',
+            'commissioner_commission.0.min' => 'La comisión del primer comisionista debe ser al menos 1.',
+            'commissioner_commission.0.regex' => 'La comisión del primer comisionista debe tener hasta dos decimales.',
+
+            'commissioner_commission.1.required' => 'La comisión del segundo comisionista es obligatoria.',
+            'commissioner_commission.1.numeric' => 'La comisión del segundo comisionista debe ser un número.',
+            'commissioner_commission.1.min' => 'La comisión del segundo comisionista debe ser al menos 1.',
+            'commissioner_commission.1.regex' => 'La comisión del segundo comisionista debe tener hasta dos decimales.',
 
             // Transfer code messages
             'transfer_code.required' => 'El código de transferencia es obligatorio.',
@@ -197,6 +202,9 @@ class StoreRequest extends FormRequest
                 if ($commissioner2Commission != $juniorCommission * 0.1) {
                     $validator->errors()->add('commissioner_commission.1', 'El segundo comisionista debe recibir el 10% de la ganancia total para los comisionistas.');
                 }
+            } elseif ($numCommissioners > 2) {
+                // Si hay más de dos comisionistas, agregar un error de validación
+                $validator->errors()->add('commissioner_commission', 'No se permiten más de dos comisionistas en el proyecto.');
             }
         });
     }

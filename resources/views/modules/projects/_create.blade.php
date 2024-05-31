@@ -176,7 +176,7 @@
                                             @endforeach
                                         </optgroup>
                                         <optgroup label="Bancos">
-                                            @foreach(['BANCO ATLÁNTIDA', 'BANCO AZTECA DE HONDURAS', 'BANCO CUSCATLAN HONDURAS', 'BANCO DE AMÉRICA CENTRAL HONDURAS', 'BANCO DE DESARROLLO RURAL HONDURAS', 'BANCO DE HONDURAS', 'BANCO DE LOS TRABAJADORES', 'BANCO DE OCCIDENTE', 'BANCO DAVIVIENDA HONDURAS', 'BANCO FINANCIERA CENTROAMERICANA', 'BANCO FINANCIERA COMERCIAL HONDUREÑA', 'BANCO HONDUREÑO DEL CAFÉ', 'BANCO LAFISE HONDURAS', 'BANCO DEL PAÍS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)                                                <option value="{{ $bank }}">{{ $bank }}</option>
+                                            @foreach(['BANCO ATLÁNTIDA', 'BANCO AZTECA DE HONDURAS', 'BANCO CUSCATLAN HONDURAS', 'BANCO DE AMÉRICA CENTRAL HONDURAS', 'BANCO DE DESARROLLO RURAL HONDURAS', 'BANCO DE HONDURAS', 'BANCO DE LOS TRABAJADORES', 'BANCO DE OCCIDENTE', 'BANCO DAVIVIENDA HONDURAS', 'BANCO FINANCIERA CENTROAMERICANA', 'BANCO FINANCIERA COMERCIAL HONDUREÑA', 'BANCO HONDUREÑO DEL CAFÉ', 'BANCO LAFISE HONDURAS', 'BANCO DEL PAÍS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)                                             <option value="{{ $bank }}">{{ $bank }}</option>
                                             @endforeach
                                         </optgroup>
                                     </select>
@@ -292,16 +292,15 @@
                                         <option value="" selected disabled>Seleccione un inversionista</option>
                                         @foreach ($commissioners as $commissioner)
                                             <option value="{{ $commissioner->id }}" {{ old('commissioner_select') == $commissioner->id ? 'selected' : '' }}>
-                                                {{ $commissioner->commissioner_name }}</option>
+                                                {{ $commissioner->commissioner_name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     <label for="commissioner_select">Comisionistas</label>
                                 </div>
                             </div>
                             <div class="col-1">
-                                <button type="button" title="Agregar comisionista seleccionado al proyecto"
-                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                    class="btn btn-primary mt-3 text-white" id="add_button_container"
+                                <button type="button" class="btn btn-primary mt-3 text-white" id="add_button_container"
                                     onclick="addCommissioner()"
                                     style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
                                     &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -328,11 +327,11 @@
                                             <th>COMISIONISTA</th>
                                             <th>COMISIÓN TOTAL</th>
                                             <th></th>
-                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Junior Alexis Ayala Guerrero</td>
+                                            <td>JUNOR GUERRERO</td>
                                             <td>
                                                 <input type="number" name="commissioner_commission[]"
                                                     id="commissioner_commission_jr"
@@ -346,21 +345,7 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-md btn-danger"
-                                                    style="border: none; padding: 5px 0px 5px 10px"
-                                                    onclick="removeCommissionerRow(this)" data-commissioner-id="1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M4 7l16 0"></path>
-                                                        <path d="M10 11l0 6"></path>
-                                                        <path d="M14 11l0 6"></path>
-                                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                                                    </svg>
-                                                </button>
+                                                <span class="text-red text-bold">Acción no disponible</span>
                                             </td>
                                         </tr>
                                         <!-- Dinamically row creation -->
