@@ -182,21 +182,22 @@ class StoreRequest extends FormRequest
             if ($numCommissioners == 1) {
                 // Validar que su comisión sea el 50% del investor_profit
                 if ($commissionerCommissions[0] != $investorProfit * 0.5) {
-                    $validator->errors()->add('commissioner_commission.0', 'Si solamente hay un comisionista en el proyecto, debe recibir el 50% de la ganancia total del proyecto.');
+                    $validator->errors()->add('commissioner_commission.0', 'El comisionista debe recibir el 50% de la ganancia total del proyecto.');
                 }
             } elseif ($numCommissioners == 2) {
-                // Si hay dos comisionistas, el primero recibe el 40% y el segundo el 10%
+                // Si hay dos comisionistas, el primero recibe el 90% de juniorCommission y el segundo el 10%
+                $juniorCommission = $investorProfit * 0.5; // Calcula juniorCommission como el 50% de investorProfit
                 $commissioner1Commission = $commissionerCommissions[0];
                 $commissioner2Commission = $commissionerCommissions[1];
     
-                if ($commissioner1Commission != $investorProfit * 0.4) {
-                    $validator->errors()->add('commissioner_commission.0', 'El primer comisionista debe recibir el 40% de la ganancia total del proyecto.');
+                if ($commissioner1Commission != $juniorCommission * 0.9) {
+                    $validator->errors()->add('commissioner_commission.0', 'El primer comisionista debe recibir el 40% de la ganancia total para los comisionistas.');
                 }
     
-                if ($commissioner2Commission != $investorProfit * 0.1) {
-                    $validator->errors()->add('commissioner_commission.1', 'El segundo comisionista debe recibir el 10% de la ganancia total del proyecto.');
+                if ($commissioner2Commission != $juniorCommission * 0.1) {
+                    $validator->errors()->add('commissioner_commission.1', 'El segundo comisionista debe recibir el 10% de la ganancia total para los comisionistas.');
                 }
             }
         });
-    }    
+    }
 }

@@ -60,27 +60,38 @@ function addInvestor(investorId, investorName) {
   investorProfitInput.addEventListener('input', calculateInvestorFinalProfit);
 
   function calculateInvestorFinalProfit() {
-      const investorProfit = parseFloat(investorProfitInput.value) || 0;
-      const investorFinalProfit = 0.5 * investorProfit;
-      investorFinalProfitInput.value = investorFinalProfit.toFixed(2);
+    const investorProfit = parseFloat(investorProfitInput.value) || 0;
+    const juniorCommissionInput = document.getElementById('commissioner_commission_jr');
+    const juniorCommission = parseFloat(juniorCommissionInput.value) || 0;
 
-      const commissioners = document.querySelectorAll('#project_commissioners_table tbody tr');
-      let commissionerCommissions = 0;
+    const commissioners = document.querySelectorAll('#project_commissioners_table tbody tr');
+    const numCommissioners = commissioners.length;
 
-      commissioners.forEach((commissioner, index) => {
-          const commissionInput = commissioner.querySelector('input[name="commissioner_commission[]"]');
-          let commission = 0;
-          if (index === 0) {
-              commission = commissioners.length === 1 ? 0.5 * investorProfit : 0.4 * investorProfit;
-          } else if (index === 1) {
-              commission = 0.1 * investorProfit;
-          }
-          commissionInput.value = commission.toFixed(2);
-          commissionerCommissions += commission;
-      });
+    let totalCommission = 0;
 
-      const updatedInvestorFinalProfit = investorProfit - commissionerCommissions;
-      investorFinalProfitInput.value = updatedInvestorFinalProfit.toFixed(2);
+    commissioners.forEach((commissioner, index) => {
+        const commissionInput = commissioner.querySelector('input[name="commissioner_commission[]"]');
+        let commission = 0;
+
+        if (index === 0) {
+            // Para el primer comisionista (index === 0), el 50% del investor_profit si no hay otros comisionistas
+            commission = numCommissioners === 1 ? 0.5 * investorProfit : 0.9 * juniorCommission;
+        } else if (index === 1) {
+            // Para el segundo comisionista (index === 1), el 10% de la comisión del primer comisionista
+            commission = 0.1 * juniorCommission;
+        } else {
+            // Para los comisionistas adicionales, distribuir el restante entre ellos
+            const remainingCommission = investorProfit - totalCommission;
+            commission = remainingCommission / (numCommissioners - 1);
+        }
+
+        commissionInput.value = commission.toFixed(2);
+        totalCommission += commission;
+    });
+
+    // Calcular el beneficio final del inversionista como el 50% del beneficio total
+    const investorFinalProfit = 0.5 * investorProfit;
+    investorFinalProfitInput.value = investorFinalProfit.toFixed(2);
   }
 
   calculateTotalInvestment();

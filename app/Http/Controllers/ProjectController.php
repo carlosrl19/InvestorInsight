@@ -103,7 +103,7 @@ class ProjectController extends Controller
         Transfer::create([
             'transfer_code' => $generatedCode,
             'transfer_bank' => $validatedData['transfer_bank'],
-            'investor_id' => is_array($validatedData['investor_id']) ? $validatedData['investor_id'][0] : $validatedData['investor_id'], // Asumiendo que la transferencia está relacionada con el primer inversionista
+            'investor_id' => is_array($validatedData['investor_id']) ? $validatedData['investor_id'][0] : $validatedData['investor_id'],
             'transfer_date' => $validatedData['transfer_date'],
             'transfer_amount' => $validatedData['transfer_amount'],
             'transfer_comment' => $validatedData['transfer_comment'],
