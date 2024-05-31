@@ -13,11 +13,11 @@ class InvestorSeeder extends Seeder
 
         Investor::create(
             [
-                'investor_name'=>'María Rodríguez',
+                'investor_name'=>'MARIA RODRIGUEZ',
                 'investor_company_name'=>'Future Capital',
                 'investor_dni'=>'0801199503998',
                 'investor_phone'=>'88997787',
-                'investor_reference_id'=>'1',
+                'investor_reference_id'=>'0',
                 'investor_balance'=>'0.00',
                 'investor_status'=>'1',
             ]

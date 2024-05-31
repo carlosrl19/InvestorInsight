@@ -100,7 +100,7 @@ Proyectos
                                         <path d="M8 15h8" />
                                         <path d="M11 11v7" />
                                     </svg>
-                                    Excel
+                                    EXCEL
                                 </a>
                             </td>
                             <td>
@@ -111,7 +111,7 @@ Proyectos
                                             <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
                                             <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
                                             <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
-                                        </svg> Finalizado
+                                        </svg> FINALIZADO
                                     </span>
                                 @elseif($project->project_status == '1')
                                     <span class="badge bg-cyan me-1 project-active" data-bs-toggle="modal" data-bs-target="#finishModal{{ $project->id }}">
@@ -120,7 +120,7 @@ Proyectos
                                             <path d="M5 11m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
                                             <path d="M12 16m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
                                             <path d="M8 11v-5a4 4 0 0 1 8 0" />
-                                        </svg> Trabajando
+                                        </svg> TRABAJANDO
                                     </span>
                                 @elseif($project->project_status == '2')
                                 <span class="badge bg-red me-1">
@@ -128,10 +128,10 @@ Proyectos
                                         <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
                                         <path d="M8 11v-3m.719 -3.289a4 4 0 0 1 7.281 2.289v4" />
                                         <path d="M3 3l18 18" />
-                                    </svg> Cerrado
+                                    </svg> CERRADO
                                 </span>
                                 @else
-                                    <span class="badge bg-dark me-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Existe un error en el estado del proyecto, revisar detalles del mismo.">Estado inválido</span> 
+                                    <span class="badge bg-dark me-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Existe un error en el estado del proyecto, revisar detalles del mismo.">ESTADO DESCONOCIDO</span> 
                                 @endif
                             </td>
 

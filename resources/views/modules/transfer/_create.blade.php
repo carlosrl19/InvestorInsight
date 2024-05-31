@@ -1,5 +1,6 @@
-<div class="modal modal-blur fade" id="modal-team" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
-   <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal modal-blur fade" id="modal-team" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #52524E">
             <div class="modal-header">
                 <h5 class="modal-title">Nueva transferencia</h5>
@@ -11,22 +12,24 @@
                     <div class="row mb-3 align-items-end" style="display: none;">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="35" name="transfer_code" value="{{ $generatedCode }}" id="transfer_code" class="form-control text-uppercase" readonly>
+                                <input type="text" maxlength="35" name="transfer_code" value="{{ $generatedCode }}"
+                                    id="transfer_code" class="form-control text-uppercase" readonly>
                                 <label for="transfer_code">Código de transferencia</label>
                             </div>
                         </div>
 
                         <div class="col">
                             <div class="form-floating">
-                                <select name="transfer_bank" id="select-optgroups" class="form-control @error('transfer_bank') is-invalid @enderror" autocomplete="off">
+                                <select name="transfer_bank" id="select-optgroups"
+                                    class="form-control @error('transfer_bank') is-invalid @enderror"
+                                    autocomplete="off">
                                     <optgroup label="Otros métodos">
-                                        @foreach(['Remesas', 'Tarjeta', 'Efectivo'] as $method)
-                                            <option value="{{ $method }}" {{ old('transfer_bank') == $method ? 'selected' : '' }}>{{ $method }}</option>
+                                        @foreach(['REMESAS', 'EFECTIVO', 'TARJETA'] as $method)
+                                            <option value="{{ $method }}">{{ $method }}</option>
                                         @endforeach
                                     </optgroup>
                                     <optgroup label="Bancos">
-                                        @foreach(['Banco Atlántida', 'Banco Azteca de Honduras', 'Banco de América Central Honduras', 'Banco de Desarrollo Rural Honduras', 'Banco de Honduras', 'Banco de Los Trabajadores', 'Banco de Occidente', 'Banco Davivienda Honduras', 'Banco Financiera Centroamericana', 'Banco Financiera Comercial Hondureña', 'Banco Hondureño del Café', 'Banco Lafise Honduras', 'Banco del País', 'Banco Popular', 'Banco Promérica'] as $bank)
-                                            <option value="{{ $bank }}" {{ old('transfer_bank') == $bank ? 'selected' : '' }}>{{ $bank }}</option>
+                                        @foreach(['BANCO ATLÁNTIDA', 'BANCO AZTECA DE HONDURAS', 'BANCO CUSCATLAN HONDURAS', 'BANCO DE AMÉRICA CENTRAL HONDURAS', 'BANCO DE DESARROLLO RURAL HONDURAS', 'BANCO DE HONDURAS', 'BANCO DE LOS TRABAJADORES', 'BANCO DE OCCIDENTE', 'BANCO DAVIVIENDA HONDURAS', 'BANCO FINANCIERA CENTROAMERICANA', 'BANCO FINANCIERA COMERCIAL HONDUREÑA', 'BANCO HONDUREÑO DEL CAFÉ', 'BANCO LAFISE HONDURAS', 'BANCO DEL PAÍS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)                                            <option value="{{ $bank }}">{{ $bank }}</option>
                                         @endforeach
                                     </optgroup>
                                 </select>
@@ -35,7 +38,8 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <span class="invalid-feedback" role="alert" id="transfer-bank-error" style="display: none;">
+                                <span class="invalid-feedback" role="alert" id="transfer-bank-error"
+                                    style="display: none;">
                                     <strong></strong>
                                 </span>
                                 <label for="transfer_bank">Banco / Modo de transferencia</label>
@@ -45,21 +49,19 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col" style="display: none;">
                             <div class="form-floating">
-                                <input type="datetime-local" 
-                                    name="transfer_date" 
-                                    style="font-size: 10px;" 
+                                <input type="datetime-local" name="transfer_date" style="font-size: 10px;"
                                     value="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
                                     id="transfer_date"
                                     min="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
                                     max="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
-                                    class="form-control @error('transfer_date') is-invalid @enderror" 
-                                    readonly />
+                                    class="form-control @error('transfer_date') is-invalid @enderror" readonly />
                                 @error('transfer_date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label class="form-label" for="transfer_date"><small>Fecha de transferencia</small></label>
+                                <label class="form-label" for="transfer_date"><small>Fecha de
+                                        transferencia</small></label>
                             </div>
                         </div>
 
@@ -77,7 +79,9 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="number" step="any" name="transfer_amount" value="{{ old('transfer_amount') }}" id="transfer_amount" class="form-control @error('transfer_amount') is-invalid @enderror"/>
+                                <input type="number" step="any" name="transfer_amount"
+                                    value="{{ old('transfer_amount') }}" id="transfer_amount"
+                                    class="form-control @error('transfer_amount') is-invalid @enderror" />
                                 @error('transfer_amount')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -90,7 +94,9 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="form-control @error('transfer_comment') is-invalid @enderror" autocomplete="off" maxlength="255" name="transfer_comment" id="transfer_comment" style="resize: none; height: 100px"> </textarea>
+                                <textarea class="form-control @error('transfer_comment') is-invalid @enderror"
+                                    autocomplete="off" maxlength="255" name="transfer_comment" id="transfer_comment"
+                                    style="resize: none; height: 100px"> </textarea>
                                 @error('transfer_comment')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -105,5 +111,5 @@
                 </form>
             </div>
         </div>
-   </div>
+    </div>
 </div>
