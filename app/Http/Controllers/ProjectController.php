@@ -129,6 +129,8 @@ class ProjectController extends Controller
     {
         // Update the project status
         $project->project_status = '0';
+        $project->project_proof_transfer_img;
+        $project->project_completion_work_date;
         $project->save();
     
         // Sumar el investor_final_investment al investor_balance de cada inversor asociado al proyecto

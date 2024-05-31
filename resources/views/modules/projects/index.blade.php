@@ -142,20 +142,36 @@ Proyectos
                             <div class="modal fade" id="finishModal{{ $project->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="finishModal{{ $project->id }}" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
-                                        <div class="modal-header" style="background: darkred; color: white">
-                                            <h5 class="modal-title" id="ModalLabel">Finalizar proyecto</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Finalizado"? Utilice esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <form action="{{ route('project.finish', $project->id) }}" method="POST">
-                                                @csrf
+                                        <form action="{{ route('project.finish', $project->id) }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="modal-header" style="background: darkred; color: white">
+                                                <h5 class="modal-title" id="ModalLabel">Finalizar proyecto</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Finalizado"? Utilice esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
+                                                Es necesario que ingrese la fecha en la que el proyecto ha finalizado sus labores, así como el comprobante de pago de la transferencia del inversionista para el proyecto.
+                                                <div class="row mt-4">
+                                                    <div class="col">
+                                                        <div class="form-floating">
+                                                            <input type="datetime-local" class="form-control" name="project_completion_work_date" id="project_completion_work_date">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-4">
+                                                    <img id="project_proof_transfer_img" src="" class="mb-2" width="200" height="200">
+                                                    <div class="col">
+                                                        <div class="form-floating">
+                                                            <input type="file" accept="image/*" class="form-control @error('project_proof_transfer_img') is-invalid @enderror" id="project_proof_transfer_img" name="project_proof_transfer_img" alt="proof-tramsfer" onchange="proof_img()">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                 <button type="submit" class="btn btn-danger">Finalizar proyecto</button>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -255,4 +271,30 @@ Proyectos
 
 <!-- Form steps -->
 <script src="{{ asset('customjs/projects/steps_form.js') }}"></script>
+
+<!-- Show img -->
+<script>
+    
+    function proof_img() {
+            if (document.getElementById("project_proof_transfer_img").files.length <= 0) return;
+
+            var archivo = document.getElementById("project_proof_transfer_img").files[0];
+
+            if (archivo.size > 1000000) {
+                const tamanioEnMb = 1000000 / 1000000;
+                alert(`El tamaño máximo es ${tamanioEnMb} MB`);
+
+                document.getElementById("project_proof_transfer_img").value = "";
+            } else {
+
+                var reader = new FileReader();
+                if (archivo) {
+                    reader.readAsDataURL(archivo);
+                    reader.onloadend = function () {
+                        document.getElementById("project_proof_transfer_img").src = reader.result;
+                    }
+                }
+            }
+        }
+</script>
 @endsection
