@@ -18,6 +18,8 @@ return new class extends Migration
             $table->decimal('project_investment', 12,2); // max = 999,999,999.99
             $table->boolean('project_status');
             $table->string('project_comment');
+            $table->string('project_proof_transfer_img')->nullable();
+            $table->date('project_completion_work_date')->nullable();
             $table->timestamps();
         });
     }

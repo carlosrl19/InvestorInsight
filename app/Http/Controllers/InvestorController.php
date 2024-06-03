@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Investor\StoreRequest;
 use App\Http\Requests\Investor\UpdateRequest;
+use Illuminate\Support\Facades\DB;
 use App\Models\CommissionAgent;
 use App\Models\CreditNote;
 use App\Models\Investor;
@@ -41,13 +42,13 @@ class InvestorController extends Controller
         $investor = Investor::findOrFail($id);
         $transfers = Transfer::where('investor_id', $investor->id)->orderBy('transfer_date')->get();
         $creditNotes = CreditNote::where('investor_id', $investor->id)->orderBy('creditNote_date')->get();
-
+    
         // Cargar el inversor de referencia
         $referenceInvestor = Investor::find($investor->investor_reference_id);
-
+    
         // Combine transfers and credit notes in a single collection and order them by date
         $events = collect();
-
+    
         foreach ($transfers as $transfer) {
             $events->push((object) [
                 'date' => $transfer->transfer_date,
@@ -58,7 +59,7 @@ class InvestorController extends Controller
                 'original_model' => $transfer
             ]);
         }
-
+    
         foreach ($creditNotes as $creditNote) {
             $events->push((object) [
                 'date' => $creditNote->creditNote_date,
@@ -69,31 +70,48 @@ class InvestorController extends Controller
                 'original_model' => $creditNote
             ]);
         }
-
+    
         $events = $events->sortBy('date');
-
+    
         // Calculate the current balance from zero, reflecting all transactions
         $currentBalance = 0;
         foreach ($events as $event) {
             $currentBalance += $event->amount;
             $event->current_balance = $currentBalance;
         }
-
+    
         // Separate the events into transfers and credit notes again for displaying in tables
         $transfers = $events->where('type', 'transfer')->map(function ($event) {
             $transfer = $event->original_model;
             $transfer->current_balance = $event->current_balance;
             return $transfer;
         });
-
+    
         $creditNotes = $events->where('type', 'creditNote')->map(function ($event) {
             $creditNote = $event->original_model;
             $creditNote->current_balance = $event->current_balance;
             return $creditNote;
         });
-
-        return view('modules.investors.show', compact('investor', 'transfers', 'creditNotes', 'referenceInvestor'));
+    
+        // Recuperar los proyectos activos del inversionista
+        $activeProjects = DB::table('projects')
+            ->join('project_investor', 'projects.id', '=', 'project_investor.project_id')
+            ->where('project_investor.investor_id', $id)
+            ->where('projects.project_status', 1)
+            ->select('projects.project_name', 'projects.project_investment', 'project_investor.investor_investment', 'project_investor.investor_profit', 'project_investor.investor_final_profit')
+            ->get();
+    
+        // Recuperar los proyectos finalizados del inversionista
+        $completedProjects = DB::table('projects')
+            ->join('project_investor', 'projects.id', '=', 'project_investor.project_id')
+            ->where('project_investor.investor_id', $id)
+            ->where('projects.project_status', 0)
+            ->select('projects.project_name', 'projects.project_investment', 'project_investor.investor_investment', 'project_investor.investor_final_profit', 'project_investor.investor_profit')
+            ->get();
+    
+        return view('modules.investors.show', compact('investor', 'transfers', 'creditNotes', 'referenceInvestor', 'activeProjects', 'completedProjects'));
     }
+    
 
     public function edit($id)
     {

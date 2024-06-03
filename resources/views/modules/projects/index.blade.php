@@ -56,6 +56,7 @@ Proyectos
                         <th>Nombre proyecto</th>
                         <th>Inicio</th>
                         <th>Cierre <small>(previsto)</small></th>
+                        <th>Cierre <small>(final)</small></th>
                         <th>Inversionista</th>
                         <th>Inversión</th>
                         <th>Ganancia total</th>
@@ -86,10 +87,22 @@ Proyectos
                             </td>
                             <td>{{ $project->project_start_date }}</td>
                             <td>{{ $project->project_end_date }}</td>
+                            
+                            @if($project->project_completion_work_date == null)
+                                <td><span class="text-red">Sin cierre</span></td>
+                            @else
+                                <td>{{ $project->project_completion_work_date }}</td>
+                            @endif
                             <td>
                                 @foreach ($project->investors as $investor)
-                                    {{ $investor->investor_name }}<br>
+                                    <a href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}<br>
                                 @endforeach
+                                <small>
+                                    <sup>
+                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
+                                    </sup>
+                                </small>
+                                </a>
                             </td>
                             <td>L. {{ number_format($project->project_investment,2) }}</td>
                             <td>L. {{ number_format($project->investors->sum('pivot.investor_profit'),2) }}</td>
@@ -149,12 +162,13 @@ Proyectos
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Finalizado"? Utilice esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
+                                                ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Finalizado"? Utilize esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
                                                 Es necesario que ingrese la fecha en la que el proyecto ha finalizado sus labores, así como el comprobante de pago de la transferencia del inversionista para el proyecto.
                                                 <div class="row mt-4">
                                                     <div class="col">
                                                         <div class="form-floating">
-                                                            <input type="datetime-local" class="form-control" name="project_completion_work_date" id="project_completion_work_date">
+                                                            <input type="date" class="form-control" name="project_completion_work_date" id="project_completion_work_date" min="{{ $project->project_start_date }}" max="{{ date('Y-m-d', strtotime($project->project_end_date . ' + 10 days')) }}">
+                                                            <label for="project_completion_work_date">Fecha de finalización del proyecto</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -162,7 +176,8 @@ Proyectos
                                                     <img id="project_proof_transfer_img" src="" class="mb-2" width="200" height="200">
                                                     <div class="col">
                                                         <div class="form-floating">
-                                                            <input type="file" accept="image/*" class="form-control @error('project_proof_transfer_img') is-invalid @enderror" id="project_proof_transfer_img" name="project_proof_transfer_img" alt="proof-tramsfer" onchange="proof_img()">
+                                                            <input type="file" accept="image/*" class="form-control @error('project_proof_transfer_img') is-invalid @enderror" id="project_proof_transfer_img" name="project_proof_transfer_img" alt="proof-transfer" onchange="previewImage(event)">
+                                                            <label for="project_proof_transfer_img">Comprobante de pago de transferencia</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -274,27 +289,13 @@ Proyectos
 
 <!-- Show img -->
 <script>
-    
-    function proof_img() {
-            if (document.getElementById("project_proof_transfer_img").files.length <= 0) return;
-
-            var archivo = document.getElementById("project_proof_transfer_img").files[0];
-
-            if (archivo.size > 1000000) {
-                const tamanioEnMb = 1000000 / 1000000;
-                alert(`El tamaño máximo es ${tamanioEnMb} MB`);
-
-                document.getElementById("project_proof_transfer_img").value = "";
-            } else {
-
-                var reader = new FileReader();
-                if (archivo) {
-                    reader.readAsDataURL(archivo);
-                    reader.onloadend = function () {
-                        document.getElementById("project_proof_transfer_img").src = reader.result;
-                    }
-                }
-            }
-        }
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output = document.getElementById('project_proof_transfer_img');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
 </script>
 @endsection

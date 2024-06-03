@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Investor;
 use App\Models\Project;
 use App\Models\CommissionAgent;
@@ -14,9 +15,20 @@ class DashboardController extends Controller
     public function index(){
         $investors = Investor::count();
         $commissioner = CommissionAgent::count();
-        $transfers = Transfer::latest()->take(15)->get();
-        $creditNotes = CreditNote::latest()->take(15)->get();
+        
+        $completedProjectsCount = DB::table('projects')
+        ->where('projects.project_status', 0)
+        ->get()
+        ->count();
 
-        return view('modules.dashboard.index', compact('investors', 'commissioner', 'transfers', 'creditNotes'));
+        $closedProjectsCount = DB::table('projects')
+        ->where('projects.project_status', 2)
+        ->get()
+        ->count();
+
+        $transfers = Transfer::latest()->take(25)->get();
+        $creditNotes = CreditNote::latest()->take(25)->get();
+
+        return view('modules.dashboard.index', compact('investors', 'commissioner', 'transfers', 'creditNotes', 'completedProjectsCount', 'closedProjectsCount'));
     }
 }

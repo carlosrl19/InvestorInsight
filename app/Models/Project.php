@@ -15,6 +15,8 @@ class Project extends Model
         'project_investment',
         'project_status',
         'project_comment',
+        'project_proof_transfer_img',
+        'project_completion_work_date'
     ];
 
     public function investors()

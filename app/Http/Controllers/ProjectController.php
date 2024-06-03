@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CommissionAgent;
+use Illuminate\Http\Request;
 use App\Http\Requests\Project\StoreRequest;
 use App\Http\Requests\Project\UpdateRequest;
 use App\Models\Investor;
@@ -125,12 +126,24 @@ class ProjectController extends Controller
         return Excel::download(new CustomExport($id), 'Excel de proyecto.xlsx');
     }
 
-    public function finishProject(Project $project)
+    public function finishProject(Request $request, Project $project)
     {
-        // Update the project status
+        // Validar los datos recibidos
+        $request->validate([
+            'project_completion_work_date' => 'required|date',
+            'project_proof_transfer_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        // Procesar la imagen
+        if ($request->hasFile('project_proof_transfer_img')) {
+            $imageName = time().'.'.$request->project_proof_transfer_img->extension();
+            $request->project_proof_transfer_img->move(public_path('images'), $imageName);
+            $project->project_proof_transfer_img = $imageName;
+        }
+    
+        // Actualizar el estado del proyecto
         $project->project_status = '0';
-        $project->project_proof_transfer_img;
-        $project->project_completion_work_date;
+        $project->project_completion_work_date = $request->project_completion_work_date;
         $project->save();
     
         // Sumar el investor_final_investment al investor_balance de cada inversor asociado al proyecto
@@ -139,9 +152,10 @@ class ProjectController extends Controller
             $investor->save();
         }
     
-        // Redirect or return a response
+        // Redirigir con un mensaje de éxito
         return redirect()->route('project.index')->with('success', 'Proyecto finalizado exitosamente.');
     }
+    
 
     public function closeProject(Project $project)
     {
