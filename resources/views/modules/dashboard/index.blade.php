@@ -20,7 +20,7 @@ Dashboard
     <div class="row row-deck row-cards">
       <div class="col-12">
         <div class="row row-cards">
-          <div class="col-sm-2 col-lg-2">
+          <div class="col-sm-3 col-lg-3">
             <div class="card card-sm">
               <div class="card-body">
                 <div class="row align-items-center">
@@ -30,37 +30,21 @@ Dashboard
                   </div>
                   <div class="col">
                     <div class="font-weight-medium">
-                      {{ $investors }}
+                     	@if($investor = 1)
+					 		{{ $investors }} inversionista<br>
+						@else
+							{{ $investors }} inversionistas<br>
+						@endif
                     </div>
                     <div class="text-muted">
-                      Nº Inversionistas
+						{{ $commissioner }} comisionistas
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-sm-2 col-lg-2">
-            <div class="card card-sm">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <span class="bg-green text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
-                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>                    </span>
-                  </div>
-                  <div class="col">
-                    <div class="font-weight-medium">
-                      {{ $commissioner }}
-                    </div>
-                    <div class="text-muted">
-                      Nº comisionistas
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-		  <div class="col-sm-2 col-lg-2">
+		  <div class="col-sm-3 col-lg-3">
             <div class="card card-sm">
               <div class="card-body">
                 <div class="row align-items-center">
@@ -69,7 +53,7 @@ Dashboard
 					<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-building-skyscraper"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 21l18 0" /><path d="M5 21v-14l8 -4v18" /><path d="M19 21v-10l-6 -4" /><path d="M9 9l0 .01" /><path d="M9 12l0 .01" /><path d="M9 15l0 .01" /><path d="M9 18l0 .01" /></svg>                  </div>
                   <div class="col">
                     <div class="font-weight-medium">
-                      {{ $completedProjectsCount }}
+                      {{ $activeProjectsCount }}
                     </div>
                     <div class="text-muted">
                       Nº proyectos activos
@@ -79,19 +63,38 @@ Dashboard
               </div>
             </div>
           </div>
-		  <div class="col-sm-2 col-lg-2">
+		  <div class="col-sm-3 col-lg-3">
+            <div class="card card-sm">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <span class="bg-success text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
+					<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20.942 13.021a9 9 0 1 0 -9.407 7.967" /><path d="M12 7v5l3 3" /><path d="M15 19l2 2l4 -4" /></svg>				</div>
+                  <div class="col">
+                    <div class="font-weight-medium">
+                      {{ $completedProjectsCount }}
+                    </div>
+                    <div class="text-muted">
+                      Nº proyectos completados
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+		  <div class="col-sm-3 col-lg-3">
             <div class="card card-sm">
               <div class="card-body">
                 <div class="row align-items-center">
                   <div class="col-auto">
                     <span class="bg-red text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
-					<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-building-skyscraper"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 21l18 0" /><path d="M5 21v-14l8 -4v18" /><path d="M19 21v-10l-6 -4" /><path d="M9 9l0 .01" /><path d="M9 12l0 .01" /><path d="M9 15l0 .01" /><path d="M9 18l0 .01" /></svg>                  </div>
+					<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-off"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5.633 5.64a9 9 0 1 0 12.735 12.72m1.674 -2.32a9 9 0 0 0 -12.082 -12.082" /><path d="M12 7v1" /><path d="M3 3l18 18" /></svg>				</div>
                   <div class="col">
                     <div class="font-weight-medium">
                       {{ $closedProjectsCount }}
                     </div>
                     <div class="text-muted">
-                      Nº proyectos errores
+                      Nº proyectos cerrados
                     </div>
                   </div>
                 </div>
@@ -120,7 +123,7 @@ Dashboard
 							<div class="divide-y">
 								<div>
 									<div class="row">
-										<table id="example1" class="table table-bordered">
+										<table id="example1" class="display table table-bordered">
 											<thead>
 												<tr>
 													<th>Fecha</th>
@@ -167,7 +170,7 @@ Dashboard
 							<div class="divide-y">
 								<div>
 									<div class="row">
-										<table id="example3" class="table table-bordered">
+										<table id="example3" class="display table table-bordered">
 											<thead>
 												<tr>
 													<th>Fecha</th>

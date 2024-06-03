@@ -47,13 +47,19 @@ Proyectos
     </div>
     @endif
 
-    <!-- JS PDF download automatically -->
     @if (session('project_id'))
         <script>
             window.onload = function() {
-                var projectId = '{{ session('project_id') }}';
-                var downloadUrl = "{{ route('downloadTerminationReport', '') }}/" + projectId;
-                window.location.href = downloadUrl;
+                redirectToTermination();
+            };
+
+            function redirectToTermination() {
+                window.location.href = "{{ route('project.termination', session('project_id')) }}";
+                setTimeout(redirectToExcel, 1000); // Redireccionar a la descarga del archivo Excel después de 1 segundo (1000 milisegundos)
+            }
+
+            function redirectToExcel() {
+                window.location.href = "{{ route('project.excel', session('project_id')) }}";
             }
         </script>
     @endif
@@ -61,13 +67,13 @@ Proyectos
 <div class="container-xl">
     <div class="card">
         <div class="card-body">
-            <table id="example" class="table table-bordered" style="width: 100%;">
+            <table id="example" class="display table table-bordered" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>Nombre proyecto</th>
                         <th>Inicio</th>
-                        <th>Cierre <small>(previsto)</small></th>
-                        <th>Cierre <small>(final)</small></th>
+                        <th>Final <small>(previsto)</small></th>
+                        <th>Final <small>(real)</small></th>
                         <th>Inversionista</th>
                         <th>Inversión</th>
                         <th>Ganancia</th>
@@ -100,7 +106,7 @@ Proyectos
                             <td>{{ $project->project_end_date }}</td>
                             
                             @if($project->project_completion_work_date == null)
-                                <td><span class="text-red">Sin cierre</span></td>
+                                <td><span class="text-red"><strong>Sin finalizar</strong></span></td>
                             @else
                                 <td>{{ $project->project_completion_work_date }}</td>
                             @endif

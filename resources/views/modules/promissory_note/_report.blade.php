@@ -2,7 +2,7 @@
 
 	<!-- Code container -->
 	<div class="code-container">
-		<span>#{{ $promissoryNote->promissoryNote_code }}</span>
+		<span>#PG-{{ $promissoryNote->promissoryNote_code }}</span>
 	</div>
 
     <!-- Credit's note title -->
@@ -14,7 +14,7 @@
         con domicilio en la ciudad de San Pedro Sula, departamento de Cortés, Honduras, <strong>PAGARÉ
             INCONDICIONALMENTE</strong> la cantidad de <strong class="text-underline">{{$amountLetras}} EXACTO</strong>
         (<strong class="text-underline">L. {{ number_format($promissoryNote->promissoryNote_amount, 0) }}</strong>)
-        a favor del señor <strong class="text-uppercase text-underline">{{ $promissoryNote->investor->investor_name }}</strong>, mayor de
+        a favor de <strong class="text-uppercase text-underline">{{ $promissoryNote->investor->investor_name }}</strong>, mayor de
         edad, hondureño y con documento Nacional de identificación número <strong
             class="text-underline">{{ $promissoryNote->investor->investor_dni }}</strong>, pago que haré efectivo el día <strong
             class="text-uppercase text-underline">{{ \Carbon\Carbon::parse($promissoryNote->promissoryNote_final_date)->translatedFormat('d F Y') }}</strong>
@@ -29,7 +29,7 @@
     <br>
 
     <!-- Credit's note Robenior signature -->
-    <div class="mt-6 ml-center">&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="90px"
+    <div class="mt-2 ml-center">&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="90px"
             style="position: absolute; margin-top: 10px; transform: rotate(25deg)">
         <br>_________________
         <br><span>DNI: <strong class="text-underline">0801199907469</strong></span>
@@ -44,15 +44,11 @@
     }
 
     .code-container{
-		background-color: darkgrey;
-		border-radius: 5px;
-		padding-left: 15px;
-		padding-right: 15px;
-		padding-top: 3px;
-		opacity: 0.3;
+		padding-top: 20%;
+		opacity: 1;
 		float: right;
 		padding-bottom: 3px;
-		font-size: 10px;
+		font-size: 12px;
 		color: black;
 		font-style: italic;
 	}
@@ -83,7 +79,7 @@
     }
 
     .mt-center {
-        margin-top: 5% !important;
+        margin-top: 25% !important;
     }
 
     .mb-2 {

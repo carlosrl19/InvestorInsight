@@ -15,7 +15,7 @@ use App\Exports\CustomExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Dompdf\Options;
 use Dompdf\Dompdf;
-use Carbon\Carbon;
+use ZipArchive;
 
 class ProjectController extends Controller
 {
@@ -134,14 +134,14 @@ class ProjectController extends Controller
         // Validar los datos recibidos
         $request->validate([
             'project_completion_work_date' => 'required|date',
-            'project_proof_transfer_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'project_proof_transfer_img' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
     
             // Project start date messages
             'project_completion_work_date.date' => 'La fecha final de cierre del proyecto debe ser una fecha válida.',
             'project_completion_work_date.after_or_equal' => 'La fecha final de cierre del proyecto no puede ser anterior a la fecha de inicio del mismo.',
     
             // Project proof transfer img messages
-            'project_proof_transfer_img.after_or_equal' => 'El comprobante de pago de transferencia del proyecto debe ser una imagen válida.',
+            'project_proof_transfer_img.image' => 'El comprobante de pago de transferencia del proyecto debe ser una imagen válida.',
         ]);
     
         // Procesar la imagen
@@ -164,7 +164,7 @@ class ProjectController extends Controller
             $investor->save();
         }
     
-        // Guardar el ID del proyecto en la sesión para la generación del PDF
+        // Guardar el ID del proyecto en la sesión para la generación del PDF y Excel
         // Esto funciona con JS en el project.index que detecta el project->id para el PDF y lo hace descargar automáticamente
         session()->flash('project_id', $project->id);
     
@@ -174,7 +174,8 @@ class ProjectController extends Controller
     
     public function downloadTerminationReport($id)
     {
-        $project = Project::findOrFail($id);
+        // Cargar el proyecto junto con los inversores y comisionados
+        $project = Project::with(['investors', 'commissioners'])->findOrFail($id);
     
         // Configuración de opciones para Dompdf
         $options = new Options();
@@ -197,12 +198,11 @@ class ProjectController extends Controller
         $pdf->render();
     
         // Devolver el PDF para descarga forzada
-        return response()->streamDownload(function () use ($pdf) {
+        return response()->streamDownload(function () use ($pdf, $project) {
             echo $pdf->output();
-        }, 'Finiquito.pdf');
+        }, 'Finiquito - ' . $project->project_name . '.pdf');
     }
     
-
     public function closeProject(Project $project)
     {
         $project->project_status = '2';

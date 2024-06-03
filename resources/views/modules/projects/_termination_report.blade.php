@@ -1,4 +1,10 @@
 <div class="main">
+
+	<!-- Code container -->
+	<div class="code-container">
+		<span>#FQ-{{ $project->project_code }}</span>
+	</div>
+
 	<!-- Finiquito title -->
 	<div class="title-note ml-2 mt-center">
 		FINIQUITO DE PROYECTO
@@ -6,20 +12,18 @@
 
 	<!-- Finiquito body -->
 	<div class="body-note mt-4 mb-4">
-		Por medio del presente documento, el Inversionista A y JR, dejan constancia de la finalización del proyecto denominado
-		"{{$project->project_name}}".
-
-		En virtud de lo anterior, el Inversionista A y el señor JR. acuerdan dar por concluido el proyecto "{{$project->project_name}}" de mutuo acuerdo, sin pendientes o reclamaciones entre ellas, así como alguna acción presente o
-		futura relacionada con el proyecto.
+		Por medio del presente documento, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, dejan constancia de la finalización del proyecto denominado <strong class="text-uppercase">"{{ $project->project_name }}"</strong> en la fecha {{ $project->project_completion_work_date }}. <br><br>
+		
+		En virtud de lo anterior, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y el señor <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>. acuerdan dar por concluido el proyecto <strong class="text-uppercase">{{ $project->project_name }}</strong> de mutuo acuerdo, sin pendientes o reclamaciones entre ellas, así como alguna acción presente o futura relacionada con el proyecto.
 	</div>
 
 	<!-- Finiquito issue date -->
 	<div class="mt-4">
-		En la ciudad de San Pedro Sula, del departamento de Cortés a los [X] días del mes de [X] del año [X].
+		Documento extendido en la ciudad de San Pedro Sula, departamento de Cortés, Honduras, a los {{ now()->day }} días del mes de {{ now()->monthName }} del año {{ now()->year }}. 
 	</div>
 
 	<!-- Finiquito signatures -->
-	<div class="mt-4 ml-center">
+	<div class="mt-6 ml-center">
 		&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px"
 			style="position: absolute; margin-top: -35px; transform: rotate(20deg)">
 		<span style="margin-left: -30px">__________________________</span><br>
@@ -28,7 +32,7 @@
 
 	<!-- Legal footer -->
 	<div class="footer mt-4">
-		Este documento contiene la firma y sello oficial de las partes involucradas. Cualquier uso no autorizado,
+		Este documento contiene la firma de las partes involucradas. Cualquier uso no autorizado,
 		reproducción, alteración o falsificación de esta firma o sello constituirá una violación de los derechos de
 		propiedad intelectual y será sujeto a acciones legales.
 		Se advierte a toda persona que tenga acceso a este documento que el uso indebido de la firma o sello de las
@@ -42,6 +46,16 @@
 	* {
 		font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
 		text-align: justify;
+	}
+
+	.code-container{
+		padding-top: 20%;
+		opacity: 1;
+		float: right;
+		padding-bottom: 3px;
+		font-size: 12px;
+		color: black;
+		font-style: italic;
 	}
 
 	.body-note {
@@ -61,7 +75,7 @@
 	}
 
 	.mt-center {
-		margin-top: 5% !important;
+		margin-top: 25% !important;
 	}
 
 	.mb-2 {
@@ -86,5 +100,9 @@
 
 	.footer {
 		font-size: 10px;
+	}
+
+	.text-uppercase{
+		text-transform: uppercase;
 	}
 </style>

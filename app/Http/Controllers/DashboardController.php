@@ -21,6 +21,11 @@ class DashboardController extends Controller
         ->get()
         ->count();
 
+        $activeProjectsCount = DB::table('projects')
+        ->where('projects.project_status', 0)
+        ->get()
+        ->count();
+
         $closedProjectsCount = DB::table('projects')
         ->where('projects.project_status', 2)
         ->get()
@@ -29,6 +34,6 @@ class DashboardController extends Controller
         $transfers = Transfer::latest()->take(25)->get();
         $creditNotes = CreditNote::latest()->take(25)->get();
 
-        return view('modules.dashboard.index', compact('investors', 'commissioner', 'transfers', 'creditNotes', 'completedProjectsCount', 'closedProjectsCount'));
+        return view('modules.dashboard.index', compact('investors', 'commissioner', 'transfers', 'creditNotes', 'completedProjectsCount', 'activeProjectsCount', 'closedProjectsCount'));
     }
 }
