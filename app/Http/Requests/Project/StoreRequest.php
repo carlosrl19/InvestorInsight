@@ -24,6 +24,8 @@ class StoreRequest extends FormRequest
             'project_investment' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'project_status' => 'required|in:0,1',
             'project_comment' => 'required|string|min:3|max:255',
+            'project_completion_work_date' => 'date|after_or_equal:project_start_date',
+            'project_proof_transfer_img' => 'string',
 
             // Investor rules
             'investor_id' => 'required|numeric|exists:investors,id',
@@ -94,6 +96,13 @@ class StoreRequest extends FormRequest
             'project_comment.string' => 'Los comentarios adicionales del proyecto solo deben contener letras, números y/o símbolos.',
             'project_comment.min' => 'Los comentarios adicionales del proyecto deben tener al menos 3 caracteres.',
             'project_comment.max' => 'Los comentarios adicionales del proyecto no pueden tener más de 255 caracteres.',
+
+            // Project start date messages
+            'project_completion_work_date.date' => 'La fecha final de cierre del proyecto debe ser una fecha válida.',
+            'project_completion_work_date.after_or_equal' => 'La fecha final de cierre del proyecto no puede ser anterior a la fecha de inicio del mismo.',
+
+            // Project proof transfer img messages
+            'project_proof_transfer_img.after_or_equal' => 'El comprobante de pago de transferencia del proyecto debe ser una imagen válida.',
 
             // Investor array id messages
             'investor_id.required' => 'El ID del inversionista es obligatorio.',

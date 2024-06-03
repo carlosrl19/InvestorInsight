@@ -47,6 +47,17 @@ Proyectos
     </div>
     @endif
 
+    <!-- JS PDF download automatically -->
+    @if (session('project_id'))
+        <script>
+            window.onload = function() {
+                var projectId = '{{ session('project_id') }}';
+                var downloadUrl = "{{ route('downloadTerminationReport', '') }}/" + projectId;
+                window.location.href = downloadUrl;
+            }
+        </script>
+    @endif
+
 <div class="container-xl">
     <div class="card">
         <div class="card-body">
@@ -59,7 +70,7 @@ Proyectos
                         <th>Cierre <small>(final)</small></th>
                         <th>Inversionista</th>
                         <th>Inversión</th>
-                        <th>Ganancia total</th>
+                        <th>Ganancia</th>
                         <th>Excel</th>
                         <th>Estado</th>
                         <th>Acciones</th>
@@ -121,7 +132,7 @@ Proyectos
                             </td>
                             <td>
                                 @if($project->project_status == '0')
-                                    <span class="badge bg-teal me-1">
+                                    <span class="badge badge-outline text-success me-1">
                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-lock">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                             <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
@@ -130,7 +141,7 @@ Proyectos
                                         </svg> FINALIZADO
                                     </span>
                                 @elseif($project->project_status == '1')
-                                    <span class="badge bg-cyan me-1 project-active" data-bs-toggle="modal" data-bs-target="#finishModal{{ $project->id }}">
+                                    <span class="badge badge-outline text-cyan me-1 project-active" data-bs-toggle="modal" data-bs-target="#finishModal{{ $project->id }}">
                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-lock-open">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                             <path d="M5 11m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
@@ -173,7 +184,7 @@ Proyectos
                                                     </div>
                                                 </div>
                                                 <div class="row mt-4">
-                                                    <img id="project_proof_transfer_img" src="" class="mb-2" width="200" height="200">
+                                                    <img id="project_proof_transfer_img" src="" class="mb-2" width="200" height="200" style="object-fit: contain;">
                                                     <div class="col">
                                                         <div class="form-floating">
                                                             <input type="file" accept="image/*" class="form-control @error('project_proof_transfer_img') is-invalid @enderror" id="project_proof_transfer_img" name="project_proof_transfer_img" alt="proof-transfer" onchange="previewImage(event)">

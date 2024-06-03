@@ -13,6 +13,9 @@ use App\Models\PromissoryNote;
 use Illuminate\Support\Str;
 use App\Exports\CustomExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Dompdf\Options;
+use Dompdf\Dompdf;
+use Carbon\Carbon;
 
 class ProjectController extends Controller
 {
@@ -131,7 +134,14 @@ class ProjectController extends Controller
         // Validar los datos recibidos
         $request->validate([
             'project_completion_work_date' => 'required|date',
-            'project_proof_transfer_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'project_proof_transfer_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    
+            // Project start date messages
+            'project_completion_work_date.date' => 'La fecha final de cierre del proyecto debe ser una fecha válida.',
+            'project_completion_work_date.after_or_equal' => 'La fecha final de cierre del proyecto no puede ser anterior a la fecha de inicio del mismo.',
+    
+            // Project proof transfer img messages
+            'project_proof_transfer_img.after_or_equal' => 'El comprobante de pago de transferencia del proyecto debe ser una imagen válida.',
         ]);
     
         // Procesar la imagen
@@ -139,6 +149,8 @@ class ProjectController extends Controller
             $imageName = time().'.'.$request->project_proof_transfer_img->extension();
             $request->project_proof_transfer_img->move(public_path('images'), $imageName);
             $project->project_proof_transfer_img = $imageName;
+        } else {
+            $project->project_proof_transfer_img = 'no-image.png';
         }
     
         // Actualizar el estado del proyecto
@@ -152,8 +164,42 @@ class ProjectController extends Controller
             $investor->save();
         }
     
+        // Guardar el ID del proyecto en la sesión para la generación del PDF
+        // Esto funciona con JS en el project.index que detecta el project->id para el PDF y lo hace descargar automáticamente
+        session()->flash('project_id', $project->id);
+    
         // Redirigir con un mensaje de éxito
-        return redirect()->route('project.index')->with('success', 'Proyecto finalizado exitosamente.');
+        return redirect()->route('project.index', compact('project'))->with('success', 'Proyecto finalizado exitosamente.');
+    }
+    
+    public function downloadTerminationReport($id)
+    {
+        $project = Project::findOrFail($id);
+    
+        // Configuración de opciones para Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        
+        // Opcion que habilita la carga de imagenes
+        $options->set('chroot', realpath(''));
+        
+        // Crear instancia de Dompdf con las opciones configuradas
+        $pdf = new Dompdf($options);
+    
+        // Cargar el contenido de la vista en Dompdf
+        $pdf->loadHtml(view('modules.projects._termination_report', compact('project')));
+    
+        // Establecer el tamaño y la orientación del papel
+        $pdf->setPaper('A4', 'portrait');
+    
+        // Renderizar el PDF
+        $pdf->render();
+    
+        // Devolver el PDF para descarga forzada
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, 'Finiquito.pdf');
     }
     
 

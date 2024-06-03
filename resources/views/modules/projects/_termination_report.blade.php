@@ -6,11 +6,10 @@
 
 	<!-- Finiquito body -->
 	<div class="body-note mt-4 mb-4">
-		Por medio del presente documento, el Inversionista [Nombre del Inversionista] y JUNIOR ALEXIS AYALA GUERRERO, dejan constancia de la finalización del proyecto denominado
-		"[Nombre del Proyecto]".
+		Por medio del presente documento, el Inversionista A y JR, dejan constancia de la finalización del proyecto denominado
+		"{{$project->project_name}}".
 
-		En virtud de lo anterior, el Inversionista y el señor JUNIOR ALEXIS AYALA GUERRERO acuerdan dar por concluido el proyecto "[Nombre
-		del Proyecto]" de mutuo acuerdo, sin pendientes o reclamaciones entre ellas, así como alguna acción presente o
+		En virtud de lo anterior, el Inversionista A y el señor JR. acuerdan dar por concluido el proyecto "{{$project->project_name}}" de mutuo acuerdo, sin pendientes o reclamaciones entre ellas, así como alguna acción presente o
 		futura relacionada con el proyecto.
 	</div>
 
