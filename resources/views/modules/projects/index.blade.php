@@ -50,7 +50,7 @@ Proyectos
 <div class="container-xl">
     <div class="card">
         <div class="card-body">
-            <table id="example" class="display table table-bordered">
+            <table id="example" class="table table-bordered" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>Nombre proyecto</th>
