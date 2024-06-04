@@ -44,7 +44,7 @@ class ProjectController extends Controller
         // Crear proyecto
         $project = Project::create([
             'project_name' => $validatedData['project_name'],
-            'project_code' => $validatedData['project_code'],
+            'project_code' => $generatedCode,
             'project_start_date' => $validatedData['project_start_date'],
             'project_end_date' => $validatedData['project_end_date'],
             'project_work_days' => $validatedData['project_work_days'],
@@ -109,21 +109,9 @@ class ProjectController extends Controller
             'transfer_bank' => $validatedData['transfer_bank'],
             'investor_id' => is_array($validatedData['investor_id']) ? $validatedData['investor_id'][0] : $validatedData['investor_id'],
             'transfer_date' => $validatedData['transfer_date'],
-            'transfer_img' => $validatedData['transfer_img'],
             'transfer_amount' => $validatedData['transfer_amount'],
             'transfer_comment' => $validatedData['transfer_comment'],
         ]);
-
-        // Procesar la imagen
-        if ($request->hasFile('transfer_img')) {
-            $imageName = time().'.'.$request->transfer_img->extension();
-            $request->transfer_img->move(public_path('images/transfers'), $imageName);
-            $transfer->transfer_img = $imageName; // Guarda el nombre de la imagen en el modelo Transfer
-            $transfer->save(); // Guarda los cambios en el modelo Transfer
-        } else {
-            $transfer->transfer_img = 'no-image.png';
-            $transfer->save(); // Guarda los cambios en el modelo Transfer
-        }
     
         // Esto funciona con JS en el project.index que detecta el project->id para el Excel y lo hace descargar automáticamente
         session()->flash('excel_project_id', $project->id);
@@ -200,10 +188,10 @@ class ProjectController extends Controller
         $endMonth = Carbon::parse($endDate)->format('m');
         $endYear = Carbon::parse($endDate)->format('Y');
 
-        $completionDate = $project->project_completion_work_date;
-        $day = Carbon::parse($completionDate)->format('d');
-        $month = Carbon::parse($completionDate)->format('m');
-        $year = Carbon::parse($completionDate)->format('Y');
+        $startDate = $project->project_start_date;
+        $day = Carbon::parse($startDate)->format('d');
+        $month = Carbon::parse($startDate)->format('m');
+        $year = Carbon::parse($startDate)->format('Y');
 
             
         // Configuración de opciones para Dompdf

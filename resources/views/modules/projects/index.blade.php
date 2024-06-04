@@ -85,12 +85,10 @@ Proyectos activos
                         <th>Nombre proyecto</th>
                         <th>Inicio</th>
                         <th>Final <small>(previsto)</small></th>
-                        <th>Final <small>(real)</small></th>
                         <th>Inversionista</th>
                         <th>Inversión</th>
                         <th>Ganancia</th>
                         <th>Excel</th>
-                        <th>Finiquito</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
@@ -117,12 +115,6 @@ Proyectos activos
                             </td>
                             <td>{{ $project->project_start_date }}</td>
                             <td>{{ $project->project_end_date }}</td>
-                            
-                            @if($project->project_completion_work_date == null)
-                                <td><span class="text-red"><strong>N/D</strong></span></td>
-                            @else
-                                <td>{{ $project->project_completion_work_date }}</td>
-                            @endif
                             <td>
                                 @foreach ($project->investors as $investor)
                                     <a href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}<br>
@@ -148,23 +140,6 @@ Proyectos activos
                                     </svg>
                                     EXCEL
                                 </a>
-                            </td>
-                            <td>
-                                @if($project->project_status == 0)
-                                <a href="{{ route('project.termination', $project) }}" class="badge bg-red me-1">
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                                        <path d="M8 11h8v7h-8z" />
-                                        <path d="M8 15h8" />
-                                        <path d="M11 11v7" />
-                                    </svg>
-                                    FINIQUITO
-                                </a>
-                                @else
-                                    <span class="text-red"><strong>N/D</strong></span>
-                                @endif
                             </td>
                             <td>
                                 @if($project->project_status == '0')
@@ -212,15 +187,7 @@ Proyectos activos
                                                 ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Finalizado"? Utilize esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
                                                 Es necesario que ingrese la fecha en la que el proyecto ha finalizado sus labores, así como el comprobante de pago de la transferencia del inversionista para el proyecto.
                                                 <div class="row mt-4">
-                                                    <div class="col">
-                                                        <div class="form-floating">
-                                                            <input type="date" class="form-control" name="project_completion_work_date" id="project_completion_work_date" min="{{ $project->project_start_date }}" max="{{ date('Y-m-d', strtotime($project->project_end_date . ' + 10 days')) }}">
-                                                            <label for="project_completion_work_date">Fecha de finalización del proyecto</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mt-4">
-                                                    <img id="project_proof_transfer_img" src="" class="mb-2" width="200" height="200" style="object-fit: contain;">
+                                                    <img id="project_proof_transfer_img" src="{{ asset('images/transfer-vector.png') }}" class="mb-4 mt-4" width="200" height="200" style="object-fit: contain;">
                                                     <div class="col">
                                                         <div class="form-floating">
                                                             <input type="file" accept="image/*" class="form-control @error('project_proof_transfer_img') is-invalid @enderror" id="project_proof_transfer_img" name="project_proof_transfer_img" alt="proof-transfer" onchange="previewImage(event)">

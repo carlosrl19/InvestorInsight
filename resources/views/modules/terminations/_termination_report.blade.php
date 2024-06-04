@@ -1,37 +1,44 @@
 <div class="main">
 
+	<!-- Date cantainer  -->
+	<div class="code-container-left">
+		<span class="text-uppercase">{{ now()->day }} de {{ now()->monthName }} de {{ now()->year }}</span><br>
+		<span class="text-bold text-uppercase">INVERSIONES ROBENIOR</span><br>
+		<span class="text-uppercase">San Pedro Sula, Honduras, CA</span>
+	</div>
+	
 	<!-- Code container -->
-	<div class="code-container">
-		<span>#FQ-{{ $project->project_code }}</span>
+	<div class="code-container-right">
+		<span class="text-bold">#FQ-{{ $project->project_code }}</span>
 	</div>
 
 	<!-- Finiquito title -->
-	<div class="title-note ml-2 mt-center">
+	<div class="title-note title-top-margin ml-4">
 		FINIQUITO DE PROYECTO
 	</div>
 
 	<!-- Finiquito body -->
-	<div class="body-note mt-4 mb-4">
-		Por medio del presente documento, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, dejan constancia de la finalización del proyecto denominado <strong class="text-uppercase">"{{ $project->project_name }}"</strong> con una fecha estima de finalización el día {{ $endDay }}/{{ $endMonth }}/{{ $endYear }}, y finalizando en la fecha {{ $day }}/{{ $month }}/{{ $year }}. <br><br>
+	<div class="body-note mb-4">
+		Por medio del presente documento, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, 
+		formalizan la conclusión y finalización del proyecto denominado <strong class="text-uppercase">"{{ $project->project_name }}"</strong> con una fecha inicial el día <strong>{{ $day }}/{{ $month }}/{{ $year }}</strong>,
+		y final el día <strong>{{ $endDay }}/{{ $endMonth }}/{{ $endYear }}</strong>. 
+		<br><br>
 		
-		En virtud de lo anterior, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y el señor <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>. acuerdan dar por concluido el proyecto <strong class="text-uppercase">"{{ $project->project_name }}"</strong> de mutuo acuerdo, sin pendientes o reclamaciones entre ellas, así como alguna acción presente o futura relacionada con el proyecto.
-	</div>
-
-	<!-- Finiquito issue date -->
-	<div class="mt-4">
-		Documento extendido en la ciudad de San Pedro Sula, departamento de Cortés, Honduras, a los {{ now()->day }} días del mes de {{ now()->monthName }} del año {{ now()->year }}. 
+		En virtud de lo anterior, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, acuerdan dar por concluido el proyecto <strong class="text-uppercase">"{{ $project->project_name }}"</strong> sin pendientes o reclamaciones entre ellos, así como alguna acción presente o futura relacionada con el proyecto.
 	</div>
 
 	<!-- Finiquito signatures -->
-	<div class="mt-6 ml-center">
+	<div class="mt-6 ml-center mt-center">
 		&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px"
 			style="position: absolute; margin-top: -35px; transform: rotate(20deg)">
+			<img src="static/sello-ejemplo.png" alt="Sello" height="80px"
+			style="position: absolute; margin-top: -35px;">
 		<span style="margin-left: -30px">__________________________</span><br>
 		Junior Alexis Ayala Guerrero<br>
 	</div>
 
 	<!-- Legal footer -->
-	<div class="footer mt-4">
+	<div class="footer">
 		Este documento contiene la firma de las partes involucradas. Cualquier uso no autorizado,
 		reproducción, alteración o falsificación de esta firma o sello constituirá una violación de los derechos de
 		propiedad intelectual y será sujeto a acciones legales.
@@ -47,19 +54,32 @@
 		font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
 		text-align: justify;
 	}
+	
+	.code-container-left{
+		padding-top: 2%;
+		opacity: 1;
+		float: left;
+		padding-bottom: 3px;
+		font-size: 12px;
+		color: black;
+	}
 
-	.code-container{
-		padding-top: 20%;
+	.code-container-right{
+		padding-top: 2%;
 		opacity: 1;
 		float: right;
 		padding-bottom: 3px;
 		font-size: 12px;
 		color: black;
-		font-style: italic;
+	}
+
+	.text-bold{
+		font-weight: bolder;
 	}
 
 	.body-note {
 		font-size: 16px;
+		margin-top: 9%;
 	}
 
 	.mt-2 {
@@ -75,7 +95,7 @@
 	}
 
 	.mt-center {
-		margin-top: 25% !important;
+		margin-top: 20% !important;
 	}
 
 	.mb-2 {
@@ -84,6 +104,10 @@
 
 	.mb-4 {
 		margin-bottom: 1.5rem !important;
+	}
+
+	.title-top-margin {
+		margin-top: 23% !important;
 	}
 
 	.ml-center {
@@ -100,6 +124,7 @@
 
 	.footer {
 		font-size: 10px;
+		margin-top: 40%;
 	}
 
 	.text-uppercase{

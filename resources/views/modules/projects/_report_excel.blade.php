@@ -52,7 +52,7 @@
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
-            <td style="background-color: #fff"></td>
+            <td style="background-color: #fff">#CP-{{ $project->project_code }}</td>
             <td style="background-color: #fff"></td>
         </tr>
 
