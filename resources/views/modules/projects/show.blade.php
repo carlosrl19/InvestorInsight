@@ -47,8 +47,8 @@ Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name 
                                 </div>
                                 <div class="col-md-6">
                                     <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha inicio: {{ $project->project_start_date }}</p>
-                                    <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha cierre <small>(previsto)</small>: {{ $project->project_end_date }}</p>
-                                    <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha cierre <small>(FINAL)</small>: {{ $project->project_completion_work_date }}</p>
+                                    <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha final <small>(previsto)</small>: {{ $project->project_end_date }}</p>
+                                    <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha final <small>(real)</small>: {{ $project->project_completion_work_date }}</p>
                                 </div>
                             </div>
                             <h3>Inversionistas del proyecto</h3>
