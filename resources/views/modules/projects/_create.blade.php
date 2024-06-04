@@ -252,18 +252,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-3 align-items-end">
-                            <div class="col">
-                                <div class="form-floating">
-                                    <input type="file" accept="image/*" class="form-control @error('transfer_img') is-invalid @enderror" id="transfer_img" name="transfer_img" alt="transfer-proof">
-                                    <label for="transfer_img">Comprobante de transferencia</label>
-                                    <span class="invalid-feedback" role="alert" id="transfer-img-error"
-                                        style="display: none;">
-                                        <strong></strong>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
                     </fieldset>
 
                     <!-- Step 3 Investor / Commission agent select -->
