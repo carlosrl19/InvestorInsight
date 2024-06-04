@@ -103,5 +103,3 @@
         </div>
    </div>
 </div>
-
-<script src="{{ asset('customjs/uppercase.js') }}"></script>
