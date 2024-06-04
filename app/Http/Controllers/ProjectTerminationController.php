@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 
-class TerminationController extends Controller
+class ProjectTerminationController extends Controller
 {
     public function index(){
         $projects = Project::where('project_status', 0)->with('investors')->get();

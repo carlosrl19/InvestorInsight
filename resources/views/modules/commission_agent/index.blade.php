@@ -89,6 +89,9 @@ Comisionistas
 
 @section('scripts')
 
+<!-- Jquery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <!-- Alert fade closer script-->
 <script src="{{ asset('customjs/alert_closer.js')}}"></script>
 

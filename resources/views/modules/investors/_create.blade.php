@@ -83,9 +83,9 @@
                                 <div class="mb-3">
                                     <label for="investor_company_name" class="mb-2 mt-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Afiliado</label>
                                     <select type="text" class="form-select" id="select-optgroups" name="investor_company_name" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
-                                        <option value="Marsella" {{ old('investor_company_name') == 'Marsella' ? 'selected' : '' }}>Marsella</option>
-                                        <option value="Jaguer" {{ old('investor_company_name') == 'Jaguer' ? 'selected' : '' }}>Jaguer</option>
-                                        <option value="Future Capital" {{ old('investor_company_name') == 'Future Capital' ? 'selected' : '' }}>Future Capital</option>
+                                        <option value="MARSELLA" {{ old('investor_company_name') == 'MARSELLA' ? 'selected' : '' }}>MARSELLA</option>
+                                        <option value="JAGUER" {{ old('investor_company_name') == 'JAGUER' ? 'selected' : '' }}>JAGUER</option>
+                                        <option value="FUTURE CAPITAL" {{ old('investor_company_name') == 'FUTURE CAPITAL' ? 'selected' : '' }}>FUTURE CAPITAL</option>
                                     </select>
                                     @error('investor_company_name')
                                         <span class="invalid-feedback" role="alert">
@@ -103,3 +103,5 @@
         </div>
    </div>
 </div>
+
+<script src="{{ asset('customjs/uppercase.js') }}"></script>

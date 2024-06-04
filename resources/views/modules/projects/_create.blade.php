@@ -409,3 +409,4 @@
 <script src="{{ asset('customjs/projects/commissioners.js') }}"></script>
 <script src="{{ asset('customjs/projects/calculations.js') }}"></script>
 <script src="{{ asset('customjs/projects/work_days_calculate.js') }}"></script>
+<script src="{{ asset('customjs/uppercase.js') }}"></script>

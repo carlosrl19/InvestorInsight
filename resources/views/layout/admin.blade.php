@@ -185,10 +185,11 @@
                     </span>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route("project.index")}}">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside" role="button" aria-expanded="false">
                     <span
-                      class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
+                      class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="icon icon-tabler icons-tabler-outline icon-tabler-building-fortress">
@@ -201,11 +202,27 @@
                         <path d="M17 7h0v.01" />
                         <path d="M17 10h0v.01" />
                         <path d="M17 13h0v.01" />
-                      </svg> </span>
+                      </svg>
+                    </span>
                     <span class="nav-link-title">
                       Proyectos
                     </span>
                   </a>
+                  <div class="dropdown-menu">
+                    <div class="dropdown-menu-columns">
+                      <div class="dropdown-menu-column">
+                        <a class="dropdown-item" href="{{ route('project.index') }}">
+                          <small>->&nbsp;</small>Proyectos activos
+                        </a>
+                        <a class="dropdown-item" href="{{ route('termination.index') }}">
+                          <small>->&nbsp;</small>Proyectos finiquitados
+                        </a>
+                        <a class="dropdown-item" href="{{ route('credit_note.index') }}">
+                          <small>->&nbsp;</small>Proyectos cerrados
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"

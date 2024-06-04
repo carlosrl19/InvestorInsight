@@ -123,7 +123,7 @@ Dashboard
 							<div class="divide-y">
 								<div>
 									<div class="row">
-										<table id="example1" class="display table table-bordered">
+										<table id="example2" class="display table table-bordered">
 											<thead>
 												<tr>
 													<th>Fecha</th>

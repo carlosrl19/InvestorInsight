@@ -47,6 +47,18 @@ Proyectos activos
     </div>
     @endif
 
+    @if (session('excel_project_id'))
+        <script>
+            window.onload = function() {
+                redirectToExcel();
+            }
+
+            function redirectToExcel() {
+                window.location.href = "{{ route('project.excel', session('excel_project_id')) }}";
+            }
+        </script>
+    @endif
+    
     @if (session('project_id'))
         <script>
             window.onload = function() {
@@ -55,7 +67,7 @@ Proyectos activos
 
             function redirectToTermination() {
                 window.location.href = "{{ route('project.termination', session('project_id')) }}";
-                setTimeout(redirectToExcel, 1000); // Redireccionar a la descarga del archivo Excel después de 1 segundo (1000 milisegundos)
+                setTimeout(redirectToExcel, 1000); // Descarga archivo Excel al segundo (1000 milisegundos)
             }
 
             function redirectToExcel() {

@@ -9,7 +9,7 @@
         <tr>
             <td></td>
             @foreach($project->investors as $investor)
-                <td style="font-size: 14px; width: 150px; font-weight: bold; background-color: #fff; text-align: center; text-decoration: underline;">PROYECTO {{ $project->project_name }}</td>
+                <td style="font-size: 14px; width: 150px; font-weight: bold; background-color: #fff; text-align: center; text-decoration: underline;">PROYECTO {{ $investor->investor_name }} </td>
             @endforeach
             <td style="background-color: #fff; width: 200px;"></td>
             <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 160px; text-align: center; text-decoration: underline;">

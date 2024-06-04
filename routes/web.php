@@ -31,5 +31,5 @@ Route::get('excel/{id}', 'App\Http\Controllers\ProjectController@export')->name(
 Route::get('/termination/{id}', 'App\Http\Controllers\ProjectController@downloadTerminationReport')->name('project.termination');
 
 // Terminations
-Route::resource('termination', 'App\Http\Controllers\TerminationController')->names('termination');
-Route::get('termination/{id}/report', 'App\Http\Controllers\TerminationController@showTermination')->name('termination.report');
+Route::resource('termination', 'App\Http\Controllers\ProjectTerminationController')->names('termination');
+Route::get('termination/{id}/report', 'App\Http\Controllers\ProjectTerminationController@showTermination')->name('termination.report');

@@ -112,6 +112,9 @@ class ProjectController extends Controller
             'transfer_amount' => $validatedData['transfer_amount'],
             'transfer_comment' => $validatedData['transfer_comment'],
         ]);
+
+        // Esto funciona con JS en el project.index que detecta el project->id para el Excel y lo hace descargar automáticamente
+        session()->flash('excel_project_id', $project->id);
     
         return redirect()->route('project.index')->with('success', 'Proyecto, pagaré y transferencia creados de manera exitosa.');
     }
@@ -126,7 +129,10 @@ class ProjectController extends Controller
 
     public function export($id)
     {
-        return Excel::download(new CustomExport($id), 'Excel de proyecto.xlsx');
+        $project = Project::findOrFail($id);
+        $projectName = $project->project_name; 
+
+        return Excel::download(new CustomExport($id), $projectName . ' - Excel.xlsx');
     }
 
     public function finishProject(Request $request, Project $project)
