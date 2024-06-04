@@ -42,6 +42,7 @@ class StoreRequest extends FormRequest
             'transfer_bank' => 'required|string|min:6|max:36|regex:/^[^\d]+$/',
             'transfer_date' => 'required|date_format:Y-m-d\TH:i:s',
             'transfer_amount' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
+            'transfer_img'=> 'string',
             'transfer_comment' => 'required|string|min:3|max:255',
         ];
     }
@@ -102,7 +103,7 @@ class StoreRequest extends FormRequest
             'project_completion_work_date.after_or_equal' => 'La fecha final de cierre del proyecto no puede ser anterior a la fecha de inicio del mismo.',
 
             // Project proof transfer img messages
-            'project_proof_transfer_img.after_or_equal' => 'El comprobante de pago de transferencia del proyecto debe ser una imagen válida.',
+            'project_proof_transfer_img.string' => 'El comprobante de pago de transferencia del proyecto debe ser una imagen válida.',
 
             // Investor array id messages
             'investor_id.required' => 'El ID del inversionista es obligatorio.',
@@ -168,6 +169,9 @@ class StoreRequest extends FormRequest
             'transfer_amount.min' => 'El monto de transferencia debe ser igual o mayor a 1',
             'transfer_amount.regex' => 'El monto de transferencia debe tener máximo hasta dos decimales.',
             
+            // Project proof transfer img messages
+            'transfer_img.string' => 'El comprobante de pago de transferencia de inversión para el proyecto debe ser una imagen válida.',
+
             // Transfer description messages
             'transfer_comment.required' => 'Los comentarios de la transferencia son obligatorios.',
             'transfer_comment.string' => 'Los comentarios de la transferencia solo deben contener letras, números y/o símbolos.',

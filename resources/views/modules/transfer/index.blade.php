@@ -50,6 +50,7 @@ Transferencias
         <table id="example" class="display table table-bordered">
             <thead>
                 <tr class="text-center">
+                    <th>Comprobante</th>
                     <th>Fecha</th>
                     <th>Banco / Modo de transferencia</th>
                     <th>Código transferencia</th>
@@ -60,6 +61,13 @@ Transferencias
             <tbody>
                 @foreach($transfers as $transfer)
                 <tr class="text-center">
+                    <td>
+                        @if (file_exists(public_path('images/transfers/' . $transfer->transfer_img)))
+                            <img src="{{ asset('images/transfers/' . $transfer->transfer_img) }}" style="height: 40px; width: 40px;" alt="transfer-proof">
+                        @else
+                            <img src="{{ asset('images/no-image2.png') }}" style="height: 40px; width: 40px;" alt="no image available" title="Sin comprobante">
+                        @endif
+                    </td>
                     <td>{{ $transfer->transfer_date }}</td>
                     <td class="text-uppercase">{{ $transfer->transfer_bank }}</td>
                     <td class="text-uppercase">{{ $transfer->transfer_code }}</td>
@@ -97,4 +105,5 @@ Transferencias
 <!-- Select2 -->
 <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
 <script src="{{ asset('customjs/select2/s2_projects.js') }}"></script>
+
 @endsection

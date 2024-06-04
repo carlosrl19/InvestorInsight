@@ -38,16 +38,28 @@ class TransferController extends Controller
                 'transfer_bank' => $request->transfer_bank,
                 'investor_id' => $request->investor_id,
                 'transfer_date' => $request->transfer_date,
+                'transfer_img' => $request->transfer_img,
                 'transfer_amount' => $request->transfer_amount,
                 'transfer_comment' => $request->transfer_comment,
             ]);
+                
+            // Procesar la imagen
+            if ($request->hasFile('transfer_img')) {
+                $imageName = time().'.'.$request->transfer_img->extension();
+                $request->transfer_img->move(public_path('images/transfers'), $imageName);
+                $transfer->transfer_img = $imageName; // Guarda el nombre de la imagen en el modelo Transfer
+                $transfer->save(); // Guarda los cambios en el modelo Transfer
+            } else {
+                $transfer->transfer_img = 'no-image.png';
+                $transfer->save(); // Guarda los cambios en el modelo Transfer
+            }
     
             // Actualiza el saldo del inversionista sumando el monto de la transferencia
             $newBalance = $investor->investor_balance + $request->transfer_amount;
             $investor->update(['investor_balance' => $newBalance]);
     
             DB::commit();
-    
+
             return redirect()->route('transfer.index')->with('success', 'Transferencia creada exitosamente.');
     
         } catch (\Exception $e) {
@@ -56,7 +68,7 @@ class TransferController extends Controller
             // Get errors
             //dd($e->getMessage());
             
-            return redirect()->back()->withErrors(['error' => 'Ocurrió un error inesperado al intentar guardar la transferencia. Si el problema persiste, contacte al servicio técnico.'])->withInput();
+            return redirect()->back()->withErrors(['error' => 'Ocurrió un error inesperado al intentar guardar la transferencia. Asegúrese de completar todos los campos del formulario. Si el problema persiste, contacte al servicio técnico.'])->withInput();
         }
     }
 

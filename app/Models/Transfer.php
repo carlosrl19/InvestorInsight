@@ -12,6 +12,7 @@ class Transfer extends Model
 
     protected $fillable = [
         'transfer_code',
+        'transfer_img',
         'transfer_bank',
         'investor_id',
         'transfer_amount',

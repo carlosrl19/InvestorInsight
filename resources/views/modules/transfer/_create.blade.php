@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('transfer.store')}}" method="POST">
+                <form action="{{ route('transfer.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-3 align-items-end" style="display: none;">
                         <div class="col">
@@ -96,13 +96,25 @@
                             <div class="form-floating">
                                 <textarea class="form-control @error('transfer_comment') is-invalid @enderror"
                                     autocomplete="off" maxlength="255" name="transfer_comment" id="transfer_comment"
-                                    style="resize: none; height: 100px"> </textarea>
+                                    style="resize: none; height: 100px">{{ old('transfer_comment') }}</textarea>
                                 @error('transfer_comment')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                                 <label for="transfer_comment">Comentarios</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-end">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="file" accept="image/*" class="form-control @error('transfer_img') is-invalid @enderror" id="transfer_img" name="transfer_img" alt="transfer-proof">
+                                <label for="transfer_img">Comprobante de transferencia</label>
+                                <span class="invalid-feedback" role="alert" id="transfer-img-error"
+                                    style="display: none;">
+                                    <strong></strong>
+                                </span>
                             </div>
                         </div>
                     </div>

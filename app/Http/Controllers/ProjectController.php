@@ -38,7 +38,7 @@ class ProjectController extends Controller
     {
         $generatedCode = strtoupper(Str::random(12));
     
-        // Validar los datos del formulario manualmente
+        // Validar los datos del formulario
         $validatedData = $request->validated();
     
         // Crear proyecto
@@ -104,20 +104,33 @@ class ProjectController extends Controller
         }
     
         // Crear transferencia
-        Transfer::create([
+        $transfer = Transfer::create([
             'transfer_code' => $generatedCode,
             'transfer_bank' => $validatedData['transfer_bank'],
             'investor_id' => is_array($validatedData['investor_id']) ? $validatedData['investor_id'][0] : $validatedData['investor_id'],
             'transfer_date' => $validatedData['transfer_date'],
             'transfer_amount' => $validatedData['transfer_amount'],
+            'transfer_img' => $validatedData['transfer_img'],
             'transfer_comment' => $validatedData['transfer_comment'],
         ]);
-
+    
+        // Procesar la imagen
+        if ($request->hasFile('transfer_img')) {
+            $imageName = time().'.'.$request->transfer_img->extension();
+            $request->transfer_img->move(public_path('images'), $imageName);
+            $transfer->transfer_img = $imageName; // Guarda el nombre de la imagen en el modelo Transfer
+            $transfer->save(); // Guarda los cambios en el modelo Transfer
+        } else {
+            $transfer->transfer_img = 'no-image.png';
+            $transfer->save(); // Guarda los cambios en el modelo Transfer
+        }
+    
         // Esto funciona con JS en el project.index que detecta el project->id para el Excel y lo hace descargar automáticamente
         session()->flash('excel_project_id', $project->id);
     
         return redirect()->route('project.index')->with('success', 'Proyecto, pagaré y transferencia creados de manera exitosa.');
     }
+    
 
     public function show($id)
     {

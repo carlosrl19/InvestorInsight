@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="projectForm" action="{{ route('project.store')}}" method="POST" novalidate>
+                <form id="projectForm" action="{{ route('project.store')}}" method="POST" enctype="multipart/form-data">
                     <!-- Step 1 General data -->
                     <fieldset>
                         @csrf
@@ -249,6 +249,18 @@
                                         <strong></strong>
                                     </span>
                                     <label for="transfer_comment">Comentarios</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3 align-items-end">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="file" accept="image/*" class="form-control @error('transfer_img') is-invalid @enderror" id="transfer_img" name="transfer_img" alt="transfer-proof">
+                                    <label for="transfer_img">Comprobante de transferencia</label>
+                                    <span class="invalid-feedback" role="alert" id="transfer-img-error"
+                                        style="display: none;">
+                                        <strong></strong>
+                                    </span>
                                 </div>
                             </div>
                         </div>

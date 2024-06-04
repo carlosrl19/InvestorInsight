@@ -16,6 +16,7 @@ class StoreRequest extends FormRequest
         return [
             'investor_id' => 'required|numeric|exists:investors,id',
             'transfer_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:transfers,transfer_code',
+            'transfer_img' => 'image|max:2048',
             'transfer_bank' => 'required|string|min:6|max:36|regex:/^[^\d]+$/',
             'transfer_date' => 'required|date_format:Y-m-d\TH:i:s',
             'transfer_amount' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
@@ -39,6 +40,10 @@ class StoreRequest extends FormRequest
             'transfer_code.regex' => 'El código de transferencia solo puede contener letras y números.',
             'transfer_code.unique' => 'El código de transferencia ya existe.',
             
+            // Transfer img messages
+            'transfer_img.image' => 'El comprobante de pago de transferencia debe ser una imagen válida.',
+            'transfer_img.max' => 'El comprobante de pago de transferencia no debe exceder los 2 MB.',
+
             // Transfer bank messages
             'transfer_bank.required' => 'El banco de transferencia es obligatorio.',
             'transfer_bank.string' => 'El banco de transferencia solo debe contener letras.',
