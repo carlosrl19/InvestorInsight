@@ -105,4 +105,5 @@
 	.text-uppercase{
 		text-transform: uppercase;
 	}
+
 </style>

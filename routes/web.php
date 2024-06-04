@@ -29,3 +29,7 @@ Route::post('project/{project}/finish', 'App\Http\Controllers\ProjectController@
 Route::post('/project/{project}/close', 'App\Http\Controllers\ProjectController@closeProject')->name('project.close');
 Route::get('excel/{id}', 'App\Http\Controllers\ProjectController@export')->name('project.excel');
 Route::get('/termination/{id}', 'App\Http\Controllers\ProjectController@downloadTerminationReport')->name('project.termination');
+
+// Terminations
+Route::resource('termination', 'App\Http\Controllers\TerminationController')->names('termination');
+Route::get('termination/{id}/report', 'App\Http\Controllers\TerminationController@showTermination')->name('termination.report');

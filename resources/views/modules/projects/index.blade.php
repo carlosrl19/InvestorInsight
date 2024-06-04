@@ -19,7 +19,7 @@ Listado principal
 @endsection
 
 @section('title')
-Proyectos
+Proyectos activos
 @endsection
 
 @section('create')

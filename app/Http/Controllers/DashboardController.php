@@ -22,7 +22,7 @@ class DashboardController extends Controller
         ->count();
 
         $activeProjectsCount = DB::table('projects')
-        ->where('projects.project_status', 0)
+        ->where('projects.project_status', 1)
         ->get()
         ->count();
 

@@ -21,7 +21,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::with('investors')->get();
+        $projects = Project::where('project_status', 1)->with('investors')->get();
         $investors = Investor::get();
         $commissioners = CommissionAgent::get();
         $generatedCode = strtoupper(Str::random(12)); // Random code
@@ -200,7 +200,7 @@ class ProjectController extends Controller
         $pdf = new Dompdf($options);
     
         // Cargar el contenido de la vista en Dompdf
-        $pdf->loadHtml(view('modules.projects._termination_report', compact('project', 'endDay', 'endMonth', 'endYear', 'day', 'month', 'year')));
+        $pdf->loadHtml(view('modules.terminations._termination_report', compact('project', 'endDay', 'endMonth', 'endYear', 'day', 'month', 'year')));
     
         // Establecer el tamaño y la orientación del papel
         $pdf->setPaper('A4', 'portrait');

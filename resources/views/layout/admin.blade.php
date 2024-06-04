@@ -272,7 +272,7 @@
                         <a class="dropdown-item" href="{{ route('credit_note.index') }}">
                           <small>->&nbsp;</small>Notas crédito
                         </a>
-                        <a class="dropdown-item" href="./cookie-banner.html">
+                        <a class="dropdown-item" href="{{ route('termination.index') }}">
                           <small>->&nbsp;</small>Finiquitos
                         </a>
                       </div>
