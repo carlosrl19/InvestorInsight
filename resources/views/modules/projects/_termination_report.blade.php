@@ -12,7 +12,7 @@
 
 	<!-- Finiquito body -->
 	<div class="body-note mt-4 mb-4">
-		Por medio del presente documento, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, dejan constancia de la finalización del proyecto denominado <strong class="text-uppercase">"{{ $project->project_name }}"</strong> en la fecha {{ $day }}/{{ $month }}/{{ $year }}. <br><br>
+		Por medio del presente documento, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, dejan constancia de la finalización del proyecto denominado <strong class="text-uppercase">"{{ $project->project_name }}"</strong> con una fecha estima de finalización el día {{ $endDay }}/{{ $endMonth }}/{{ $endYear }}, y finalizando en la fecha {{ $day }}/{{ $month }}/{{ $year }}. <br><br>
 		
 		En virtud de lo anterior, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y el señor <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>. acuerdan dar por concluido el proyecto <strong class="text-uppercase">"{{ $project->project_name }}"</strong> de mutuo acuerdo, sin pendientes o reclamaciones entre ellas, así como alguna acción presente o futura relacionada con el proyecto.
 	</div>

@@ -177,11 +177,17 @@ class ProjectController extends Controller
         // Cargar el proyecto junto con los inversores y comisionados
         $project = Project::with(['investors', 'commissioners'])->findOrFail($id);
 
+        $endDate = $project->project_end_date;
+        $endDay = Carbon::parse($endDate)->format('d');
+        $endMonth = Carbon::parse($endDate)->format('m');
+        $endYear = Carbon::parse($endDate)->format('Y');
+
         $completionDate = $project->project_completion_work_date;
         $day = Carbon::parse($completionDate)->format('d');
         $month = Carbon::parse($completionDate)->format('m');
         $year = Carbon::parse($completionDate)->format('Y');
-    
+
+            
         // Configuración de opciones para Dompdf
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
@@ -194,7 +200,7 @@ class ProjectController extends Controller
         $pdf = new Dompdf($options);
     
         // Cargar el contenido de la vista en Dompdf
-        $pdf->loadHtml(view('modules.projects._termination_report', compact('project', 'day', 'month', 'year')));
+        $pdf->loadHtml(view('modules.projects._termination_report', compact('project', 'endDay', 'endMonth', 'endYear', 'day', 'month', 'year')));
     
         // Establecer el tamaño y la orientación del papel
         $pdf->setPaper('A4', 'portrait');

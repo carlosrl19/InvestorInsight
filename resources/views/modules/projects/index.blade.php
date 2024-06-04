@@ -107,7 +107,7 @@ Proyectos
                             <td>{{ $project->project_end_date }}</td>
                             
                             @if($project->project_completion_work_date == null)
-                                <td><span class="text-red"><strong>Sin finalizar</strong></span></td>
+                                <td><span class="text-red"><strong>N/D</strong></span></td>
                             @else
                                 <td>{{ $project->project_completion_work_date }}</td>
                             @endif
@@ -151,7 +151,7 @@ Proyectos
                                     FINIQUITO
                                 </a>
                                 @else
-                                    <span class="text-red">No disponible</span>
+                                    <span class="text-red"><strong>N/D</strong></span>
                                 @endif
                             </td>
                             <td>

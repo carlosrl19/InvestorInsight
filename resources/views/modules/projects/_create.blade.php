@@ -44,7 +44,7 @@
                                     <input type="text" name="project_name" value="{{ old('project_name') }}"
                                         id="project_name"
                                         class="form-control @error('project_name') is-invalid @enderror"
-                                        autocomplete="off" maxlength="55" />
+                                        autocomplete="off" maxlength="55" onkeyup="this.value = this.value.toUpperCase();"/>
                                     @error('project_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

@@ -531,3 +531,10 @@ $(document).ready(function () {
         return isValid;
     }
 });
+
+// UPPERCASE project_name
+var input = document.getElementById("project_name");
+
+input.addEventListener("keyup", function() {
+  this.value = this.value.toUpperCase();
+});
