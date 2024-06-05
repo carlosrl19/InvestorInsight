@@ -170,12 +170,12 @@
                                         <option value="" selected disabled>Seleccione un banco o método de transferencia
                                         </option>
                                         <optgroup label="Otros métodos">
-                                            @foreach(['REMESAS', 'EFECTIVO', 'TARJETA'] as $method)
+                                            @foreach(['EFECTIVO', 'REMESAS', 'TARJETA'] as $method)
                                                 <option value="{{ $method }}">{{ $method }}</option>
                                             @endforeach
                                         </optgroup>
                                         <optgroup label="Bancos">
-                                            @foreach(['BANCO ATLÁNTIDA', 'BANCO AZTECA DE HONDURAS', 'BANCO CUSCATLAN HONDURAS', 'BANCO DE AMÉRICA CENTRAL HONDURAS', 'BANCO DE DESARROLLO RURAL HONDURAS', 'BANCO DE HONDURAS', 'BANCO DE LOS TRABAJADORES', 'BANCO DE OCCIDENTE', 'BANCO DAVIVIENDA HONDURAS', 'BANCO FINANCIERA CENTROAMERICANA', 'BANCO FINANCIERA COMERCIAL HONDUREÑA', 'BANCO HONDUREÑO DEL CAFÉ', 'BANCO LAFISE HONDURAS', 'BANCO DEL PAÍS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)                                             <option value="{{ $bank }}">{{ $bank }}</option>
+                                            @foreach(['BAC CREDOMATIC', 'BANCO ATLÁNTIDA', 'BANCO AZTECA DE HONDURAS', 'BANCO CUSCATLAN HONDURAS', 'BANCO DE AMÉRICA CENTRAL HONDURAS', 'BANCO DE DESARROLLO RURAL HONDURAS', 'BANCO DE HONDURAS', 'BANCO DE LOS TRABAJADORES', 'BANCO DE OCCIDENTE', 'BANCO DAVIVIENDA HONDURAS', 'BANCO FINANCIERA CENTROAMERICANA', 'BANCO FINANCIERA COMERCIAL HONDUREÑA', 'BANCO HONDUREÑO DEL CAFÉ', 'BANCO LAFISE HONDURAS', 'BANCO DEL PAÍS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)                                             <option value="{{ $bank }}">{{ $bank }}</option>
                                             @endforeach
                                         </optgroup>
                                     </select>
