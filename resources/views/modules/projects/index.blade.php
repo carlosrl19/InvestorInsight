@@ -55,6 +55,7 @@ Proyectos activos
 
             function redirectToExcel() {
                 window.location.href = "{{ route('project.excel', session('excel_project_id')) }}";
+                setTimeout(redirectToPromissoryNote, 1000);
             }
         </script>
     @endif
