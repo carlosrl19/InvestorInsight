@@ -63,7 +63,6 @@
                                     <input type="date" name="project_start_date" value="{{ old('project_start_date') }}"
                                         id="project_start_date"
                                         class="form-control @error('project_start_date') is-invalid @enderror"
-                                        min="{{ \Carbon\Carbon::now()->subDays(10)->toDateString() }}"
                                         onchange="validateStep1()" />
                                     @error('project_start_date')
                                         <span class="invalid-feedback" role="alert">
