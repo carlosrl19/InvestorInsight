@@ -23,10 +23,11 @@ class ProjectController extends Controller
     {
         $projects = Project::where('project_status', 1)->with('investors')->get();
         $investors = Investor::get();
+        $promissoryNote = PromissoryNote::get();
         $commissioners = CommissionAgent::get();
         $generatedCode = strtoupper(Str::random(12)); // Random code
 
-        return view('modules.projects.index', compact('projects', 'investors', 'commissioners', 'generatedCode'));
+        return view('modules.projects.index', compact('projects', 'investors', 'commissioners', 'promissoryNote', 'generatedCode'));
     }
 
     public function create()

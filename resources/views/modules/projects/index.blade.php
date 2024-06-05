@@ -89,6 +89,7 @@ Proyectos activos
                         <th>Inversión</th>
                         <th>Ganancia</th>
                         <th>Excel</th>
+                        <th>Pagaré</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
@@ -133,12 +134,25 @@ Proyectos activos
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                         <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2sz" />
                                         <path d="M8 11h8v7h-8z" />
                                         <path d="M8 15h8" />
                                         <path d="M11 11v7" />
                                     </svg>
                                     EXCEL
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('promissory_note.report', $project->id) }}" class="badge bg-red me-1" data-toggle="modal" data-target="#pdfModal">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                                        <path d="M8 11h8v7h-8z" />
+                                        <path d="M8 15h8" />
+                                        <path d="M11 11v7" />
+                                    </svg>
+                                    PAGARÉ
                                 </a>
                             </td>
                             <td>
@@ -240,6 +254,21 @@ Proyectos activos
                                 </td>
                             @endif
 
+                            <!-- Modal for promissory note -->
+                            <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="pdfModalLabel">Previsualización de pagaré</h5>
+                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <iframe id="pdf-frame" style="width:100%; height:500px;" src=""></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Modal for closing the project -->
                             <div class="modal fade" id="closeModal{{ $project->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="closeModal{{ $project->id }}" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -301,5 +330,20 @@ Proyectos activos
         };
         reader.readAsDataURL(event.target.files[0]);
     }
+</script>
+
+<!-- PDF view -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $('#pdfModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var url = button.attr('href'); // Extraer la información de los atributos data-*
+        var modal = $(this);
+        modal.find('#pdf-frame').attr('src', url);
+    });
+    $('#pdfModal').on('hidden.bs.modal', function (e) {
+        $(this).find('#pdf-frame').attr('src', '');
+    });
 </script>
 @endsection
