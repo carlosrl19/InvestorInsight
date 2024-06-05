@@ -34,10 +34,24 @@ Editar información /&nbsp;<b class="text-muted">{{ $investor->investor_name }}<
                                 </span>
                             @enderror
                         </div>
-                        <div class="col">
+                        <div class="col" style="display: none;">
                             <label class="form-label" for="investor_balance">Saldo monetario</label>
                             <input type="number" value="{{ $investor->investor_balance }}" name="investor_balance" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror"/>
                             @error('investor_balance')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="investor_balance">Empresa afiliada</label>
+                            <select type="text" class="form-select" id="select-optgroups" name="investor_company_name" style="font-size: clamp(0.7rem, 3vh, 0.8rem);">
+                                <option value="ROBENIOR" {{ (old('investor_company_name') ?? $investor->investor_company_name) == 'ROBENIOR' ? 'selected' : '' }}>ROBENIOR</option>
+                                <option value="MARSELLA" {{ (old('investor_company_name') ?? $investor->investor_company_name) == 'MARSELLA' ? 'selected' : '' }}>MARSELLA</option>
+                                <option value="JAGUER" {{ (old('investor_company_name') ?? $investor->investor_company_name) == 'JAGUER' ? 'selected' : '' }}>JAGUER</option>
+                                <option value="FUTURE CAPITAL" {{ (old('investor_company_name') ?? $investor->investor_company_name) == 'FUTURE CAPITAL' ? 'selected' : '' }}>FUTURE CAPITAL</option>
+                            </select>
+                            @error('investor_company_name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -75,7 +89,7 @@ Editar información /&nbsp;<b class="text-muted">{{ $investor->investor_name }}<
                         </div>
                         <div class="col">
                             <label class="form-label" for="investor_reference_id">Recomendado por</label>
-                            <select class="form-select js-example-basic-multiple" name="investor_reference_id" style="font-size: clamp(0.6rem, 3vh, 0.7rem); width: 100%">
+                            <select class="form-select js-example-basic-multiple" name="investor_reference_id" style="font-size: clamp(0.6rem, 3vh, 0.8rem); width: 100%">
                                 @foreach ($investors as $inv)
                                     <option value="{{ $inv->id }}" {{ $inv->id == $investor->investor_reference_id ? 'selected' : '' }}>
                                         {{ $inv->investor_name }}
@@ -88,7 +102,6 @@ Editar información /&nbsp;<b class="text-muted">{{ $investor->investor_name }}<
                                 </span>
                             @enderror
                         </div>
-
                     </div>
                     <a href="{{ route('investor.index') }}" class="btn btn-dark me-auto">Volver</a>
                     <button type="submit" class="btn btn-teal">Guardar cambios</button>

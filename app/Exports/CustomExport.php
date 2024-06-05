@@ -45,7 +45,7 @@ class CustomExport implements FromView, WithProperties, WithEvents
                 $sheet = $event->sheet->getDelegate();
                 $sheet->mergeCells('B2:C2');
 
-                // Protection / Security
+                // Protection / Security disabled
                 // $sheet->getProtection()->setPassword('invest24_'); // Set password
                 // $event->sheet->getProtection()->setSheet(true); // Set protection to excel
             },
