@@ -18,7 +18,7 @@ class StoreRequest extends FormRequest
             // Project rules
             'project_name' => 'required|string|min:3|max:55|regex:/^[a-zA-Z0-9\s]+$/|unique:projects,project_name',
             'project_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:projects,project_code',
-            'project_start_date' => 'required|date_format:Y-m-d|after_or_equal:' . date('Y-m-d', strtotime('-10 days')),
+            'project_start_date' => 'required|date_format:Y-m-d',
             'project_end_date' => 'required|date_format:Y-m-d|after:project_start_date',
             'project_work_days' => 'required|numeric|min:1|regex:/^\d+$/',
             'project_investment' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
