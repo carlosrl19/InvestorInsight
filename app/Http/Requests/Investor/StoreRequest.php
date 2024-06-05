@@ -12,7 +12,7 @@ class StoreRequest extends FormRequest
             'investor_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:investors',
             'investor_company_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/',
             'investor_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/|unique:investors',
-            'investor_phone' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|unique:investors',
+            'investor_phone' => 'required|string|min:8|max:11|regex:/^[0-9]+$/|unique:investors',
             'investor_reference_id' => 'numeric|exists:investors,id',
             'investor_balance' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'investor_status' => 'required|min:0|max:1',
@@ -51,7 +51,7 @@ class StoreRequest extends FormRequest
             'investor_phone.string' => 'El número de teléfono solo debe contener números.',
             'investor_phone.regex' => 'El número de teléfono no puede contener letras ni símbolos.',
             'investor_phone.min' => 'El número de teléfono debe contener al menos 8 digitos.',
-            'investor_phone.max' => 'El número de teléfono no puede exceder 8 digitos.',
+            'investor_phone.max' => 'El número de teléfono no puede exceder 11 digitos.',
             
             // Investor id messages
             'investor_reference_id.required' => 'El inversionista recomendante es obligatorio.',

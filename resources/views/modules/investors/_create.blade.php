@@ -48,7 +48,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="investor_phone" value="{{ old('investor_phone') }}" id="investor_phone" class="form-control @error('investor_phone') is-invalid @enderror" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
+                                <input type="text" minlength="8" maxlength="11" name="investor_phone" value="{{ old('investor_phone') }}" id="investor_phone" class="form-control @error('investor_phone') is-invalid @enderror" autocomplete="off">
                                 @error('investor_phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
