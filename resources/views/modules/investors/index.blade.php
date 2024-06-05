@@ -51,7 +51,7 @@ Inversionistas
                     <th>Empresa</th>
                     <th>Nº Identidad</th>
                     <th>Teléfono</th>
-                    <th>Capital</th>
+                    <th>Fondo monetario</th>
                     <th>Recomendación</th>
                     <th>Estado</th>
                     <th>Acciones</th>

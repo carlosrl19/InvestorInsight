@@ -37,13 +37,13 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="number" name="investor_balance" step="any" readonly value="0.00" title="Si el inversionista tiene saldo existente y se está agregando al sistema por primera vez, agregue el saldo monetario como una transferencia y agregue el comentario referente a que ya era un saldo existente." data-bs-toggle="tooltip" data-bs-placement="right" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror"/>
+                                <input type="number" name="investor_balance" step="any" readonly value="0.00" title="Si el inversionista tiene fondos existentes y se está agregando al sistema por primera vez, agregue el fondo monetario como una transferencia y agregue el comentario referente a que ya era un fondo existente." data-bs-toggle="tooltip" data-bs-placement="right" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror"/>
                                 @error('investor_balance')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label for="investor_balance">Saldo monetario</label>
+                                <label for="investor_balance">Fondo monetario</label>
                             </div>
                         </div>
                         <div class="col">

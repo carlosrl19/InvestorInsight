@@ -48,7 +48,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                     @else
                                     <strong class="text-red">(no tiene recomendación)</strong>,
                                     @endif
-                                    </strong> tiene un capital de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
+                                    </strong> tiene un fondo monetario de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
                                 </div>
                             </div>
                         </div>
