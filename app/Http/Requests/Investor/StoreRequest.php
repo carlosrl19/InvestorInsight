@@ -11,7 +11,7 @@ class StoreRequest extends FormRequest
         return [
             'investor_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:investors',
             'investor_company_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/',
-            'investor_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/|unique:investors',
+            'investor_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/',
             'investor_phone' => 'required|string|min:8|max:11|regex:/^[0-9]+$/|unique:investors',
             'investor_reference_id' => 'numeric|exists:investors,id',
             'investor_balance' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
