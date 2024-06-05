@@ -83,6 +83,7 @@
                                 <div class="mb-3">
                                     <label for="investor_company_name" class="mb-2 mt-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Afiliado</label>
                                     <select type="text" class="form-select" id="select-optgroups" name="investor_company_name" style="font-size: clamp(0.6rem, 3vh, 0.7rem);">
+                                        <option value="ROBENIOR" {{ old('investor_company_name') == 'ROBENIOR' ? 'selected' : '' }}>ROBENIOR</option>
                                         <option value="MARSELLA" {{ old('investor_company_name') == 'MARSELLA' ? 'selected' : '' }}>MARSELLA</option>
                                         <option value="JAGUER" {{ old('investor_company_name') == 'JAGUER' ? 'selected' : '' }}>JAGUER</option>
                                         <option value="FUTURE CAPITAL" {{ old('investor_company_name') == 'FUTURE CAPITAL' ? 'selected' : '' }}>FUTURE CAPITAL</option>
