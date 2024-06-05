@@ -83,6 +83,7 @@ Proyectos activos
             <table id="example" class="display table table-bordered" style="width: 100%;">
                 <thead>
                     <tr>
+                        <th>Código</th>
                         <th>Nombre proyecto</th>
                         <th>Inicio</th>
                         <th>Final <small>(previsto)</small></th>
@@ -104,6 +105,7 @@ Proyectos activos
                             $project = $projectGroup->first();
                         @endphp
                         <tr>
+                            <td>{{ $project->project_code}}</td>
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 <a href="{{ route('project.show', $project) }}">
                                     {{ $project->project_name }}
