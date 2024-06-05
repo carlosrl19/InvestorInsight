@@ -68,7 +68,6 @@ class StoreRequest extends FormRequest
             // Project start date messages
             'project_start_date.required' => 'La fecha de inicio del proyecto es obligatoria.',
             'project_start_date.date_format' => 'La fecha de inicio del proyecto debe tener el formato Y-m-d.',
-            'project_start_date.after_or_equal' => 'La fecha de inicio del proyecto no puede ser anterior a 10 días desde la fecha actual.',
             
             // Project end date messages
             'project_end_date.required' => 'La fecha de fin del proyecto es obligatoria.',

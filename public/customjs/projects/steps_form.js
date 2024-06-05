@@ -141,13 +141,13 @@ $(document).ready(function () {
             $("#start-date-error").show();
         } else {
             var now = new Date();
-            now.setDate(now.getDate() - 11);
+            now.setDate(now.getDate() - 730);
 
             if (new Date(startDate) < now) {
                 isValid = false;
                 startDateInput.addClass("is-invalid");
                 startDateError.text(
-                    "La fecha de inicio del proyecto no puede ser anterior a 10 días desde la fecha actual."
+                    "La fecha de inicio del proyecto no puede ser anterior a 2 año desde la fecha actual."
                 );
                 $("#start-date-error").show();
             } else if (endDate && new Date(startDate) >= new Date(endDate)) {
