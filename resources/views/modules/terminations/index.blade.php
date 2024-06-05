@@ -28,8 +28,7 @@ Proyectos finiquitados
                     <tr>
                         <th>Nombre proyecto</th>
                         <th>Inicio</th>
-                        <th>Final <small>(previsto)</small></th>
-                        <th>Final <small>(real)</small></th>
+                        <th>Final</th>
                         <th>Inversionista</th>
                         <th>Inversión</th>
                         <th>Ganancia</th>
@@ -58,13 +57,7 @@ Proyectos finiquitados
                                 </a>
                             </td>
                             <td>{{ $project->project_start_date }}</td>
-                            <td>{{ $project->project_end_date }}</td>
-                            
-                            @if($project->project_completion_work_date == null)
-                                <td><span class="text-red"><strong>N/D</strong></span></td>
-                            @else
-                                <td>{{ $project->project_completion_work_date }}</td>
-                            @endif
+                            <td>{{ $project->project_end_date }}</td>                            
                             <td>
                                 @foreach ($project->investors as $investor)
                                     <a href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}<br>

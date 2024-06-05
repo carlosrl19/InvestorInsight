@@ -17,19 +17,5 @@ class CommissionAgentSeeder extends Seeder
                 'commissioner_phone' => '31559105',
             ]
         );
-        CommissionAgent::create(
-            [
-                'commissioner_name' => 'MARCOS BARAHONA',
-                'commissioner_dni' => '0801199301345',
-                'commissioner_phone' => '88978899',
-            ]
-        );
-        CommissionAgent::create(
-            [
-                'commissioner_name' => 'ADA FLORES',
-                'commissioner_dni' => '0801199812345',
-                'commissioner_phone' => '31234567',
-            ]
-        );
     }
 }

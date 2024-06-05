@@ -24,10 +24,10 @@ class ProjectTerminationController extends Controller
         $endMonth = Carbon::parse($endDate)->format('m');
         $endYear = Carbon::parse($endDate)->format('Y');
 
-        $completionDate = $project->project_completion_work_date;
-        $day = Carbon::parse($completionDate)->format('d');
-        $month = Carbon::parse($completionDate)->format('m');
-        $year = Carbon::parse($completionDate)->format('Y');
+        $startDate = $project->project_start_date;
+        $day = Carbon::parse($startDate)->format('d');
+        $month = Carbon::parse($startDate)->format('m');
+        $year = Carbon::parse($startDate)->format('Y');
 
             
         // Configuración de opciones para Dompdf

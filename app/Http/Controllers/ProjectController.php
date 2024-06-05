@@ -139,12 +139,7 @@ class ProjectController extends Controller
     {
         // Validar los datos recibidos
         $request->validate([
-            'project_completion_work_date' => 'required|date',
             'project_proof_transfer_img' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
-    
-            // Project start date messages
-            'project_completion_work_date.date' => 'La fecha final de cierre del proyecto debe ser una fecha válida.',
-            'project_completion_work_date.after_or_equal' => 'La fecha final de cierre del proyecto no puede ser anterior a la fecha de inicio del mismo.',
     
             // Project proof transfer img messages
             'project_proof_transfer_img.image' => 'El comprobante de pago de transferencia del proyecto debe ser una imagen válida.',
@@ -161,7 +156,6 @@ class ProjectController extends Controller
     
         // Actualizar el estado del proyecto
         $project->project_status = '0';
-        $project->project_completion_work_date = $request->project_completion_work_date;
         $project->save();
     
         // Sumar el investor_final_investment al investor_balance de cada inversor asociado al proyecto
