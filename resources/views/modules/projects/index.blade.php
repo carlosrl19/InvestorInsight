@@ -204,7 +204,6 @@ Proyectos activos
                                                 ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Finalizado"? Utilize esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
                                                 Es necesario que ingrese la fecha en la que el proyecto ha finalizado sus labores, así como el comprobante de pago de la transferencia del inversionista para el proyecto.
                                                 <div class="row mt-4">
-                                                    <img id="project_proof_transfer_img" src="{{ asset('images/transfer-vector.png') }}" class="mb-4 mt-4" width="200" height="200" style="object-fit: contain;">
                                                     <div class="col">
                                                         <div class="form-floating">
                                                             <input type="file" accept="image/*" class="form-control @error('project_proof_transfer_img') is-invalid @enderror" id="project_proof_transfer_img" name="project_proof_transfer_img" alt="proof-transfer" onchange="previewImage(event)">
@@ -322,18 +321,6 @@ Proyectos activos
 
 <!-- Form steps -->
 <script src="{{ asset('customjs/projects/steps_form.js') }}"></script>
-
-<!-- Show img -->
-<script>
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function(){
-            var output = document.getElementById('project_proof_transfer_img');
-            output.src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-</script>
 
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
