@@ -30,9 +30,14 @@ Comisionistas
     </div>
     @endif
     
-    @if(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="10000">
-        <strong>{{ session('error') }}</strong>
+    @if ($errors->any())
+    <div class="alert alert-danger alert-dismissible" alert-dismissible fade show" style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="10000">
+        <strong>El formulario contiene los siguientes errores:</strong>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
     </div>
     @endif
 
