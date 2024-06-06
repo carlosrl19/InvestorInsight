@@ -38,7 +38,7 @@ class CommissionAgentController extends Controller
     public function edit($id)
     {
         $commission_agent = CommissionAgent::findOrFail($id);
-        return view('modules.commission_agent.update', compact('commission_agent'));
+        return view('modules.commission_agent.create', compact('commission_agent'));
     }    
 
 
@@ -52,8 +52,8 @@ class CommissionAgentController extends Controller
     {
         $commissionAgent = CommissionAgent::find($id);
     
-        if (($commissionAgent->id == 1 && $commissionAgent->commissioner_name == 'Junior Alexis Ayala Guerrero')) {
-            return redirect()->route('commission_agent.index')->with('error', 'No se puede eliminar a Junior Alexis Ayala Guerrero de los comisionistas.');
+        if (($commissionAgent->id == 1 || $commissionAgent->commissioner_name == 'JUNIOR AYALA')) {
+            return redirect()->route('commission_agent.index')->with('error', 'No se puede eliminar a Junior Ayala de los comisionistas.');
         }
     
         $commissionAgent->delete();

@@ -1,17 +1,11 @@
-@extends('layout.admin')
-
-@section('pretitle')
-Comisionistas
-@endsection
-
-@section('title')
-Editar información /&nbsp;<b class="text-muted">{{ $commission_agent->commissioner_name }}<b/>
-@endsection
-
-@section('content')
-    <div class="container-xl">
-        <div class="card">
-            <div class="card-body">
+<div class="modal modal-blur fade" id="modal-team-update" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border: 2px solid #52524E">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar inversionista</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
                 <form method="POST" action="{{ route('commission_agent.update', ['commission_agent' => $commission_agent]) }}" novalidate>
                     @method('PUT')
                     @csrf
@@ -53,4 +47,6 @@ Editar información /&nbsp;<b class="text-muted">{{ $commission_agent->commissio
             </div>
         </div>
     </div>
-@endsection
+</div>
+
+<script src="{{ asset('customjs/uppercase.js') }}"></script>

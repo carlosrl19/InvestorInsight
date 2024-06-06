@@ -24,31 +24,111 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
 @endsection
 
 @section('content')
-<div class="container-xl">
-    <div class="row">
-        <div class="col-12">
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="accordion" id="accordion-example">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading-1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true">
+                                    <h4>Información general del inversionista</h4>
+                                </button>
+                                </h2>
+                                <div id="collapse-1" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
+                                    <div class="accordion-body pt-0">
+                                        <strong>{{ $investor->investor_name }}</strong> es un inversionista con número de identidad <strong>{{ $investor->investor_dni }}</strong>, número de teléfono <strong>{{ $investor->investor_phone }}</strong>.
+                                        Recomendado por
+                                        <strong>
+                                        @if($referenceInvestor)
+                                        <a href="{{ route('investor.show', ['investor' => $referenceInvestor->id]) }}">
+                                            <strong>{{ $referenceInvestor->investor_name }}</strong>
+                                        </a>
+                                        @else
+                                        <strong class="text-red">(no tiene recomendación)</strong>,
+                                        @endif
+                                        </strong> tiene un fondo monetario de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-6">
             <div class="card mb-2">
                 <div class="card-body">
                     <div class="accordion" id="accordion-example">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading-1">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true">
-                                <h4>Información general del inversionista</h4>
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="true">
+                                <h4>Proyectos en proceso</h4>
                             </button>
                             </h2>
-                            <div id="collapse-1" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
+                            <div id="collapse-2" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
                                 <div class="accordion-body pt-0">
-                                    <strong>{{ $investor->investor_name }}</strong> es un inversionista con número de identidad <strong>{{ $investor->investor_dni }}</strong>, número de teléfono <strong>{{ $investor->investor_phone }}</strong>.
-                                    Recomendado por
-                                    <strong>
-                                    @if($referenceInvestor)
-                                    <a href="{{ route('investor.show', ['investor' => $referenceInvestor->id]) }}">
-                                        <strong>{{ $referenceInvestor->investor_name }}</strong>
-                                    </a>
-                                    @else
-                                    <strong class="text-red">(no tiene recomendación)</strong>,
-                                    @endif
-                                    </strong> tiene un fondo monetario de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
+                                    <table id="example0" class="display table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Proyecto</th>
+                                                <th>Total invertido</th>
+                                                <th>Ganancia proyecto</th>
+                                                <th>Ganancia inversionista</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($activeProjects as $project)
+                                            <tr>
+                                                <td>{{ $project->project_name }}</td>
+                                                <td>L. {{ number_format($project->investor_investment, 2) }}</td>
+                                                <td>L. {{ number_format($project->investor_profit, 2) }}</td>
+                                                <td>L. {{ number_format($project->investor_final_profit, 2) }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <div class="accordion" id="accordion-example">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading-1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="true">
+                                <h4>Historial de proyectos finalizados</h4>
+                            </button>
+                            </h2>
+                            <div id="collapse-2" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
+                                <div class="accordion-body pt-0">
+                                    <table id="example1" class="display table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Proyecto</th>
+                                                <th>Total invertido</th>
+                                                <th>Ganancia proyecto</th>
+                                                <th>Ganancia inversionista</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($completedProjects as $project)
+                                            <tr>
+                                                <td>{{ $project->project_name }}</td>
+                                                <td>L. {{ number_format($project->investor_investment, 2) }}</td>
+                                                <td>L. {{ number_format($project->investor_final_profit, 2) }}</td>
+                                                <td>L. {{ number_format($project->investor_final_profit, 2) }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -57,87 +137,6 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
             </div>
         </div>
     </div>
-    <div class="row">
-    <div class="col-6">
-        <div class="card mb-2">
-            <div class="card-body">
-                <div class="accordion" id="accordion-example">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading-1">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="true">
-                            <h4>Proyectos en proceso</h4>
-                        </button>
-                        </h2>
-                        <div id="collapse-2" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
-                            <div class="accordion-body pt-0">
-                                <table id="example0" class="display table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Proyecto</th>
-                                            <th>Total invertido</th>
-                                            <th>Ganancia proyecto</th>
-                                            <th>Ganancia inversionista</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($activeProjects as $project)
-                                        <tr>
-                                            <td>{{ $project->project_name }}</td>
-                                            <td>L. {{ number_format($project->investor_investment, 2) }}</td>
-                                            <td>L. {{ number_format($project->investor_profit, 2) }}</td>
-                                            <td>L. {{ number_format($project->investor_final_profit, 2) }}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="card mb-2">
-            <div class="card-body">
-                <div class="accordion" id="accordion-example">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading-1">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="true">
-                            <h4>Historial de proyectos finalizados</h4>
-                        </button>
-                        </h2>
-                        <div id="collapse-2" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
-                            <div class="accordion-body pt-0">
-                                <table id="example1" class="display table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Proyecto</th>
-                                            <th>Total invertido</th>
-                                            <th>Ganancia proyecto</th>
-                                            <th>Ganancia inversionista</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($completedProjects as $project)
-                                        <tr>
-                                            <td>{{ $project->project_name }}</td>
-                                            <td>L. {{ number_format($project->investor_investment, 2) }}</td>
-                                            <td>L. {{ number_format($project->investor_final_profit, 2) }}</td>
-                                            <td>L. {{ number_format($project->investor_final_profit, 2) }}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
     <div class="card mb-4">
         <div class="card-body">
