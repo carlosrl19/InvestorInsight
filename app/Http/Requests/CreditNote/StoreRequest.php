@@ -15,7 +15,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'investor_id' => 'required|numeric|exists:investors,id',
-            'creditNote_date' => 'required|date_format:Y-m-d\TH:i:s',
+            'creditNote_date' => 'required|date:Y-m-d H:i:s',
             'creditNote_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'creditNote_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:credit_notes,creditNote_code',
             'creditNote_description' => 'required|string|min:3|max:255',
@@ -40,7 +40,7 @@ class StoreRequest extends FormRequest
 
             // Credit note date messages
             'creditNote_date.required' => 'La fecha de la nota crédito es obligatoria.',
-            'creditNote_date.date' => 'Debe ingresar un formato de fecha válido para la nota crédito.',
+            'creditNote_date.date' => 'Debe ingresar un formato de fecha válido para la nota crédito (Y-m-d H:i:s).',
 
             // Credit note name messages
             'creditNote_amount.required' => 'EL monto de la nota crédito es obligatoria.',

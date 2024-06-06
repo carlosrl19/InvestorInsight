@@ -1,5 +1,5 @@
 <div class="modal modal-blur fade" id="modal-team" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
-   <div class="modal-dialog modal-dialog-centered" role="document">
+   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #52524E">
             <div class="modal-header">
                 <h5 class="modal-title">Nueva nota crédito</h5>
@@ -9,15 +9,15 @@
                 <form action="{{ route('credit_note.store')}}" method="POST">
                     @csrf
                     <div class="row mb-3 align-items-end">
-                        <div class="col" style="display: none">
+                       <div class="col" style="display: none">
                             <div class="form-floating">
                                 <input type="datetime-local" 
                                     name="creditNote_date" 
                                     style="font-size: 10px;" 
-                                    value="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
+                                    value="{{ $creditNoteDate }}" 
                                     id="creditNote_date"
-                                    min="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
-                                    max="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
+                                    min="{{ $creditNoteDate }}" 
+                                    max="{{ $creditNoteDate }}" 
                                     class="form-control @error('creditNote_date') is-invalid @enderror" 
                                     readonly />
                                 @error('creditNote_date')
@@ -29,7 +29,8 @@
                                 <label class="form-label" for="creditNote_date"><small>Fecha de nota crédito</small></label>
                             </div>
                         </div>
-                        <div class="col">
+
+                        <div class="col-lg-6">
                             <div class="form-floating">
                                 <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;">
                                     <option value="" selected disabled>Seleccione un inversionista</option>
@@ -42,15 +43,17 @@
                                 <label for="investor_id">Inversionistas</label>
                             </div>
                         </div>
+                        
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" id="investor_balance" class="form-control" value="" readonly oninput="formatNumber(this.value)">
                                 <label for="investor_balance">Capital actual</label>
                             </div>
                         </div>
+                        
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="creditNote_amount" value="{{ old('creditNote_amount') }}" id="creditNote_amount" class="form-control @error('creditNote_amount') is-invalid @enderror"/>
+                                <input type="text" name="creditNote_amount" value="{{ old('creditNote_amount') }}" id="creditNote_amount" class="form-control @error('creditNote_amount') is-invalid @enderror" autocomplete="off"/>
                                 @error('creditNote_amount')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

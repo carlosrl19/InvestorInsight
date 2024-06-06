@@ -1,8 +1,15 @@
 <div class="main">
 
+	<!-- Date cantainer  -->
+	<div class="code-container-left">
+		<span class="text-uppercase">{{ $dia }} de {{ $mes }} de {{ $anio }}</span><br>
+		<span class="text-bold text-uppercase">INVERSIONES ROBENIOR</span><br>
+		<span class="text-uppercase">San Pedro Sula, Honduras, CA</span>
+	</div>
+
 	<!-- Code container -->
-	<div class="code-container">
-		<span>#{{ $creditNote->creditNote_code }}</span>
+	<div class="code-container-right">
+		<span class="text-bold">#{{ $creditNote->creditNote_code }}</span>
 	</div>
 	
 	<!-- Credit's note title -->
@@ -13,7 +20,10 @@
 	<!-- Credit's note body -->
 	<div class="body-note mt-4 mb-4">
 		Por la presente, se emite la siguiente nota de crédito a favor del inversionista <strong>{{ $creditNote->investor->investor_name }}</strong>, identificado con su número de identidad 
-		<strong>{{ $creditNote->investor->investor_dni }}</strong>, número de teléfono <strong>{{ $creditNote->investor->investor_phone }}</strong>, una nota de crédito con un valor total de Lps. <strong>{{ number_format($creditNote->creditNote_amount,2) }}</strong>.
+		<strong>{{ $creditNote->investor->investor_dni }}</strong>, número de teléfono <strong>{{ $creditNote->investor->investor_phone }}</strong>, con un valor total de Lps. <strong>{{ number_format($creditNote->creditNote_amount,2) }}</strong>.
+		<br>
+		<br>
+		Mediante el presente documento, el inversionista queda con un fondo disponible de Lps. <strong>{{ number_format($creditNote->investor->investor_balance,2 )}}</strong>.
 	</div>
 
 	<!-- Credit's note reason title -->
@@ -26,18 +36,14 @@
 		{{ $creditNote->creditNote_description }}
 	</div>
 
-	<!-- Credit's note issue date -->
-	<div class="mt-6">
-		Documento emitido por Inversiones ROBENIOR en San Pedro Sula, Cortés, Honduras, a los {{ $dia }} días del mes de {{ $mes }} del año {{ $anio }}.
-	</div>
-
 	<!-- Credit's note Robenior signature -->
-	<div class="mt-4 ml-center">
-		&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px" style="position: absolute; margin-top: -25px"><br>
-		&nbsp;&nbsp;<img src="static/sello-ejemplo.png" alt="Logo" height="80px" style="position: absolute; margin-top: -35px; margin-left: 30px"><br>
-		_________________<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dariel Moncada<br>
-		<strong style="margin-left: -12px">Gerente administrativo</strong>
+	<div class="mt-6 ml-center">
+		&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px"
+			style="position: absolute; margin-top: -45px; transform: rotate(35deg)">
+			<img src="static/sello-ejemplo.png" alt="Sello" height="80px"
+			style="position: absolute; margin-top: -60px; margin-left: 100px">
+		<span style="margin-left: -30px">__________________________</span><br>
+		<strong>Junior Alexis Ayala Guerrero</strong><br>
 	</div>
 
 	<!-- Legal footer -->
@@ -54,18 +60,26 @@
 		text-align: justify;
 	}
 
-	.code-container{
-		background-color: darkgrey;
-		border-radius: 5px;
-		padding-left: 15px;
-		padding-right: 15px;
-		padding-top: 3px;
-		opacity: 0.3;
+	.code-container-left{
+		padding-top: 2%;
+		opacity: 1;
+		float: left;
+		padding-bottom: 3px;
+		font-size: 12px;
+		color: black;
+	}
+
+	.code-container-right{
+		padding-top: 2%;
+		opacity: 1;
 		float: right;
 		padding-bottom: 3px;
-		font-size: 10px;
+		font-size: 12px;
 		color: black;
-		font-style: italic;
+	}
+
+	.text-bold{
+		font-weight: bolder;
 	}
 
 	.body-note{
@@ -85,7 +99,7 @@
 	}
 
 	.mt-center {
-		margin-top: 7% !important;
+		margin-top: 15% !important;
 	}
 
 	.mb-2 {
@@ -97,7 +111,7 @@
 	}
 
 	.ml-center {
-  		margin-left: 37% !important;
+  		margin-left: 35% !important;
 	}
 
 	.header-note{
@@ -123,5 +137,9 @@
 
 	.footer{
 		font-size: 10px;
+	}
+
+	.text-uppercase{
+		text-transform: uppercase;
 	}
 </style>

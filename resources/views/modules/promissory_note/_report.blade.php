@@ -5,10 +5,10 @@
 		<span class="text-bold">#PG-{{ $promissoryNote->promissoryNote_code }}</span>
 	</div>
 
-    <!-- Credit's note title -->
+    <!-- Promissory note title -->
     <div class="title-note title-top-margin">PAGARE L {{ number_format($promissoryNote->promissoryNote_amount, 2) }}</div>
 
-    <!-- Credit's note body -->
+    <!-- Promissory note body -->
     <div class="body-note mt-6 mb-4">Yo: <strong class="text-underline">JUNIOR ALEXIS AYALA GUERRERO</strong>, mayor de edad, hondureño, soltero y
         comerciante, con documento Nacional de identificación número <strong
             class="text-underline">0801199907469</strong>,
@@ -29,12 +29,13 @@
     </div>
     <br>
 
-    <!-- Credit's note Robenior signature -->
-    <div class="mt-6 ml-center">&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="90px"
-            style="position: absolute; margin-top: 10px; transform: rotate(25deg)">
-            <img src="static/sello-ejemplo.png" alt="Sello" height="80px"
-			style="position: absolute; margin-top: -5px;">
-        <br>_________________
+    <!-- Promissory note Robenior signature -->
+    <div class="mt-6 ml-center">
+        &nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px"
+			style="position: absolute; margin-top: 0px; transform: rotate(35deg)">
+			<img src="static/sello-ejemplo.png" alt="Sello" height="80px"
+			style="position: absolute; margin-top: -20px; margin-left: 100px">
+        <br>_______________________
         <br><span>DNI: <strong class="text-underline">0801199907469</strong></span>
     </div>
 </div>

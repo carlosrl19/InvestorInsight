@@ -14,14 +14,14 @@
 
 	<!-- Finiquito title -->
 	<div class="title-note title-top-margin ml-4">
-		FINIQUITO DE PROYECTO
+		FINIQUITO DE PROYECTO L. {{ number_format($project->project_investment + $project->investors->sum('pivot.investor_final_profit'),2) }}
 	</div>
 
 	<!-- Finiquito body -->
 	<div class="body-note mb-4">
 		Por medio del presente documento, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, 
 		formalizan la conclusión y finalización del proyecto denominado <strong class="text-uppercase">"{{ $project->project_name }}"</strong> con una fecha inicial el día <strong>{{ $day }}/{{ $month }}/{{ $year }}</strong>,
-		y final el día <strong>{{ $endDay }}/{{ $endMonth }}/{{ $endYear }}</strong>. 
+		y final el día <strong>{{ $endDay }}/{{ $endMonth }}/{{ $endYear }}</strong>, con un valor total de Lps. <strong>{{ number_format($project->project_investment + $project->investors->sum('pivot.investor_final_profit'),2) }}</strong>.
 		<br><br>
 		
 		En virtud de lo anterior, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, acuerdan dar por concluido el proyecto <strong class="text-uppercase">"{{ $project->project_name }}"</strong> sin pendientes o reclamaciones entre ellos, así como alguna acción presente o futura relacionada con el proyecto.
@@ -30,11 +30,11 @@
 	<!-- Finiquito signatures -->
 	<div class="mt-6 ml-center mt-center">
 		&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px"
-			style="position: absolute; margin-top: -35px; transform: rotate(20deg)">
+			style="position: absolute; margin-top: -45px; transform: rotate(35deg)">
 			<img src="static/sello-ejemplo.png" alt="Sello" height="80px"
-			style="position: absolute; margin-top: -35px;">
+			style="position: absolute; margin-top: -60px; margin-left: 100px">
 		<span style="margin-left: -30px">__________________________</span><br>
-		Junior Alexis Ayala Guerrero<br>
+		<strong>Junior Alexis Ayala Guerrero</strong><br>
 	</div>
 
 	<!-- Legal footer -->
@@ -111,7 +111,7 @@
 	}
 
 	.ml-center {
-		margin-left: 37% !important;
+		margin-left: 35% !important;
 	}
 
 	.title-note {

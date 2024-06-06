@@ -75,7 +75,6 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                             <tr>
                                                 <th>Proyecto</th>
                                                 <th>Total invertido</th>
-                                                <th>Ganancia proyecto</th>
                                                 <th>Ganancia inversionista</th>
                                             </tr>
                                         </thead>
@@ -84,8 +83,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                             <tr>
                                                 <td>{{ $project->project_name }}</td>
                                                 <td>L. {{ number_format($project->investor_investment, 2) }}</td>
-                                                <td>L. {{ number_format($project->investor_profit, 2) }}</td>
-                                                <td>L. {{ number_format($project->investor_final_profit, 2) }}</td>
+                                                <td>L. {{ number_format($project->investor_final_profit + $project->investor_investment, 2) }}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -114,7 +112,6 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                             <tr>
                                                 <th>Proyecto</th>
                                                 <th>Total invertido</th>
-                                                <th>Ganancia proyecto</th>
                                                 <th>Ganancia inversionista</th>
                                             </tr>
                                         </thead>
@@ -123,8 +120,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                             <tr>
                                                 <td>{{ $project->project_name }}</td>
                                                 <td>L. {{ number_format($project->investor_investment, 2) }}</td>
-                                                <td>L. {{ number_format($project->investor_final_profit, 2) }}</td>
-                                                <td>L. {{ number_format($project->investor_final_profit, 2) }}</td>
+                                                <td>L. {{ number_format($project->investor_final_profit + $project->investor_investment, 2) }}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>

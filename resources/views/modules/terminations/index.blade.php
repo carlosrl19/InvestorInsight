@@ -70,7 +70,7 @@ Proyectos finiquitados
                                 </a>
                             </td>
                             <td>L. {{ number_format($project->project_investment,2) }}</td>
-                            <td>L. {{ number_format($project->investors->sum('pivot.investor_profit'),2) }}</td>
+                            <td>L. {{ number_format($project->investors->sum('pivot.investor_final_profit'),2) }}</td>
                             <td>
                                 @if($project->project_status == 0)
                                 <a href="{{ route('termination.report', $project->id) }}" class="badge bg-red me-1" data-toggle="modal" data-target="#pdfModal">
