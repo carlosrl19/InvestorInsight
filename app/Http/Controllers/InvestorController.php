@@ -117,7 +117,7 @@ class InvestorController extends Controller
     {
         $investor = Investor::findOrFail($id);
         $investors = Investor::where('id', '!=', $id)->get(); // Excluir al inversor que se está editando
-        return view('modules.investors.update', compact('investor', 'investors'));
+        return view('modules.investors.create', compact('investor', 'investors'));
     }
 
     public function update(UpdateRequest $request, Investor $investor)

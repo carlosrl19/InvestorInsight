@@ -38,7 +38,7 @@ class CommissionAgentController extends Controller
     public function edit($id)
     {
         $commission_agent = CommissionAgent::findOrFail($id);
-        return view('modules.commission_agent.create', compact('commission_agent'));
+        return view('modules.commission_agent.index', compact('commission_agent'));
     }    
 
 
