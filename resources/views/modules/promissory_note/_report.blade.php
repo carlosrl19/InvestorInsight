@@ -6,7 +6,7 @@
 	</div>
 
     <!-- Promissory note title -->
-    <div class="title-note title-top-margin">PAGARE L {{ number_format($promissoryNote->promissoryNote_amount, 2) }}</div>
+    <div class="title-note title-top-margin">PAGARE L. {{ number_format($promissoryNote->promissoryNote_amount,2)}}</div>
 
     <!-- Promissory note body -->
     <div class="body-note mt-6 mb-4">Yo: <strong class="text-underline">JUNIOR ALEXIS AYALA GUERRERO</strong>, mayor de edad, hondureño, soltero y

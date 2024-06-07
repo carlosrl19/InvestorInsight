@@ -21,6 +21,7 @@ class CreditNoteController extends Controller
         $investors = Investor::get();
         $creditNoteCode = strtoupper(Str::random(12)); // Credit note random code
         $creditNoteDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
+
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
@@ -69,7 +70,7 @@ class CreditNoteController extends Controller
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="Nota crédito.pdf"');
     }
-    
+     
     public function store(StoreRequest $request)
     {
         DB::beginTransaction();
