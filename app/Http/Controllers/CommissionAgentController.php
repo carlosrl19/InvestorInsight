@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommissionAgent\StoreRequest;
 use App\Http\Requests\CommissionAgent\UpdateRequest;
 use App\Models\CommissionAgent;
+use App\Models\Investor;
 
 class CommissionAgentController extends Controller
 {
@@ -12,7 +13,9 @@ class CommissionAgentController extends Controller
     public function index()
     {
         $commission_agents = CommissionAgent::get();
-        return view('modules.commission_agent.index', compact('commission_agents'));
+        $total_investor_balance = Investor::sum('investor_balance');
+
+        return view('modules.commission_agent.index', compact('commission_agents', 'total_investor_balance'));
     }
 
 

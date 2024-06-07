@@ -20,8 +20,9 @@ class CreditNoteController extends Controller
         $investors = Investor::get();
         $creditNoteCode = strtoupper(Str::random(12)); // Credit note random code
         $creditNoteDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
+        $total_investor_balance = Investor::sum('investor_balance');
 
-        return view('modules.credit_note.index', compact('creditNotes', 'investors', 'creditNoteCode', 'creditNoteDate'));
+        return view('modules.credit_note.index', compact('creditNotes', 'investors', 'creditNoteCode', 'creditNoteDate', 'total_investor_balance'));
     }
 
     public function create()

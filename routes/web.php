@@ -22,7 +22,9 @@ Route::get('credit_note/{id}/report', 'App\Http\Controllers\CreditNoteController
 Route::resource('promissory_note', 'App\Http\Controllers\PromissoryNoteController')->names('promissory_note');
 Route::get('promissory_note/{id}/report', 'App\Http\Controllers\PromissoryNoteController@showReport')->name('promissory_note.report');
 
-// Projects
+// ==============
+//  Projects     //
+// =============
 Route::resource('project', 'App\Http\Controllers\ProjectController')->names('project');
 Route::get('project/{id}/report', 'App\Http\Controllers\ProjectController@showReport')->name('project.report');
 Route::post('project/{project}/finish', 'App\Http\Controllers\ProjectController@finishProject')->name('project.finish');
@@ -36,3 +38,8 @@ Route::get('termination/{id}/report', 'App\Http\Controllers\ProjectTerminationCo
 
 // Closed
 Route::get('closed/', 'App\Http\Controllers\ProjectController@indexClosed')->name('project.closed');
+
+// ==========
+// ROBENIOR  //
+// ==========
+Route::get('funds/', 'App\Http\Controllers\RoebniorController@indexfunds')->name('robenior.funds');

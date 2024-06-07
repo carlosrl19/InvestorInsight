@@ -15,7 +15,8 @@ class DashboardController extends Controller
     public function index(){
         $investors = Investor::count();
         $commissioner = CommissionAgent::count();
-        
+        $total_investor_balance = Investor::sum('investor_balance');
+
         $completedProjectsCount = DB::table('projects')
         ->where('projects.project_status', 0)
         ->get()
@@ -34,6 +35,6 @@ class DashboardController extends Controller
         $transfers = Transfer::latest()->take(25)->get();
         $creditNotes = CreditNote::latest()->take(25)->get();
 
-        return view('modules.dashboard.index', compact('investors', 'commissioner', 'transfers', 'creditNotes', 'completedProjectsCount', 'activeProjectsCount', 'closedProjectsCount'));
+        return view('modules.dashboard.index', compact('investors', 'commissioner', 'total_investor_balance', 'transfers', 'creditNotes', 'completedProjectsCount', 'activeProjectsCount', 'closedProjectsCount'));
     }
 }

@@ -17,13 +17,14 @@ class InvestorController extends Controller
     {
         $investors = Investor::get();
         $commissioners = CommissionAgent::get();
+        $total_investor_balance = Investor::sum('investor_balance');
 
         // Mapeamos los investors para obtener sus referencias
         $investors = $investors->map(function ($investor) {
             $investor->investor_reference = Investor::find($investor->investor_reference_id);
             return $investor;
         });
-        return view('modules.investors.index', compact('investors', 'commissioners'));
+        return view('modules.investors.index', compact('investors', 'commissioners', 'total_investor_balance'));
     }
 
     public function create()

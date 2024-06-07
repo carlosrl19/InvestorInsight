@@ -26,16 +26,18 @@ class ProjectController extends Controller
         $promissoryNote = PromissoryNote::get();
         $commissioners = CommissionAgent::get();
         $generatedCode = strtoupper(Str::random(12)); // Random code
+        $total_investor_balance = Investor::sum('investor_balance');
 
-        return view('modules.projects.index', compact('projects', 'investors', 'commissioners', 'promissoryNote', 'generatedCode'));
+        return view('modules.projects.index', compact('projects', 'investors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance'));
     }
 
     public function indexClosed()
     {
         $projects = Project::where('project_status', 2)->with('investors')->get();
         $investors = Investor::get();
+        $total_investor_balance = Investor::sum('investor_balance');
 
-        return view('modules.projects_closed.index', compact('projects', 'investors',));
+        return view('modules.projects_closed.index', compact('projects', 'investors', 'total_investor_balance'));
     }
 
     public function create()

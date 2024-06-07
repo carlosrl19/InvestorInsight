@@ -15,7 +15,9 @@ class TransferController extends Controller
         $investors = Investor::get();
         $transfers = Transfer::get();
         $generatedCode = strtoupper(Str::random(12));
-        return view('modules.transfer.index', compact('investors', 'transfers', 'generatedCode'));
+        $total_investor_balance = Investor::sum('investor_balance');
+
+        return view('modules.transfer.index', compact('investors', 'transfers', 'generatedCode', 'total_investor_balance'));
     }
 
     public function create()

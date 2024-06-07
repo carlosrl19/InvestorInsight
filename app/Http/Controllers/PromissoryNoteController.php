@@ -18,8 +18,9 @@ class PromissoryNoteController extends Controller
         $promissoryNotes = PromissoryNote::get();
         $investors = Investor::get();
         $promissoryCode = strtoupper(Str::random(12)); // Promissory note random code
+        $total_investor_balance = Investor::sum('investor_balance');
 
-        return view("modules.promissory_note.index", compact("promissoryNotes", "investors", "promissoryCode"));
+        return view("modules.promissory_note.index", compact("promissoryNotes", "investors", "promissoryCode", 'total_investor_balance'));
     }
     public function create()
     {

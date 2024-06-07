@@ -61,7 +61,7 @@ Pagarés
                         <th>Inversionista</th>
                         <th>Monto pagaré</th>
                         <th>Estado pagaré</th>
-                        <th>Exportar</th>
+                        <th>Pagaré</th>
                     </tr>
                 </thead>
                 <tbody>

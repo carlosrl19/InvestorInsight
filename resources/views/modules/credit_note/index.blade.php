@@ -61,7 +61,7 @@ Notas crédito
                         <th>Inversionista</th>
                         <th>Monto nota crédito</th>
                         <th>Comentarios / motivos de nota crédito</th>
-                        <th>Exportar</th>
+                        <th>Nota crédito</th>
                     </tr>
                 </thead>
                 <tbody>
