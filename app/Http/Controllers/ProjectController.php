@@ -70,7 +70,7 @@ class ProjectController extends Controller
                     'investor_id' => $invId,
                     'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
                     'promissoryNote_final_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->addMonth()->format('Y-m-d'),
-                    'promissoryNote_amount' => $validatedData['investor_investment'][$i],
+                    'promissoryNote_amount' => $validatedData['investor_investment'][$i] + $validatedData['investor_final_profit'][$i],
                     'promissoryNote_code' => $promissoryNoteCode,
                     'promissoryNote_status' => 1,
                 ]);
@@ -91,7 +91,7 @@ class ProjectController extends Controller
                 'investor_id' => $invId,
                 'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
                 'promissoryNote_final_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->addMonth()->format('Y-m-d'),
-                'promissoryNote_amount' => $validatedData['investor_investment'],
+                'promissoryNote_amount' => $validatedData['investor_investment'] + $validatedData['investor_final_profit'],
                 'promissoryNote_code' => $promissoryNoteCode,
                 'promissoryNote_status' => 1,
             ]);

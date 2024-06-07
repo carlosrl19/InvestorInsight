@@ -131,7 +131,7 @@ Proyectos activos
                                 </a>
                             </td>
                             <td>L. {{ number_format($project->project_investment,2) }}</td>
-                            <td>L. {{ number_format($project->investors->sum('pivot.investor_profit'),2) }}</td>
+                            <td>L. {{ number_format($project->investors->sum('pivot.investor_final_profit'),2) }}</td>
                             <td>
                                 <a href="{{ route('project.excel', $project) }}" class="badge bg-teal me-1">
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
