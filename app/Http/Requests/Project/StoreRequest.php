@@ -25,6 +25,7 @@ class StoreRequest extends FormRequest
             'project_status' => 'required|in:0,1',
             'project_comment' => 'required|string|min:3|max:255',
             'project_proof_transfer_img' => 'string',
+            'project_close_comment' => 'string|min:3|max:255',
 
             // Investor rules
             'investor_id' => 'required|numeric|exists:investors,id',
@@ -90,13 +91,18 @@ class StoreRequest extends FormRequest
             'project_status.in' => 'El estado del proyecto no es válido.',
             
             // Project description messages
-            'project_comment.required' => 'Los comentarios adicionales del proyecto son obligatorios.',
             'project_comment.string' => 'Los comentarios adicionales del proyecto solo deben contener letras, números y/o símbolos.',
             'project_comment.min' => 'Los comentarios adicionales del proyecto deben tener al menos 3 caracteres.',
             'project_comment.max' => 'Los comentarios adicionales del proyecto no pueden tener más de 255 caracteres.',
 
             // Project proof transfer img messages
             'project_proof_transfer_img.string' => 'El comprobante de pago de transferencia del proyecto debe ser una imagen válida.',
+
+            // Project description messages
+            'project_close_comment.required' => 'El motivo de cierre del proyecto son obligatorios.',
+            'project_close_comment.string' => 'El motivo de cierre del proyecto solo deben contener letras, números y/o símbolos.',
+            'project_close_comment.min' => 'El motivo de cierre del proyecto deben tener al menos 3 caracteres.',
+            'project_close_comment.max' => 'El motivo de cierre del proyecto no pueden tener más de 255 caracteres.',
 
             // Investor array id messages
             'investor_id.required' => 'El ID del inversionista es obligatorio.',

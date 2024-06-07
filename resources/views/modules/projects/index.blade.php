@@ -287,6 +287,11 @@ Proyectos activos
                                         </div>
                                         <div class="modal-body">
                                             ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Cerrado"? Utilice esta opción únicamente cuando un proyecto tenga conflictos para llevarse a cabo y no se pueda seguir con el mismo.
+
+                                            <div class="form-floating mt-4 mb-2">
+                                                <textarea type="text" class="form-control" style="overflow: hidden; height: 100px; resize: none" name="project_close_comment" id="project_close_comment"></textarea>
+                                                <label for="project_close_comment">Motivo de cierre del proyecto</label>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

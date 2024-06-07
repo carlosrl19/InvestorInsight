@@ -40,6 +40,7 @@ Proyectos cerrados
                         <th>Inversión</th>
                         <th>Ganancia</th>
                         <th>Estado</th>
+                        <th>Motivo de cierre</th>
                     </tr>
                 </thead>
                 @php
@@ -64,7 +65,7 @@ Proyectos cerrados
                                 </a>
                             </td>
                             <td>{{ $project->project_start_date }}</td>
-                            <td>{{ $project->project_end_date }}</td>                            
+                            <td style="text-decoration:line-through;">{{ $project->project_end_date }}</td>                            
                             <td>
                                 @foreach ($project->investors as $investor)
                                     <a href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}<br>
@@ -90,6 +91,13 @@ Proyectos cerrados
                                     </span>
                                 @else
                                     <span class="badge bg-dark me-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Existe un error en el estado del proyecto, revisar detalles del mismo.">ESTADO DESCONOCIDO</span> 
+                                @endif
+                            </td>
+                            <td>
+                                @if($project->project_close_comment == '')
+                                    <strong class="text-red">El usuario no dió motivos</strong>
+                                @else
+                                    <span class="text-dark">{{ $project->project_close_comment }}</span>
                                 @endif
                             </td>
                         </tr>

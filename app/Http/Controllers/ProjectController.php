@@ -225,9 +225,20 @@ class ProjectController extends Controller
         }, 'Finiquito - ' . $project->project_name . '.pdf');
     }
     
-    public function closeProject(Project $project)
+    public function closeProject(Request $request, Project $project)
     {
+        // Validar los datos recibidos
+        $request->validate([
+            'project_close_comment' => 'string|min:3|max:255',
+    
+            // Project description messages
+            'project_close_comment.string' => 'El motivo de cierre del proyecto solo deben contener letras, números y/o símbolos.',
+            'project_close_comment.min' => 'El motivo de cierre del proyecto deben tener al menos 3 caracteres.',
+            'project_close_comment.max' => 'El motivo de cierre del proyecto no pueden tener más de 255 caracteres.',
+        ]);
+
         $project->project_status = '2';
+        $project->project_close_comment;
         $project->save();
 
         return redirect()->route('project.index')->with('success', 'Proyecto cerrado correctamente.');
@@ -237,12 +248,6 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
         return view('modules.projects.update', compact('project'));
-    }
-
-    public function update(UpdateRequest $request, Project $project)
-    {
-        $project->update($request->all());
-        return redirect()->route("project.index")->with("success", "Proyecto actualizado exitosamente.");
     }
 
     public function destroy($id)

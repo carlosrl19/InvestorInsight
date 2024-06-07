@@ -15,6 +15,7 @@ class Project extends Model
         'project_investment',
         'project_status',
         'project_comment',
+        'project_close_comment',
         'project_proof_transfer_img',
     ];
 
