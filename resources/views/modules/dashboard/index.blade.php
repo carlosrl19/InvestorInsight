@@ -103,6 +103,7 @@ Dashboard
           </div>
         </div>
       </div>
+	  
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
@@ -159,6 +160,7 @@ Dashboard
 				</div>
 			</div>
 		</div>
+
 		<div class="col-lg-5">
 			<div class="row row-cards">
 				<div class="col-12">

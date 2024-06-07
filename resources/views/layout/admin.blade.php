@@ -314,11 +314,11 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="{{ route('transfer.index') }}">
+                        <a class="dropdown-item" href="">
                           <small>->&nbsp;</small>Fondos <strong style="margin-left: 8vh" class="text-success">Lps. {{ number_format($total_investor_balance,2) }}</strong>
                         </a>
                         <small></small>
-                        <a class="dropdown-item" href="{{ route('termination.index') }}">
+                        <a class="dropdown-item" href="">
                           <small>->&nbsp;</small>Comisiones  <strong style="margin-left: 5vh" class="text-success">Lps. {{ number_format($total_commissioner_balance,2) }}</strong>
                         </a>
                       </div>

@@ -89,7 +89,6 @@ Proyectos activos
             <table id="example" class="display nowrap table table-bordered" style="width: 100%;">
                 <thead>
                     <tr>
-                        <th>Código</th>
                         <th>Nombre proyecto</th>
                         <th>Inicio</th>
                         <th>Final <small>(previsto)</small></th>
@@ -111,7 +110,6 @@ Proyectos activos
                             $project = $projectGroup->first();
                         @endphp
                         <tr>
-                            <td>{{ $project->project_code}}</td>
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 <a href="{{ route('project.show', $project) }}">
                                     {{ $project->project_name }}
@@ -125,9 +123,9 @@ Proyectos activos
                             </td>
                             <td>{{ $project->project_start_date }}</td>
                             <td>{{ $project->project_end_date }}</td>
-                            <td>
+                            <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 @foreach ($project->investors as $investor)
-                                    <a href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}<br>
+                                    <a title="{{ $investor->investor_name }}" data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}<br>
                                 @endforeach
                                 <small>
                                     <sup>
