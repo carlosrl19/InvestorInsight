@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Investor;
+use App\Models\CommissionAgent;
 use Carbon\Carbon;
 use Dompdf\Options;
 use Dompdf\Dompdf;
@@ -13,8 +14,9 @@ class ProjectTerminationController extends Controller
     public function index(){
         $projects = Project::where('project_status', 0)->with('investors')->get();
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
-        return view('modules.terminations.index', compact('projects', 'total_investor_balance'));
+        return view('modules.terminations.index', compact('projects', 'total_investor_balance', 'total_commissioner_balance'));
     }
 
     public function showTermination($id) {

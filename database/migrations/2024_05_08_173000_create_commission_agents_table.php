@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('commissioner_name');
             $table->string('commissioner_dni');
             $table->string('commissioner_phone');
+            $table->decimal('commissioner_balance', 12,2); // max = 999,999,999.99
             $table->timestamps();
         });
     }

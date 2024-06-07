@@ -27,8 +27,9 @@ class ProjectController extends Controller
         $commissioners = CommissionAgent::get();
         $generatedCode = strtoupper(Str::random(12)); // Random code
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
-        return view('modules.projects.index', compact('projects', 'investors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance'));
+        return view('modules.projects.index', compact('projects', 'investors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance'));
     }
 
     public function indexClosed()
@@ -36,8 +37,9 @@ class ProjectController extends Controller
         $projects = Project::where('project_status', 2)->with('investors')->get();
         $investors = Investor::get();
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
-        return view('modules.projects_closed.index', compact('projects', 'investors', 'total_investor_balance'));
+        return view('modules.projects_closed.index', compact('projects', 'investors', 'total_investor_balance', 'total_commissioner_balance'));
     }
 
     public function create()
@@ -159,7 +161,7 @@ class ProjectController extends Controller
         // Procesar la imagen
         if ($request->hasFile('project_proof_transfer_img')) {
             $imageName = time().'.'.$request->project_proof_transfer_img->extension();
-            $request->project_proof_transfer_img->move(public_path('images'), $imageName);
+            $request->project_proof_transfer_img->move(public_path('images/transfers'), $imageName);
             $project->project_proof_transfer_img = $imageName;
         } else {
             $project->project_proof_transfer_img = 'no-image.png';
@@ -173,6 +175,12 @@ class ProjectController extends Controller
         foreach ($project->investors as $investor) {
             $investor->investor_balance += ($investor->pivot->investor_final_profit + $investor->pivot->investor_investment);
             $investor->save();
+        }
+
+        // Sumar el commissioner_commission al commissioner_balance de cada comisionista asociado al proyecto
+        foreach ($project->commissioners as $commissioner) {
+            $commissioner->commissioner_balance += ($commissioner->pivot->commissioner_commission);
+            $commissioner->save();
         }
     
         // Guardar el ID del proyecto en la sesión para la generación del PDF y Excel

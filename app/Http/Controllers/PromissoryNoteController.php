@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PromissoryNote\StoreRequest; 
 use App\Models\PromissoryNote;
 use App\Models\Investor;
+use App\Models\CommissionAgent;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
@@ -19,8 +20,9 @@ class PromissoryNoteController extends Controller
         $investors = Investor::get();
         $promissoryCode = strtoupper(Str::random(12)); // Promissory note random code
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
-        return view("modules.promissory_note.index", compact("promissoryNotes", "investors", "promissoryCode", 'total_investor_balance'));
+        return view("modules.promissory_note.index", compact("promissoryNotes", "investors", "promissoryCode", 'total_investor_balance', 'total_commissioner_balance'));
     }
     public function create()
     {

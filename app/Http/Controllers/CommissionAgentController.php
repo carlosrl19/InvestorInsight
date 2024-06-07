@@ -14,8 +14,9 @@ class CommissionAgentController extends Controller
     {
         $commission_agents = CommissionAgent::get();
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
-        return view('modules.commission_agent.index', compact('commission_agents', 'total_investor_balance'));
+        return view('modules.commission_agent.index', compact('commission_agents', 'total_investor_balance', 'total_commissioner_balance'));
     }
 
 

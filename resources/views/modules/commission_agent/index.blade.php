@@ -45,7 +45,8 @@ Comisionistas
 <div class="container-xl">
     <div class="card mb-2">
         <div class="card-body">
-           <div id="search-filters-container">FILTROS</div>
+           <div id="search-filters-container">FILTROS
+            </div>
         </div>
     </div>
     <div class="card">
@@ -56,6 +57,7 @@ Comisionistas
                         <th>Nombre comisionista</th>
                         <th>Nº Identidad</th>
                         <th>Teléfono</th>
+                        <th>Capital</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -65,6 +67,7 @@ Comisionistas
                         <td>{{ $commission_agent->commissioner_name }}</td>
                         <td>{{ $commission_agent->commissioner_dni }}</td>
                         <td>{{ $commission_agent->commissioner_phone }}</td>
+                        <td>Lps. {{ number_format($commission_agent->commissioner_balance,2 )}}</td>
                         <td>
                             @include('modules.commission_agent._delete')
                             <div class="btn-list flex-nowrap">
@@ -86,7 +89,7 @@ Comisionistas
                                     </div>
                                 </div>
                                 @else
-                                <span class="text-red">Acción no disponible</span>
+                                <strong class="text-red">Acción no disponible</strong>
                                 @endif
                             </div>
                         </td>

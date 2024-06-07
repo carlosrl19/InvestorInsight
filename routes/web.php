@@ -38,8 +38,3 @@ Route::get('termination/{id}/report', 'App\Http\Controllers\ProjectTerminationCo
 
 // Closed
 Route::get('closed/', 'App\Http\Controllers\ProjectController@indexClosed')->name('project.closed');
-
-// ==========
-// ROBENIOR  //
-// ==========
-Route::get('funds/', 'App\Http\Controllers\RoebniorController@indexfunds')->name('robenior.funds');

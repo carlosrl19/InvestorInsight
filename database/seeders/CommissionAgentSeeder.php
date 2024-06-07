@@ -15,6 +15,7 @@ class CommissionAgentSeeder extends Seeder
                 'commissioner_name' => 'JUNIOR AYALA',
                 'commissioner_dni' => '0801199907469',
                 'commissioner_phone' => '31559105',
+                'commissioner_balance' => '0.00',
             ]
         );
     }

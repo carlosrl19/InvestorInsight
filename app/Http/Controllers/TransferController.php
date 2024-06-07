@@ -6,6 +6,7 @@ use App\Http\Requests\Transfer\StoreRequest;
 use Illuminate\Support\Facades\DB;      
 use App\Models\Transfer;
 use App\Models\Investor;
+use App\Models\CommissionAgent;
 use Illuminate\Support\Str;
 
 class TransferController extends Controller
@@ -16,8 +17,9 @@ class TransferController extends Controller
         $transfers = Transfer::get();
         $generatedCode = strtoupper(Str::random(12));
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
-        return view('modules.transfer.index', compact('investors', 'transfers', 'generatedCode', 'total_investor_balance'));
+        return view('modules.transfer.index', compact('investors', 'transfers', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance'));
     }
 
     public function create()
