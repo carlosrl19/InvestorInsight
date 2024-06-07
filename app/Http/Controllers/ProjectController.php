@@ -30,6 +30,14 @@ class ProjectController extends Controller
         return view('modules.projects.index', compact('projects', 'investors', 'commissioners', 'promissoryNote', 'generatedCode'));
     }
 
+    public function indexClosed()
+    {
+        $projects = Project::where('project_status', 2)->with('investors')->get();
+        $investors = Investor::get();
+
+        return view('modules.projects_closed.index', compact('projects', 'investors',));
+    }
+
     public function create()
     {
         return view('modules.projects._create');

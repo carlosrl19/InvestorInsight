@@ -217,7 +217,7 @@
                         <a class="dropdown-item" href="{{ route('termination.index') }}">
                           <small>->&nbsp;</small>Proyectos finiquitados
                         </a>
-                        <a class="dropdown-item" href="{{ route('credit_note.index') }}">
+                        <a class="dropdown-item" href="{{ route('project.closed') }}">
                           <small>->&nbsp;</small>Proyectos cerrados
                         </a>
                       </div>

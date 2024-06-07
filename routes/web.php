@@ -33,3 +33,6 @@ Route::get('/termination/{id}', 'App\Http\Controllers\ProjectController@download
 // Terminations
 Route::resource('termination', 'App\Http\Controllers\ProjectTerminationController')->names('termination');
 Route::get('termination/{id}/report', 'App\Http\Controllers\ProjectTerminationController@showTermination')->name('termination.report');
+
+// Closed
+Route::get('closed/', 'App\Http\Controllers\ProjectController@indexClosed')->name('project.closed');
