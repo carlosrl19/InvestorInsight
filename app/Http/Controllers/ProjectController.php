@@ -161,7 +161,7 @@ class ProjectController extends Controller
     
         // Sumar el investor_final_investment al investor_balance de cada inversor asociado al proyecto
         foreach ($project->investors as $investor) {
-            $investor->investor_balance += $investor->pivot->investor_final_profit;
+            $investor->investor_balance += ($investor->pivot->investor_final_profit + $investor->pivot->investor_investment);
             $investor->save();
         }
     
