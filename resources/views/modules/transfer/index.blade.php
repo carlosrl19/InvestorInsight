@@ -5,6 +5,7 @@
 <!-- Datatable CSS -->
 <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/datatable.css') }}" rel="stylesheet">
 
 <!-- Select2 -->
 <link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
@@ -45,6 +46,11 @@ Transferencias
     @endif
 
 <div class="container-xl">
+    <div class="card mb-2">
+        <div class="card-body">
+           <div id="search-filters-container">FILTROS</div>
+        </div>
+    </div>
     <div class="card">
       <div class="card-body">
         <table id="example" class="display table table-bordered">
@@ -53,7 +59,7 @@ Transferencias
                     <th>Comprobante</th>
                     <th>Fecha</th>
                     <th>Banco / Modo de transferencia</th>
-                    <th>Código transferencia</th>
+                    <th>Código</th>
                     <th>Inversionista</th>
                     <th>Monto transferencia</th>
                 </tr>

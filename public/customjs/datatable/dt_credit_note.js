@@ -11,7 +11,7 @@
                 .eq(0)
                 .each(function (colIdx) {
                     // Verifica si la columna actual no es la última
-                    if (colIdx < api.columns().eq(0).length - 1) {
+                    if (colIdx < api.columns().eq(0).length - 2) {
                         var column = api.column(colIdx);
                         var title = $(column.header()).text();
 
@@ -57,7 +57,7 @@
             infoFiltered: "- Filtrado de _MAX_ registros.",
             sInfoEmpty: "Sin registros para mostrar",
             info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-            emptyTable: "No se encontraron registros de comisionistas para mostrar.",
+            emptyTable: "No se encontraron registros de notas crédito para mostrar.",
             zeroRecords:
                 "No se encontraron registros que coincidan con la búsqueda.",
         },
@@ -70,22 +70,5 @@
             [10, 20, 50],
             [10, 20, 50]
         ],
-    });
-
-    // Script to show a filter per columns excluding the last 3 columns
-    $("#example tfoot th").each(function(index) {
-        if (index < $("#example thead th").length - 1) {
-            var title = $("#example thead th").eq($(this).index()).text();
-            $(this).html('<input type="text" data-kt-filter="search" style="width: 100%;" placeholder="Buscar" />');
-        }
-    });
-
-    // Apply the filter
-    $("input").on("keyup change", function() {
-        if ($(this).parent().index() < $("#example thead th").length - 1) {
-            table.column($(this).parent().index() + ":visible").search(this.value).draw();
-        } else {
-            table.column($(this).parent().index() + ":visible").search('').draw();
-        }
     });
 })(jQuery);

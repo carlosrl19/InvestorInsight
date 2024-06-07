@@ -5,6 +5,7 @@
 <!-- Datatable CSS -->
 <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/datatable.css') }}" rel="stylesheet">
 
 <!-- Toast.JS CSS -->
 <link rel="stylesheet" href="{{ asset('dist/libs/toast.js/css/Toast.min.css') }}">
@@ -78,9 +79,14 @@ Proyectos activos
     @endif
 
 <div class="container-xl">
+    <div class="card mb-2">
+        <div class="card-body">
+           <div id="search-filters-container">FILTROS</div>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
-            <table id="example" class="display table table-bordered" style="width: 100%;">
+            <table id="example" class="display nowrap table table-bordered" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>Código</th>

@@ -1,32 +1,46 @@
-(function($) {
-    "use strict"
+(function ($) {
+    "use strict";
 
-    var table = $('#example').DataTable({
-        dom: 'lBfrtip',
-        buttons: [
-            {
-                extend: 'excelHtml5',
-                className: 'btn btn-success dt-buttons btnExcel',
-                exportOptions: {
-                    modifier: {
-                        search: 'applied',
-                    },
-                    columns: [0, 1, 2, 3, 4, 5, 6]
-                },
-                text: 'Exportar información a Excel',
-            },
-            {
-                extend: 'pdfHtml5',
-                className: 'btn btn-danger dt-buttons btnPDF',
-                exportOptions: {
-                    modifier: {
-                        search: 'applied',
-                    },
-                    columns: [0, 1]
-                },
-                text: 'Exportar información a PDF',
-            },
-        ],
+    var table = $("#example").DataTable({
+        dom: "lBfrtip",
+        initComplete: function () {
+            var api = this.api();
+
+            // Crea los filtros de búsqueda en el elemento #search-filters
+            api.columns()
+                .eq(0)
+                .each(function (colIdx) {
+                    // Verifica si la columna actual no es la última
+                    if (colIdx < api.columns().eq(0).length - 1) {
+                        var column = api.column(colIdx);
+                        var title = $(column.header()).text();
+
+                        var $input = $(
+                            '<input type="text" data-kt-filter="search" id="search-filters" style="width: 100%;" placeholder="' +
+                                title +
+                                '" />'
+                        );
+
+                        $input
+                            .appendTo($("#search-filters-container"))
+                            .on("keyup change", function () {
+                                column.search(this.value).draw();
+                            });
+                    }
+                });
+
+            // Agrega el botón para limpiar los campos de búsqueda
+            $(
+                '<button type="button" class="btn btn-sm btn-secondary" id="clear-search">Limpiar búsqueda</button>'
+            )
+                .appendTo($("#search-filters-container"))
+                .on("click", function () {
+                    // Limpia los campos de búsqueda
+                    $("#search-filters-container input").val("");
+                    // Resetear los filtros de búsqueda
+                    table.columns().search("").draw();
+                });
+        },
         language: {
             paginate: {
                 next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
@@ -43,18 +57,19 @@
             infoFiltered: "- Filtrado de _MAX_ registros.",
             sInfoEmpty: "Sin registros para mostrar",
             info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-            emptyTable: "No se encontraron registros de inversionistas para mostrar.",
+            emptyTable:
+                "No se encontraron registros de inversionistas para mostrar.",
             zeroRecords:
                 "No se encontraron registros que coincidan con la búsqueda.",
         },
         responsive: true,
         paginate: true,
         info: true,
-        searching: false,
+        searching: true,
         lengthChange: true,
         aLengthMenu: [
             [10, 20, 50],
-            [10, 20, 50]
+            [10, 20, 50],
         ],
     });
 })(jQuery);

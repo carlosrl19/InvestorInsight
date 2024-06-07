@@ -76,11 +76,6 @@ class CreditNoteController extends Controller
             $investor = Investor::findOrFail($request->investor_id);
             $creditNoteCode = strtoupper(Str::random(12)); // Credit note random code
             $creditNoteDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
-
-            // Verifica si el monto de la nota de crédito es mayor que el saldo del inversionista
-            if ($request->creditNote_amount > $investor->investor_balance) {
-                return redirect()->back()->withErrors(['creditNote_amount' => 'El monto de la nota de crédito no puede ser mayor que el fondo del inversionista (Lps. '. $investor->investor_balance. ').'])->withInput();
-            }
             
             // Crea la nueva nota crédito
             $transfer = CreditNote::create([

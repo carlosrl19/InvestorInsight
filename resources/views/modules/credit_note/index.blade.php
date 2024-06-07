@@ -5,6 +5,7 @@
 <!-- Datatable CSS -->
 <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/datatable.css') }}" rel="stylesheet">
 
 <!-- Select2 -->
 <link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
@@ -45,12 +46,17 @@ Notas crédito
     @endif
 
 <div class="container-xl">
+    <div class="card mb-2">
+        <div class="card-body">
+           <div id="search-filters-container">FILTROS</div>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
             <table id="example" class="display table table-bordered">
                 <thead>
                     <tr class="text-center">
-                        <th>ID único</th>
+                        <th>Código</th>
                         <th>Fecha</th>
                         <th>Inversionista</th>
                         <th>Monto nota crédito</th>
@@ -113,7 +119,7 @@ Notas crédito
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_transfer.js') }}"></script>
+<script src="{{ asset('customjs/datatable/dt_credit_note.js') }}"></script>
 
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
