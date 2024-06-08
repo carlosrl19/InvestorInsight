@@ -61,7 +61,7 @@
                                         @endforeach
                                     </optgroup>
                                     <optgroup label="Bancos">
-                                        @foreach(['BAC CREDOMATIC', 'BANCO ATLÁNTIDA', 'BANCO AZTECA DE HONDURAS', 'BANCO CUSCATLAN HONDURAS', 'BANCO DE AMÉRICA CENTRAL HONDURAS', 'BANCO DE DESARROLLO RURAL HONDURAS', 'BANCO DE HONDURAS', 'BANCO DE LOS TRABAJADORES', 'BANCO DE OCCIDENTE', 'BANCO DAVIVIENDA HONDURAS', 'BANCO FINANCIERA CENTROAMERICANA', 'FICOHSA', 'BANCO HONDUREÑO DEL CAFÉ', 'BANCO LAFISE HONDURAS', 'BANCO DEL PAÍS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)                                            <option value="{{ $bank }}">{{ $bank }}</option>
+                                        @foreach(['BAC CREDOMATIC', 'BANCO ATLÁNTIDA', 'BANCO AZTECA DE HONDURAS', 'BANCO CUSCATLAN HONDURAS', 'BANCO DE AMÉRICA CENTRAL HONDURAS', 'BANCO DE DESARROLLO RURAL HONDURAS', 'BANCO DE HONDURAS', 'BANCO DE LOS TRABAJADORES', 'BANCO DE OCCIDENTE', 'BANCO DAVIVIENDA HONDURAS', 'FICENSA', 'FICOHSA', 'BANCO HONDUREÑO DEL CAFÉ', 'BANCO LAFISE HONDURAS', 'BANCO DEL PAÍS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)                                            <option value="{{ $bank }}">{{ $bank }}</option>
                                         @endforeach
                                     </optgroup>
                                 </select>
