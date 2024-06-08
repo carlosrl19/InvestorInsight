@@ -197,13 +197,13 @@
                                     <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;"
                                         onchange="updateInvestor()" required>
                                         <option value="" selected disabled>Seleccione un inversionista</option>
-                                        @foreach ($investors as $investor)
+                                        @foreach ($investors->where('investor_status', 1) as $investor)
                                             <option value="{{ $investor->id }}">
                                                 {{ $investor->investor_name }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    <label for="investor_id">Inversionistas</label>
+                                    <label for="investor_id">Inversionistas disponibles</label>
                                     <span class="invalid-feedback" role="alert" id="investor-id-error"
                                         style="display: none;">
                                         <strong></strong>
