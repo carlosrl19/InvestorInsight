@@ -136,7 +136,7 @@ Inversionistas
 
                             <!-- Update investors modal -->
                             <div class="modal modal-blur fade" id="modal-update-{{ $investor->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                                     <div class="modal-content" style="border: 2px solid #52524E">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Editar inversionista</h5>
@@ -165,6 +165,9 @@ Inversionistas
                                                             </span>
                                                         @enderror
                                                     </div>
+                                                    <input type="hidden" name="investor_status" value="1">
+                                                </div>
+                                                <div class="row mb-3 align-items-end">
                                                     <div class="col">
                                                         <label class="form-label" for="investor_balance_{{ $investor->id }}">Saldo monetario</label>
                                                         <input type="number" value="{{ $investor->investor_balance }}" name="investor_balance" id="investor_balance_{{ $investor->id }}" class="form-control @error('investor_balance') is-invalid @enderror"/>
@@ -188,11 +191,10 @@ Inversionistas
                                                             </span>
                                                         @enderror
                                                     </div>
-                                                    <input type="hidden" name="investor_status" value="1">
                                                 </div>
                                                 <div class="row mb-3 align-items-end">
                                                     <div class="col">
-                                                        <div class="form-label">Estado / Disposición a proyectos</div>
+                                                        <div class="form-label">Disposición a proyectos</div>
                                                         <div>
                                                             <label class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio" name="investor_status" value="1" {{ $investor->investor_status == 1 ? 'checked' : '' }}>
