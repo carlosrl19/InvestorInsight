@@ -43,7 +43,7 @@ class CustomExport implements FromView, WithProperties, WithEvents
         return [
             AfterSheet::class => function(AfterSheet $event) {
                 $sheet = $event->sheet->getDelegate();
-                $sheet->mergeCells('B2:C2');
+                $sheet->mergeCells('B2:D2'); // La celda B2 llega hasta la celda D2
 
                 // Protection / Security disabled
                 // $sheet->getProtection()->setPassword('invest24_'); // Set password
