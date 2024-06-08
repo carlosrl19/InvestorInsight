@@ -48,6 +48,13 @@ Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name 
                                 <div class="col-md-6">
                                     <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha inicio: {{ $project->project_start_date }}</p>
                                     <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha final: {{ $project->project_end_date }}</p>
+                                    <p><div class="badge bg-success mt-1"></div>&nbsp;
+                                        @foreach($project->investors as $investor)
+                                            Ganancia total: Lps. {{ number_format($investor->pivot->investor_final_profit + $project->project_investment,2) }}
+                                            <br>
+                                        @endforeach
+                                    </p>
+                                </p>
                                 </div>
                             </div>
                             <h3>Inversionistas del proyecto</h3>
@@ -75,8 +82,7 @@ Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name 
                                                         <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
                                                     </svg><br>
                                                     <span class="badge bg-orange mt-2">Inversión (I): Lps. {{ number_format($investor->pivot->investor_investment) }}</span><br>
-                                                    <span class="badge bg-cyan mt-2">Comisión 50% (C): Lps. {{ number_format($investor->pivot->investor_profit / 2,2) }}</span>
-                                                    <span class="badge bg-success mt-2">Ganancia total (I+C): Lps. {{ number_format($investor->pivot->investor_final_profit + $project->project_investment,2) }}</span><br>
+                                                    <span class="badge bg-cyan mt-2">Ganancia (C): Lps. {{ number_format($investor->pivot->investor_profit / 2,2) }}</span>
                                                 </a>
                                             </div>
                                         </div>

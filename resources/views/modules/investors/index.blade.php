@@ -165,7 +165,7 @@ Inversionistas
                                                             </span>
                                                         @enderror
                                                     </div>
-                                                    <div class="col" style="display: none;">
+                                                    <div class="col">
                                                         <label class="form-label" for="investor_balance_{{ $investor->id }}">Saldo monetario</label>
                                                         <input type="number" value="{{ $investor->investor_balance }}" name="investor_balance" id="investor_balance_{{ $investor->id }}" class="form-control @error('investor_balance') is-invalid @enderror"/>
                                                         @error('investor_balance')
