@@ -24,7 +24,7 @@
                                     class="form-control @error('transfer_bank') is-invalid @enderror"
                                     autocomplete="off">
                                     <optgroup label="Otros métodos">
-                                        @foreach(['EFECTIVO', 'REMESAS', 'TARJETA'] as $method)
+                                        @foreach(['EFECTIVO', 'FONDOS', 'REMESAS', 'TARJETA'] as $method)
                                             <option value="{{ $method }}">{{ $method }}</option>
                                         @endforeach
                                     </optgroup>
