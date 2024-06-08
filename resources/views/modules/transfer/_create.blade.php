@@ -1,6 +1,6 @@
 <div class="modal modal-blur fade" id="modal-team" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #52524E">
             <div class="modal-header">
                 <h5 class="modal-title">Nueva transferencia</h5>
@@ -9,40 +9,12 @@
             <div class="modal-body">
                 <form action="{{ route('transfer.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="row mb-3 align-items-end" style="display: none;">
-                        <div class="col">
+                    <div class="row mb-3 align-items-end">
+                        <div class="col" style="display: none;">
                             <div class="form-floating">
                                 <input type="text" maxlength="35" name="transfer_code" value="{{ $generatedCode }}"
                                     id="transfer_code" class="form-control text-uppercase" readonly>
                                 <label for="transfer_code">Código de transferencia</label>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="form-floating">
-                                <select name="transfer_bank" id="select-optgroups"
-                                    class="form-control @error('transfer_bank') is-invalid @enderror"
-                                    autocomplete="off">
-                                    <optgroup label="Otros métodos">
-                                        @foreach(['EFECTIVO', 'FONDOS', 'REMESAS', 'TARJETA'] as $method)
-                                            <option value="{{ $method }}">{{ $method }}</option>
-                                        @endforeach
-                                    </optgroup>
-                                    <optgroup label="Bancos">
-                                        @foreach(['BAC CREDOMATIC', 'BANCO ATLÁNTIDA', 'BANCO AZTECA DE HONDURAS', 'BANCO CUSCATLAN HONDURAS', 'BANCO DE AMÉRICA CENTRAL HONDURAS', 'BANCO DE DESARROLLO RURAL HONDURAS', 'BANCO DE HONDURAS', 'BANCO DE LOS TRABAJADORES', 'BANCO DE OCCIDENTE', 'BANCO DAVIVIENDA HONDURAS', 'BANCO FINANCIERA CENTROAMERICANA', 'BANCO FINANCIERA COMERCIAL HONDUREÑA', 'BANCO HONDUREÑO DEL CAFÉ', 'BANCO LAFISE HONDURAS', 'BANCO DEL PAÍS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)                                            <option value="{{ $bank }}">{{ $bank }}</option>
-                                        @endforeach
-                                    </optgroup>
-                                </select>
-                                @error('transfer_bank')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <span class="invalid-feedback" role="alert" id="transfer-bank-error"
-                                    style="display: none;">
-                                    <strong></strong>
-                                </span>
-                                <label for="transfer_bank">Banco / Modo de transferencia</label>
                             </div>
                         </div>
                     </div>
@@ -77,6 +49,35 @@
                                 <label for="investor_id">Inversionistas</label>
                             </div>
                         </div>
+
+                        <div class="col">
+                            <div class="form-floating">
+                                <select name="transfer_bank" id="select-optgroups"
+                                    class="form-control @error('transfer_bank') is-invalid @enderror"
+                                    autocomplete="off">
+                                    <optgroup label="Otros métodos">
+                                        @foreach(['EFECTIVO', 'FONDOS', 'REMESAS', 'TARJETA'] as $method)
+                                            <option value="{{ $method }}">{{ $method }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                    <optgroup label="Bancos">
+                                        @foreach(['BAC CREDOMATIC', 'BANCO ATLÁNTIDA', 'BANCO AZTECA DE HONDURAS', 'BANCO CUSCATLAN HONDURAS', 'BANCO DE AMÉRICA CENTRAL HONDURAS', 'BANCO DE DESARROLLO RURAL HONDURAS', 'BANCO DE HONDURAS', 'BANCO DE LOS TRABAJADORES', 'BANCO DE OCCIDENTE', 'BANCO DAVIVIENDA HONDURAS', 'BANCO FINANCIERA CENTROAMERICANA', 'BANCO FINANCIERA COMERCIAL HONDUREÑA', 'BANCO HONDUREÑO DEL CAFÉ', 'BANCO LAFISE HONDURAS', 'BANCO DEL PAÍS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)                                            <option value="{{ $bank }}">{{ $bank }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                </select>
+                                @error('transfer_bank')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <span class="invalid-feedback" role="alert" id="transfer-bank-error"
+                                    style="display: none;">
+                                    <strong></strong>
+                                </span>
+                                <label for="transfer_bank">Banco / Modo de transferencia</label>
+                            </div>
+                        </div>
+                        
                         <div class="col">
                             <div class="form-floating">
                                 <input type="number" step="any" name="transfer_amount"
