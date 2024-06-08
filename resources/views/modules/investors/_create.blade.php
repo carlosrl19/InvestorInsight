@@ -20,7 +20,9 @@
                                 <label for="investor_name">Nombre del inversionista</label>
                             </div>
                         </div>
-
+                        <input type="hidden" name="investor_status" value="1">
+                    </div>
+                    <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="investor_dni" value="{{ old('investor_dni') }}" id="investor_dni" class="form-control @error('investor_dni') is-invalid @enderror" data-mask="0000000000000" data-mask-visible="true" placeholder="0000000000000" autocomplete="off"/>
@@ -32,10 +34,7 @@
                                 <label for="investor_dni">Nº identidad</label>
                             </div>
                         </div>
-                        <input type="hidden" name="investor_status" value="1">
-                    </div>
-                    <div class="row mb-3 align-items-end">
-                        <div class="col">
+                        <div class="col" style="display: none">
                             <div class="form-floating">
                                 <input type="number" name="investor_balance" step="any" readonly value="0.00" title="Si el inversionista tiene fondos existentes y se está agregando al sistema por primera vez, agregue el fondo monetario como una transferencia y agregue el comentario referente a que ya era un fondo existente." data-bs-toggle="tooltip" data-bs-placement="right" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror"/>
                                 @error('investor_balance')
