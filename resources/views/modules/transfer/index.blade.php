@@ -68,7 +68,13 @@ Transferencias
                 @foreach($transfers as $transfer)
                 <tr class="text-center">
                     <td>
-                        <a href="#" class="btn btn-sm btn-primary" data-bs-toogle="modal" data-bs-modal="#imageModal">Ver comprobante</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal-{{ $transfer->id }}">
+                            @if (file_exists(public_path('images/transfers/' . $transfer->transfer_img)))
+                                <img src="{{ asset('images/transfers/' . $transfer->transfer_img) }}" style="height: 40px; width: 40px; display: flex; margin: auto" alt="transfer-proof">
+                            @else
+                                <img src="{{ asset('images/no-image.png') }}" style="height: 40px; width: 40px; display: flex; margin: auto" alt="no image available" title="Sin comprobante">
+                            @endif
+                        </a>
                     </td>
                     <td>{{ $transfer->transfer_date }}</td>
                     <td class="text-uppercase">{{ $transfer->transfer_bank }}</td>
@@ -84,28 +90,28 @@ Transferencias
                     </td>
                     <td>Lps. {{ number_format($transfer->transfer_amount,2) }}</td>
                 </tr>
+                <div class="modal modal-blur fade" id="imageModal-{{ $transfer->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content" style="border: 2px solid #52524E">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Imagen de comprobante</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                @if (file_exists(public_path('images/transfers/' . $transfer->transfer_img)))
+                                    <img src="{{ asset('images/transfers/' . $transfer->transfer_img) }}" style="height: 400px; width: 400px; display: flex; margin: auto" alt="transfer-proof">
+                                @else
+                                    <img src="{{ asset('images/no-image.png') }}" style="height: 400px; width: 400px; display: flex; margin: auto" alt="no image available" title="Sin comprobante">
+                                @endif
+                                <br>
+                                <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Volver</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @endforeach
             </tbody>
         </table>
-        <div class="modal modal-blur fade" id="imageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" style="border: 2px solid #52524E">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Imagen de comprobante</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        @if (file_exists(public_path('images/transfers/' . $transfer->transfer_img)))
-                            <img src="{{ asset('images/transfers/' . $transfer->transfer_img) }}" style="height: 40px; width: 40px;" alt="transfer-proof">
-                        @else
-                            <img src="{{ asset('images/no-image2.png') }}" style="height: 40px; width: 40px;" alt="no image available" title="Sin comprobante">
-                        @endif
-                        <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Volver</button>
-                    </div>
-                </div>
-            </div>
-        </div>
       </div>
     </div>
 </div>
