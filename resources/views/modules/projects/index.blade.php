@@ -92,6 +92,7 @@ Proyectos activos
                         <th>Nombre proyecto</th>
                         <th>Inicio</th>
                         <th>Final <small>(previsto)</small></th>
+                        <th>Días restantes</th>
                         <th>Inversionista</th>
                         <th>Inversión</th>
                         <th>Ganancia</th>
@@ -123,6 +124,7 @@ Proyectos activos
                             </td>
                             <td>{{ $project->project_start_date }}</td>
                             <td>{{ $project->project_end_date }}</td>
+                            <td>{{ $project->days_remaining  }}</td> <!-- From Controller -->
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 @foreach ($project->investors as $investor)
                                     <a title="{{ $investor->investor_name }}" data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}<br>
@@ -343,6 +345,40 @@ Proyectos activos
     });
     $('#pdfModal').on('hidden.bs.modal', function (e) {
         $(this).find('#pdf-frame').attr('src', '');
+    });
+</script>   
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const projects = {!! json_encode($projects) !!}; // Convertimos los datos de PHP a JSON
+        const today = new Date();
+
+        projects.forEach(project => {
+            const projectEndDate = new Date(project.project_end_date);
+            const timeDiff = projectEndDate.getTime() - today.getTime();
+            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Diferencia en días
+
+            if (daysDiff <= 3) {
+                new Toast({
+                    message: `Quedan <strong>${daysDiff}</strong> día para la finalización del proyecto "<strong>${project.project_name}</strong>".`,
+                    type: 'danger',
+                });
+            }  
+
+            else if (daysDiff == 1) {
+                new Toast({
+                    message: `Solo queda <strong>${daysDiff}</strong> día para la finalización del proyecto "<strong>${project.project_name}</strong>".`,
+                    type: 'danger',
+                });
+            }
+
+            else if (daysDiff <= 5) {
+                new Toast({
+                    message: `Quedan <strong>${daysDiff}</strong> días para la finalización del proyecto "<strong>${project.project_name}</strong>".`,
+                    type: 'success',
+                });
+            }
+        });
     });
 </script>
 @endsection

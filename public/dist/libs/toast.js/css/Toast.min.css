@@ -1,17 +1,25 @@
 .toastjs-container {
-    position: absolute;
-    position: fixed;
-    bottom: 30px;
+    position: relative;
+    top: 30px;
     left: 30px;
     width: calc(100% - 60px);
     max-width: 400px;
-    transform: translateX(-150%);
-    transition: transform 0.3s;
-    z-index: 9999; /*z-index 9999 if have to show it on modal*/
+    transform: translateY(-150%);
+    transition: transform 0.2s;
+    z-index: 9999;
 }
+
 .toastjs-container[aria-hidden="false"] {
-    transform: translateX(0);
+    transform: translateY(-150%);
 }
+
+.toastjs-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+
 .toastjs {
     background: #fff;
     padding: 10px 15px 0;
@@ -20,19 +28,25 @@
     border-radius: 4px;
     font-size: 12px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
 }
+
 .toastjs.default {
     border-left-color: #aaa;
 }
+
 .toastjs.success {
     border-left-color: #2ecc40;
 }
+
 .toastjs.warning {
     border-left-color: #ff851b;
 }
+
 .toastjs.danger {
     border-left-color: #ff4136;
 }
+
 .toastjs-btn {
     background: #f0f0f0;
     padding: 5px 10px;
@@ -45,10 +59,12 @@
     margin-bottom: 10px;
     cursor: pointer;
 }
+
 .toastjs-btn--custom {
     background: #323232;
     color: #fff;
 }
+
 .toastjs-btn:focus,
 .toastjs-btn:hover {
     outline: 0;
