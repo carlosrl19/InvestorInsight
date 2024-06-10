@@ -28,31 +28,31 @@ class StoreRequest extends FormRequest
             'commissioner_name.required' => 'El nombre es obligatorio.',
             'commissioner_name.unique' => 'El nombre ya existe.',
             'commissioner_name.string' => 'El nombre solo debe contener letras.',
-            'commissioner_name.regex' => 'El nombre no puede contener números ni símbolos.',
-            'commissioner_name.min' => 'El nombre debe contener al menos 3 letras.',
-            'commissioner_name.max' => 'El nombre no puede exceder 55 letras.',
+            'commissioner_name.regex' => 'El nombre del comisionista no puede contener números ni símbolos.',
+            'commissioner_name.min' => 'El nombre del comisionista debe contener al menos 3 letras.',
+            'commissioner_name.max' => 'El nombre del comisionista no puede exceder 55 letras.',
 
             // Commissioner agent dni messages
-            'commissioner_dni.required' => 'El DNI es obligatorio.',
-            'commissioner_dni.unique' => 'El DNI ya existe.',
-            'commissioner_dni.string' => 'El DNI solo debe contener números.',
-            'commissioner_dni.regex' => 'El DNI no puede contener letras ni símbolos.',
-            'commissioner_dni.min' => 'El DNI debe contener al menos 13 digitos.',
-            'commissioner_dni.max' => 'El DNI no puede exceder 13 digitos.',
+            'commissioner_dni.required' => 'El DNI del comisionista es obligatorio.',
+            'commissioner_dni.unique' => 'El DNI del comisionista ya existe.',
+            'commissioner_dni.string' => 'El DNI del comisionista solo debe contener números.',
+            'commissioner_dni.regex' => 'El DNI del comisionista no puede contener letras ni símbolos.',
+            'commissioner_dni.min' => 'El DNI del comisionista debe contener al menos 13 digitos.',
+            'commissioner_dni.max' => 'El DNI del comisionista no puede exceder 13 digitos.',
 
             // Commissioner agent phone messages
-            'commissioner_phone.required' => 'El número de teléfono es obligatorio.',
-            'commissioner_phone.unique' => 'El número de teléfono ya existe.',
-            'commissioner_phone.string' => 'El número de teléfono solo debe contener números.',
-            'commissioner_phone.regex' => 'El número de teléfono no puede contener letras ni símbolos.',
-            'commissioner_phone.min' => 'El número de teléfono debe contener al menos 8 digitos.',
-            'commissioner_phone.max' => 'El número de teléfono no puede exceder 8 digitos.',
+            'commissioner_phone.required' => 'El número de teléfono del comisionista es obligatorio.',
+            'commissioner_phone.unique' => 'El número de teléfono del comisionista ya existe.',
+            'commissioner_phone.string' => 'El número de teléfono del comisionista solo debe contener números.',
+            'commissioner_phone.regex' => 'El número de teléfono del comisionista no puede contener letras ni símbolos.',
+            'commissioner_phone.min' => 'El número de teléfono del comisionista debe contener al menos 8 digitos.',
+            'commissioner_phone.max' => 'El número de teléfono del comisionista no puede exceder 8 digitos.',
 
             // commissioner balance messages
-            //'commissioner_balance.required' => 'El saldo de la cuenta es obligatorio.',
-            'commissioner_balance.numeric' => 'El saldo de la cuenta solo debe contener números.',
-            'commissioner_balance.regex' => 'El saldo de la cuenta no puede contener letras ni símbolos.',
-            'commissioner_balance.min' => 'El saldo de la cuenta debe ser mayor o igual a 0.',
+            'commissioner_balance.required' => 'El saldo de la cuenta del comisionista es obligatorio.',
+            'commissioner_balance.numeric' => 'El saldo de la cuenta del comisionista solo debe contener números.',
+            'commissioner_balance.regex' => 'El saldo de la cuenta del comisionista no puede contener letras ni símbolos.',
+            'commissioner_balance.min' => 'El saldo de la cuenta del comisionista debe ser mayor o igual a 0.',
         ];
     }
 }

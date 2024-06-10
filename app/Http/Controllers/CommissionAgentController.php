@@ -15,8 +15,9 @@ class CommissionAgentController extends Controller
         $commission_agents = CommissionAgent::get();
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+        $commissioner_balance = 0.00;
 
-        return view('modules.commission_agent.index', compact('commission_agents', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.commission_agent.index', compact('commission_agents', 'total_investor_balance', 'total_commissioner_balance', 'commissioner_balance'));
     }
 
 
@@ -28,6 +29,7 @@ class CommissionAgentController extends Controller
 
     public function store(StoreRequest $request)
     {
+
         CommissionAgent::create($request->all());
         return redirect()->route('commission_agent.index')->with('success', 'Comisionista creado exitosamente.');
     }

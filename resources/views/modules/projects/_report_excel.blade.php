@@ -26,8 +26,13 @@
             </td>
             <td style="background-color: #fff;"></td>
             <td style="background-color: #fff;"></td>
-            <td style="background-color: #fff;"></td>
-            <td style="background-color: #fff; text-align: center; font-weight: bold;">#CP-{{ $project->project_code }}</td>
+            @if(isset($project->commissioners[1]))
+                <td style="background-color: #fff;"></td>
+                <td style="background-color: #fff; text-align: center; font-weight: bold;">#CP-{{ $project->project_code }}</td>
+            @else
+                <td style="background-color: #fff; text-align: center; font-weight: bold;">#CP-{{ $project->project_code }}</td>
+                <td></td>
+            @endif
         </tr>
         
         <!-- Blank rows 1 -->
@@ -39,8 +44,13 @@
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
-            <td style="background-color: #fff"></td>
-            <td style="background-color: #fff"></td>
+            @if(isset($project->commissioners[1]))
+                <td style="background-color: #fff;"></td>
+                <td style="background-color: #fff;"></td>
+            @else
+                <td style="background-color: #fff"></td>
+                <td></td>
+            @endif
         </tr>
         
         <!-- Blank rows 2 -->
@@ -52,8 +62,13 @@
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
-            <td style="background-color: #fff"></td>
-            <td style="background-color: #fff"></td>
+            @if(isset($project->commissioners[1]))
+                <td style="background-color: #fff;"></td>
+                <td style="background-color: #fff;"></td>
+            @else
+                <td style="background-color: #fff"></td>
+                <td></td>
+            @endif
         </tr>
 
         <!-- Header table -->
@@ -64,13 +79,11 @@
             <td style="background-color: #fff; font-size: 11px; font-weight: bold;">CAPITAL</td>
             <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 120px; text-align: center;">GANANCIA TOTAL</td>
             <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 150px; text-align: center;">
-                {{ implode(' ', array_slice(explode(' ', $investor->investor_name), 0, 1)) }} 
-                {{ implode(' ', array_slice(explode(' ', $investor->investor_name), -1)) }} 50%
+                {{ implode(' ', array_slice(explode(' ', $investor->investor_name), 0, 1)) }} 50%
             </td>
             @if(isset($project->commissioners[1]))
                 <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center;">
-                    {{ implode(' ', array_slice(explode(' ', $commissioners->get(1)->commissioner_name ?? '-'), 0, 1)) }} 
-                    {{ implode(' ', array_slice(explode(' ', $commissioners->get(1)->commissioner_name ?? '-'), -1)) }} 10%
+                    {{ implode(' ', array_slice(explode(' ', $commissioners->get(1)->commissioner_name ?? '-'), 0, 1)) }} 10%
                 </td>
                 <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center;">
                     {{ implode(' ', array_slice(explode(' ', $commissioners[0]->commissioner_name), 0, 1)) }} 40%
