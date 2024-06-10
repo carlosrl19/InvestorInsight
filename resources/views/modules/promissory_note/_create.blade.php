@@ -9,18 +9,22 @@
                 <form action="{{ route('promissory_note.store')}}" method="POST">
                     @csrf
                     <div class="row mb-3 align-items-end">
-                        <div class="col" style="border: 1px solid #DADFE5; border-radius: 4px">
-                            <label for="investor_id" class="mb-2" style="font-size: clamp(0.6rem, 3vh, 0.6rem); color: gray">Inversionista deudor</label><br>
-                            <select class="form-select js-example-basic-multiple" name="investor_id" style="font-size: clamp(0.6rem, 3vh, 0.7rem); width: 100%">
-                                <option></option>
-                                @foreach ($investors as $investor)                                    
-                                    <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col">
+                            <div class="form-floating">
+                                <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;">
+                                    <option value="" selected disabled>Seleccione un inversionista</option>
+                                    @foreach ($investors as $investor)
+                                        <option value="{{ $investor->id }}" data-balance="{{ $investor->investor_balance }}" {{ old('investor_id') == $investor->id ? 'selected' : '' }}>
+                                            {{ $investor->investor_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <label for="investor_id">Inversionistas</label>
+                            </div>
                         </div>
                     </div>
                     <div class="row mb-3 align-items-end">
-                        <div class="col">
+                        <div class="col" style="display: none">
                             <div class="form-floating">
                                 <input type="date" 
                                     name="promissoryNote_emission_date" 
@@ -46,7 +50,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <div class="col">
+                        <div class="col" style="display: none">
                             <div class="form-floating">
                                 <input type="text" readonly class="form-control @error('promissoryNote_code') is-invalid @enderror" id="promissoryNote_code"
                                     name="promissoryNote_code" value="{{ $promissoryCode }}" autocomplete="off"

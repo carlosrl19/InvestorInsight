@@ -42,10 +42,11 @@ class PromissoryNoteController extends Controller
         Carbon::setLocale('es');
 
         // Obtener la fecha actual en español
-        $fechaActual = Carbon::now()->setTimezone('America/Costa_Rica');
-        $dia = $fechaActual->format('d');
-        $mes = $fechaActual->translatedFormat('F'); // 'F' para nombre completo del mes
-        $anio = $fechaActual->format('Y');
+        $fechaFinal = Carbon::parse($promissoryNote->promissoryNote_emission_date); 
+
+        $dia = $fechaFinal->format('d');
+        $mes = $fechaFinal->translatedFormat('F'); // 'F' para nombre completo del mes
+        $anio = $fechaFinal->format('Y');
     
         // Configuración de opciones para Dompdf
         $options = new Options();

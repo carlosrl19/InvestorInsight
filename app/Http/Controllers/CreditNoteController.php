@@ -89,6 +89,12 @@ class CreditNoteController extends Controller
                 'creditNote_code' => $creditNoteCode,
                 'creditNote_description' => $request->creditNote_description,
             ]);
+
+            // Verifica si el saldo del inversionista es suficiente para la nota crédito
+            if ($investor->investor_balance < $request->creditNote_amount) {
+                DB::rollBack();
+                return redirect()->back()->withErrors(['error' => 'El fondo del inversionista es insuficiente para esta operación.']);
+            }
     
             // Actualiza el saldo del inversionista restando el monto de la nota crédito
             $newBalance = $investor->investor_balance - $request->creditNote_amount;

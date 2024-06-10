@@ -9,7 +9,7 @@
                 <form action="{{ route('investor.store')}}" method="POST">
                     @csrf
                     <div class="row mb-3 align-items-end">
-                        <div class="col">
+                        <div class="col" style="display: none">
                             <div class="form-floating">
                                 <input type="text" readonly name="investor_code" id="investor_code" value="{{ $investorCode }}" class="form-control @error('investor_name') is-invalid @enderror" autocomplete="off">
                                 <label for="investor_code" name="investor_code">ID</label>
