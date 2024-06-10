@@ -18,7 +18,7 @@ class UpdateRequest extends FormRequest
         return [
             'commissioner_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:commission_agents,commissioner_name,' . $commissionerId . '',
             'commissioner_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/|unique:commission_agents,commissioner_dni,' . $commissionerId . '',
-            'commissioner_phone' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|unique:commission_agents,commissioner_phone,' . $commissionerId . '',
+            'commissioner_phone' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|',
             'investor_balance' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
         ];
     }
