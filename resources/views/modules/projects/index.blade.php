@@ -92,7 +92,7 @@ Proyectos activos
                         <th>Nombre proyecto</th>
                         <th>Inicio</th>
                         <th>Final <small>(previsto)</small></th>
-                        <th>Días restantes</th>
+                        <th>Días</th>
                         <th>Inversionista</th>
                         <th>Inversión</th>
                         <th>Ganancia</th>
@@ -310,6 +310,8 @@ Proyectos activos
         </div>
     </div>
 </div>
+<div id="toast-container" aria-live="polite" aria-atomic="true" style="position: absolute; bottom: 0; right: 0; min-width: 300px;"></div>
+
 
 @include('modules.projects._create')
 @endsection
@@ -352,33 +354,42 @@ Proyectos activos
     document.addEventListener('DOMContentLoaded', function () {
         const projects = {!! json_encode($projects) !!}; // Convertimos los datos de PHP a JSON
         const today = new Date();
+        const toastContainer = document.getElementById('toast-container'); // Contenedor para los toasts
 
         projects.forEach(project => {
             const projectEndDate = new Date(project.project_end_date);
             const timeDiff = projectEndDate.getTime() - today.getTime();
             const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Diferencia en días
 
-            if (daysDiff <= 3) {
-                new Toast({
-                    message: `Quedan <strong>${daysDiff}</strong> día para la finalización del proyecto "<strong>${project.project_name}</strong>".`,
-                    type: 'danger',
-                });
-            }  
-
-            else if (daysDiff == 1) {
-                new Toast({
-                    message: `Solo queda <strong>${daysDiff}</strong> día para la finalización del proyecto "<strong>${project.project_name}</strong>".`,
-                    type: 'danger',
-                });
+            let toastMessage = '';
+            if (daysDiff == 1) {
+                toastMessage = `Solo queda <strong>${daysDiff}</strong> día para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
+            } else if (daysDiff <= 5) {
+                toastMessage = `Quedan <strong>${daysDiff}</strong> días para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
             }
 
-            else if (daysDiff <= 5) {
-                new Toast({
-                    message: `Quedan <strong>${daysDiff}</strong> días para la finalización del proyecto "<strong>${project.project_name}</strong>".`,
-                    type: 'success',
-                });
+            if (toastMessage) {
+                const toast = document.createElement('div');
+                toast.classList.add('toast');
+                toast.setAttribute('role', 'alert');
+                toast.setAttribute('aria-live', 'assertive');
+                toast.setAttribute('aria-atomic', 'true');
+                toast.innerHTML = `
+                    <div class="toast-header">
+                        <strong class="me-auto">${project.project_name}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        ${toastMessage}
+                    </div>
+                `;
+                toastContainer.appendChild(toast);
+
+                const bsToast = new bootstrap.Toast(toast);
+                bsToast.show();
             }
         });
     });
 </script>
+
 @endsection
