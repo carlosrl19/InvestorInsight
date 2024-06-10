@@ -369,13 +369,11 @@ Proyectos activos
             toastMessage = `Quedan <strong>${daysDiff}</strong> días para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
         } else if (daysDiff == 0) {
             toastMessage = `Hoy finaliza el proyecto "<strong>${project.project_name}</strong>".`;
-        } else if (daysDiff > 5) {
-            toastMessage = ``;
         } else if (daysDiff < 0) {
-            toastMessage = ``;
+            // No se debe mostrar el toast cuando daysDiff es menor a 0
         }
 
-        if (daysDiff > 0) {
+        if (daysDiff > 0 && daysDiff <= 5) {
             const toast = document.createElement('div');
             toast.classList.add('toast');
             toast.setAttribute('role', 'alert');
