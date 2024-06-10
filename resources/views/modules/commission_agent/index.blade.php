@@ -54,6 +54,7 @@ Comisionistas
             <table id="example" class="display table table-bordered">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Nombre comisionista</th>
                         <th>Nº Identidad</th>
                         <th>Teléfono</th>
@@ -64,6 +65,7 @@ Comisionistas
                 <tbody>
                     @foreach($commission_agents as $commission_agent)
                     <tr>
+                        <td> {{ $commission_agent->commissioner_code }} </td>
                         <td>{{ $commission_agent->commissioner_name }}</td>
                         <td>{{ $commission_agent->commissioner_dni }}</td>
                         <td>{{ $commission_agent->commissioner_phone }}</td>
@@ -108,6 +110,18 @@ Comisionistas
                                         @method('PUT')
                                         @csrf
                                         <div class="row mb-3 align-items-end">
+                                            <div class="col" style="display: none">
+                                                <div class="form-floating">
+                                                    <input type="text" readonly name="commissioner_code" id="commissioner_code" value="{{ $commissionerCode }}" class="form-control" autocomplete="off">
+                                                    <label for="commissioner_code" name="commissioner_code">ID</label>
+                                                </div>
+                                            </div>
+                                            <div class="col" style="display: none">
+                                                <div class="form-floating">
+                                                    <input type="text" readonly name="commissioner_balance" id="commissioner_balance" value="{{ $commission_agent->commissioner_balance }}" class="form-control" autocomplete="off">
+                                                    <label for="commissioner_balance" name="commissioner_balance">ID</label>
+                                                </div>
+                                            </div>
                                             <div class="col">
                                                 <label class="form-label" for="commissioner_name_{{ $commission_agent->id }}">Nombre del comisionista</label>
                                                 <input type="text" maxlength="55" value="{{ $commission_agent->commissioner_name }}" name="commissioner_name" id="commissioner_name_{{ $commission_agent->id }}" class="form-control @error('commissioner_name') is-invalid @enderror" placeholder="Ingrese el nombre del comisionista" autocomplete="off"/>

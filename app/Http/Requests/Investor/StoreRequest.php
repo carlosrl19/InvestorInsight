@@ -29,7 +29,7 @@ class StoreRequest extends FormRequest
             'investor_code.string' => 'El código del inversionista solo debe contener números.',
             'investor_code.min' => 'El código del inversionista debe contener al menos 8 caracteres.',
             'investor_code.max' => 'El código del inversionista no puede exceder 8 caracteres.',
-            'investor_code.regex' => 'El código del inversionista no puede contener letras ni símbolos..',
+            'investor_code.regex' => 'El código del inversionista no puede contener letras ni símbolos.',
             'investor_code.unique' => 'El código del inversionista ya existe.',
 
             // Investor name messages

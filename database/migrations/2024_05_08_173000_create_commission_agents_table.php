@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('commission_agents', function (Blueprint $table) {
             $table->id();
+            $table->string('commissioner_code');
             $table->string('commissioner_name');
             $table->string('commissioner_dni');
             $table->string('commissioner_phone');

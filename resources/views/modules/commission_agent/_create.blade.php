@@ -9,6 +9,12 @@
                 <form action="{{ route('commission_agent.store')}}" method="POST">
                     @csrf
                     <div class="row mb-3 align-items-end">
+                        <div class="col" style="display: none">
+                            <div class="form-floating">
+                                <input type="text" readonly name="commissioner_code" id="commissioner_code" value="{{ $commissionerCode }}" class="form-control @error('investor_name') is-invalid @enderror" autocomplete="off">
+                                <label for="commissioner_code" name="commissioner_code">ID</label>
+                            </div>
+                        </div>
                         <div class="col" style="display: none;">
                             <div class="form-floating">
                                 <input type="number" name="commissioner_balance" value="{{ $commissioner_balance}}" readonly id="commissioner_balance" class="form-control @error('commissioner_balance') is-invalid @enderror" autocomplete="off"/>

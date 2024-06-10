@@ -16,8 +16,13 @@ class CommissionAgentController extends Controller
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
         $commissioner_balance = 0.00;
+        $commissioner_balance = 0.00;
 
-        return view('modules.commission_agent.index', compact('commission_agents', 'total_investor_balance', 'total_commissioner_balance', 'commissioner_balance'));
+        $lastCommissioner = CommissionAgent::latest()->first();
+        $nextId = $lastCommissioner ? $lastCommissioner->id + 1 : 1;
+        $commissionerCode = str_pad($nextId, 8, '0', STR_PAD_LEFT);
+
+        return view('modules.commission_agent.index', compact('commission_agents', 'total_investor_balance', 'total_commissioner_balance', 'commissioner_balance', 'commissionerCode'));
     }
 
 

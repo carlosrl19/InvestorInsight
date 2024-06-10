@@ -12,6 +12,7 @@ class CommissionAgentSeeder extends Seeder
     {
         CommissionAgent::create(
             [
+                'commissioner_code' => '00000001',
                 'commissioner_name' => 'JUNIOR AYALA',
                 'commissioner_dni' => '0801199907469',
                 'commissioner_phone' => '31559105',
