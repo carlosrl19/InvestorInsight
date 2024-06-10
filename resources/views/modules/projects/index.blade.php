@@ -366,6 +366,8 @@ Proyectos activos
                 toastMessage = `Solo queda <strong>${daysDiff}</strong> día para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
             } else if (daysDiff <= 5) {
                 toastMessage = `Quedan <strong>${daysDiff}</strong> días para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
+            }  else if (daysDiff <= 0) {
+                toastMessage = ``;
             }
 
             if (toastMessage) {

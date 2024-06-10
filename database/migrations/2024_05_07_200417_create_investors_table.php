@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('investors', function (Blueprint $table) {
             $table->id();
+            $table->string('investor_code');
             $table->string('investor_name');
             $table->string('investor_company_name');
             $table->string('investor_dni');

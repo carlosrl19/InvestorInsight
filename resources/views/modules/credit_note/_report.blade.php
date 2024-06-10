@@ -43,9 +43,9 @@
 	<!-- Credit's note Robenior signature -->
 	<div class="mt-6 ml-center">
 		&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px"
-			style="position: absolute; margin-top: -45px; transform: rotate(35deg)">
+			style="position: absolute; margin-top: -45px; transform: scale(1.4)">
 			<img src="static/sello-ejemplo.png" alt="Sello" height="80px"
-			style="position: absolute; margin-top: -60px; margin-left: 100px">
+			style="position: absolute; margin-top: -70px; margin-left: 160px; transform: scale(1.3)">
 		<span style="margin-left: -30px">__________________________</span><br>
 		<strong>Junior Alexis Ayala Guerrero</strong><br>
 	</div>

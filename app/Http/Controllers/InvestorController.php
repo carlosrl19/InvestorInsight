@@ -12,29 +12,39 @@ use App\Models\Transfer;
 
 class InvestorController extends Controller
 {
-
     public function index()
     {
         $investors = Investor::get();
         $commissioners = CommissionAgent::get();
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
-
+    
         // Mapeamos los investors para obtener sus referencias
         $investors = $investors->map(function ($investor) {
             $investor->investor_reference = Investor::find($investor->investor_reference_id);
             return $investor;
         });
-        return view('modules.investors.index', compact('investors', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
+    
+        $lastInvestor = Investor::latest()->first();
+        $nextId = $lastInvestor ? $lastInvestor->id + 1 : 1;
+        $investorCode = str_pad($nextId, 8, '0', STR_PAD_LEFT);
+    
+        return view('modules.investors.index', compact('investors', 'commissioners', 'total_investor_balance', 'total_commissioner_balance', 'investorCode'));
     }
-
+    
     public function create()
     {
-        //
+        return view('modules.investors.create');
     }
-
+    
     public function store(StoreRequest $request)
     {
+        $lastInvestor = Investor::latest()->first();
+        $nextId = $lastInvestor ? $lastInvestor->id + 1 : 1;
+        $investorCode = str_pad($nextId, 8, '0', STR_PAD_LEFT);
+    
+        $request->merge(['investor_code' => $investorCode]);
+    
         Investor::create($request->all());
         return redirect()->route('investor.index')->with('success', 'Inversionista creado exitosamente.');
     }

@@ -32,9 +32,9 @@
     <!-- Promissory note Robenior signature -->
     <div class="mt-6 ml-center">
         &nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px"
-			style="position: absolute; margin-top: 0px; transform: rotate(35deg)">
+			style="position: absolute; margin-top: -5px; transform: scale(1.4)">
 			<img src="static/sello-ejemplo.png" alt="Sello" height="80px"
-			style="position: absolute; margin-top: -20px; margin-left: 100px">
+			style="position: absolute; margin-top: -30px; margin-left: 160px; transform: scale(1.3)">
         <br>_______________________
         <br><span>DNI: <strong class="text-underline">0801199907469</strong></span>
     </div>

@@ -60,8 +60,8 @@ class StoreRequest extends FormRequest
             // Project code messages
             'project_code.required' => 'El código del proyecto es obligatorio.',
             'project_code.string' => 'El código del proyecto solo debe contener letras.',
-            'project_code.min' => 'El código del proyecto debe tener 12 caracteres.',
-            'project_code.max' => 'El código del proyecto debe tener 12 caracteres.',
+            'project_code.min' => 'El código del proyecto debe tener al menos 12 caracteres.',
+            'project_code.max' => 'El código del proyecto no puede exceder 12 caracteres.',
             'project_code.regex' => 'El código del proyecto solo puede contener letras y números.',
             'project_code.unique' => 'El código del proyecto ya existe.',
             
