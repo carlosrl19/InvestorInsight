@@ -2,3 +2,14 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+#toast-container{
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    min-width: 350px;
+}
+.toast-body{
+    font-size: clamp(0.6rem, 3vh, 0.8rem);
+    border-left: 4px solid red;
+}

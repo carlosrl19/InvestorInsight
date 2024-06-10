@@ -310,7 +310,7 @@ Proyectos activos
         </div>
     </div>
 </div>
-<div id="toast-container" aria-live="polite" aria-atomic="true" style="position: absolute; bottom: 0; right: 0; min-width: 300px;"></div>
+<div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
 
 @include('modules.projects._create')
@@ -359,14 +359,17 @@ Proyectos activos
     projects.forEach(project => {
         const projectEndDate = new Date(project.project_end_date);
         const timeDiff = projectEndDate.getTime() - today.getTime();
-        const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Diferencia en días
+        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
 
         let toastMessage = '';
+
         if (daysDiff == 1) {
             toastMessage = `Solo queda <strong>${daysDiff}</strong> día para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
         } else if (daysDiff <= 5) {
             toastMessage = `Quedan <strong>${daysDiff}</strong> días para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
-        } else if (daysDiff <= 0) {
+        } else if (daysDiff == 0) {
+            toastMessage = `Hoy finaliza el proyecto "<strong>${project.project_name}</strong>".`;
+        } else if (daysDiff < 0) {
             toastMessage = ``;
         }
 
@@ -377,10 +380,6 @@ Proyectos activos
             toast.setAttribute('aria-live', 'assertive');
             toast.setAttribute('aria-atomic', 'true');
             toast.innerHTML = `
-                <div class="toast-header">
-                    <strong class="me-auto">${project.project_name}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
                 <div class="toast-body">
                     ${toastMessage}
                 </div>
