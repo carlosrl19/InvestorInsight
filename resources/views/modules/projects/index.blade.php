@@ -352,7 +352,7 @@ Proyectos activos
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const projects = {!! json_encode($projects) !!}; // Convertimos los datos de PHP a JSON
+        const projects = <?php echo json_encode($projects); ?>; // Convertimos los datos de PHP a JSON
         const today = new Date();
         const toastContainer = document.getElementById('toast-container'); // Contenedor para los toasts
 
