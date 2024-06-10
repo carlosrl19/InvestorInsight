@@ -27,15 +27,19 @@ class ProjectController extends Controller
         $generatedCode = strtoupper(Str::random(12)); // Random code
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
-    
+        
         // Calcular días restantes para cada proyecto
         foreach ($projects as $project) {
-            $project->days_remaining = now()->diffInDays($project->project_end_date, false);
+            $daysRemaining = now()->diffInDays($project->project_end_date, false);
+            if ($daysRemaining <= 0) {
+                $project->days_remaining = '0';
+            } else {
+                $project->days_remaining = $daysRemaining;
+            }
         }
-    
+        
         return view('modules.projects.index', compact('projects', 'investors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance'));
     }
-    
 
     public function indexClosed()
     {
@@ -86,7 +90,7 @@ class ProjectController extends Controller
                 PromissoryNote::create([
                     'investor_id' => $invId,
                     'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
-                    'promissoryNote_final_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->addMonth()->format('Y-m-d'),
+                    'promissoryNote_final_date' =>  $project->project_end_date,
                     'promissoryNote_amount' => $validatedData[ 'investor_investment' ][$i] + $validatedData[ 'investor_final_profit' ][$i],
                     'promissoryNote_code' => $promissoryNoteCode,
                     'promissoryNote_status' => 1,
@@ -107,7 +111,7 @@ class ProjectController extends Controller
             PromissoryNote::create([
                 'investor_id' => $invId,
                 'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
-                'promissoryNote_final_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->addMonth()->format('Y-m-d'),
+                'promissoryNote_final_date' =>  $project->project_end_date,
                 'promissoryNote_amount' => $validatedData[ 'investor_investment' ] + $validatedData[ 'investor_final_profit' ],
                 'promissoryNote_code' => $promissoryNoteCode,
                 'promissoryNote_status' => 1,

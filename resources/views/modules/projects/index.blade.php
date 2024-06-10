@@ -88,10 +88,10 @@ Proyectos activos
         <div class="card-body">
             <table id="example" class="display nowrap table table-bordered" style="width: 100%;">
                 <thead>
-                    <tr>
+                    <tr style="text-align: center;">
                         <th>Nombre proyecto</th>
                         <th>Inicio</th>
-                        <th>Final <small>(previsto)</small></th>
+                        <th>Final</th>
                         <th>Días</th>
                         <th>Inversionista</th>
                         <th>Inversión</th>
@@ -112,7 +112,7 @@ Proyectos activos
                         @endphp
                         <tr>
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
-                                <a href="{{ route('project.show', $project) }}">
+                                <a href="{{ route('project.show', $project) }}" title="{{ $project->project_name }}" data-bs-toggle="tooltip" data-bs-placement="top">
                                     {{ $project->project_name }}
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -124,7 +124,7 @@ Proyectos activos
                             </td>
                             <td>{{ $project->project_start_date }}</td>
                             <td>{{ $project->project_end_date }}</td>
-                            <td>{{ $project->days_remaining  }}</td> <!-- From Controller -->
+                            <td style="text-align: center;">{{ $project->days_remaining  }}</td> <!-- Get it from Controller -->
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 @foreach ($project->investors as $investor)
                                     <a title="{{ $investor->investor_name }}" data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}<br>
@@ -352,46 +352,46 @@ Proyectos activos
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const projects = <?php echo json_encode($projects); ?>; // Convertimos los datos de PHP a JSON
-        const today = new Date();
-        const toastContainer = document.getElementById('toast-container'); // Contenedor para los toasts
+    const projects = <?php echo json_encode($projects); ?>; // Convertimos los datos de PHP a JSON
+    const today = new Date();
+    const toastContainer = document.getElementById('toast-container'); // Contenedor para los toasts
 
-        projects.forEach(project => {
-            const projectEndDate = new Date(project.project_end_date);
-            const timeDiff = projectEndDate.getTime() - today.getTime();
-            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Diferencia en días
+    projects.forEach(project => {
+        const projectEndDate = new Date(project.project_end_date);
+        const timeDiff = projectEndDate.getTime() - today.getTime();
+        const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Diferencia en días
 
-            let toastMessage = '';
-            if (daysDiff == 1) {
-                toastMessage = `Solo queda <strong>${daysDiff}</strong> día para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
-            } else if (daysDiff <= 5) {
-                toastMessage = `Quedan <strong>${daysDiff}</strong> días para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
-            }  else if (daysDiff <= 0) {
-                toastMessage = ``;
-            }
+        let toastMessage = '';
+        if (daysDiff == 1) {
+            toastMessage = `Solo queda <strong>${daysDiff}</strong> día para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
+        } else if (daysDiff <= 5) {
+            toastMessage = `Quedan <strong>${daysDiff}</strong> días para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
+        } else if (daysDiff <= 0) {
+            toastMessage = ``;
+        }
 
-            if (toastMessage) {
-                const toast = document.createElement('div');
-                toast.classList.add('toast');
-                toast.setAttribute('role', 'alert');
-                toast.setAttribute('aria-live', 'assertive');
-                toast.setAttribute('aria-atomic', 'true');
-                toast.innerHTML = `
-                    <div class="toast-header">
-                        <strong class="me-auto">${project.project_name}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                        ${toastMessage}
-                    </div>
-                `;
-                toastContainer.appendChild(toast);
+        if (daysDiff > 0) {
+            const toast = document.createElement('div');
+            toast.classList.add('toast');
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+            toast.innerHTML = `
+                <div class="toast-header">
+                    <strong class="me-auto">${project.project_name}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    ${toastMessage}
+                </div>
+            `;
+            toastContainer.appendChild(toast);
 
-                const bsToast = new bootstrap.Toast(toast);
-                bsToast.show();
-            }
-        });
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+        }
     });
+});
 </script>
 
 @endsection
