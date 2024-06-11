@@ -171,11 +171,11 @@
                                         <option value="" selected disabled>Seleccione un banco o método de transferencia
                                         </option>
                                         <optgroup label="Otros métodos">
-                                            @foreach(['EFECTIVO', 'FONDOS', 'REMESAS', 'TARJETA'] as $method)
+                                            @foreach(['REMESAS', 'FONDOS', 'EFECTIVO', 'TARJETA'] as $method)
                                                 <option value="{{ $method }}">{{ $method }}</option>
                                             @endforeach
                                         </optgroup>
-                                        
+
                                         <optgroup label="Bancos">
                                             @foreach(['BAC CREDOMATIC', 'BANCO ATLÁNTIDA', 'BANCO AZTECA', 'BANCO CUSCATLAN', 'BANRURAL', 'BANCO CENTRAL', 'BANTRABHN', 'BANCO DE OCCIDENTE', 'DAVIVIENDA', 'FICENSA', 'FICOHSA', 'BANHCAFE', 'LAFISE', 'BANPAIS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)                                             <option value="{{ $bank }}">{{ $bank }}</option>
                                             @endforeach
