@@ -349,45 +349,46 @@ Proyectos activos
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    const projects = <?php echo json_encode($projects); ?>; // Convertimos los datos de PHP a JSON
-    const today = new Date();
-    const toastContainer = document.getElementById('toast-container'); // Contenedor para los toasts
+        const projects = <?php echo json_encode($projects); ?>; // Convertimos los datos de PHP a JSON
+        const today = new Date();
+        const toastContainer = document.getElementById('toast-container'); // Contenedor para los toasts
 
-    projects.forEach(project => {
-        const projectEndDate = new Date(project.project_end_date);
-        const timeDiff = projectEndDate.getTime() - today.getTime();
-        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24)) + 2;
+        setTimeout(() => {
+            projects.forEach(project => {
+                const projectEndDate = new Date(project.project_end_date);
+                const timeDiff = projectEndDate.getTime() - today.getTime();
+                const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24)) + 2;
 
-        let toastMessage = '';
+                let toastMessage = '';
 
-        if (daysDiff == 1) {
-            toastMessage = `Solo queda <strong>${daysDiff}</strong> día para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
-        } else if (daysDiff <= 5) {
-            toastMessage = `Quedan <strong>${daysDiff}</strong> días para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
-        } else if (daysDiff == 0) {
-            toastMessage = `Hoy finaliza el proyecto "<strong>${project.project_name}</strong>".`;
-        } else if (daysDiff < 0) {
-            // No se debe mostrar el toast cuando daysDiff es menor a 0
-        }
+                if (daysDiff == 1) {
+                    toastMessage = `Solo queda <strong>${daysDiff}</strong> día para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
+                } else if (daysDiff <= 5) {
+                    toastMessage = `Quedan <strong>${daysDiff}</strong> días para la finalización del proyecto "<strong>${project.project_name}</strong>".`;
+                } else if (daysDiff == 0) {
+                    toastMessage = `Hoy finaliza el proyecto "<strong>${project.project_name}</strong>".`;
+                } else if (daysDiff < 0) {
+                    // No se debe mostrar el toast cuando daysDiff es menor a 0
+                }
 
-        if (daysDiff > 0 && daysDiff <= 5) {
-            const toast = document.createElement('div');
-            toast.classList.add('toast');
-            toast.setAttribute('role', 'alert');
-            toast.setAttribute('aria-live', 'assertive');
-            toast.setAttribute('aria-atomic', 'true');
-            toast.innerHTML = `
-                <div class="toast-body">
-                    ${toastMessage}
-                </div>
-            `;
-            toastContainer.appendChild(toast);
+                if (daysDiff > 0 && daysDiff <= 5) {
+                    const toast = document.createElement('div');
+                    toast.classList.add('toast');
+                    toast.setAttribute('role', 'alert');
+                    toast.setAttribute('aria-live', 'assertive');
+                    toast.setAttribute('aria-atomic', 'true');
+                    toast.innerHTML = `
+                        <div class="toast-body">
+                            ${toastMessage}
+                        </div>
+                    `;
+                    toastContainer.appendChild(toast);
 
-            const bsToast = new bootstrap.Toast(toast);
-            bsToast.show();
-        }
+                    const bsToast = new bootstrap.Toast(toast);
+                    bsToast.show();
+                }
+            });
+        }, 5000); // Retrasar la ejecución 5 segundos (5000 milisegundos)
     });
-});
 </script>
-
 @endsection
