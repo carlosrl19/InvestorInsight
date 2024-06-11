@@ -310,8 +310,8 @@ Proyectos activos
         </div>
     </div>
 </div>
-<div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
+<div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
 @include('modules.projects._create')
 @endsection
