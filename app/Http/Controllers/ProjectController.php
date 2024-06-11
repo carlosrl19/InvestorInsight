@@ -150,7 +150,6 @@ class ProjectController extends Controller
         return redirect()->route('project.index')->with('success', 'Proyecto, pagaré y transferencia creados de manera exitosa.');
     }
     
-
     public function show($id)
     {
         $project = Project::findOrFail($id);
@@ -252,20 +251,22 @@ class ProjectController extends Controller
             echo $pdf->output();
         }, 'Finiquito - ' . $project->project_name . '.pdf');
     }
+
     public function closeProject(Request $request, Project $project)
     {
         // Validar los datos recibidos
         $request->validate([
-            'project_close_comment' => 'string|min:3|max:255',
-
+            'project_close_comment' => 'required|string|min:3|max:255',
+        ], [
             // Project description messages
-            'project_close_comment.string' => 'El motivo de cierre del proyecto solo deben contener letras, números y/o símbolos.',
-            'project_close_comment.min' => 'El motivo de cierre del proyecto deben tener al menos 3 caracteres.',
-            'project_close_comment.max' => 'El motivo de cierre del proyecto no pueden tener más de 255 caracteres.',
+            'project_close_comment.required' => 'El motivo de cierre del proyecto es obligatorio.',
+            'project_close_comment.string' => 'El motivo de cierre del proyecto solo debe contener letras, números y/o símbolos.',
+            'project_close_comment.min' => 'El motivo de cierre del proyecto debe tener al menos 3 caracteres.',
+            'project_close_comment.max' => 'El motivo de cierre del proyecto no puede tener más de 255 caracteres.',
         ]);
 
         $project->project_status = '2';
-        $project->project_close_comment;
+        $project->project_close_comment = $request->input('project_close_comment');
         $project->save();
 
         return redirect()->route('project.index')->with('success', 'Proyecto cerrado correctamente.');
