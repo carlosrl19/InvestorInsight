@@ -318,11 +318,42 @@ $(document).ready(function () {
             $("#transfer-amount-error").show();
         } else {
             var transferAmountNumber = parseFloat(transferAmount);
-            if (isNaN(transferAmountNumber) || transferAmountNumber <= 0) {
+            if (isNaN(transferAmountNumber)) {
                 isValid = false;
                 transferAmountInput.addClass("is-invalid");
                 transferAmountError.text(
-                    "El monto de transferencia debe ser un número válido y mayor a 0."
+                    "El monto de transferencia debe ser un número válido."
+                );
+                $("#transfer-amount-error").show();
+            } else if (transferAmountNumber <= 0) {
+                isValid = false;
+                transferAmountInput.addClass("is-invalid");
+                transferAmountError.text(
+                    "El monto de transferencia debe ser mayor a 0."
+                );
+                $("#transfer-amount-error").show();
+            } else {
+                transferAmountInput.removeClass("is-invalid");
+                transferAmountInput.addClass("is-valid");
+                $("#transfer-amount-error").hide();
+            }
+        }
+        
+        if (transferBank == "FONDOS") {
+            var investorBalance = currentFieldset.find("#investor_balance").val();
+            var transferAmountNumber = parseFloat(transferAmount);
+            if (transferAmountNumber > investorBalance) {
+                isValid = false;
+                transferAmountInput.addClass("is-invalid");
+                transferAmountError.text(
+                    "El monto del fondo a invertir no puede ser mayor que el fondo disponible."
+                );
+                $("#transfer-amount-error").show();
+            } else if (transferAmountNumber <= 0) {
+                isValid = false;
+                transferAmountInput.addClass("is-invalid");
+                transferAmountError.text(
+                    "El monto del fondo a invertir debe ser mayor a 0."
                 );
                 $("#transfer-amount-error").show();
             } else {

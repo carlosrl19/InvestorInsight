@@ -147,18 +147,20 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="number" min="0" name="transfer_amount" id="transfer_amount"
-                                        class="form-control @error('transfer_amount') is-invalid @enderror" />
-                                    @error('transfer_amount')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <span class="invalid-feedback" role="alert" id="transfer-amount-error"
+                                    <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;"
+                                        onchange="updateInvestor()" required>
+                                        <option value="" selected disabled>Seleccione un inversionista</option>
+                                        @foreach ($investors->where('investor_status', 1) as $investor)
+                                            <option value="{{ $investor->id }}">
+                                                {{ $investor->investor_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <label for="investor_id">Inversionistas disponibles</label>
+                                    <span class="invalid-feedback" role="alert" id="investor-id-error"
                                         style="display: none;">
                                         <strong></strong>
                                     </span>
-                                    <label for="transfer_amount">Monto de transferencia</label>
                                 </div>
                             </div>
 
@@ -192,22 +194,27 @@
                                 </div>
                             </div>
 
+                            <div class="col" id="investor_balance" style="display: none;">
+                                <div class="form-floating">
+                                    <input type="number" value="{{ $investor->investor_balance }}" class="form-control" name="investor_balance" readonly>
+                                    <label for="investor_balance">Fondo disponible</label>
+                                </div>
+                            </div>
+
                             <div class="col">
                                 <div class="form-floating">
-                                    <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;"
-                                        onchange="updateInvestor()" required>
-                                        <option value="" selected disabled>Seleccione un inversionista</option>
-                                        @foreach ($investors->where('investor_status', 1) as $investor)
-                                            <option value="{{ $investor->id }}">
-                                                {{ $investor->investor_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <label for="investor_id">Inversionistas disponibles</label>
-                                    <span class="invalid-feedback" role="alert" id="investor-id-error"
+                                    <input type="number" min="0" name="transfer_amount" id="transfer_amount"
+                                        class="form-control @error('transfer_amount') is-invalid @enderror" />
+                                    @error('transfer_amount')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <span class="invalid-feedback" role="alert" id="transfer-amount-error"
                                         style="display: none;">
                                         <strong></strong>
                                     </span>
+                                    <label for="transfer_amount">Monto de transferencia</label>
                                 </div>
                             </div>
                         </div>
@@ -409,3 +416,13 @@
 <script src="{{ asset('customjs/projects/calculations.js') }}"></script>
 <script src="{{ asset('customjs/projects/work_days_calculate.js') }}"></script>
 <script src="{{ asset('customjs/uppercase.js') }}"></script>
+
+<script>
+    document.getElementById('transfer_bank').addEventListener('change', function() {
+        if (this.value === 'FONDOS') {
+            document.getElementById('investor_balance').style.display = 'block';
+        } else {
+            document.getElementById('investor_balance').style.display = 'none';
+        }
+    });
+</script>
