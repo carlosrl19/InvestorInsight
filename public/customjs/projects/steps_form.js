@@ -5,8 +5,13 @@ $(document).ready(function () {
     var nextBtn = $("#nextBtn");
     var submitBtn = $("#submitBtn");
 
+    // Mostrar el primer paso al cargar la página
     showStep(currentStep);
 
+    // Inicialmente deshabilitar el botón submit
+    submitBtn.prop("disabled", true);
+
+    // Controlador del botón Siguiente
     nextBtn.click(function () {
         if (validateStep(currentStep, steps)) {
             currentStep++;
@@ -14,15 +19,18 @@ $(document).ready(function () {
         }
     });
 
+    // Controlador del botón Anterior
     prevBtn.click(function () {
         currentStep--;
         showStep(currentStep);
     });
 
+    // Función para mostrar el paso actual
     function showStep(stepIndex) {
         steps.hide();
         $(steps[stepIndex]).show();
     
+        // Ocultar o mostrar botones según el paso actual
         if (stepIndex === 0) {
             prevBtn.hide();
         } else {
@@ -61,6 +69,11 @@ $(document).ready(function () {
             case 3:
                 isValid = validateStep4(currentFieldset) && isValid;
                 break;
+        }
+
+        // Habilitar o deshabilitar el botón de submit según la validez del paso actual
+        if (stepIndex == steps.length - 1) {
+            submitBtn.prop("disabled", !isValid);
         }
 
         return isValid;
@@ -490,7 +503,6 @@ $(document).ready(function () {
     
         return isValid;
     }
-    
 
     // Validations to step 4
     function validateStep4(currentFieldset) {
@@ -528,6 +540,19 @@ $(document).ready(function () {
             $('$project-comment-error').hide();
         }
 
+        // Llamar a checkCommentInput() para asegurar que el botón submit se actualice correctamente
+        checkCommentInput();
+
         return isValid;
+    }
+
+    // Función para verificar la entrada en el campo de comentarios del proyecto
+    $('#project_comment').on('input', function() {
+        checkCommentInput();
+    });
+
+    function checkCommentInput() {
+        var projectComment = $('#project_comment').val().trim();
+        submitBtn.prop('disabled', projectComment.length == 0);
     }
 });
