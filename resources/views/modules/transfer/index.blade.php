@@ -57,11 +57,9 @@ Transferencias
             <thead>
                 <tr class="text-center">
                     <th>Código</th>
-                    <th>Fecha</th>
-                    <th>Banco transferencia</th>
                     <th>Inversionista</th>
                     <th>Fecha Hora</th>
-                    <th>Banco / Modo de transferencia</th>
+                    <th>Banco transferencia</th>
                     <th>Monto transferencia</th>
                     <th>Comentarios</th>
                     <th>Comprobante</th>
