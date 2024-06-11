@@ -182,20 +182,9 @@ class ProjectController extends Controller
         $project->project_status = '0';
         $project->save();
 
-        // Obtener la transferencia correspondiente
-        $transfer = Transfer::where('transfer_code', $project->project_code)->first();
-
-        // Obtener el transfer_bank
-        $transfer_bank = $transfer->transfer_bank;
-
         // Sumar el investor_final_investment al investor_balance de cada inversor asociado al proyecto
         foreach ($project->investors as $investor) {
-            if ($transfer_bank == 'FONDOS') {
-                $investor->investor_balance -= $investor->pivot->investor_investment;
-                $investor->investor_balance += $investor->pivot->investor_final_profit;
-            } else {
-                $investor->investor_balance += ($investor->pivot->investor_final_profit + $investor->pivot->investor_investment);
-            }
+            $investor->investor_balance += ($investor->pivot->investor_final_profit + $investor->pivot->investor_investment);
             $investor->save();
         }
 
