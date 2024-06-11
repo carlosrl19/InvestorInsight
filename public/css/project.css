@@ -5,10 +5,15 @@
 
 #toast-container{
     position: absolute;
-    right: 30px;
-    bottom: 30px;
+    right: 20px;
+    bottom: 20px;
     min-width: 350px;
 }
+
+.toast-spacing {
+    margin-bottom: 0.1rem;
+}
+
 .toast-body{
     font-size: clamp(0.6rem, 3vh, 0.8rem);
     border-left: 4px solid red;

@@ -373,12 +373,13 @@ Proyectos activos
 
                 if (daysDiff > 0 && daysDiff <= 5) {
                     const toast = document.createElement('div');
-                    toast.classList.add('toast');
+                    toast.classList.add('toast', 'toast-spacing');
                     toast.setAttribute('role', 'alert');
                     toast.setAttribute('aria-live', 'assertive');
                     toast.setAttribute('aria-atomic', 'true');
                     toast.innerHTML = `
                         <div class="toast-body">
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                             ${toastMessage}
                         </div>
                     `;
@@ -388,7 +389,7 @@ Proyectos activos
                     bsToast.show();
                 }
             });
-        }, 5000); // Retrasar la ejecución 5 segundos (5000 milisegundos)
+        }, 3000); // Retrasar la ejecución 5 segundos (5000 milisegundos)
     });
 </script>
 @endsection
