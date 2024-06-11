@@ -9,9 +9,9 @@
         <tr>
             <td></td>
             @foreach($project->investors as $investor)
-                <td style="font-size: 14px; width: 200px; font-weight: bold; background-color: #fff; text-align: left; text-decoration: underline;">PROYECTO {{ $investor->investor_name }} </td>
+                <td style="font-size: 14px; width: 100px; font-weight: bold; background-color: #fff; text-align: left; text-decoration: underline;">PROYECTO {{ $investor->investor_name }} </td>
             @endforeach
-            <td style="background-color: #fff; width: 300px;"></td>
+            <td style="background-color: #fff; width: auto;"></td>
             <td style="background-color: #fff; width: 100px;"></td>
             <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 160px; text-align: center; text-decoration: underline;">
                 @if($project->project_status == 0)
@@ -24,8 +24,8 @@
                     DESCONOCIDO
                 @endif
             </td>
-            <td style="background-color: #fff;"></td>
-            <td style="background-color: #fff;"></td>
+            <td style="background-color: #fff; width: 160px;"></td>
+            <td style="background-color: #fff; width: 160px;"></td>
             @if(isset($project->commissioners[1]))
                 <td style="background-color: #fff;"></td>
                 <td style="background-color: #fff; text-align: center; font-weight: bold;">#CP-{{ $project->project_code }}</td>
@@ -42,8 +42,8 @@
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
-            <td style="background-color: #fff"></td>
-            <td style="background-color: #fff"></td>
+            <td style="background-color: #fff;"></td>
+            <td style="background-color: #fff;"></td>
             @if(isset($project->commissioners[1]))
                 <td style="background-color: #fff;"></td>
                 <td style="background-color: #fff;"></td>
@@ -60,8 +60,8 @@
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
             <td style="background-color: #fff"></td>
-            <td style="background-color: #fff"></td>
-            <td style="background-color: #fff"></td>
+            <td style="background-color: #fff;"></td>
+            <td style="background-color: #fff;"></td>
             @if(isset($project->commissioners[1]))
                 <td style="background-color: #fff;"></td>
                 <td style="background-color: #fff;"></td>
@@ -100,16 +100,16 @@
         <tr>
             <td></td>
             <td style="background-color: #A9D08E; width: 90px"></td>
-            <td style="background-color: #fff; font-size: 12px; font-weight: bold; text-align: left; border-bottom: 1px solid #000;">{{ $project->project_name }}</td>
+            <td style="background-color: #fff; font-size: 12px; font-weight: bold; text-align: left; width: 140px; border-bottom: 1px solid #000;">{{ $project->project_name }}</td>
             <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000;">L. {{ number_format($project->investors->sum('pivot.investor_investment'), 2) }}</td>
             <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000;">L. {{ number_format($project->investors->sum('pivot.investor_profit'), 2) }}</td>
-            <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000; text-decoration: underline; font-weight: bold;">L. {{ number_format($project->investors->sum('pivot.investor_final_profit'), 2) }}</td>
+            <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000; width: 100px; text-decoration: underline; font-weight: bold;">L. {{ number_format($project->investors->sum('pivot.investor_final_profit'), 2) }}</td>
             @if(isset($project->commissioners[1]))
-                <td style="text-align: center; border-bottom: 1px solid #000; width: 220px; font-weight: bold;">
+                <td style="text-align: center; border-bottom: 1px solid #000; width: auto; font-weight: bold;">
                     L. {{ number_format($project->commissioners[1]->pivot->commissioner_commission, 2) }}
                 </td>
             @endif
-            <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000; width: 220px">L. {{ number_format($project->commissioners[0]->pivot->commissioner_commission, 2) }}</td>
+            <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000; width: 100px">L. {{ number_format($project->commissioners[0]->pivot->commissioner_commission, 2) }}</td>
             <td style="color: #1F4E82; text-decoration: underline; text-align: left; border-bottom: 1px solid #000;">{{ $project->project_comment }}</td>
         </tr>
     </tbody>

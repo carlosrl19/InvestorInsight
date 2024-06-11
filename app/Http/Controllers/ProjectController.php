@@ -150,7 +150,6 @@ class ProjectController extends Controller
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
         return view('modules.projects.show', compact('project', 'investors', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
     }
-
     public function export($id)
     {
         $project = Project::findOrFail($id);
