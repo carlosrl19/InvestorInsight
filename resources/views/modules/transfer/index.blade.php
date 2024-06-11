@@ -57,6 +57,8 @@ Transferencias
             <thead>
                 <tr class="text-center">
                     <th>Código</th>
+                    <th>Fecha</th>
+                    <th>Banco transferencia</th>
                     <th>Inversionista</th>
                     <th>Fecha Hora</th>
                     <th>Banco / Modo de transferencia</th>
@@ -92,6 +94,8 @@ Transferencias
                         </a>
                     </td>
                 </tr>
+
+                <!-- Modal comprobante -->
                 <div class="modal modal-blur fade" id="imageModal-{{ $transfer->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content" style="border: 2px solid #52524E">
