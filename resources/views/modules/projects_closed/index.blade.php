@@ -94,10 +94,10 @@ Proyectos cerrados
                                 @endif
                             </td>
                             <td>
-                                @if($project->project_close_comment == '')
-                                    <strong class="text-red">El usuario no dió motivos</strong>
-                                @else
+                                @if($project->project_close_comment != '')
                                     <span class="text-dark">{{ $project->project_close_comment }}</span>
+                                @else
+                                    <strong class="text-red">El usuario no dió motivos</strong>
                                 @endif
                             </td>
                         </tr>

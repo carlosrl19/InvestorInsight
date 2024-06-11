@@ -285,21 +285,21 @@ Proyectos activos
                                             <h5 class="modal-title" id="ModalLabel">Cerrar proyecto</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
-                                            ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Cerrado"? Utilice esta opción únicamente cuando un proyecto tenga conflictos para llevarse a cabo y no se pueda seguir con el mismo.
+                                        <form action="{{ route('project.close', $project->id) }}" method="POST">
+                                            @csrf
+                                            <div class="modal-body">
+                                                ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Cerrado"? Utilice esta opción únicamente cuando un proyecto tenga conflictos para llevarse a cabo y no se pueda seguir con el mismo.
 
-                                            <div class="form-floating mt-4 mb-2">
-                                                <textarea type="text" class="form-control" style="overflow: hidden; height: 100px; resize: none" name="project_close_comment" id="project_close_comment"></textarea>
-                                                <label for="project_close_comment">Motivo de cierre del proyecto</label>
+                                                <div class="form-floating mt-4 mb-2">
+                                                    <textarea type="text" class="form-control" style="overflow: hidden; height: 100px; resize: none" name="project_close_comment" id="project_close_comment"></textarea>
+                                                    <label for="project_close_comment">Motivo de cierre del proyecto</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <form action="{{ route('project.close', $project->id) }}" method="POST">
-                                                @csrf
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                 <button type="submit" class="btn btn-danger">Cerrar proyecto</button>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -335,6 +335,7 @@ Proyectos activos
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
     $('#pdfModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que activó el modal
@@ -349,9 +350,9 @@ Proyectos activos
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const projects = <?php echo json_encode($projects); ?>; // Convertimos los datos de PHP a JSON
+        const projects = <?php echo json_encode($projects); ?>; // datos de PHP a JSON
         const today = new Date();
-        const toastContainer = document.getElementById('toast-container'); // Contenedor para los toasts
+        const toastContainer = document.getElementById('toast-container');
 
         setTimeout(() => {
             projects.forEach(project => {

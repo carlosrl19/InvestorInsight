@@ -59,87 +59,97 @@ class ProjectController extends Controller
     public function store(StoreRequest $request)
     {
         $generatedCode = strtoupper(Str::random(12));
-
+    
         // Validar los datos del formulario
         $validatedData = $request->validated();
-
+    
         // Crear proyecto
         $project = Project::create([
-            'project_name' => $validatedData[ 'project_name' ],
+            'project_name' => $validatedData['project_name'],
             'project_code' => $generatedCode,
-            'project_start_date' => $validatedData[ 'project_start_date' ],
-            'project_end_date' => $validatedData[ 'project_end_date' ],
-            'project_work_days' => $validatedData[ 'project_work_days' ],
-            'project_investment' => $validatedData[ 'project_investment' ],
-            'project_status' => $validatedData[ 'project_status' ],
-            'project_comment' => $validatedData[ 'project_comment' ],
+            'project_start_date' => $validatedData['project_start_date'],
+            'project_end_date' => $validatedData['project_end_date'],
+            'project_work_days' => $validatedData['project_work_days'],
+            'project_investment' => $validatedData['project_investment'],
+            'project_status' => $validatedData['project_status'],
+            'project_comment' => $validatedData['project_comment'],
         ]);
-
+    
         // Asociar inversionistas con el proyecto
-        if (is_array($validatedData[ 'investor_id' ])) {
-            foreach ($validatedData[ 'investor_id' ] as $i => $invId) {
+        if (is_array($validatedData['investor_id'])) {
+            foreach ($validatedData['investor_id'] as $i => $invId) {
                 $project->investors()->attach($invId, [
-                    'investor_investment' => $validatedData[ 'investor_investment' ][$i],
-                    'investor_profit' => $validatedData[ 'investor_profit' ][$i],
-                    'investor_final_profit' => $validatedData[ 'investor_final_profit' ][$i],
+                    'investor_investment' => $validatedData['investor_investment'][$i],
+                    'investor_profit' => $validatedData['investor_profit'][$i],
+                    'investor_final_profit' => $validatedData['investor_final_profit'][$i],
                 ]);
-
+    
                 // Crear pagaré para cada inversionista del proyecto
                 $promissoryNoteCode = $generatedCode;
-
+    
                 PromissoryNote::create([
                     'investor_id' => $invId,
                     'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
-                    'promissoryNote_final_date' =>  $project->project_end_date,
-                    'promissoryNote_amount' => $validatedData[ 'investor_investment' ][$i] + $validatedData[ 'investor_final_profit' ][$i],
+                    'promissoryNote_final_date' => $project->project_end_date,
+                    'promissoryNote_amount' => $validatedData['investor_investment'][$i] + $validatedData['investor_final_profit'][$i],
                     'promissoryNote_code' => $promissoryNoteCode,
                     'promissoryNote_status' => 1,
                 ]);
             }
         } else {
             // Solo hay un inversionista
-            $invId = $validatedData[ 'investor_id' ];
+            $invId = $validatedData['investor_id'];
             $project->investors()->attach($invId, [
-                'investor_investment' => $validatedData[ 'investor_investment' ],
-                'investor_profit' => $validatedData[ 'investor_profit' ],
-                'investor_final_profit' => $validatedData[ 'investor_final_profit' ],
+                'investor_investment' => $validatedData['investor_investment'],
+                'investor_profit' => $validatedData['investor_profit'],
+                'investor_final_profit' => $validatedData['investor_final_profit'],
             ]);
-
+    
             // Crear pagaré para el inversionista del proyecto
             $promissoryNoteCode = $generatedCode;
-
+    
             PromissoryNote::create([
                 'investor_id' => $invId,
                 'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
-                'promissoryNote_final_date' =>  $project->project_end_date,
-                'promissoryNote_amount' => $validatedData[ 'investor_investment' ] + $validatedData[ 'investor_final_profit' ],
+                'promissoryNote_final_date' => $project->project_end_date,
+                'promissoryNote_amount' => $validatedData['investor_investment'] + $validatedData['investor_final_profit'],
                 'promissoryNote_code' => $promissoryNoteCode,
                 'promissoryNote_status' => 1,
             ]);
         }
-
+    
         // Asociar comisionistas con el proyecto
-        foreach ($validatedData[ 'commissioner_id' ] as $j => $comId) {
+        foreach ($validatedData['commissioner_id'] as $j => $comId) {
             $project->commissioners()->attach($comId, [
-                'commissioner_commission' => $validatedData[ 'commissioner_commission' ][$j],
+                'commissioner_commission' => $validatedData['commissioner_commission'][$j],
             ]);
         }
-
+    
         // Crear transferencia
         $transfer = Transfer::create([
             'transfer_code' => $generatedCode,
-            'transfer_bank' => $validatedData[ 'transfer_bank' ],
-            'investor_id' => is_array($validatedData[ 'investor_id' ]) ? $validatedData[ 'investor_id' ][ 0 ] : $validatedData[ 'investor_id' ],
-            'transfer_date' => $validatedData[ 'transfer_date' ],
-            'transfer_amount' => $validatedData[ 'transfer_amount' ],
-            'transfer_comment' => $validatedData[ 'transfer_comment' ],
+            'transfer_bank' => $validatedData['transfer_bank'],
+            'investor_id' => is_array($validatedData['investor_id']) ? $validatedData['investor_id'][0] : $validatedData['investor_id'],
+            'transfer_date' => $validatedData['transfer_date'],
+            'transfer_amount' => $validatedData['transfer_amount'],
+            'transfer_comment' => $validatedData['transfer_comment'],
         ]);
-
+    
+        // Ajustar el balance del inversionista según el banco de transferencia
+        $investor = Investor::find($transfer->investor_id);
+        if ($validatedData['transfer_bank'] == 'FONDOS') {
+            $investor->investor_balance -= $validatedData['transfer_amount'];
+        } else {
+            $investor->investor_balance += $validatedData['transfer_amount'];
+        }
+        $investor->save();
+    
         // Esto funciona con JS en el project.index que detecta el project->id para el Excel y lo hace descargar automáticamente
         session()->flash('excel_project_id', $project->id);
-
+    
         return redirect()->route('project.index')->with('success', 'Proyecto, pagaré y transferencia creados de manera exitosa.');
     }
+    
 
     public function show($id)
     {
@@ -242,7 +252,6 @@ class ProjectController extends Controller
             echo $pdf->output();
         }, 'Finiquito - ' . $project->project_name . '.pdf');
     }
-
     public function closeProject(Request $request, Project $project)
     {
         // Validar los datos recibidos
