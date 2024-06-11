@@ -56,29 +56,19 @@ Transferencias
         <table id="example" class="display table table-bordered">
             <thead>
                 <tr class="text-center">
-                    <th>Comprobante</th>
-                    <th>Fecha</th>
-                    <th>Banco / Modo de transferencia</th>
                     <th>Código</th>
                     <th>Inversionista</th>
+                    <th>Fecha Hora</th>
+                    <th>Banco / Modo de transferencia</th>
                     <th>Monto transferencia</th>
+                    <th>Comentarios</th>
+                    <th>Comprobante</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($transfers as $transfer)
                 <tr class="text-center">
-                    <td>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal-{{ $transfer->id }}">
-                            @if (file_exists(public_path('images/transfers/' . $transfer->transfer_img)))
-                                <img src="{{ asset('images/transfers/' . $transfer->transfer_img) }}" style="height: 40px; width: 40px; display: flex; margin: auto" alt="transfer-proof">
-                            @else
-                                <img src="{{ asset('images/no-image.png') }}" style="height: 40px; width: 40px; display: flex; margin: auto" alt="no image available" title="Sin comprobante">
-                            @endif
-                        </a>
-                    </td>
-                    <td>{{ $transfer->transfer_date }}</td>
-                    <td class="text-uppercase">{{ $transfer->transfer_bank }}</td>
-                    <td class="text-uppercase">{{ $transfer->transfer_code }}</td>
+                    <td>{{ $transfer->transfer_code }}</td>
                     <td>
                         <a href="{{ route('investor.show', $transfer->investor_id) }}">{{ $transfer->investor->investor_name }}
                             <small>
@@ -88,7 +78,19 @@ Transferencias
 						    </small>
                         </a>
                     </td>
+                    <td>{{ $transfer->transfer_date }}</td>
+                    <td class="text-uppercase">{{ $transfer->transfer_bank }}</td>
                     <td>Lps. {{ number_format($transfer->transfer_amount,2) }}</td>
+                    <td>{{ $transfer->transfer_comment }}</td>
+                    <td>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal-{{ $transfer->id }}">
+                            @if (file_exists(public_path('images/transfers/' . $transfer->transfer_img)))
+                                <img src="{{ asset('images/transfers/' . $transfer->transfer_img) }}" style="height: 40px; width: 40px; display: flex; margin: auto" alt="transfer-proof">
+                            @else
+                                <img src="{{ asset('images/no-image.png') }}" style="height: 40px; width: 40px; display: flex; margin: auto" alt="no image available" title="Sin comprobante">
+                            @endif
+                        </a>
+                    </td>
                 </tr>
                 <div class="modal modal-blur fade" id="imageModal-{{ $transfer->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
