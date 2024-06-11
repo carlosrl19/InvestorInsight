@@ -97,12 +97,19 @@ function addInvestor(investorId, investorName) {
     calculateTotalInvestment();
     }
 
-    // Update investor investment amount in real time
+    // Update investor investment amount in real time (project_investment get value from investor_investment and investor_investment get value from transfer_amount)
     document.getElementById('transfer_amount').addEventListener('input', function() {
         const transferAmount = this.value;
         document.querySelectorAll('input[name="investor_investment"]').forEach(input => {
             input.value = transferAmount;
         });
+
+        // Project investment = transfer amount value
+        document.querySelectorAll('input[name="project_investment"]').forEach(input => {
+            input.value = transferAmount;
+        });
+
+        
         calculateTotalInvestment();
         const investorProfitInput = document.querySelector('input[name="investor_profit"]');
         if (investorProfitInput) {
