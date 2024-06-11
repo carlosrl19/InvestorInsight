@@ -30,7 +30,7 @@ class ProjectController extends Controller
         
         // Calcular días restantes para cada proyecto
         foreach ($projects as $project) {
-            $daysRemaining = now()->diffInDays($project->project_end_date, false);
+            $daysRemaining = now()->diffInDays($project->project_end_date, false) + 2;
             if ($daysRemaining <= 0) {
                 $project->days_remaining = '0';
             } else {

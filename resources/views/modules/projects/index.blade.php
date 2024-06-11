@@ -329,9 +329,6 @@ Proyectos activos
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('customjs/datatable/dt_project.js') }}"></script>
 
-<!-- ToastJS -->
-<script src="{{ asset('dist/libs/toast.js/js/Toast.min.js') }}"></script>
-
 <!-- Form steps -->
 <script src="{{ asset('customjs/projects/steps_form.js') }}"></script>
 
@@ -359,7 +356,7 @@ Proyectos activos
     projects.forEach(project => {
         const projectEndDate = new Date(project.project_end_date);
         const timeDiff = projectEndDate.getTime() - today.getTime();
-        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24)) + 2;
 
         let toastMessage = '';
 
