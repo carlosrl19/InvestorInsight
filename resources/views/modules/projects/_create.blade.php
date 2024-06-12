@@ -277,6 +277,7 @@
                                 style="float: right; font-size: clamp(0.6rem, 6vh, 0.7rem)">Paso 3/4</span>
                         </h4>
                         <input type="hidden" name="project_status" value="1">
+
                         <!-- Project's selected investor -->
                         <table class="table table-bordered" id="project_investors_table" style="width: 100%">
                             <thead>
@@ -284,8 +285,8 @@
                                     <th>INVERSIONISTA PRINCIPAL</th>
                                     <th>CAPITAL DE INVERSIÓN</th>
                                     <th>GANANCIA TOTAL DEL PROYECTO</th>
-                                    <th>GANANCIA INVERSIONISTA PRINCIPAL (50%)</th>
-                                    </th>
+                                    <th>GANANCIA INVERSIONISTA PRINCIPAL</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <!-- Dinamically row creation -->
@@ -297,7 +298,7 @@
                                 <div class="form-floating">
                                     <select class="form-select" id="commissioner_select"
                                         style="font-size: clamp(0.6rem, 3vh, 0.8rem);">
-                                        <option value="" selected disabled>Seleccione un inversionista</option>
+                                        <option value="" selected disabled>Seleccione un comisionista</option>
                                         @foreach ($commissioners as $commissioner)
                                             <option value="{{ $commissioner->id }}" {{ old('commissioner_select') == $commissioner->id ? 'selected' : '' }}>
                                                 {{ $commissioner->commissioner_name }}
