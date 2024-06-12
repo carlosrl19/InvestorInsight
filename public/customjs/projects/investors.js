@@ -104,11 +104,10 @@ function addInvestor(investorId, investorName) {
             input.value = transferAmount;
         });
 
-        // Project investment = transfer amount value
+        // Project investment == transfer amount value
         document.querySelectorAll('input[name="project_investment"]').forEach(input => {
             input.value = transferAmount;
         });
-
         
         calculateTotalInvestment();
         const investorProfitInput = document.querySelector('input[name="investor_profit"]');

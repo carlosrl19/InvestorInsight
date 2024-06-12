@@ -332,14 +332,14 @@
                                 <table class="table table-bordered table-striped" id="project_commissioners_table">
                                     <thead>
                                         <tr>
-                                            <th>COMISIONISTA</th>
+                                            <th>COMISIONISTAS DEL PROYECTO</th>
                                             <th>COMISIÓN TOTAL</th>
-                                            <th></th>
+                                            <th style="width: 50px">ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>JUNOR GUERRERO</td>
+                                            <td>JUNOR AYALA</td>
                                             <td>
                                                 <input type="number" name="commissioner_commission[]"
                                                     id="commissioner_commission_jr"
