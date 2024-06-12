@@ -63,6 +63,18 @@ class ProjectController extends Controller
         // Validar los datos del formulario
         $validatedData = $request->validated();
     
+        // Verificar la condición del banco de transferencia antes de crear el proyecto
+        if ($validatedData['transfer_bank'] == 'FONDOS') {
+            // Encontrar el inversionista
+            $investorId = is_array($validatedData['investor_id']) ? $validatedData['investor_id'][0] : $validatedData['investor_id'];
+            $investor = Investor::find($investorId);
+    
+            // Verificar si el monto de la transferencia es mayor que el balance del inversionista
+            if ($validatedData['transfer_amount'] > $investor->investor_balance) {
+                return redirect()->back()->withErrors(['transfer_amount' => 'El monto de transferencia no puede ser mayor que el fondo del inversionista.'])->withInput();
+            }
+        }
+    
         // Crear proyecto
         $project = Project::create([
             'project_name' => $validatedData['project_name'],
@@ -137,18 +149,15 @@ class ProjectController extends Controller
     
         // Ajustar el balance del inversionista según el banco de transferencia
         $investor = Investor::find($transfer->investor_id);
-
+    
         if ($validatedData['transfer_bank'] == 'FONDOS') {
-            // Verificar si el monto de la transferencia es mayor que el balance del inversionista
-            if ($validatedData['transfer_amount'] > $investor->investor_balance) {
-                return redirect()->back()->withErrors(['transfer_amount' => 'El monto de transferencia no puede ser mayor que el fondo del inversionista.'])->withInput();
-            }
             $investor->investor_balance -= $validatedData['transfer_amount'];
         } else {
             $investor->investor_balance += $validatedData['transfer_amount'];
         }
+    
         $investor->save();
-
+    
         // Esto funciona con JS en el project.index que detecta el project->id para el Excel y lo hace descargar automáticamente
         session()->flash('excel_project_id', $project->id);
     

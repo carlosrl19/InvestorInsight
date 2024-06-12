@@ -178,7 +178,7 @@ Inversionistas
                                                 <div class="row mb-3 align-items-end">
                                                     <div class="col">
                                                         <label class="form-label" for="investor_balance_{{ $investor->id }}">Saldo monetario</label>
-                                                        <input type="number" value="{{ $investor->investor_balance }}" name="investor_balance" id="investor_balance_{{ $investor->id }}" class="form-control @error('investor_balance') is-invalid @enderror"/>
+                                                        <input type="number" value="{{ $investor->investor_balance }}" name="investor_balance" id="investor_balance_{{ $investor->id }}" class="form-control @error('investor_balance') is-invalid @enderror" autocomplete="off"/>
                                                         @error('investor_balance')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>

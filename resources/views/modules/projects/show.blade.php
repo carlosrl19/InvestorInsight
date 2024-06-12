@@ -33,7 +33,7 @@ Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name 
                         <div class="col-lg-6"> <!-- Col que debe estar a la izquierda -->
                             <h3>Imagen del comprobante de pago</h3>
                             <div class="card mb-4" style="height: auto; width: 410px;">
-                                <img src="/images/{{ $project->project_proof_transfer_img }}" style="height: auto; width: 410px;">
+                                <img src="/images/transfers/{{ $project->project_proof_transfer_img }}" style="height: auto; width: 410px;">
                             </div>
                         </div> <!-- Fin de col izquierda -->
 
