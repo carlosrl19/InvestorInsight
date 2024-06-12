@@ -465,7 +465,7 @@ $(document).ready(function () {
             if (isNaN(commissionerCommissionJrAmountNumber) || commissionerCommissionJrAmountNumber <= 0) {
                 isValid = false;
                 commissionerCommissionJrInput.addClass("is-invalid");
-                commissionerCommissionJrError.text("La comisión del comisionista Junior Ayala debe ser un número válido y mayor a 0.");
+                commissionerCommissionJrError.text("La comisión del comisionista debe ser mayor a 0.");
                 $("#commissioner-commission-jr-error").show();
             } else {
                 commissionerCommissionJrInput.removeClass("is-invalid");
