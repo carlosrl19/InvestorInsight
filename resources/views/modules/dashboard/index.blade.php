@@ -151,11 +151,72 @@ Dashboard
 			</div>
 		</div>
 
-		<div class="col-lg-12">
+		<div class="col-lg-7">
 			<div class="card">
 				<div class="card-body">
 					<h3 class="card-title">Inversión de proyectos</h3>
 					<div id="chart-mentions" class="chart-lg"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-5">
+			<div class="row row-cards">
+				<div class="col-12">
+					<div class="card" style="height: 20rem">
+						<div class="card-header">
+							<h3 class="card-title">Ultimos pagarés<sup class="text-muted"> (últimos 25)</sup>
+							</h3>
+						</div>
+						<div class="card-body card-body-scrollable card-body-scrollable-shadow">
+							<div class="divide-y">
+								<div>
+									<div class="row">
+										<table id="example4" class="display table table-bordered">
+											<thead>
+												<tr>
+													<th>Código</th>
+													<th>Fecha pago</th>
+													<th>Inversionista</th>
+													<th>Monto</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach ($promissoryNotes as $promissoryNote)												
+													<tr>
+														<td>{{ $promissoryNote->promissoryNote_code }}</td>
+														<td>{{ $promissoryNote->promissoryNote_final_date }}</td>
+														<td>
+															<a href="{{ route('investor.show', $promissoryNote->investor_id) }}">{{ $promissoryNote->investor->investor_name }}
+																<small>
+																	<sup>
+																		<svg xmlns="http://www.w3.org/2000/svg" width="24"
+																			height="24" viewBox="0 0 24 24" fill="none"
+																			stroke="currentColor" stroke-width="1"
+																			stroke-linecap="round" stroke-linejoin="round"
+																			class="icon icon-tabler icons-tabler-outline icon-tabler-link">
+																			<path stroke="none" d="M0 0h24v24H0z"
+																				fill="none" />
+																			<path d="M9 15l6 -6" />
+																			<path
+																				d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
+																			<path
+																				d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
+																		</svg>
+																	</sup>
+																</small>
+															</a>
+														</td>
+														<td>Lps. {{ number_format($promissoryNote->promissoryNote_amount,2) }}</td>
+													</tr>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

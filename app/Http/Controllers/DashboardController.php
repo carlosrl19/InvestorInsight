@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Investor;
-use App\Models\Project;
 use App\Models\CommissionAgent;
 use App\Models\Transfer;
 use App\Models\CreditNote;
+use App\Models\PromissoryNote;
 
 class DashboardController extends Controller
 {
@@ -33,6 +32,7 @@ class DashboardController extends Controller
             ->get()
             ->count();
     
+        $promissoryNotes = PromissoryNote::latest()->take(25)->get();
         $transfers = Transfer::latest()->take(25)->get();
         $creditNotes = CreditNote::latest()->take(25)->get();
     
@@ -41,6 +41,7 @@ class DashboardController extends Controller
             'commissioner', 
             'total_investor_balance', 
             'total_commissioner_balance', 
+            'promissoryNotes',
             'transfers', 
             'creditNotes', 
             'completedProjectsCount', 
