@@ -321,6 +321,9 @@ Proyectos activos
 <!-- Jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- ToastJS -->
+<script src="{{ asset('dist/libs/toast.js/js/Toast.min.js') }}"></script>
+
 <!-- Alert fade closer script-->
 <script src="{{ asset('customjs/alert_closer.js')}}"></script>
 

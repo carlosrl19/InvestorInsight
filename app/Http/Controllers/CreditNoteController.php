@@ -93,7 +93,7 @@ class CreditNoteController extends Controller
             // Verifica si el saldo del inversionista es suficiente para la nota crédito
             if ($investor->investor_balance < $request->creditNote_amount) {
                 DB::rollBack();
-                return redirect()->back()->withErrors(['error' => 'El fondo del inversionista es insuficiente para esta operación.']);
+                return redirect()->back()->withErrors(['error' => 'El monto de la nota crédito no puede ser mayor que el fondo del inversionista.']);
             }
     
             // Actualiza el saldo del inversionista restando el monto de la nota crédito

@@ -161,7 +161,7 @@ class ProjectController extends Controller
         // Esto funciona con JS en el project.index que detecta el project->id para el Excel y lo hace descargar automáticamente
         session()->flash('excel_project_id', $project->id);
     
-        return redirect()->route('project.index')->with('success', 'Proyecto, pagaré y transferencia creados de manera exitosa.');
+        return redirect()->route('project.index')->with('success', 'Proyecto creado de manera exitosa.');
     }
     
     public function show($id)
