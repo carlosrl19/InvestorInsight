@@ -16,7 +16,7 @@ class StoreRequest extends FormRequest
     {
         return [
             // Project rules
-            'project_name' => 'required|string|min:3|max:55|regex:/^[a-zA-Z0-9]+$/',
+            'project_name' => 'required|string|min:3|max:55|regex:/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/',
             'project_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:projects,project_code',
             'project_start_date' => 'required|date_format:Y-m-d',
             'project_end_date' => 'required|date_format:Y-m-d|after:project_start_date',
