@@ -132,7 +132,7 @@ $(document).ready(function () {
                 "El nombre del proyecto debe contener al menos 3 caracteres."
             );
             $("#project-name-error").show();
-        } else if (!/^[a-zA-Z0-9\s]+$/.test(projectName)) {
+        } else if (!/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/.test(projectName)) {
             isValid = false;
             projectNameInput.addClass("is-invalid");
             projectNameError.text(
