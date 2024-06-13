@@ -11,7 +11,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col" style="display: none">
                             <div class="form-floating">
-                                <input type="text" readonly name="investor_code" id="investor_code" value="{{ $investorCode }}" class="form-control @error('investor_name') is-invalid @enderror" autocomplete="off">
+                                <input type="text" readonly name="investor_code" id="investor_code" value="{{ $investorCode }}" class="form-control" autocomplete="off">
                                 <label for="investor_code" name="investor_code">ID</label>
                             </div>
                         </div>
