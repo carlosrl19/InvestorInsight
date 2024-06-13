@@ -341,7 +341,7 @@ $(document).ready(function () {
                 isValid = false;
                 transferAmountInput.addClass("is-invalid");
                 transferAmountError.text(
-                    "El monto de transferencia debe ser un número válido mayor a 0."
+                    "El monto de transferencia debe ser mayor a 0."
                 );
                 $("#transfer-amount-error").show();
             } else {
@@ -355,9 +355,15 @@ $(document).ready(function () {
             isValid = false;
             transferAmountInput.addClass("is-invalid");
             transferAmountError.text(
-                "La inversión es mayor al fondo del inversionista."
+                "La inversión no puede ser mayor al fondo del inversionista."
             );
             $("#transfer-amount-error").show();
+
+            investorBalanceInput.addClass("is-invalid");
+            investorBalanceError.text(
+                "El fondo del inversionista es insuficiente."
+            );
+            $("#investor-balance-error").show();
         }        
 
         if (!transferComment) {
