@@ -2,56 +2,47 @@
 
 function updateInvestor() {
     const investorSelect = document.getElementById('investor_id');
+    
+    // Se encarga de obtener el inversionista seleccionado
     const selectedInvestor = investorSelect.options[investorSelect.selectedIndex];
     const investorId = selectedInvestor.value;
 
-    removeExistingInvestorRow();
-
     if (investorId) {
-        addInvestor(investorId, selectedInvestor.text);
+        const investorName = selectedInvestor.text;
+        const transferAmount = document.getElementById('transfer_amount').value;
+
+        const newRow = document.createElement('tr');
+        newRow.setAttribute('data-investor-id', investorId);
+        newRow.innerHTML = `
+            <td>${investorName}</td>
+            <td>
+                <input type="number" readonly name="project_investment" value="${transferAmount}" class="form-control" style="font-size: clamp(0.6rem, 6vh, 0.68rem); display: none" placeholder="Capital de inversión" min="1" required>
+                <input type="number" readonly name="investor_investment" id="investor_investment" value="${transferAmount}" class="form-control" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Capital de inversión" min="1" required>
+                <input type="hidden" name="investor_id" value="${investorId}">
+            </td>
+            <td>
+                <input type="number" name="investor_profit" id="investor_profit" class="form-control" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia total del proyecto" min="1" required>
+                <span class="invalid-feedback" role="alert" id="investor-profit-error" style="display: none;">
+                    <strong></strong>
+                </span>
+            </td>
+            <td>
+                <input type="number" readonly name="investor_final_profit" id="investor_final_profit" class="form-control" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia inversionista principal" min="1">
+                <span class="invalid-feedback" role="alert" id="investor-final-profit-error" style="display: none;">
+                    <strong></strong>
+                </span>
+            </td>`;
+
+        document.querySelector('#project_investors_table tbody').appendChild(newRow);
+        
+        // Deshabilitar la opción seleccionada en el select del paso 3
+        document.querySelector(`#investor_select option[value="${investorId}"]`).disabled = true;
+
+        newRow.querySelector('input[name="investor_profit"]').addEventListener('input', calculateInvestorFinalProfit);
+        calculateTotalInvestment();
     }
 }
 
-function removeExistingInvestorRow() {
-    const existingRow = document.querySelector(`#project_investors_table tbody tr[data-investor-id]`);
-    if (existingRow) {
-        const previousInvestorId = existingRow.getAttribute('data-investor-id');
-        document.querySelector(`#investor_id option[value="${previousInvestorId}"]`).disabled = false;
-        existingRow.remove();
-    }
-}
-
-function addInvestor(investorId, investorName) {
-    const transferAmount = document.getElementById('transfer_amount').value;
-
-    const newRow = document.createElement('tr');
-    newRow.setAttribute('data-investor-id', investorId);
-    newRow.innerHTML = `
-        <td>${investorName}</td>
-        <td>
-            <input type="number" readonly name="project_investment" value="${transferAmount}" class="form-control" style="font-size: clamp(0.6rem, 6vh, 0.68rem); display: none" placeholder="Capital de inversión" min="1" required>
-            <input type="number" readonly name="investor_investment" id="investor_investment" value="${transferAmount}" class="form-control" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Capital de inversión" min="1" required>
-            <input type="hidden" name="investor_id" value="${investorId}">
-        </td>
-        <td>
-            <input type="number" name="investor_profit" id="investor_profit" class="form-control" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia total del proyecto" min="1" required>
-            <span class="invalid-feedback" role="alert" id="investor-profit-error" style="display: none;">
-                <strong></strong>
-            </span>
-        </td>
-        <td>
-            <input type="number" readonly name="investor_final_profit" id="investor_final_profit" class="form-control" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia inversionista principal" min="1">
-            <span class="invalid-feedback" role="alert" id="investor-final-profit-error" style="display: none;">
-                <strong></strong>
-            </span>
-        </td>`;
-
-    document.querySelector('#project_investors_table tbody').appendChild(newRow);
-    document.querySelector(`#investor_id option[value="${investorId}"]`).disabled = true;
-
-    newRow.querySelector('input[name="investor_profit"]').addEventListener('input', calculateInvestorFinalProfit);
-    calculateTotalInvestment();
-}
 
 function calculateInvestorFinalProfit() {
     const investorProfitInput = document.querySelector('input[name="investor_profit"]');

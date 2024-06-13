@@ -400,19 +400,19 @@ $(document).ready(function () {
     function validateStep3(currentFieldset) {
         var isValid = true;
     
-        var investorInvestment = currentFieldset.find("#investor_investment").val();
+        var investorInvestment = parseFloat(currentFieldset.find("#investor_investment").val());
         var investorInvestmentInput = currentFieldset.find("#investor_investment");
         var investorInvestmentError = currentFieldset.find("#investor-investment-error strong");
     
-        var investorProfit = currentFieldset.find("#investor_profit").val();
+        var investorProfit = parseFloat(currentFieldset.find("#investor_profit").val());
         var investorProfitInput = currentFieldset.find("#investor_profit");
         var investorProfitError = currentFieldset.find("#investor-profit-error strong");
     
-        var investorFinalProfit = currentFieldset.find("#investor_final_profit").val();
+        var investorFinalProfit = parseFloat(currentFieldset.find("#investor_final_profit").val());
         var investorFinalProfitInput = currentFieldset.find("#investor_final_profit");
         var investorFinalProfitError = currentFieldset.find("#investor-final-profit-error strong");
     
-        var commissionerCommissionJr = currentFieldset.find("#commissioner_commission_jr").val();
+        var commissionerCommissionJr = parseFloat(currentFieldset.find("#commissioner_commission_jr").val());
         var commissionerCommissionJrInput = currentFieldset.find("#commissioner_commission_jr");
         var commissionerCommissionJrError = currentFieldset.find("#commissioner-commission-jr-error strong");
     
@@ -427,34 +427,25 @@ $(document).ready(function () {
             $(this).next("span.invalid-feedback").find("strong").text("");
         });
     
-        if (!investorInvestment) {
+        if (isNaN(investorInvestment) || investorInvestment <= 0) {
             isValid = false;
             investorInvestmentInput.addClass("is-invalid");
-            investorInvestmentError.text("El capital de inversión es obligatorio.");
+            investorInvestmentError.text("El capital de inversión debe ser un número mayor a 0.");
             $("#investor-investment-error").show();
         } else {
-            var investorInvestmentAmountNumber = parseFloat(investorInvestment);
-            if (isNaN(investorInvestmentAmountNumber) || investorInvestmentAmountNumber <= 0) {
-                isValid = false;
-                investorInvestmentInput.addClass("is-invalid");
-                investorInvestmentError.text("El capital de inversión debe ser mayor a 0.");
-                $("#investor-investment-error").show();
-            } else {
-                investorInvestmentInput.removeClass("is-invalid");
-                investorInvestmentInput.addClass("is-valid");
-                $("#investor-investment-error").hide();
-            }
+            investorInvestmentInput.removeClass("is-invalid");
+            investorInvestmentInput.addClass("is-valid");
+            $("#investor-investment-error").hide();
         }
     
-        if (!investorProfit) {
+        if (isNaN(investorProfit) || investorProfit <= 0 || investorProfit > investorInvestment) {
             isValid = false;
             investorProfitInput.addClass("is-invalid");
-            investorProfitError.text("La ganancia total del proyecto es obligatoria.");
-            $("#investor-profit-error").show();
-        } else if(investorProfit > investorInvestment){
-            isValid = false;
-            investorProfitInput.addClass("is-invalid");
-            investorProfitError.text("La ganancia total del proyecto no puede ser mayor a la inversión del mismo.");
+            if (isNaN(investorProfit) || investorProfit <= 0) {
+                investorProfitError.text("La ganancia total del proyecto debe ser un número mayor a 0.");
+            } else {
+                investorProfitError.text("La ganancia total del proyecto no puede ser mayor al capital de inversión.");
+            }
             $("#investor-profit-error").show();
         } else {
             investorProfitInput.removeClass("is-invalid");
@@ -462,66 +453,42 @@ $(document).ready(function () {
             $("#investor-profit-error").hide();
         }
     
-        if (!investorFinalProfit) {
+        if (isNaN(investorFinalProfit) || investorFinalProfit <= 0) {
             isValid = false;
             investorFinalProfitInput.addClass("is-invalid");
-            investorFinalProfitError.text("La ganancia final del inversionista es obligatoria.");
+            investorFinalProfitError.text("La ganancia final del inversionista debe ser un número mayor a 0.");
             $("#investor-final-profit-error").show();
         } else {
-            var InvestorFinalProfitAmountNumber = parseFloat(investorFinalProfit);
-            if (isNaN(InvestorFinalProfitAmountNumber) || InvestorFinalProfitAmountNumber <= 0) {
-                isValid = false;
-                investorFinalProfitInput.addClass("is-invalid");
-                investorFinalProfitError.text("La ganancia final del proyecto debe ser mayor a 0.");
-                $("#investor-final-profit-error").show();
-            } else {
-                investorFinalProfitInput.removeClass("is-invalid");
-                investorFinalProfitInput.addClass("is-valid");
-                $("#investor-final-profit-error").hide();
-            }
+            investorFinalProfitInput.removeClass("is-invalid");
+            investorFinalProfitInput.addClass("is-valid");
+            $("#investor-final-profit-error").hide();
         }
     
-        if (!commissionerCommissionJr) {
+        if (isNaN(commissionerCommissionJr) || commissionerCommissionJr <= 0) {
             isValid = false;
             commissionerCommissionJrInput.addClass("is-invalid");
-            commissionerCommissionJrError.text("La comisión del comisionista Junior Ayala es obligatoria.");
+            commissionerCommissionJrError.text("La comisión del comisionista Junior Ayala debe ser un número mayor a 0.");
             $("#commissioner-commission-jr-error").show();
         } else {
-            var commissionerCommissionJrAmountNumber = parseFloat(commissionerCommissionJr);
-            if (isNaN(commissionerCommissionJrAmountNumber) || commissionerCommissionJrAmountNumber <= 0) {
-                isValid = false;
-                commissionerCommissionJrInput.addClass("is-invalid");
-                commissionerCommissionJrError.text("La comisión del comisionista debe ser mayor a 0.");
-                $("#commissioner-commission-jr-error").show();
-            } else {
-                commissionerCommissionJrInput.removeClass("is-invalid");
-                commissionerCommissionJrInput.addClass("is-valid");
-                $("#commissioner-commission-jr-error").hide();
-            }
+            commissionerCommissionJrInput.removeClass("is-invalid");
+            commissionerCommissionJrInput.addClass("is-valid");
+            $("#commissioner-commission-jr-error").hide();
         }
     
         commissionerCommissions.each(function() {
             var commissionerCommissionInput = $(this);
             var commissionerCommissionError = commissionerCommissionInput.next("span.invalid-feedback").find("strong");
-            var commissionerCommission = commissionerCommissionInput.val();
+            var commissionerCommission = parseFloat(commissionerCommissionInput.val());
     
-            if (!commissionerCommission) {
+            if (isNaN(commissionerCommission) || commissionerCommission <= 0) {
                 commissionerCommissionsValid = false;
                 commissionerCommissionInput.addClass("is-invalid");
-                commissionerCommissionError.text("La comisión del comisionista es obligatoria.");
+                commissionerCommissionError.text("La comisión del comisionista debe ser un número mayor a 0.");
                 commissionerCommissionInput.next("span.invalid-feedback").show();
             } else {
-                var commissionerCommissionAmountNumber = parseFloat(commissionerCommission);
-                if (isNaN(commissionerCommissionAmountNumber) || commissionerCommissionAmountNumber <= 0) {
-                    commissionerCommissionsValid = false;
-                    commissionerCommissionInput.addClass("is-invalid");
-                    commissionerCommissionError.text("La comisión del comisionista debe ser mayor a 0.");
-                    commissionerCommissionInput.next("span.invalid-feedback").show();
-                } else {
-                    commissionerCommissionInput.removeClass("is-invalid");
-                    commissionerCommissionInput.addClass("is-valid");
-                    commissionerCommissionInput.next("span.invalid-feedback").hide();
-                }
+                commissionerCommissionInput.removeClass("is-invalid");
+                commissionerCommissionInput.addClass("is-valid");
+                commissionerCommissionInput.next("span.invalid-feedback").hide();
             }
         });
     
@@ -529,7 +496,7 @@ $(document).ready(function () {
     
         return isValid;
     }
-
+    
     // Validations to step 4
     function validateStep4(currentFieldset) {
         var isValid = true;

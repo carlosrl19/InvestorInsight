@@ -288,6 +288,38 @@
                         <input type="hidden" name="project_status" value="1">
 
                         <!-- Project's selected investor -->
+                        <div class="row mb-3 alig-items-end">
+                            <div class="col-11">
+                                <div class="form-floating">
+                                    <select class="form-select" id="investor_select"
+                                        style="font-size: clamp(0.6rem, 3vh, 0.8rem);">
+                                        <option value="" selected disabled>Seleccione un inversionista</option>
+                                        @foreach ($investors as $investor)
+                                            <option value="{{ $investor->id }}" {{ old('investor_select') == $investor->id ? 'selected' : '' }}>
+                                                {{ $investor->investor_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <label for="investor_select">Comisionistas</label>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <button type="button" class="btn btn-red mt-3 text-white" id="add_button_container"
+                                    style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
+                                    &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-users-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4c.96 0 1.84 .338 2.53 .901" />
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                        <path d="M16 19h6" />
+                                        <path d="M19 16v6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
                         <table class="table table-bordered" id="project_investors_table" style="width: 100%">
                             <thead>
                                 <tr>
@@ -301,6 +333,7 @@
                                 <!-- Dinamically row creation -->
                             </tbody>
                         </table>
+                        <hr>
 
                         <div class="row mb-3 alig-items-end">
                             <div class="col-11">
