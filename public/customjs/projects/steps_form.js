@@ -437,7 +437,7 @@ $(document).ready(function () {
             if (isNaN(investorInvestmentAmountNumber) || investorInvestmentAmountNumber <= 0) {
                 isValid = false;
                 investorInvestmentInput.addClass("is-invalid");
-                investorInvestmentError.text("El capital de inversión debe ser un número válido y mayor a 0.");
+                investorInvestmentError.text("El capital de inversión debe ser mayor a 0.");
                 $("#investor-investment-error").show();
             } else {
                 investorInvestmentInput.removeClass("is-invalid");
@@ -450,6 +450,11 @@ $(document).ready(function () {
             isValid = false;
             investorProfitInput.addClass("is-invalid");
             investorProfitError.text("La ganancia total del proyecto es obligatoria.");
+            $("#investor-profit-error").show();
+        } else if(investorProfit > investorInvestment){
+            isValid = false;
+            investorProfitInput.addClass("is-invalid");
+            investorProfitError.text("La ganancia total del proyecto no puede ser mayor a la inversión del mismo.");
             $("#investor-profit-error").show();
         } else {
             investorProfitInput.removeClass("is-invalid");
@@ -467,7 +472,7 @@ $(document).ready(function () {
             if (isNaN(InvestorFinalProfitAmountNumber) || InvestorFinalProfitAmountNumber <= 0) {
                 isValid = false;
                 investorFinalProfitInput.addClass("is-invalid");
-                investorFinalProfitError.text("La ganancia final del proyecto debe ser un número válido y mayor a 0.");
+                investorFinalProfitError.text("La ganancia final del proyecto debe ser mayor a 0.");
                 $("#investor-final-profit-error").show();
             } else {
                 investorFinalProfitInput.removeClass("is-invalid");
@@ -510,7 +515,7 @@ $(document).ready(function () {
                 if (isNaN(commissionerCommissionAmountNumber) || commissionerCommissionAmountNumber <= 0) {
                     commissionerCommissionsValid = false;
                     commissionerCommissionInput.addClass("is-invalid");
-                    commissionerCommissionError.text("La comisión del comisionista debe ser un número válido y mayor a 0.");
+                    commissionerCommissionError.text("La comisión del comisionista debe ser mayor a 0.");
                     commissionerCommissionInput.next("span.invalid-feedback").show();
                 } else {
                     commissionerCommissionInput.removeClass("is-invalid");

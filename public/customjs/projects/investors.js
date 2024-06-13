@@ -35,9 +35,15 @@ function addInvestor(investorId, investorName) {
         </td>
         <td>
             <input type="number" name="investor_profit" id="investor_profit" class="form-control" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia total del proyecto" min="1" required>
+            <span class="invalid-feedback" role="alert" id="investor-profit-error" style="display: none;">
+                <strong></strong>
+            </span>
         </td>
         <td>
             <input type="number" readonly name="investor_final_profit" id="investor_final_profit" class="form-control" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Ganancia inversionista principal" min="1">
+            <span class="invalid-feedback" role="alert" id="investor-final-profit-error" style="display: none;">
+                <strong></strong>
+            </span>
         </td>`;
 
     document.querySelector('#project_investors_table tbody').appendChild(newRow);
