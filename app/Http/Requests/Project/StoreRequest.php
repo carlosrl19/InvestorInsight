@@ -186,6 +186,7 @@ class StoreRequest extends FormRequest
             $investorProfit = $this->input('investor_profit');
             $investorFinalProfit = $this->input('investor_final_profit');
             $commissionerCommissions = $this->input('commissioner_commission', []);
+            $investorInvestment = $this->input('investor_investment');
     
             // Validar si investor_final_profit es igual al 50% de investor_investment
             if ($investorFinalProfit != $investorProfit * 0.5) {
@@ -218,6 +219,12 @@ class StoreRequest extends FormRequest
                 // Si hay más de dos comisionistas, agregar un error de validación
                 $validator->errors()->add('commissioner_commission', 'No se permiten más de dos comisionistas en el proyecto.');
             }
+    
+            // Validar que investor_profit no sea mayor que investor_investment
+            if ($investorProfit > $investorInvestment) {
+                $validator->errors()->add('investor_profit', 'La ganancia del inversionista no puede ser mayor que la inversión.');
+            }
         });
     }
+    
 }

@@ -65,6 +65,7 @@ class ProjectController extends Controller
     
         // Verificar la condición del banco de transferencia antes de crear el proyecto
         if ($validatedData['transfer_bank'] == 'FONDOS') {
+
             // Encontrar el inversionista
             $investorId = is_array($validatedData['investor_id']) ? $validatedData['investor_id'][0] : $validatedData['investor_id'];
             $investor = Investor::find($investorId);
@@ -72,6 +73,19 @@ class ProjectController extends Controller
             // Verificar si el monto de la transferencia es mayor que el balance del inversionista
             if ($validatedData['transfer_amount'] > $investor->investor_balance) {
                 return redirect()->back()->withErrors(['transfer_amount' => 'El monto de transferencia no puede ser mayor que el fondo del inversionista.'])->withInput();
+            }
+        }
+
+        // Verificar que el investor_profit no sea mayor que el investor_investment
+        if (is_array($validatedData['investor_profit'])) {
+            foreach ($validatedData['investor_profit'] as $i => $profit) {
+                if ($profit > $validatedData['investor_investment'][$i]) {
+                    return redirect()->back()->withErrors(['investor_profit' => 'La ganancia del inversionista no puede ser mayor que la inversión.'])->withInput();
+                }
+            }
+        } else {
+            if ($validatedData['investor_profit'] > $validatedData['investor_investment']) {
+                return redirect()->back()->withErrors(['investor_profit' => 'La ganancia del inversionista no puede ser mayor que la inversión.'])->withInput();
             }
         }
     
