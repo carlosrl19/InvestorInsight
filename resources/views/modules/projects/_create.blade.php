@@ -320,13 +320,15 @@
                                 </button>
                             </div>
                         </div>
+
                         <table class="table table-bordered" id="project_investors_table" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th>INVERSIONISTA PRINCIPAL</th>
+                                    <th>INVERSIONISTAS DEL PROYECTO</th>
                                     <th>CAPITAL DE INVERSIÓN</th>
                                     <th>GANANCIA TOTAL DEL PROYECTO</th>
                                     <th>GANANCIA INVERSIONISTA PRINCIPAL</th>
+                                    <th style="width: 50px">ACCIONES</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -372,7 +374,7 @@
                         <div class="row mb-3 mt-3 align-items-end">
                             <div class="col-12">
                                 <!-- Project's selected investor -->
-                                <table class="table table-bordered table-striped" id="project_commissioners_table">
+                                <table class="table table-bordered table-striped" id="project_commissioners_table" style="width: 100%">
                                     <thead>
                                         <tr>
                                             <th>COMISIONISTAS DEL PROYECTO</th>

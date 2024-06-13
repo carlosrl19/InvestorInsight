@@ -226,5 +226,4 @@ class StoreRequest extends FormRequest
             }
         });
     }
-    
 }
