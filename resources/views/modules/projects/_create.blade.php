@@ -167,7 +167,16 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" id="investor_balance" class="form-control" value="" readonly oninput="formatNumber(this.value)">
+                                    <input type="text" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror" value="" readonly oninput="formatNumber(this.value)">
+                                    @error('investor_balance')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <span class="invalid-feedback" role="alert" id="investor-balance-error"
+                                        style="display: none;">
+                                        <strong></strong>
+                                    </span>
                                     <label for="investor_balance">Capital actual</label>
                                 </div>
                             </div>
@@ -206,7 +215,7 @@
                             <div class="col">
                                 <div class="form-floating">
                                     <input type="number" min="0" name="transfer_amount" id="transfer_amount"
-                                        class="form-control @error('transfer_amount') is-invalid @enderror" />
+                                        class="form-control @error('transfer_amount') is-invalid @enderror"/>
                                     @error('transfer_amount')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

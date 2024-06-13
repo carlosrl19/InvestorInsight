@@ -232,12 +232,14 @@ $(document).ready(function () {
         var transferBank = currentFieldset.find("#transfer_bank").val();
         var transferAmount = currentFieldset.find("#transfer_amount").val();
         var transferComment = currentFieldset.find("#transfer_comment").val();
+        var investorBalance = currentFieldset.find("#investor_balance").val();
 
         var investorInput = currentFieldset.find("#investor_id");
         var transferDateInput = currentFieldset.find("#transfer_date");
         var transferBankInput = currentFieldset.find("#transfer_bank");
         var transferAmountInput = currentFieldset.find("#transfer_amount");
         var transferCommentInput = currentFieldset.find("#transfer_comment");
+        var investorBalanceInput = currentFieldset.find("#investor_balance");
 
         var investorError = currentFieldset.find("#investor-id-error strong");
         var transferDateError = currentFieldset.find(
@@ -252,12 +254,16 @@ $(document).ready(function () {
         var transferCommentError = currentFieldset.find(
             "#transfer-comment-error strong"
         );
+        var investorBalanceError = currentFieldset.find(
+            "#investor-balance-error strong"
+        );
 
         investorError.text("");
         transferDateError.text("");
         transferBankError.text("");
         transferAmountError.text("");
         transferCommentError.text("");
+        investorBalanceError.text("");
 
         // investor_id select
         var isValidInvestor = false;
@@ -335,7 +341,7 @@ $(document).ready(function () {
                 isValid = false;
                 transferAmountInput.addClass("is-invalid");
                 transferAmountError.text(
-                    "El monto de transferencia debe ser un número válido y mayor a 0."
+                    "El monto de transferencia debe ser un número válido mayor a 0."
                 );
                 $("#transfer-amount-error").show();
             } else {
@@ -344,6 +350,15 @@ $(document).ready(function () {
                 $("#transfer-amount-error").hide();
             }
         }
+
+        if (transferBank == 'FONDOS' && transferAmount > investorBalance){
+            isValid = false;
+            transferAmountInput.addClass("is-invalid");
+            transferAmountError.text(
+                "La inversión es mayor al fondo del inversionista."
+            );
+            $("#transfer-amount-error").show();
+        }        
 
         if (!transferComment) {
             isValid = false;
