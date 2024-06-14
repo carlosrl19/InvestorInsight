@@ -138,26 +138,28 @@ class ProjectController extends Controller
             ]);
         }
 
-        // Asociar comisionistas con el proyecto
+       // Asociar comisionistas con el proyecto
         foreach ($validatedData['commissioner_id'] as $j => $comId) {
             $project->commissioners()->attach($comId, [
                 'commissioner_commission' => $validatedData['commissioner_commission'][$j],
             ]);
 
             // Crear pagaré para cada comisionista del proyecto
-            $promissoryNoteCode = strtoupper(Str::random(12));
-            $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
+            if ($comId != 1) {
+                $promissoryNoteCode = strtoupper(Str::random(12));
+                $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
-            PromissoryNoteCommissioner::create([
-                'commissioner_id' => $comId,
-                'promissoryNoteCommissioner_emission_date' => $todayDate,
-                'promissoryNoteCommissioner_final_date' => $project->project_end_date,
-                'promissoryNoteCommissioner_amount' => $validatedData['commissioner_commission'][$j],
-                'promissoryNoteCommissioner_code' => $promissoryNoteCode,
-                'promissoryNoteCommissioner_status' => 1,
-            ]);
+                PromissoryNoteCommissioner::create([
+                    'commissioner_id' => $comId,
+                    'promissoryNoteCommissioner_emission_date' => $todayDate,
+                    'promissoryNoteCommissioner_final_date' => $project->project_end_date,
+                    'promissoryNoteCommissioner_amount' => $validatedData['commissioner_commission'][$j],
+                    'promissoryNoteCommissioner_code' => $promissoryNoteCode,
+                    'promissoryNoteCommissioner_status' => 1,
+                ]);
+            }
         }
-    
+        
         // Crear transferencia
         $transfer = Transfer::create([
             'transfer_code' => $generatedCode,
@@ -184,7 +186,6 @@ class ProjectController extends Controller
     
         return redirect()->route('project.index')->with('success', 'Proyecto creado de manera exitosa.');
     }
-    
     public function show($id)
     {
         $project = Project::findOrFail($id);

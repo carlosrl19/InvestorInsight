@@ -165,7 +165,7 @@ Dashboard
 				<div class="col-12">
 					<div class="card" style="height: 20rem">
 						<div class="card-header">
-							<h3 class="card-title">Ultimos pagarés<sup class="text-muted"> (últimos 25)</sup>
+							<h3 class="card-title">Ultimos pagarés inversionistas<sup class="text-muted"> (últimos 25)</sup>
 							</h3>
 						</div>
 						<div class="card-body card-body-scrollable card-body-scrollable-shadow">

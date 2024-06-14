@@ -186,7 +186,7 @@ class StoreRequest extends FormRequest
         ];
     }
 
-    // Custom Laravel validation rules
+    // Custom Laravel validation rules /*
     protected function withValidator($validator)
     {
         $validator->after(function ($validator) {
