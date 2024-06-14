@@ -9,6 +9,7 @@ use App\Models\Investor;
 use App\Models\Project;
 use App\Models\Transfer;
 use App\Models\PromissoryNote;
+use App\Models\PromissoryNoteCommissioner;
 use Illuminate\Support\Str;
 use App\Exports\CustomExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -40,16 +41,6 @@ class ProjectController extends Controller
         }
         
         return view('modules.projects.index', compact('projects', 'todayDate', 'investors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance'));
-    }
-
-    public function indexClosed()
-    {
-        $projects = Project::where('project_status', 2)->with('investors')->get();
-        $investors = Investor::get();
-        $total_investor_balance = Investor::sum('investor_balance');
-        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
-
-        return view('modules.projects_closed.index', compact('projects', 'investors', 'total_investor_balance', 'total_commissioner_balance'));
     }
 
     public function create()
@@ -146,11 +137,24 @@ class ProjectController extends Controller
                 'promissoryNote_status' => 1,
             ]);
         }
-    
+
         // Asociar comisionistas con el proyecto
         foreach ($validatedData['commissioner_id'] as $j => $comId) {
             $project->commissioners()->attach($comId, [
                 'commissioner_commission' => $validatedData['commissioner_commission'][$j],
+            ]);
+
+            // Crear pagaré para cada comisionista del proyecto
+            $promissoryNoteCode = strtoupper(Str::random(12));
+            $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
+
+            PromissoryNoteCommissioner::create([
+                'commissioner_id' => $comId,
+                'promissoryNoteCommissioner_emission_date' => $todayDate,
+                'promissoryNoteCommissioner_final_date' => $project->project_end_date,
+                'promissoryNoteCommissioner_amount' => $validatedData['commissioner_commission'][$j],
+                'promissoryNoteCommissioner_code' => $promissoryNoteCode,
+                'promissoryNoteCommissioner_status' => 1,
             ]);
         }
     
@@ -197,6 +201,16 @@ class ProjectController extends Controller
         $projectName = $project->project_name;
 
         return Excel::download(new CustomExport($id), $projectName . ' - Excel.xlsx');
+    }
+    
+    public function indexClosed()
+    {
+        $projects = Project::where('project_status', 2)->with('investors')->get();
+        $investors = Investor::get();
+        $total_investor_balance = Investor::sum('investor_balance');
+        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+
+        return view('modules.projects_closed.index', compact('projects', 'investors', 'total_investor_balance', 'total_commissioner_balance'));
     }
 
     public function finishProject(Request $request, Project $project)

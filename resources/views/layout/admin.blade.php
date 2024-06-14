@@ -286,6 +286,9 @@
                         <a class="dropdown-item" href="{{ route('promissory_note.index') }}">
                           <small>->&nbsp;</small>Pagarés Inversionistas
                         </a>
+                        <a class="dropdown-item" href="{{ route('promissory_note_commissioner.index') }}">
+                          <small>->&nbsp;</small>Pagarés comisionistas
+                        </a>
                         <a class="dropdown-item" href="{{ route('credit_note.index') }}">
                           <small>->&nbsp;</small>Notas crédito
                         </a>
