@@ -99,7 +99,7 @@ class ProjectController extends Controller
             'project_investment' => $validatedData['project_investment'],
             'project_status' => $validatedData['project_status'],
             'project_comment' => $validatedData['project_comment'],
-            'investor_balance_history' => $validatedData['investor_balance_history']
+            'investor_balance_history' => $validatedData['investor_balance_history'],
         ]);
     
         // Asociar inversionistas con el proyecto
@@ -182,11 +182,12 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::findOrFail($id);
+        $transfer = Transfer::findOrFail($id);
         $investors = $project->investors;
         $commissioners = $project->commissioners;
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
-        return view('modules.projects.show', compact('project', 'investors', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.projects.show', compact('project', 'transfer', 'investors', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
     }
     public function export($id)
     {

@@ -68,7 +68,6 @@ function deleteInvestorRow(button) {
     calculateTotalInvestment();
 }
 
-
 function updateInvestor() {
     const investorSelect = document.getElementById('investor_id');
     
