@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PromissoryNoteCommissioner;
 use App\Models\Investor;
+use App\Models\CommissionAgent;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
@@ -14,9 +15,12 @@ class PromissoryNoteCommissionerController extends Controller
     public function index()
     {
         $promissoryNotesCommissioner = PromissoryNoteCommissioner::get();
-        $investors = Investor::get();
+        $commissioners = CommissionAgent::get();
 
-        return view('modules.promissory_note_commissioner.index', compact('promissoryNotesCommissioner', 'investors'));
+        $total_investor_balance = Investor::sum('investor_balance');
+        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+
+        return view('modules.promissory_note_commissioner.index', compact('promissoryNotesCommissioner', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
     }
     
     public function showReport($id) {

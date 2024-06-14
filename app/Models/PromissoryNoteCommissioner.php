@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PromissoryNoteCommissioner extends Model
 {
-    public function investor(){
+    public function commissioner(){
         return $this->belongsTo(CommissionAgent::class, 'commissioner_id', 'id');
     }
 

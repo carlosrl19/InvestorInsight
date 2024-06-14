@@ -2,11 +2,11 @@
 
 	<!-- Code container -->
 	<div class="code-container-right">
-		<span class="text-bold">#PG-{{ $promissoryNote->promissoryNote_code }}</span>
+		<span class="text-bold">#PG-{{ $promissoryNoteCommissioner->promissoryNoteCommissioner_code }}</span>
 	</div>
 
     <!-- Promissory note title -->
-    <div class="title-note title-top-margin">PAGARE L. {{ number_format($promissoryNote->promissoryNote_amount,2)}}</div>
+    <div class="title-note title-top-margin">PAGARE L. {{ number_format($promissoryNoteCommissioner->promissoryNoteCommissioner_amount,2)}}</div>
 
     <!-- Promissory note body -->
     <div class="body-note mt-6 mb-4">Yo: <strong class="text-underline">JUNIOR ALEXIS AYALA GUERRERO</strong>, mayor de edad, hondureño, soltero y
@@ -14,13 +14,13 @@
             class="text-underline">0801199907469</strong>,
         con domicilio en la ciudad de San Pedro Sula, departamento de Cortés, Honduras, <strong>PAGARÉ
             INCONDICIONALMENTE</strong> la cantidad de <strong class="text-underline">{{$amountLetras}} EXACTO</strong>
-        (<strong class="text-underline">L. {{ number_format($promissoryNote->promissoryNote_amount, 0) }}</strong>)
-        a favor de <strong class="text-uppercase text-underline">{{ $promissoryNote->investor->investor_name }}</strong>, mayor de
+        (<strong class="text-underline">L. {{ number_format($promissoryNoteCommissioner->promissoryNoteCommissioner_amount, 0) }}</strong>)
+        a favor de <strong class="text-uppercase text-underline">{{ $promissoryNoteCommissioner->commissioner->commissioner_name }}</strong>, mayor de
         edad, hondureño y con documento Nacional de identificación número <strong
-            class="text-underline">{{ $promissoryNote->investor->investor_dni }}</strong>, pago que haré efectivo el día <strong
-            class="text-uppercase text-underline">{{ \Carbon\Carbon::parse($promissoryNote->promissoryNote_final_date)->translatedFormat('d F Y') }}</strong>
+            class="text-underline">{{ $promissoryNoteCommissioner->commissioner->commissioner_dni }}</strong>, pago que haré efectivo el día <strong
+            class="text-uppercase text-underline">{{ \Carbon\Carbon::parse($promissoryNoteCommissioner->promissoryNoteCommissioner_final_date)->translatedFormat('d F Y') }}</strong>
         (<strong
-            class="text-underline">{{ \Carbon\Carbon::parse($promissoryNote->promissoryNote_final_date)->translatedFormat('d/m/Y') }}</strong>).
+            class="text-underline">{{ \Carbon\Carbon::parse($promissoryNoteCommissioner->promissoryNoteCommissioner_final_date)->translatedFormat('d/m/Y') }}</strong>).
 
         <br>
         <br>
