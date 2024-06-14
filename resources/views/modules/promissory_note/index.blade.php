@@ -57,6 +57,7 @@ Pagarés
                 <thead>
                     <tr class="text-center">
                         <th>Código</th>
+                        <th>Fecha de emisión</th>
                         <th>Fecha de pago</th>
                         <th>Inversionista</th>
                         <th>Monto pagaré</th>
@@ -68,6 +69,7 @@ Pagarés
                     @foreach($promissoryNotes as $promissoryNote)
                     <tr class="text-center">
                         <td>{{ $promissoryNote->promissoryNote_code }}</td>
+                        <td>{{ $promissoryNote->promissoryNote_emission_date }}</td>
                         <td>{{ $promissoryNote->promissoryNote_final_date }}</td>
                         <td>
                             <a href="{{ route('investor.show', $promissoryNote->investor) }}">{{ $promissoryNote->investor->investor_name }}

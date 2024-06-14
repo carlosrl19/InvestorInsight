@@ -284,7 +284,7 @@
                           <small>->&nbsp;</small>Transferencias
                         </a>
                         <a class="dropdown-item" href="{{ route('promissory_note.index') }}">
-                          <small>->&nbsp;</small>Pagarés
+                          <small>->&nbsp;</small>Pagarés Inversionistas
                         </a>
                         <a class="dropdown-item" href="{{ route('credit_note.index') }}">
                           <small>->&nbsp;</small>Notas crédito
