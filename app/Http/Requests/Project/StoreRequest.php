@@ -26,6 +26,7 @@ class StoreRequest extends FormRequest
             'project_comment' => 'required|string|min:3|max:255',
             'project_proof_transfer_img' => 'string',
             'project_close_comment' => 'string|min:3|max:255',
+            'investor_balance_history' => 'required|min:0|regex:/^\d+(\.\d{1,2})?$/',
 
             // Investor rules
             'investor_id' => 'required|numeric|exists:investors,id',
@@ -85,6 +86,12 @@ class StoreRequest extends FormRequest
             'project_investment.numeric' => 'La inversión del proyecto debe ser un número.',
             'project_investment.min' => 'La inversión del proyecto no puede ser negativa.',
             'project_investment.regex' => 'La inversión del proyecto debe tener hasta dos decimales.',
+
+            // Project investment messages
+            'investor_balance_history.required' => 'El fondo del inversionista del proyecto es obligatoria.',
+            'investor_balance_history.numeric' => 'El fondo del inversionista del proyecto debe ser un número.',
+            'investor_balance_history.min' => 'El fondo del inversionista del proyecto no puede ser menor a 0.',
+            'investor_balance_history.regex' => 'El fondo del inversionista del proyecto debe tener hasta dos decimales.',
             
             // Project status messages
             'project_status.required' => 'El estado del proyecto es obligatorio.',

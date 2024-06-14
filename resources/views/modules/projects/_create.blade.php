@@ -167,7 +167,8 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror" value="" readonly oninput="formatNumber(this.value)">
+                                    <input type="number" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror" value="" readonly oninput="formatNumber(this.value)">
+                                    <input type="hidden" id="investor_balance_history" name="investor_balance_history" class="form-control" value="" readonly oninput="formatNumber(this.value)">
                                     @error('investor_balance')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

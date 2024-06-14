@@ -44,6 +44,7 @@ Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name 
                                     <p><div class="badge bg-success mt-1"></div>&nbsp;Proyecto: {{ $project->project_name }}</p>
                                     <p><div class="badge bg-success mt-1"></div>&nbsp;Código: CP-{{ $project->project_code }}</p>
                                     <p><div class="badge bg-success mt-1"></div>&nbsp;Inversión total: Lps. {{ number_format($project->project_investment,2) }}</p>
+                                    <p><div class="badge bg-success mt-1"></div>&nbsp;Fondo del inversionista: Lps. {{ number_format($project->investor_balance_history,2) }}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha inicio: {{ $project->project_start_date }}</p>

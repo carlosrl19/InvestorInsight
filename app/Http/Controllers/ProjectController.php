@@ -99,6 +99,7 @@ class ProjectController extends Controller
             'project_investment' => $validatedData['project_investment'],
             'project_status' => $validatedData['project_status'],
             'project_comment' => $validatedData['project_comment'],
+            'investor_balance_history' => $validatedData['investor_balance_history']
         ]);
     
         // Asociar inversionistas con el proyecto

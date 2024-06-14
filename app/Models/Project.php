@@ -17,6 +17,7 @@ class Project extends Model
         'project_comment',
         'project_close_comment',
         'project_proof_transfer_img',
+        'investor_balance_history'
     ];
 
     public function investors()

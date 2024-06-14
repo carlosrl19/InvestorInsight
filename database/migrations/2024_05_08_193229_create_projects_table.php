@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('project_comment');
             $table->string('project_close_comment')->nullable();
             $table->string('project_proof_transfer_img')->nullable();
+            $table->decimal('investor_balance_history', 12, 2);
             $table->timestamps();
         });
     }
