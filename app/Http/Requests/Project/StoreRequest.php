@@ -41,7 +41,7 @@ class StoreRequest extends FormRequest
             // Transfer rules
             'transfer_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:transfers,transfer_code',
             'transfer_bank' => 'required|string|min:6|max:36|regex:/^[^\d]+$/',
-            'transfer_date' => 'required|date_format:Y-m-d\TH:i:s',
+            'transfer_date' => 'required|date:Y-m-d H:i:s',
             'transfer_amount' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
             'transfer_img'=> 'string',
             'transfer_comment' => 'required|string|min:3|max:255',
@@ -167,7 +167,7 @@ class StoreRequest extends FormRequest
             
             // Transfer date messages
             'transfer_date.required' => 'La fecha de transferencia es obligatoria.',
-            'transfer_date.date_format' => 'La fecha de transferencia debe tener el formato Y-m-d\TH:i:s.',
+            'transfer_date.date' => 'Debe ingresar un formato de fecha válido para el depçosito del proyecto (Y-m-d H:i:s).',
             
             // Transfer amount messages
             'transfer_amount.required' => 'El monto de transferencia es obligatorio.',

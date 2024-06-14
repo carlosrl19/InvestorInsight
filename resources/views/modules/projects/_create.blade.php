@@ -235,10 +235,10 @@
                                 <div class="form-floating">
                                     <div class="card-status-start bg-primary"></div>
                                     <input type="datetime-local" name="transfer_date"
-                                        value="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
+                                        value="{{ $todayDate }}"
                                         id="transfer_date"
-                                        min="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
-                                        max="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')}}"
+                                        min="{{ $todayDate }}"
+                                        max="{{ $todayDate }}"
                                         class="form-control @error('transfer_date') is-invalid @enderror" />
                                     @error('transfer_date')
                                         <span class="invalid-feedback" role="alert">

@@ -27,6 +27,7 @@ class ProjectController extends Controller
         $generatedCode = strtoupper(Str::random(12)); // Random code
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+        $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
         
         // Calcular días restantes para cada proyecto
         foreach ($projects as $project) {
@@ -38,7 +39,7 @@ class ProjectController extends Controller
             }
         }
         
-        return view('modules.projects.index', compact('projects', 'investors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.projects.index', compact('projects', 'todayDate', 'investors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance'));
     }
 
     public function indexClosed()
@@ -59,6 +60,7 @@ class ProjectController extends Controller
     public function store(StoreRequest $request)
     {
         $generatedCode = strtoupper(Str::random(12));
+        $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
     
         // Validar los datos del formulario
         $validatedData = $request->validated();
@@ -116,7 +118,7 @@ class ProjectController extends Controller
     
                 PromissoryNote::create([
                     'investor_id' => $invId,
-                    'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
+                    'promissoryNote_emission_date' => $todayDate,
                     'promissoryNote_final_date' => $project->project_end_date,
                     'promissoryNote_amount' => $validatedData['investor_investment'][$i] + $validatedData['investor_final_profit'][$i],
                     'promissoryNote_code' => $promissoryNoteCode,
@@ -137,7 +139,7 @@ class ProjectController extends Controller
     
             PromissoryNote::create([
                 'investor_id' => $invId,
-                'promissoryNote_emission_date' => \Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d'),
+                'promissoryNote_emission_date' => $todayDate,
                 'promissoryNote_final_date' => $project->project_end_date,
                 'promissoryNote_amount' => $validatedData['investor_investment'] + $validatedData['investor_final_profit'],
                 'promissoryNote_code' => $promissoryNoteCode,
@@ -157,7 +159,7 @@ class ProjectController extends Controller
             'transfer_code' => $generatedCode,
             'transfer_bank' => $validatedData['transfer_bank'],
             'investor_id' => is_array($validatedData['investor_id']) ? $validatedData['investor_id'][0] : $validatedData['investor_id'],
-            'transfer_date' => $validatedData['transfer_date'],
+            'transfer_date' => $todayDate,
             'transfer_amount' => $validatedData['transfer_amount'],
             'transfer_comment' => $validatedData['transfer_comment'],
         ]);
