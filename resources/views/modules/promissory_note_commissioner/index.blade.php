@@ -17,7 +17,7 @@ Listado principal
 @endsection
 
 @section('title')
-Pagarés de comisionistas
+Pagarés comisionistas
 @endsection
 
 @section('content')

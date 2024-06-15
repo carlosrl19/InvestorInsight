@@ -14,7 +14,7 @@ class PromissoryNoteCommissionerController extends Controller
 {
     public function index()
     {
-        $promissoryNotesCommissioner = PromissoryNoteCommissioner::get();
+        $promissoryNotesCommissioner = PromissoryNoteCommissioner::where('commissioner_id', '!=', '1');
         $commissioners = CommissionAgent::get();
 
         $total_investor_balance = Investor::sum('investor_balance');

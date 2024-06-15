@@ -17,7 +17,7 @@ Listado principal
 @endsection
 
 @section('title')
-Pagarés
+Pagarés inversionistas
 @endsection
 
 @section('create')

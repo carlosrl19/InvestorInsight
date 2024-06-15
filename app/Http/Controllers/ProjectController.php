@@ -58,7 +58,6 @@ class ProjectController extends Controller
     
         // Verificar la condición del banco de transferencia antes de crear el proyecto
         if ($validatedData['transfer_bank'] == 'FONDOS') {
-
             // Encontrar el inversionista
             $investorId = is_array($validatedData['investor_id']) ? $validatedData['investor_id'][0] : $validatedData['investor_id'];
             $investor = Investor::find($investorId);
@@ -67,8 +66,11 @@ class ProjectController extends Controller
             if ($validatedData['transfer_amount'] > $investor->investor_balance) {
                 return redirect()->back()->withErrors(['transfer_amount' => 'El monto de transferencia no puede ser mayor que el fondo del inversionista.'])->withInput();
             }
+    
+            // Restar el transfer_amount del investor_balance_history
+            $validatedData['investor_balance_history'] -= $validatedData['transfer_amount'];
         }
-
+    
         // Verificar que el investor_profit no sea mayor que el investor_investment
         if (is_array($validatedData['investor_profit'])) {
             foreach ($validatedData['investor_profit'] as $i => $profit) {
@@ -137,29 +139,27 @@ class ProjectController extends Controller
                 'promissoryNote_status' => 1,
             ]);
         }
-
-       // Asociar comisionistas con el proyecto
+    
+        // Asociar comisionistas con el proyecto
         foreach ($validatedData['commissioner_id'] as $j => $comId) {
             $project->commissioners()->attach($comId, [
                 'commissioner_commission' => $validatedData['commissioner_commission'][$j],
             ]);
-
+    
             // Crear pagaré para cada comisionista del proyecto
-            if ($comId != 1) {
-                $promissoryNoteCode = strtoupper(Str::random(12));
-                $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
-
-                PromissoryNoteCommissioner::create([
-                    'commissioner_id' => $comId,
-                    'promissoryNoteCommissioner_emission_date' => $todayDate,
-                    'promissoryNoteCommissioner_final_date' => $project->project_end_date,
-                    'promissoryNoteCommissioner_amount' => $validatedData['commissioner_commission'][$j],
-                    'promissoryNoteCommissioner_code' => $promissoryNoteCode,
-                    'promissoryNoteCommissioner_status' => 1,
-                ]);
-            }
+            $promissoryNoteCode = strtoupper(Str::random(12));
+            $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
+    
+            PromissoryNoteCommissioner::create([
+                'commissioner_id' => $comId,
+                'promissoryNoteCommissioner_emission_date' => $todayDate,
+                'promissoryNoteCommissioner_final_date' => $project->project_end_date,
+                'promissoryNoteCommissioner_amount' => $validatedData['commissioner_commission'][$j],
+                'promissoryNoteCommissioner_code' => $promissoryNoteCode,
+                'promissoryNoteCommissioner_status' => 1,
+            ]);
         }
-        
+    
         // Crear transferencia
         $transfer = Transfer::create([
             'transfer_code' => $generatedCode,
@@ -186,6 +186,8 @@ class ProjectController extends Controller
     
         return redirect()->route('project.index')->with('success', 'Proyecto creado de manera exitosa.');
     }
+    
+
     public function show($id)
     {
         $project = Project::findOrFail($id);

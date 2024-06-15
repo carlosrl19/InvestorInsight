@@ -61,7 +61,7 @@ Transferencias
                     <th>Fecha Hora</th>
                     <th>Banco transferencia</th>
                     <th>Monto transferencia</th>
-                    <th>Comentarios</th>
+                    <th>Motivo</th>
                     <th>Comprobante</th>
                 </tr>
             </thead>
