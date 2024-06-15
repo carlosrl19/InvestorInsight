@@ -280,6 +280,15 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
+                        <a class="dropdown-item" href="{{ route('payments.index') }}">
+                          <small>->&nbsp;</small>Pagos
+                        </a>
+                        <a class="dropdown-item" href="{{ route('termination.index') }}">
+                          <small>->&nbsp;</small>Finiquitos
+                        </a>
+                        <a class="dropdown-item" href="{{ route('credit_note.index') }}">
+                          <small>->&nbsp;</small>Notas crédito
+                        </a>
                         <a class="dropdown-item" href="{{ route('transfer.index') }}">
                           <small>->&nbsp;</small>Transferencias
                         </a>
@@ -288,12 +297,6 @@
                         </a>
                         <a class="dropdown-item" href="{{ route('promissory_note_commissioner.index') }}">
                           <small>->&nbsp;</small>Pagarés comisionistas
-                        </a>
-                        <a class="dropdown-item" href="{{ route('credit_note.index') }}">
-                          <small>->&nbsp;</small>Notas crédito
-                        </a>
-                        <a class="dropdown-item" href="{{ route('termination.index') }}">
-                          <small>->&nbsp;</small>Finiquitos
                         </a>
                       </div>
                     </div>

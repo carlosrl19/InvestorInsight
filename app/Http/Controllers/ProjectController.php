@@ -186,7 +186,6 @@ class ProjectController extends Controller
     
         return redirect()->route('project.index')->with('success', 'Proyecto creado de manera exitosa.');
     }
-    
 
     public function show($id)
     {
@@ -241,7 +240,7 @@ class ProjectController extends Controller
 
         // Sumar el investor_final_investment al investor_balance de cada inversor asociado al proyecto
         foreach ($project->investors as $investor) {
-            $investor->investor_balance += ($investor->pivot->investor_final_profit + $investor->pivot->investor_investment);
+            $investor->investor_balance += $investor->pivot->investor_final_profit + $investor->pivot->investor_investment;
             $investor->save();
         }
 

@@ -29,7 +29,6 @@ class Investor extends Model
         return $this->hasMany(CreditNote::class, 'id');
     }
 
-
     public function transfers()
     {
         return $this->hasMany(Transfer::class);

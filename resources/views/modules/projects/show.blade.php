@@ -41,19 +41,19 @@ Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name 
                             <div class="row mb-3"> <!-- Inicio del segundo col que debe ser a la derecha -->
                                 <h3>Información general del proyecto</h3>
                                 <div class="col-md-6">
-                                    <p><div class="badge bg-success mt-1"></div>&nbsp;Proyecto: {{ $project->project_name }}</p>
-                                    <p><div class="badge bg-success mt-1"></div>&nbsp;Código: CP-{{ $project->project_code }}</p>
-                                    <p><div class="badge bg-success mt-1"></div>&nbsp;Inversión total: Lps. {{ number_format($project->project_investment,2) }}</p>
+                                    <p><div class="badge bg-success mt-1"></div>&nbsp; Proyecto: {{ $project->project_name }}</p>
+                                    <p><div class="badge bg-success mt-1"></div>&nbsp; Código: CP-{{ $project->project_code }}</p>
+                                    <p><div class="badge bg-success mt-1"></div>&nbsp; Inversión total: Lps. {{ number_format($project->project_investment,2) }}</p>
                                     <p><div class="badge bg-cyan mt-1"></div>
                                         &nbsp;Fondo inversionista: Lps. {{ number_format($project->investor_balance_history,2) }}
                                     </p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha inicio: {{ $project->project_start_date }}</p>
-                                    <p><div class="badge bg-success mt-1"></div>&nbsp;Fecha final: {{ $project->project_end_date }}</p>
+                                    <p><div class="badge bg-success mt-1"></div>&nbsp; Fecha inicio: {{ $project->project_start_date }}</p>
+                                    <p><div class="badge bg-success mt-1"></div>&nbsp; Fecha final: {{ $project->project_end_date }}</p>
                                     <p><div class="badge bg-success mt-1"></div>&nbsp;
                                         @foreach($project->investors as $investor)
-                                            Ganancia total: Lps. {{ number_format($investor->pivot->investor_final_profit + $project->project_investment,2) }}
+                                             Ganancia total: Lps. {{ number_format($investor->pivot->investor_final_profit + $project->project_investment,2) }}
                                             <br>
                                         @endforeach
                                     </p>

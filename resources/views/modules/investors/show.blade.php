@@ -155,9 +155,9 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                                             <tr>
                                                                 <th>Fecha</th>
                                                                 <th>Banco</th>
-                                                                <th>Monto transferencia</th>
-                                                                <th>Capital</th>
-                                                                <th>Nuevo saldo</th>
+                                                                <th>Monto</th>
+                                                                <th>Fondo</th>
+                                                                <th>Nuevo fondo</th>
                                                                 <th>Comentarios</th>
                                                             </tr>
                                                             </thead>
@@ -210,7 +210,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                                         <th>Fecha</th>
                                                         <th>Monto nota crédito</th>
                                                         <th>Capital</th>
-                                                        <th>Nuevo saldo</th>
+                                                        <th>Nuevo fondo</th>
                                                         <th>Comentarios</th>
                                                     </tr>
                                                     </thead>

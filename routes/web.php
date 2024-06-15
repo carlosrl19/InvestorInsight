@@ -22,6 +22,9 @@ Route::get('credit_note/{id}/report', 'App\Http\Controllers\CreditNoteController
 Route::resource('promissory_note', 'App\Http\Controllers\PromissoryNoteController')->names('promissory_note');
 Route::get('promissory_note/{id}/report', 'App\Http\Controllers\PromissoryNoteController@showReport')->name('promissory_note.report');
 
+// Payments
+Route::resource('payments', 'App\Http\Controllers\PaymentController')->names('payments');
+
 // Promissory note commissioners
 Route::resource('promissory_note_commissioner', 'App\Http\Controllers\PromissoryNoteCommissionerController')->names('promissory_note_commissioner');
 Route::get('promissory_note_commissioner/{id}/report', 'App\Http\Controllers\PromissoryNoteCommissionerController@showReport')->name('promissory_note_commissioner.report');
