@@ -9,6 +9,7 @@ class PromissoryNote extends Model
     public function investor(){
         return $this->belongsTo(Investor::class, 'investor_id', 'id');
     }
+    
 
     protected $fillable = [
         'investor_id',

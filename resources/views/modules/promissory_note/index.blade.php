@@ -83,9 +83,9 @@ Pagarés inversionistas
                         <td>Lps. {{ number_format($promissoryNote->promissoryNote_amount,2) }}</td>
                         <td>
                             @if($promissoryNote->promissoryNote_status == '1')
-                                <span class="badge bg-success me-1"></span> Emitido
+                                <span class="badge bg-orange me-1"></span> Emitido / Sin pagar
                             @elseif($promissoryNote->promissoryNote_status == '0')
-                                <span class="badge bg-orange me-1"></span> No emitido
+                                <span class="badge bg-success me-1"></span> Emitido / Pagado
                             @else
                                 <span class="badge bg-red me-1"></span> Estado inválido
                             @endif

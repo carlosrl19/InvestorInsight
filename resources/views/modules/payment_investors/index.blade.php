@@ -57,18 +57,20 @@ Pagos
             <thead>
                 <tr class="text-center">
                     <th>Código</th>
-                    <th>Monto pagado</th>
                     <th>Fecha Hora</th>
-                    <th>Código pagaré</th>
+                    <th>Inversionista</th>
+                    <th>Monto pagado</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($payments as $payment)
                 <tr class="text-center">
                     <td>{{ $payment->payment_code }}</td>
-                    <td>{{ $payment->payment_amount }}</td>
                     <td>{{ $payment->payment_date }}</td>
-                    <td>{{ $payment->promissoryNote_id }}</td>
+                    <td>
+                        {{ $payment->promissoryNoteInvestor->investor->investor_name ?? 'N/A' }}
+                    </td>
+                    <td class="text-red">Lps. {{ $payment->payment_amount }}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -77,7 +79,7 @@ Pagos
     </div>
 </div>
 
-@include('modules.payments._create')
+@include('modules.payment_investors._create')
 @endsection
 
 @section('scripts')
