@@ -22,7 +22,6 @@ $(document).ready(function() {
 $(document).ready(function() {
   $(".select2-promissoryNotes").select2({
     dropdownParent: $("#modal-team"),
-    placeholder: "Seleccione el pagaré a pagar",
     allowClear: true,
     language: "es",
   });
