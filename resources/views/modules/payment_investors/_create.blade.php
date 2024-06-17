@@ -13,7 +13,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <select name="promissoryNoteInvestor_id" id="promissoryNoteInvestor_id" class="form-control">
+                                <select name="promissoryNoteInvestor_id" id="promissoryNoteInvestor_id" class="form-control select2-promissoryNotes">
                                     <optgroup label="Pagarés de inversionistas">
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
                                         @foreach ($promissoryNoteInvestors->where('promissoryNote_status', 1) as $promissoryNoteInvestor)

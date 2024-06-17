@@ -4,6 +4,7 @@
     margin-bottom: 6px;
     position: relative;
     vertical-align: middle;
+    padding-top: 15px;
 }
 .select2-container .select2-selection--single {
     box-sizing: border-box;
@@ -166,7 +167,7 @@
 .select2-container--default
     .select2-selection--single
     .select2-selection__rendered {
-    color: #444;
+    color: #444; /* Options Font color*/
     line-height: 28px;
 }
 .select2-container--default

@@ -138,8 +138,4 @@ Pagarés comisionistas
         $(this).find('#pdf-frame').attr('src', '');
     });
 </script>
-
-<!-- Select2 -->
-<script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
-<script src="{{ asset('customjs/select2/s2_projects.js') }}"></script>
 @endsection

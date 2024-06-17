@@ -92,4 +92,8 @@ Pagos
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('customjs/datatable/dt_transfer.js') }}"></script>
 
+<!-- Select2 -->
+<script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
+<script src="{{ asset('customjs/select2/s2_init.js') }}"></script>
+
 @endsection
