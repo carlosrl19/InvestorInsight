@@ -169,7 +169,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                                                     <td>Lps. {{ number_format($transfer->current_balance, 2) }}</td>
                                                                     <td class="text-green">Lps. {{ number_format($transfer->transfer_amount, 2) }}</td>
                                                                     <td>Lps. {{ number_format($transfer->current_balance - $transfer->transfer_amount, 2) }}</td>
-                                                                    <td title="Comentario: {{ $transfer->transfer_comment }}" data-bs-toggle="tooltip" data-bs-placement="right" class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i>Ver comentarios ...</i></td>
+                                                                    <td class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $transfer->transfer_comment }}</td>
                                                                 </tr>
                                                                 @endforeach
                                                             </tbody>
@@ -221,7 +221,7 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                                         <td class="text-red">Lps. {{ number_format($creditNote->creditNote_amount, 2) }}</td>
                                                         <td>Lps. {{ number_format($creditNote->current_balance + $creditNote->creditNote_amount, 2) }}</td>
                                                         <td>Lps. {{ number_format($creditNote->current_balance, 2) }}</td>
-                                                        <td title="Comentario: {{ $creditNote->creditNote_description }}" data-bs-toggle="tooltip" data-bs-placement="right" class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i>Ver comentarios ...</i></td>
+                                                        <td class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $creditNote->creditNote_description }}</td>
                                                     </tr>
                                                     @endforeach
                                                     </tbody>
