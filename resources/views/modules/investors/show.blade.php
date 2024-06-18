@@ -155,9 +155,9 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                                             <tr>
                                                                 <th>Fecha</th>
                                                                 <th>Banco</th>
-                                                                <th>Monto</th>
+                                                                <th>Transferencia</th>
+                                                                <th>Capital</th>
                                                                 <th>Fondo</th>
-                                                                <th>Nuevo fondo</th>
                                                                 <th>Comentarios</th>
                                                             </tr>
                                                             </thead>
@@ -166,9 +166,9 @@ Historial de inversionista /&nbsp;<b class="text-muted">{{ $investor->investor_n
                                                                 <tr>
                                                                     <td>{{ $transfer->transfer_date }}</td>
                                                                     <td class="text-uppercase">{{ $transfer->transfer_bank }}</td>
+                                                                    <td>Lps. {{ number_format($transfer->current_balance, 2) }}</td>
                                                                     <td class="text-green">Lps. {{ number_format($transfer->transfer_amount, 2) }}</td>
                                                                     <td>Lps. {{ number_format($transfer->current_balance - $transfer->transfer_amount, 2) }}</td>
-                                                                    <td>Lps. {{ number_format($transfer->current_balance, 2) }}</td>
                                                                     <td title="Comentario: {{ $transfer->transfer_comment }}" data-bs-toggle="tooltip" data-bs-placement="right" class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i>Ver comentarios ...</i></td>
                                                                 </tr>
                                                                 @endforeach

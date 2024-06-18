@@ -178,7 +178,7 @@
                                         style="display: none;">
                                         <strong></strong>
                                     </span>
-                                    <label for="investor_balance">Capital actual</label>
+                                    <label for="investor_balance">Fondo actual</label>
                                 </div>
                             </div>
 
@@ -226,7 +226,7 @@
                                         style="display: none;">
                                         <strong></strong>
                                     </span>
-                                    <label for="transfer_amount">Monto de transferencia</label>
+                                    <label for="transfer_amount">Fondo a capital</label>
                                 </div>
                             </div>                            
                         </div>
