@@ -10,6 +10,9 @@
 <!-- Badge CSS -->
 <link href="{{ asset('/css/project.css') }}" rel="stylesheet">
 
+<!-- Select2 -->
+<link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
+
 @endsection
 
 @section('pretitle')
@@ -18,6 +21,12 @@ Listado principal
 
 @section('title')
 Proyectos finiquitados
+@endsection
+
+@section('create')
+<a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-payment">
+    + Nuevo pago de finiquito
+</a>
 @endsection
 
 @section('content')
@@ -54,15 +63,11 @@ Proyectos finiquitados
                         <tr>
                             <td>{{ $project->project_code}}</td>
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
-                                <a href="{{ route('project.show', $project) }}">
+                                <a href="#" class="text-blue" style="font-size: clamp(0.6rem, 3vw, 0.65rem); border: none; margin-right: 5px" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showModal{{ $project->id }}"></>
                                     {{ $project->project_name }}
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                        <path d="M9 15l6 -6" />
-                                        <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
-                                        <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
-                                    </svg>
+                                    &nbsp;<svg class="text-blue" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
                                 </a>
+                                @include('modules.projects._show')
                             </td>
                             <td>{{ $project->project_start_date }}</td>
                             <td>{{ $project->project_end_date }}</td>                            
@@ -134,12 +139,18 @@ Proyectos finiquitados
 </div>
 @endsection
 
+@include('modules.payment_investors._create')
+
 @section('scripts')
 
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('customjs/datatable/dt_project_terminated.js') }}"></script>
+
+<!-- Select2 -->
+<script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
+<script src="{{ asset('customjs/select2/s2_init.js') }}"></script>
 
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

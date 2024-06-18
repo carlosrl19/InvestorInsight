@@ -1,39 +1,21 @@
-@extends('layout.admin')
-
-@section('head')
-<!-- Datatable CSS -->
-<link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
-
-<link rel="stylesheet" href="{{ asset('css/history.css') }}">
-@endsection
-
-@section('pretitle')
-Proyectos
-@endsection
-
-@section('create')
-<button class="btn" onclick="goBack()" style="background-color: transparent; margin-right: 5px">
-    &nbsp;<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-back-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg>
-    Volver
-</button>
-@endsection
-
-@section('title')
-Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name }}</b>
-@endsection
-
-@section('content')
-<div class="container-xl">
-    <div class="card mb-2">
-        <div class="card-body">
-            <div class="card">
-                <div class="container mt-2">
-                    <div class="row"> <!-- Inicia la fila principal -->
+<div class="modal modal-blur fade" id="showModal{{ $project->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="showModal{{ $project->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content" style="border: 2px solid #52524E">
+            <div class="modal-header">
+                <h5 class="modal-title">Datos del proyecto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row"> <!-- Inicia la fila principal -->
                         <div class="col-lg-6"> <!-- Col que debe estar a la izquierda -->
                             <h3>Imagen del comprobante de pago</h3>
                             <div class="card mb-4" style="height: auto; width: 410px;">
-                                <img src="/images/transfers/{{ $project->project_proof_transfer_img }}" style="height: auto; width: 410px;">
+                                @if($project->project_status != 0)
+                                    <img src="{{ asset('static/in_process.gif') }}" alt="in_process" style="height: auto; width: 180px; padding-top: 20%; padding-bottom: 30%; margin: auto">
+                                    <p class="mt-3 text-center">PROYECTO EN PROCESO</p>
+                                @else
+                                    <img src="/images/transfers/{{ $project->project_proof_transfer_img }}" style="height: auto; width: 410px;">
+                                @endif
                             </div>
                         </div> <!-- Fin de col izquierda -->
 
@@ -133,21 +115,8 @@ Información del proyecto/&nbsp;<b class="text-muted">{{ $project->project_name 
                                 @endforeach
                             </div> <!-- Fin del col derecho -->
                         </div> <!-- Fin de col-lg-6 derecha -->
-                    </div> <!-- Fin de la fila principal -->
-                </div>
+                </div> <!-- Fin de la fila principal -->
             </div>
         </div>
     </div>
 </div>
-
-@endsection
-
-@section('scripts')
-<!-- Redirect button -->
-<script src="{{ asset('customjs/return_redirect.js')}}"></script>
-
-<!-- Datatable -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-<script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_history.js')}}"></script>
-@endsection

@@ -10479,6 +10479,10 @@ textarea.form-control-lg {
   white-space: nowrap !important;
 }
 
+.text-bold{
+  font-weight: bold;
+}
+
 /* rtl:begin:remove */
 .text-break {
   word-wrap: break-word !important;

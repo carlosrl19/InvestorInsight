@@ -21,7 +21,7 @@ $(document).ready(function() {
 // Prommissory notes select2 init
 $(document).ready(function() {
   $(".select2-promissoryNotes").select2({
-    dropdownParent: $("#modal-team"),
+    dropdownParent: $("#modal-payment"),
     allowClear: true,
     language: "es",
   });

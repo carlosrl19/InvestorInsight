@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\PaymentInvestor;
+use App\Models\PromissoryNote;
+use App\Models\PromissoryNoteCommissioner;
 use App\Models\Investor;
 use App\Models\CommissionAgent;
 use Carbon\Carbon;
 use Dompdf\Options;
 use Dompdf\Dompdf;
+use Illuminate\Support\Str;
 
 class ProjectTerminationController extends Controller
 {
@@ -16,7 +20,13 @@ class ProjectTerminationController extends Controller
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
-        return view('modules.terminations.index', compact('projects', 'total_investor_balance', 'total_commissioner_balance'));
+        $payments = PaymentInvestor::with(['promissoryNoteInvestor.investor'])->get();
+        $promissoryNoteInvestors = PromissoryNote::get();
+        $promissoryNoteCommissioners = PromissoryNoteCommissioner::get();
+        $generatedCode = strtoupper(Str::random(12)); // Random code
+        $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
+
+        return view('modules.terminations.index', compact('projects', 'total_investor_balance', 'total_commissioner_balance', 'payments', 'promissoryNoteInvestors', 'promissoryNoteCommissioners', 'generatedCode', 'todayDate'));
     }
 
     public function showTermination($id) {
