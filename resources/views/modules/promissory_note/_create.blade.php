@@ -80,7 +80,7 @@
                             <div class="form-floating">
                                 <input type="date" 
                                     name="promissoryNote_final_date" 
-                                    style="font-size: 10px;" 
+                                    style="font-size: 12px;" 
                                     value="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d')}}"
                                     id="promissoryNote_final_date"
                                     min="{{Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d')}}"

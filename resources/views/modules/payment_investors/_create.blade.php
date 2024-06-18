@@ -14,12 +14,15 @@
                         <div class="col">
                             <div class="form-floating">
                                 <select name="promissoryNoteInvestor_id" id="promissoryNoteInvestor_id" class="form-control select2-promissoryNotes">
-                                    <optgroup label="Pagarés de inversionistas">
+                                    @if ($promissoryNoteInvestors->where('promissoryNote_status', 1)->count() > 0)
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
-                                        @foreach ($promissoryNoteInvestors->where('promissoryNote_status', 1) as $promissoryNoteInvestor)
-                                            <option value="{{ $promissoryNoteInvestor->id }}">{{ $promissoryNoteInvestor->promissoryNote_code }} - Lps. {{ $promissoryNoteInvestor->promissoryNote_amount }}</option>
-                                        @endforeach
-                                    </optgroup>
+                                        @forelse ($promissoryNoteInvestors->where('promissoryNote_status', 1) as $promissoryNoteInvestor)
+                                            <option value="{{ $promissoryNoteInvestor->id }}">{{ $promissoryNoteInvestor->promissoryNote_code }} - Lps. {{ number_format($promissoryNoteInvestor->promissoryNote_amount,2) }}</option>
+                                        @empty
+                                        @endforelse
+                                    @else
+                                        <option value="" disabled selected>No existen pagarés para pagar</option>
+                                    @endif
                                 </select>
                                 <label for="promissoryNoteInvestor_id">Pagarés pendientes de pago</label>
                             </div>
