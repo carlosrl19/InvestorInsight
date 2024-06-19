@@ -45,7 +45,7 @@
                                         id="project_name"
                                         class="form-control @error('project_name') is-invalid @enderror"
                                         autocomplete="off" maxlength="55"
-                                        onkeyup="this.value = this.value.toUpperCase();" />
+                                        oninput="this.value = this.value.toUpperCase()" />
                                     @error('project_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -256,7 +256,7 @@
                                     <textarea maxlength="255"
                                         class="form-control @error('transfer_comment') is-invalid @enderror"
                                         autocomplete="off" maxlength="255" name="transfer_comment" id="transfer_comment"
-                                        style="resize: none; height: 100px">{{ old('transfer_comment')}}</textarea>
+                                        style="resize: none; height: 100px" oninput="this.value = this.value.toUpperCase()">{{ old('transfer_comment')}}</textarea>
                                     @error('transfer_comment')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -429,7 +429,7 @@
                                     <textarea maxlength="255" style="overflow: hidden; height: 100px; resize: none"
                                         name="project_comment" id="project_comment"
                                         class="form-control @error('project_comment') is-invalid @enderror"
-                                        autocomplete="off">{{ old('project_comment') }}</textarea>
+                                        autocomplete="off" oninput="this.value = this.value.toUpperCase()">{{ old('project_comment') }}</textarea>
                                     @error('project_comment')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -463,5 +463,4 @@
 <script src="{{ asset('customjs/projects/commissioners.js') }}"></script>
 <script src="{{ asset('customjs/projects/calculations.js') }}"></script>
 <script src="{{ asset('customjs/projects/work_days_calculate.js') }}"></script>
-<script src="{{ asset('customjs/uppercase.js') }}"></script>
 <script src="{{ asset('customjs/investors/investor_balance.js') }}"></script>

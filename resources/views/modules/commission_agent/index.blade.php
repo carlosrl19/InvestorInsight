@@ -120,19 +120,13 @@ Comisionistas
                                         <div class="row mb-3 align-items-end">
                                             <div class="col" style="display: none">
                                                 <div class="form-floating">
-                                                    <input type="text" readonly name="commissioner_code" id="commissioner_code" value="{{ $commissionerCode }}" class="form-control" autocomplete="off">
-                                                    <label for="commissioner_code" name="commissioner_code">ID</label>
-                                                </div>
-                                            </div>
-                                            <div class="col" style="display: none">
-                                                <div class="form-floating">
                                                     <input type="text" readonly name="commissioner_balance" id="commissioner_balance" value="{{ $commission_agent->commissioner_balance }}" class="form-control" autocomplete="off">
-                                                    <label for="commissioner_balance" name="commissioner_balance">ID</label>
+                                                    <label for="commissioner_balance" name="commissioner_balance">Capital</label>
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <label class="form-label" for="commissioner_name_{{ $commission_agent->id }}">Nombre del comisionista</label>
-                                                <input type="text" maxlength="55" value="{{ $commission_agent->commissioner_name }}" name="commissioner_name" id="commissioner_name_{{ $commission_agent->id }}" class="form-control @error('commissioner_name') is-invalid @enderror" placeholder="Ingrese el nombre del comisionista" autocomplete="off"/>
+                                                <input type="text" maxlength="55" oninput="this.value = this.value.toUpperCase()" value="{{ $commission_agent->commissioner_name }}" name="commissioner_name" id="commissioner_name_{{ $commission_agent->id }}" class="form-control @error('commissioner_name') is-invalid @enderror" placeholder="Ingrese el nombre del comisionista" autocomplete="off"/>
                                                 @error('commissioner_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

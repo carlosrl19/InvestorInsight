@@ -9,12 +9,6 @@
                 <form action="{{ route('commission_agent.store')}}" method="POST">
                     @csrf
                     <div class="row mb-3 align-items-end">
-                        <div class="col" style="display: none">
-                            <div class="form-floating">
-                                <input type="text" readonly name="commissioner_code" id="commissioner_code" value="{{ $commissionerCode }}" class="form-control @error('investor_name') is-invalid @enderror" autocomplete="off">
-                                <label for="commissioner_code" name="commissioner_code">ID</label>
-                            </div>
-                        </div>
                         <div class="col" style="display: none;">
                             <div class="form-floating">
                                 <input type="number" name="commissioner_balance" value="{{ $commissioner_balance}}" readonly id="commissioner_balance" class="form-control @error('commissioner_balance') is-invalid @enderror" autocomplete="off"/>
@@ -23,12 +17,12 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label for="commissioner_name">Saldo del comisionista</label>
+                                <label for="commissioner_name">Capital del comisionista</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="55" name="commissioner_name" value="{{ old('commissioner_name') }}" id="commissioner_name" class="form-control @error('commissioner_name') is-invalid @enderror" autocomplete="off"/>
+                                <input type="text" maxlength="55" name="commissioner_name" oninput="this.value = this.value.toUpperCase()" value="{{ old('commissioner_name') }}" id="commissioner_name" class="form-control @error('commissioner_name') is-invalid @enderror" autocomplete="off"/>
                                 @error('commissioner_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

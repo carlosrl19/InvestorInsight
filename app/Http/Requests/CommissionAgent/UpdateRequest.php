@@ -16,7 +16,6 @@ class UpdateRequest extends FormRequest
         $commissionerId = $this->route("commission_agent")->id;
 
         return [
-            'commissioner_code' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|unique:commission_agents,commissioner_code,' . $commissionerId . '',
             'commissioner_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:commission_agents,commissioner_name,' . $commissionerId . '',
             'commissioner_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/|unique:commission_agents,commissioner_dni,' . $commissionerId . '',
             'commissioner_phone' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|',
@@ -27,15 +26,6 @@ class UpdateRequest extends FormRequest
     public function messages()
     {
         return [
-
-            // Commissioner code messages
-            'commissioner_code.required' => 'El código del comisionista es obligatorio.',
-            'commissioner_code.string' => 'El código del comisionista solo debe contener números.',
-            'commissioner_code.min' => 'El código del comisionista debe contener al menos 8 caracteres.',
-            'commissioner_code.max' => 'El código del comisionista no puede exceder 8 caracteres.',
-            'commissioner_code.regex' => 'El código del comisionista no puede contener letras ni símbolos.',
-            'commissioner_code.unique' => 'El código del comisionista ya existe.',
-
             // Commissioner agent name messages
             'commissioner_name.required' => 'El nombre es obligatorio.',
             'commissioner_name.unique' => 'El nombre ya existe.',
