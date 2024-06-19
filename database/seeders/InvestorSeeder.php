@@ -13,7 +13,6 @@ class InvestorSeeder extends Seeder
 
         Investor::create(
             [
-                'investor_code' => '00000001',
                 'investor_name'=>'PIVOTE',
                 'investor_company_name'=>'ROBENIOR',
                 'investor_dni'=>'0801199503998',
@@ -26,7 +25,6 @@ class InvestorSeeder extends Seeder
 
         Investor::create(
             [
-                'investor_code' => '00000002',
                 'investor_name'=>'CARLOS RODRIGUEZ',
                 'investor_company_name'=>'ROBENIOR',
                 'investor_dni'=>'0703199903200',

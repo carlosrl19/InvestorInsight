@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\Investor\StoreRequest;
 use App\Http\Requests\Investor\UpdateRequest;
 use Illuminate\Support\Facades\DB;
@@ -35,13 +36,7 @@ class InvestorController extends Controller
     }
     
     public function store(StoreRequest $request)
-    {
-        $lastInvestor = Investor::latest()->first();
-        $nextId = $lastInvestor ? $lastInvestor->id + 1 : 1;
-        $investorCode = str_pad($nextId, 8, '0', STR_PAD_LEFT);
-    
-        $request->merge(['investor_code' => $investorCode]);
-    
+    {    
         Investor::create($request->all());
         return redirect()->route('investor.index')->with('success', 'Inversionista creado exitosamente.');
     }
@@ -126,8 +121,17 @@ class InvestorController extends Controller
     public function edit($id)
     {
         $investor = Investor::findOrFail($id);
-        $investors = Investor::where('id', '!=', $id)->get(); // Excluir al inversor que se está editando
-        return view('modules.investors.create', compact('investor', 'investors'));
+        return view('modules.investors.index', compact('investor'));
+    }
+
+    public function fund(Request $request, Investor $investor, $id)
+    {
+        $investor = Investor::findOrFail($id);
+
+        $investor->investor_balance = $request->input('investor_balance');
+        $investor->save();
+    
+        return redirect()->route('investor.index')->with("success", "Fondo del inversionista actualizado exitosamente.");
     }
 
     public function update(UpdateRequest $request, Investor $investor)

@@ -7,6 +7,7 @@ Route::resource('dashboard', 'App\Http\Controllers\DashboardController')->names(
 
 // Investor
 Route::resource('investor', 'App\Http\Controllers\InvestorController')->names('investor');
+Route::post('investor/{id}/fund', 'App\Http\Controllers\InvestorController@fund')->name('investor.fund');
 
 // Commission Agent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');
