@@ -64,17 +64,22 @@ Historial de comisionista /&nbsp;<b class="text-muted">{{ $commissioner->commiss
                                         <table id="example0" class="display table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Proyecto</th>
-                                                    <th>Comisión del proyecto</th>
+                                                    <th style="width: 88%">Proyecto</th>
+                                                    <th style="width: 10%">Comisión del proyecto</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($activeProjects as $project)
                                                 <tr>
                                                     <td>{{ $project->project_name }}</td>
-                                                    <td>L. {{ number_format($project->commissioner_commission, 2) }}</td>
+                                                    <td class="text-left">L. {{ number_format($project->commissioner_commission, 2) }}</td>
                                                 </tr>
                                                 @endforeach
+                                                 <!-- Agregar la fila que suma la segunda columna -->
+                                                <tr style="background-color: #95D2B3;">
+                                                    <td style="font-weight: bold;">TOTAL DE COMISIONES EN PROCESO</td>
+                                                    <td class="text-white" style="font-weight: bold;">L. {{ number_format($activeProjects->sum('commissioner_commission'), 2) }}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
