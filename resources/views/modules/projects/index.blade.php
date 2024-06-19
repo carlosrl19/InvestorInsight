@@ -193,7 +193,7 @@ Proyectos activos
                             </td>
 
                             <!-- Modal for finishing the project -->
-                            <div class="modal fade" id="finishModal{{ $project->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="finishModal{{ $project->id }}" aria-hidden="true">
+                            <div class="modal modal-blur fade" id="finishModal{{ $project->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="finishModal{{ $project->id }}" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <form action="{{ route('project.finish', $project->id) }}" method="POST" enctype="multipart/form-data">

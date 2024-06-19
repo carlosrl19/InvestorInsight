@@ -54,7 +54,7 @@ Comisionistas
             <table id="example" class="display table table-bordered">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th class="text-center">ID</th>
                         <th>Nombre comisionista</th>
                         <th>Nº Identidad</th>
                         <th>Teléfono</th>
@@ -63,9 +63,9 @@ Comisionistas
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($commission_agents as $commission_agent)
+                    @foreach($commission_agents as $i => $commission_agent)
                     <tr>
-                        <td> {{ $commission_agent->commissioner_code }} </td>
+                        <td class="text-center">{{ $i++ }}</td>
                         <td>
                             <a href="{{ route('commission_agent.show', $commission_agent) }}">{{ $commission_agent->commissioner_name }}
                                 <small>
