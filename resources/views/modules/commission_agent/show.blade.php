@@ -75,7 +75,7 @@ Historial de comisionista /&nbsp;<b class="text-muted">{{ $commissioner->commiss
                                                     <td class="text-left">L. {{ number_format($project->commissioner_commission, 2) }}</td>
                                                 </tr>
                                                 @endforeach
-                                                 <!-- Agregar la fila que suma la segunda columna -->
+                                                <!-- Agregar la fila que suma la segunda columna -->
                                                 <tr style="background-color: #95D2B3;">
                                                     <td style="font-weight: bold;">TOTAL DE COMISIONES EN PROCESO</td>
                                                     <td class="text-white" style="font-weight: bold;">L. {{ number_format($activeProjects->sum('commissioner_commission'), 2) }}</td>

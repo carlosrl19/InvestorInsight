@@ -9,7 +9,6 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'investor_code' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|unique:investors,investor_code',
             'investor_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:investors',
             'investor_company_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/',
             'investor_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/',
@@ -23,15 +22,6 @@ class StoreRequest extends FormRequest
     public function messages()
     {
         return [
-            
-            // Investor code messages
-            'investor_code.required' => 'El código del inversionista es obligatorio.',
-            'investor_code.string' => 'El código del inversionista solo debe contener números.',
-            'investor_code.min' => 'El código del inversionista debe contener al menos 8 caracteres.',
-            'investor_code.max' => 'El código del inversionista no puede exceder 8 caracteres.',
-            'investor_code.regex' => 'El código del inversionista no puede contener letras ni símbolos.',
-            'investor_code.unique' => 'El código del inversionista ya existe.',
-
             // Investor name messages
             'investor_name.required' => 'El nombre del inversionista es obligatorio.',
             'investor_name.unique' => 'El nombre del inversionista ya existe.',

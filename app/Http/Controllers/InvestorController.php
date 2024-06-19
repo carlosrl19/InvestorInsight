@@ -16,6 +16,7 @@ class InvestorController extends Controller
     {
         $investors = Investor::get();
         $commissioners = CommissionAgent::get();
+
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
     
@@ -24,12 +25,8 @@ class InvestorController extends Controller
             $investor->investor_reference = Investor::find($investor->investor_reference_id);
             return $investor;
         });
-    
-        $lastInvestor = Investor::latest()->first();
-        $nextId = $lastInvestor ? $lastInvestor->id + 1 : 1;
-        $investorCode = str_pad($nextId, 8, '0', STR_PAD_LEFT);
-    
-        return view('modules.investors.index', compact('investors', 'commissioners', 'total_investor_balance', 'total_commissioner_balance', 'investorCode'));
+
+        return view('modules.investors.index', compact('investors', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
     }
     
     public function create()
@@ -125,7 +122,6 @@ class InvestorController extends Controller
     
         return view('modules.investors.show', compact('investor', 'transfers', 'creditNotes', 'referenceInvestor', 'activeProjects', 'completedProjects', 'total_investor_balance', 'total_commissioner_balance'));
     }
-    
 
     public function edit($id)
     {
