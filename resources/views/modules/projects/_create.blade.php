@@ -292,7 +292,7 @@
                         <div class="row mb-3 alig-items-end">
                             <div class="col-11">
                                 <div class="form-floating">
-                                    <select class="form-select" id="investor_select"
+                                    <select class="form-select" id="investor_select" disabled
                                         style="font-size: clamp(0.6rem, 3vh, 0.8rem);">
                                         <option value="" selected disabled>Seleccione un inversionista</option>
                                         @foreach ($investors as $investor)
@@ -305,7 +305,7 @@
                                 </div>
                             </div>
                             <div class="col-1">
-                                <button type="button" class="btn btn-red mt-3 text-white" id="add_button_container"
+                                <button type="button" class="btn btn-red mt-3 text-white" id="add_button_container" disabled
                                     style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
                                     &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

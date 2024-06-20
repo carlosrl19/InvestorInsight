@@ -20,6 +20,25 @@ Listado principal
 Pagarés comisionistas
 @endsection
 
+@section('notification_navbar')
+<div class="list-group list-group-flush list-group-hoverable">
+    @foreach ($promissoryNotesCommissioner as $promissoryNote)
+    <div class="list-group-item">
+        <div class="row align-items-center">
+            <div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>
+            <div class="col">
+                <a class="text-body d-block" style="font-size: clamp(0.7rem, 6vh, 0.8rem)" id="pnc_code">Pagaré #{{ $promissoryNote->promissoryNoteCommissioner_code }}</a>
+                <div class="d-block text-muted mt-n1" style="font-size: clamp(0.6rem, 6vh, 0.7rem)">
+                   Fecha de pago {{ $promissoryNote->promissoryNoteCommissioner_final_date}}.
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+</div>
+@endsection
+
+
 @section('content')
 
     @if(session('success'))
