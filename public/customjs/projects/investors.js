@@ -68,6 +68,8 @@ function deleteInvestorRow(button) {
     calculateTotalInvestment();
 }
 
+let previousInvestorId = null;
+
 function updateInvestor() {
     const investorSelect = document.getElementById('investor_id');
     
@@ -78,6 +80,12 @@ function updateInvestor() {
     if (investorId) {
         const investorName = selectedInvestor.text;
         const transferAmount = document.getElementById('transfer_amount').value;
+
+        // Eliminar todas las filas de la tabla de inversionistas
+        const tbody = document.querySelector('#project_investors_table tbody');
+        while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
+        }
 
         const newRow = document.createElement('tr');
         newRow.setAttribute('data-investor-id', investorId);
@@ -104,10 +112,18 @@ function updateInvestor() {
                 <span class="text-red text-bold">Acción no disponible</span>
             </td>`;
 
-        document.querySelector('#project_investors_table tbody').appendChild(newRow);
-        
-        // Deshabilitar la opción seleccionada en el select del paso 3
-        document.querySelector(`#investor_select option[value="${investorId}"]`).disabled = true;
+        tbody.appendChild(newRow);
+
+        // Rehabilitar la opción del inversionista previamente seleccionado
+        if (previousInvestorId) {
+            document.querySelector(`#investor_id option[value="${previousInvestorId}"]`).disabled = false;
+        }
+
+        // Deshabilitar la opción del inversionista actualmente seleccionado
+        document.querySelector(`#investor_id option[value="${investorId}"]`).disabled = true;
+
+        // Actualizar el ID del inversionista previamente seleccionado
+        previousInvestorId = investorId;
 
         newRow.querySelector('input[name="investor_profit"]').addEventListener('input', calculateInvestorFinalProfit);
         calculateTotalInvestment();
