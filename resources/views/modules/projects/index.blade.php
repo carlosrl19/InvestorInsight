@@ -89,17 +89,17 @@ Proyectos activos
             <table id="example" class="display nowrap table table-bordered" style="width: 100%;">
                 <thead>
                     <tr style="text-align: center;">
-                        <th>Nombre proyecto</th>
-                        <th>Inicio</th>
-                        <th>Final</th>
-                        <th>Días</th>
-                        <th>Inversionista</th>
-                        <th>Inversión</th>
-                        <th>Ganancia</th>
-                        <th>Excel</th>
-                        <th>Pagaré</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
+                        <th>Código <br>proyecto</th>
+                        <th>Nombre <br>proyecto</th>
+                        <th>Fecha <br>inicio</th>
+                        <th>Fecha <br>final</th>
+                        <th>Días <br>restantes</th>
+                        <th>Nombre <br>inversionista</th>
+                        <th>Monto <br>inversión</th>
+                        <th>Ganancia <br>proyecto</th>
+                        <th>Exportar <br>reportes</th>
+                        <th>Estado <br>proyecto</th>
+                        <th>Más <br>acciones</th>
                     </tr>
                 </thead>
                 @php
@@ -111,6 +111,7 @@ Proyectos activos
                             $project = $projectGroup->first();
                         @endphp
                         <tr>
+                            <td>#{{ $project->project_code }}</td>
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 <a href="#" class="text-blue" style="font-size: clamp(0.6rem, 3vw, 0.65rem); border: none; margin-right: 5px" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showModal{{ $project->id }}"></>
                                     {{ $project->project_name }}
@@ -135,30 +136,42 @@ Proyectos activos
                             <td>L. {{ number_format($project->project_investment,2) }}</td>
                             <td>L. {{ number_format($project->investors->sum('pivot.investor_final_profit'),2) }}</td>
                             <td>
-                                <a href="{{ route('project.excel', $project) }}" class="badge bg-teal me-1">
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2sz" />
-                                        <path d="M8 11h8v7h-8z" />
-                                        <path d="M8 15h8" />
-                                        <path d="M11 11v7" />
-                                    </svg>
-                                    EXCEL
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{{ route('promissory_note.report', $project->id) }}" class="badge bg-red me-1" data-toggle="modal" data-target="#pdfModal">
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                                        <path d="M8 11h8v7h-8z" />
-                                        <path d="M8 15h8" />
-                                        <path d="M11 11v7" />
-                                    </svg>
-                                    PAGARÉ
-                                </a>
+                                <div class="btn-list flex-nowrap">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-red dropdown-toggle align-text-top" data-bs-toggle="dropdown">
+                                        Exportar
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <small class="text-muted dropdown-item">Exportar reporte</small>
+                                            <div class="row" style="margin-left: 0.6vw; margin-right: 0.6vw">
+                                                <a href="{{ route('project.excel', $project) }}" class="badge bg-teal me-1">
+                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2sz" />
+                                                        <path d="M8 11h8v7h-8z" />
+                                                        <path d="M8 15h8" />
+                                                        <path d="M11 11v7" />
+                                                    </svg>
+                                                    EXCEL
+                                                </a>
+                                            </div>
+                                            <div class="row" style="margin-left: 0.6vw; margin-right: 0.6vw">
+                                                <a href="{{ route('promissory_note.report', $project->id) }}" class="badge bg-red me-1 mt-2" data-toggle="modal" data-target="#pdfModal">
+                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                                                        <path d="M8 11h8v7h-8z" />
+                                                        <path d="M8 15h8" />
+                                                        <path d="M11 11v7" />
+                                                    </svg>
+                                                    PAGARÉ
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                             <td>
                                 @if($project->project_status == '0')

@@ -104,7 +104,7 @@ class InvestorController extends Controller
             ->join('project_investor', 'projects.id', '=', 'project_investor.project_id')
             ->where('project_investor.investor_id', $id)
             ->where('projects.project_status', 1)
-            ->select('projects.project_name', 'projects.project_investment', 'project_investor.investor_investment', 'project_investor.investor_profit', 'project_investor.investor_final_profit')
+            ->select('projects.project_name', 'projects.project_code', 'projects.project_investment', 'project_investor.investor_investment', 'project_investor.investor_profit', 'project_investor.investor_final_profit')
             ->get();
     
         // Recuperar los proyectos finalizados del inversionista
@@ -112,7 +112,7 @@ class InvestorController extends Controller
             ->join('project_investor', 'projects.id', '=', 'project_investor.project_id')
             ->where('project_investor.investor_id', $id)
             ->where('projects.project_status', 0)
-            ->select('projects.project_name', 'projects.project_investment', 'project_investor.investor_investment', 'project_investor.investor_final_profit', 'project_investor.investor_profit')
+            ->select('projects.project_name', 'projects.project_code', 'projects.project_investment', 'project_investor.investor_investment', 'project_investor.investor_final_profit', 'project_investor.investor_profit')
             ->get();
     
         return view('modules.investors.show', compact('investor', 'transfers', 'creditNotes', 'referenceInvestor', 'activeProjects', 'completedProjects', 'total_investor_balance', 'total_commissioner_balance'));

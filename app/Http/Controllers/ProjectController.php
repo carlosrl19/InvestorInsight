@@ -191,6 +191,7 @@ class ProjectController extends Controller
         $transfer = Transfer::findOrFail($id);
         $investors = $project->investors;
         $commissioners = $project->commissioners;
+        
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
         return view('modules.projects.show', compact('project', 'transfer', 'investors', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
