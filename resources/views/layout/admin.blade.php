@@ -78,7 +78,7 @@
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
                   <div class="card" style="width: 50vh;">
                     <div class="card-header">
-                      <h3 class="card-title">Pagarés pendientes</h3>
+                      <h4 class="card-title">Pendientes</h4>
                     </div>
                     @yield('notification_navbar')
                   </div>

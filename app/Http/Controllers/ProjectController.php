@@ -146,8 +146,6 @@ class ProjectController extends Controller
                 'commissioner_commission' => $validatedData['commissioner_commission'][$j],
             ]);
     
-            // Crear pagaré para cada comisionista del proyecto
-            $promissoryNoteCode = strtoupper(Str::random(12));
             $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
     
             PromissoryNoteCommissioner::create([
@@ -223,6 +221,7 @@ class ProjectController extends Controller
 
             // Project proof transfer img messages
             'project_proof_transfer_img.image' => 'El comprobante de pago de transferencia del proyecto debe ser una imagen válida.',
+            'project_proof_transfer_img.mimes' => 'El formato de imagen debe ser jpeg, png, jpg, svg.',
         ]);
 
         // Procesar la imagen

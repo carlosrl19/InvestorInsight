@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
             'project_investment' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'project_status' => 'required|in:0,1',
             'project_comment' => 'required|string|min:3|max:255',
-            'project_proof_transfer_img' => 'string',
+            'project_proof_transfer_img' => 'string|mimes:jpeg,png,jpg,svg',
             'project_close_comment' => 'string|min:3|max:255',
             'investor_balance_history' => 'required|min:0|regex:/^\d+(\.\d{1,2})?$/',
 
@@ -43,7 +43,7 @@ class StoreRequest extends FormRequest
             'transfer_bank' => 'required|string|min:6|max:36|regex:/^[^\d]+$/',
             'transfer_date' => 'required|date:Y-m-d H:i:s',
             'transfer_amount' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
-            'transfer_img'=> 'string',
+            'transfer_img'=> 'string|mimes:jpeg,png,jpg,svg',
             'transfer_comment' => 'required|string|min:3|max:255',
         ];
     }
@@ -104,6 +104,7 @@ class StoreRequest extends FormRequest
 
             // Project proof transfer img messages
             'project_proof_transfer_img.string' => 'El comprobante de pago de transferencia del proyecto debe ser una imagen válida.',
+            'project_proof_transfer_img.mimes' => 'El formato de imagen debe ser jpeg, png, jpg, svg.',
 
             // Project description messages
             'project_close_comment.required' => 'El motivo de cierre del proyecto son obligatorios.',
