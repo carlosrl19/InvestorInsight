@@ -26,8 +26,8 @@
                         <div class="col-6 mb-4">
                             <label class="form-label" for="investor_balance_{{ $investor->id }}">Nuevo fondo del
                                 inversionista</label>
-                            <input type="number" value="{{ $investor->investor_balance }}" name="investor_balance"
-                                id="investor_balance_{{ $investor->id }}"
+                            <input type="number" value="{{ $investor->investor_balance }}" min="{{ $investor->investor_balance }}" name="investor_balance"
+                                id="investor_balance_{{ $investor->id }}" 
                                 class="form-control @error('investor_balance') is-invalid @enderror"
                                 autocomplete="off" />
                             @error('investor_balance')
