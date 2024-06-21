@@ -207,7 +207,7 @@ class ProjectController extends Controller
 
     public function exportActiveProjects()
     {
-        return Excel::download(new ActiveProjectsExport, 'Proyectos Activos.xlsx');
+        return Excel::download(new ActiveProjectsExport, 'EXCEL - PROYECTOS ACTIVOS.xlsx');
     }
     
     public function indexClosed()

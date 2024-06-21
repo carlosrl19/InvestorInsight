@@ -37,15 +37,17 @@ Route::resource('project', 'App\Http\Controllers\ProjectController')->names('pro
 Route::get('project/{id}/report', 'App\Http\Controllers\ProjectController@showReport')->name('project.report');
 Route::post('project/{project}/finish', 'App\Http\Controllers\ProjectController@finishProject')->name('project.finish');
 Route::post('/project/{project}/close', 'App\Http\Controllers\ProjectController@closeProject')->name('project.close');
-Route::get('excel/{id}', 'App\Http\Controllers\ProjectController@export')->name('project.excel');
 
+// Excel to projects
+Route::get('excel/{id}', 'App\Http\Controllers\ProjectController@export')->name('project.excel');
 Route::get('excel/projects/active', 'App\Http\Controllers\ProjectController@exportActiveProjects')->name('project.active_projects');
 
+// Terminate project
 Route::get('/termination/{id}', 'App\Http\Controllers\ProjectController@downloadTerminationReport')->name('project.termination');
 
-// Terminations
+// Project terminations
 Route::resource('termination', 'App\Http\Controllers\ProjectTerminationController')->names('termination');
 Route::get('termination/{id}/report', 'App\Http\Controllers\ProjectTerminationController@showTermination')->name('termination.report');
 
-// Closed
+// Closed projects
 Route::get('closed/', 'App\Http\Controllers\ProjectController@indexClosed')->name('project.closed');

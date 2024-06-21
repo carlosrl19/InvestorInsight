@@ -13,7 +13,7 @@ class ActiveProjectsExport implements FromView, WithProperties, WithEvents
 {
     public function view(): View
     {
-        $projects = Project::where('project_status', 1)->get();
+        $projects = Project::where('project_status', 1)->orderBy('project_investment', 'desc')->get();
 
         return view('modules.projects._report_active_projects_excel', [
             'projects' => $projects,
@@ -23,7 +23,7 @@ class ActiveProjectsExport implements FromView, WithProperties, WithEvents
     public function properties(): array
     {
         return [
-            'title' => 'EXCEL - PROYECTOS ACTIVO',
+            'title' => 'EXCEL - PROYECTOS ACTIVOS',
             'creator' => 'Investor Insight',
         ];
     }
