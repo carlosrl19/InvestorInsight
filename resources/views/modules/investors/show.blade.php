@@ -33,6 +33,7 @@ Historial de inversionista /&nbsp;
 
 @section('content')
     <div class="container-xl">
+        <!-- General information about investor -->
         <div class="row">
             <div class="col-12">
                 <div class="card mb-2">
@@ -65,8 +66,10 @@ Historial de inversionista /&nbsp;
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-6 mb-2">
+            <!-- In-process projects table -->
+            <div class="col-6 mb-4">
                 <div class="card" style="min-height: auto; max-height: 20rem">
                     <div class="card-header">
                         <h3 class="card-title">Proyectos en proceso</h3>
@@ -101,6 +104,8 @@ Historial de inversionista /&nbsp;
                     </div>
                 </div>
             </div>
+
+            <!-- Completed projects table -->
             <div class="col-6">
                 <div class="card mb-2">
                     <div class="card-body">
@@ -141,6 +146,7 @@ Historial de inversionista /&nbsp;
             </div>
         </div>
 
+        <!-- Tranfers history table -->
         <div class="card mb-4">
             <div class="card-body">
                 <div id="item-0">
@@ -195,6 +201,7 @@ Historial de inversionista /&nbsp;
             </div> <!-- Card body close -->
         </div>
     
+        <!-- Credit notes history table -->
         <div class="card">
             <div class="card-body">
                 <div id="item-1">
