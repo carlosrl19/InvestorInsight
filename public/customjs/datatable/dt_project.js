@@ -61,6 +61,7 @@
             zeroRecords:
                 "No se encontraron registros que coincidan con la búsqueda.",
         },
+        scrollX: true,
         responsive: true,
         paginate: true,
         info: true,

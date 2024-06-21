@@ -12,6 +12,7 @@ use App\Models\PromissoryNote;
 use App\Models\PromissoryNoteCommissioner;
 use Illuminate\Support\Str;
 use App\Exports\CustomExport;
+use App\Exports\ActiveProjectsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Dompdf\Options;
 use Dompdf\Dompdf;
@@ -202,6 +203,11 @@ class ProjectController extends Controller
         $projectName = $project->project_name;
 
         return Excel::download(new CustomExport($id), $projectName . ' - Excel.xlsx');
+    }
+
+    public function exportActiveProjects()
+    {
+        return Excel::download(new ActiveProjectsExport, 'Proyectos Activos.xlsx');
     }
     
     public function indexClosed()

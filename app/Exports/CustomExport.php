@@ -33,7 +33,7 @@ class CustomExport implements FromView, WithProperties, WithEvents
     public function properties(): array
     {
         return [
-            'title' => 'Excel de proyecto',
+            'title' => 'EXCEL DE PROYECTO',
             'creator' => 'Investor Insight',
         ];
     }
