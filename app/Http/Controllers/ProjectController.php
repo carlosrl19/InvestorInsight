@@ -202,7 +202,7 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $projectName = $project->project_name;
 
-        return Excel::download(new CustomExport($id), $projectName . ' - Excel.xlsx');
+        return Excel::download(new CustomExport($id), $projectName . ' - EXCEL.xlsx');
     }
 
     public function exportActiveProjects()

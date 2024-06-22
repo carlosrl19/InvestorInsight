@@ -1,3 +1,41 @@
+<?php
+// Array de colores
+$colors = array(
+    // Rojo
+    "#FF6B6B", "#E74C3C", "#FF4500", "#B22222",
+
+    // Morado claro:
+    "#FF00FF",
+    
+    // Naranja:
+    "#FFA500", "#F1C40F", "#FF7F50", "#F39C12", "#D2691E", "#FFD700", "#D35400", "#E67E22", "#FF8C00",
+    
+    // Morado:
+    "#9B59B6", "#8E44AD", "#9932CC", "#BA55D3", "#9400D3", "#4B0082",
+    
+    // Verde:
+    "#1ABC9C", "#16A085", "#2ECC71", "#27AE60", "#00FA9A", "#00FF7F", "#228B22", "#7CFC00",
+    
+    // Azul:
+    "#2980B9", "#3498DB", "#1E90FF", "#00BFFF", "#87CEEB", "#4682B4", "#10439F", "#6A5ACD", "#614BC3",
+    
+    // Azul claro:
+    "#ABCDEF",
+    
+    // Rosado:
+    "#A25772", "#C71585", "#FF1493", "#FF69B4",
+
+    // Verde limón:
+    "#32CD32", "#7FFF00", "#ADFF2F",
+);
+
+// Generar un color aleatorio
+$randomColor = $colors[rand(0, count($colors) - 1)];
+
+// Convertir el color a hexadecimal
+$hexColor = $randomColor;
+?>
+
 <table>
     <thead>
         <tr>
@@ -10,7 +48,7 @@
             <td></td>
             @foreach($project->investors as $investor)
                 <td style="font-size: 14px; width: 100px; font-weight: bold; background-color: #fff; text-align: left; text-decoration: underline;">
-                    PROYECTO {{ $investor->investor_name }}
+                    PROYECTO {{ implode(' ', array_slice(explode(' ', $investor->investor_name), 0, 1)) }} {{ implode(' ', array_slice(explode(' ', $investor->investor_name), -1)) }}
                 </td>
             @endforeach
             <td style="background-color: #fff; width: auto;"></td>
@@ -80,7 +118,7 @@
         <!-- Header table -->
         <tr>
             <td></td>
-            <td style="background-color: #A9D08E; width: 150px"></td>
+            <td style="background-color: <?php echo htmlspecialchars($hexColor) ?>; width: 150px"></td>
             <td></td>
             <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; ">CAPITAL</td>
             <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 120px; text-align: center;">GANANCIA TOTAL</td>
@@ -105,7 +143,7 @@
         <!-- Content table -->
         <tr>
             <td></td>
-            <td style="background-color: #A9D08E; width: 90px"></td>
+            <td style="background-color: <?php echo htmlspecialchars($hexColor) ?>; width: 90px"></td>
             <td style="background-color: #fff; font-size: 12px; font-weight: bold; text-align: left; width: 140px; border-bottom: 1px solid #000;">{{ $project->project_name }}</td>
             <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000;">L. {{ number_format($project->investors->sum('pivot.investor_investment'), 2) }}</td>
             <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000;">L. {{ number_format($project->investors->sum('pivot.investor_profit'), 2) }}</td>
