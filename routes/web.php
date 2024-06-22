@@ -31,7 +31,7 @@ Route::get('promissory_note_commissioner/{id}/report', 'App\Http\Controllers\Pro
 Route::resource('payments_investor', 'App\Http\Controllers\PaymentInvestorController')->names('payments_investor');
 
 // ==============
-//  Projects     //
+//  Projects   //
 // =============
 Route::resource('project', 'App\Http\Controllers\ProjectController')->names('project');
 Route::get('project/{id}/report', 'App\Http\Controllers\ProjectController@showReport')->name('project.report');
@@ -40,7 +40,8 @@ Route::post('/project/{project}/close', 'App\Http\Controllers\ProjectController@
 
 // Excel to projects
 Route::get('excel/{id}', 'App\Http\Controllers\ProjectController@export')->name('project.excel');
-Route::get('excel/projects/active', 'App\Http\Controllers\ProjectController@exportActiveProjects')->name('project.active_projects');
+Route::get('excel/projects/in_process', 'App\Http\Controllers\ProjectController@exportActiveProjects')->name('project.active_projects');
+Route::get('excel/projects/in_process/{investorId}', 'App\Http\Controllers\ProjectController@exportActiveInvestorProjects')->name('project.active_investor_projects');
 
 // Terminate project
 Route::get('/termination/{id}', 'App\Http\Controllers\ProjectController@downloadTerminationReport')->name('project.termination');

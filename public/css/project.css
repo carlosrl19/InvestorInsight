@@ -18,3 +18,8 @@
     font-size: clamp(0.6rem, 3vh, 0.7rem);
     border-left: 4px solid red;
 }
+
+.btn[disabled] {
+    pointer-events: none;
+    opacity: 0.6;
+}

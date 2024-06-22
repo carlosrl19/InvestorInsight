@@ -13,6 +13,7 @@ use App\Models\PromissoryNoteCommissioner;
 use Illuminate\Support\Str;
 use App\Exports\CustomExport;
 use App\Exports\ActiveProjectsExport;
+use App\Exports\ActiveInvestorProjectExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Dompdf\Options;
 use Dompdf\Dompdf;
@@ -23,7 +24,14 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::where('project_status', 1)->with('investors')->get();
+        $activeProjectsCount = Project::where('project_status', 1)->count();
+
         $investors = Investor::get();
+        
+        $investorsWithActivedProjects = Investor::whereHas('projects', function($query) {
+            $query->where('project_status', 1);
+        })->get();
+
         $promissoryNote = PromissoryNote::get();
         $commissioners = CommissionAgent::get();
         $generatedCode = strtoupper(Str::random(12)); // Random code
@@ -41,7 +49,7 @@ class ProjectController extends Controller
             }
         }
         
-        return view('modules.projects.index', compact('projects', 'todayDate', 'investors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.projects.index', compact('projects', 'activeProjectsCount', 'todayDate', 'investors', 'investorsWithActivedProjects', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance'));
     }
 
     public function create()
@@ -209,7 +217,12 @@ class ProjectController extends Controller
     {
         return Excel::download(new ActiveProjectsExport, 'EXCEL - PROYECTOS ACTIVOS.xlsx');
     }
-    
+
+    public function exportActiveInvestorProjects($investorId)
+    {
+        return Excel::download(new ActiveInvestorProjectExport($investorId), 'EXCEL - PROYECTOS ACTIVOS.xlsx');
+    }
+
     public function indexClosed()
     {
         $projects = Project::where('project_status', 2)->with('investors')->get();

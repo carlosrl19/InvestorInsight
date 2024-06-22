@@ -8,6 +8,16 @@ $(document).ready(function() {
   });
 });
 
+// Investors select2 init -> Project index (excel export)
+$(document).ready(function() {
+  $(".select2-investors").select2({
+    dropdownParent: $("#investorsModal"),
+    placeholder: "Seleccione un inversionista",
+    allowClear: true,
+    language: "es",
+  });
+});
+
 // Commission agents select2 init
 $(document).ready(function() {
   $(".select2-commissioners").select2({
