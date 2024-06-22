@@ -130,6 +130,7 @@ Historial de inversionista /&nbsp;
                                             <tbody>
                                                 @foreach ($completedProjects as $project)
                                                 <tr>
+                                                    <td>#{{ $project->project_code }}</td>
                                                     <td>{{ $project->project_name }}</td>
                                                     <td>L. {{ number_format($project->investor_investment, 2) }}</td>
                                                     <td>L. {{ number_format($project->investor_final_profit + $project->investor_investment, 2) }}</td>
@@ -166,12 +167,12 @@ Historial de inversionista /&nbsp;
                                                             <table id="example2" class="display table table-bordered">
                                                                 <thead>
                                                                 <tr>
-                                                                    <th style="width: 50px">Fecha</th>
-                                                                    <th>Banco</th>
-                                                                    <th style="width: 120px">Transferencia</th>
-                                                                    <th style="width: 120px">Capital</th>
-                                                                    <th style="width: 120px">Fondo</th>
-                                                                    <th style="width: 400px;">Comentarios</th>
+                                                                    <th style="width: 50px">FECHA</th>
+                                                                    <th>BANCO</th>
+                                                                    <th style="width: 120px">TRANSFERENCIA</th>
+                                                                    <th style="width: 120px">CAPITAL</th>
+                                                                    <th style="width: 120px">FONDO</th>
+                                                                    <th style="width: 400px;">COMENTARIOS AGREGADOS A TRANSFERENCIA</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -221,11 +222,11 @@ Historial de inversionista /&nbsp;
                                                     <table id="example3" class="display table table-bordered">
                                                         <thead>
                                                         <tr>
-                                                            <th>Fecha</th>
-                                                            <th>Monto nota crédito</th>
-                                                            <th>Capital</th>
-                                                            <th>Nuevo fondo</th>
-                                                            <th>Comentarios</th>
+                                                            <th>FECHA</th>
+                                                            <th>MONTO NOTA CRÉDITO</th>
+                                                            <th>CAPITAL</th>
+                                                            <th>NUEVO FONDO</th>
+                                                            <th>COMENTARIOS AGREGADOS A NOTA CRÉDITO</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>

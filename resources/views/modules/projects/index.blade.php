@@ -27,7 +27,6 @@ Proyectos activos
 @endsection
 
 @section('create')
-
 <a href="#" class="btn btn-cyan" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#investorsModal"
    @if($activeProjectsCount == 0) disabled @endif>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
@@ -373,6 +372,7 @@ Proyectos activos
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<!-- PDF Modal activator -->
 <script>
     $('#pdfModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que activó el modal
@@ -385,6 +385,7 @@ Proyectos activos
     });
 </script>   
 
+<!-- Toast message -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const projects = <?php echo json_encode($projects); ?>; // datos de PHP a JSON
