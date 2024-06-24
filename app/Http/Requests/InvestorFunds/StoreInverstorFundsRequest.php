@@ -10,6 +10,7 @@ class StoreInverstorFundsRequest extends FormRequest
     {
         return [
             'investor_id' => 'numeric|exists:investors,id',
+            'investor_change_date' => 'required|date:Y-m-d',
             'investor_old_funds' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'investor_new_funds' => 'required|numeric|gte:investor_old_funds',
             'investor_new_funds_comment' => 'required|string|min:3|max:255',
@@ -24,6 +25,10 @@ class StoreInverstorFundsRequest extends FormRequest
             'investor_id.required' => 'El inversionista del fondo es obligatorio.',
             'investor_id.numeric' => 'El id del inversionista del fondo solo debe contener números.',
             'investor_id.exists' => 'El inversionista del fondo no existe en la base de datos.',
+
+            // Investor change date
+            'investor_change_date.required' => 'La fecha del cambio en el fondo del inversionista es obligatoria.',
+            'investor_change_date.date' => 'El formato de fecha del cambio en el fondo del inversionista debe ser Y-m-d.',
 
             // Investor old funds messages
             'investor_old_funds.required' => 'El fondo actual del inversionista es obligatorio.',

@@ -12,6 +12,7 @@ use App\Models\CreditNote;
 use App\Models\Investor;
 use App\Models\InvestorFunds;
 use App\Models\Transfer;
+use Carbon\Carbon;
 
 class InvestorController extends Controller
 {
@@ -20,6 +21,7 @@ class InvestorController extends Controller
         $investors = Investor::get();
         $investorFunds = InvestorFunds::get();
         $commissioners = CommissionAgent::get();
+        $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
@@ -30,7 +32,7 @@ class InvestorController extends Controller
             return $investor;
         });
 
-        return view('modules.investors.index', compact('investors', 'investorFunds', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.investors.index', compact('investors', 'todayDate', 'investorFunds', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
     }
     
     public function create()
@@ -131,7 +133,8 @@ class InvestorController extends Controller
     {
         // Encuentra el inversionista o falla si no existe
         $investor = Investor::findOrFail($id);
-    
+        $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d');
+
         // Guarda los fondos anteriores antes de actualizar
         $oldFunds = $investor->investor_balance;
     
@@ -142,6 +145,7 @@ class InvestorController extends Controller
         // Obtén los datos validados y añade los campos necesarios para InvestorFunds
         $validatedData = $request->validated();
         $validatedData['investor_id'] = $investor->id;
+        $validatedData['investor_change_date'] = $todayDate;
         $validatedData['investor_old_funds'] = $oldFunds;
         $validatedData['investor_new_funds'] = $investor->investor_balance;
         $validatedData['investor_new_funds_comment'] = $request->input('investor_new_funds_comment');

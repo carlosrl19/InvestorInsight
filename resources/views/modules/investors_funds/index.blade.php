@@ -13,7 +13,7 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>Nombre inversionista</th>
-                                    <th>Nº Identidad</th>
+                                    <th>Fecha</th>
                                     <th>Fondo anterior</th>
                                     <th>Nuevo fondo</th>
                                     <th>Diferencia</th>
@@ -24,7 +24,7 @@
                                 @foreach($investorFunds as $investor)
                                     <tr class="text-center">
                                         <td>{{ $investor->investor->investor_name }}</td>
-                                        <td>{{ $investor->investor->investor_dni }}</td>
+                                        <td>{{ $investor->investor_change_date }}</td>
                                         <td>Lps. {{ number_format($investor->investor_old_funds,2) }}</td>
                                         <td>Lps. {{ number_format($investor->investor_new_funds,2) }}</td>
                                         <td class="text-success">Lps. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}<sup>+</sup></td>

@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('investor_funds', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('investor_id');
+            $table->date('investor_change_date');
             $table->decimal('investor_old_funds',10,2);
             $table->decimal('investor_new_funds',10,2);
             $table->string('investor_new_funds_comment');

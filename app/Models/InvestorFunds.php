@@ -8,6 +8,7 @@ class InvestorFunds extends Model
 {
     protected $fillable = [
         'investor_id',
+        'investor_change_date',
         'investor_old_funds',
         'investor_new_funds',
         'investor_new_funds_comment'

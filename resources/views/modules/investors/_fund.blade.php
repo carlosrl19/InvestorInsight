@@ -9,8 +9,27 @@
             <div class="modal-body">
                 <form action="{{ route('investor.fund', $investor)}}" method="POST" novalidate>
                     @csrf
-
                     <div class="row align-items-end">
+                        <div class="col" style="display: none">
+                            <div class="form-floating">
+                                <input type="datetime" 
+                                    name="investor_change_date" 
+                                    style="font-size: 10px;" 
+                                    value="{{ $todayDate }}" 
+                                    id="investor_change_date"
+                                    min="{{ $todayDate }}" 
+                                    max="{{ $todayDate }}" 
+                                    class="form-control @error('investor_change_date') is-invalid @enderror" 
+                                    readonly />
+                                @error('investor_change_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                                <label class="form-label" for="investor_change_date"><small>Fecha actual</small></label>
+                            </div>
+                        </div>
                         <div class="col-6 mb-4">
                             <div class="form-floating">
                                 <input type="number" readonly value="{{ $investor->investor_balance }}"
