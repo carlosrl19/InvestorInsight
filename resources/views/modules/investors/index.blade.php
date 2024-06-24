@@ -18,6 +18,10 @@ Inversionistas
 @endsection
 
 @section('create')
+<a href="#" class="btn btn-orange" style="font-size: clamp(0.6rem, 3vw, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-funds">
+    $ Historial de cambios en fondos
+</a>
+
 <a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-team">
     + Nuevo inversionista
 </a>
@@ -111,6 +115,7 @@ Inversionistas
                                 </td>
                                 <td>
                                     @include('modules.investors._delete')
+                                    @include('modules.investors._fund')
                                     @if($investor->id != 1)
                                     <div class="btn-list flex-nowrap">
                                         <div class="dropdown">
@@ -257,7 +262,8 @@ Inversionistas
     </div>
 
 @include('modules.investors._create')
-@include('modules.investors._fund')
+@include('modules.investors_funds.index')
+
 @endsection
 
 @section('scripts')
@@ -269,5 +275,6 @@ Inversionistas
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('customjs/datatable/dt_investor.js') }}"></script>
+<script src="{{ asset('customjs/datatable/dt_investor_funds.js') }}"></script>
 
 @endsection

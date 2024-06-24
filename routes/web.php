@@ -30,6 +30,9 @@ Route::get('promissory_note_commissioner/{id}/report', 'App\Http\Controllers\Pro
 // Investor payments
 Route::resource('payments_investor', 'App\Http\Controllers\PaymentInvestorController')->names('payments_investor');
 
+// Investor funds
+Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController')->names('investors_funds');
+
 // ==============
 //  Projects   //
 // =============

@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <button type="button" class="btn btn-teal" id="exportButton">Exportar proyectos del inversionista</button>
+                    <button type="button" class="btn btn-teal" id="exportButton">Exportar proyectos activos del inversionista</button>
                 </div>
             </div>
         </div>

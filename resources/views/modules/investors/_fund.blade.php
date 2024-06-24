@@ -7,34 +7,60 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('investor.fund', $investor)}}" method="POST">
+                <form action="{{ route('investor.fund', $investor)}}" method="POST" novalidate>
                     @csrf
 
                     <div class="row align-items-end">
                         <div class="col-6 mb-4">
-                            <label class="form-label" for="investor_balance_{{ $investor->id }}">Fondo actual del inversionista</label>
-                            <input type="number" readonly value="{{ $investor->investor_balance }}"
-                                name="investor_balance" id="investor_balance_{{ $investor->id }}"
-                                class="form-control @error('investor_balance') is-invalid @enderror"
-                                autocomplete="off" autofocus style="background-color: #fff6e980" />
-                            @error('investor_balance')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="form-floating">
+                                <input type="number" readonly value="{{ $investor->investor_balance }}"
+                                    name="investor_old_funds" id="investor_old_funds"
+                                    class="form-control @error('investor_old_funds') is-invalid @enderror"
+                                    autocomplete="off" autofocus style="background-color: #fff6e980" />
+                                @error('investor_old_funds')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <label class="form-label" for="investor_old_funds">Fondo actual del inversionista</label>
+                            </div>
+                            <input type="hidden" name="investor_balance" value="{{ $investor->investor_balance }}">
                         </div>
+                        
                         <div class="col-6 mb-4">
-                            <label class="form-label" for="investor_balance_{{ $investor->id }}">Nuevo fondo del
-                                inversionista</label>
-                            <input type="number" value="{{ $investor->investor_balance }}" min="{{ $investor->investor_balance }}" name="investor_balance"
-                                id="investor_balance_{{ $investor->id }}" 
-                                class="form-control @error('investor_balance') is-invalid @enderror"
-                                autocomplete="off" />
-                            @error('investor_balance')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="form-floating">
+                                <input type="number" value="{{ $investor->investor_balance }}" min="{{ $investor->investor_balance }}"
+                                    name="investor_new_funds" id="investor_new_funds"
+                                    class="form-control @error('investor_new_funds') is-invalid @enderror"
+                                    autocomplete="off" />
+                                @error('investor_new_funds')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <label class="form-label" for="investor_new_funds">Nuevo fondo del inversionista</label>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 align-items-end">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <textarea maxlength="255"
+                                        class="form-control @error('investor_new_funds_comment') is-invalid @enderror"
+                                        autocomplete="off" maxlength="255" name="investor_new_funds_comment" id="investor_new_funds_comment"
+                                        style="resize: none; height: 100px" oninput="this.value = this.value.toUpperCase()">{{ old('investor_new_funds_comment')}}</textarea>
+                                    @error('investor_new_funds_comment')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <span class="invalid-feedback" role="alert" id="transfer-comment-error"
+                                        style="display: none;">
+                                        <strong></strong>
+                                    </span>
+                                    <label for="investor_new_funds_comment">Comentarios</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

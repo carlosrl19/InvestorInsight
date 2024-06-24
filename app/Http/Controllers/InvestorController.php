@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\Investor\StoreRequest;
 use App\Http\Requests\Investor\UpdateRequest;
+use App\Http\Requests\InvestorFunds\StoreInverstorFundsRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\CommissionAgent;
 use App\Models\CreditNote;
 use App\Models\Investor;
+use App\Models\InvestorFunds;
 use App\Models\Transfer;
 
 class InvestorController extends Controller
@@ -16,6 +18,7 @@ class InvestorController extends Controller
     public function index()
     {
         $investors = Investor::get();
+        $investorFunds = InvestorFunds::get();
         $commissioners = CommissionAgent::get();
 
         $total_investor_balance = Investor::sum('investor_balance');
@@ -27,7 +30,7 @@ class InvestorController extends Controller
             return $investor;
         });
 
-        return view('modules.investors.index', compact('investors', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.investors.index', compact('investors', 'investorFunds', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
     }
     
     public function create()
@@ -123,14 +126,30 @@ class InvestorController extends Controller
         $investor = Investor::findOrFail($id);
         return view('modules.investors.index', compact('investor'));
     }
-
-    public function fund(Request $request, Investor $investor, $id)
+    
+    public function fund(StoreInverstorFundsRequest $request, $id)
     {
+        // Encuentra el inversionista o falla si no existe
         $investor = Investor::findOrFail($id);
-
-        $investor->investor_balance = $request->input('investor_balance');
+    
+        // Guarda los fondos anteriores antes de actualizar
+        $oldFunds = $investor->investor_balance;
+    
+        // Actualiza el balance del inversionista
+        $investor->investor_balance = $request->input('investor_new_funds');
         $investor->save();
     
+        // Obtén los datos validados y añade los campos necesarios para InvestorFunds
+        $validatedData = $request->validated();
+        $validatedData['investor_id'] = $investor->id;
+        $validatedData['investor_old_funds'] = $oldFunds;
+        $validatedData['investor_new_funds'] = $investor->investor_balance;
+        $validatedData['investor_new_funds_comment'] = $request->input('investor_new_funds_comment');
+    
+        // Crea el registro en InvestorFunds usando create
+        InvestorFunds::create($validatedData);
+    
+        // Redirige con un mensaje de éxito
         return redirect()->route('investor.index')->with("success", "Fondo del inversionista actualizado exitosamente.");
     }
 

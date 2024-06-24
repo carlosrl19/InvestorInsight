@@ -36,3 +36,12 @@ $(document).ready(function() {
     language: "es",
   });
 });
+
+// Transfer bank select2 init
+$(document).ready(function() {
+  $(".select2-transferBank").select2({
+    dropdownParent: $("#modal-team"),
+    allowClear: true,
+    language: "es",
+  });
+});

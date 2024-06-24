@@ -182,11 +182,9 @@
                                 </div>
                             </div>
 
-                            <div class="col">
+                            <div class="col" style="width: 35vh;">
                                 <div class="form-floating">
-                                    <select name="transfer_bank" id="transfer_bank"
-                                        class="form-control @error('transfer_bank') is-invalid @enderror"
-                                        autocomplete="off">
+                                    <select name="transfer_bank" id="transfer_bank" class="form-control select2-transferBank" style="width: 35vh">
                                         <option value="" selected disabled>Seleccione un banco o método de transferencia
                                         </option>
                                         <optgroup label="Otros métodos">
@@ -200,15 +198,6 @@
                                             @endforeach
                                         </optgroup>
                                     </select>
-                                    @error('transfer_bank')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <span class="invalid-feedback" role="alert" id="transfer-bank-error"
-                                        style="display: none;">
-                                        <strong></strong>
-                                    </span>
                                     <label for="transfer_bank">Banco / Modo de transferencia</label>
                                 </div>
                             </div>

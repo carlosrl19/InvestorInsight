@@ -13,7 +13,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <select name="promissoryNoteInvestor_id" id="promissoryNoteInvestor_id" class="form-control select2-promissoryNotes">
+                                <select name="promissoryNoteInvestor_id" id="promissoryNoteInvestor_id" class="form-control select2-promissoryNotes" style="width: 100%">
                                     @if ($promissoryNoteInvestors->where('promissoryNote_status', 1)->count() > 0)
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
                                         @forelse ($promissoryNoteInvestors->where('promissoryNote_status', 1) as $promissoryNoteInvestor)

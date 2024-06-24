@@ -30,7 +30,6 @@ class CommissionAgentController extends Controller
 
     public function store(StoreRequest $request)
     {
-
         CommissionAgent::create($request->all());
         return redirect()->route('commission_agent.index')->with('success', 'Comisionista creado exitosamente.');
     }
