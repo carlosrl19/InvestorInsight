@@ -1,5 +1,6 @@
 // Funciones relacionadas con los inversionistas
 
+// Add investor row function
 document.getElementById('add_button_container').addEventListener('click', function() {
     const investorSelect = document.getElementById('investor_select');
     const investorId = investorSelect.value;
@@ -55,6 +56,7 @@ document.getElementById('add_button_container').addEventListener('click', functi
     }
 });
 
+// Delete investor row function
 function deleteInvestorRow(button) {
     const row = button.closest('tr');
     const investorId = row.getAttribute('data-investor-id');
@@ -70,6 +72,7 @@ function deleteInvestorRow(button) {
 
 let previousInvestorId = null;
 
+// Function updateInvestor that add selected investor to step3 table
 function updateInvestor() {
     const investorSelect = document.getElementById('investor_id');
     
@@ -130,6 +133,7 @@ function updateInvestor() {
     }
 }
 
+// Calculate percetage in step3 table
 function calculateInvestorFinalProfit() {
     const investorProfitInput = document.querySelector('input[name="investor_profit"]');
     const investorFinalProfitInput = document.querySelector('input[name="investor_final_profit"]');
@@ -159,6 +163,7 @@ function calculateInvestorFinalProfit() {
     investorFinalProfitInput.value = (0.5 * investorProfit).toFixed(2);
 }
 
+// Investor_investment = Transfer_amount
 document.getElementById('transfer_amount').addEventListener('input', function() {
     const transferAmount = this.value;
 

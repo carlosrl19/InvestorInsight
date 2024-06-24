@@ -148,8 +148,7 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;"
-                                        onchange="updateInvestor()" required>
+                                    <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;" onchange="updateInvestor()" required>
                                         <option value="" selected disabled>Seleccione un inversionista</option>
                                         @foreach ($investors->where('investor_status', 1) as $investor)
                                             <option value="{{ $investor->id }}" data-balance="{{ $investor->investor_balance }}">
@@ -158,8 +157,7 @@
                                         @endforeach
                                     </select>
                                     <label for="investor_id">Inversionistas disponibles</label>
-                                    <span class="invalid-feedback" role="alert" id="investor-id-error"
-                                        style="display: none;">
+                                    <span class="invalid-feedback" role="alert" id="investor-id-error" style="display: none;">
                                         <strong></strong>
                                     </span>
                                 </div>
@@ -167,7 +165,7 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="number" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror" value="" readonly oninput="formatNumber(this.value)">
+                                    <input type="number" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror" value="" readonly>
                                     <input type="hidden" id="investor_balance_history" name="investor_balance_history" class="form-control" value="" readonly oninput="formatNumber(this.value)">
                                     @error('investor_balance')
                                         <span class="invalid-feedback" role="alert">
@@ -281,7 +279,7 @@
                         <div class="row mb-3 alig-items-end">
                             <div class="col-11">
                                 <div class="form-floating">
-                                    <select class="form-select" id="investor_select" disabled
+                                    <select class="form-select" id="investor_select"
                                         style="font-size: clamp(0.6rem, 3vh, 0.8rem);">
                                         <option value="" selected disabled>Seleccione un inversionista</option>
                                         @foreach ($investors as $investor)
@@ -294,7 +292,7 @@
                                 </div>
                             </div>
                             <div class="col-1">
-                                <button type="button" class="btn btn-red mt-3 text-white" id="add_button_container" disabled
+                                <button type="button" class="btn btn-red mt-3 text-white" id="add_button_container"
                                     style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
                                     &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

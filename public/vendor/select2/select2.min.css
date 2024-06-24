@@ -124,7 +124,8 @@
     padding-top: 10px;
 }
 .select2-search--dropdown .select2-search__field {
-    padding: 4px;
+    padding: 15px;
+    font-size: clamp(0.7rem, 3vw, 0.8rem);
     width: 100%;
     box-sizing: border-box;
 }
