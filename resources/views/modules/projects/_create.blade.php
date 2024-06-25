@@ -183,8 +183,8 @@
                             <div class="col" style="width: 35vh;">
                                 <div class="form-floating">
                                     <select name="transfer_bank" id="transfer_bank" class="form-control select2-transferBank" style="width: 35vh">
-                                        <option value="" selected disabled>Seleccione un banco
-                                        </option>
+                                        <option value="" selected disabled>Seleccione un banco</option>
+
                                         <optgroup label="Otros métodos">
                                             @foreach(['REMESAS', 'FONDOS', 'EFECTIVO', 'TARJETA'] as $method)
                                                 <option value="{{ $method }}">{{ $method }}</option>
@@ -192,7 +192,11 @@
                                         </optgroup>
 
                                         <optgroup label="Bancos">
-                                            @foreach(['BAC CREDOMATIC', 'BANCO ATLÁNTIDA', 'BANCO AZTECA', 'BANCO CUSCATLAN', 'BANRURAL', 'BANCO CENTRAL', 'BANTRABHN', 'BANCO DE OCCIDENTE', 'DAVIVIENDA', 'FICENSA', 'FICOHSA', 'BANHCAFE', 'LAFISE', 'BANPAIS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)                                             <option value="{{ $bank }}">{{ $bank }}</option>
+                                            @foreach([
+                                                'BAC CREDOMATIC', 'BANCO ATLÁNTIDA', 'BANCO AZTECA', 'BANCO CUSCATLAN', 
+                                                'BANRURAL', 'BANCO CENTRAL', 'BANTRABHN', 'BANCO DE OCCIDENTE', 'DAVIVIENDA', 'FICENSA', 
+                                                'FICOHSA', 'BANHCAFE', 'LAFISE', 'BANPAIS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)
+                                                <option value="{{ $bank }}">{{ $bank }}</option>
                                             @endforeach
                                         </optgroup>
                                     </select>
