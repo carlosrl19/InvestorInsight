@@ -1,7 +1,7 @@
 // Funciones relacionadas con los inversionistas
 
 // Add investor row function
-document.getElementById('add_button_container').addEventListener('click', function() {
+document.getElementById('add_investor_button_container').addEventListener('click', function() {
     const investorSelect = document.getElementById('investor_select');
     const investorId = investorSelect.value;
     const investorName = investorSelect.options[investorSelect.selectedIndex].text;

@@ -111,7 +111,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <label class="form-label" for="total_work_days"><small>Días de
+                                    <label class="form-label" for="project_work_days"><small>Días de
                                             trabajo</small></label>
                                 </div>
                                 <span class="invalid-feedback" role="alert" id="work-days-error" style="display: none;">
@@ -148,7 +148,7 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;" onchange="updateInvestor()" required>
+                                    <select class="form-select select2-investors" id="investor_id" name="investor_id" style="width: 100%;" onchange="updateInvestor()" required>
                                         <option value="" selected disabled>Seleccione un inversionista</option>
                                         @foreach ($investors->where('investor_status', 1) as $investor)
                                             <option value="{{ $investor->id }}" data-balance="{{ $investor->investor_balance }}">
@@ -183,7 +183,7 @@
                             <div class="col" style="width: 35vh;">
                                 <div class="form-floating">
                                     <select name="transfer_bank" id="transfer_bank" class="form-control select2-transferBank" style="width: 35vh">
-                                        <option value="" selected disabled>Seleccione un banco o método de transferencia
+                                        <option value="" selected disabled>Seleccione un banco
                                         </option>
                                         <optgroup label="Otros métodos">
                                             @foreach(['REMESAS', 'FONDOS', 'EFECTIVO', 'TARJETA'] as $method)
@@ -292,7 +292,7 @@
                                 </div>
                             </div>
                             <div class="col-1">
-                                <button type="button" class="btn btn-red mt-3 text-white" id="add_button_container"
+                                <button type="button" class="btn btn-red mt-3 text-white" id="add_investor_button_container"
                                     style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
                                     &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

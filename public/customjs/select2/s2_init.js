@@ -8,9 +8,13 @@ $(document).ready(function() {
   });
 });
 
+$('.select2-investors').select2().on('select2:open', function(e){
+  $('.select2-search__field').attr('placeholder', 'BUSCAR INVERSIONISTA ...');
+})
+
 // Investors select2 init -> Project index (excel export)
 $(document).ready(function() {
-  $(".select2-investors").select2({
+  $(".select2-active-project-investors").select2({
     dropdownParent: $("#investorsModal"),
     placeholder: "Seleccione un inversionista",
     allowClear: true,
@@ -18,8 +22,8 @@ $(document).ready(function() {
   });
 });
 
-$('.select2-investors').select2().on('select2:open', function(e){
-  $('.select2-search__field').attr('placeholder', 'Buscar inversionista ...');
+$('.select2-active-project-investor').select2().on('select2:open', function(e){
+  $('.select2-search__field').attr('placeholder', 'BUSCAR INVERSIONISTA ...');
 })
 
 // Commission agents select2 init
@@ -33,7 +37,7 @@ $(document).ready(function() {
 });
 
 $('.select2-commissioners').select2().on('select2:open', function(e){
-  $('.select2-search__field').attr('placeholder', 'Buscar comisionista ...');
+  $('.select2-search__field').attr('placeholder', 'BUSCAR COMISIONISTA ...');
 })
 
 // Prommissory notes select2 init
@@ -46,7 +50,7 @@ $(document).ready(function() {
 });
 
 $('.select2-promissoryNotes').select2().on('select2:open', function(e){
-  $('.select2-search__field').attr('placeholder', 'Buscar pagaré ...');
+  $('.select2-search__field').attr('placeholder', 'BUSCAR PAGARÉ ...');
 })
 
 // Transfer bank select2 init
@@ -59,5 +63,5 @@ $(document).ready(function() {
 });
 
 $('.select2-transferBank').select2().on('select2:open', function(e){
-  $('.select2-search__field').attr('placeholder', 'Buscar banco ...');
+  $('.select2-search__field').attr('placeholder', 'BUSCAR AGENTE FINANCIERO...');
 })

@@ -88,10 +88,10 @@ class StoreRequest extends FormRequest
             'project_investment.regex' => 'La inversión del proyecto debe tener hasta dos decimales.',
 
             // Project investment messages
-            'investor_balance_history.required' => 'El fondo del inversionista del proyecto es obligatoria.',
-            'investor_balance_history.numeric' => 'El fondo del inversionista del proyecto debe ser un número.',
-            'investor_balance_history.min' => 'El fondo del inversionista del proyecto no puede ser menor a 0.',
-            'investor_balance_history.regex' => 'El fondo del inversionista del proyecto debe tener hasta dos decimales.',
+            'investor_balance_history.required' => 'El fondo (registro) del inversionista del proyecto es obligatoria.',
+            'investor_balance_history.numeric' => 'El fondo (registro) del inversionista del proyecto debe ser un número.',
+            'investor_balance_history.min' => 'El fondo (registro) del inversionista del proyecto no puede ser menor a 0.',
+            'investor_balance_history.regex' => 'El fondo (registro) del inversionista del proyecto debe tener hasta dos decimales.',
             
             // Project status messages
             'project_status.required' => 'El estado del proyecto es obligatorio.',

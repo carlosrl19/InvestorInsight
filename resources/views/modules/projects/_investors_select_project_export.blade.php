@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-floating">
-                            <select name="investor_id" id="investor_id" class="form-control select2-investors">
+                            <select name="investor_id" id="investor_id" class="form-control select2-active-project-investor">
                                 <option value="" selected disabled>Seleccione el inversionista</option>
                                 @foreach ($investorsWithActivedProjects as $investor)
                                     <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
