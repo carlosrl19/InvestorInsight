@@ -27,6 +27,10 @@ class Project extends Model
             ->withTimestamps();
     }
 
+    public function investor(){
+        return $this->belongsTo(Investor::class, 'investor_id', 'id');
+    }
+
     public function commissioners()
     {
         return $this->belongsToMany(CommissionAgent::class, 'project_commissioner', 'project_id', 'commissioner_id')

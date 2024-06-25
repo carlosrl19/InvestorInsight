@@ -110,6 +110,7 @@ Proyectos activos
            <div id="search-filters-container">FILTROS</div>
         </div>
     </div>
+    
     <div class="card">
         <div class="card-body">
             <table id="example" class="display nowrap table table-bordered" style="width: 100%;">

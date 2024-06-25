@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transfer extends Model
 {
-    public function investor(){
-        return $this->belongsTo(Investor::class, 'investor_id', 'id');
-    }
-
     protected $fillable = [
         'transfer_code',
         'transfer_img',
@@ -19,4 +15,9 @@ class Transfer extends Model
         'transfer_date',
         'transfer_comment',
     ];
+
+    public function investor(){
+        return $this->belongsTo(Investor::class, 'investor_id', 'id');
+    }
+
 }
