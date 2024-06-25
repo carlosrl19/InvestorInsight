@@ -121,6 +121,10 @@ Notas crédito
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('customjs/datatable/dt_credit_note.js') }}"></script>
 
+<!-- Select2 -->
+<script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
+<script src="{{ asset('customjs/select2/s2_init.js') }}"></script>
+
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

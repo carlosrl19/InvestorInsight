@@ -148,15 +148,15 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <select class="form-select select2-investors" id="investor_id" name="investor_id" style="width: 100%;" onchange="updateInvestor()" required>
+                                    <select class="form-select select2-investors" id="investor_id" name="investor_id" style="width: 100%;">
                                         <option value="" selected disabled>Seleccione un inversionista</option>
-                                        @foreach ($investors->where('investor_status', 1) as $investor)
-                                            <option value="{{ $investor->id }}" data-balance="{{ $investor->investor_balance }}">
+                                        @foreach ($investors as $investor)
+                                            <option value="{{ $investor->id }}" data-balance="{{ $investor->investor_balance }}" {{ old('investor_id') == $investor->id ? 'selected' : '' }}>
                                                 {{ $investor->investor_name }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    <label for="investor_id">Inversionistas disponibles</label>
+                                    <label for="investor_id">Inversionistas</label>
                                     <span class="invalid-feedback" role="alert" id="investor-id-error" style="display: none;">
                                         <strong></strong>
                                     </span>
@@ -165,8 +165,8 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="number" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror" value="" readonly>
-                                    <input type="hidden" id="investor_balance_history" name="investor_balance_history" class="form-control" value="" readonly oninput="formatNumber(this.value)">
+                                    <input type="number" id="investor_balance" class="form-control @error('investor_balance') is-invalid @enderror" autocomplete="off" readonly value="">
+                                    <input type="hidden" id="investor_balance_history" name="investor_balance_history" class="form-control" value="" readonly>
                                     @error('investor_balance')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -221,6 +221,7 @@
                                 </div>
                             </div>                            
                         </div>
+
                         <div class="row mb-3 align-items-end">
                             <div class="col" style="display: none;">
                                 <div class="form-floating">
@@ -241,6 +242,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row mb-3 align-items-end">
                             <div class="col">
                                 <div class="form-floating">

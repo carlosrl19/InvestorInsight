@@ -116,6 +116,7 @@ Inversionistas
                                 <td>
                                     @include('modules.investors._delete')
                                     @include('modules.investors._fund')
+                                    
                                     @if($investor->id != 1)
                                     <div class="btn-list flex-nowrap">
                                         <div class="dropdown">

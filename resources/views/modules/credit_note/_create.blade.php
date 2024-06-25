@@ -46,8 +46,8 @@
                         
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" id="investor_balance" class="form-control" value="" readonly oninput="formatNumber(this.value)">
-                                <label for="investor_balance">Capital actual</label>
+                                <input type="text" id="investor_balance" class="form-control" value="" readonly>
+                                <label for="investor_balance">Fondo actual</label>
                             </div>
                         </div>
                         

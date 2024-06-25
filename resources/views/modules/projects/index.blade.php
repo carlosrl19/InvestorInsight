@@ -13,9 +13,6 @@
 <!-- Badge CSS -->
 <link href="{{ asset('/css/project.css') }}" rel="stylesheet">
 
-<!-- Select2 -->
-<link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
-
 @endsection
 
 @section('pretitle')
@@ -360,10 +357,6 @@ Proyectos activos
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('customjs/datatable/dt_project.js') }}"></script>
-
-<!-- Select2 -->
-<script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
-<script src="{{ asset('customjs/select2/s2_init.js') }}"></script>
 
 <!-- Form steps -->
 <script src="{{ asset('customjs/projects/steps_form.js') }}"></script>
