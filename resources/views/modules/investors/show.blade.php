@@ -34,7 +34,7 @@ Historial de inversionista /&nbsp;
 @section('content')
     <div class="container-xl">
         <!-- General information about investor -->
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-12">
                 <div class="card mb-2">
                     <div class="card-body">
@@ -67,9 +67,48 @@ Historial de inversionista /&nbsp;
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="card" style="min-height: auto; max-height: 20rem">
+                    <div class="card-header">
+                        <h3 class="card-title">Historial de cambios en fondo de inversionista</h3>
+                    </div>
+                    <div class="card-body card-body-scrollable card-body-scrollable-shadow">
+                        <div class="divide-y">
+                            <div>
+                                <div class="row">
+                                    <table class="display table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>FECHA CAMBIO</th>
+                                                <th>TOTAL FONDO ANTERIOR</th>
+                                                <th>TOTAL NUEVO FONDO</th>
+                                                <th>MOTIVO / COMENTARIO</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($investorFunds as $investor)
+                                            <tr>
+                                                <td>{{ $investor->investor_change_date }}</td>
+                                                <td>L. {{ number_format($investor->investor_old_funds, 2) }}</td>
+                                                <td>L. {{ number_format($investor->investor_new_funds,2) }}</td>
+                                                <td>{{ $investor->investor_new_funds_comment}}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- In-process projects / Closed projects -->
+        <div class="row mb-3">
             <!-- In-process projects table -->
-            <div class="col-6 mb-4">
+            <div class="col-6">
                 <div class="card" style="min-height: auto; max-height: 20rem">
                     <div class="card-header">
                         <h3 class="card-title">Proyectos en proceso</h3>
@@ -78,70 +117,74 @@ Historial de inversionista /&nbsp;
                         <div class="divide-y">
                             <div>
                                 <div class="row">
-                                <table id="example0" class="display table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>CÓDIGO</th>
-                                            <th>PROYECTO</th>
-                                            <th>INVERSIÓN</th>
-                                            <th>GANANCIA</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($activeProjects as $project)
-                                        <tr>
-                                            <td>#{{ $project->project_code }}</td>
-                                            <td>{{ $project->project_name }}</td>
-                                            <td>L. {{ number_format($project->investor_investment, 2) }}</td>
-                                            <td>L. {{ number_format($project->investor_final_profit + $project->investor_investment, 2) }}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                    <table id="example0" class="display table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>CÓDIGO</th>
+                                                <th>PROYECTO</th>
+                                                <th>INVERSIÓN</th>
+                                                <th>GANANCIA</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($activeProjects as $project)
+                                            <tr>
+                                                <td>#{{ $project->project_code }}</td>
+                                                <td>{{ $project->project_name }}</td>
+                                                <td>L. {{ number_format($project->investor_investment, 2) }}</td>
+                                                <td>L. {{ number_format($project->investor_final_profit + $project->investor_investment, 2) }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer" style="background-color: #95D2B3; padding: 10px; border: 4px solid #fff; justify-content: space-between;">
+                        <span style="margin-left: 5%; font-weight: bold;">TOTAL GANANCIA EN PROCESO</span>
+                        <span style="float: right; margin-right: 7%; color: #fff; font-size: clamp(0.7rem, 3vw, 0.8rem)">L. {{ number_format($activeProjects->sum('investor_investment') + $activeProjects->sum('investor_final_profit'), 2) }}</span>
                     </div>
                 </div>
             </div>
 
             <!-- Completed projects table -->
             <div class="col-6">
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <div class="accordion" id="accordion-example">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="heading-1">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="true">
-                                    <h4>Historial de proyectos finalizados</h4>
-                                </button>
-                                </h2>
-                                <div id="collapse-2" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
-                                    <div class="accordion-body pt-0">
-                                        <table id="example1" class="display table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>CÓDIGO</th>
-                                                    <th>PROYECTO</th>
-                                                    <th>INVERSIÓN</th>
-                                                    <th>GANANCIA</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($completedProjects as $project)
+                <div class="card" style="min-height: auto; max-height: 20rem">
+                    <div class="card-header">
+                        <h3 class="card-title">Proyectos finalizados</h3>
+                    </div>
+                    <div class="card-body card-body-scrollable card-body-scrollable-shadow">
+                        <div class="divide-y">
+                            <div>
+                                <div class="row">
+                                    <table id="example1" class="display table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>CÓDIGO</th>
+                                                <th>PROYECTO</th>
+                                                <th>INVERSIÓN</th>
+                                                <th>GANANCIA</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($completedProjects as $project)
                                                 <tr>
                                                     <td>#{{ $project->project_code }}</td>
                                                     <td>{{ $project->project_name }}</td>
                                                     <td>L. {{ number_format($project->investor_investment, 2) }}</td>
                                                     <td>L. {{ number_format($project->investor_final_profit + $project->investor_investment, 2) }}</td>
                                                 </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer" style="background-color: #95D2B3; padding: 10px; border: 4px solid #fff; justify-content: space-between;">
+                        <span style="margin-left: 5%; font-weight: bold;">TOTAL GANANCIA DE PROYECTOS</span>
+                        <span style="float: right; margin-right: 7%; color: #fff; font-size: clamp(0.7rem, 3vw, 0.8rem)">L. {{ number_format($completedProjects->sum('investor_investment') + $completedProjects->sum('investor_final_profit'), 2) }}</span>
                     </div>
                 </div>
             </div>
