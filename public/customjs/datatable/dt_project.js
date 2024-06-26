@@ -41,6 +41,7 @@
                     table.columns().search("").draw();
                 });
         },
+        
         language: {
             paginate: {
                 next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
@@ -61,7 +62,8 @@
             zeroRecords:
                 "No se encontraron registros que coincidan con la búsqueda.",
         },
-        scrollX: true,
+
+        scrollX: false,
         responsive: true,
         paginate: true,
         info: true,

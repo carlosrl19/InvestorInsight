@@ -148,7 +148,7 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;">
+                                    <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;" required onchange="updateInvestor()">
                                         <option value="" selected disabled>Seleccione un inversionista</option>
                                         @foreach ($investors as $investor)
                                             <option value="{{ $investor->id }}" data-balance="{{ $investor->investor_balance }}" {{ old('investor_id') == $investor->id ? 'selected' : '' }}>
@@ -285,7 +285,7 @@
                         <div class="row mb-3 alig-items-end">
                             <div class="col-11">
                                 <div class="form-floating">
-                                    <select class="form-select" id="investor_select"
+                                    <select class="form-select select2-investors" id="investor_select" disabled
                                         style="font-size: clamp(0.6rem, 3vh, 0.8rem);">
                                         <option value="" selected disabled>Seleccione un inversionista</option>
                                         @foreach ($investors as $investor)
@@ -300,7 +300,7 @@
                             
                             <div class="col-1">
                                 <button type="button" class="btn btn-red mt-3 text-white" id="add_investor_button_container"
-                                    style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
+                                    disabled style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
                                     &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round"
@@ -335,7 +335,7 @@
                         <div class="row mb-3 alig-items-end">
                             <div class="col-11">
                                 <div class="form-floating">
-                                    <select class="form-select" id="commissioner_select"
+                                    <select class="form-select select2-commissioners" id="commissioner_select"
                                         style="font-size: clamp(0.6rem, 3vh, 0.8rem);">
                                         <option value="" selected disabled>Seleccione un comisionista</option>
                                         @foreach ($commissioners as $commissioner)

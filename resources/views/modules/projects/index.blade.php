@@ -120,7 +120,7 @@ Proyectos activos
                         <th>Nombre <br>proyecto</th>
                         <th>Fecha <br>inicio</th>
                         <th>Fecha <br>final</th>
-                        <th>Días <br>restantes</th>
+                        <th>Días</th>
                         <th>Nombre <br>inversionista</th>
                         <th>Monto <br>inversión</th>
                         <th>Ganancia <br>proyecto</th>
