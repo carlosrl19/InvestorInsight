@@ -9,13 +9,13 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-floating">
-                            <select name="investor_id" id="investor_id" class="form-select">
+                            <select name="investor_id" id="investor_id_select" class="form-select">
                                 <option value="" selected disabled>Seleccione el inversionista</option>
                                 @foreach ($investorsWithActivedProjects as $investor)
                                     <option value="{{ $investor->id }}">{{ $investor->investor_name }}</option>
                                 @endforeach
                             </select>
-                            <label for="investor_id">Inversionistas con proyectos activos</label>
+                            <label for="investor_id_select">Inversionistas con proyectos activos</label>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
 
 <script>
     document.getElementById('exportButton').addEventListener('click', function() {
-        var investorId = document.getElementById('investor_id').value;
+        var investorId = document.getElementById('investor_id_select').value;
         if (investorId) {
             var url = '{{ route("project.active_investor_projects", ":investorId") }}';
             url = url.replace(':investorId', investorId);
