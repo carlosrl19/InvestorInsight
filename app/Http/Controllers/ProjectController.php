@@ -25,12 +25,12 @@ class ProjectController extends Controller
     {
         $projects = Project::where('project_status', 1)->with('investors')->get();
         $activeProjectsCount = Project::where('project_status', 1)->count();
-
-        $investors = Investor::get();
         
         $investorsWithActivedProjects = Investor::whereHas('projects', function($query) {
             $query->where('project_status', 1);
         })->get();
+        
+        $investors = Investor::get();
 
         $promissoryNote = PromissoryNote::get();
         $commissioners = CommissionAgent::get();
@@ -49,7 +49,7 @@ class ProjectController extends Controller
             }
         }
         
-        return view('modules.projects.index', compact('projects', 'activeProjectsCount', 'todayDate', 'investors', 'investorsWithActivedProjects', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.projects.index', compact('projects', 'activeProjectsCount', 'investorsWithActivedProjects', 'investors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance', 'todayDate',));
     }
 
     public function create()

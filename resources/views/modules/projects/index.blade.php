@@ -338,8 +338,8 @@ Proyectos activos
 
 <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-@include('modules.projects._investors_select_project_export')
 @include('modules.projects._create')
+@include('modules.projects._investors_select_project_export')
 
 @endsection
 

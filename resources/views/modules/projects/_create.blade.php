@@ -148,7 +148,7 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <select class="form-select select2-investors" id="investor_id" name="investor_id" style="width: 100%;">
+                                    <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;">
                                         <option value="" selected disabled>Seleccione un inversionista</option>
                                         @foreach ($investors as $investor)
                                             <option value="{{ $investor->id }}" data-balance="{{ $investor->investor_balance }}" {{ old('investor_id') == $investor->id ? 'selected' : '' }}>
@@ -297,6 +297,7 @@
                                     <label for="investor_select">Comisionistas</label>
                                 </div>
                             </div>
+                            
                             <div class="col-1">
                                 <button type="button" class="btn btn-red mt-3 text-white" id="add_investor_button_container"
                                     style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
@@ -452,8 +453,8 @@
     </div>
 </div>
 
+<script src="{{ asset('customjs/projects/work_days_calculate.js') }}"></script>
 <script src="{{ asset('customjs/projects/investors.js') }}"></script>
 <script src="{{ asset('customjs/projects/commissioners.js') }}"></script>
 <script src="{{ asset('customjs/projects/calculations.js') }}"></script>
-<script src="{{ asset('customjs/projects/work_days_calculate.js') }}"></script>
 <script src="{{ asset('customjs/investors/investor_balance.js') }}"></script>
