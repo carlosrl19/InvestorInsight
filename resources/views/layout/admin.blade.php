@@ -193,6 +193,9 @@
                         <a class="dropdown-item" href="{{ route("commission_agent.index")}}">
                           <small>->&nbsp;</small>Comisionistas
                         </a>
+                        <a class="dropdown-item" href="{{ route("provider.index")}}">
+                          <small>->&nbsp;</small>Proveedores
+                        </a>
                       </div>
                     </div>
                   </div>

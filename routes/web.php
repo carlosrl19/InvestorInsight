@@ -12,6 +12,9 @@ Route::post('investor/{id}/fund', 'App\Http\Controllers\InvestorController@fund'
 // Commission Agent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');
 
+// Providers Agent
+Route::resource('provider', 'App\Http\Controllers\ProviderController')->names('provider');
+
 // Transfer
 Route::resource('transfer', 'App\Http\Controllers\TransferController')->names('transfer');
 

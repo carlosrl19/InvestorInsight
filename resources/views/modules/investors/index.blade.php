@@ -58,14 +58,14 @@ Inversionistas
                     <thead>
                         <tr class="text-center">
                             <th>ID</th>
-                            <th>Nombre inversionista</th>
-                            <th>Empresa</th>
-                            <th>Nº Identidad</th>
-                            <th>Teléfono</th>
-                            <th>Fondo monetario</th>
-                            <th>Recomendación</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
+                            <th>NOMBRE INVERSIONISTA</th>
+                            <th>EMPRESA</th>
+                            <th>Nº IDENTIDAD</th>
+                            <th>Nº TELÉFONO</th>
+                            <th>FONDO MONETARIO</th>
+                            <th>RECOMENDACIÓN</th>
+                            <th>ESTADO</th>
+                            <th style="width: 8vh">ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -162,72 +162,84 @@ Inversionistas
                                                 @csrf
                                                 <div class="row mb-3 align-items-end">
                                                     <div class="col">
-                                                        <label class="form-label" for="investor_name_{{ $investor->id }}">Nombre del inversionista</label>
-                                                        <input type="text" maxlength="55" oninput="this.value = this.value.toUpperCase()" value="{{ $investor->investor_name }}" name="investor_name" id="investor_name_{{ $investor->id }}" class="form-control @error('investor_name') is-invalid @enderror" placeholder="Ingrese el nombre del inversionista" autocomplete="off"/>
-                                                        @error('investor_name')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
+                                                        <div class="form-floating">
+                                                            <input type="text" maxlength="55" oninput="this.value = this.value.toUpperCase()" value="{{ $investor->investor_name }}" name="investor_name" id="investor_name_{{ $investor->id }}" class="form-control @error('investor_name') is-invalid @enderror" placeholder="Ingrese el nombre del inversionista" autocomplete="off"/>
+                                                            @error('investor_name')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                            <label for="investor_name_{{ $investor->id }}">Nombre del inversionista</label>
+                                                        </div>
                                                     </div>
                                                     <div class="col">
-                                                        <label class="form-label" for="investor_dni_{{ $investor->id }}">Nº identidad</label>
-                                                        <input type="text" maxlength="13" value="{{ $investor->investor_dni }}" name="investor_dni" id="investor_dni_{{ $investor->id }}" class="form-control @error('investor_dni') is-invalid @enderror" placeholder="Ingrese el número de identidad" autocomplete="off"/>
-                                                        @error('investor_dni')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
+                                                        <div class="form-floating">
+                                                            <input type="text" maxlength="13" value="{{ $investor->investor_dni }}" name="investor_dni" id="investor_dni_{{ $investor->id }}" class="form-control @error('investor_dni') is-invalid @enderror" placeholder="Ingrese el número de identidad" autocomplete="off"/>
+                                                            @error('investor_dni')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                            <label for="investor_dni_{{ $investor->id }}">Nº identidad</label>
+                                                        </div>
                                                     </div>
                                                     <div class="col">
-                                                        <label class="form-label" for="investor_reference_id_{{ $investor->id }}">Recomendado por</label>
-                                                        <select class="form-select js-example-basic-multiple" name="investor_reference_id" style="font-size: clamp(0.6rem, 3vh, 0.8rem); width: 100%">
-                                                            @foreach ($investors as $inv)
-                                                                <option value="{{ $inv->id }}" {{ $inv->id == $investor->investor_reference_id ? 'selected' : '' }}>
-                                                                    {{ $inv->investor_name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('investor_reference_id')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
+                                                        <div class="form-floating">
+                                                            <select class="form-select js-example-basic-multiple" name="investor_reference_id" style="font-size: clamp(0.6rem, 3vh, 0.8rem); width: 100%">
+                                                                @foreach ($investors as $inv)
+                                                                    <option value="{{ $inv->id }}" {{ $inv->id == $investor->investor_reference_id ? 'selected' : '' }}>
+                                                                        {{ $inv->investor_name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('investor_reference_id')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                            <label for="investor_reference_id_{{ $investor->id }}">Recomendado por</label>
+                                                        </div>
                                                     </div>
                                                     <input type="hidden" name="investor_status" value="1">
                                                 </div>
                                                 <div class="row mb-3 align-items-end">
                                                     <div class="col" style="display: none">
-                                                        <label class="form-label" for="investor_balance_{{ $investor->id }}">Fondo del inversionista</label>
-                                                        <input type="number" value="{{ $investor->investor_balance }}" name="investor_balance" id="investor_balance_{{ $investor->id }}" class="form-control @error('investor_balance') is-invalid @enderror" autocomplete="off"/>
-                                                        @error('investor_balance')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
+                                                        <div class="form-floating">
+                                                            <input type="number" value="{{ $investor->investor_balance }}" name="investor_balance" id="investor_balance_{{ $investor->id }}" class="form-control @error('investor_balance') is-invalid @enderror" autocomplete="off"/>
+                                                            @error('investor_balance')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                            <label for="investor_balance_{{ $investor->id }}">Fondo del inversionista</label>
+                                                        </div>
                                                     </div>
                                                     <div class="col">
-                                                        <label class="form-label" for="investor_company_name_{{ $investor->id }}">Empresa afiliada</label>
-                                                        <select type="text" class="form-select" id="select-optgroups-{{ $investor->id }}" name="investor_company_name" style="font-size: clamp(0.7rem, 3vh, 0.8rem);">
-                                                            <option value="ROBENIOR" {{ (old('investor_company_name') ?? $investor->investor_company_name) == 'ROBENIOR' ? 'selected' : '' }}>ROBENIOR</option>
-                                                            <option value="MARSELLA" {{ (old('investor_company_name') ?? $investor->investor_company_name) == 'MARSELLA' ? 'selected' : '' }}>MARSELLA</option>
-                                                            <option value="JAGUER" {{ (old('investor_company_name') ?? $investor->investor_company_name) == 'JAGUER' ? 'selected' : '' }}>JAGUER</option>
-                                                            <option value="FUTURE CAPITAL" {{ (old('investor_company_name') ?? $investor->investor_company_name) == 'FUTURE CAPITAL' ? 'selected' : '' }}>FUTURE CAPITAL</option>
-                                                        </select>
-                                                        @error('investor_company_name')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
+                                                        <div class="form-floating">
+                                                            <select type="text" class="form-select" id="select-optgroups-{{ $investor->id }}" name="investor_company_name" style="font-size: clamp(0.7rem, 3vh, 0.8rem);">
+                                                                <option value="ROBENIOR" {{ (old('investor_company_name') ?? $investor->investor_company_name) == 'ROBENIOR' ? 'selected' : '' }}>ROBENIOR</option>
+                                                                <option value="MARSELLA" {{ (old('investor_company_name') ?? $investor->investor_company_name) == 'MARSELLA' ? 'selected' : '' }}>MARSELLA</option>
+                                                                <option value="JAGUER" {{ (old('investor_company_name') ?? $investor->investor_company_name) == 'JAGUER' ? 'selected' : '' }}>JAGUER</option>
+                                                                <option value="FUTURE CAPITAL" {{ (old('investor_company_name') ?? $investor->investor_company_name) == 'FUTURE CAPITAL' ? 'selected' : '' }}>FUTURE CAPITAL</option>
+                                                            </select>
+                                                            @error('investor_company_name')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                            <label for="investor_company_name_{{ $investor->id }}">Empresa afiliada</label>
+                                                        </div>
                                                     </div>
                                                     <div class="col">
-                                                        <label class="form-label" for="investor_phone_{{ $investor->id }}">Nº teléfono</label>
-                                                        <input type="text" name="investor_phone" value="{{ $investor->investor_phone }}" id="investor_phone_{{ $investor->id }}" class="form-control @error('investor_phone') is-invalid @enderror" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
-                                                        @error('investor_phone')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
+                                                        <div class="form-floating">
+                                                            <input type="text" name="investor_phone" value="{{ $investor->investor_phone }}" id="investor_phone_{{ $investor->id }}" class="form-control @error('investor_phone') is-invalid @enderror" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
+                                                            @error('investor_phone')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                            <label for="investor_phone_{{ $investor->id }}">Nº teléfono</label>
+                                                        </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-label">Disposición a proyectos</div>

@@ -10,7 +10,7 @@
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">
-                    <p class="text-left">Esta intentando eliminar a un inversionista, esta acción no se puede deshacer y eliminará el inversionista <strong style="text-transform: uppercase">{{ $commission_agent->commission_agent_name }}</strong>.</p>
+                    <p class="text-left">Esta intentando eliminar a un inversionista, esta acción no se puede deshacer y eliminará por completo toda información sobre el inversionista <strong style="text-transform: uppercase">{{ $commission_agent->commission_agent_name }}</strong>.</p>
 
                     <div class="mt-4 text-left">
                         <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
