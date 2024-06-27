@@ -60,9 +60,13 @@ foreach ($projects as $index => $project) {
                 <td></td>
                 @foreach($project->investors as $investor)
                     <td style="font-size: 14px; width: 100px; font-weight: bold; background-color: #fff; text-align: left; text-decoration: underline;">
-                        PROYECTO {{ implode(' ', array_slice(explode(' ', $investor->investor_name), 0, 1)) }} {{ implode(' ', array_slice(explode(' ', $investor->investor_name), -1)) }}
+                        PROYECTO {{ explode(' ', $investor->investor_name)[0] }}
+                        @if(count(explode(' ', $investor->investor_name)) > 1)
+                            {{ implode(' ', array_slice(explode(' ', $investor->investor_name), 1)) }}
+                        @endif
                     </td>
                 @endforeach
+
                 <td style="background-color: #fff; width: auto;"></td>
                 <td style="background-color: #fff; width: 100px;"></td>
                 <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 160px; text-align: center; text-decoration: underline;">
