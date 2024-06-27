@@ -63,7 +63,7 @@
                 "No se encontraron registros que coincidan con la búsqueda.",
         },
 
-        scrollX: false,
+        scrollX: true,
         responsive: true,
         paginate: true,
         info: true,

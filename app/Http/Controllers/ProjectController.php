@@ -224,15 +224,20 @@ class ProjectController extends Controller
 
     public function exportActiveProjects()
     {
-        return Excel::download(new ActiveProjectsExport, 'PROYECTOS ACTIVOS - EXCEL.xlsx');
+        $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->locale('es')->translatedFormat('d F Y'); // Mes con nombre completo en español
+        $todayDate = str_replace(Carbon::now()->translatedFormat('F'), strtoupper(Carbon::now()->translatedFormat('F')), $todayDate); // Uppercase para el nombre del mes
+    
+        return Excel::download(new ActiveProjectsExport, 'PROYECTOS ACTIVOS ' . $todayDate . ' - EXCEL.xlsx');
     }
-
     public function exportActiveInvestorProjects($investorId)
     {   
         $investor = Investor::findOrFail($investorId);
         $investorName = $investor->investor_name;
 
-        return Excel::download(new ActiveInvestorProjectExport($investorId), 'PROYECTOS ACTIVOS - '. $investorName . '.xlsx');
+        $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->locale('es')->translatedFormat('d F Y'); // Mes con nombre completo en español
+        $todayDate = str_replace(Carbon::now()->translatedFormat('F'), strtoupper(Carbon::now()->translatedFormat('F')), $todayDate); // Uppercase para el nombre del mes
+
+        return Excel::download(new ActiveInvestorProjectExport($investorId), 'PROYECTOS ACTIVOS (' . $todayDate . ') - '. $investorName . '.xlsx');
     }
 
     public function indexClosed()
