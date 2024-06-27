@@ -6,6 +6,7 @@ use App\Models\CommissionAgent;
 use Illuminate\Http\Request;
 use App\Http\Requests\Project\StoreRequest;
 use App\Models\Investor;
+use App\Models\InvestorFunds;
 use App\Models\Project;
 use App\Models\Transfer;
 use App\Models\PromissoryNote;
@@ -182,6 +183,14 @@ class ProjectController extends Controller
     
         if ($validatedData['transfer_bank'] == 'FONDOS') {
             $investor->investor_balance -= $validatedData['transfer_amount'];
+
+            $investorFunds = new InvestorFunds();
+            $investorFunds->investor_id = $investor->id;
+            $investorFunds->investor_change_date = now();
+            $investorFunds->investor_old_funds = $investor->investor_balance + $validatedData['transfer_amount'];
+            $investorFunds->investor_new_funds = $investor->investor_balance;
+            $investorFunds->investor_new_funds_comment = 'FONDO A CAPITAL DE PROYECTO ' . $validatedData['project_name'];
+            $investorFunds->save();
         } else {
             $investor->investor_balance += $validatedData['transfer_amount'];
         }

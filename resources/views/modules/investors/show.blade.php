@@ -82,22 +82,32 @@ Historial de inversionista /&nbsp;
                                         <thead>
                                             <tr>
                                                 <th>FECHA CAMBIO</th>
-                                                <th>TOTAL FONDO ANTERIOR</th>
-                                                <th>TOTAL NUEVO FONDO</th>
-                                                <th>DIFERENCIA</th>
+                                                <th>FONDO ANTERIOR</th>
+                                                <th>DEPOSITO / CAMBIO EN FONDOS</th>
+                                                <th>NUEVO FONDO</th>
                                                 <th>MOTIVO / COMENTARIO</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($investorFunds as $investor)
+                                            @forelse ($investorFunds as $investor)
                                             <tr>
                                                 <td>{{ $investor->investor_change_date }}</td>
                                                 <td>L. {{ number_format($investor->investor_old_funds, 2) }}</td>
+                                                
+                                                @if($investor->investor_new_funds - $investor->investor_old_funds < 0)
+                                                    <td class="text-red">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                                @else
+                                                    <td class="text-success">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                                @endif
+                                                
                                                 <td>L. {{ number_format($investor->investor_new_funds,2) }}</td>
-                                                <td class="text-success">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }} <small><sup>+</sup></small></td>
                                                 <td>{{ $investor->investor_new_funds_comment}}</td>
                                             </tr>
-                                            @endforeach
+                                            @empty
+                                            <tr>
+                                                <td colspan="5" style="text-align: center;">No se encontraron registros de cambios en fondos para mostrar.</td>
+                                            </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
