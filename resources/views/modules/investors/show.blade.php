@@ -67,6 +67,7 @@ Historial de inversionista /&nbsp;
             </div>
         </div>
 
+        <!-- Funds changes table -->
         <div class="row mb-3">
             <div class="col-12">
                 <div class="card" style="min-height: auto; max-height: 20rem">

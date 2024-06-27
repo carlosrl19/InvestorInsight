@@ -49,8 +49,10 @@ class InvestorController extends Controller
     public function show($id)
     {
         $investor = Investor::findOrFail($id);
-        $investorFunds = InvestorFunds::where('investor_id', '=', $id)->get(); 
+        $investorFunds = InvestorFunds::where('investor_id', '=', $id)->orderBy('created_at')->get(); 
+
         $transfers = Transfer::where('investor_id', $investor->id)->orderBy('transfer_date')->get();
+        
         $creditNotes = CreditNote::where('investor_id', $investor->id)->orderBy('creditNote_date')->get();
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
@@ -134,7 +136,7 @@ class InvestorController extends Controller
     {
         // Encuentra el inversionista o falla si no existe
         $investor = Investor::findOrFail($id);
-        $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d');
+        $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
         // Guarda los fondos anteriores antes de actualizar
         $oldFunds = $investor->investor_balance;

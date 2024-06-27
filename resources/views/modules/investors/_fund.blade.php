@@ -12,7 +12,7 @@
                     <div class="row align-items-end">
                         <div class="col" style="display: none">
                             <div class="form-floating">
-                                <input type="datetime" 
+                                <input type="datetime-local" 
                                     name="investor_change_date" 
                                     style="font-size: 10px;" 
                                     value="{{ $todayDate }}" 
