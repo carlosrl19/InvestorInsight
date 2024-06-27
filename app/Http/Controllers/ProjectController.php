@@ -319,7 +319,7 @@ class ProjectController extends Controller
         // Devolver el PDF para descarga forzada
         return response()->streamDownload(function () use ($pdf, $project) {
             echo $pdf->output();
-        }, 'Finiquito - ' . $project->project_name . '.pdf');
+        }, $project->project_name . ' - FINIQUITO' . '.pdf');
     }
 
     public function closeProject(Request $request, Project $project)

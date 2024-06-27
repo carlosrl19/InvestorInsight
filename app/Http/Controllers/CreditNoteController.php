@@ -68,7 +68,7 @@ class CreditNoteController extends Controller
         // Devolver el PDF en línea
         return response($pdf->output(), 200)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'inline; filename="Nota crédito.pdf"');
+            ->header('Content-Disposition', 'inline; filename="PDF NOTA CRÉDITO.pdf"');
     }
      
     public function store(StoreRequest $request)

@@ -75,6 +75,6 @@ class PromissoryNoteController extends Controller
         // Devolver el PDF en línea
         return response($pdf->output(), 200)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'inline; filename="Pagaré.pdf"');
+            ->header('Content-Disposition', 'inline; filename="PDF PAGARÉ.pdf"');
     }
 }

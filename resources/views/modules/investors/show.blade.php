@@ -84,6 +84,7 @@ Historial de inversionista /&nbsp;
                                                 <th>FECHA CAMBIO</th>
                                                 <th>TOTAL FONDO ANTERIOR</th>
                                                 <th>TOTAL NUEVO FONDO</th>
+                                                <th>DIFERENCIA</th>
                                                 <th>MOTIVO / COMENTARIO</th>
                                             </tr>
                                         </thead>
@@ -93,6 +94,7 @@ Historial de inversionista /&nbsp;
                                                 <td>{{ $investor->investor_change_date }}</td>
                                                 <td>L. {{ number_format($investor->investor_old_funds, 2) }}</td>
                                                 <td>L. {{ number_format($investor->investor_new_funds,2) }}</td>
+                                                <td class="text-success">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }} <small><sup>+</sup></small></td>
                                                 <td>{{ $investor->investor_new_funds_comment}}</td>
                                             </tr>
                                             @endforeach
