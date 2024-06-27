@@ -215,12 +215,15 @@ class ProjectController extends Controller
 
     public function exportActiveProjects()
     {
-        return Excel::download(new ActiveProjectsExport, 'EXCEL - PROYECTOS ACTIVOS.xlsx');
+        return Excel::download(new ActiveProjectsExport, 'PROYECTOS ACTIVOS - EXCEL.xlsx');
     }
 
     public function exportActiveInvestorProjects($investorId)
-    {
-        return Excel::download(new ActiveInvestorProjectExport($investorId), 'EXCEL - PROYECTOS ACTIVOS.xlsx');
+    {   
+        $investor = Investor::findOrFail($investorId);
+        $investorName = $investor->investor_name;
+
+        return Excel::download(new ActiveInvestorProjectExport($investorId), 'PROYECTOS ACTIVOS - '. $investorName . '.xlsx');
     }
 
     public function indexClosed()
