@@ -40,16 +40,16 @@ Proyectos finiquitados
         <div class="card-body">
             <table id="example" class="display table table-bordered" style="width: 100%;">
                 <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Nombre proyecto</th>
-                        <th>Inicio</th>
-                        <th>Final</th>
-                        <th>Inversionista</th>
-                        <th>Inversión</th>
-                        <th>Ganancia</th>
-                        <th>Finiquito</th>
-                        <th>Estado</th>
+                    <tr style="text-align: center;">
+                        <th>Código <br> proyecto</th>
+                        <th>Nombre <br> proyecto</th>
+                        <th>Feha <br> inicio</th>
+                        <th>Fecha <br> final</th>
+                        <th>Nombre <br> inversionista</th>
+                        <th>Monto <br> Inversión</th>
+                        <th>Ganancia <br> proyecto</th>
+                        <th>Exportar <br> Finiquito</th>
+                        <th>Estado <br> proyecto</th>
                     </tr>
                 </thead>
                 @php
@@ -60,7 +60,7 @@ Proyectos finiquitados
                         @php
                             $project = $projectGroup->first();
                         @endphp
-                        <tr>
+                        <tr style="text-align: center;">
                             <td>{{ $project->project_code}}</td>
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 <a href="#" class="text-blue" style="font-size: clamp(0.6rem, 3vw, 0.65rem); border: none; margin-right: 5px" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showModal{{ $project->id }}"></>

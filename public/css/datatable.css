@@ -20,3 +20,22 @@
     border: 1px solid #c9c9c9;
     padding: 5px;
 }
+
+#search-filters-funds-container {
+    padding: 6px;
+    min-width: 120px;
+    border-radius: 5px;
+    display: flex;
+    border: none;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 251, 245, 0.281);
+    color: #000;
+}
+
+#search-filters-funds{
+    border-radius: 5px;
+    border: 1px solid #c9c9c9;
+    padding: 5px;
+}

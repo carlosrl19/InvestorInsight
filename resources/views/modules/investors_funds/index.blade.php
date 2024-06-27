@@ -7,17 +7,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div id="search-filters-funds-container">FILTROS</div>
+                    </div>
+                </div>
+
                 <div class="card">
                     <div class="card-body">
                         <table id="exampleFunds" class="display table table-bordered">
                             <thead>
                                 <tr class="text-center">
-                                    <th>Nombre inversionista</th>
-                                    <th>Fecha</th>
-                                    <th>Fondo anterior</th>
-                                    <th>Nuevo fondo</th>
-                                    <th>Diferencia</th>
-                                    <th>Comentarios</th>
+                                    <th>NOMBRE INVERSIONISTA</th>
+                                    <th>FECHA CAMBIO</th>
+                                    <th>FONDO ANTERIOR</th>
+                                    <th>DEPOSITO / CAMBIO EN FONDOS</th>
+                                    <th>NUEVO FONDO</th>
+                                    <th>MOTIVO / COMENTARIOS</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,8 +32,14 @@
                                         <td>{{ $investor->investor->investor_name }}</td>
                                         <td>{{ $investor->investor_change_date }}</td>
                                         <td>Lps. {{ number_format($investor->investor_old_funds,2) }}</td>
+
+                                        @if($investor->investor_new_funds - $investor->investor_old_funds < 0)
+                                            <td class="text-red">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                        @else
+                                            <td class="text-success">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                        @endif
+
                                         <td>Lps. {{ number_format($investor->investor_new_funds,2) }}</td>
-                                        <td class="text-success">Lps. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}<sup>+</sup></td>
                                         <td>{{ $investor->investor_new_funds_comment }}</td>
                                     </tr>
                                 @endforeach

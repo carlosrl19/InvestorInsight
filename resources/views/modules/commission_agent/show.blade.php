@@ -67,7 +67,7 @@ Historial de comisionista /&nbsp;
                                 <div class="row">
                                     <table id="example0" class="display table table-bordered">
                                         <thead>
-                                            <tr>
+                                            <tr style="text-align: center;">
                                                 <th style="width: 5%; text-align: center">Nº</th>
                                                 <th style="width: 10%;">CÓDIGO</th>
                                                 <th style="width: 68%;">PROYECTO</th>
@@ -76,7 +76,7 @@ Historial de comisionista /&nbsp;
                                         </thead>
                                         <tbody>
                                             @foreach ($activeProjects as $i => $project)
-                                            <tr>
+                                            <tr style="text-align: center;">
                                                 <td style="text-align: center">{{ $i++ }}</td>
                                                 <td>#{{ $project->project_code }}</td>
                                                 <td>{{ $project->project_name }}</td>
@@ -106,14 +106,18 @@ Historial de comisionista /&nbsp;
                                 <div class="row">
                                     <table id="example1" class="display table table-bordered">
                                         <thead>
-                                            <tr>
+                                            <tr style="text-align: center;">
+                                                <th>Nº</th>
+                                                <th>CÓDIGO</th>
                                                 <th>PROYECTO</th>
                                                 <th>COMISIÓN</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($completedProjects as $project)
-                                            <tr>
+                                            @foreach ($completedProjects as $i => $project)
+                                            <tr style="text-align: center;">
+                                                <td>{{ $i++ }}</td>
+                                                <td>#{{ $project->project_code }}</td>
                                                 <td>{{ $project->project_name }}</td>
                                                 <td>L. {{ number_format($project->commissioner_commission, 2) }}</td>
                                             </tr>
@@ -123,6 +127,10 @@ Historial de comisionista /&nbsp;
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer" style="background-color: #95D2B3; padding: 10px; border: 4px solid #fff; justify-content: space-between;">
+                        <span style="margin-left: 5%; font-weight: bold;">TOTAL GANANCIA DE PROYECTOS</span>
+                        <span style="float: right; margin-right: 7%; color: #fff; font-size: clamp(0.7rem, 3vw, 0.8rem)">L. {{ number_format($completedProjects->sum('commissioner_commission'),2) }}</span>
                     </div>
                 </div>
             </div>

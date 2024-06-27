@@ -51,7 +51,7 @@ class InvestorController extends Controller
         $investor = Investor::findOrFail($id);
         $investorFunds = InvestorFunds::where('investor_id', '=', $id)->orderBy('created_at')->get(); 
 
-        $transfers = Transfer::where('investor_id', $investor->id)->orderBy('transfer_date')->get();
+        $transfers = Transfer::where('investor_id', $investor->id)->where('transfer_bank', '!=', 'FONDOS')->orderBy('transfer_date')->get();
         
         $creditNotes = CreditNote::where('investor_id', $investor->id)->orderBy('creditNote_date')->get();
         $total_investor_balance = Investor::sum('investor_balance');

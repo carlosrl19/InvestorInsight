@@ -142,7 +142,7 @@ Proyectos activos
                         @php
                             $project = $projectGroup->first();
                         @endphp
-                        <tr>
+                        <tr style="text-align: center;">
                             <td>#{{ $project->project_code }}</td>
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 <a href="#" class="text-blue" style="font-size: clamp(0.6rem, 3vw, 0.65rem); border: none; margin-right: 5px" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showModal{{ $project->id }}"></>

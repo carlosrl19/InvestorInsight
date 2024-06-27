@@ -204,109 +204,89 @@ Historial de inversionista /&nbsp;
         </div>
 
         <!-- Tranfers history table -->
-        <div class="card mb-4">
-            <div class="card-body">
-                <div id="item-0">
-                    <div class="col-lg-12">
-                        <div class="row row-cards">
-                            <div class="col-12">
-                                <div class="card" style="height: 21rem">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Historial de transferencias</h3>
-                                    </div>
-                                    <div class="card-body card-body-scrollable card-body-scrollable-shadow">
-                                        <div class="divide-y">
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="text-truncate">
-                                                            <table id="example2" class="display table table-bordered">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th style="width: 50px">FECHA</th>
-                                                                    <th>BANCO</th>
-                                                                    <th style="width: 120px">TRANSFERENCIA</th>
-                                                                    <th style="width: 120px">CAPITAL</th>
-                                                                    <th style="width: 120px">FONDO</th>
-                                                                    <th style="width: 400px;">COMENTARIOS AGREGADOS A TRANSFERENCIA</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach($transfers as $transfer)
-                                                                    <tr>
-                                                                        <td>{{ $transfer->transfer_date }}</td>
-                                                                        <td class="text-uppercase">{{ $transfer->transfer_bank }}</td>
-                                                                        <td class="text-green">Lps. {{ number_format($transfer->transfer_amount, 2) }}</td>
-                                                                        <td>Lps. {{ number_format($transfer->current_balance, 2) }}</td>
-                                                                        <td>Lps. {{ number_format($transfer->current_balance - $transfer->transfer_amount, 2) }}</td>
-                                                                        <td class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $transfer->transfer_comment }}</td>
-                                                                    </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+        <div class="row mb-4">
+            <div class="card" style="height: 21rem">
+                <div class="card-header">
+                    <h3 class="card-title">Historial de transferencias</h3>
+                </div>
+                <div class="card-body card-body-scrollable card-body-scrollable-shadow">
+                    <div class="divide-y">
+                        <div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="text-truncate">
+                                        <table id="example2" class="display table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 50px">FECHA</th>
+                                                <th>BANCO</th>
+                                                <th style="width: 120px">TRANSFERENCIA</th>
+                                                <th style="width: 120px">CAPITAL</th>
+                                                <th style="width: 120px">FONDO</th>
+                                                <th style="width: 400px;">COMENTARIOS AGREGADOS A TRANSFERENCIA</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($transfers as $transfer)
+                                                <tr>
+                                                    <td>{{ $transfer->transfer_date }}</td>
+                                                    <td class="text-uppercase">{{ $transfer->transfer_bank }}</td>
+                                                    <td class="text-green">Lps. {{ number_format($transfer->transfer_amount, 2) }}</td>
+                                                    <td>Lps. {{ number_format($transfer->current_balance, 2) }}</td>
+                                                    <td>Lps. {{ number_format($transfer->current_balance - $transfer->transfer_amount, 2) }}</td>
+                                                    <td class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $transfer->transfer_comment }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> <!-- Card body close -->
+            </div>
         </div>
     
         <!-- Credit notes history table -->
-        <div class="card">
-            <div class="card-body">
-                <div id="item-1">
-                    <div class="col-lg-12">
-                        <div class="row row-cards">
-                            <div class="col-12">
-                                <div class="card" style="height: 21rem">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Historial de notas crédito</h3>
-                                    </div>
-                                    <div class="card-body card-body-scrollable card-body-scrollable-shadow">
-                                    <div class="divide-y">
-                                        <div>
-                                            <div class="row">
-                                            <div class="col">
-                                                <div class="text-truncate">
-                                                    <table id="example3" class="display table table-bordered">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>FECHA</th>
-                                                            <th>MONTO NOTA CRÉDITO</th>
-                                                            <th>CAPITAL</th>
-                                                            <th>NUEVO FONDO</th>
-                                                            <th>COMENTARIOS AGREGADOS A NOTA CRÉDITO</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        @foreach($creditNotes as $creditNote)
-                                                        <tr>
-                                                            <td>{{ $creditNote->creditNote_date }}</td>
-                                                            <td class="text-red">Lps. {{ number_format($creditNote->creditNote_amount, 2) }}</td>
-                                                            <td>Lps. {{ number_format($creditNote->current_balance + $creditNote->creditNote_amount, 2) }}</td>
-                                                            <td>Lps. {{ number_format($creditNote->current_balance, 2) }}</td>
-                                                            <td class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $creditNote->creditNote_description }}</td>
-                                                        </tr>
-                                                        @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
+        <div class="row">
+            <div class="card" style="height: 21rem">
+                <div class="card-header">
+                    <h3 class="card-title">Historial de notas crédito</h3>
+                </div>
+                <div class="card-body card-body-scrollable card-body-scrollable-shadow">
+                <div class="divide-y">
+                    <div>
+                        <div class="row">
+                        <div class="col">
+                            <div class="text-truncate">
+                                <table id="example3" class="display table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>FECHA</th>
+                                        <th>MONTO NOTA CRÉDITO</th>
+                                        <th>CAPITAL</th>
+                                        <th>NUEVO FONDO</th>
+                                        <th>COMENTARIOS AGREGADOS A NOTA CRÉDITO</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($creditNotes as $creditNote)
+                                    <tr>
+                                        <td>{{ $creditNote->creditNote_date }}</td>
+                                        <td class="text-red">Lps. {{ number_format($creditNote->creditNote_amount, 2) }}</td>
+                                        <td>Lps. {{ number_format($creditNote->current_balance + $creditNote->creditNote_amount, 2) }}</td>
+                                        <td>Lps. {{ number_format($creditNote->current_balance, 2) }}</td>
+                                        <td class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $creditNote->creditNote_description }}</td>
+                                    </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+                        </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
