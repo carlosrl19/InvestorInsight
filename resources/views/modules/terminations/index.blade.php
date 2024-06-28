@@ -61,7 +61,7 @@ Proyectos finiquitados
                             $project = $projectGroup->first();
                         @endphp
                         <tr style="text-align: center;">
-                            <td>{{ $project->project_code}}</td>
+                            <td>#{{ $project->project_code}}</td>
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 <a href="#" class="text-blue" style="font-size: clamp(0.6rem, 3vw, 0.65rem); border: none; margin-right: 5px" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showModal{{ $project->id }}"></>
                                     {{ $project->project_name }}
@@ -73,13 +73,14 @@ Proyectos finiquitados
                             <td>{{ $project->project_end_date }}</td>                            
                             <td>
                                 @foreach ($project->investors as $investor)
-                                    <a href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}<br>
+                                    <a style="font-size: clamp(0.6rem, 3vw, 0.65rem);" href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}
+                                    <small>
+                                        <sup>
+                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
+                                        </sup>
+                                    </small>
+                                    <br>
                                 @endforeach
-                                <small>
-                                    <sup>
-                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
-                                    </sup>
-                                </small>
                                 </a>
                             </td>
                             <td>L. {{ number_format($project->project_investment,2) }}</td>
@@ -87,14 +88,7 @@ Proyectos finiquitados
                             <td>
                                 @if($project->project_status == 0)
                                 <a href="{{ route('termination.report', $project->id) }}" class="badge bg-red me-1" data-toggle="modal" data-target="#pdfModal">
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                                        <path d="M8 11h8v7h-8z" />
-                                        <path d="M8 15h8" />
-                                        <path d="M11 11v7" />
-                                    </svg>
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-type-pdf"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" /><path d="M5 18h1.5a1.5 1.5 0 0 0 0 -3h-1.5v6" /><path d="M17 18h2" /><path d="M20 15h-3v6" /><path d="M11 15v6h1a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2h-1z" /></svg>
                                     FINIQUITO
                                 </a>
                                 @else

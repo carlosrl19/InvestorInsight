@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\WithProperties;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
+// File used to export active projects to an investors from a select (modules/projects/_investors_select_project_export)
 class ActiveInvestorProjectExport implements FromView, WithProperties, WithEvents
 {
    protected $investorId;

@@ -18,6 +18,10 @@ Proveedores
 @endsection
 
 @section('create')
+<a href="#" class="btn btn-orange" style="font-size: clamp(0.6rem, 3vw, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-funds">
+    $ Historial de cambios en fondos
+</a>
+
 <a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-team">
     + Nuevo proveedor
 </a>
@@ -85,6 +89,8 @@ Proveedores
                                 <td>{{ $provider->provider_description }}</td>
                                 <td>
                                     @include('modules.providers._delete')
+                                    @include('modules.providers._fund')
+
                                     <div class="btn-list flex-nowrap">
                                         <div class="dropdown">
                                             <button class="btn btn-sm dropdown-toggle align-text-top" style="margin-right: -7vh; min-width: auto" data-bs-toggle="dropdown">ACCIONES</button>
@@ -93,6 +99,11 @@ Proveedores
                                                 <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-update-{{ $provider->id }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
                                                     &nbsp;Actualizar información
+                                                </a>
+
+                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-fund{{ $provider->id }}">
+                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-coins"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14c0 1.657 2.686 3 6 3s6 -1.343 6 -3s-2.686 -3 -6 -3s-6 1.343 -6 3z" /><path d="M9 14v4c0 1.656 2.686 3 6 3s6 -1.344 6 -3v-4" /><path d="M3 6c0 1.072 1.144 2.062 3 2.598s4.144 .536 6 0c1.856 -.536 3 -1.526 3 -2.598c0 -1.072 -1.144 -2.062 -3 -2.598s-4.144 -.536 -6 0c-1.856 .536 -3 1.526 -3 2.598z" /><path d="M3 6v10c0 .888 .772 1.45 2 2" /><path d="M3 11c0 .888 .772 1.45 2 2" /></svg>
+                                                    &nbsp;Agregar pago
                                                 </a>
                                                 
                                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $provider->id }}">
@@ -198,6 +209,8 @@ Proveedores
     </div>
 
 @include('modules.providers._create')
+@include('modules.provider_funds.index')
+
 @endsection
 
 @section('scripts')
@@ -209,5 +222,23 @@ Proveedores
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('customjs/datatable/dt_provider.js') }}"></script>
+<script src="{{ asset('customjs/datatable/dt_provider_funds.js') }}"></script>
+
+<!-- PDF view -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- PDF Modal activator -->
+<script>
+    $('#pdfModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var url = button.attr('href'); // Extraer la información de los atributos data-*
+        var modal = $(this);
+        modal.find('#pdf-frame').attr('src', url);
+    });
+    $('#pdfModal').on('hidden.bs.modal', function (e) {
+        $(this).find('#pdf-frame').attr('src', '');
+    });
+</script>   
 
 @endsection

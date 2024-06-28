@@ -79,19 +79,19 @@ Pagarés inversionistas
             <table id="example" class="display table table-bordered">
                 <thead>
                     <tr class="text-center">
-                        <th>Código</th>
-                        <th>Fecha de emisión</th>
-                        <th>Fecha de pago</th>
-                        <th>Inversionista</th>
-                        <th>Monto pagaré</th>
-                        <th>Estado pagaré</th>
-                        <th>Pagaré</th>
+                        <th>CÓDIGO</th>
+                        <th>FECHA EMISIÓN</th>
+                        <th>FECHA PAGO</th>
+                        <th>NOMBRE INVERSIONISTA</th>
+                        <th>MONTO PAGARÉ</th>
+                        <th>ESTADO PAGARÉ</th>
+                        <th>EXPORTAR PAGARÉ</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($promissoryNotes as $promissoryNote)
                         <tr class="text-center">
-                            <td>{{ $promissoryNote->promissoryNote_code }}</td>
+                            <td>#{{ $promissoryNote->promissoryNote_code }}</td>
                             <td>{{ $promissoryNote->promissoryNote_emission_date }}</td>
                             <td>{{ $promissoryNote->promissoryNote_final_date }}</td>
                             <td>
@@ -123,7 +123,7 @@ Pagarés inversionistas
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('promissory_note.report', $promissoryNote->id) }}" class="btn btn-red"
+                                <a href="{{ route('promissory_note.report', $promissoryNote->id) }}" class="btn btn-sm btn-red"
                                     data-toggle="modal" data-target="#pdfModal">
                                     &nbsp;&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -135,7 +135,7 @@ Pagarés inversionistas
                                         <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" />
                                         <path
                                             d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" />
-                                    </svg>
+                                    </svg> PAGARÉ &nbsp;
                                 </a>
                             </td>
                         </tr>

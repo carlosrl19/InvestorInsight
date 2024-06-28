@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\InvestorFunds;
+namespace App\Http\Requests\ProviderFunds;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class StoreProviderRequest extends FormRequest
 {
-
     public function authorize(): bool
     {
         return true;

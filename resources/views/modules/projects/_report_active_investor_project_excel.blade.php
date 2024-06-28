@@ -1,3 +1,5 @@
+<!-- Excel template used to export all active projects to an investors -->
+
 <?php
 // Array de colores
 $colors = array(

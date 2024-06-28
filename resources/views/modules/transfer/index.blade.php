@@ -68,7 +68,7 @@ Transferencias
             <tbody>
                 @foreach($transfers as $transfer)
                 <tr class="text-center">
-                    <td>{{ $transfer->transfer_code }}</td>
+                    <td>#{{ $transfer->transfer_code }}</td>
                     <td>
                         <a href="{{ route('investor.show', $transfer->investor_id) }}">{{ $transfer->investor->investor_name }}
                             <small>

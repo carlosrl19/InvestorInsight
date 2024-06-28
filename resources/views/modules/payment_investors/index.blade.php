@@ -56,21 +56,21 @@ Pagos
         <table id="example" class="display table table-bordered">
             <thead>
                 <tr class="text-center">
-                    <th>Código</th>
-                    <th>Fecha Hora</th>
-                    <th>Inversionista</th>
-                    <th>Monto pagado</th>
+                    <th>CÓDIGO</th>
+                    <th>FECHA HORA</th>
+                    <th>NOMBRE INVERSIONISTA</th>
+                    <th>MONTO PAGADO</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($payments as $payment)
                 <tr class="text-center">
-                    <td>{{ $payment->payment_code }}</td>
+                    <td>#{{ $payment->payment_code }}</td>
                     <td>{{ $payment->payment_date }}</td>
                     <td>
                         {{ $payment->promissoryNoteInvestor->investor->investor_name ?? 'N/A' }}
                     </td>
-                    <td class="text-red">Lps. {{ $payment->payment_amount }}</td>
+                    <td class="text-red">Lps. {{ number_format($payment->payment_amount,2) }}</td>
                 </tr>
                 @endforeach
             </tbody>

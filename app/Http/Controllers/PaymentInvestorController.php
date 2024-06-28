@@ -37,7 +37,6 @@ class PaymentInvestorController extends Controller
         $promissoryNote = PromissoryNote::findOrFail($request->promissoryNoteInvestor_id);
         $promissoryNote->update(['promissoryNote_status' => 0]);
 
-        // Redireccionar con un mensaje de éxito
-        return redirect()->route('payments_investor.index')->with('success', 'Pago registrado y pagaré actualizado correctamente.');
+        return redirect()->route('payments_investor.index')->with('success', 'Pago registrado correctamente.');
     }
 }

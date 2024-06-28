@@ -9,11 +9,21 @@ Route::resource('dashboard', 'App\Http\Controllers\DashboardController')->names(
 Route::resource('investor', 'App\Http\Controllers\InvestorController')->names('investor');
 Route::post('investor/{id}/fund', 'App\Http\Controllers\InvestorController@fund')->name('investor.fund');
 
+// Investor payments
+Route::resource('payments_investor', 'App\Http\Controllers\PaymentInvestorController')->names('payments_investor');
+
+// Investor funds
+Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController')->names('investors_funds');
+
 // Commission Agent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');
 
 // Providers Agent
 Route::resource('provider', 'App\Http\Controllers\ProviderController')->names('provider');
+Route::post('provider/{id}/fund', 'App\Http\Controllers\ProviderController@fund')->name('provider.fund');
+
+// Providers Funds
+Route::resource('provider_funds', 'App\Http\Controllers\InvestorFundsController')->names('provider_funds');
 
 // Transfer
 Route::resource('transfer', 'App\Http\Controllers\TransferController')->names('transfer');
@@ -29,12 +39,6 @@ Route::get('promissory_note/{id}/report', 'App\Http\Controllers\PromissoryNoteCo
 // Promissory note commissioners
 Route::resource('promissory_note_commissioner', 'App\Http\Controllers\PromissoryNoteCommissionerController')->names('promissory_note_commissioner');
 Route::get('promissory_note_commissioner/{id}/report', 'App\Http\Controllers\PromissoryNoteCommissionerController@showReport')->name('promissory_note_commissioner.report');
-
-// Investor payments
-Route::resource('payments_investor', 'App\Http\Controllers\PaymentInvestorController')->names('payments_investor');
-
-// Investor funds
-Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController')->names('investors_funds');
 
 // ==============
 //  Projects   //

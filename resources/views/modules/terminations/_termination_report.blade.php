@@ -1,6 +1,6 @@
 <div class="main">
 
-	<!-- Date cantainer  -->
+	<!-- Date container  -->
 	<div class="code-container-left">
 		<span class="text-uppercase">{{ now()->day }} de {{ now()->monthName }} de {{ now()->year }}</span><br>
 		<span class="text-bold text-uppercase">INVERSIONES ROBENIOR</span><br>

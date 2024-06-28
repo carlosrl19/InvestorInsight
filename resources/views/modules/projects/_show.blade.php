@@ -22,7 +22,7 @@
                         <div class="col-lg-6"> <!-- Columna derecha -->
                             <div class="row mb-3"> <!-- Inicio del segundo col que debe ser a la derecha -->
                                 <h3>Información general del proyecto</h3>
-                                <div class="col-md-6">
+                                <div class="col-md-6 text-start">
                                     <p><div class="badge bg-success mt-1"></div>&nbsp; Proyecto: {{ $project->project_name }}</p>
                                     <p><div class="badge bg-success mt-1"></div>&nbsp; Código: CP-{{ $project->project_code }}</p>
                                     <p><div class="badge bg-success mt-1"></div>&nbsp; Inversión total: Lps. {{ number_format($project->project_investment,2) }}</p>
@@ -30,7 +30,7 @@
                                         &nbsp;Fondo inversionista: Lps. {{ number_format($project->investor_balance_history,2) }}
                                     </p>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 text-start">
                                     <p><div class="badge bg-success mt-1"></div>&nbsp; Fecha inicio: {{ $project->project_start_date }}</p>
                                     <p><div class="badge bg-success mt-1"></div>&nbsp; Fecha final: {{ $project->project_end_date }}</p>
                                     <p><div class="badge bg-success mt-1"></div>&nbsp;
@@ -45,7 +45,7 @@
                             <h3>Inversionistas del proyecto</h3>
                             <div class="row">
                                 @foreach($project->investors as $investor)
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col mb-3 text-start">
                                         <div class="card">
                                             <div class="card-status-start-md bg-primary"></div>
                                             <div class="card-stamp">
@@ -77,7 +77,7 @@
                             <h3>Comisionistas del proyecto</h3>
                             <div class="row">
                                 @foreach($project->commissioners as $key => $commissioner)
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col mb-3 text-start">
                                         <div class="card">
                                             <div class="card-status-start-md bg-secondary"></div>
                                             <div class="card-stamp">

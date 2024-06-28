@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #52524E">
             <div class="modal-header">
-                <h5 class="modal-title">Inversionistas - Historial de cambios en fondos</h5>
+                <h5 class="modal-title">Proveedores - Historial de cambios en fondos</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -15,32 +15,28 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <table id="exampleFunds" class="display table table-bordered">
+                        <table id="exampleProviderFunds" class="display table table-bordered">
                             <thead>
                                 <tr class="text-center">
-                                    <th>NOMBRE INVERSIONISTA</th>
-                                    <th>FECHA CAMBIO</th>
-                                    <th>FONDO ANTERIOR</th>
-                                    <th>DEPOSITO / CAMBIO EN FONDOS</th>
-                                    <th>NUEVO FONDO</th>
+                                    <th>NOMBRE PROVEEDOR</th>
+                                    <th>FECHA PAGO</th>
+                                    <th>MONTO PAGO</th>
                                     <th>MOTIVO / COMENTARIOS</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($investorFunds as $investor)
+                                @foreach($provider_funds as $provider_fund)
                                     <tr class="text-center">
-                                        <td>{{ $investor->investor->investor_name }}</td>
-                                        <td>{{ $investor->investor_change_date }}</td>
-                                        <td>Lps. {{ number_format($investor->investor_old_funds,2) }}</td>
+                                        <td>{{ $provider_fund->provider->provider_name }}</td>
+                                        <td>{{ $provider_fund->provider_change_date }}</td>
 
-                                        @if($investor->investor_new_funds - $investor->investor_old_funds < 0)
-                                            <td class="text-red">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                        @if($provider_fund->provider_new_funds - $provider->provider_old_funds < 0)
+                                            <td class="text-red">L. {{ number_format($provider_fund->provider_new_funds - $provider_fund->provider_old_funds,2) }}</td>
                                         @else
-                                            <td class="text-success">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                            <td class="text-success">L. {{ number_format($provider_fund->provider_new_funds - $provider_fund->provider_old_funds,2) }}</td>
                                         @endif
 
-                                        <td>Lps. {{ number_format($investor->investor_new_funds,2) }}</td>
-                                        <td>{{ $investor->investor_new_funds_comment }}</td>
+                                        <td>{{ $provider_fund->provider_new_funds_comment }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -1,3 +1,5 @@
+<!-- Excel template used to export all active projects to all investors -->
+
 <?php
 // Array de colores
 $colors = array(
@@ -59,12 +61,9 @@ foreach ($projects as $index => $project) {
             <tr class="header-row">
                 <td></td>
                 @foreach($project->investors as $investor)
-                    <td style="font-size: 14px; width: 100px; font-weight: bold; background-color: #fff; text-align: left; text-decoration: underline;">
-                        PROYECTO {{ explode(' ', $investor->investor_name)[0] }}
-                        @if(count(explode(' ', $investor->investor_name)) > 1)
-                            {{ implode(' ', array_slice(explode(' ', $investor->investor_name), 1)) }}
-                        @endif
-                    </td>
+                <td style="font-size: 14px; width: 100px; font-weight: bold; background-color: #fff; text-align: left; text-decoration: underline;">
+                    PROYECTO {{ explode(' ', $investor->investor_name)[0] }} {{ explode(' ', $investor->investor_name)[count(explode(' ', $investor->investor_name)) - 1] }}
+                </td>
                 @endforeach
 
                 <td style="background-color: #fff; width: auto;"></td>

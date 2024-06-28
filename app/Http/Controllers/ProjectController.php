@@ -189,7 +189,7 @@ class ProjectController extends Controller
             $investorFunds->investor_change_date = now();
             $investorFunds->investor_old_funds = $investor->investor_balance + $validatedData['transfer_amount'];
             $investorFunds->investor_new_funds = $investor->investor_balance;
-            $investorFunds->investor_new_funds_comment = 'FONDO A CAPITAL DE PROYECTO ' . $validatedData['project_name'];
+            $investorFunds->investor_new_funds_comment = 'FONDO A CAPITAL DE PROYECTO ' . $validatedData['project_name'] . ' - CODIGO DE PROYECTO #' . $generatedCode . '.';
             $investorFunds->save();
         } else {
             $investor->investor_balance += $validatedData['transfer_amount'];

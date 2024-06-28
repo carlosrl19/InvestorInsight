@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\WithProperties;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
+// File used to export active projects to all investors with active projects
 class ActiveProjectsExport implements FromView, WithProperties, WithEvents
 {
     public function view(): View
