@@ -145,7 +145,7 @@ Dashboard
 											<tbody>
 												@foreach ($promissoryNotes as $promissoryNote)												
 													<tr>
-														<td>{{ $promissoryNote->promissoryNote_code }}</td>
+														<td>#{{ $promissoryNote->promissoryNote_code }}</td>
 														<td>{{ $promissoryNote->promissoryNote_final_date }}</td>
 														<td>
 															<a href="{{ route('investor.show', $promissoryNote->investor_id) }}">{{ $promissoryNote->investor->investor_name }}
@@ -205,8 +205,7 @@ Dashboard
 															</a>
 														</td>
 														<td>{{ $transfer->transfer_bank }}</td>
-														<td class="text-green">Lps.
-															{{ number_format($transfer->transfer_amount, 2) }}</td>
+														<td class="text-green">Lps. {{ number_format($transfer->transfer_amount, 2) }}</td>
 													</tr>
 												@endforeach
 											</tbody>

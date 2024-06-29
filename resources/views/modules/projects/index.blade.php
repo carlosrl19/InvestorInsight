@@ -25,28 +25,14 @@ Proyectos activos
 
 @section('create')
 <a href="#" class="btn btn-cyan" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#investorsModal"
-   @if($activeProjectsCount == 0) disabled @endif>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-        <path d="M8 11h8v7h-8z" />
-        <path d="M8 15h8" />
-        <path d="M11 11v7" />
-    </svg>
+    @if($activeProjectsCount == 0) disabled @endif>
+    <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%); margin-right: 5px" src="{{ asset('../static/svg/file-spreadsheet.svg') }}" width="20" height="20" alt="">
     Filtrar excel
 </a>
 
 <a href="{{ route('project.active_projects') }}" class="btn btn-teal" style="font-size: clamp(0.6rem, 6vh, 0.7rem);"
-   @if($activeProjectsCount == 0) disabled @endif>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-        <path d="M8 11h8v7h-8z" />
-        <path d="M8 15h8" />
-        <path d="M11 11v7" />
-    </svg>
+    @if($activeProjectsCount == 0) disabled @endif>
+    <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%); margin-right: 5px" src="{{ asset('../static/svg/file-spreadsheet.svg') }}" width="20" height="20" alt="">
     Excel proyectos activos
 </a>
 
@@ -168,13 +154,13 @@ Proyectos activos
                             <td>L. {{ number_format($project->project_investment,2) }}</td>
                             <td>L. {{ number_format($project->investors->sum('pivot.investor_final_profit'),2) }}</td>
                             <td>
-                                <a href="{{ route('project.excel', $project) }}" class="badge bg-teal me-1 text-white">
+                                <a href="{{ route('project.excel', $project) }}" class="badge bg-teal me-1 text-white" style="padding-right: 30px">
                                     <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-spreadsheet.svg') }}" width="20" height="20" alt="">
                                     EXCEL
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ route('promissory_note.report', $project->id) }}" class="badge bg-red me-1 text-white" data-toggle="modal" data-target="#pdfModal">
+                                <a href="{{ route('promissory_note.report', $project->id) }}" class="badge bg-red me-1 text-white" style="padding-right: 30px" data-toggle="modal" data-target="#pdfModal">
                                     <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
                                     PAGARÉ
                                 </a>
@@ -186,7 +172,7 @@ Proyectos activos
                                         FINALIZADO
                                     </span>
                                 @elseif($project->project_status == '1')
-                                    <span class="badge badge-outline text-cyan me-1 project-active" data-bs-toggle="modal" data-bs-target="#finishModal{{ $project->id }}">
+                                    <span class="badge badge-outline text-cyan me-1 project-active" style="padding-right: 30px" data-bs-toggle="modal" data-bs-target="#finishModal{{ $project->id }}">
                                         <img style="filter: invert(71%) sepia(60%) saturate(5470%) hue-rotate(149deg) brightness(89%) contrast(82%);" src="{{ asset('../static/svg/lock-open.svg') }}" width="20" height="20" alt="">
                                         TRABAJANDO
                                     </span>

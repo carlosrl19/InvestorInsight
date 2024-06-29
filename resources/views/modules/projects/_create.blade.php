@@ -12,15 +12,9 @@
                     <fieldset>
                         @csrf
                         <h4 class="text-center text-muted">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-1">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                                <path d="M10 10l2 -2v8" />
-                            </svg> Datos generales del proyecto <span
-                                style="float: right; font-size: clamp(0.6rem, 6vh, 0.7rem)">Paso 1/4</span>
+                            <img style="filter: invert(44%) sepia(11%) saturate(0%) hue-rotate(225deg) brightness(99%) contrast(85%);" src="{{ asset('../static/svg/circle-number-1.svg') }}" width="24" height="24">
+                            Datos generales del proyecto
+                            <span style="float: right; font-size: clamp(0.6rem, 6vh, 0.7rem)">Paso 1/4</span>
                         </h4>
                         <div class="row mb-3 align-items-end">
                             <div class="col" style="display: none">
@@ -124,15 +118,9 @@
                     <!-- Step 2 Transfer -->
                     <fieldset>
                         <h4 class="text-center text-muted">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-2">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                                <path d="M10 8h3a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 0 -1 1v2a1 1 0 0 0 1 1h3" />
-                            </svg> Depósito del proyecto <span
-                                style="float: right; font-size: clamp(0.6rem, 6vh, 0.7rem)">Paso 2/4</span>
+                            <img style="filter: invert(44%) sepia(11%) saturate(0%) hue-rotate(225deg) brightness(99%) contrast(85%);" src="{{ asset('../static/svg/circle-number-2.svg') }}" width="24" height="24">
+                            Depósito del proyecto
+                            <span style="float: right; font-size: clamp(0.6rem, 6vh, 0.7rem)">Paso 2/4</span>
                         </h4>
 
                         <div class="row mb-3 align-items-end">
@@ -268,16 +256,9 @@
                     <!-- Step 3 Investor / Commission agent select -->
                     <fieldset>
                         <h4 class="text-center text-muted">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-3">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                                <path
-                                    d="M10 9a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1" />
-                            </svg> Integrantes del proyecto <span
-                                style="float: right; font-size: clamp(0.6rem, 6vh, 0.7rem)">Paso 3/4</span>
+                            <img style="filter: invert(44%) sepia(11%) saturate(0%) hue-rotate(225deg) brightness(99%) contrast(85%);" src="{{ asset('../static/svg/circle-number-3.svg') }}" width="24" height="24">
+                            Integrantes del proyecto
+                            <span style="float: right; font-size: clamp(0.6rem, 6vh, 0.7rem)">Paso 3/4</span>
                         </h4>
                         <input type="hidden" name="project_status" value="1">
 
@@ -300,18 +281,8 @@
                             
                             <div class="col-1">
                                 <button type="button" class="btn btn-red mt-3 text-white" id="add_investor_button_container"
-                                    disabled style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
-                                    &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-users-plus">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4c.96 0 1.84 .338 2.53 .901" />
-                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                        <path d="M16 19h6" />
-                                        <path d="M19 16v6" />
-                                    </svg>
+                                    disabled style="margin-bottom: 5px; border: none; padding: 5px 10px 5px 5px">
+                                    &nbsp;<img style="filter: invert(100%) sepia(0%) saturate(7485%) hue-rotate(207deg) brightness(103%) contrast(103%);" src="{{ asset('../static/svg/user-plus.svg') }}" width="20" height="20">
                                 </button>
                             </div>
                         </div>
@@ -350,18 +321,8 @@
                             <div class="col-1">
                                 <button type="button" class="btn btn-primary mt-3 text-white" id="add_button_container"
                                     onclick="addCommissioner()"
-                                    style="margin-bottom: 5px; border: none; padding: 5px 0px 5px 5px">
-                                    &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-users-plus">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4c.96 0 1.84 .338 2.53 .901" />
-                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                        <path d="M16 19h6" />
-                                        <path d="M19 16v6" />
-                                    </svg>
+                                    style="margin-bottom: 5px; border: none; padding: 5px 10px 5px 5px">
+                                    &nbsp;<img style="filter: invert(100%) sepia(0%) saturate(7485%) hue-rotate(207deg) brightness(103%) contrast(103%);" src="{{ asset('../static/svg/users-plus.svg') }}" width="20" height="20">
                                 </button>
                             </div>
                         </div>
@@ -406,16 +367,9 @@
                     <!-- Step 4 Comment -->
                     <fieldset>
                         <h4 class="text-center text-muted">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-4">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                                <path d="M10 8v3a1 1 0 0 0 1 1h3" />
-                                <path d="M14 8v8" />
-                            </svg> Comentarios adicionales (Comentario del excel) <span
-                                style="float: right; font-size: clamp(0.6rem, 6vh, 0.7rem)">Paso 4/4</span>
+                            <img style="filter: invert(44%) sepia(11%) saturate(0%) hue-rotate(225deg) brightness(99%) contrast(85%);" src="{{ asset('../static/svg/circle-number-4.svg') }}" width="24" height="24">
+                            Comentarios adicionales (Comentario del excel)
+                            <span style="float: right; font-size: clamp(0.6rem, 6vh, 0.7rem)">Paso 4/4</span>
                         </h4>
                         <div class="row mb-3 align-items-end">
                             <div class="col">

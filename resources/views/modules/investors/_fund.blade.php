@@ -83,8 +83,8 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-teal">Guardar</button>
+                    <button type="button" style="float: left;" class="btn btn-dark me-auto" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" style="float: left; margin-left: 5px" class="btn btn-teal">Guardar</button>
                 </form>
             </div>
         </div>

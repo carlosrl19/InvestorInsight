@@ -50,22 +50,14 @@
                                             <div class="card-status-start-md bg-primary"></div>
                                             <div class="card-stamp">
                                                 <div class="card-stamp-icon bg-primary">
-                                                <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-number-1">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                    <path d="M13 20v-16l-5 5" />
-                                                </svg>
+                                                    <img style="filter: invert(100%) sepia(0%) saturate(7441%) hue-rotate(237deg) brightness(118%) contrast(100%);" src="{{ asset('../static/svg/number-1.svg') }}" width="90" height="90">
                                                 </div>
                                             </div>
                                             <div class="card-body">
                                                 <a href="{{ route('investor.show', $investor) }}">
                                                     {{ $investor->investor_name }}
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-link">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M9 15l6 -6" />
-                                                        <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
-                                                        <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
-                                                    </svg><br>
+                                                    <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+                                                    <br>
                                                     <span class="badge bg-orange mt-2">Inversión (I): Lps. {{ number_format($investor->pivot->investor_investment) }}</span><br>
                                                     <span class="badge bg-cyan mt-2">Ganancia (C): Lps. {{ number_format($investor->pivot->investor_profit / 2,2) }}</span>
                                                 </a>
@@ -83,30 +75,17 @@
                                             <div class="card-stamp">
                                                 <div class="card-stamp-icon bg-primary">
                                                     @if($key == 1) <!-- Verifica si es el segundo card -->
-                                                        <!-- Imagen SVG para el segundo card -->
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-number-3">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                            <path d="M12 12a4 4 0 1 0 -4 -4" />
-                                                            <path d="M8 16a4 4 0 1 0 4 -4" />
-                                                        </svg>
+                                                        <img style="filter: invert(100%) sepia(0%) saturate(7441%) hue-rotate(237deg) brightness(118%) contrast(100%);" src="{{ asset('../static/svg/number-3.svg') }}" width="90" height="90">
                                                     @else
-                                                        <!-- Imagen SVG original -->
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-number-2">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                            <path d="M8 8a4 4 0 1 1 8 0c0 1.098 -.564 2.025 -1.159 2.815l-6.841 9.185h8" />
-                                                        </svg>
+                                                        <img style="filter: invert(100%) sepia(0%) saturate(7441%) hue-rotate(237deg) brightness(118%) contrast(100%);" src="{{ asset('../static/svg/number-2.svg') }}" width="90" height="90">
                                                     @endif
                                                 </div>
                                             </div>
                                             <div class="card-body">
                                                 <a href="{{ route('commission_agent.show', $commissioner) }}">
                                                     {{ $commissioner->commissioner_name }}
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-link">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M9 15l6 -6" />
-                                                        <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
-                                                        <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
-                                                    </svg><br>
+                                                    <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+                                                    <br>
                                                     <span class="badge bg-secondary mt-2">Comisión: Lps. {{ number_format($commissioner->pivot->commissioner_commission,2) }}</span>
                                                 </a>
                                             </div>

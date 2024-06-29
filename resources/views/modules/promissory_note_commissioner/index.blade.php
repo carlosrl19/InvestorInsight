@@ -105,7 +105,7 @@ Pagarés comisionistas
                         </td>
                         <td>
                             <a href="{{ route('promissory_note_commissioner.report', $promissoryNote->id) }}" style="font-size: clamp(0.6rem, 3vw, 0.65rem);" class="btn btn-sm btn-red" data-toggle="modal" data-target="#pdfModal">
-                            &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="{{ asset('../static/svg/printer.svg') }}" width="20" height="20" alt="">
+                            &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
                             &nbsp;PAGARÉ
                             </a>
                         </td>
