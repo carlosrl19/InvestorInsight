@@ -12,22 +12,14 @@ Inversionistas
 
 @section('create')
 <button class="btn" onclick="goBack()" style="background-color: transparent; margin-right: 5px">
-    &nbsp;<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-back-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg>
+    &nbsp;<img src="{{ asset('../static/svg/arrow-back-up.svg') }}" width="20" height="20">&nbsp;
     Volver
 </button>
 @endsection
 
 @section('title')
 Historial de inversionista /&nbsp;
-<b class="text-muted">{{ $investor->investor_name }}&nbsp;
-    <svg class="mb-1" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-scan"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 9a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-        <path d="M4 8v-2a2 2 0 0 1 2 -2h2" />
-        <path d="M4 16v2a2 2 0 0 0 2 2h2" />
-        <path d="M16 4h2a2 2 0 0 1 2 2v2" />
-        <path d="M16 20h2a2 2 0 0 0 2 -2v-2" />
-        <path d="M8 16a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2" />
-    </svg>
-</b>
+<b class="text-muted">{{ $investor->investor_name }}</b>
 
 @endsection
 
@@ -37,27 +29,32 @@ Historial de inversionista /&nbsp;
         <div class="row mb-2">
             <div class="col-12">
                 <div class="card mb-2">
-                    <div class="card-body">
-                        <div class="accordion" id="accordion-example">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="heading-1">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true">
-                                    <h4>Información general del inversionista</h4>
-                                </button>
-                                </h2>
-                                <div id="collapse-1" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
-                                    <div class="accordion-body pt-0">
-                                        <strong>{{ $investor->investor_name }}</strong> es un inversionista con número de identidad <strong>{{ $investor->investor_dni }}</strong>, número de teléfono <strong>{{ $investor->investor_phone }}</strong>.
-                                        Recomendado por
-                                        <strong>
-                                        @if($referenceInvestor)
-                                        <a href="{{ route('investor.show', ['investor' => $referenceInvestor->id]) }}">
-                                            <strong>{{ $referenceInvestor->investor_name }}</strong>
-                                        </a>
-                                        @else
-                                        <strong class="text-red">(no tiene recomendación)</strong>,
-                                        @endif
-                                        </strong> tiene un fondo monetario de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
+                    <div class="card-body d-flex align-items-center">
+                        <div class="col-auto me-4">
+                            <img src="{{ asset('../static/svg/user-scan.svg') }}" width="90" height="90" alt="">
+                        </div>
+                        <div class="col">
+                            <div class="accordion" id="accordion-example">
+                                <div class="accordion-item" style="border: none;">
+                                    <h2 class="accordion-header" id="heading-1">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true">
+                                            <h4>Información general del inversionista</h4>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse-1" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
+                                        <div class="accordion-body pt-0">
+                                            <strong>{{ $investor->investor_name }}</strong> es un inversionista con número de identidad <strong>{{ $investor->investor_dni }}</strong>, número de teléfono <strong>{{ $investor->investor_phone }}</strong>.
+                                            Recomendado por
+                                            <strong>
+                                                @if($referenceInvestor)
+                                                    <a href="{{ route('investor.show', ['investor' => $referenceInvestor->id]) }}">
+                                                        <strong>{{ $referenceInvestor->investor_name }}</strong>&nbsp;<img style="margin-bottom: 0.4vh; filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+                                                    </a>
+                                                @else
+                                                    <strong class="text-red">(no tiene recomendación)</strong>,
+                                                @endif
+                                            </strong> tiene un fondo monetario de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -11,7 +11,7 @@ class ProviderFundsController extends Controller
 
     public function index()
     {
-        $provider_funds = Providerfunds::all();
+        $provider_funds = Providerfunds::get();
         return view("modules.provider_funds.index", compact("provider_funds"));
     }
 
@@ -27,9 +27,11 @@ class ProviderFundsController extends Controller
         return redirect()->route("provider_funds.index")->with("success","Fondo registrado exitosamente.");
     }
 
-    public function show(ProviderFunds $providerFunds)
+    public function show($id)
     {
-        //
+        $provider_fund = ProviderFunds::findOrFail($id);
+
+        return view("modules.provider_funds.show", compact("provider_fund"));
     }
 
     public function edit(ProviderFunds $providerFunds)

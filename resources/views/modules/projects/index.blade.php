@@ -147,7 +147,7 @@ Proyectos activos
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 <a href="#" class="text-blue" style="font-size: clamp(0.6rem, 3vw, 0.65rem); border: none; margin-right: 5px" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showModal{{ $project->id }}"></>
                                     {{ $project->project_name }}
-                                    &nbsp;<svg class="text-blue" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
+                                    &nbsp;<img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
                                 </a>
                                 @include('modules.projects._show')
                             </td>
@@ -159,7 +159,7 @@ Proyectos activos
                                     <a title="{{ $investor->investor_name }}" data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}
                                     <small>
                                         <sup>
-                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
+                                            <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
                                         </sup>
                                     </small><br>
                                 @endforeach
@@ -168,50 +168,32 @@ Proyectos activos
                             <td>L. {{ number_format($project->project_investment,2) }}</td>
                             <td>L. {{ number_format($project->investors->sum('pivot.investor_final_profit'),2) }}</td>
                             <td>
-                                <a href="{{ route('project.excel', $project) }}" class="badge bg-teal me-1">
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2sz" />
-                                        <path d="M8 11h8v7h-8z" />
-                                        <path d="M8 15h8" />
-                                        <path d="M11 11v7" />
-                                    </svg>
+                                <a href="{{ route('project.excel', $project) }}" class="badge bg-teal me-1 text-white">
+                                    <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-spreadsheet.svg') }}" width="20" height="20" alt="">
                                     EXCEL
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ route('promissory_note.report', $project->id) }}" class="badge bg-red me-1" data-toggle="modal" data-target="#pdfModal">
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-type-pdf"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" /><path d="M5 18h1.5a1.5 1.5 0 0 0 0 -3h-1.5v6" /><path d="M17 18h2" /><path d="M20 15h-3v6" /><path d="M11 15v6h1a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2h-1z" /></svg>
+                                <a href="{{ route('promissory_note.report', $project->id) }}" class="badge bg-red me-1 text-white" data-toggle="modal" data-target="#pdfModal">
+                                    <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
                                     PAGARÉ
                                 </a>
                             </td>
                             <td>
                                 @if($project->project_status == '0')
                                     <span class="badge badge-outline text-success me-1">
-                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-lock">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                            <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
-                                            <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
-                                            <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
-                                        </svg> FINALIZADO
+                                        <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/lock.svg') }}" width="20" height="20" alt="">
+                                        FINALIZADO
                                     </span>
                                 @elseif($project->project_status == '1')
                                     <span class="badge badge-outline text-cyan me-1 project-active" data-bs-toggle="modal" data-bs-target="#finishModal{{ $project->id }}">
-                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-lock-open">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                            <path d="M5 11m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
-                                            <path d="M12 16m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                            <path d="M8 11v-5a4 4 0 0 1 8 0" />
-                                        </svg> TRABAJANDO
+                                        <img style="filter: invert(71%) sepia(60%) saturate(5470%) hue-rotate(149deg) brightness(89%) contrast(82%);" src="{{ asset('../static/svg/lock-open.svg') }}" width="20" height="20" alt="">
+                                        TRABAJANDO
                                     </span>
                                 @elseif($project->project_status == '2')
                                 <span class="badge bg-red me-1">
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-lock-off"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 11h2a2 2 0 0 1 2 2v2m0 4a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2h4" />
-                                        <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
-                                        <path d="M8 11v-3m.719 -3.289a4 4 0 0 1 7.281 2.289v4" />
-                                        <path d="M3 3l18 18" />
-                                    </svg> CERRADO
+                                    <img style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);" src="{{ asset('../static/svg/lock-code.svg') }}" width="20" height="20" alt="">
+                                    CERRADO
                                 </span>
                                 @else
                                     <span class="badge bg-dark me-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Existe un error en el estado del proyecto, revisar detalles del mismo.">ESTADO DESCONOCIDO</span> 
@@ -259,11 +241,7 @@ Proyectos activos
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <small class="text-muted dropdown-item">Acciones de finalización</small>
                                             <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#closeModal{{ $project->id }}">
-                                                <svg class="text-red" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-x">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                                                    <path d="M10 10l4 4m0 -4l-4 4" />
-                                                </svg>
+                                                <img style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);" src="{{ asset('../static/svg/circle-x.svg') }}" width="20" height="20" alt="">
                                                 &nbsp;Cerrar proyecto
                                             </a>
                                         </div>
@@ -273,13 +251,8 @@ Proyectos activos
                             @else
                                 <td>
                                     <span class="text-red">
-                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-lock-off">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                            <path d="M15 11h2a2 2 0 0 1 2 2v2m0 4a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2h4" />
-                                            <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
-                                            <path d="M8 11v-3m.719 -3.289a4 4 0 0 1 7.281 2.289v4" />
-                                            <path d="M3 3l18 18" />
-                                        </svg> Ninguna
+                                        <img style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);" src="{{ asset('../static/svg/lock-code.svg') }}" width="20" height="20" alt="">
+                                        Ninguna
                                     </span>
                                 </td>
                             @endif

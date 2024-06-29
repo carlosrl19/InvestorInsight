@@ -52,7 +52,7 @@ class ProviderController extends Controller
         $provider->provider_balance = $request->input('provider_new_funds');
         $provider->save();
     
-        // Obtén los datos validados y añade los campos necesarios para InvestorFunds
+        // Obtén los datos validados y añade los campos necesarios para providerFunds
         $validatedData = $request->validated();
         $validatedData['provider_id'] = $provider->id;
         $validatedData['provider_change_date'] = $todayDate;
@@ -60,7 +60,7 @@ class ProviderController extends Controller
         $validatedData['provider_new_funds'] = $provider->provider_balance;
         $validatedData['provider_new_funds_comment'] = $request->input('provider_new_funds_comment');
     
-        // Crea el registro en InvestorFunds usando create
+        // Crea el registro en providerFunds usando create
         ProviderFunds::create($validatedData);
     
         // Redirige con un mensaje de éxito
@@ -70,10 +70,12 @@ class ProviderController extends Controller
     public function show($id)
     {
         $provider = Provider::findOrFail($id);
+        $providerFunds = ProviderFunds::where('provider_id', '=', $id)->orderBy('created_at')->get(); 
+
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
-        return view("modules.providers.show", compact("provider", "total_investor_balance", "total_commissioner_balance"));
+        return view("modules.providers.show", compact("provider", "providerFunds", "total_investor_balance", "total_commissioner_balance"));
     }
 
     public function edit($id)
