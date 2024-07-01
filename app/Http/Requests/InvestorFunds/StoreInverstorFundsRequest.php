@@ -44,7 +44,7 @@ class StoreInverstorFundsRequest extends FormRequest
 
             // Investor new funds messages
             'investor_new_funds.numeric' => 'El nuevo fondo del inversionista solo debe contener números.',
-            'investor_new_funds.regex' => 'El nuevo fondo del inversionista no puede contener letras ni sím0bolos.',
+            'investor_new_funds.regex' => 'El nuevo fondo del inversionista no puede contener letras ni símbolos.',
             'investor_new_funds.min' => 'El nuevo fondo del inversioinsta debe ser mayor a 0.',
             'investor_new_funds.gte' => 'El nuevo fondo del inversionista debe ser mayor o igual al fondo actual.',
         ];
