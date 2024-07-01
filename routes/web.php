@@ -23,7 +23,8 @@ Route::resource('provider', 'App\Http\Controllers\ProviderController')->names('p
 Route::post('provider/{id}/fund', 'App\Http\Controllers\ProviderController@fund')->name('provider.fund');
 
 // Providers Funds
-Route::resource('provider_funds', 'App\Http\Controllers\InvestorFundsController')->names('provider_funds');
+Route::resource('provider_funds', 'App\Http\Controllers\ProviderFundsController')->names('provider_funds');
+Route::get('provider_funds/{id}/bill', 'App\Http\Controllers\ProviderFundsController@showBill')->name('provider_funds.bill');
 
 // Transfer
 Route::resource('transfer', 'App\Http\Controllers\TransferController')->names('transfer');

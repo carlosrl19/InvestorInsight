@@ -1,3 +1,5 @@
+<title>#PG-{{ $promissoryNote->promissoryNote_code }}</title>
+
 <div class="main">
 
 	<!-- Code container -->

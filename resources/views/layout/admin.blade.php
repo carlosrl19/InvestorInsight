@@ -43,12 +43,12 @@
           <div class="navbar-nav flex-row order-md-last">
             <div class="d-none d-md-flex">
               <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Activar modo oscuro"
-                data-bs-toggle="tooltip" data-bs-placement="bottom" onclick="changeTheme('dark')">
+                data-bs-toggle="tooltip" data-bs-placement="bottom">
                 <img src="{{ asset('../static/svg/moon.svg') }}" width="20" height="20">
               </a>
 
               <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Activar modo claro"
-                data-bs-toggle="tooltip" data-bs-placement="bottom" onclick="changeTheme('light')">
+                data-bs-toggle="tooltip" data-bs-placement="bottom">
                 <img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(73deg) brightness(103%) contrast(103%);" src="{{ asset('../static/svg/sun.svg') }}" width="20" height="20">
               </a>
               <div class="nav-item dropdown d-none d-md-flex me-3">

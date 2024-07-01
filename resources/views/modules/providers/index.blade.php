@@ -61,7 +61,6 @@ Proveedores
                             <th>NOMBRE PROVEEDOR</th>
                             <th>Nº IDENTIDAD</th>
                             <th>Nº TELÉFONO</th>
-                            <th>FONDO MONETARIO</th>
                             <th>DESCRIPCIÓN</th>
                             <th style="width: 8vh">ACCIONES</th>
                         </tr>
@@ -81,11 +80,6 @@ Proveedores
                                 </td>
                                 <td>{{ $provider->provider_dni }}</td>
                                 <td>{{ $provider->provider_phone }}</td>
-                                @if($provider->provider_balance <= 0)
-                                    <td><span class="text-light badge bg-red">Lps. {{ number_format($provider->provider_balance,2) }}</span></td>
-                                @else
-                                    <td>Lps. {{ number_format($provider->provider_balance,2) }}</td>
-                                @endif
                                 <td>{{ $provider->provider_description }}</td>
                                 <td>
                                     @include('modules.providers._delete')

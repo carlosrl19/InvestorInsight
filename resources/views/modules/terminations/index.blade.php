@@ -87,7 +87,7 @@ Proyectos finiquitados
                             <td>L. {{ number_format($project->investors->sum('pivot.investor_final_profit'),2) }}</td>
                             <td>
                                 @if($project->project_status == 0)
-                                <a href="{{ route('termination.report', $project->id) }}" class="badge bg-red me-1" data-toggle="modal" data-target="#pdfModal">
+                                <a href="{{ route('termination.report', $project->id) }}" class="badge bg-red me-1 text-white" data-toggle="modal" data-target="#pdfModal">
                                     <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
                                     FINIQUITO
                                 </a>
@@ -97,8 +97,8 @@ Proyectos finiquitados
                             </td>
                             <td>
                                 @if($project->project_status == '0')
-                                    <span class="badge badge-outline text-success me-1">
-                                        <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/lock.svg') }}" width="20" height="20" alt="">
+                                    <span class="badge badge-outline text-success me-1 text-white">
+                                        <img style="filter: brightness(0) saturate(100%) invert(49%) sepia(86%) saturate(434%) hue-rotate(78deg) brightness(98%) contrast(86%);" src="{{ asset('../static/svg/lock.svg') }}" width="20" height="20" alt="">
                                         FINALIZADO
                                     </span>
                                 @else

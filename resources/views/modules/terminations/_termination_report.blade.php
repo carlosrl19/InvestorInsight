@@ -1,3 +1,5 @@
+<title>#FQ-{{ $project->project_code }}</title>
+
 <div class="main">
 
 	<!-- Date container  -->

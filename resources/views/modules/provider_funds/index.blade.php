@@ -29,13 +29,7 @@
                                     <tr class="text-center">
                                         <td>{{ $provider_fund->provider->provider_name }}</td>
                                         <td>{{ $provider_fund->provider_change_date }}</td>
-
-                                        @if($provider_fund->provider_new_funds - $provider->provider_old_funds < 0)
-                                            <td class="text-red">L. {{ number_format($provider_fund->provider_new_funds - $provider_fund->provider_old_funds,2) }}</td>
-                                        @else
-                                            <td class="text-success">L. {{ number_format($provider_fund->provider_new_funds - $provider_fund->provider_old_funds,2) }}</td>
-                                        @endif
-
+                                        <td>L. {{ number_format($provider_fund->provider_new_funds,2)  }}</td>
                                         <td>{{ $provider_fund->provider_new_funds_comment }}</td>
                                     </tr>
                                 @endforeach

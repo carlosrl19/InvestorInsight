@@ -1,3 +1,5 @@
+<title>#NC-{{ $creditNote->creditNote_code }}</title>
+
 <div class="main">
 
 	<!-- Date container  -->
@@ -9,7 +11,7 @@
 
 	<!-- Code container -->
 	<div class="code-container-right">
-		<span class="text-bold">#{{ $creditNote->creditNote_code }}</span>
+		<span class="text-bold">#NC-{{ $creditNote->creditNote_code }}</span>
 	</div>
 	
 	<!-- Credit's note title -->
