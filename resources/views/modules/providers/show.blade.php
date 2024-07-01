@@ -121,6 +121,12 @@ Historial de proveedor /&nbsp;
     </div>
 @endsection
 
+<style>
+    .dataTables_filter{
+        display: none;
+    }
+</style>
+
 @section('scripts')
 <!-- Redirect button -->
 <script src="{{ asset('customjs/return_redirect.js')}}"></script>
@@ -145,5 +151,5 @@ Historial de proveedor /&nbsp;
     $('#pdfModal').on('hidden.bs.modal', function (e) {
         $(this).find('#pdf-frame').attr('src', '');
     });
-</script>  
+</script>
 @endsection

@@ -296,7 +296,7 @@ class ProjectController extends Controller
         return redirect()->route('project.index', compact('project'))->with('success', 'Proyecto finalizado exitosamente.');
     }
 
-    public function downloadTerminationReport($id)
+    public function showTermination($id)
     {
         // Cargar el proyecto junto con los inversores y comisionados
         $project = Project::with(['investors', 'commissioners'])->findOrFail($id);

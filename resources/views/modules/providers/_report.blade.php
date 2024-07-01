@@ -2,7 +2,7 @@
 <html>
    <head>
       <meta charset="utf-8" />
-      <title>Tax Invoice</title>
+      <title>{{ $provider_fund->provider->provider_name }} - FACTURA</title>
       <link rel="shortcut icon" type="image/png" href="./favicon.png" />
       <style>
          * {

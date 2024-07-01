@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProviderFunds\StoreProviderRequest;
+use App\Models\Provider;
 use App\Models\ProviderFunds;
 use Luecano\NumeroALetras\NumeroALetras;
 use Dompdf\Options;
@@ -39,7 +40,6 @@ class ProviderFundsController extends Controller
 
     public function showBill($id)
     {
-        // Cargar el proyecto junto con los inversores y comisionados
         $provider_fund = ProviderFunds::findOrFail($id);
 
         $change_date = $provider_fund->provider_change_date;
@@ -75,6 +75,51 @@ class ProviderFundsController extends Controller
        return response($pdf->output(), 200)
         ->header('Content-Type', 'application/pdf')
         ->header('Content-Disposition', 'inline; filename="PDF FINIQUITO.pdf"');
+    }
+
+    public function downloadBill($id)
+    {
+        $provider_fund = ProviderFunds::findOrFail($id);
+
+        $change_date = $provider_fund->provider_change_date;
+        $day = Carbon::parse($change_date)->format('d');
+        $month = Carbon::parse($change_date)->translatedFormat('F');
+        $year = Carbon::parse($change_date)->format('Y');
+
+        // Configuración de opciones para Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+
+        // Opcion que habilita la carga de imagenes
+        $options->set('chroot', realpath(''));
+
+        // Crear instancia de Dompdf con las opciones configuradas
+        $pdf = new Dompdf($options);
+
+        // Formateador de números a letras
+        $formatter = new NumeroALetras();
+        $valorLetras = $formatter->toWords($provider_fund->provider_new_funds);
+
+        // Cargar el contenido de la vista en Dompdf
+        $pdf->loadHtml(view('modules.providers._report', compact('provider_fund', 'day', 'month', 'year', 'valorLetras')));
+
+        // Establecer el tamaño y la orientación del papel
+        $pdf->setPaper('A4', 'portrait');
+
+        // Renderizar el PDF
+        $pdf->render();
+
+        $provider = Provider::where('id', $provider_fund->provider_id)->first();
+        $provider_name = $provider->provider_name;
+    
+        // Crear el nombre del archivo con el formato deseado
+        $file_name = $provider_name . ' - FACTURA.pdf';
+
+        // Devolver el PDF para descarga forzada
+        return response()->streamDownload(function () use ($pdf, $provider_fund) {
+            echo $pdf->output();
+        }, $file_name);
     }
 
     public function edit(ProviderFunds $providerFunds)

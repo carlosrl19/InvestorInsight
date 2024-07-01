@@ -25,6 +25,7 @@ Route::post('provider/{id}/fund', 'App\Http\Controllers\ProviderController@fund'
 // Providers Funds
 Route::resource('provider_funds', 'App\Http\Controllers\ProviderFundsController')->names('provider_funds');
 Route::get('provider_funds/{id}/bill', 'App\Http\Controllers\ProviderFundsController@showBill')->name('provider_funds.bill');
+Route::get('provider_funds/{id}/bill/download', 'App\Http\Controllers\ProviderFundsController@downloadBill')->name('provider_funds.bill_download');
 
 // Transfer
 Route::resource('transfer', 'App\Http\Controllers\TransferController')->names('transfer');
@@ -57,7 +58,7 @@ Route::get('excel/projects/in_process', 'App\Http\Controllers\ProjectController@
 Route::get('excel/projects/in_process/{investorId}', 'App\Http\Controllers\ProjectController@exportActiveInvestorProjects')->name('project.active_investor_projects');
 
 // Terminate project
-Route::get('/termination/{id}', 'App\Http\Controllers\ProjectController@downloadTerminationReport')->name('project.termination');
+Route::get('/termination/{id}', 'App\Http\Controllers\ProjectController@showTermination')->name('project.termination');
 
 // Project terminations
 Route::resource('termination', 'App\Http\Controllers\ProjectTerminationController')->names('termination');
