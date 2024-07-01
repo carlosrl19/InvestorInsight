@@ -7,12 +7,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <div id="search-filters-funds-container">FILTROS</div>
-                    </div>
-                </div>
-
                 <div class="card">
                     <div class="card-body">
                         <table id="exampleProviderFunds" class="display table table-bordered">
