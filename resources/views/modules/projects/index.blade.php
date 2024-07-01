@@ -68,11 +68,11 @@ Proyectos activos
 
             function redirectToExcel() {
                 window.location.href = "{{ route('project.excel', session('excel_project_id')) }}";
-                setTimeout(redirectToTermination, 1000);
+                setTimeout(redirectoToPromissoryNote, 1000);
             }
 
-            function redirectToTermination() {
-                window.location.href = "{{ route('project.termination', session('excel_project_id')) }}";
+            function redirectoToPromissoryNote() {
+                window.location.href = "{{ route('promissory_note.report_download', session('excel_project_id')) }}";
             }
         </script>
     @endif

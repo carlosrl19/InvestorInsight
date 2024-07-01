@@ -98,8 +98,8 @@
    </head>
    <body>
       <section class="main-pd-wrapper" style="margin: auto; border: 1px solid #000; padding: 20px;">
-         <div style="text-align: center; margin: auto; line-height: 1.5; font-size: 14px; color: #4a4a4a;">
-            <img src="static/logo.png" alt="logo-img">
+         <img style="float: right" src="static/logo.png" alt="logo-img">
+         <div style="text-align: justify; margin: auto; line-height: 1.5; font-size: 14px; color: #4a4a4a;">
             <p style="font-weight: bold; color: #000; margin-top: 15px; font-size: 18px;">
                INVERSIONES ROBENIOR
             </p>
@@ -107,7 +107,7 @@
                SAN PEDRO SULA, CORTÉS, HONDURAS, CA
             </p>
             <p>
-               <b>COMPROBANTE DE PAGO</b>
+               <b>{{ $provider_fund->provider_change_date }}</b>
             </p>
          </div>
 
