@@ -2,18 +2,28 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #883939">
             <div class="modal-header">
-                <h5 class="modal-title">Confirmar</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title">Confirmar acción</h5>
             </div>
             <form action="{{ route('investor.destroy', $investor->id) }}"
                 method="POST">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">
-                    <p class="text-left">Esta intentando eliminar a un inversionista, esta acción no se puede deshacer y eliminará por completo toda información referente sobre proyectos, transferencias, notas crédito, pagarés y todo todo movimiento realizado por el inversionista <strong style="text-transform: uppercase">{{ $investor->investor_name }}</strong>.</p>
-
-                    <button style="float: left;" type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
-                    <button style="float: left; margin-left: 5px; margin-bottom: 25px" type="submit" class="btn btn-danger">Confirmar acción</button>
+                    <div style="border: 2px solid red; padding: 10px; background-color: #f8d7da;">
+                    <p style="font-size: 16px; font-weight: bold;">¡ADVERTENCIA!</p>
+                    <p>Está a punto de tomar una acción permanente e irreversible: eliminar por completo al inversionista <strong style="text-transform: uppercase">{{ $investor->investor_name }}</strong>. 
+                    Esto borrará todo rastro de su actividad, incluyendo transacciones, historial de inversiones, y cualquier otro dato relacionado.</p>
+                    
+                    <p>Antes de proceder, se recomienda verificar cuidadosamente que esta es la acción correcta. Una vez eliminado, no habrá forma de recuperar la información del inversionista.</p>
+                    
+                    <p>Si está seguro de que desea continuar, haga clic en el botón "Confirmar acción" a continuación. De lo contrario, presione el botón "Cancelar" para evitar dicha eliminación.</p>
+                    
+                    <br>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-red" style="margin-left: 5px; background-color: red; font-size: 14px; font-weight: bold;">Confirmar acción</button>
+                    <br>
+                    <br>
+                    </div>
                 </div>
             </form>
         </div>
