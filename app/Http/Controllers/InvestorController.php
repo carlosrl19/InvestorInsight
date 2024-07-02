@@ -160,6 +160,14 @@ class InvestorController extends Controller
         return redirect()->route('investor.index')->with("success", "Fondo del inversionista actualizado exitosamente.");
     }
 
+    public function liquidate($id){
+        $investor = Investor::findOrFail($id);
+
+        // Actualizar el estado del proyecto
+        $investor->investor_status = '0';
+        $investor->save();
+    }
+
     public function update(UpdateRequest $request, Investor $investor)
     {
         $investor->update($request->all());
@@ -168,7 +176,9 @@ class InvestorController extends Controller
 
     public function destroy($id)
     {
-        Investor::destroy($id);
+        $investor = Investor::findOrFail($id);
+        $investor->delete();
+    
         return redirect()->route('investor.index')->with('success', 'Inversionista eliminado exitosamente.');
     }
 }

@@ -124,6 +124,7 @@ Inversionistas
                                                 Acciones
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- Modification's option -->
                                                 <small class="text-muted dropdown-item">Modificaciones</small>
                                                 <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-update-{{ $investor->id }}">
                                                     <img style="filter: invert(42%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(99%) contrast(93%);" src="{{ asset('../static/svg/edit.svg') }}" width="20" height="20" alt="">
@@ -138,6 +139,13 @@ Inversionistas
                                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $investor->id }}">
                                                     <img style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);" src="{{ asset('../static/svg/trash.svg') }}" width="20" height="20" alt="">
                                                     &nbsp;Eliminar inversionista
+                                                </a>
+
+                                                <!-- Liquidation's option -->
+                                                <small class="text-muted dropdown-item">Liquidación</small>
+                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-liquidate-{{ $investor->id }}">
+                                                    <img style="filter: invert(42%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(99%) contrast(93%);" src="{{ asset('../static/svg/user-down.svg') }}" width="20" height="20" alt="">
+                                                    &nbsp;Liquidar inversionista
                                                 </a>
                                             </div>
                                         </div>
@@ -262,6 +270,27 @@ Inversionistas
                                                 </div>
                                                 <a href="{{ route('investor.index') }}" class="btn btn-dark me-auto">Volver</a>
                                                 <button type="submit" class="btn btn-teal">Guardar cambios</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Liquidation modal -->
+                            <div class="modal modal-blur fade" id="modal-liquidate-{{ $investor->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content" style="border: 2px solid #52524E">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Liquidar inversionista</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST" action="{{ route('investor.liquidate', $investor->id) }}" novalidate>
+                                                @method('PUT')
+                                                @csrf
+                                                <p>Liquidar a un inversionista se refiere al proceso de cerrar o terminar la participación de un inversionista en una empresa o proyecto.</p>
+                                                <a href="{{ route('investor.index') }}" class="btn btn-dark me-auto">Volver</a>
+                                                <button type="submit" class="btn btn-teal">Confirmar liquidación</button>
                                             </form>
                                         </div>
                                     </div>

@@ -10,7 +10,8 @@ return new class extends Migration
     {
         Schema::create('investor_funds', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('investor_id');
+            $table->unsignedBigInteger('investor_id');
+            $table->foreign('investor_id')->references('id')->on('investors')->onDelete('cascade');
             $table->dateTime('investor_change_date');
             $table->decimal('investor_old_funds',10,2);
             $table->decimal('investor_new_funds',10,2);

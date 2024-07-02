@@ -124,7 +124,7 @@
                 </p>
             </div>
 
-            <div style="display:inline-block; float: right; line-height: 1.5; font-size: 12px; color: #4a4a4a;">
+            <div style="display:inline; float: right; line-height: 1.5; font-size: 12px; color: #4a4a4a;">
                 <p style="font-weight: bold; color: #000; font-size: 12px;">
                 INFORMACIÓN DEL PROVEEDOR
                 </p>

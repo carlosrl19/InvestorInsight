@@ -13,6 +13,7 @@ Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name(
 // Investor
 Route::resource('investor', 'App\Http\Controllers\InvestorController')->names('investor');
 Route::post('investor/{id}/fund', 'App\Http\Controllers\InvestorController@fund')->name('investor.fund');
+Route::get('investor/{id}/liquidation','App\Http\Controllers\InvestorController@liquidate')->name('investor.liquidate');
 
 // Investor payments
 Route::resource('payments_investor', 'App\Http\Controllers\PaymentInvestorController')->names('payments_investor');

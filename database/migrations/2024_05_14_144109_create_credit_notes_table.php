@@ -10,7 +10,8 @@ return new class extends Migration
     {
         Schema::create('credit_notes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('investor_id');
+            $table->unsignedBigInteger('investor_id');
+            $table->foreign('investor_id')->references('id')->on('investors')->onDelete('cascade');
             $table->decimal('creditNote_amount', 10,2);
             $table->string('creditNote_description');
             $table->string('creditNote_code');

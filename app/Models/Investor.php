@@ -25,11 +25,19 @@ class Investor extends Model
     
     public function credit_note()
     {
-        return $this->hasMany(CreditNote::class, 'id');
+        return $this->hasMany(CreditNote::class, 'investor_id')
+                    ->onDelete('cascade');
+    }
+
+    public function investor_funds()
+    {
+        return $this->hasMany(InvestorFunds::class, 'investor_id')
+                    ->onDelete('cascade');
     }
 
     public function transfers()
     {
-        return $this->hasMany(Transfer::class);
+        return $this->hasMany(Transfer::class)
+                    ->onDelete('cascade');
     }
 }
