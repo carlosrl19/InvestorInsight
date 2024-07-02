@@ -35,6 +35,12 @@ class Investor extends Model
                     ->onDelete('cascade');
     }
 
+    public function investor_liquidations()
+    {
+        return $this->hasMany(InvestorLiquidations::class, 'investor_id')
+                    ->onDelete('cascade');
+    }
+
     public function transfers()
     {
         return $this->hasMany(Transfer::class)

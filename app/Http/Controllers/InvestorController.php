@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Investor\StoreRequest;
 use App\Http\Requests\Investor\UpdateRequest;
 use App\Http\Requests\InvestorFunds\StoreInverstorFundsRequest;
+use App\Http\Requests\InvestorLiquidations\StoreInvestorLiquidationsRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\CommissionAgent;
 use App\Models\CreditNote;
 use App\Models\Investor;
 use App\Models\InvestorFunds;
+use App\Models\InvestorLiquidations;
 use App\Models\Transfer;
 use Carbon\Carbon;
 
@@ -20,6 +22,7 @@ class InvestorController extends Controller
     {
         $investors = Investor::get();
         $investorFunds = InvestorFunds::get();
+        $investorLiquidations = investorLiquidations::get();
         $commissioners = CommissionAgent::get();
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
@@ -32,7 +35,7 @@ class InvestorController extends Controller
             return $investor;
         });
 
-        return view('modules.investors.index', compact('investors', 'todayDate', 'investorFunds', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.investors.index', compact('investors', 'todayDate', 'investorFunds', 'investorLiquidations', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
     }
     
     public function create()
@@ -143,6 +146,7 @@ class InvestorController extends Controller
     
         // Actualiza el balance del inversionista
         $investor->investor_balance = $request->input('investor_new_funds');
+        $investor->investor_status = '1';
         $investor->save();
     
         // Obtén los datos validados y añade los campos necesarios para InvestorFunds
@@ -160,12 +164,37 @@ class InvestorController extends Controller
         return redirect()->route('investor.index')->with("success", "Fondo del inversionista actualizado exitosamente.");
     }
 
-    public function liquidate($id){
+    public function liquidate(StoreInvestorLiquidationsRequest $request, $id){
         $investor = Investor::findOrFail($id);
+        $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
+        $oldFunds = $investor->investor_balance;
 
-        // Actualizar el estado del proyecto
-        $investor->investor_status = '0';
+        // Obtén los datos validados y añade los campos necesarios para InvestorLiquidate
+        $validatedData = $request->validated();
+        $validatedData['investor_id'] = $investor->id;
+        $validatedData['investor_liquidation_amount'] = $investor->investor_balance;
+        $validatedData['investor_liquidation_date'] = $todayDate;
+        
+        // Crea el registro en InvestorLiquidate usando create
+        InvestorLiquidations::create($validatedData);
+
+        // Obtén los datos validados y añade los campos necesarios para InvestorFunds
+        $validatedData = $request->validated();
+        $validatedData['investor_id'] = $investor->id;
+        $validatedData['investor_change_date'] = $todayDate;
+        $validatedData['investor_old_funds'] = $oldFunds;
+        $validatedData['investor_new_funds'] = 0.00;
+        $validatedData['investor_new_funds_comment'] = 'LIQUIDACIÓN AL INVERSIONISTA.';
+            
+        // Crea el registro en InvestorFunds usando create
+        InvestorFunds::create($validatedData);
+
+        // Actualizar el estado del inversionista y su fondo en 0.00
+        $investor->investor_status = '3';
+        $investor->investor_balance = '0.00';
         $investor->save();
+ 
+        return redirect()->route("investor.index")->with('success', 'Inversionista liquidado exitosamente.');
     }
 
     public function update(UpdateRequest $request, Investor $investor)

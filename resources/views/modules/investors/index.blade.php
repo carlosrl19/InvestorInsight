@@ -18,6 +18,10 @@ Inversionistas
 @endsection
 
 @section('create')
+<a href="#" class="btn bg-green text-white" style="font-size: clamp(0.6rem, 3vw, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-liquidations">
+    <img style="filter: brightness(0) saturate(100%) invert(89%) sepia(100%) saturate(1%) hue-rotate(258deg) brightness(104%) contrast(101%);" src="{{ asset('static/svg/user-down.svg') }}" width="16" height="16" alt="">&nbsp;Historial de liquidaciones
+</a>
+
 <a href="#" class="btn btn-orange" style="font-size: clamp(0.6rem, 3vw, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-funds">
     $ Historial de cambios en fondos
 </a>
@@ -108,9 +112,11 @@ Inversionistas
                                     @if($investor->investor_status == '1')
                                         <span class="badge bg-success me-1"></span> Disponible
                                     @elseif($investor->investor_status == '0')
-                                        <span class="badge bg-orange me-1"></span> No disponible
+                                        <span class="badge bg-orange me-1"></span> <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Habilite todas las acciones cambiando la disposición del inversionista a proyectos a 'Disponible' en el apartado de 'Actualizar información'.">No disponible</span>
+                                    @elseif($investor->investor_status == '3')
+                                        <span class="badge bg-cyan me-1"></span> <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Habilite todas las acciones cambiando la disposición del inversionista a proyectos a 'Disponible' en el apartado de 'Actualizar información'.">Liquidado / No disponible</span>
                                     @else
-                                        <span class="badge bg-red me-1"></span> Estado inválido
+                                        <span class="badge bg-red me-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Existe un error en el estado del inversionista."></span> Estado inválido
                                     @endif
                                 </td>
                                 <td>
@@ -118,38 +124,65 @@ Inversionistas
                                     @include('modules.investors._fund')
                                     
                                     @if($investor->id != 1)
-                                    <div class="btn-list flex-nowrap">
-                                        <div class="dropdown">
-                                            <button class="btn btn-sm dropdown-toggle align-text-top" data-bs-toggle="dropdown">
-                                                Acciones
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <!-- Modification's option -->
-                                                <small class="text-muted dropdown-item">Modificaciones</small>
-                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-update-{{ $investor->id }}">
-                                                    <img style="filter: invert(42%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(99%) contrast(93%);" src="{{ asset('../static/svg/edit.svg') }}" width="20" height="20" alt="">
-                                                    &nbsp;Actualizar información
-                                                </a>
+                                        @if($investor->investor_status != 3)
+                                        <div class="btn-list flex-nowrap">
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm dropdown-toggle align-text-top" data-bs-toggle="dropdown">
+                                                    Acciones
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <!-- Modification's option -->
+                                                    <small class="text-muted dropdown-item">Modificaciones</small>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-update-{{ $investor->id }}">
+                                                        <img style="filter: invert(42%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(99%) contrast(93%);" src="{{ asset('../static/svg/edit.svg') }}" width="20" height="20" alt="">
+                                                        &nbsp;Actualizar información
+                                                    </a>
 
-                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-fund{{ $investor->id }}">
-                                                    <img style="filter: invert(42%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(99%) contrast(93%);" src="{{ asset('../static/svg/coins.svg') }}" width="20" height="20" alt="">
-                                                    &nbsp;Agregar fondo
-                                                </a>
-                                                
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $investor->id }}">
-                                                    <img style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);" src="{{ asset('../static/svg/trash.svg') }}" width="20" height="20" alt="">
-                                                    &nbsp;Eliminar inversionista
-                                                </a>
+                                                    @if($investor->investor_status == 1)
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-fund{{ $investor->id }}">
+                                                        <img style="filter: invert(42%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(99%) contrast(93%);" src="{{ asset('../static/svg/coins.svg') }}" width="20" height="20" alt="">
+                                                        &nbsp;Agregar fondo
+                                                    </a>
+                                                    @endif
+                                                    
+                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $investor->id }}">
+                                                        <img style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);" src="{{ asset('../static/svg/trash.svg') }}" width="20" height="20" alt="">
+                                                        &nbsp;Eliminar inversionista
+                                                    </a>
 
-                                                <!-- Liquidation's option -->
-                                                <small class="text-muted dropdown-item">Liquidación</small>
-                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-liquidate-{{ $investor->id }}">
-                                                    <img style="filter: invert(42%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(99%) contrast(93%);" src="{{ asset('../static/svg/user-down.svg') }}" width="20" height="20" alt="">
-                                                    &nbsp;Liquidar inversionista
-                                                </a>
+                                                    <!-- Liquidation's option -->
+                                                    @if($investor->investor_balance > 0)
+                                                        <small class="text-muted dropdown-item">Liquidación</small>
+                                                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-liquidate-{{ $investor->id }}">
+                                                            <img style="filter: invert(42%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(99%) contrast(93%);" src="{{ asset('../static/svg/user-down.svg') }}" width="20" height="20" alt="">
+                                                            &nbsp;Liquidar inversionista
+                                                        </a>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        @else
+                                        <div class="btn-list flex-nowrap">
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm dropdown-toggle align-text-top" data-bs-toggle="dropdown">
+                                                    Acciones
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <!-- Modification's option -->
+                                                    <small class="text-muted dropdown-item">Modificaciones</small>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-update-{{ $investor->id }}">
+                                                        <img style="filter: invert(42%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(99%) contrast(93%);" src="{{ asset('../static/svg/edit.svg') }}" width="20" height="20" alt="">
+                                                        &nbsp;Actualizar información
+                                                    </a>
+
+                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $investor->id }}">
+                                                        <img style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);" src="{{ asset('../static/svg/trash.svg') }}" width="20" height="20" alt="">
+                                                        &nbsp;Eliminar inversionista
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
                                     @else
                                     <strong class="text-red">No disponible</strong>
                                     @endif
@@ -288,9 +321,20 @@ Inversionistas
                                             <form method="POST" action="{{ route('investor.liquidate', $investor->id) }}" novalidate>
                                                 @method('PUT')
                                                 @csrf
-                                                <p>Liquidar a un inversionista se refiere al proceso de cerrar o terminar la participación de un inversionista en una empresa o proyecto.</p>
-                                                <a href="{{ route('investor.index') }}" class="btn btn-dark me-auto">Volver</a>
-                                                <button type="submit" class="btn btn-teal">Confirmar liquidación</button>
+                                                <div style="border: 2px solid orange; padding: 10px; background-color: #fff3cd;">
+                                                    <p style="font-size: 16px; margin-left: 39%; font-weight: bold; margin-bottom: 15px">¡ATENCIÓN!</p>
+                                                    <p>Estás a punto de realizar la liquidación del inversionista <strong style="text-transform: uppercase">{{ $investor->investor_name }}</strong>. Esta acción conllevará el cierre definitivo de todas las cuentas y posiciones relacionadas con este inversionista, una vez confirmado el proceso, no habrá marcha atrás.</p>
+                                                    <p>Si estás seguro de que deseas proceder con la liquidación, haz clic en el botón "Liquidar" a continuación. De lo contrario, te sugerimos considerar alternativas, como la suspensión temporal de la relación con el inversionista.</p>
+
+                                                    <input type="hidden" name="investor_liquidation_amount" value="{{ $investor->investor_balance }}">
+                                                    <input type="hidden" name="investor_liquidation_date" value="{{ $todayDate }}">
+    
+                                                    <br>
+                                                    <button type="button" style="margin-left: 22%" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button class="btn btn-orange" style="margin-left: 5px; background-color: orange; font-size: 14px; font-weight: bold;">Liquidar inversionista</button>
+                                                    <br>
+                                                    <br>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -305,6 +349,7 @@ Inversionistas
 
 @include('modules.investors._create')
 @include('modules.investors_funds.index')
+@include('modules.investors_liquidations.index')
 
 @endsection
 
@@ -318,5 +363,6 @@ Inversionistas
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('customjs/datatable/dt_investor.js') }}"></script>
 <script src="{{ asset('customjs/datatable/dt_investor_funds.js') }}"></script>
+<script src="{{ asset('customjs/datatable/dt_investor_liquidations.js') }}"></script>
 
 @endsection

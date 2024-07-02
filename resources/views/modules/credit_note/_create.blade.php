@@ -79,18 +79,18 @@
                         </div>
                     </div>
                     <div class="row mb-3 align-items-end">
-                            <div class="col">
-                                <div class="form-floating">
-                                    <textarea maxlength="255" style="overflow: hidden; height: 100px; resize: none" class="form-control @error('creditNote_description') is-invalid @enderror" autocomplete="off" name="creditNote_description" id="creditNote_description"> </textarea>
-                                    @error('creditNote_description')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <label for="creditNote_description">Comentarios</label>
-                                </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea maxlength="255" style="overflow: hidden; height: 100px; resize: none" class="form-control @error('creditNote_description') is-invalid @enderror" autocomplete="off" name="creditNote_description" id="creditNote_description"> </textarea>
+                                @error('creditNote_description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <label for="creditNote_description">Comentarios</label>
                             </div>
                         </div>
+                    </div>
                     <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-teal">Guardar</button>
                 </form>

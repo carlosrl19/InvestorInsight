@@ -13,13 +13,17 @@ Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name(
 // Investor
 Route::resource('investor', 'App\Http\Controllers\InvestorController')->names('investor');
 Route::post('investor/{id}/fund', 'App\Http\Controllers\InvestorController@fund')->name('investor.fund');
-Route::get('investor/{id}/liquidation','App\Http\Controllers\InvestorController@liquidate')->name('investor.liquidate');
+Route::put('investor/{id}/liquidation','App\Http\Controllers\InvestorController@liquidate')->name('investor.liquidate');
 
 // Investor payments
 Route::resource('payments_investor', 'App\Http\Controllers\PaymentInvestorController')->names('payments_investor');
 
 // Investor funds
 Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController')->names('investors_funds');
+
+// Investor liquidations
+Route::resource('investors_liquidations', 'App\Http\Controllers\InvestorLiquidationsController')->names('investors_liquidations');
+Route::get('investors_liquidations/{id}/voucher/download', 'App\Http\Controllers\InvestorLiquidationsController@downloadVoucher')->name('investors_liquidations.voucher_download');
 
 // Commission Agent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');
