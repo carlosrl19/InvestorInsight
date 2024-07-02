@@ -20,7 +20,7 @@
                                     <th>NOMBRE PROVEEDOR</th>
                                     <th>FECHA PAGO</th>
                                     <th>MONTO PAGO</th>
-                                    <th>EXPORTAR FACTURA</th>
+                                    <th>DESCARGAR COMPROBANTE</th>
                                     <th>MOTIVO / COMENTARIOS</th>
                                 </tr>
                             </thead>
@@ -33,7 +33,7 @@
                                         <td>
                                             <a href="{{ route('provider_funds.bill_download', $provider_fund->id) }}" class="badge bg-red me-1 text-white">
                                                 <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
-                                                FACTURA
+                                                COMPROBANTE
                                             </a>
                                         </td>
                                         <td>{{ $provider_fund->provider_new_funds_comment }}</td>

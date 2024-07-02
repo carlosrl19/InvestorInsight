@@ -114,7 +114,7 @@ class ProviderFundsController extends Controller
         $provider_name = $provider->provider_name;
     
         // Crear el nombre del archivo con el formato deseado
-        $file_name = $provider_name . ' - FACTURA.pdf';
+        $file_name = $provider_name . ' - COMPROBANTE.pdf';
 
         // Devolver el PDF para descarga forzada
         return response()->streamDownload(function () use ($pdf, $provider_fund) {

@@ -36,7 +36,7 @@
                                 <input type="number" readonly value="{{ $provider->provider_balance }}"
                                     name="provider_old_funds" id="provider_old_funds"
                                     class="form-control @error('provider_old_funds') is-invalid @enderror"
-                                    autocomplete="off" autofocus style="background-color: #fff6e980" />
+                                    autocomplete="off" autofocus/>
                                 @error('provider_old_funds')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -79,7 +79,7 @@
                                         style="display: none;">
                                         <strong></strong>
                                     </span>
-                                    <label for="provider_new_funds_comment">Comentarios</label>
+                                    <label for="provider_new_funds_comment">Comentarios / Motivo de pago</label>
                                 </div>
                             </div>
                         </div>

@@ -35,7 +35,7 @@
                                 <input type="number" readonly value="{{ $investor->investor_balance }}"
                                     name="investor_old_funds" id="investor_old_funds"
                                     class="form-control @error('investor_old_funds') is-invalid @enderror"
-                                    autocomplete="off" autofocus style="background-color: #fff6e980" />
+                                    autocomplete="off" autofocus/>
                                 @error('investor_old_funds')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -67,7 +67,7 @@
                                     <textarea maxlength="255"
                                         class="form-control @error('investor_new_funds_comment') is-invalid @enderror"
                                         autocomplete="off" maxlength="255" name="investor_new_funds_comment" id="investor_new_funds_comment"
-                                        style="resize: none; height: 100px" oninput="this.value = this.value.toUpperCase()">{{ old('investor_new_funds_comment')}}</textarea>
+                                        style="resize: none; height: 100px;" oninput="this.value = this.value.toUpperCase()">{{ old('investor_new_funds_comment')}}</textarea>
                                     @error('investor_new_funds_comment')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -77,7 +77,7 @@
                                         style="display: none;">
                                         <strong></strong>
                                     </span>
-                                    <label for="investor_new_funds_comment">Comentarios</label>
+                                    <label for="investor_new_funds_comment">Comentarios / Motivo para agregar fondos</label>
                                 </div>
                             </div>
                         </div>

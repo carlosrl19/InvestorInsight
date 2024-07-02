@@ -2,8 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Home route (redirect to dashboard)
+Route::get('/', function () {
+    return redirect()->route('dashboard.index');
+})->name('dashboard.index');
+
 // Dashboard
-Route::resource('dashboard', 'App\Http\Controllers\DashboardController')->names('dashboard');
+Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard.index');
 
 // Investor
 Route::resource('investor', 'App\Http\Controllers\InvestorController')->names('investor');

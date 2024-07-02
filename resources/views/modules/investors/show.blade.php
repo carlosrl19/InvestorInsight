@@ -79,9 +79,9 @@ Historial de inversionista /&nbsp;
                                         <thead>
                                             <tr>
                                                 <th>FECHA CAMBIO</th>
+                                                <th>MOVIMIENTOS EN FONDOS</th>
                                                 <th>FONDO ANTERIOR</th>
-                                                <th>DEPOSITO / CAMBIO EN FONDOS</th>
-                                                <th>NUEVO FONDO</th>
+                                                <th>FONDO FINAL</th>
                                                 <th>MOTIVO / COMENTARIO</th>
                                             </tr>
                                         </thead>
@@ -89,14 +89,14 @@ Historial de inversionista /&nbsp;
                                             @forelse ($investorFunds as $investor)
                                             <tr>
                                                 <td>{{ $investor->investor_change_date }}</td>
-                                                <td>L. {{ number_format($investor->investor_old_funds, 2) }}</td>
-                                                
+                                                                                                
                                                 @if($investor->investor_new_funds - $investor->investor_old_funds < 0)
                                                     <td class="text-red">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
                                                 @else
                                                     <td class="text-success">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
                                                 @endif
-                                                
+
+                                                <td>L. {{ number_format($investor->investor_old_funds, 2) }}</td>
                                                 <td>L. {{ number_format($investor->investor_new_funds,2) }}</td>
                                                 <td>{{ $investor->investor_new_funds_comment}}</td>
                                             </tr>

@@ -76,7 +76,7 @@ Historial de proveedor /&nbsp;
                                             <tr class="text-center">
                                                 <th>FECHA CAMBIO</th>
                                                 <th>DEPOSITO / CAMBIO EN FONDOS</th>
-                                                <th>EXPORTAR FACTURA</th>
+                                                <th>EXPORTAR COMPROBANTE</th>
                                                 <th>MOTIVO / COMENTARIO</th>
                                             </tr>
                                         </thead>
@@ -88,7 +88,7 @@ Historial de proveedor /&nbsp;
                                                     <td>
                                                         <a href="{{ route('provider_funds.bill', $provider_fund->id) }}" class="badge bg-red me-1 text-white" data-toggle="modal" data-target="#pdfModal">
                                                             <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
-                                                            FACTURA
+                                                            COMPROBANTE
                                                         </a>
                                                     </td>
                                                     <td>{{ $provider_fund->provider_new_funds_comment }}</td>
@@ -99,7 +99,7 @@ Historial de proveedor /&nbsp;
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="pdfModalLabel">Previsualización de factura de pago</h5>
+                                                            <h5 class="modal-title" id="pdfModalLabel">Previsualización de comprobante</h5>
                                                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">

@@ -190,11 +190,16 @@ class ProjectController extends Controller
             $investorFunds->investor_change_date = now();
             $investorFunds->investor_old_funds = $investor->investor_balance + $validatedData['transfer_amount'];
             $investorFunds->investor_new_funds = $investor->investor_balance;
-            $investorFunds->investor_new_funds_comment = 'FONDO A CAPITAL DE PROYECTO ' . $validatedData['project_name'] . ' - CODIGO DE PROYECTO #' . $generatedCode . '.';
+            $investorFunds->investor_new_funds_comment = 'FONDO A CAPITAL DE PROYECTO ' . $validatedData['project_name'] . ' - CODIGO #' . $generatedCode . '.';
             $investorFunds->save();
-        } else {
+        }
+
+        /* Suma al investor_balance el valor del transfer_amount cuando el transfer_bank no es FONDOS
+        
+        else {
             $investor->investor_balance += $validatedData['transfer_amount'];
         }
+        */
     
         $investor->save();
     
@@ -257,12 +262,12 @@ class ProjectController extends Controller
         // Validar los datos recibidos
         $request->validate([
             'project_proof_transfer_img' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
-
+    
             // Project proof transfer img messages
             'project_proof_transfer_img.image' => 'El comprobante de pago de transferencia del proyecto debe ser una imagen válida.',
             'project_proof_transfer_img.mimes' => 'El formato de imagen debe ser jpeg, png, jpg, svg.',
         ]);
-
+    
         // Procesar la imagen
         if ($request->hasFile('project_proof_transfer_img')) {
             $imageName = time() . '.' . $request->project_proof_transfer_img->extension();
@@ -271,27 +276,36 @@ class ProjectController extends Controller
         } else {
             $project->project_proof_transfer_img = 'no-image.png';
         }
-
+    
         // Actualizar el estado del proyecto
         $project->project_status = '0';
         $project->save();
-
+    
         // Sumar el investor_final_investment al investor_balance de cada inversor asociado al proyecto
         foreach ($project->investors as $investor) {
             $investor->investor_balance += $investor->pivot->investor_final_profit + $investor->pivot->investor_investment;
             $investor->save();
+    
+            // Guardar el registro en InvestorFunds
+            $investorFunds = new InvestorFunds();
+            $investorFunds->investor_id = $investor->id;
+            $investorFunds->investor_change_date = now();
+            $investorFunds->investor_old_funds = $investor->investor_balance - ($investor->pivot->investor_final_profit + $investor->pivot->investor_investment);
+            $investorFunds->investor_new_funds = $investor->investor_balance;
+            $investorFunds->investor_new_funds_comment = 'GANANCIA + CAPITAL A FONDO POR PROYECTO ' . $project->project_name . ' - CODIGO #' . $project->project_code . '.';
+            $investorFunds->save();
         }
-
+    
         // Sumar el commissioner_commission al commissioner_balance de cada comisionista asociado al proyecto
         foreach ($project->commissioners as $commissioner) {
             $commissioner->commissioner_balance += ($commissioner->pivot->commissioner_commission);
             $commissioner->save();
         }
-
+    
         // Guardar el ID del proyecto en la sesión para la generación del PDF y Excel
         // Esto funciona con JS en el project.index que detecta el project->id para el PDF y lo hace descargar automáticamente
         session()->flash('project_id', $project->id);
-
+    
         // Redirigir con un mensaje de éxito
         return redirect()->route('project.index', compact('project'))->with('success', 'Proyecto finalizado exitosamente.');
     }

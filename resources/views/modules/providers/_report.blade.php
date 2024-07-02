@@ -2,7 +2,7 @@
 <html>
    <head>
       <meta charset="utf-8" />
-      <title>{{ $provider_fund->provider->provider_name }} - FACTURA</title>
+      <title>{{ $provider_fund->provider->provider_name }} - COMPROBANTE</title>
       <link rel="shortcut icon" type="image/png" href="./favicon.png" />
       <style>
          * {
@@ -98,9 +98,9 @@
    </head>
    <body>
       <section class="main-pd-wrapper" style="margin: auto; border: 1px solid #000; padding: 20px;">
-         <img style="float: right" src="static/logo.png" alt="logo-img">
+         <img style="margin-left: 80%;" width="18" height="16" src="static/svg/robenior.svg" alt="logo-img">
          <div style="text-align: justify; margin: auto; line-height: 1.5; font-size: 14px; color: #4a4a4a;">
-            <p style="font-weight: bold; color: #000; margin-top: 15px; font-size: 18px;">
+            <p style="font-weight: bold; color: #000; margin-top: -15px; font-size: 18px;">
                INVERSIONES ROBENIOR
             </p>
             <p style="margin: 15px auto;">
