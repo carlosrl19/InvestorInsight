@@ -204,6 +204,9 @@
                         <a class="dropdown-item" href="{{ route('payments_investor.index') }}">
                           <small>->&nbsp;</small>Pagos inversionistas
                         </a>
+                        <a class="dropdown-item" href="{{ route('payments_commissioner.index') }}">
+                          <small>->&nbsp;</small>Pagos comisionistas
+                        </a>
                       </div>
                     </div>
                   </div>

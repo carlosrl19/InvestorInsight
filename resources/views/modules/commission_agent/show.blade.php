@@ -41,7 +41,7 @@ Historial de comisionista /&nbsp;
                                     </h2>
                                     <div id="collapse-1" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
                                         <div class="accordion-body pt-0">
-                                            <strong>{{ $commissioner->commissioner_name }}</strong> es un comisionista con número de identidad <strong>{{ $commissioner->commissioner_dni }}</strong>, número de teléfono <strong>{{ $commissioner->commissioner_phone }}</strong>.
+                                            <strong>{{ $commissioner->commissioner_name }}</strong> es un comisionista con número de identidad <strong>{{ $commissioner->commissioner_dni }}</strong>, número de teléfono <strong>{{ $commissioner->commissioner_phone }}</strong>,
                                             </strong> tiene un fondo total de Lps. <strong>{{ number_format($commissioner->commissioner_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $commissioner->created_at }}</strong>.
                                         </div>
                                     </div>

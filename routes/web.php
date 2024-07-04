@@ -24,8 +24,11 @@ Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController
 // Investor liquidations
 Route::resource('investors_liquidations', 'App\Http\Controllers\InvestorLiquidationsController')->names('investors_liquidations');
 
-// Commission Agent
+// Commission ggent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');
+
+// Commission agent payments
+Route::resource('payments_commissioner', 'App\Http\Controllers\PaymentCommissionerController')->names('payments_commissioner');
 
 // Providers Agent
 Route::resource('provider', 'App\Http\Controllers\ProviderController')->names('provider');

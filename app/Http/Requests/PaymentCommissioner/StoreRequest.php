@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\PaymentInvestor;
+namespace App\Http\Requests\PaymentCommissioner;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
 {
-    
     public function authorize(): bool
     {
         return true;
@@ -15,10 +14,10 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'payment_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:payment_investors',
+            'payment_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/',
             'payment_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'payment_date' => 'required|date:Y-m-d H:i:s',
-            'promissoryNoteInvestor_id' => 'required|numeric|exists:promissory_notes,id',
+            'promissoryNoteCommissioner_id' => 'required|numeric|exists:promissory_note_commissioners,id',
         ];
     }
 
@@ -44,9 +43,9 @@ class StoreRequest extends FormRequest
             'payment_code.max' => 'El código del pago no puede exceder 12 letras.',
 
             // Investor id messages
-            'promissoryNoteInvestor_id.required' => 'El pagaré a pagar es obligatorio.',
-            'promissoryNoteInvestor_id.numeric' => 'El id del pagaré seleccionado solo debe contener números.',
-            'promissoryNoteInvestor_id.exists' => 'El pagaré seleccionado no existe en la base de datos.',
+            'promissoryNoteCommissioner_id.required' => 'El pagaré a pagar es obligatorio.',
+            'promissoryNoteCommissioner_id.numeric' => 'El id del pagaré seleccionado solo debe contener números.',
+            'promissoryNoteCommissioner_id.exists' => 'El pagaré seleccionado no existe en la base de datos.',
             
         ];
     }

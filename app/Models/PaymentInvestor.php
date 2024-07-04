@@ -17,17 +17,7 @@ class PaymentInvestor extends Model
     {
         return $this->belongsTo(Investor::class);
     }
-    
-    public function commissioners()
-    {
-        return $this->belongsTo(CommissionAgent::class);
-    }
 
-    public function promissory_note_investors()
-    {
-        return $this->belongsTo(PromissoryNote::class);
-    }
-    
     public function promissoryNoteInvestor()
     {
         return $this->belongsTo(PromissoryNote::class, 'promissoryNoteInvestor_id');

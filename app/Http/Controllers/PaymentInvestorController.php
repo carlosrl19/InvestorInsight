@@ -7,7 +7,6 @@ use App\Models\Investor;
 use App\Models\CommissionAgent;
 use App\Models\PromissoryNote;
 use App\Models\PromissoryNoteCommissioner;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Http\Requests\PaymentInvestor\StoreRequest;
 
@@ -17,14 +16,13 @@ class PaymentInvestorController extends Controller
     {
         $payments = PaymentInvestor::with(['promissoryNoteInvestor.investor'])->get();
         $promissoryNoteInvestors = PromissoryNote::get();
-        $promissoryNoteCommissioners = PromissoryNoteCommissioner::get();
         
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
-        return view('modules.payment_investors.index', compact('payments', 'promissoryNoteInvestors', 'todayDate', 'promissoryNoteCommissioners', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.payment_investors.index', compact('payments', 'promissoryNoteInvestors', 'todayDate', 'total_investor_balance', 'total_commissioner_balance'));
     }
 
     public function store(StoreRequest $request)
