@@ -18,6 +18,7 @@ class ProjectTerminationController extends Controller
     public function index(){
         $projects = Project::where('project_status', 0)->with('investors')->get();
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
         $payments = PaymentInvestor::with(['promissoryNoteInvestor.investor'])->get();
@@ -26,7 +27,7 @@ class ProjectTerminationController extends Controller
         $generatedCode = strtoupper(Str::random(12)); // Random code
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
-        return view('modules.terminations.index', compact('projects', 'total_investor_balance', 'total_commissioner_balance', 'payments', 'promissoryNoteInvestors', 'promissoryNoteCommissioners', 'generatedCode', 'todayDate'));
+        return view('modules.terminations.index', compact('projects', 'total_project_investment', 'total_investor_balance', 'total_commissioner_balance', 'payments', 'promissoryNoteInvestors', 'promissoryNoteCommissioners', 'generatedCode', 'todayDate'));
     }
 
     public function showTermination($id) {

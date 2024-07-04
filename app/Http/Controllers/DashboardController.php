@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Investor;
 use App\Models\CommissionAgent;
 use App\Models\Transfer;
+use App\Models\Project;
 use App\Models\CreditNote;
 use App\Models\PromissoryNote;
 
@@ -15,6 +16,7 @@ class DashboardController extends Controller
         $investors = Investor::count();
         $commissioner = CommissionAgent::count();
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
     
         $completedProjectsCount = DB::table('projects')
@@ -39,7 +41,8 @@ class DashboardController extends Controller
         return view('modules.dashboard.index', compact(
             'investors', 
             'commissioner', 
-            'total_investor_balance', 
+            'total_investor_balance',
+            'total_project_investment',
             'total_commissioner_balance', 
             'promissoryNotes',
             'transfers', 

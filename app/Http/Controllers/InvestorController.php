@@ -14,6 +14,7 @@ use App\Models\Investor;
 use App\Models\InvestorFunds;
 use App\Models\InvestorLiquidations;
 use App\Models\Transfer;
+use App\Models\Project;
 use Carbon\Carbon;
 
 class InvestorController extends Controller
@@ -27,6 +28,7 @@ class InvestorController extends Controller
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
     
         // Mapeamos los investors para obtener sus referencias
@@ -35,7 +37,7 @@ class InvestorController extends Controller
             return $investor;
         });
 
-        return view('modules.investors.index', compact('investors', 'todayDate', 'investorFunds', 'investorLiquidations', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.investors.index', compact('investors', 'todayDate', 'investorFunds', 'investorLiquidations', 'commissioners', 'total_investor_balance', 'total_project_investment', 'total_commissioner_balance'));
     }
     
     public function create()

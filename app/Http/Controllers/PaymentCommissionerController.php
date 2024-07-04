@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PaymentCommissioner\StoreRequest;
 use App\Models\PaymentCommissioner;
 use App\Models\Investor;
+use App\Models\Project;
 use App\Models\CommissionAgent;
 use App\Models\PromissoryNote;
 use App\Models\PromissoryNoteCommissioner;
@@ -20,9 +21,10 @@ class PaymentCommissionerController extends Controller
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
-        return view('modules.payment_commissioners.index', compact('payments', 'todayDate', 'promissoryNoteCommissioners', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.payment_commissioners.index', compact('payments', 'todayDate', 'promissoryNoteCommissioners', 'total_project_investment', 'total_investor_balance', 'total_commissioner_balance'));
     }
 
     public function store(StoreRequest $request)

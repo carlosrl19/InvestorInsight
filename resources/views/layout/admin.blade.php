@@ -228,6 +228,9 @@
                         <a class="dropdown-item" href="">
                           <small>->&nbsp;</small>Fondos <strong style="margin-left: 8vh" class="text-success">Lps. {{ number_format($total_investor_balance,2) }}</strong>
                         </a>
+                        <a class="dropdown-item" href="">
+                          <small>->&nbsp;</small>Inversiones <strong style="margin-left: 5vh" class="text-success">Lps. {{ number_format($total_project_investment,2) }}</strong>
+                        </a>
                         <small></small>
                         <a class="dropdown-item" href="">
                           <small>->&nbsp;</small>Comisiones  <strong style="margin-left: 5vh" class="text-success">Lps. {{ number_format($total_commissioner_balance,2) }}</strong>

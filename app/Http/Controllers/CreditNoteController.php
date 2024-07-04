@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\CreditNote;
 use App\Http\Requests\CreditNote\StoreRequest;
 use App\Models\Investor;
+use App\Models\Project;
 use App\Models\CommissionAgent;
 use Dompdf\Options;
 use Dompdf\Dompdf;
@@ -23,9 +24,10 @@ class CreditNoteController extends Controller
         $creditNoteDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
-        return view('modules.credit_note.index', compact('creditNotes', 'investors', 'creditNoteCode', 'creditNoteDate', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.credit_note.index', compact('creditNotes', 'investors', 'creditNoteCode', 'creditNoteDate', 'total_investor_balance', 'total_project_investment', 'total_commissioner_balance'));
     }
 
     public function create()

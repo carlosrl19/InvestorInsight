@@ -6,6 +6,7 @@ use App\Http\Requests\CommissionAgent\StoreRequest;
 use App\Http\Requests\CommissionAgent\UpdateRequest;
 use App\Models\CommissionAgent;
 use App\Models\Investor;
+use App\Models\Project;
 use Illuminate\Support\Facades\DB;
 
 class CommissionAgentController extends Controller
@@ -14,11 +15,13 @@ class CommissionAgentController extends Controller
     public function index()
     {
         $commission_agents = CommissionAgent::get();
+
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
         $commissioner_balance = 0.00;
 
-        return view('modules.commission_agent.index', compact('commission_agents', 'total_investor_balance', 'total_commissioner_balance', 'commissioner_balance'));
+        return view('modules.commission_agent.index', compact('commission_agents', 'total_project_investment', 'total_investor_balance', 'total_commissioner_balance', 'commissioner_balance'));
     }
 
 

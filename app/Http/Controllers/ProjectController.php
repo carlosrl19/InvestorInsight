@@ -39,6 +39,7 @@ class ProjectController extends Controller
         $commissioners = CommissionAgent::get();
         $generatedCode = strtoupper(Str::random(12)); // Random code
         $total_investor_balance = Investor::sum('investor_balance');
+        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
         
@@ -52,7 +53,7 @@ class ProjectController extends Controller
             }
         }
         
-        return view('modules.projects.index', compact('projects', 'activeProjectsCount', 'investorsWithActivedProjects', 'investors', 'availableInvestors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance', 'todayDate',));
+        return view('modules.projects.index', compact('projects', 'activeProjectsCount', 'total_project_investment', 'investorsWithActivedProjects', 'investors', 'availableInvestors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance', 'todayDate',));
     }
 
     public function create()
@@ -191,7 +192,7 @@ class ProjectController extends Controller
             $investorFunds->investor_change_date = now();
             $investorFunds->investor_old_funds = $investor->investor_balance + $validatedData['transfer_amount'];
             $investorFunds->investor_new_funds = $investor->investor_balance;
-            $investorFunds->investor_new_funds_comment = 'FONDO A CAPITAL DE PROYECTO ' . $validatedData['project_name'] . ' - CODIGO #' . $generatedCode . '.';
+            $investorFunds->investor_new_funds_comment = 'FONDO A CAPITAL DE ' . $validatedData['project_name'] . ' - CODIGO #' . $generatedCode . '.';
             $investorFunds->save();
         }
 
