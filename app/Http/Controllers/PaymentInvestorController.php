@@ -19,13 +19,12 @@ class PaymentInvestorController extends Controller
         $promissoryNoteInvestors = PromissoryNote::get();
         $promissoryNoteCommissioners = PromissoryNoteCommissioner::get();
         
-        $generatedCode = strtoupper(Str::random(12)); // Random code
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
         $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
 
-        return view('modules.payment_investors.index', compact('payments', 'promissoryNoteInvestors', 'todayDate', 'promissoryNoteCommissioners', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.payment_investors.index', compact('payments', 'promissoryNoteInvestors', 'todayDate', 'promissoryNoteCommissioners', 'total_investor_balance', 'total_commissioner_balance'));
     }
 
     public function store(StoreRequest $request)

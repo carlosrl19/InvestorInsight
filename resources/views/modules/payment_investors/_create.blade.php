@@ -13,7 +13,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <select name="promissoryNoteInvestor_id" id="promissoryNoteInvestor_id" class="form-control select2-promissoryNotes" style="width: 100%">
+                                <select name="promissoryNoteInvestor_id" id="promissoryNoteInvestor_id" class="form-control select2-promissoryNotes" style="width: 100%" onchange="updatePaymentCode()">
                                     @if ($promissoryNoteInvestors->where('promissoryNote_status', 1)->count() > 0)
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
                                         @forelse ($promissoryNoteInvestors->where('promissoryNote_status', 1) as $promissoryNoteInvestor)
@@ -73,7 +73,7 @@
                                     class="form-control @error('payment_code') is-invalid @enderror" 
                                     id="payment_code"
                                     name="payment_code" 
-                                    value="{{ $generatedCode }}" 
+                                    value="" 
                                     autocomplete="off"
                                     readonly">
                                     @error('payment_code')
@@ -92,3 +92,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    function updatePaymentCode() {
+    // Obtener el valor seleccionado en el select
+    var selectedOption = document.getElementById('promissoryNoteInvestor_id').value;
+
+    // Obtener el código del pagaré seleccionado
+    var promissoryNoteCode = document.querySelector(`option[value="${selectedOption}"]`).textContent.split(' - ')[0];
+
+    // Asignar el código del pagaré al campo payment_code
+    document.getElementById('payment_code').value = promissoryNoteCode;
+}
+</script>

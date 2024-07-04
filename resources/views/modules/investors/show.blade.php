@@ -101,9 +101,15 @@ Historial de inversionista /&nbsp;
                                                     <td>{{ $investor->investor_change_date }}</td>
                                                                                                     
                                                     @if($investor->investor_new_funds - $investor->investor_old_funds < 0)
-                                                        <td class="text-red">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                                        <td class="text-red">
+                                                            <img style="filter: brightness(0) saturate(100%) invert(27%) sepia(21%) saturate(6806%) hue-rotate(340deg) brightness(100%) contrast(86%);" src="{{ asset('../static/svg/arrow-down.svg') }}" width="12" height="12" alt="">
+                                                            L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}
+                                                        </td>
                                                     @else
-                                                        <td class="text-success">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                                        <td class="text-success">
+                                                            <img style="filter: brightness(0) saturate(100%) invert(53%) sepia(52%) saturate(632%) hue-rotate(78deg) brightness(96%) contrast(93%);" src="{{ asset('../static/svg/arrow-up.svg') }}" width="12" height="12" alt="">
+                                                            L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}
+                                                        </td>
                                                     @endif
 
                                                     <td>L. {{ number_format($investor->investor_old_funds, 2) }}</td>
@@ -115,7 +121,9 @@ Historial de inversionista /&nbsp;
                                                     <td>{{ $investor->investor_change_date }}</td>
                                                                                                     
                                                     @if($investor->investor_new_funds - $investor->investor_old_funds < 0)
-                                                        <td class="text-red">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                                        <td class="text-red">
+                                                            <img style="filter: brightness(0) saturate(100%) invert(27%) sepia(21%) saturate(6806%) hue-rotate(340deg) brightness(100%) contrast(86%);" src="{{ asset('../static/svg/arrow-down.svg') }}" width="12" height="12" alt="">
+                                                            L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
                                                     @else
                                                         <td class="text-success">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
                                                     @endif
@@ -123,7 +131,7 @@ Historial de inversionista /&nbsp;
                                                     <td>L. {{ number_format($investor->investor_old_funds, 2) }}</td>
                                                     <td>L. {{ number_format($investor->investor_new_funds,2) }}</td>
                                                     <td>
-                                                        {{ $investor->investor_new_funds_comment }}
+                                                        <span class="text-red"></span> {{ $investor->investor_new_funds_comment }}
                                                     </td>
                                                 </tr>
                                                 @endif
