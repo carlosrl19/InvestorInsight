@@ -9,7 +9,7 @@
                 <div class="row"> <!-- Inicia la fila principal -->
                         <div class="col-lg-6"> <!-- Col que debe estar a la izquierda -->
                             <h3>Imagen del comprobante de pago</h3>
-                            <div class="card mb-4" style="height: auto; width: 410px;">
+                            <div class="card mb-4" style="margin: auto; border: none; height: auto; width: 390px;">
                                 @if($project->project_status != 0)
                                     <img src="{{ asset('static/in_process.gif') }}" alt="in_process" style="height: auto; width: 180px; padding-top: 20%; padding-bottom: 30%; margin: auto">
                                     <p class="mt-3 text-center">PROYECTO EN PROCESO</p>

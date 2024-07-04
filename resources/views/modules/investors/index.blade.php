@@ -323,15 +323,15 @@ Inversionistas
                                                 @csrf
                                                 <div style="border: 2px solid orange; padding: 10px; background-color: #fff3cd;">
                                                     <p style="font-size: 16px; margin-left: 39%; font-weight: bold; margin-bottom: 15px">¡ATENCIÓN!</p>
-                                                    <p>Estás a punto de realizar la liquidación del inversionista <strong style="text-transform: uppercase">{{ $investor->investor_name }}</strong>. Esta acción conllevará el cierre definitivo de todas las cuentas y posiciones relacionadas con este inversionista, una vez confirmado el proceso, no habrá marcha atrás.</p>
-                                                    <p>Si estás seguro de que deseas proceder con la liquidación, haz clic en el botón "Liquidar" a continuación. De lo contrario, te sugerimos considerar alternativas, como la suspensión temporal de la relación con el inversionista.</p>
+                                                    <p>Estás a punto de realizar la liquidación del inversionista <strong style="text-transform: uppercase">{{ $investor->investor_name }}</strong>. Esta acción conllevará el cierre definitivo de la cuenta y todo movimiento relacionado con este inversionista, una vez confirmado el proceso, no habrá marcha atrás.</p>
+                                                    <p>Si estás seguro de que deseas proceder con la liquidación, haz clic en el botón "<strong>Liquidar inversionista</strong>" a continuación.</p>
 
                                                     <input type="hidden" name="investor_liquidation_amount" value="{{ $investor->investor_balance }}">
                                                     <input type="hidden" name="investor_liquidation_date" value="{{ $todayDate }}">
     
                                                     <br>
                                                     <button type="button" style="margin-left: 22%" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button class="btn btn-orange" style="margin-left: 5px; background-color: orange; font-size: 14px; font-weight: bold;">Liquidar inversionista</button>
+                                                    <button class="btn btn-orange" style="margin-left: 5px; background-color: orange; font-size: 14px;">Liquidar inversionista</button>
                                                     <br>
                                                     <br>
                                                 </div>

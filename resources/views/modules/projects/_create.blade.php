@@ -138,7 +138,7 @@
                                 <div class="form-floating">
                                     <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;" required onchange="updateInvestor()">
                                         <option value="" selected disabled>Seleccione un inversionista</option>
-                                        @foreach ($investors as $investor)
+                                        @foreach ($availableInvestors as $investor)
                                             <option value="{{ $investor->id }}" data-balance="{{ $investor->investor_balance }}" {{ old('investor_id') == $investor->id ? 'selected' : '' }}>
                                                 {{ $investor->investor_name }}
                                             </option>

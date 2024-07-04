@@ -19,7 +19,7 @@ Proveedores
 
 @section('create')
 <a href="#" class="btn btn-orange" style="font-size: clamp(0.6rem, 3vw, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-funds">
-    $ Historial de cambios en fondos
+    $ Historial de pagos
 </a>
 
 <a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-team">

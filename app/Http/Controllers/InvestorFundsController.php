@@ -26,26 +26,4 @@ class InvestorFundsController extends Controller
         InvestorFunds::create($request->all());
         return redirect()->route('investors_funds.index')->with('success', 'Nuevo fondo actualizado exitosamente.');
     }
-
-    public function show(InvestorFunds $investorFunds)
-    {
-        //
-    }
-
-    public function edit(InvestorFunds $investorFunds)
-    {
-        //
-    }
-
-
-    public function update($id)
-    {
-        //
-    }
-
-
-    public function destroy(InvestorFunds $investorFunds)
-    {
-        //
-    }
 }

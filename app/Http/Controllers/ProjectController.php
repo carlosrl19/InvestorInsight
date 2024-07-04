@@ -32,6 +32,7 @@ class ProjectController extends Controller
             $query->where('project_status', 1);
         })->get();
         
+        $availableInvestors = Investor::where('investor_status', 1)->get();
         $investors = Investor::get();
 
         $promissoryNote = PromissoryNote::get();
@@ -51,7 +52,7 @@ class ProjectController extends Controller
             }
         }
         
-        return view('modules.projects.index', compact('projects', 'activeProjectsCount', 'investorsWithActivedProjects', 'investors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance', 'todayDate',));
+        return view('modules.projects.index', compact('projects', 'activeProjectsCount', 'investorsWithActivedProjects', 'investors', 'availableInvestors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance', 'todayDate',));
     }
 
     public function create()

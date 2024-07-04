@@ -23,7 +23,6 @@ Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController
 
 // Investor liquidations
 Route::resource('investors_liquidations', 'App\Http\Controllers\InvestorLiquidationsController')->names('investors_liquidations');
-Route::get('investors_liquidations/{id}/voucher/download', 'App\Http\Controllers\InvestorLiquidationsController@downloadVoucher')->name('investors_liquidations.voucher_download');
 
 // Commission Agent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');

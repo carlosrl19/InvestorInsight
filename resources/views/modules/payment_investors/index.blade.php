@@ -17,7 +17,7 @@ Listado principal
 @endsection
 
 @section('title')
-Pagos
+Pagos inversionistas
 @endsection
 
 @section('create')

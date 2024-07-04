@@ -21,7 +21,6 @@
                                     <th>NOMBRE INVERSIONISTA</th>
                                     <th>FECHA LIQUIDACIÓN</th>
                                     <th>FONDO LIQUIDADO</th>
-                                    <th>DESCARGAR COMPROBANTE</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,12 +29,6 @@
                                         <td>{{ $investor->investor->investor_name }}</td>
                                         <td>{{ $investor->investor_liquidation_date }}</td>
                                         <td>Lps. {{ number_format($investor->investor_liquidation_amount,2) }}</td>
-                                        <td>
-                                            <a href="{{ route('investors_liquidations.voucher_download', $investor->id) }}" class="badge bg-red me-1 text-white">
-                                                <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
-                                                COMPROBANTE
-                                            </a>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

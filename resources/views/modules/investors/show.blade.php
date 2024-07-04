@@ -19,7 +19,11 @@ Inversionistas
 
 @section('title')
 Historial de inversionista /&nbsp;
-<b class="text-muted">{{ $investor->investor_name }}</b>
+<b class="text-muted">{{ $investor->investor_name }}&nbsp;</b>
+    @if($investor->investor_status == 3)/&nbsp;
+        <span class="status-dot status-dot-animated bg-red d-block"></span>&nbsp;
+        <span style="color: rgb(231, 0, 0); font-style: italic; font-size: clamp(0.7rem, 3vw, 0.8rem)">LIQUIDADO</span>
+    @endif
 
 @endsection
 
@@ -53,7 +57,12 @@ Historial de inversionista /&nbsp;
                                                 @else
                                                     <strong class="text-red">(no tiene recomendación)</strong>,
                                                 @endif
-                                            </strong> tiene un fondo monetario de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
+                                            </strong>
+                                            @if($investor->investor_status != 3)
+                                            tiene un fondo monetario de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
+                                            @else
+                                            fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -87,23 +96,41 @@ Historial de inversionista /&nbsp;
                                         </thead>
                                         <tbody>
                                             @forelse ($investorFunds as $investor)
-                                            <tr>
-                                                <td>{{ $investor->investor_change_date }}</td>
-                                                                                                
-                                                @if($investor->investor_new_funds - $investor->investor_old_funds < 0)
-                                                    <td class="text-red">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
-                                                @else
-                                                    <td class="text-success">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
-                                                @endif
+                                                @if($investor->investor_new_funds_comment != 'LIQUIDACIÓN AL INVERSIONISTA.')
+                                                <tr>
+                                                    <td>{{ $investor->investor_change_date }}</td>
+                                                                                                    
+                                                    @if($investor->investor_new_funds - $investor->investor_old_funds < 0)
+                                                        <td class="text-red">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                                    @else
+                                                        <td class="text-success">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                                    @endif
 
-                                                <td>L. {{ number_format($investor->investor_old_funds, 2) }}</td>
-                                                <td>L. {{ number_format($investor->investor_new_funds,2) }}</td>
-                                                <td>{{ $investor->investor_new_funds_comment}}</td>
-                                            </tr>
-                                            @empty
-                                            <tr>
-                                                <td colspan="5" style="text-align: center;">No se encontraron registros de cambios en fondos para mostrar.</td>
-                                            </tr>
+                                                    <td>L. {{ number_format($investor->investor_old_funds, 2) }}</td>
+                                                    <td>L. {{ number_format($investor->investor_new_funds,2) }}</td>
+                                                    <td>{{ $investor->investor_new_funds_comment }}</td>
+                                                </tr>
+                                                @else
+                                                <tr style="background-color: #c649492f;">
+                                                    <td>{{ $investor->investor_change_date }}</td>
+                                                                                                    
+                                                    @if($investor->investor_new_funds - $investor->investor_old_funds < 0)
+                                                        <td class="text-red">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                                    @else
+                                                        <td class="text-success">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
+                                                    @endif
+
+                                                    <td>L. {{ number_format($investor->investor_old_funds, 2) }}</td>
+                                                    <td>L. {{ number_format($investor->investor_new_funds,2) }}</td>
+                                                    <td>
+                                                        {{ $investor->investor_new_funds_comment }}
+                                                    </td>
+                                                </tr>
+                                                @endif
+                                                @empty
+                                                <tr>
+                                                    <td colspan="5" style="text-align: center;">No se encontraron registros de cambios en fondos para mostrar.</td>
+                                                </tr>
                                             @endforelse
                                         </tbody>
                                     </table>
