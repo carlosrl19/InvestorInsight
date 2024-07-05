@@ -40,10 +40,6 @@
         <br>_______________________
         <br><span>DNI: <strong class="text-underline">0801199907469</strong></span>
     </div>
-
-    @if($promissoryNote->promissoryNote_status != 1)
-        <img src="static/SelloPagado.png" alt="Logo" height="120px" style="position: absolute; left: 20%; right: 0; top: 32%; bottom: 0; transform: rotate(-45deg); opacity: 0.2;">
-    @endif
 </div>
 
 <style>
