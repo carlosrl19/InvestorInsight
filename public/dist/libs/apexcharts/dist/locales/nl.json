@@ -40,16 +40,16 @@
     ],
     "shortDays": ["Zo", "Ma", "Di", "Wo", "Do", "Vr", "Za"],
     "toolbar": {
-      "exportToSVG": "Download SVG",
-      "exportToPNG": "Download PNG",
-      "exportToCSV": "Download CSV",
-      "menu": "Menu",
-      "selection": "Selectie",
-      "selectionZoom": "Zoom selectie",
-      "zoomIn": "Zoom in",
-      "zoomOut": "Zoom out",
-      "pan": "Verplaatsen",
-      "reset": "Standaardwaarden"
+      "exportToSVG": "Descargar SVG",
+      "exportToPNG": "Descargar PNG",
+      "exportToCSV": "Descargar CSV",
+      "menu": "Menú",
+      "selection": "Selección",
+      "selectionZoom": "Selección de zoom",
+      "zoomIn": "Acercar",
+      "zoomOut": "Alejar",
+      "pan": "Panorámica",
+      "reset": "Reiniciar zoom"
     }
   }
 }

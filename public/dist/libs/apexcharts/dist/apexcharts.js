@@ -3152,16 +3152,15 @@
   		"Sat"
   	],
   	toolbar: {
-  		exportToSVG: "Download SVG",
-  		exportToPNG: "Download PNG",
-  		exportToCSV: "Download CSV",
-  		menu: "Menu",
-  		selection: "Selection",
-  		selectionZoom: "Selection Zoom",
-  		zoomIn: "Zoom In",
-  		zoomOut: "Zoom Out",
-  		pan: "Panning",
-  		reset: "Reset Zoom"
+  		exportToSVG: "Descargar SVG",
+  		exportToPNG: "Descargar PNG",
+  		menu: "Menú",
+  		selection: "Selección",
+  		selectionZoom: "Zoom de selección",
+  		zoomIn: "Acercar",
+  		zoomOut: "Alejar",
+  		pan: "Panorámica",
+  		reset: "Reinicar zoom"
   	}
   };
   var en = {

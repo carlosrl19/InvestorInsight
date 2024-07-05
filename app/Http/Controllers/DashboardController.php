@@ -39,9 +39,22 @@ class DashboardController extends Controller
         $promissoryNotes = PromissoryNote::latest()->take(25)->get();
         $transfers = Transfer::latest()->take(25)->get();
         $creditNotes = CreditNote::latest()->take(25)->get();
-    
+
+        $commissioner_id = 1;
+
+        $payments = DB::table('payment_commissioners')
+        ->join('projects', 'payment_commissioners.payment_code', '=', 'projects.project_code')
+        ->where('payment_commissioners.commissioner_id', $commissioner_id)
+        ->select('payment_commissioners.created_at', 
+                 DB::raw('SUM(payment_commissioners.payment_amount) as payment_amount'), 
+                 'projects.project_name', 
+                 'projects.project_investment')
+        ->groupBy('payment_commissioners.created_at', 'projects.project_name', 'projects.project_investment')
+        ->orderBy('payment_commissioners.created_at')
+        ->get();
+
         return view('modules.dashboard.index', compact(
-            'investors', 
+            'investors',
             'commissioner', 
             'total_investor_balance',
             'total_project_investment',
@@ -51,7 +64,8 @@ class DashboardController extends Controller
             'creditNotes', 
             'completedProjectsCount', 
             'activeProjectsCount', 
-            'closedProjectsCount'
+            'closedProjectsCount',
+            'payments'
         ));
     }
 }
