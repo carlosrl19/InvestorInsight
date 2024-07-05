@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\PaymentInvestor;
 use App\Models\Investor;
 use App\Models\Project;
-use App\Models\CommissionAgent;
 use App\Models\PromissoryNote;
-use App\Models\PromissoryNoteCommissioner;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\PaymentInvestor\StoreRequest;
 
 class PaymentInvestorController extends Controller
@@ -22,9 +21,11 @@ class PaymentInvestorController extends Controller
 
         $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
 
-        return view('modules.payment_investors.index', compact('payments', 'promissoryNoteInvestors', 'todayDate', 'total_investor_balance', 'total_project_investment', 'total_commissioner_balance'));
+        return view('modules.payment_investors.index', compact('payments', 'promissoryNoteInvestors', 'todayDate', 'total_investor_balance', 'total_project_investment', 'total_commissioner_commission_payment'));
     }
 
     public function store(StoreRequest $request)

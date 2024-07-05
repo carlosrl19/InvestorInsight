@@ -13,6 +13,7 @@ use App\Models\PromissoryNote;
 use App\Models\PromissoryNoteCommissioner;
 use Illuminate\Support\Str;
 use Luecano\NumeroALetras\NumeroALetras;
+use Illuminate\Support\Facades\DB;
 use App\Exports\CustomExport;
 use App\Exports\ActiveProjectsExport;
 use App\Exports\ActiveInvestorProjectExport;
@@ -40,7 +41,11 @@ class ProjectController extends Controller
         $generatedCode = strtoupper(Str::random(12)); // Random code
         $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+        
+        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
+
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
         
         // Calcular días restantes para cada proyecto
@@ -53,7 +58,7 @@ class ProjectController extends Controller
             }
         }
         
-        return view('modules.projects.index', compact('projects', 'activeProjectsCount', 'total_project_investment', 'investorsWithActivedProjects', 'investors', 'availableInvestors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance', 'todayDate',));
+        return view('modules.projects.index', compact('projects', 'activeProjectsCount', 'total_project_investment', 'investorsWithActivedProjects', 'investors', 'availableInvestors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_commission_payment', 'todayDate',));
     }
 
     public function create()
@@ -219,8 +224,11 @@ class ProjectController extends Controller
         $commissioners = $project->commissioners;
         
         $total_investor_balance = Investor::sum('investor_balance');
-        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
-        return view('modules.projects.show', compact('project', 'transfer', 'investors', 'commissioners', 'total_investor_balance', 'total_commissioner_balance'));
+        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
+
+        return view('modules.projects.show', compact('project', 'transfer', 'investors', 'commissioners', 'total_investor_balance', 'total_commissioner_commission_payment'));
     }
     
     public function export($id)
@@ -254,9 +262,12 @@ class ProjectController extends Controller
         $projects = Project::where('project_status', 2)->with('investors')->get();
         $investors = Investor::get();
         $total_investor_balance = Investor::sum('investor_balance');
-        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
+        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
+            ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+            ->sum('promissoryNoteCommissioner_amount');
 
-        return view('modules.projects_closed.index', compact('projects', 'investors', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.projects_closed.index', compact('projects', 'investors', 'total_investor_balance', 'total_project_investment', 'total_commissioner_commission_payment'));
     }
 
     public function finishProject(Request $request, Project $project)

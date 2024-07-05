@@ -12,6 +12,7 @@ use Dompdf\Dompdf;
 use Carbon\Carbon;
 use Luecano\NumeroALetras\NumeroALetras;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class PromissoryNoteController extends Controller
 {
@@ -22,9 +23,11 @@ class PromissoryNoteController extends Controller
         $promissoryCode = strtoupper(Str::random(12)); // Promissory note random code
         $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
 
-        return view("modules.promissory_note.index", compact("promissoryNotes", "investors", "promissoryCode", 'total_project_investment', 'total_investor_balance', 'total_commissioner_balance'));
+        return view("modules.promissory_note.index", compact("promissoryNotes", "investors", "promissoryCode", 'total_project_investment', 'total_investor_balance', 'total_commissioner_commission_payment'));
     }
     public function create()
     {

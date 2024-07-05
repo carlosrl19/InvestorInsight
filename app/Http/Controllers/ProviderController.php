@@ -11,6 +11,7 @@ use App\Models\Investor;
 use App\Models\CommissionAgent;
 use App\Models\ProviderFunds;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ProviderController extends Controller
 {
@@ -21,11 +22,13 @@ class ProviderController extends Controller
         $provider_funds = ProviderFunds::get();
         $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
 
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
-        return view("modules.providers.index", compact("providers", "total_project_investment", "todayDate", "provider_funds", "total_investor_balance", "total_commissioner_balance"));
+        return view("modules.providers.index", compact("providers", "total_project_investment", "todayDate", "provider_funds", "total_investor_balance", "total_commissioner_commission_payment"));
     }
 
     public function create()
@@ -73,11 +76,13 @@ class ProviderController extends Controller
     {
         $provider = Provider::findOrFail($id);
         $providerFunds = ProviderFunds::where('provider_id', '=', $id)->orderBy('created_at')->get(); 
-
         $total_investor_balance = Investor::sum('investor_balance');
-        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+        
+        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
 
-        return view("modules.providers.show", compact("provider", "providerFunds", "total_investor_balance", "total_commissioner_balance"));
+        return view("modules.providers.show", compact("provider", "providerFunds", "total_investor_balance", "total_commissioner_commission_payment"));
     }
 
     public function edit($id)

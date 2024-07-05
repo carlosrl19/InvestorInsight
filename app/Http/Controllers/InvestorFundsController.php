@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\InvestorFunds;
 use App\Http\Requests\InvestorFunds\StoreInverstorFundsRequest;
-use App\Http\Requests\InvestorFunds\UpdateRequest;
 
 class InvestorFundsController extends Controller
 {

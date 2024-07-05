@@ -29,7 +29,9 @@ class InvestorController extends Controller
 
         $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
     
         // Mapeamos los investors para obtener sus referencias
         $investors = $investors->map(function ($investor) {
@@ -37,7 +39,7 @@ class InvestorController extends Controller
             return $investor;
         });
 
-        return view('modules.investors.index', compact('investors', 'todayDate', 'investorFunds', 'investorLiquidations', 'commissioners', 'total_investor_balance', 'total_project_investment', 'total_commissioner_balance'));
+        return view('modules.investors.index', compact('investors', 'todayDate', 'investorFunds', 'investorLiquidations', 'commissioners', 'total_investor_balance', 'total_project_investment', 'total_commissioner_commission_payment'));
     }
     
     public function create()
@@ -60,7 +62,10 @@ class InvestorController extends Controller
         
         $creditNotes = CreditNote::where('investor_id', $investor->id)->orderBy('creditNote_date')->get();
         $total_investor_balance = Investor::sum('investor_balance');
-        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
+        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
     
         // Cargar el inversor de referencia
         $referenceInvestor = Investor::find($investor->investor_reference_id);
@@ -128,7 +133,7 @@ class InvestorController extends Controller
             ->select('projects.project_name', 'projects.project_code', 'projects.project_investment', 'project_investor.investor_investment', 'project_investor.investor_final_profit', 'project_investor.investor_profit')
             ->get();
     
-        return view('modules.investors.show', compact('investor', 'investorFunds', 'transfers', 'creditNotes', 'referenceInvestor', 'activeProjects', 'completedProjects', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.investors.show', compact('investor', 'investorFunds', 'transfers', 'creditNotes', 'referenceInvestor', 'activeProjects', 'completedProjects', 'total_project_investment', 'total_investor_balance', 'total_commissioner_commission_payment'));
     }
 
     public function edit($id)

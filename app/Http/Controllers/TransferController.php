@@ -19,9 +19,11 @@ class TransferController extends Controller
         $generatedCode = strtoupper(Str::random(12));
         $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_commissioner_balance = CommissionAgent::sum('commissioner_balance');
+        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
 
-        return view('modules.transfer.index', compact('investors', 'transfers', 'total_project_investment', 'generatedCode', 'total_investor_balance', 'total_commissioner_balance'));
+        return view('modules.transfer.index', compact('investors', 'transfers', 'total_project_investment', 'generatedCode', 'total_investor_balance', 'total_commissioner_commission_payment'));
     }
 
     public function create()

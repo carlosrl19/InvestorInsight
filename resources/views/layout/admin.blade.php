@@ -226,15 +226,28 @@
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
                         <a class="dropdown-item" href="">
-                          <small>->&nbsp;</small>Fondos <strong style="margin-left: 8vh" class="text-success">Lps. {{ number_format($total_investor_balance,2) }}</strong>
+                          <small>->&nbsp;</small>
+                            Pago comisiones
+                            <span style="width: 12vh"></span>
+                            <small style="margin-left: auto">
+                              <strong class="text-success">Lps. {{ number_format($total_commissioner_commission_payment,2) }}</strong>
+                            </small>
                         </a>
                         <a class="dropdown-item" href="">
-                          <small>->&nbsp;</small>Inversiones <strong style="margin-left: 5vh" class="text-success">Lps. {{ number_format($total_project_investment,2) }}</strong>
+                          <small>->&nbsp;</small>
+                            Fondos sin invertir
+                            <small style="margin-left: auto">
+                              <strong class="text-success">Lps. {{ number_format($total_investor_balance,2) }}</strong>
+                            </small>
+                        </a>
+                        <a class="dropdown-item" href="">
+                          <small>->&nbsp;</small>
+                            Inversión proyectos
+                          <small style="margin-left: auto">
+                            <strong class="text-success">Lps. {{ number_format($total_project_investment,2) }}</strong>
+                          </small>
                         </a>
                         <small></small>
-                        <a class="dropdown-item" href="">
-                          <small>->&nbsp;</small>Comisiones  <strong style="margin-left: 5vh" class="text-success">Lps. {{ number_format($total_commissioner_balance,2) }}</strong>
-                        </a>
                       </div>
                     </div>
                   </div>
