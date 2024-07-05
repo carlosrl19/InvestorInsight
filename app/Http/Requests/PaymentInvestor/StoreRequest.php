@@ -18,7 +18,7 @@ class StoreRequest extends FormRequest
             'payment_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:payment_investors',
             'payment_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'payment_date' => 'required|date:Y-m-d H:i:s',
-            'promissoryNoteInvestor_id' => 'required|numeric|exists:promissory_notes,id',
+            'promissoryNote_id' => 'required|numeric|exists:promissory_notes,id',
         ];
     }
 
@@ -44,9 +44,9 @@ class StoreRequest extends FormRequest
             'payment_code.max' => 'El código del pago no puede exceder 12 letras.',
 
             // Investor id messages
-            'promissoryNoteInvestor_id.required' => 'El pagaré a pagar es obligatorio.',
-            'promissoryNoteInvestor_id.numeric' => 'El id del pagaré seleccionado solo debe contener números.',
-            'promissoryNoteInvestor_id.exists' => 'El pagaré seleccionado no existe en la base de datos.',
+            'promissoryNote_id.required' => 'El pagaré a pagar es obligatorio.',
+            'promissoryNote_id.numeric' => 'El id del pagaré seleccionado solo debe contener números.',
+            'promissoryNote_id.exists' => 'El pagaré seleccionado no existe en la base de datos.',
             
         ];
     }

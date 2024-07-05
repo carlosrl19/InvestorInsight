@@ -59,7 +59,7 @@ Pagos comisionistas
                     <th>CÓDIGO</th>
                     <th>FECHA HORA</th>
                     <th>NOMBRE COMISIONISTA</th>
-                    <th>MONTO PAGADO</th>
+                    <th>MONTO TOTAL</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,7 +68,7 @@ Pagos comisionistas
                     <td>#{{ $payment->payment_code }}</td>
                     <td>{{ $payment->payment_date }}</td>
                     <td>
-                        {{ $payment->promissoryNoteCommisioner->commissioner->commissioner_name ?? 'N/A' }}
+                        {{ $payment->commissioner->commissioner_name }}
                     </td>
                     <td class="text-red">Lps. {{ number_format($payment->payment_amount,2) }}</td>
                 </tr>

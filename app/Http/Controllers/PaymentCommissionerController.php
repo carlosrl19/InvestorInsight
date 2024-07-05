@@ -16,7 +16,6 @@ class PaymentCommissionerController extends Controller
     {
         $payments = PaymentCommissioner::with(['promissoryNoteCommissioner.commissioner'])->get();
         $promissoryNoteCommissioners = PromissoryNoteCommissioner::where('commissioner_id', '!=', '1')->get();
-
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
         $total_investor_balance = Investor::sum('investor_balance');

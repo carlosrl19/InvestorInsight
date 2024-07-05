@@ -13,7 +13,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <select name="promissoryNoteInvestor_id" id="promissoryNoteInvestor_id" class="form-control select2-promissoryNotes" style="width: 100%" onchange="updatePaymentCode()">
+                                <select name="promissoryNote_id" id="promissoryNote_id" class="form-control select2-promissoryNotes" style="width: 100%" onchange="updatePaymentCode()">
                                     @if ($promissoryNoteInvestors->where('promissoryNote_status', 1)->count() > 0)
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
                                         @forelse ($promissoryNoteInvestors->where('promissoryNote_status', 1) as $promissoryNoteInvestor)
@@ -24,7 +24,7 @@
                                         <option value="" disabled selected>No existen pagarés para pagar</option>
                                     @endif
                                 </select>
-                                <label for="promissoryNoteInvestor_id">Pagarés pendientes de pago</label>
+                                <label for="promissoryNote_id">Pagarés pendientes de pago</label>
                             </div>
                         </div>
                         <div class="col" style="display: none">
@@ -96,7 +96,7 @@
 <script>
     function updatePaymentCode() {
     // Obtener el valor seleccionado en el select
-    var selectedOption = document.getElementById('promissoryNoteInvestor_id').value;
+    var selectedOption = document.getElementById('promissoryNote_id').value;
 
     // Obtener el código del pagaré seleccionado
     var promissoryNoteCode = document.querySelector(`option[value="${selectedOption}"]`).textContent.split(' - ')[0];

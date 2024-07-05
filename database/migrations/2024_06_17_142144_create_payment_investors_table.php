@@ -13,7 +13,10 @@ return new class extends Migration
             $table->string('payment_code');
             $table->decimal('payment_amount', 10,2);
             $table->date('payment_date');
-            $table->unsignedInteger('promissoryNoteInvestor_id');
+            $table->unsignedBigInteger('investor_id');
+            $table->foreign('investor_id')->references('id')->on('investors')->onDelete('cascade');
+            $table->unsignedBigInteger('promissoryNote_id');
+            $table->foreign('promissoryNote_id')->references('id')->on('promissory_notes')->onDelete('cascade');
             $table->timestamps();
         });
     }

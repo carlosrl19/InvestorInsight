@@ -10,12 +10,13 @@ class PaymentCommissioner extends Model
         'payment_code',
         'payment_amount',
         'payment_date',
-        'promissoryNoteCommissioner_id',
+        'promissoryNote_id',
+        'commissioner_id',
     ];
     
-    public function commissioners()
+    public function commissioner()
     {
-        return $this->belongsTo(CommissionAgent::class);
+        return $this->belongsTo(CommissionAgent::class, 'commissioner_id');
     }
 
     public function promissoryNoteCommissioner()

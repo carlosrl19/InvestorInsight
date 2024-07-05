@@ -10,16 +10,17 @@ class PaymentInvestor extends Model
         'payment_code',
         'payment_amount',
         'payment_date',
-        'promissoryNoteInvestor_id',
+        'promissoryNote_id',
+        'investor_id',
     ];
 
-    public function investors()
+    public function investor()
     {
-        return $this->belongsTo(Investor::class);
+        return $this->belongsTo(Investor::class, 'investor_id');
     }
 
     public function promissoryNoteInvestor()
     {
-        return $this->belongsTo(PromissoryNote::class, 'promissoryNoteInvestor_id');
+        return $this->belongsTo(PromissoryNote::class, 'promissoryNote_id');
     }
 }

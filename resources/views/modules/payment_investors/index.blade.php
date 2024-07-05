@@ -59,7 +59,7 @@ Pagos inversionistas
                     <th>CÓDIGO</th>
                     <th>FECHA HORA</th>
                     <th>NOMBRE INVERSIONISTA</th>
-                    <th>MONTO PAGADO</th>
+                    <th>MONTO TOTAL</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,9 +67,7 @@ Pagos inversionistas
                 <tr class="text-center">
                     <td>#{{ $payment->payment_code }}</td>
                     <td>{{ $payment->payment_date }}</td>
-                    <td>
-                        {{ $payment->promissoryNoteInvestor->investor->investor_name ?? 'N/A' }}
-                    </td>
+                    <td>{{ $payment->investor->investor_name }}</td>
                     <td class="text-red">Lps. {{ number_format($payment->payment_amount,2) }}</td>
                 </tr>
                 @endforeach

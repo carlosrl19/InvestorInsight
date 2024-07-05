@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\DB;
 use App\Exports\CustomExport;
 use App\Exports\ActiveProjectsExport;
 use App\Exports\ActiveInvestorProjectExport;
+use App\Models\PaymentCommissioner;
+use App\Models\PaymentInvestor;
 use Maatwebsite\Excel\Facades\Excel;
 use Dompdf\Options;
 use Dompdf\Dompdf;
@@ -307,13 +309,43 @@ class ProjectController extends Controller
             $investorFunds->investor_new_funds = $investor->investor_balance;
             $investorFunds->investor_new_funds_comment = 'GANANCIA + CAPITAL A FONDO POR PROYECTO ' . $project->project_name . ' - CODIGO #' . $project->project_code . '.';
             $investorFunds->save();
+
+            // Crear registro de pago para cada inversionista (payment_investors)
+            $investorPayment = new PaymentInvestor();
+            $investorPayment->investor_id = $investor->id;
+            $promissoryNoteId = PromissoryNote::where('promissoryNote_code', $project->project_code)->value('id');
+            $investorPayment->promissoryNote_id = $promissoryNoteId;
+            $investorPayment->payment_code = $project->project_code;
+            $investorPayment->payment_amount = ($investor->pivot->investor_final_profit + $investor->pivot->investor_investment);
+            $investorPayment->payment_date = now();
+            $investorPayment->save();
         }
     
         // Sumar el commissioner_commission al commissioner_balance de cada comisionista asociado al proyecto
         foreach ($project->commissioners as $commissioner) {
             $commissioner->commissioner_balance += ($commissioner->pivot->commissioner_commission);
             $commissioner->save();
+
+            // Crear registro de pago para cada comisionista (payment_commissioner)
+            $commissionerPayment = new PaymentCommissioner();
+            $commissionerPayment->commissioner_id = $commissioner->id;
+            $promissoryNoteId = PromissoryNote::where('promissoryNote_code', $project->project_code)->value('id');
+            $commissionerPayment->promissoryNote_id = $promissoryNoteId;
+            $commissionerPayment->payment_code = $project->project_code;
+            $commissionerPayment->payment_amount = $commissioner->pivot->commissioner_commission;
+            $commissionerPayment->payment_date = now();
+            $commissionerPayment->save();
         }
+
+        // Cambiar estado del pagaré del inversionista
+        DB::table('promissory_notes')
+            ->where('promissoryNote_code', $project->project_code)
+            ->update(['promissoryNote_status' => 0]);
+
+        // Cambiar estado del pagaré del comisionista
+        DB::table('promissory_note_commissioners')
+            ->where('promissoryNoteCommissioner_code', $project->project_code)
+            ->update(['promissoryNoteCommissioner_status' => 0]);
     
         // Guardar el ID del proyecto en la sesión para la generación del PDF y Excel
         // Esto funciona con JS en el project.index que detecta el project->id para el PDF y lo hace descargar automáticamente

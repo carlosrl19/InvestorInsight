@@ -46,4 +46,9 @@ class Investor extends Model
         return $this->hasMany(Transfer::class)
                     ->onDelete('cascade');
     }
+
+    public function payment_investors()
+    {
+        return $this->hasMany(PaymentInvestor::class);
+    }
 }
