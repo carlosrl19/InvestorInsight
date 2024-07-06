@@ -169,7 +169,6 @@ Comisionistas
                         </div>
                     </div>
                     <!-- Fin del modal específico -->
-                    
                     @endforeach
                 </tbody>
             </table>

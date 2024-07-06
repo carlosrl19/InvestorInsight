@@ -113,8 +113,68 @@ Prestamistas
                                     <form method="POST" action="{{ route('moneylender.update', ['moneylender' => $moneylender->id]) }}" novalidate>
                                         @method('PUT')
                                         @csrf
+                                        <div class="row mb-3 align-items-end">
+                                            <div class="col">
+                                                <div class="form-floating">
+                                                    <input type="text" maxlength="55" oninput="this.value = this.value.toUpperCase()" value="{{ $moneylender->moneylender_name }}" name="moneylender_name" id="moneylender_name_{{ $moneylender->id }}" class="form-control @error('moneylender_name') is-invalid @enderror" placeholder="Ingrese el nombre del prestamista" autocomplete="off"/>
+                                                    @error('moneylender_name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                    <label for="moneylender_name_{{ $moneylender->id }}">Nombre del prestamista</label>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-floating">
+                                                    <input type="text" maxlength="13" value="{{ $moneylender->moneylender_dni }}" name="moneylender_dni" id="moneylender_dni_{{ $moneylender->id }}" class="form-control @error('moneylender_dni') is-invalid @enderror" placeholder="Ingrese el número de identidad" autocomplete="off"/>
+                                                    @error('moneylender_dni')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                    <label for="moneylender_dni_{{ $moneylender->id }}">Nº identidad</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 align-items-end">
+                                            <div class="col">
+                                                <div class="form-floating">
+                                                    <input type="text" name="moneylender_phone" value="{{ $moneylender->moneylender_phone }}" id="moneylender_phone_{{ $moneylender->id }}" class="form-control @error('moneylender_phone') is-invalid @enderror" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
+                                                    @error('moneylender_phone')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                    <label for="moneylender_phone_{{ $moneylender->id }}">Nº teléfono</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3 align-items-end">
+                                            <div class="col">
+                                                <div class="form-floating">
+                                                    <textarea maxlength="255" style="overflow: hidden; height: 150px; resize: none"
+                                                        name="moneylender_description" id="moneylender_description"
+                                                        class="form-control @error('moneylender_description') is-invalid @enderror"
+                                                        autocomplete="off" oninput="this.value = this.value.toUpperCase()">{{ $moneylender->moneylender_description }}</textarea>
+                                                    @error('moneylender_description')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                    <span class="invalid-feedback" role="alert" id="project-comment-error"
+                                                        style="display: none;">
+                                                        <strong></strong>
+                                                    </span>
+                                                    <label for="moneylender_description">
+                                                        Descripción del prestamista
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
                                         
-                                        <a href="{{ route('moneylender.index') }}" class="btn btn-dark me-auto">Volver</a>
+                                        <a href="{{ route('commission_agent.index') }}" class="btn btn-dark me-auto">Volver</a>
                                         <button type="submit" class="btn btn-teal">Guardar cambios</button>
                                     </form>
                                 </div>
