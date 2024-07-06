@@ -29,9 +29,9 @@
     <div class="page page-center">
         <div class="container-tight">
             <div class="empty">
-                <p class="empty-title">!Tabla no encontrada!</p>
+                <p class="empty-title">!Petición al servidor no encontrada!</p>
                 <div style="width: 450px; margin: 3vh 0vh 5vh 0vh;">
-                    <img src="{{ asset('static/419-error.svg') }}" alt="">
+                    <img src="{{ asset('static/svg/error_server.svg') }}" alt="">
                 </div>
                 <p class="empty-subtitle text-muted">
                     "Lo sentimos, parece que tenemos un problema técnico y necesitamos hacer algunos ajustes en nuestro
