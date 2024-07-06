@@ -30,15 +30,6 @@ Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentControl
 // Commission agent payments
 Route::resource('payments_commissioner', 'App\Http\Controllers\PaymentCommissionerController')->names('payments_commissioner');
 
-// Providers Agent
-Route::resource('provider', 'App\Http\Controllers\ProviderController')->names('provider');
-Route::post('provider/{id}/fund', 'App\Http\Controllers\ProviderController@fund')->name('provider.fund');
-
-// Providers Funds
-Route::resource('provider_funds', 'App\Http\Controllers\ProviderFundsController')->names('provider_funds');
-Route::get('provider_funds/{id}/bill', 'App\Http\Controllers\ProviderFundsController@showBill')->name('provider_funds.bill');
-Route::get('provider_funds/{id}/bill/download', 'App\Http\Controllers\ProviderFundsController@downloadBill')->name('provider_funds.bill_download');
-
 // Transfer
 Route::resource('transfer', 'App\Http\Controllers\TransferController')->names('transfer');
 
