@@ -11,7 +11,9 @@ class MoneylenderLoansController extends Controller
 
     public function index()
     {
-        //
+        $moneylenderLoans = MoneylenderLoans::latest(20)->get();
+
+        return view('modules.moneylender_loans.index', compact('moneylenderLoans'));
     }
 
     public function create()

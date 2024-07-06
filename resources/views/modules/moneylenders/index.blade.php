@@ -18,6 +18,10 @@ Prestamistas
 @endsection
 
 @section('create')
+<a href="#" class="btn btn-orange" style="font-size: clamp(0.6rem, 3vw, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-loans">
+    $ Historial de préstamos
+</a>
+
 <a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-team">
     + Nuevo prestamista
 </a>
@@ -45,13 +49,13 @@ Prestamistas
 <div class="container-xl">
     <div class="card mb-2">
         <div class="card-body">
-           <div id="search-filters-container">FILTROS
+           <div id="search-filters-moneylender-container">FILTROS
             </div>
         </div>
     </div>
     <div class="card">
         <div class="card-body">
-            <table id="example" class="display table table-bordered">
+            <table id="exampleMoneylender" class="display table table-bordered">
                 <thead>
                     <tr style="text-align: center;">
                         <th>ID</th>
@@ -192,6 +196,7 @@ Prestamistas
 @endsection
 
 @include('modules.moneylenders._create')
+@include('modules.moneylender_loans.index')
 
 @section('scripts')
 
@@ -201,6 +206,7 @@ Prestamistas
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_commissioner.js') }}"></script>
+<script src="{{ asset('customjs/datatable/dt_moneylender.js') }}"></script>
+<script src="{{ asset('customjs/datatable/dt_moneylender_loans.js') }}"></script>
 
 @endsection

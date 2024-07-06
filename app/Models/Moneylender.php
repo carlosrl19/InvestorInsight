@@ -12,4 +12,8 @@ class Moneylender extends Model
         'moneylender_phone',
         'moneylender_description'
     ];
+
+    public function moneylender_loan(){
+        return $this->belongsTo(MoneylenderLoans::class, 'moneylender_id', 'id');
+    }
 }
