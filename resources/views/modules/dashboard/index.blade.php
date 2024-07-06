@@ -5,6 +5,9 @@
 <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
 
+<!-- Apexchart -->
+<link href="{{ asset('dist/libs/apexcharts/dist/apexcharts.css') }}" rel="stylesheet">
+
 @endsection
 
 @section('pretitle')
@@ -115,7 +118,7 @@ Dashboard
 		<div class="col-lg-7">
 			<div class="card">
 				<div class="card-body">
-					<h3 class="card-title">Junior Ayala - Comisiones del mes</h3>
+					<h3 class="card-title">Registro de comisiones<sup class="text-muted"> (Junior Alexis Ayala Guerrero)</sup></h3>
 					<div id="chart-mentions" class="chart-lg"></div>
 				</div>
 			</div>
@@ -305,17 +308,21 @@ Dashboard
                 height: 240,
                 parentHeightOffset: 0,
 				toolbar: {
-                    show: false,
+                    show: true,
+					tools: {
+						download: true,
+						selection: true,
+						zoom: false,
+						zoomin: true,
+						zoomout: true,
+						pan: false,
+						reset: false
+					}
                 },
                 animations: {
                     enabled: true
                 },
                 stacked: false,
-            },
-            plotOptions: {
-                bar: {
-                    columnWidth: '50%',
-                }
             },
             dataLabels: {
                 enabled: false,
@@ -391,5 +398,4 @@ Dashboard
         })).render();
     });
 </script>
-
 @endsection
