@@ -30,6 +30,9 @@ Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentControl
 // Commission agent payments
 Route::resource('payments_commissioner', 'App\Http\Controllers\PaymentCommissionerController')->names('payments_commissioner');
 
+// Investor payments
+Route::resource('moneylender', 'App\Http\Controllers\MoneylenderController')->names('moneylender');
+
 // Transfer
 Route::resource('transfer', 'App\Http\Controllers\TransferController')->names('transfer');
 

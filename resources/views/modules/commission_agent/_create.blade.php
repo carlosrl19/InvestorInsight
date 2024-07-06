@@ -34,7 +34,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" maxlength="13" name="commissioner_dni" value="{{ old('commissioner_dni') }}" id="commissioner_dni" class="form-control @error('commissioner_dni') is-invalid @enderror" autocomplete="off"/>
-                                @error('commissioner_dni')investor_name
+                                @error('commissioner_dni')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
