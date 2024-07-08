@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Project;
+use App\Models\Investor;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithProperties;
@@ -14,7 +15,13 @@ class ActiveProjectsExport implements FromView, WithProperties, WithEvents
 {
     public function view(): View
     {
-        $projects = Project::where('project_status', 1)->orderBy('project_investment', 'desc')->get();
+        // Obtener los proyectos con sus inversores
+        $projects = Project::with('investors')
+            ->where('project_status', 1)
+            ->get()
+            ->sortBy(function ($project) {
+                return $project->investors->pluck('investor_name')->join(',');
+            });
 
         return view('modules.projects._report_active_projects_excel', [
             'projects' => $projects,
