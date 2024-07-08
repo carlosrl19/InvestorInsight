@@ -55,7 +55,7 @@ Historial de prestamista /&nbsp;
             <div class="col-6">
                 <div class="card" style="min-height: auto; max-height: 20rem">
                     <div class="card-header">
-                        <h3 class="card-title">Préstamos</h3>
+                        <h3 class="card-title">Préstamos activos</h3>
                     </div>
                     <div class="card-body card-body-scrollable card-body-scrollable-shadow">
                         <div class="divide-y">
@@ -83,7 +83,7 @@ Historial de prestamista /&nbsp;
             <div class="col-6">
                 <div class="card" style="min-height: auto; max-height: 20rem">
                     <div class="card-header">
-                        <h3 class="card-title">Proyectos finalizados</h3>
+                        <h3 class="card-title">Préstamos pagados</h3>
                     </div>
                     <div class="card-body card-body-scrollable card-body-scrollable-shadow">
                         <div class="divide-y">
