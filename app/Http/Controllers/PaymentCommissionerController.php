@@ -33,8 +33,8 @@ class PaymentCommissionerController extends Controller
         $paymentCommissioner = PaymentCommissioner::create($request->validated());
 
         // Actualizar el estado del pagaré correspondiente
-        $promissoryNote = PromissoryNoteCommissioner::findOrFail($request->promissoryNoteCommissioner_id);
-        $promissoryNote->update(['promissoryNote_status' => 0]);
+        $promissoryNote = PromissoryNoteCommissioner::findOrFail($request->promissoryNote_id);
+        $promissoryNote->update(['promissoryNoteCommissioner_status' => 0]);
 
         return redirect()->route('payments_commissioner.index')->with('success', 'Pago registrado correctamente.');
     }

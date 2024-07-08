@@ -3,8 +3,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #52524E">
             <div class="modal-header">
-                <h5 class="modal-title">Nuevo pago
-                </h5>
+                <h5 class="modal-title">Nuevo pago</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -13,18 +12,20 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <select name="promissoryNoteCommissioner_id" id="promissoryNoteCommissioner_id" class="form-control select2-promissoryNotes" style="width: 100%" onchange="updatePaymentCode()">
+                                <select name="promissoryNote_id" id="promissoryNote_id" class="form-control select2-promissoryNotes" style="width: 100%" onchange="updatePaymentDetails()">
                                     @if ($promissoryNoteCommissioners->where('promissoryNoteCommissioner_status', 1)->count() > 0)
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
                                         @forelse ($promissoryNoteCommissioners->where('promissoryNoteCommissioner_status', 1) as $promissoryNoteCommissioner)
-                                            <option value="{{ $promissoryNoteCommissioner->id }}">{{ $promissoryNoteCommissioner->promissoryNoteCommissioner_code }} - Lps. {{ number_format($promissoryNoteCommissioner->promissoryNoteCommissioner_amount,2) }}</option>
+                                            <option value="{{ $promissoryNoteCommissioner->id }}" data-commissioner-id="{{ $promissoryNoteCommissioner->commissioner_id }}">
+                                                {{ $promissoryNoteCommissioner->promissoryNoteCommissioner_code }} - Lps. {{ number_format($promissoryNoteCommissioner->promissoryNoteCommissioner_amount, 2) }}
+                                            </option>
                                         @empty
                                         @endforelse
                                     @else
                                         <option value="" disabled selected>No existen pagarés para pagar</option>
                                     @endif
                                 </select>
-                                <label for="promissoryNoteCommissioner_id">Pagarés pendientes de pago</label>
+                                <label for="promissoryNote_id">Pagarés pendientes de pago</label>
                             </div>
                         </div>
                         <div class="col" style="display: none">
@@ -75,7 +76,7 @@
                                     name="payment_code" 
                                     value="" 
                                     autocomplete="off"
-                                    readonly">
+                                    readonly>
                                     @error('payment_code')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -84,6 +85,7 @@
                                 <label for="payment_code">Código pago</label>
                             </div>
                         </div>
+                        <input type="hidden" name="commissioner_id" id="commissioner_id" value="">
                     </div>
                     <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-teal">Realizar pago</button>
@@ -94,14 +96,20 @@
 </div>
 
 <script>
-    function updatePaymentCode() {
-    // Obtener el valor seleccionado en el select
-    var selectedOption = document.getElementById('promissoryNoteCommissioner_id').value;
+    function updatePaymentDetails() {
+        // Obtener el valor seleccionado en el select
+        var selectedOption = document.getElementById('promissoryNote_id').value;
 
-    // Obtener el código del pagaré seleccionado
-    var promissoryNoteCode = document.querySelector(`option[value="${selectedOption}"]`).textContent.split(' - ')[0];
+        // Obtener el código del pagaré seleccionado
+        var promissoryNoteCode = document.querySelector(`option[value="${selectedOption}"]`).textContent.split(' - ')[0];
 
-    // Asignar el código del pagaré al campo payment_code
-    document.getElementById('payment_code').value = promissoryNoteCode;
-}
+        // Obtener el commissioner_id del pagaré seleccionado
+        var commissionerId = document.querySelector(`option[value="${selectedOption}"]`).getAttribute('data-commissioner-id');
+
+        // Asignar el código del pagaré al campo payment_code
+        document.getElementById('payment_code').value = promissoryNoteCode;
+
+        // Asignar el commissioner_id al campo oculto
+        document.getElementById('commissioner_id').value = commissionerId;
+    }
 </script>

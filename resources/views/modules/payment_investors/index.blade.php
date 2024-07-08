@@ -67,7 +67,14 @@ Pagos inversionistas
                 <tr class="text-center">
                     <td>#{{ $payment->payment_code }}</td>
                     <td>{{ $payment->payment_date }}</td>
-                    <td>{{ $payment->investor->investor_name }}</td>
+                    <td>
+                        <a href="{{ route('investor.show', $payment->investor) }}">{{ $payment->investor->investor_name }}
+                        <small>
+                            <sup>
+                                <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+                            </sup>
+                        </small>
+                    </td>
                     <td class="text-red">Lps. {{ number_format($payment->payment_amount,2) }}</td>
                 </tr>
                 @endforeach

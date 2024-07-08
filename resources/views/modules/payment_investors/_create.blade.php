@@ -3,8 +3,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #52524E">
             <div class="modal-header">
-                <h5 class="modal-title">Nuevo pago
-                </h5>
+                <h5 class="modal-title">Nuevo pago</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -13,11 +12,13 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <select name="promissoryNote_id" id="promissoryNote_id" class="form-control select2-promissoryNotes" style="width: 100%" onchange="updatePaymentCode()">
+                                <select name="promissoryNote_id" id="promissoryNote_id" class="form-control select2-promissoryNotes" style="width: 100%" onchange="updatePaymentDetails()">
                                     @if ($promissoryNoteInvestors->where('promissoryNote_status', 1)->count() > 0)
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
                                         @forelse ($promissoryNoteInvestors->where('promissoryNote_status', 1) as $promissoryNoteInvestor)
-                                            <option value="{{ $promissoryNoteInvestor->id }}">{{ $promissoryNoteInvestor->promissoryNote_code }} - Lps. {{ number_format($promissoryNoteInvestor->promissoryNote_amount,2) }}</option>
+                                            <option value="{{ $promissoryNoteInvestor->id }}" data-investor-id="{{ $promissoryNoteInvestor->investor_id }}">
+                                                {{ $promissoryNoteInvestor->promissoryNote_code }} - Lps. {{ number_format($promissoryNoteInvestor->promissoryNote_amount, 2) }}
+                                            </option>
                                         @empty
                                         @endforelse
                                     @else
@@ -75,7 +76,7 @@
                                     name="payment_code" 
                                     value="" 
                                     autocomplete="off"
-                                    readonly">
+                                    readonly>
                                     @error('payment_code')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -84,6 +85,7 @@
                                 <label for="payment_code">Código pago</label>
                             </div>
                         </div>
+                        <input type="hidden" name="investor_id" id="investor_id" value="">
                     </div>
                     <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-teal">Realizar pago</button>
@@ -94,14 +96,20 @@
 </div>
 
 <script>
-    function updatePaymentCode() {
-    // Obtener el valor seleccionado en el select
-    var selectedOption = document.getElementById('promissoryNote_id').value;
+    function updatePaymentDetails() {
+        // Obtener el valor seleccionado en el select
+        var selectedOption = document.getElementById('promissoryNote_id').value;
 
-    // Obtener el código del pagaré seleccionado
-    var promissoryNoteCode = document.querySelector(`option[value="${selectedOption}"]`).textContent.split(' - ')[0];
+        // Obtener el código del pagaré seleccionado
+        var promissoryNoteCode = document.querySelector(`option[value="${selectedOption}"]`).textContent.split(' - ')[0];
 
-    // Asignar el código del pagaré al campo payment_code
-    document.getElementById('payment_code').value = promissoryNoteCode;
-}
+        // Obtener el investor_id del pagaré seleccionado
+        var investorId = document.querySelector(`option[value="${selectedOption}"]`).getAttribute('data-investor-id');
+
+        // Asignar el código del pagaré al campo payment_code
+        document.getElementById('payment_code').value = promissoryNoteCode;
+
+        // Asignar el investor_id al campo oculto
+        document.getElementById('investor_id').value = investorId;
+    }
 </script>
