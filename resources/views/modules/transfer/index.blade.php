@@ -103,9 +103,9 @@ Transferencias
                             </div>
                             <div class="modal-body">
                                 @if (file_exists(public_path('images/transfers/' . $transfer->transfer_img)))
-                                    <img src="{{ asset('images/transfers/' . $transfer->transfer_img) }}" style="height: 450px; width: 400px; display: flex; margin: auto" alt="transfer-proof">
+                                    <img src="{{ asset('images/transfers/' . $transfer->transfer_img) }}" style="height: auto; width: 100%; display: flex; margin: auto" alt="transfer-proof">
                                 @else
-                                    <img src="{{ asset('images/no-image.png') }}" style="height: 400px; width: 400px; display: flex; margin: auto" alt="no image available" title="Sin comprobante">
+                                    <img src="{{ asset('images/no-image.png') }}" style="height: 35vh; width: 100%; display: flex; margin: auto" alt="no image available" title="Sin comprobante">
                                 @endif
                                 <br>
                                 <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Volver</button>

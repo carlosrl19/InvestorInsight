@@ -15,7 +15,7 @@ class TransferController extends Controller
     public function index()
     {
         $investors = Investor::get();
-        $transfers = Transfer::where('transfer_bank', '=!', 'FONDOS')->get();
+        $transfers = Transfer::where('transfer_bank', '!=', 'FONDOS')->get();
         $generatedCode = strtoupper(Str::random(12));
         $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
