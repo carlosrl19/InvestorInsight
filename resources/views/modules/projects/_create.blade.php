@@ -266,7 +266,7 @@
                         <div class="row mb-3 alig-items-end">
                             <div class="col-11">
                                 <div class="form-floating">
-                                    <select class="form-select select2-investors" id="investor_select" disabled
+                                    <select class="form-select select2-investors" id="investor_select"
                                         style="font-size: clamp(0.6rem, 3vh, 0.8rem);">
                                         <option value="" selected disabled>Seleccione un inversionista</option>
                                         @foreach ($investors as $investor)
@@ -275,13 +275,13 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    <label for="investor_select">Comisionistas</label>
+                                    <label for="investor_select">Inversionistas</label>
                                 </div>
                             </div>
                             
                             <div class="col-1">
                                 <button type="button" class="btn btn-red mt-3 text-white" id="add_investor_button_container"
-                                    disabled style="margin-bottom: 5px; border: none; padding: 5px 10px 5px 5px">
+                                    style="margin-bottom: 5px; border: none; padding: 5px 10px 5px 5px">
                                     &nbsp;<img style="filter: invert(100%) sepia(0%) saturate(7485%) hue-rotate(207deg) brightness(103%) contrast(103%);" src="{{ asset('../static/svg/user-plus.svg') }}" width="20" height="20">
                                 </button>
                             </div>
@@ -293,7 +293,7 @@
                                     <th>INVERSIONISTAS DEL PROYECTO</th>
                                     <th>CAPITAL DE INVERSIÓN</th>
                                     <th>GANANCIA TOTAL DEL PROYECTO</th>
-                                    <th>GANANCIA INVERSIONISTA PRINCIPAL</th>
+                                    <th>GANANCIA FINAL INVERSIONISTA</th>
                                     <th style="width: 50px">ACCIONES</th>
                                 </tr>
                             </thead>
@@ -301,8 +301,7 @@
                                 <!-- Dinamically row creation -->
                             </tbody>
                         </table>
-                        <hr>
-
+                        
                         <div class="row mb-3 alig-items-end">
                             <div class="col-11">
                                 <div class="form-floating">
