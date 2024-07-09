@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Transfer;
 use App\Models\Project;
 use App\Models\Investor;
-use App\Models\CommissionAgent;
+use App\Models\InvestorFunds;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class TransferController extends Controller
 {
@@ -61,6 +62,23 @@ class TransferController extends Controller
                 $transfer->transfer_img = 'no-image.png';
                 $transfer->save(); // Guarda los cambios en el modelo Transfer
             }
+
+            // Se registra el cambio en el fondo del inversionista
+            $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
+     
+            // Guarda los fondos anteriores antes de actualizar
+            $oldFunds = $investor->investor_balance;
+         
+            // Obtén los datos validados y añade los campos necesarios para InvestorFunds
+            $validatedData = $request->validated();
+            $validatedData['investor_id'] = $investor->id;
+            $validatedData['investor_change_date'] = $todayDate;
+            $validatedData['investor_old_funds'] = $oldFunds;
+            $validatedData['investor_new_funds'] = $investor->investor_balance + $request->transfer_amount;
+            $validatedData['investor_new_funds_comment'] = "TRANSFERENCIA MEDIANTE " . $request->transfer_bank . "- CÓDIGO #" . $generatedCode . '.';
+         
+            // Crea el registro en InvestorFunds usando create
+            InvestorFunds::create($validatedData);
     
             // Actualiza el saldo del inversionista sumando el monto de la transferencia
             $newBalance = $investor->investor_balance + $request->transfer_amount;
@@ -74,7 +92,7 @@ class TransferController extends Controller
             DB::rollBack();
             
             // Get errors
-            //dd($e->getMessage());
+            dd($e->getMessage());
             
             return redirect()->back()->withErrors(['error' => 'Ocurrió un error inesperado al intentar guardar la transferencia. Asegúrese de completar todos los campos del formulario. Si el problema persiste, contacte al servicio técnico.'])->withInput();
         }

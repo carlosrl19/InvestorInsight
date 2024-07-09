@@ -98,14 +98,14 @@ Transferencias
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content" style="border: 2px solid #52524E">
                             <div class="modal-header">
-                                <h5 class="modal-title">Imagen de comprobante</h5>
+                                <h5 class="modal-title">Imagen de comprobante de transferencia</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 @if (file_exists(public_path('images/transfers/' . $transfer->transfer_img)))
-                                    <img src="{{ asset('images/transfers/' . $transfer->transfer_img) }}" style="height: auto; width: 100%; display: flex; margin: auto" alt="transfer-proof">
+                                    <img src="{{ asset('images/transfers/' . $transfer->transfer_img) }}" style="min-height: 70vh; max-height: 70vh; width: auto; display: flex; margin: auto" alt="transfer-proof">
                                 @else
-                                    <img src="{{ asset('images/no-image.png') }}" style="height: 35vh; width: 100%; display: flex; margin: auto" alt="no image available" title="Sin comprobante">
+                                    <img src="{{ asset('images/no-image.png') }}" style="min-height: 70vh; max-height: 70vh;; width: auto; display: flex; margin: auto" alt="no image available" title="Sin comprobante">
                                 @endif
                                 <br>
                                 <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Volver</button>
