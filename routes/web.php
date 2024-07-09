@@ -45,7 +45,6 @@ Route::resource('promissory_note', 'App\Http\Controllers\PromissoryNoteControlle
 Route::get('promissory_note/{id}/report', 'App\Http\Controllers\PromissoryNoteController@showReport')->name('promissory_note.report');
 Route::get('promissory_note/{id}/report/download', 'App\Http\Controllers\PromissoryNoteController@downloadReport')->name('promissory_note.report_download');
 
-
 // Promissory note commissioners
 Route::resource('promissory_note_commissioner', 'App\Http\Controllers\PromissoryNoteCommissionerController')->names('promissory_note_commissioner');
 Route::get('promissory_note_commissioner/{id}/report', 'App\Http\Controllers\PromissoryNoteCommissionerController@showReport')->name('promissory_note_commissioner.report');

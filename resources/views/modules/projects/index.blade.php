@@ -34,6 +34,7 @@
         bottom: 0;
         left: 0;
         right: 0;
+        border-radius: 10px;
         background-color: rgba(0, 0, 0, 0.5);
         color: white;
         text-align: center;
@@ -229,7 +230,7 @@ Proyectos activos
 
                             <!-- Modal for finishing the project -->
                             <div class="modal modal-blur fade" id="finishModal{{ $project->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="finishModal{{ $project->id }}" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <form action="{{ route('project.finish', $project->id) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
@@ -238,65 +239,68 @@ Proyectos activos
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Finalizado"? Utilize esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
-                                                Es necesario que ingrese la fecha en la que el proyecto ha finalizado sus labores, así como el comprobante de pago de la transferencia del inversionista para el proyecto.
-                                                
-                                                <p class="mt-2" style="background-color: #e3e3e3; border-radius: 10px; padding: 10px">
-                                                    <strong>PAGOS: </strong>
-                                                    Una vez finalizado el proyecto, los pagos a los inversionistas y comisionistas se registrarán de manera inmediata. Es decir, los saldos se agregarán automáticamente a sus fondos.                                                </p>
-                                                
-                                                <div class="row mb-3 align-items-end">
-                                                    <div class="col">
-                                                        <div class="form-floating">
-                                                            <input type="file" accept="image/*" 
-                                                            class="form-control @error('project_proof_transfer_img') is-invalid @enderror" 
-                                                            id="project_proof_transfer_img" name="project_proof_transfer_img" alt="proof-transfer" onchange="previewImage(event)">
-                                                            <label for="project_proof_transfer_img">Comprobante de transferencia</label>
-                                                            <span class="invalid-feedback" role="alert" id="transfer-img-error"
-                                                                style="display: none;">
-                                                                <strong></strong>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="form-floating"
-                                                        style="border: 1px solid #e3e3e3; border-radius: 10px; padding: 10px; min-height: 32vh; max-height: 32vh;">
-                                                        <span style="display: flex; justify-content: center; color: #5b5b5b">Visualizador de
-                                                            comprobante ingresado de transferencia</span>
-                                                        <div class="image-container" style="position: relative;">
-                                                            <img id="image-preview" src="#" alt="Imagen de transferencia"
-                                                                style="max-width: 100%; max-height: 28vh; display: none;">
-                                                            <div class="overlay" title="Clic en la imagen para ver en pantalla completa." data-bs-toggle="tooltip" data-bs-placement="bottom">Pantalla completa</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Full viewer -->
-                                                <div class="modal fade" id="image-modal" tabindex="-1" aria-labelledby="image-modal-label"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="image-modal-label">Imagen de comprobante ingresado de
-                                                                    transferencia</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                    aria-label="Close"></button>
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Finalizado"? Utilize esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
+                                                        Es necesario que ingrese la fecha en la que el proyecto ha finalizado sus labores, así como el comprobante de pago de la transferencia del inversionista para el proyecto.
+                                                        
+                                                        <p class="mt-2" style="background-color: #e3e3e3; border-radius: 10px; padding: 10px">
+                                                            <strong>PAGOS: </strong>
+                                                            Una vez finalizado el proyecto, los pagos a los inversionistas y comisionistas se registrarán de manera inmediata. Es decir, los saldos se agregarán automáticamente a sus fondos.                                                </p>
+                                                        
+                                                        <div class="row mb-2 align-items-end">
+                                                            <div class="col">
+                                                                <div class="form-floating">
+                                                                    <input style="font-size: clamp(0.6rem, 3vw, 0.7rem)" type="file" accept="image/*" 
+                                                                    class="form-control @error('project_proof_transfer_img') is-invalid @enderror" 
+                                                                    id="project_proof_transfer_img" name="project_proof_transfer_img" alt="proof-transfer" onchange="previewImage(event)">
+                                                                    <label for="project_proof_transfer_img">Comprobante de transferencia</label>
+                                                                    <span class="invalid-feedback" role="alert" id="transfer-img-error"
+                                                                        style="display: none;">
+                                                                        <strong></strong>
+                                                                    </span>
+                                                                </div>
                                                             </div>
-                                                            <div class="modal-body d-flex justify-content-center align-items-center">
-                                                                <img id="full-image" src="#" alt="Imagen de transferencia"
-                                                                    class="img-fluid">
+                                                        </div>
+
+                                                        <!-- Full viewer -->
+                                                        <div class="modal fade" id="image-modal" tabindex="-1" aria-labelledby="image-modal-label"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="image-modal-label">Imagen de comprobante ingresado de
+                                                                            transferencia</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body d-flex justify-content-center align-items-center">
+                                                                        <img id="full-image" src="#" alt="Imagen de transferencia"
+                                                                            class="img-fluid">
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-4">
+                                                        <div class="form-floating"
+                                                            style="border: 1px solid #e3e3e3; border-radius: 10px; padding: 10px; min-height: 32vh; max-height: 32vh;">
+                                                            <span style="display: flex; justify-content: center; color: #5b5b5b">Visualizador de comprobante</span>
+                                                            <div class="image-container" style="position: relative;">
+                                                                <img id="image-preview" src="#" alt="Imagen de transferencia"
+                                                                    style="max-width: 100%; max-height: 26vh; display: none; margin-top: 10px">
+                                                                <div class="overlay">Clic en imagen para pantalla completa</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                            </div>
 
-                                            </div>                                            
-                                            <div class="modal-footer">
+                                            <div style="margin: 0px 5px 20px 20px;">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                 <button type="submit" class="btn btn-danger">Finalizar proyecto</button>
                                             </div>
+                                            
                                         </form>
                                     </div>
                                 </div>

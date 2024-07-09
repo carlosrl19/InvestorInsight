@@ -145,7 +145,7 @@
                             <div class="image-container" style="position: relative;">
                                 <img id="image-preview" src="#" alt="Imagen de transferencia"
                                     style="max-width: 100%; max-height: 35vh; display: none;">
-                                <div class="overlay" title="Clic en la imagen para ver en pantalla completa." data-bs-toggle="tooltip" data-bs-placement="bottom">Pantalla completa</div>
+                                <div class="overlay">Pantalla completa</div>
                             </div>
                         </div>
                     </div>
@@ -219,6 +219,7 @@
         bottom: 0;
         left: 0;
         right: 0;
+        border-radius: 10px;
         background-color: rgba(0, 0, 0, 0.5);
         color: white;
         text-align: center;
