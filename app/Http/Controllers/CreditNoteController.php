@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\CreditNote;
 use App\Http\Requests\CreditNote\StoreRequest;
 use App\Models\Investor;
+use App\Models\InvestorFunds;
 use App\Models\Project;
 use App\Models\CommissionAgent;
 use Dompdf\Options;
@@ -99,6 +100,23 @@ class CreditNoteController extends Controller
                 DB::rollBack();
                 return redirect()->back()->withErrors(['error' => 'El monto de la nota crédito no puede ser mayor que el fondo del inversionista.']);
             }
+
+            // Se registra el cambio en el fondo del inversionista
+            $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
+     
+            // Guarda los fondos anteriores antes de actualizar
+            $oldFunds = $investor->investor_balance;
+          
+            // Obtén los datos validados y añade los campos necesarios para InvestorFunds
+            $validatedData = $request->validated();
+            $validatedData['investor_id'] = $investor->id;
+            $validatedData['investor_change_date'] = $todayDate;
+            $validatedData['investor_old_funds'] = $oldFunds;
+            $validatedData['investor_new_funds'] = $investor->investor_balance - $request->creditNote_amount;
+            $validatedData['investor_new_funds_comment'] = "NOTA CRÉDITO - CÓDIGO #" . $creditNoteCode . '.';
+          
+            // Crea el registro en InvestorFunds usando create
+            InvestorFunds::create($validatedData);
     
             // Actualiza el saldo del inversionista restando el monto de la nota crédito
             $newBalance = $investor->investor_balance - $request->creditNote_amount;
