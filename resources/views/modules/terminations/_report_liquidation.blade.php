@@ -1,4 +1,4 @@
-<title>#LQ-{{ $project->project_code }}</title>
+<title>{{ $project->project_name }} - #LQ-{{ $project->project_code }}</title>
 
 <div class="main">
 

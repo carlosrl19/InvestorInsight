@@ -117,6 +117,53 @@ class ProjectTerminationController extends Controller
         // Devolver el PDF en línea
         return response($pdf->output(), 200)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'inline; filename="PDF NOTA CRÉDITO.pdf"');
+            ->header('Content-Disposition', 'inline; filename="PDF LIQUIDACIÓN DE PROYECTO.pdf"');
+    }
+
+    public function downloadLiquidation($id) {
+        $project = Project::with(['investors', 'commissioners'])->findOrFail($id);
+
+        // Configurar el locale en Carbon
+        Carbon::setLocale('es');
+
+        // Obtener la fecha actual en español
+        $fecha = Carbon::now()->setTimezone('America/Costa_Rica');
+        $day = $fecha->format('d');
+        $month = $fecha->format('m');
+        $year = $fecha->format('Y');
+
+        $endDate = $project->project_end_date;
+        $endDay = Carbon::parse($endDate)->format('d');
+        $endMonth = Carbon::parse($endDate)->format('m');
+        $endYear = Carbon::parse($endDate)->format('Y');
+    
+        // Configuración de opciones para Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        
+        // Opcion que habilita la carga de imagenes
+        $options->set('chroot', realpath(''));
+        
+        // Crear instancia de Dompdf con las opciones configuradas
+        $pdf = new Dompdf($options);
+
+        // Formateador de números a letras
+        $formatter = new NumeroALetras();
+        $amountLetras = $formatter->toWords($project->project_investment + $project->investors->sum('pivot.investor_final_profit'));
+    
+        // Cargar el contenido de la vista en Dompdf
+        $pdf->loadHtml(view('modules.terminations._report_liquidation', compact('project', 'day', 'month', 'year', 'endDay', 'endMonth', 'endYear', 'amountLetras')));
+    
+        // Establecer el tamaño y la orientación del papel
+        $pdf->setPaper('A4', 'portrait');
+    
+        // Renderizar el PDF
+        $pdf->render();
+    
+        // Devolver el PDF para descarga forzada
+        return response()->streamDownload(function () use ($pdf, $project) {
+            echo $pdf->output();
+        }, $project->project_name . ' - LIQUIDACIÓN' . '.pdf');
     }
 }

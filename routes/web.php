@@ -70,6 +70,7 @@ Route::get('/termination/{id}', 'App\Http\Controllers\ProjectController@showTerm
 Route::resource('termination', 'App\Http\Controllers\ProjectTerminationController')->names('termination');
 Route::get('termination/{id}/report', 'App\Http\Controllers\ProjectTerminationController@showTermination')->name('termination.report');
 Route::get('termination/{id}/liquidation_report', 'App\Http\Controllers\ProjectTerminationController@showLiquidation')->name('termination.liquidation_report');
+Route::get('termination/{id}/liquidation_report/download', 'App\Http\Controllers\ProjectTerminationController@downloadLiquidation')->name('termination.liquidation_download');
 
 // Closed projects
 Route::get('closed/', 'App\Http\Controllers\ProjectController@indexClosed')->name('project.closed');

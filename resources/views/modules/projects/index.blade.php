@@ -94,6 +94,7 @@ Proyectos activos
     </div>
     @endif
 
+    <!-- Cuando el proyecto se crea -->
     @if (session('excel_project_id'))
         <script>
             window.onload = function() {
@@ -111,6 +112,7 @@ Proyectos activos
         </script>
     @endif
 
+    <!-- Cuando el proyecto se finaliza -->
     @if (session('project_id'))
         <script>
             window.onload = function() {
@@ -124,6 +126,11 @@ Proyectos activos
 
             function redirectToExcel() {
                 window.location.href = "{{ route('project.excel', session('project_id')) }}";
+                setTimeout(redirectToLiquidation, 1000);  // Descarga archivo liquidación al segundo (1000 milisegundos)
+            }
+
+            function redirectToLiquidation() {
+                window.location.href = "{{ route('termination.liquidation_download', session('project_id')) }}";
             }
         </script>
     @endif
