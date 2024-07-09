@@ -13,6 +13,40 @@
 <!-- Badge CSS -->
 <link href="{{ asset('/css/project.css') }}" rel="stylesheet">
 
+<style>
+    .image-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .image-preview {
+        display: inline-block;
+    }
+
+    .overlay:hover{
+        cursor: help;
+    }
+
+    .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        text-align: center;
+        padding: 10px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .image-container:hover .overlay {
+        opacity: 1;
+    }
+</style>
+
 @endsection
 
 @section('pretitle')
@@ -199,15 +233,59 @@ Proyectos activos
                                             <div class="modal-body">
                                                 ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Finalizado"? Utilize esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
                                                 Es necesario que ingrese la fecha en la que el proyecto ha finalizado sus labores, así como el comprobante de pago de la transferencia del inversionista para el proyecto.
-                                                <div class="row mt-4">
+                                                
+                                                <p class="mt-2" style="background-color: #e3e3e3; border-radius: 10px; padding: 10px">
+                                                    <strong>PAGOS: </strong>
+                                                    Una vez finalizado el proyecto, los pagos a los inversionistas y comisionistas se registrarán de manera inmediata. Es decir, los saldos se agregarán automáticamente a sus fondos.                                                </p>
+                                                
+                                                <div class="row mb-3 align-items-end">
                                                     <div class="col">
                                                         <div class="form-floating">
-                                                            <input type="file" accept="image/*" class="form-control @error('project_proof_transfer_img') is-invalid @enderror" id="project_proof_transfer_img" name="project_proof_transfer_img" alt="proof-transfer" onchange="previewImage(event)">
-                                                            <label for="project_proof_transfer_img">Comprobante de pago de transferencia</label>
+                                                            <input type="file" accept="image/*" 
+                                                            class="form-control @error('project_proof_transfer_img') is-invalid @enderror" 
+                                                            id="project_proof_transfer_img" name="project_proof_transfer_img" alt="proof-transfer" onchange="previewImage(event)">
+                                                            <label for="project_proof_transfer_img">Comprobante de transferencia</label>
+                                                            <span class="invalid-feedback" role="alert" id="transfer-img-error"
+                                                                style="display: none;">
+                                                                <strong></strong>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-floating"
+                                                        style="border: 1px solid #e3e3e3; border-radius: 10px; padding: 10px; min-height: 32vh; max-height: 32vh;">
+                                                        <span style="display: flex; justify-content: center; color: #5b5b5b">Visualizador de
+                                                            comprobante ingresado de transferencia</span>
+                                                        <div class="image-container" style="position: relative;">
+                                                            <img id="image-preview" src="#" alt="Imagen de transferencia"
+                                                                style="max-width: 100%; max-height: 28vh; display: none;">
+                                                            <div class="overlay" title="Clic en la imagen para ver en pantalla completa." data-bs-toggle="tooltip" data-bs-placement="bottom">Pantalla completa</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Full viewer -->
+                                                <div class="modal fade" id="image-modal" tabindex="-1" aria-labelledby="image-modal-label"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="image-modal-label">Imagen de comprobante ingresado de
+                                                                    transferencia</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body d-flex justify-content-center align-items-center">
+                                                                <img id="full-image" src="#" alt="Imagen de transferencia"
+                                                                    class="img-fluid">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>                                            
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                 <button type="submit" class="btn btn-danger">Finalizar proyecto</button>
@@ -334,6 +412,30 @@ Proyectos activos
         $(this).find('#pdf-frame').attr('src', '');
     });
 </script>   
+
+<script>
+    function previewImage(event) {
+        var preview = document.getElementById('image-preview');
+        preview.style.display = 'block';
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function() {
+            preview.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+    }
+</script>
+
+<script>
+    var imagePreview = document.getElementById('image-preview');
+    var fullImage = document.getElementById('full-image');
+
+    imagePreview.addEventListener('click', function() {
+        fullImage.src = this.src;
+        var imageModal = new bootstrap.Modal(document.getElementById('image-modal'));
+        imageModal.show();
+    });
+</script>
 
 <!-- Toast message -->
 <script>

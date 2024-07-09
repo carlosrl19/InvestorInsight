@@ -23,7 +23,6 @@ Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController
 
 // Investor liquidations
 Route::resource('investors_liquidations', 'App\Http\Controllers\InvestorLiquidationsController')->names('investors_liquidations');
-Route::get('investors_liquidations/report', 'App\Http\Controllers\CreditNoteController@showReport')->name('investors_liquidations.report');
 
 // Commission ggent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');
@@ -70,6 +69,7 @@ Route::get('/termination/{id}', 'App\Http\Controllers\ProjectController@showTerm
 // Project terminations
 Route::resource('termination', 'App\Http\Controllers\ProjectTerminationController')->names('termination');
 Route::get('termination/{id}/report', 'App\Http\Controllers\ProjectTerminationController@showTermination')->name('termination.report');
+Route::get('termination/{id}/liquidation_report', 'App\Http\Controllers\ProjectTerminationController@showLiquidation')->name('termination.liquidation_report');
 
 // Closed projects
 Route::get('closed/', 'App\Http\Controllers\ProjectController@indexClosed')->name('project.closed');

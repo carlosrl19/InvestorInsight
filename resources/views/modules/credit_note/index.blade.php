@@ -91,7 +91,7 @@ Notas crédito
                 </tbody>
             </table>
 
-            <!-- Modal -->
+            <!-- PDF Viewer Modal -->
             <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">

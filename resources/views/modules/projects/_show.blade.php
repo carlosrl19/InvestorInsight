@@ -14,7 +14,7 @@
                                     <img src="{{ asset('static/in_process.gif') }}" alt="in_process" style="height: auto; width: 180px; padding-top: 20%; padding-bottom: 30%; margin: auto">
                                     <p class="mt-3 text-center">PROYECTO EN PROCESO</p>
                                 @else
-                                    <img src="/images/transfers/{{ $project->project_proof_transfer_img }}" style="height: auto; width: 410px;">
+                                    <img src="/images/transfers/{{ $project->project_proof_transfer_img }}" style="min-height: auto; max-height: 60vh; width: 410px;">
                                 @endif
                             </div>
                         </div> <!-- Fin de col izquierda -->

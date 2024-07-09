@@ -18,11 +18,6 @@ Inversionistas
 @endsection
 
 @section('create')
-<a href="{{ route('investors_liquidations.report')}}" style="font-size: clamp(0.6rem, 3vw, 0.65rem);" class="btn btn-sm btn-red" data-toggle="modal" data-target="#pdfModal">
-    &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
-    &nbsp;NOTA CRÉDITO
-</a>
-
 <a href="#" class="btn bg-green text-white" style="font-size: clamp(0.6rem, 3vw, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-liquidations">
     <img style="filter: brightness(0) saturate(100%) invert(89%) sepia(100%) saturate(1%) hue-rotate(258deg) brightness(104%) contrast(101%);" src="{{ asset('static/svg/user-down.svg') }}" width="16" height="16" alt="">&nbsp;Historial de liquidaciones
 </a>
@@ -348,6 +343,20 @@ Inversionistas
                         @endforeach
                     </tbody>
                 </table>
+                <!-- PDF Viewer Modal -->
+                <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="pdfModalLabel">Previsualización de nota crédito</h5>
+                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe id="pdf-frame" style="width:100%; height:500px;" src=""></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -369,5 +378,21 @@ Inversionistas
 <script src="{{ asset('customjs/datatable/dt_investor.js') }}"></script>
 <script src="{{ asset('customjs/datatable/dt_investor_funds.js') }}"></script>
 <script src="{{ asset('customjs/datatable/dt_investor_liquidations.js') }}"></script>
+
+<!-- PDF view -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $('#pdfModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var url = button.attr('href'); // Extraer la información de los atributos data-*
+        var modal = $(this);
+        modal.find('#pdf-frame').attr('src', url);
+    });
+    $('#pdfModal').on('hidden.bs.modal', function (e) {
+        $(this).find('#pdf-frame').attr('src', '');
+    });
+</script>
 
 @endsection

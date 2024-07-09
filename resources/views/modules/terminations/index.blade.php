@@ -49,6 +49,7 @@ Proyectos finiquitados
                         <th>Monto <br> Inversión</th>
                         <th>Ganancia <br> proyecto</th>
                         <th>Exportar <br> Finiquito</th>
+                        <th>Exportar <br> Liquidación</th>
                         <th>Estado <br> proyecto</th>
                     </tr>
                 </thead>
@@ -96,6 +97,16 @@ Proyectos finiquitados
                                 @endif
                             </td>
                             <td>
+                                @if($project->project_status == 0)
+                                <a href="{{ route('termination.liquidation_report', $project->id)}}" class="badge bg-red me-1 text-white" data-toggle="modal" data-target="#liquidationModal">
+                                    <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
+                                    LIQUIDACIÓN
+                                </a>
+                                @else
+                                    <span class="text-red"><strong>N/D</strong></span>
+                                @endif
+                            </td>
+                            <td>
                                 @if($project->project_status == '0')
                                     <span class="badge badge-outline text-success me-1 text-white">
                                         <img style="filter: brightness(0) saturate(100%) invert(49%) sepia(86%) saturate(434%) hue-rotate(78deg) brightness(98%) contrast(86%);" src="{{ asset('../static/svg/lock.svg') }}" width="20" height="20" alt="">
@@ -110,7 +121,7 @@ Proyectos finiquitados
                 </tbody>
             </table>
 
-            <!-- Modal -->
+            <!-- Termination viewer Modal -->
             <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -120,6 +131,21 @@ Proyectos finiquitados
                         </div>
                         <div class="modal-body">
                             <iframe id="pdf-frame" style="width:100%; height:500px;" src=""></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Liquidation viewer Modal -->
+            <div class="modal fade modal-blur" id="liquidationModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="liquidationModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="liquidationModalLabel">Previsualización de liquidación</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <iframe id="liquidation-frame" style="width:100%; height:500px;" src=""></iframe>
                         </div>
                     </div>
                 </div>
@@ -145,6 +171,8 @@ Proyectos finiquitados
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Termination iframe modal -->
 <script>
     $('#pdfModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que activó el modal
@@ -154,6 +182,19 @@ Proyectos finiquitados
     });
     $('#pdfModal').on('hidden.bs.modal', function (e) {
         $(this).find('#pdf-frame').attr('src', '');
+    });
+</script>
+
+<!-- Liquidation iframe modal -->
+<script>
+    $('#liquidationModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var url = button.attr('href'); // Extraer la información de los atributos data-*
+        var modal = $(this);
+        modal.find('#liquidation-frame').attr('src', url);
+    });
+    $('#liquidationModal').on('hidden.bs.modal', function (e) {
+        $(this).find('#liquidation-frame').attr('src', '');
     });
 </script>
 @endsection

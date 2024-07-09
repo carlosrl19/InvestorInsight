@@ -7,7 +7,7 @@ use App\Models\PaymentInvestor;
 use App\Models\PromissoryNote;
 use App\Models\PromissoryNoteCommissioner;
 use App\Models\Investor;
-use App\Models\CommissionAgent;
+use Luecano\NumeroALetras\NumeroALetras;
 use Carbon\Carbon;
 use Dompdf\Options;
 use Dompdf\Dompdf;
@@ -46,7 +46,6 @@ class ProjectTerminationController extends Controller
         $day = Carbon::parse($startDate)->format('d');
         $month = Carbon::parse($startDate)->format('m');
         $year = Carbon::parse($startDate)->format('Y');
-
             
         // Configuración de opciones para Dompdf
         $options = new Options();
@@ -72,5 +71,52 @@ class ProjectTerminationController extends Controller
         return response($pdf->output(), 200)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="PDF FINIQUITO.pdf"');
+    }
+
+    public function showLiquidation($id) {
+        $project = Project::with(['investors', 'commissioners'])->findOrFail($id);
+
+        // Configurar el locale en Carbon
+        Carbon::setLocale('es');
+
+        // Obtener la fecha actual en español
+        $fecha = Carbon::now()->setTimezone('America/Costa_Rica');
+        $day = $fecha->format('d');
+        $month = $fecha->format('m');
+        $year = $fecha->format('Y');
+
+        $endDate = $project->project_end_date;
+        $endDay = Carbon::parse($endDate)->format('d');
+        $endMonth = Carbon::parse($endDate)->format('m');
+        $endYear = Carbon::parse($endDate)->format('Y');
+    
+        // Configuración de opciones para Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        
+        // Opcion que habilita la carga de imagenes
+        $options->set('chroot', realpath(''));
+        
+        // Crear instancia de Dompdf con las opciones configuradas
+        $pdf = new Dompdf($options);
+
+        // Formateador de números a letras
+        $formatter = new NumeroALetras();
+        $amountLetras = $formatter->toWords($project->project_investment + $project->investors->sum('pivot.investor_final_profit'));
+    
+        // Cargar el contenido de la vista en Dompdf
+        $pdf->loadHtml(view('modules.terminations._report_liquidation', compact('project', 'day', 'month', 'year', 'endDay', 'endMonth', 'endYear', 'amountLetras')));
+    
+        // Establecer el tamaño y la orientación del papel
+        $pdf->setPaper('A4', 'portrait');
+    
+        // Renderizar el PDF
+        $pdf->render();
+    
+        // Devolver el PDF en línea
+        return response($pdf->output(), 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'inline; filename="PDF NOTA CRÉDITO.pdf"');
     }
 }
