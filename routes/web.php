@@ -23,6 +23,7 @@ Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController
 
 // Investor liquidations
 Route::resource('investors_liquidations', 'App\Http\Controllers\InvestorLiquidationsController')->names('investors_liquidations');
+Route::get('investors_liquidations/report', 'App\Http\Controllers\CreditNoteController@showReport')->name('investors_liquidations.report');
 
 // Commission ggent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');

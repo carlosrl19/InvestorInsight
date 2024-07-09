@@ -18,6 +18,11 @@ Inversionistas
 @endsection
 
 @section('create')
+<a href="{{ route('investors_liquidations.report')}}" style="font-size: clamp(0.6rem, 3vw, 0.65rem);" class="btn btn-sm btn-red" data-toggle="modal" data-target="#pdfModal">
+    &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
+    &nbsp;NOTA CRÉDITO
+</a>
+
 <a href="#" class="btn bg-green text-white" style="font-size: clamp(0.6rem, 3vw, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-liquidations">
     <img style="filter: brightness(0) saturate(100%) invert(89%) sepia(100%) saturate(1%) hue-rotate(258deg) brightness(104%) contrast(101%);" src="{{ asset('static/svg/user-down.svg') }}" width="16" height="16" alt="">&nbsp;Historial de liquidaciones
 </a>
