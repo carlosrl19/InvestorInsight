@@ -24,9 +24,7 @@ Proyectos finiquitados
 @endsection
 
 @section('create')
-<a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-payment">
-    + Nuevo pago de finiquito
-</a>
+
 @endsection
 
 @section('content')
@@ -48,7 +46,6 @@ Proyectos finiquitados
                         <th>Nombre <br> inversionista</th>
                         <th>Monto <br> Inversión</th>
                         <th>Ganancia <br> proyecto</th>
-                        <th>Exportar <br> Finiquito</th>
                         <th>Exportar <br> Liquidación</th>
                         <th>Estado <br> proyecto</th>
                     </tr>
@@ -86,16 +83,6 @@ Proyectos finiquitados
                             </td>
                             <td>L. {{ number_format($project->project_investment,2) }}</td>
                             <td>L. {{ number_format($project->investors->sum('pivot.investor_final_profit'),2) }}</td>
-                            <td>
-                                @if($project->project_status == 0)
-                                <a href="{{ route('termination.report', $project->id) }}" class="badge bg-red me-1 text-white" data-toggle="modal" data-target="#pdfModal">
-                                    <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
-                                    FINIQUITO
-                                </a>
-                                @else
-                                    <span class="text-red"><strong>N/D</strong></span>
-                                @endif
-                            </td>
                             <td>
                                 @if($project->project_status == 0)
                                 <a href="{{ route('termination.liquidation_report', $project->id)}}" class="badge bg-red me-1 text-white" data-toggle="modal" data-target="#liquidationModal">
@@ -154,8 +141,6 @@ Proyectos finiquitados
     </div>
 </div>
 @endsection
-
-@include('modules.payment_investors._create')
 
 @section('scripts')
 
