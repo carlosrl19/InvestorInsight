@@ -14,10 +14,9 @@ class StoreInvestorLiquidationsRequest extends FormRequest
             'investor_liquidation_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'liquidation_code' => 'required|string|min:12|max:12|regex:/^[a-zA-Z0-9]+$/|unique:investor_liquidations,liquidation_code',
             'liquidation_payment_amount' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
-            'liquidation_payment_mode' => 'required|string|min:3|max:55|regex:/^[a-zA-Z0-9\s]+$/',
+            'liquidation_payment_mode' => 'required|string|min:3|max:55|regex:/^[a-zA-Z0-9\s\/áéíóúÁÉÍÓÚ]+$/',
             'liquidation_payment_comment' => 'required|string|min:3|max:255',
             'liquidation_payment_imgs' => 'required'
-
         ];
     }
 
