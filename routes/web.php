@@ -13,7 +13,8 @@ Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name(
 // Investor
 Route::resource('investor', 'App\Http\Controllers\InvestorController')->names('investor');
 Route::post('investor/{id}/fund', 'App\Http\Controllers\InvestorController@fund')->name('investor.fund');
-Route::put('investor/{id}/liquidation','App\Http\Controllers\InvestorController@liquidate')->name('investor.liquidate');
+Route::put('investor/{id}/liquidation','App\Http\Controllers\InvestorController@liquidate')->name('investor.liquidate'); // liquidar inversionista
+Route::get('investor/{id}/liquidation/download', 'App\Http\Controllers\InvestorController@downloadLiquidation')->name('investor.liquidation_download'); // Descargar liquidación de inversionista
 
 // Investor payments
 Route::resource('payments_investor', 'App\Http\Controllers\PaymentInvestorController')->names('payments_investor');
@@ -68,7 +69,6 @@ Route::get('/termination/{id}', 'App\Http\Controllers\ProjectController@showTerm
 // Project terminations
 Route::resource('termination', 'App\Http\Controllers\ProjectTerminationController')->names('termination');
 Route::get('termination/{id}/report', 'App\Http\Controllers\ProjectTerminationController@showTermination')->name('termination.report');
-Route::get('termination/{id}/liquidation_report', 'App\Http\Controllers\ProjectTerminationController@showLiquidation')->name('termination.liquidation_report');
 Route::get('termination/{id}/liquidation_report/download', 'App\Http\Controllers\ProjectTerminationController@downloadLiquidation')->name('termination.liquidation_download');
 
 // Closed projects

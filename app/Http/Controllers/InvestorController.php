@@ -16,6 +16,10 @@ use App\Models\InvestorLiquidations;
 use App\Models\Transfer;
 use App\Models\Project;
 use Carbon\Carbon;
+use Luecano\NumeroALetras\NumeroALetras;
+use Illuminate\Support\Str;
+use Dompdf\Options;
+use Dompdf\Dompdf;
 
 class InvestorController extends Controller
 {
@@ -26,6 +30,7 @@ class InvestorController extends Controller
         $investorLiquidations = investorLiquidations::get();
         $commissioners = CommissionAgent::get();
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
+        $generatedCode = strtoupper(Str::random(12)); // Random code
 
         $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
@@ -39,7 +44,7 @@ class InvestorController extends Controller
             return $investor;
         });
 
-        return view('modules.investors.index', compact('investors', 'todayDate', 'investorFunds', 'investorLiquidations', 'commissioners', 'total_investor_balance', 'total_project_investment', 'total_commissioner_commission_payment'));
+        return view('modules.investors.index', compact('investors', 'generatedCode', 'todayDate', 'investorFunds', 'investorLiquidations', 'commissioners', 'total_investor_balance', 'total_project_investment', 'total_commissioner_commission_payment'));
     }
     
     public function create()
@@ -171,20 +176,37 @@ class InvestorController extends Controller
         return redirect()->route('investor.index')->with("success", "Fondo del inversionista actualizado exitosamente.");
     }
 
-    public function liquidate(StoreInvestorLiquidationsRequest $request, $id){
+    public function liquidate(StoreInvestorLiquidationsRequest $request, $id)
+    {
         $investor = Investor::findOrFail($id);
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
+    
+        $generatedCode = strtoupper(Str::random(12));
         $oldFunds = $investor->investor_balance;
-
-        // Obtén los datos validados y añade los campos necesarios para InvestorLiquidate
+    
         $validatedData = $request->validated();
         $validatedData['investor_id'] = $investor->id;
         $validatedData['investor_liquidation_amount'] = $investor->investor_balance;
         $validatedData['investor_liquidation_date'] = $todayDate;
-        
-        // Crea el registro en InvestorLiquidate usando create
+        $validatedData['liquidation_code'] = $generatedCode;
+        $validatedData['liquidation_payment_mode'] = $request->input('liquidation_payment_mode');
+        $validatedData['liquidation_payment_amount'] = $request->input('liquidation_payment_amount');
+        $validatedData['liquidation_payment_comment'] = $request->input('liquidation_payment_comment');
+    
+        // Procesar y guardar las imágenes
+        $images = $request->file('liquidation_payment_imgs');
+        if ($images) {
+            $imageNames = [];
+            foreach ($images as $image) {
+                $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/liquidations'), $imageName);
+                $imageNames[] = $imageName;
+            }
+            $validatedData['liquidation_payment_imgs'] = json_encode($imageNames);
+        }
+    
         InvestorLiquidations::create($validatedData);
-
+    
         // Obtén los datos validados y añade los campos necesarios para InvestorFunds
         $validatedData = $request->validated();
         $validatedData['investor_id'] = $investor->id;
@@ -192,18 +214,63 @@ class InvestorController extends Controller
         $validatedData['investor_old_funds'] = $oldFunds;
         $validatedData['investor_new_funds'] = 0.00;
         $validatedData['investor_new_funds_comment'] = 'LIQUIDACIÓN AL INVERSIONISTA.';
-            
+             
         // Crea el registro en InvestorFunds usando create
         InvestorFunds::create($validatedData);
-
+ 
         // Actualizar el estado del inversionista y su fondo en 0.00
         $investor->investor_status = '3';
         $investor->investor_balance = '0.00';
         $investor->save();
  
+        // session()->flash('investor_liquidation', $investor->id);
+  
         return redirect()->route("investor.index")->with('success', 'Inversionista liquidado exitosamente.');
     }
-
+    
+    public function downloadLiquidation($id) {
+        $investorLiquidation = InvestorLiquidations::findOrFail($id);
+        $investorId = $investorLiquidation->investor_id;
+        $investor = Investor::findOrFail($investorId);
+    
+        $generatedCode = strtoupper(Str::random(12)); // Random code
+        $balanceToLiquidate = $investor->liquidation_payment_amount;
+    
+        // Configurar el locale en Carbon
+        Carbon::setLocale('es');
+    
+        // Obtener la fecha actual en español
+        $fecha = Carbon::now()->setTimezone('America/Costa_Rica');
+        $day = $fecha->format('d');
+        $month = $fecha->format('m');
+        $year = $fecha->format('Y');
+    
+        // Configuración de opciones para Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+    
+        // Opcion que habilita la carga de imagenes
+        $options->set('chroot', realpath(''));
+    
+        // Crear instancia de Dompdf con las opciones configuradas
+        $pdf = new Dompdf($options);
+    
+        // Cargar el contenido de la vista en Dompdf
+        $pdf->loadHtml(view('modules.investors_liquidations._report_liquidation', compact('generatedCode', 'investorLiquidation', 'investor', 'day', 'month', 'year', 'balanceToLiquidate')));
+    
+        // Establecer el tamaño y la orientación del papel
+        $pdf->setPaper('A4', 'portrait');
+    
+        // Renderizar el PDF
+        $pdf->render();
+    
+        // Devolver el PDF para descarga forzada
+        return response()->streamDownload(function () use ($pdf, $investor) {
+            echo $pdf->output();
+        }, $investor->investor_name . ' - LIQUIDACIÓN' . '.pdf');
+    }
+    
     public function update(UpdateRequest $request, Investor $investor)
     {
         $investor->update($request->all());

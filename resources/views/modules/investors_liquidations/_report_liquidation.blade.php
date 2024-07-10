@@ -1,4 +1,4 @@
-<title>{{ $project->project_name }} - #LQ-{{ $project->project_code }}</title>
+<title>{{ $investor->investor_name }} - #LQ-{{ $generatedCode }}</title>
 
 <div class="main">
 
@@ -11,24 +11,24 @@
 	
 	<!-- Code container -->
 	<div class="code-container-right">
-		<span class="text-bold">#LQ-{{ $project->project_code }}</span>
+		<span class="text-bold">#LQ-{{ $generatedCode }}</span>
 	</div>
 
 	<!-- Liquidation title -->
 	<div class="title-note title-top-margin ml-4">
-		LIQUIDACIÓN {{ $project->project_name }} (L. {{ number_format($project->project_investment + $project->investors->sum('pivot.investor_final_profit'),2) }})
+		LIQUIDACIÓN DE FONDOS
 	</div>
 
 	<!-- Liquidation body -->
 	<div class="body-note mb-4">
-		Por medio del presente documento, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, 
-		formalizan la finalización y liquidación del proyecto denominado <strong class="text-uppercase">"{{ $project->project_name }}"</strong> con una fecha inicial el día <strong>{{ $day }}/{{ $month }}/{{ $year }}</strong>,
-		y final el día <strong>{{ $endDay }}/{{ $endMonth }}/{{ $endYear }}</strong>, con un valor total de <strong>{{ $amountLetras }} LEMPIRAS</strong> (L. {{ number_format($project->project_investment + $project->investors->sum('pivot.investor_final_profit'),2) }}).
+		Por medio de este registro, <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, formaliza la liquidación de la cuenta del inversionista <strong class="text-uppercase">{{ $investor->investor_name }}</strong>, 
+		en San Pedro Sula, Cortés, Honduras, con fecha <strong>{{ $day }}/{{ $month }}/{{ $year }}</strong>, por un monto total de Lps. <strong>{{ number_format($investorLiquidation->investor_liquidation_amount,2) }}</strong>. 
+		El pago se realizó a través de <strong>{{ $investorLiquidation->liquidation_payment_mode }}</strong>.
 		<br><br>
 		
-        Conforme a lo señalado previamente, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, acuerdan que el proyecto 
-        <strong class="text-uppercase">"{{ $project->project_name }}"</strong> ha sido finalizado, y mediante el documento presente, liquidado satisfactoriamente. Todos los pagos correspondientes al proyecto han sido realizados, dejando un saldo de 
-        Lps. 0.00 pendiente. Las partes confirman que no existen reclamaciones, deudas u obligaciones pendientes relacionadas con este proyecto. 
+		Conforme a lo estipulado previamente, <strong>{{ $investor->investor_name }}</strong> y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, acuerdan que mediante el presente documento, 
+		<strong>{{ $investor->investor_name }}</strong> queda liquidado satisfactoriamente. Por consiguiente, todos los pagos correspondientes a la liquidación han sido efectuados, 
+		dejando un saldo pendiente de Lps. 0.00, confirmando que no existen reclamaciones, deudas u obligaciones pendientes entre ambas partes a futuro.
 	</div>
 
 	<!-- Liquidation signatures -->

@@ -33,6 +33,21 @@ Inversionistas
 
 @section('content')
 
+    <!-- Cuando el inversionista se liquida 
+    @if (session('investor_liquidation'))
+        <script>
+            window.onload = function() {
+                redirectToLiquidation();
+            }
+
+            function redirectToLiquidation() {
+                window.location.href = "{{ route('investor.liquidation_download', session('investor_liquidation')) }}";
+            }
+        </script>
+    @endif
+
+    -->
+
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="4000">
         <strong>{{ session('success') }}</strong>
@@ -311,26 +326,123 @@ Inversionistas
 
                             <!-- Liquidation modal -->
                             <div class="modal modal-blur fade" id="modal-liquidate-{{ $investor->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content" style="border: 2px solid #52524E">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Liquidar inversionista</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="POST" action="{{ route('investor.liquidate', $investor->id) }}" novalidate>
+                                            <form method="POST" action="{{ route('investor.liquidate', $investor->id) }}" enctype="multipart/form-data" novalidate>
                                                 @method('PUT')
                                                 @csrf
                                                 <div style="border: 2px solid orange; padding: 10px; background-color: #fff3cd;">
-                                                    <p style="font-size: 16px; margin-left: 39%; font-weight: bold; margin-bottom: 15px">¡ATENCIÓN!</p>
-                                                    <p>Estás a punto de realizar la liquidación del inversionista <strong style="text-transform: uppercase">{{ $investor->investor_name }}</strong>. Esta acción conllevará el cierre definitivo de la cuenta y todo movimiento relacionado con este inversionista, una vez confirmado el proceso, no habrá marcha atrás.</p>
-                                                    <p>Si estás seguro de que deseas proceder con la liquidación, haz clic en el botón "<strong>Liquidar inversionista</strong>" a continuación.</p>
+                                                    <p style="color: #000; font-size: 16px; margin-left: 39%; font-weight: bold; margin-bottom: 15px">¡ATENCIÓN!</p>
+                                                    <p style="color: #000;">
+                                                        Está a punto de realizar la liquidación del inversionista identificado como <strong style="text-transform: uppercase">{{ $investor->investor_name }}</strong>. 
+                                                        Esta acción conllevará el cierre definitivo de la cuenta, dejando el fondo del inversor en L. 0.00, una vez confirmado el proceso, no habrá marcha atrás.
+                                                    </p>
+
+                                                    <p style="color: #000;">
+                                                        Si está seguro de que desea proceder con la liquidación, complete el siguiente formulario y luego haga clic en el botón "<strong>Liquidar inversionista</strong>".
+                                                    </p>
 
                                                     <input type="hidden" name="investor_liquidation_amount" value="{{ $investor->investor_balance }}">
                                                     <input type="hidden" name="investor_liquidation_date" value="{{ $todayDate }}">
+                                                    <input type="hidden" name="liquidation_code" value="{{ $generatedCode }}">
+
+                                                    <h4 class="mt-2 mb-3" style="font-weight: 500; text-align: center; text-decoration: underline">FORMULARIO OBLIGATORIO DE LIQUIDACIÓN</h4>
+                                                    
+                                                    <div class="row mb-3 align-items-end">
+                                                        <div class="col-8">
+                                                            <div class="form-floating">
+                                                                <select style="font-size: clamp(0.7rem, 3vw, 0.75rem)" name="liquidation_payment_mode" id="select-optgroups"
+                                                                    class="form-control @error('liquidation_payment_mode') is-invalid @enderror"
+                                                                    autocomplete="off">
+                                                                    <option selected disabled>Seleccione un método de pago</option>
+                                                                    <optgroup label="Otros métodos">
+                                                                        @foreach (['BANCA ONLINE', 'TRANSFERENCIA', 'EFECTIVO'] as $method)
+                                                                            <option value="{{ $method }}">{{ $method }}</option>
+                                                                        @endforeach
+                                                                    </optgroup>
+                                                                    <optgroup label="Varios">
+                                                                        @foreach (['VARIOS MÉTODOS/TRANSFERENCIAS'] as $method)
+                                                                            <option value="{{ $method }}">{{ $method }}</option>
+                                                                        @endforeach
+                                                                    </optgroup>
+                                                                    <optgroup label="Bancos">
+                                                                        @foreach (['BAC CREDOMATIC', 'BANCO ATLÁNTIDA', 'BANCO AZTECA', 'BANCO CUSCATLAN', 'BANRURAL', 'BANCO CENTRAL', 'BANTRABHN', 'BANCO DE OCCIDENTE', 'DAVIVIENDA', 'FICENSA', 'FICOHSA', 'BANHCAFE', 'LAFISE', 'BANPAIS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)
+                                                                            <option value="{{ $bank }}">{{ $bank }}</option>
+                                                                        @endforeach
+                                                                    </optgroup>
+                                                                </select>
+                                                                @error('liquidation_payment_mode')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                                <span class="invalid-feedback" role="alert" id="transfer-bank-error"
+                                                                    style="display: none;">
+                                                                    <strong></strong>
+                                                                </span>
+                                                                <label for="liquidation_payment_mode">Método de pago utilizado</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-4">
+                                                            <div class="form-floating">
+                                                                <input style="color: gray" type="text" readonly min="{{ $investor->investor_balance }}" max="{{ $investor->investor_balance }}" value="{{ number_format($investor->investor_balance,2) }}" class="form-control @error('liquidation_payment_amount') is-invalid @enderror" autocomplete="off"/>
+                                                                @error('liquidation_payment_amount')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                                <label for="liquidation_payment_amount">Total a liquidar</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3" style="display: none">
+                                                            <div class="form-floating">
+                                                                <input type="number" readonly min="{{ $investor->investor_balance }}" max="{{ $investor->investor_balance }}" name="liquidation_payment_amount" value="{{ $investor->investor_balance }}" id="liquidation_payment_amount" class="form-control @error('liquidation_payment_amount') is-invalid @enderror" autocomplete="off"/>
+                                                                @error('liquidation_payment_amount')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                                <label for="liquidation_payment_amount">Liquidación total</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3 align-items-end">
+                                                        <div class="col">
+                                                            <div class="form-floating">
+                                                                <textarea oninput="this.value = this.value.toUpperCase()" class="form-control @error('liquidation_payment_comment') is-invalid @enderror" autocomplete="off" maxlength="255"
+                                                                    name="liquidation_payment_comment" id="liquidation_payment_comment" style="resize: none; height: 110px">{{ old('liquidation_payment_comment') }}</textarea>
+                                                                @error('liquidation_payment_comment')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                                <label for="liquidation_payment_comment">Comentarios adicionales</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3 align-items-end">
+                                                        <div class="col">
+                                                            <div class="form-floating">
+                                                                <input type="file" style="font-size: clamp(0.6rem, 3vw, 0.7rem)" class="form-control @error('liquidation_payment_img') is-invalid @enderror"" id="liquidation_payment_imgs" name="liquidation_payment_imgs[]" multiple accept="image/*">
+                                                                <label for="liquidation_payment_imgs">Comprobante(s) de liquidación</label>
+                                                                <span class="invalid-feedback" role="alert" id="transfer-img-error"
+                                                                    style="display: none;">
+                                                                    <strong></strong>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
     
                                                     <br>
-                                                    <button type="button" style="margin-left: 22%" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
                                                     <button class="btn btn-orange" style="margin-left: 5px; background-color: orange; font-size: 14px;">Liquidar inversionista</button>
                                                     <br>
                                                     <br>
@@ -343,20 +455,6 @@ Inversionistas
                         @endforeach
                     </tbody>
                 </table>
-                <!-- PDF Viewer Modal -->
-                <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="pdfModalLabel">Previsualización de nota crédito</h5>
-                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <iframe id="pdf-frame" style="width:100%; height:500px;" src=""></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -382,17 +480,4 @@ Inversionistas
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script>
-    $('#pdfModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Botón que activó el modal
-        var url = button.attr('href'); // Extraer la información de los atributos data-*
-        var modal = $(this);
-        modal.find('#pdf-frame').attr('src', url);
-    });
-    $('#pdfModal').on('hidden.bs.modal', function (e) {
-        $(this).find('#pdf-frame').attr('src', '');
-    });
-</script>
-
 @endsection

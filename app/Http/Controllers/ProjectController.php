@@ -12,7 +12,6 @@ use App\Models\Transfer;
 use App\Models\PromissoryNote;
 use App\Models\PromissoryNoteCommissioner;
 use Illuminate\Support\Str;
-use Luecano\NumeroALetras\NumeroALetras;
 use Illuminate\Support\Facades\DB;
 use App\Exports\CustomExport;
 use App\Exports\ActiveProjectsExport;

@@ -103,7 +103,7 @@
                             <div class="row mb-3 align-items-end">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <textarea class="form-control @error('transfer_comment') is-invalid @enderror" autocomplete="off" maxlength="255"
+                                        <textarea oninput="this.value = this.value.toUpperCase()" class="form-control @error('transfer_comment') is-invalid @enderror" autocomplete="off" maxlength="255"
                                             name="transfer_comment" id="transfer_comment" style="resize: none; height: 100px">{{ old('transfer_comment') }}</textarea>
                                         @error('transfer_comment')
                                             <span class="invalid-feedback" role="alert">

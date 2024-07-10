@@ -18,17 +18,29 @@
                         <table id="exampleLiquidations" class="display table table-bordered">
                             <thead>
                                 <tr class="text-center">
+                                    <th>CÓDIGO</th>
                                     <th>NOMBRE INVERSIONISTA</th>
                                     <th>FECHA LIQUIDACIÓN</th>
+                                    <th>MÉTODO DE PAGO UTILIZADO</th>
                                     <th>FONDO LIQUIDADO</th>
+                                    <th>DESCARGAR LIQUIDACIÓN</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($investorLiquidations as $investor)
+                                @foreach($investorLiquidations as $investorLiquidation)
                                     <tr class="text-center">
-                                        <td>{{ $investor->investor->investor_name }}</td>
-                                        <td>{{ $investor->investor_liquidation_date }}</td>
-                                        <td>Lps. {{ number_format($investor->investor_liquidation_amount,2) }}</td>
+                                        <td>#{{ $investorLiquidation->liquidation_code }}</td>
+                                        <td>{{ $investorLiquidation->investor->investor_name }}</td>
+                                        <td>{{ $investorLiquidation->investor_liquidation_date }}</td>
+                                        <td>{{ $investorLiquidation->liquidation_payment_mode }}</td>
+                                        <td>Lps. {{ number_format($investorLiquidation->investor_liquidation_amount,2) }}</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-red" href="{{ route('investor.liquidation_download', $investorLiquidation)}}">
+                                                <img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" 
+                                                src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
+                                                &nbsp;LIQUIDACIÓN
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -81,7 +81,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <textarea maxlength="255" style="overflow: hidden; height: 100px; resize: none" class="form-control @error('creditNote_description') is-invalid @enderror" autocomplete="off" name="creditNote_description" id="creditNote_description"> </textarea>
+                                <textarea oninput="this.value = this.value.toUpperCase()" maxlength="255" style="overflow: hidden; height: 100px; resize: none" class="form-control @error('creditNote_description') is-invalid @enderror" autocomplete="off" name="creditNote_description" id="creditNote_description"> </textarea>
                                 @error('creditNote_description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

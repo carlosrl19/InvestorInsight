@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
     public function messages()
     {
         return [
-            // Transfer code messages
+            // Credit note code messages
             'creditNote_code.required' => 'El código de la nota de crédito es obligatorio.',
             'creditNote_code.unique' => 'El código de la nota de crédito ya existe.',
             'creditNote_code.string' => 'El código de la nota de crédito solo debe contener letras y/o números.',
