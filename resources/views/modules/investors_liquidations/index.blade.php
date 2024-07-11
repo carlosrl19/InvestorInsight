@@ -24,7 +24,7 @@
                                     <th>MÉTODO DE PAGO</th>
                                     <th>LIQUIDACIÓN</th>
                                     <th>COMPROBANTE(S)</th>
-                                    <th>DESCARGAR <br>LIQUIDACIÓN</th>
+                                    <th>EXPORTAR <br>LIQUIDACIÓN</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,11 +76,26 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="btn btn-sm btn-red" style="font-size: clamp(0.6rem, 3vw, 0.6rem)" href="{{ route('investor.liquidation_download', $investorLiquidation)}}">
+                                            <a class="btn btn-sm btn-red" style="font-size: clamp(0.6rem, 3vw, 0.6rem)" href="{{ route('investor.liquidation_show', $investorLiquidation)}}" data-toggle="modal" data-target="#pdfModal">
                                                 <img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" 
                                                 src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
                                                 &nbsp;LIQUIDACIÓN&nbsp;&nbsp;
                                             </a>
+
+                                             <!-- PDF Viewer Modal -->
+                                            <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="pdfModalLabel">Previsualización de liquidación</h5>
+                                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <iframe id="pdf-frame" style="width:100%; height:500px;" src=""></iframe>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -104,6 +119,23 @@
         margin: auto;
     }
 </style>
+
+<!-- PDF view -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $('#pdfModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var url = button.attr('href'); // Extraer la información de los atributos data-*
+        var modal = $(this);
+        modal.find('#pdf-frame').attr('src', url);
+    });
+    $('#pdfModal').on('hidden.bs.modal', function (e) {
+        $(this).find('#pdf-frame').attr('src', '');
+    });
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

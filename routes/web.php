@@ -14,7 +14,7 @@ Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name(
 Route::resource('investor', 'App\Http\Controllers\InvestorController')->names('investor');
 Route::post('investor/{id}/fund', 'App\Http\Controllers\InvestorController@fund')->name('investor.fund');
 Route::put('investor/{id}/liquidation','App\Http\Controllers\InvestorController@liquidate')->name('investor.liquidate'); // liquidar inversionista
-Route::get('investor/{id}/liquidation/download', 'App\Http\Controllers\InvestorController@downloadLiquidation')->name('investor.liquidation_download'); // Descargar liquidación de inversionista
+Route::get('investor/{id}/show/liquidation/', 'App\Http\Controllers\InvestorController@showLiquidation')->name('investor.liquidation_show'); // Mostrar liquidación de inversionista
 
 // Investor payments
 Route::resource('payments_investor', 'App\Http\Controllers\PaymentInvestorController')->names('payments_investor');

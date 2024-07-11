@@ -21,11 +21,30 @@
 
 	<!-- Liquidation body -->
 	<div class="body-note mb-4">
-		Por medio de este registro, <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, formaliza la liquidación de la cuenta del inversionista <strong class="text-uppercase">{{ $investor->investor_name }}</strong>, 
+		Por medio de este registro, <strong>JUNIOR ALEXIS AYALA GUERRERO</strong> formaliza la liquidación de la cuenta del inversionista <strong class="text-uppercase">{{ $investor->investor_name }}</strong>, 
 		en San Pedro Sula, Cortés, Honduras, con fecha <strong>{{ $day }}/{{ $month }}/{{ $year }}</strong>, por un monto total de Lps. <strong>{{ number_format($investorLiquidation->investor_liquidation_amount,2) }}</strong>. 
-		El pago se realizó a través de <strong>{{ $investorLiquidation->liquidation_payment_mode }}</strong>.
-		<br><br>
-		
+		El pago se realizó a través de <strong>{{ $investorLiquidation->liquidation_payment_mode }}</strong> siendo detallados de la siguiente manera:
+
+		<table class="table mt-4 mb-2">
+			<thead>
+				<tr>
+					<th style="text-align: center;">Nº</th>
+					<th style="text-align: left;">INFORMACIÓN DE TRANSFERENCIA</th>
+				</tr>
+			</thead>
+			<tbody>
+				@php
+					$i = 1;
+				@endphp
+				@foreach(explode("\n", $investorLiquidation->liquidation_payment_comment) as $line)
+					<tr>
+						<td style="text-align: center;">{{ $i++ }}</td>
+						<td style="text-align: left; font-size: 14px">{{ $line }}</td>
+					</tr>
+				@endforeach
+			</tbody>
+		</table>
+
 		Conforme a lo estipulado previamente, <strong>{{ $investor->investor_name }}</strong> y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, acuerdan que mediante el presente documento, 
 		<strong>{{ $investor->investor_name }}</strong> queda liquidado satisfactoriamente. Por consiguiente, todos los pagos correspondientes a la liquidación han sido efectuados, 
 		dejando un saldo pendiente de Lps. 0.00, confirmando que no existen reclamaciones, deudas u obligaciones pendientes entre ambas partes a futuro.
@@ -57,6 +76,36 @@
 	* {
 		font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
 		text-align: justify;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		font-family: Arial, sans-serif;
+		border: 1px solid #ddd;
+	}
+
+	th, td {
+		padding: 10px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+	}
+
+	th {
+		background-color: #f2f2f2;
+		border-right: 1px solid #ddd;
+	}
+
+	td {
+		border-right: 1px solid #ddd;
+	}
+
+	tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+
+	tr:hover {
+		background-color: #e6e6e6;
 	}
 	
 	.code-container-left{

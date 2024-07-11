@@ -360,17 +360,12 @@ Inversionistas
                                                                     class="form-control @error('liquidation_payment_mode') is-invalid @enderror"
                                                                     autocomplete="off">
                                                                     <option selected disabled>Seleccione un método de pago</option>
-                                                                    <optgroup label="Otros métodos">
-                                                                        @foreach (['BANCA ONLINE', 'TRANSFERENCIA', 'EFECTIVO'] as $method)
+                                                                    <optgroup label="OTROS MÉTODOS">
+                                                                        @foreach (['VARIOS MÉTODOS/TRANSFERENCIAS', 'BANCA ONLINE', 'TRANSFERENCIA', 'EFECTIVO'] as $method)
                                                                             <option value="{{ $method }}">{{ $method }}</option>
                                                                         @endforeach
                                                                     </optgroup>
-                                                                    <optgroup label="Varios">
-                                                                        @foreach (['VARIOS MÉTODOS/TRANSFERENCIAS'] as $method)
-                                                                            <option value="{{ $method }}">{{ $method }}</option>
-                                                                        @endforeach
-                                                                    </optgroup>
-                                                                    <optgroup label="Bancos">
+                                                                    <optgroup label="BANCOS">
                                                                         @foreach (['BAC CREDOMATIC', 'BANCO ATLÁNTIDA', 'BANCO AZTECA', 'BANCO CUSCATLAN', 'BANRURAL', 'BANCO CENTRAL', 'BANTRABHN', 'BANCO DE OCCIDENTE', 'DAVIVIENDA', 'FICENSA', 'FICOHSA', 'BANHCAFE', 'LAFISE', 'BANPAIS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)
                                                                             <option value="{{ $bank }}">{{ $bank }}</option>
                                                                         @endforeach
