@@ -6,6 +6,10 @@ use App\Http\Requests\InvestorLiquidations\StoreInvestorLiquidationsRequest;
 use App\Models\InvestorLiquidations;
 use App\Models\Investor;
 use Illuminate\Support\Facades\DB;
+use Dompdf\Options;
+use Dompdf\Dompdf;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class InvestorLiquidationsController extends Controller
 {
@@ -25,5 +29,49 @@ class InvestorLiquidationsController extends Controller
     {
         InvestorLiquidations::create($request->all());
         return redirect()->route('investors_liquidations.index')->with('success', 'Nuevo fondo actualizado exitosamente.');
+    }
+
+    public function showLiquidation($id) {
+        $investorLiquidation = InvestorLiquidations::findOrFail($id);
+        $investorId = $investorLiquidation->investor_id;
+        $investor = Investor::findOrFail($investorId);
+    
+        $generatedCode = strtoupper(Str::random(12)); // Random code
+        $balanceToLiquidate = $investor->liquidation_payment_amount;
+    
+        // Configurar el locale en Carbon
+        Carbon::setLocale('es');
+    
+        // Obtener la fecha actual en español
+        $fecha = Carbon::now()->setTimezone('America/Costa_Rica');
+        $day = $fecha->format('d');
+        $month = $fecha->format('m');
+        $year = $fecha->format('Y');
+    
+        // Configuración de opciones para Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+    
+        // Opcion que habilita la carga de imagenes
+        $options->set('chroot', realpath(''));
+    
+        // Crear instancia de Dompdf con las opciones configuradas
+        $pdf = new Dompdf($options);
+    
+        // Cargar el contenido de la vista en Dompdf
+        $pdf->loadHtml(view('modules.investors_liquidations._report_liquidation', compact('generatedCode', 'investorLiquidation', 'investor', 'day', 'month', 'year', 'balanceToLiquidate')));
+    
+        // Establecer el tamaño y la orientación del papel
+        $pdf->setPaper('A4', 'portrait');
+    
+        // Renderizar el PDF
+        $pdf->render();
+        
+        $fileName = $investorLiquidation->investor->investor_name . ' - LIQUIDACIÓN.pdf';
+
+        return response($pdf->output(), 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'inline; filename="' . $fileName . '"');
     }
 }

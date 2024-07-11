@@ -21,11 +21,11 @@
 
 	<!-- Liquidation body -->
 	<div class="body-note mb-4">
-		Por medio de este registro, <strong>JUNIOR ALEXIS AYALA GUERRERO</strong> formaliza la liquidación de la cuenta del inversionista <strong class="text-uppercase">{{ $investor->investor_name }}</strong>, 
+		Por medio de este documento, <strong>JUNIOR ALEXIS AYALA GUERRERO</strong> formaliza la liquidación de la cuenta del inversionista <strong class="text-uppercase">{{ $investor->investor_name }}</strong>, 
 		en San Pedro Sula, Cortés, Honduras, con fecha <strong>{{ $day }}/{{ $month }}/{{ $year }}</strong>, por un monto total de Lps. <strong>{{ number_format($investorLiquidation->investor_liquidation_amount,2) }}</strong>. 
 		El pago se realizó a través de <strong>{{ $investorLiquidation->liquidation_payment_mode }}</strong> siendo detallados de la siguiente manera:
 
-		<table class="table mt-4 mb-2">
+		<table class="table mt-4 mb-4">
 			<thead>
 				<tr>
 					<th style="text-align: center;">Nº</th>
@@ -38,20 +38,21 @@
 				@endphp
 				@foreach(explode("\n", $investorLiquidation->liquidation_payment_comment) as $line)
 					<tr>
-						<td style="text-align: center;">{{ $i++ }}</td>
-						<td style="text-align: left; font-size: 14px">{{ $line }}</td>
+						<td style="font-size: 12px; text-align: center;">{{ $i++ }}</td>
+						<td style="font-size: 12px; text-align: left;">{{ $line }}</td>
 					</tr>
 				@endforeach
 			</tbody>
 		</table>
 
-		Conforme a lo estipulado previamente, <strong>{{ $investor->investor_name }}</strong> y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, acuerdan que mediante el presente documento, 
-		<strong>{{ $investor->investor_name }}</strong> queda liquidado satisfactoriamente. Por consiguiente, todos los pagos correspondientes a la liquidación han sido efectuados, 
-		dejando un saldo pendiente de Lps. 0.00, confirmando que no existen reclamaciones, deudas u obligaciones pendientes entre ambas partes a futuro.
+		<p class="mt-2">
+		Según lo acordado, el inversionista ha sido liquidado de manera satisfactoria. En consecuencia, todos los pagos correspondientes a la liquidación han sido efectuados, dejando un saldo pendiente de Lps. 0.00, 
+		lo que confirma que no existen reclamaciones, deudas u obligaciones pendientes entre ambas partes a futuro.
+		</p>
 	</div>
 
 	<!-- Liquidation signatures -->
-	<div class="mt-6 ml-center mt-center">
+	<div class="mt-2 ml-center mt-center">
 		&nbsp;&nbsp;<img src="static/Firma-ejemplo.png" alt="Logo" height="80px"
 			style="position: absolute; margin-top: -47px; transform: scale(1.4)">
 			<img src="static/sello-ejemplo.png" alt="Sello" height="80px"
@@ -89,6 +90,7 @@
 		padding: 10px;
 		text-align: left;
 		border-bottom: 1px solid #ddd;
+		font-size: 14px;
 	}
 
 	th {
@@ -148,7 +150,7 @@
 	}
 
 	.mt-center {
-		margin-top: 20% !important;
+		margin-top: 15% !important;
 	}
 
 	.mb-2 {
@@ -177,7 +179,7 @@
 
 	.footer {
 		font-size: 10px;
-		margin-top: 40%;
+		margin-top: 10%;
 	}
 
 	.text-uppercase{

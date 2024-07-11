@@ -14,7 +14,6 @@ Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name(
 Route::resource('investor', 'App\Http\Controllers\InvestorController')->names('investor');
 Route::post('investor/{id}/fund', 'App\Http\Controllers\InvestorController@fund')->name('investor.fund');
 Route::put('investor/{id}/liquidation','App\Http\Controllers\InvestorController@liquidate')->name('investor.liquidate'); // liquidar inversionista
-Route::get('investor/{id}/show/liquidation/', 'App\Http\Controllers\InvestorController@showLiquidation')->name('investor.liquidation_show'); // Mostrar liquidación de inversionista
 
 // Investor payments
 Route::resource('payments_investor', 'App\Http\Controllers\PaymentInvestorController')->names('payments_investor');
@@ -25,6 +24,7 @@ Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController
 
 // Investor liquidations
 Route::resource('investors_liquidations', 'App\Http\Controllers\InvestorLiquidationsController')->names('investors_liquidations');
+Route::get('investors_liquidations/{id}/report', 'App\Http\Controllers\InvestorLiquidationsController@showLiquidation')->name('investors_liquidations.report'); // Mostrar liquidación de inversionista
 
 // Commission ggent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');
