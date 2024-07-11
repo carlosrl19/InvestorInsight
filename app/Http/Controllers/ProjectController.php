@@ -318,6 +318,7 @@ class ProjectController extends Controller
             $investorPayment->investor_id = $investor->id;
             $promissoryNoteId = PromissoryNote::where('promissoryNote_code', $project->project_code)->value('id');
             $investorPayment->promissoryNote_id = $promissoryNoteId;
+            $investorPayment->project_id = $project->id;
             $investorPayment->payment_code = $project->project_code;
             $investorPayment->payment_amount = ($investor->pivot->investor_final_profit + $investor->pivot->investor_investment);
             $investorPayment->payment_date = now();

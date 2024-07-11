@@ -127,11 +127,6 @@ Proyectos activos
 
             function redirectToExcel() {
                 window.location.href = "{{ route('project.excel', session('project_id')) }}";
-                setTimeout(redirectToLiquidation, 1000);  // Descarga archivo liquidación al segundo (1000 milisegundos)
-            }
-
-            function redirectToLiquidation() {
-                window.location.href = "{{ route('termination.liquidation_download', session('project_id')) }}";
             }
         </script>
     @endif
@@ -275,7 +270,7 @@ Proyectos activos
                                                                             aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="modal-body d-flex justify-content-center align-items-center">
-                                                                        <img id="full-image" src="#" alt="Imagen de transferencia"
+                                                                        <img id="full-image" style="max-height: 75vh; max-width: 100%; width: auto;" src="#" alt="Imagen de transferencia"
                                                                             class="img-fluid">
                                                                     </div>
                                                                 </div>

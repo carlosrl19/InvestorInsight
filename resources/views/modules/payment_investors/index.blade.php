@@ -60,6 +60,7 @@ Pagos inversionistas
                     <th>FECHA HORA</th>
                     <th>NOMBRE INVERSIONISTA</th>
                     <th>MONTO TOTAL</th>
+                    <th>EXPORTAR <br>REPORTE DE PAGO</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,10 +77,31 @@ Pagos inversionistas
                         </small>
                     </td>
                     <td class="text-red">Lps. {{ number_format($payment->payment_amount,2) }}</td>
+                    <td class="text-red">
+                        <a href="{{ route('payments_investor.report', $payment->id) }}" class="badge bg-red me-1 text-white" data-toggle="modal" data-target="#pdfModal">
+                            <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
+                            REPORTE DE PAGO
+                        </a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+
+        <!-- PDF Viewer Modal -->
+        <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pdfModalLabel">Previsualización de reporte de pago de comisión</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe id="pdf-frame" style="width:100%; height:500px;" src=""></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
       </div>
     </div>
 </div>
@@ -100,5 +122,21 @@ Pagos inversionistas
 <!-- Select2 -->
 <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
 <script src="{{ asset('customjs/select2/s2_init.js') }}"></script>
+
+<!-- PDF view -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $('#pdfModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var url = button.attr('href'); // Extraer la información de los atributos data-*
+        var modal = $(this);
+        modal.find('#pdf-frame').attr('src', url);
+    });
+    $('#pdfModal').on('hidden.bs.modal', function (e) {
+        $(this).find('#pdf-frame').attr('src', '');
+    });
+</script>
 
 @endsection

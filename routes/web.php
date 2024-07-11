@@ -18,6 +18,7 @@ Route::get('investor/{id}/liquidation/download', 'App\Http\Controllers\InvestorC
 
 // Investor payments
 Route::resource('payments_investor', 'App\Http\Controllers\PaymentInvestorController')->names('payments_investor');
+Route::get('payments_investor/{id}/report', 'App\Http\Controllers\PaymentInvestorController@showReport')->name('payments_investor.report');
 
 // Investor funds
 Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController')->names('investors_funds');
@@ -31,7 +32,7 @@ Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentControl
 // Commission agent payments
 Route::resource('payments_commissioner', 'App\Http\Controllers\PaymentCommissionerController')->names('payments_commissioner');
 
-// Investor payments
+// Moneylender payments
 Route::resource('moneylender', 'App\Http\Controllers\MoneylenderController')->names('moneylender');
 
 // Transfer
@@ -69,7 +70,6 @@ Route::get('/termination/{id}', 'App\Http\Controllers\ProjectController@showTerm
 // Project terminations
 Route::resource('termination', 'App\Http\Controllers\ProjectTerminationController')->names('termination');
 Route::get('termination/{id}/report', 'App\Http\Controllers\ProjectTerminationController@showTermination')->name('termination.report');
-Route::get('termination/{id}/liquidation_report/download', 'App\Http\Controllers\ProjectTerminationController@downloadLiquidation')->name('termination.liquidation_download');
 
 // Closed projects
 Route::get('closed/', 'App\Http\Controllers\ProjectController@indexClosed')->name('project.closed');
