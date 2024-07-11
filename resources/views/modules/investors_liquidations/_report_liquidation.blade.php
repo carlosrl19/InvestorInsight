@@ -1,4 +1,4 @@
-<title>{{ $investor->investor_name }} - #LQ-{{ $generatedCode }}</title>
+<title>{{ $investor->investor_name }} - #LQ-{{ $investorLiquidation->liquidation_code }}</title>
 
 <div class="main">
 
@@ -11,7 +11,7 @@
 	
 	<!-- Code container -->
 	<div class="code-container-right">
-		<span class="text-bold">#LQ-{{ $generatedCode }}</span>
+		<span class="text-bold">#LQ-{{ $investorLiquidation->liquidation_code }}</span>
 	</div>
 
 	<!-- Liquidation title -->
