@@ -46,6 +46,7 @@ class InvestorLiquidationsController extends Controller
         $fecha = Carbon::now()->setTimezone('America/Costa_Rica');
         $day = $fecha->format('d');
         $month = $fecha->format('m');
+        $monthSpanish = $fecha->translatedFormat('F');
         $year = $fecha->format('Y');
     
         // Configuración de opciones para Dompdf
@@ -68,7 +69,7 @@ class InvestorLiquidationsController extends Controller
         // Renderizar el PDF
         $pdf->render();
         
-        $fileName = $investorLiquidation->investor->investor_name . ' - LIQUIDACIÓN.pdf';
+        $fileName = $investorLiquidation->investor->investor_name . ' - LIQUIDACIÓN (' . $day . '-' . $monthSpanish . '-' . $year . ').pdf';
 
         return response($pdf->output(), 200)
             ->header('Content-Type', 'application/pdf')

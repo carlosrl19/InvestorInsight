@@ -23,13 +23,18 @@
 	<div class="body-note mb-4">
 		Por medio de este documento, <strong>JUNIOR ALEXIS AYALA GUERRERO</strong> formaliza la liquidación de la cuenta del inversionista <strong class="text-uppercase">{{ $investor->investor_name }}</strong>, 
 		en San Pedro Sula, Cortés, Honduras, con fecha <strong>{{ $day }}/{{ $month }}/{{ $year }}</strong>, por un monto total de Lps. <strong>{{ number_format($investorLiquidation->investor_liquidation_amount,2) }}</strong>. 
-		El pago se realizó a través de <strong>{{ $investorLiquidation->liquidation_payment_mode }}</strong> siendo detallados de la siguiente manera:
+		
+		@if($investorLiquidation->liquidation_payment_mode == "VARIOS MÉTODOS/TRANSFERENCIAS")
+			Los pagos realizados para la liquidación fueron los siguientes:
+		@else
+			El pago se realizó a través de <strong>{{ $investorLiquidation->liquidation_payment_mode }}</strong> siendo detallado de la siguiente manera:
+		@endif
 
 		<table class="table mt-4 mb-4">
 			<thead>
 				<tr>
 					<th style="text-align: center;">Nº</th>
-					<th style="text-align: left;">INFORMACIÓN DE TRANSFERENCIA</th>
+					<th style="text-align: left;">INFORMACIÓN DE PAGOS EFECTUADOS</th>
 				</tr>
 			</thead>
 			<tbody>
