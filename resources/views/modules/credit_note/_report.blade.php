@@ -23,13 +23,6 @@
 	<div class="body-note mt-4 mb-4">
 		Por la presente, se emite la siguiente nota de crédito a favor del inversionista <strong>{{ $creditNote->investor->investor_name }}</strong>, identificado con su número de identidad 
 		<strong>{{ $creditNote->investor->investor_dni }}</strong>, número de teléfono <strong>{{ $creditNote->investor->investor_phone }}</strong>, con un valor total de Lps. <strong>{{ number_format($creditNote->creditNote_amount,2) }}</strong>.
-		<br>
-		<br>
-		@if($creditNote->investor->investor_balance < 0)
-			Mediante el presente documento, el inversionista mencionado anteriormente pasa a tener un fondo en negativo de Lps. <strong class="text-red">{{ number_format($creditNote->investor->investor_balance,2 )}}</strong>.
-		@else
-			Mediante el presente documento, el inversionista mencionado anteriormente queda con un fondo disponible de Lps. <strong>{{ number_format($creditNote->investor->investor_balance,2 )}}</strong>.
-		@endif
 	</div>
 
 	<!-- Credit's note reason title -->
