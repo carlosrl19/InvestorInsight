@@ -25,6 +25,7 @@ Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController
 // Investor liquidations
 Route::resource('investors_liquidations', 'App\Http\Controllers\InvestorLiquidationsController')->names('investors_liquidations');
 Route::get('investors_liquidations/{id}/report', 'App\Http\Controllers\InvestorLiquidationsController@showLiquidation')->name('investors_liquidations.report'); // Mostrar liquidación de inversionista
+Route::get('investors_liquidations/{id}/report/download', 'App\Http\Controllers\InvestorLiquidationsController@downloadLiquidation')->name('investors_liquidations.report_download'); // Descargar liquidación de inversionista
 
 // Commission agent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');
