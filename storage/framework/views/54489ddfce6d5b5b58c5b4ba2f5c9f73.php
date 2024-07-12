@@ -272,7 +272,7 @@ unset($__errorArgs, $__bag); ?>
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="number" min="0" name="transfer_amount" id="transfer_amount"
+                                    <input type="number" min="0" value="" name="transfer_amount" id="transfer_amount"
                                         class="form-control <?php $__errorArgs = ['transfer_amount'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

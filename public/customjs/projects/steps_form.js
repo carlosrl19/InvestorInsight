@@ -355,7 +355,7 @@ $(document).ready(function () {
             isValid = false;
             transferAmountInput.addClass("is-invalid");
             transferAmountError.text(
-                "La inversión no puede ser mayor al fondo del inversionista."
+                "El monto de inversión no puede ser mayor al fondo disponible del inversionista."
             );
             $("#transfer-amount-error").show();
 

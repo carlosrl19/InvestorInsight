@@ -129,7 +129,7 @@ Inversionistas
                                     @elseif($investor->investor_status == '0')
                                         <span class="badge bg-orange me-1"></span> <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Habilite todas las acciones cambiando la disposición del inversionista a proyectos a 'Disponible' en el apartado de 'Actualizar información'.">No disponible</span>
                                     @elseif($investor->investor_status == '3')
-                                        <span class="badge bg-cyan me-1"></span> <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Habilite todas las acciones cambiando la disposición del inversionista a proyectos a 'Disponible' en el apartado de 'Actualizar información'.">Liquidado / No disponible</span>
+                                        <span class="badge bg-red me-1"></span> <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Habilite todas las acciones cambiando la disposición del inversionista a proyectos a 'Disponible' en el apartado de 'Actualizar información'.">Liquidado / No disponible</span>
                                     @else
                                         <span class="badge bg-red me-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Existe un error en el estado del inversionista."></span> Estado inválido
                                     @endif

@@ -194,7 +194,7 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="number" min="0" name="transfer_amount" id="transfer_amount"
+                                    <input type="number" min="0" value="" name="transfer_amount" id="transfer_amount"
                                         class="form-control @error('transfer_amount') is-invalid @enderror"/>
                                     @error('transfer_amount')
                                         <span class="invalid-feedback" role="alert">
