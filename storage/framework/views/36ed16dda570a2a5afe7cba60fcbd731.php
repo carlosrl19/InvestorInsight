@@ -51,7 +51,7 @@
 		</table>
 
 		<p class="mt-2">
-		Según lo acordado, el inversionista ha sido liquidado de manera satisfactoria. En consecuencia, todos los pagos correspondientes a la liquidación han sido efectuados, dejando un saldo pendiente de Lps. 0.00, 
+		Según lo acordado, el inversionista ha sido liquidado de manera satisfactoria, dejando un saldo pendiente de Lps. 0.00, 
 		lo que confirma que no existen reclamaciones, deudas u obligaciones pendientes entre ambas partes a futuro.
 		</p>
 	</div>

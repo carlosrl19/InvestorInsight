@@ -242,21 +242,11 @@ $(document).ready(function () {
         var investorBalanceInput = currentFieldset.find("#investor_balance");
 
         var investorError = currentFieldset.find("#investor-id-error strong");
-        var transferDateError = currentFieldset.find(
-            "#transfer-date-error strong"
-        );
-        var transferBankError = currentFieldset.find(
-            "#transfer-bank-error strong"
-        );
-        var transferAmountError = currentFieldset.find(
-            "#transfer-amount-error strong"
-        );
-        var transferCommentError = currentFieldset.find(
-            "#transfer-comment-error strong"
-        );
-        var investorBalanceError = currentFieldset.find(
-            "#investor-balance-error strong"
-        );
+        var transferDateError = currentFieldset.find("#transfer-date-error strong");
+        var transferBankError = currentFieldset.find("#transfer-bank-error strong");
+        var transferAmountError = currentFieldset.find("#transfer-amount-error strong");
+        var transferCommentError = currentFieldset.find("#transfer-comment-error strong");
+        var investorBalanceError = currentFieldset.find("#investor-balance-error strong");
 
         investorError.text("");
         transferDateError.text("");
@@ -304,23 +294,17 @@ $(document).ready(function () {
         } else if (transferBank.length < 6) {
             isValid = false;
             transferBankInput.addClass("is-invalid");
-            transferBankError.text(
-                "El banco de transferencia debe tener al menos 6 caracteres"
-            );
+            transferBankError.text("El banco de transferencia debe tener al menos 6 caracteres");
             $("#transfer-bank-error").show();
         } else if (transferBank.length > 36) {
             isValid = false;
             transferBankInput.addClass("is-invalid");
-            transferBankError.text(
-                "El banco de transferencia no puede tener más de 36 caracteres."
-            );
+            transferBankError.text("El banco de transferencia no puede tener más de 36 caracteres.");
             $("#transfer-bank-error").show();
         } else if (!/^[^\d]+$/.test(transferBank)) {
             isValid = false;
             transferBankInput.addClass("is-invalid");
-            transferBankError.text(
-                "El banco de transferencia no puede contener números ni símbolos."
-            );
+            transferBankError.text("El banco de transferencia no puede contener números ni símbolos.");
             $("#transfer-bank-error").show();
         } else {
             transferBankInput.removeClass("is-invalid");
@@ -331,18 +315,14 @@ $(document).ready(function () {
         if (!transferAmount) {
             isValid = false;
             transferAmountInput.addClass("is-invalid");
-            transferAmountError.text(
-                "El monto de transferencia es obligatorio."
-            );
+            transferAmountError.text("El monto de transferencia es obligatorio.");
             $("#transfer-amount-error").show();
         } else {
             var transferAmountNumber = parseFloat(transferAmount);
             if (isNaN(transferAmountNumber) || transferAmountNumber <= 0) {
                 isValid = false;
                 transferAmountInput.addClass("is-invalid");
-                transferAmountError.text(
-                    "El monto de transferencia debe ser mayor a 0."
-                );
+                transferAmountError.text("El monto de transferencia debe ser mayor a 0.");
                 $("#transfer-amount-error").show();
             } else {
                 transferAmountInput.removeClass("is-invalid");
@@ -351,41 +331,31 @@ $(document).ready(function () {
             }
         }
 
-        if (transferBank === 'FONDOS' && transferAmount > investorBalance){
+        if (transferBank === 'FONDOS' && parseFloat(transferAmount) > parseFloat(investorBalance)){
             isValid = false;
             transferAmountInput.addClass("is-invalid");
-            transferAmountError.text(
-                "El monto de inversión no puede ser mayor al fondo disponible del inversionista."
-            );
+            transferAmountError.text("El monto de inversión no puede ser mayor al fondo disponible del inversionista.");
             $("#transfer-amount-error").show();
 
             investorBalanceInput.addClass("is-invalid");
-            investorBalanceError.text(
-                "El fondo del inversionista es insuficiente."
-            );
+            investorBalanceError.text("El fondo del inversionista es insuficiente.");
             $("#investor-balance-error").show();
         }        
 
         if (!transferComment) {
             isValid = false;
             transferCommentInput.addClass("is-invalid");
-            transferCommentError.text(
-                "El comentario de la transferencia es obligatorio."
-            );
+            transferCommentError.text("El comentario de la transferencia es obligatorio.");
             $("#transfer-comment-error").show();
         } else if (transferComment.length > 255) {
             isValid = false;
             transferCommentInput.addClass("is-invalid");
-            transferCommentError.text(
-                "El comentario no puede exceder 255 caracteres."
-            );
+            transferCommentError.text("El comentario no puede exceder 255 caracteres.");
             $("#transfer-comment-error").show();
         } else if (transferComment.length < 3) {
             isValid = false;
             transferCommentInput.addClass("is-invalid");
-            transferCommentError.text(
-                "El comentario debe contener al menos 3 caracteres."
-            );
+            transferCommentError.text("El comentario debe contener al menos 3 caracteres.");
             $("#transfer-comment-error").show();
         } else {
             transferCommentInput.removeClass("is-invalid");
