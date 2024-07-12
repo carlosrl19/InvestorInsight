@@ -34,16 +34,14 @@
 
 	<!-- Credit's note reason title -->
 	<div class="reason-note-title mt-4 mb-2">
-		Motivo de emisión
+		MOTIVO DE EMISIÓN
 	</div>
-	<br>
 	<br>
 
 	<!-- Credit's note readon body -->
 	<div class="reason-note-body">
 		{{ $creditNote->creditNote_description }}
 	</div>
-	<br>
 	<br>
 	<br>
 
@@ -69,6 +67,7 @@
 	* {
 		font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
 		text-align: justify;
+		line-height: 1.8;
 	}
 
 	.code-container-left{
@@ -95,6 +94,11 @@
 
 	.body-note{
 		font-size: 16px;
+	}
+
+	.reason-note-body{
+		padding: 5px;
+		padding-bottom: 10px;
 	}
 
 	.mt-2 {
@@ -144,6 +148,7 @@
 		font-weight: bolder;
 		margin-bottom: 20px;
 		text-align: center;
+		text-decoration: underline;
 	}
 
 	.footer{

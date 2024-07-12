@@ -54,6 +54,7 @@
 	* {
 		font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
 		text-align: justify;
+		line-height: 1.8;
 	}
 	
 	.code-container-left{
