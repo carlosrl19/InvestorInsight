@@ -23,15 +23,7 @@
 	<div class="body-note mt-4 mb-4">
 		Por la presente, se emite el siguiente reporte de pago de comisión a favor del inversionista <strong>{{ $paymentInvestor->investor->investor_name }}</strong>, identificado con su número de identidad 
 		<strong>{{ $paymentInvestor->investor->investor_dni }}</strong>, número de teléfono <strong>{{ $paymentInvestor->investor->investor_phone }}</strong>, con un valor total de Lps. 
-        <strong>{{ number_format($projectInvestor->investor_final_profit, 2) }}</strong> por concepto del proyecto <strong>{{ $project->project_name }}</strong> con fecha de inicio el día <strong>{{ $project->project_start_date }}</strong> y fecha de finalización <strong>{{ $project->project_end_date }}</strong>.
-        <br>
-        <br>
-		Así mismo se hace el retorno de la inversión por un valor de <strong>L. {{ number_format($project->project_investment,2) }}</strong>.
-		@if($paymentInvestor->investor->investor_balance < 0)
-            Posterior a este pago, el inversionista mencionado presenta un saldo negativo de Lps. <strong class="text-red">{{ number_format($paymentInvestor->investor->investor_balance,2 )}}</strong>.
-        @else
-            Posterior a este pago, el inversionista cuenta con un fondo disponible de Lps. <strong>{{ number_format($paymentInvestor->investor->investor_balance,2 )}}</strong>.
-        @endif
+        <strong>{{ number_format($projectInvestor->investor_final_profit, 2) }}</strong> por concepto del proyecto <strong>{{ $project->project_name }}</strong> con fecha de inicio el día <strong>{{ $project->project_start_date }}</strong> y fecha de finalización <strong>{{ $project->project_end_date }}</strong>. Así mismo se hace el retorno de la inversión por un valor de <strong>L. {{ number_format($project->project_investment,2) }}</strong>.
 		<br>
 		<br>
 		<br>

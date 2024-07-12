@@ -26,8 +26,7 @@
 		y final el día <strong>{{ $endDay }}/{{ $endMonth }}/{{ $endYear }}</strong>, con un valor total de Lps. <strong>{{ number_format($project->project_investment + $project->investors->sum('pivot.investor_final_profit'),2) }}</strong>.
 		<br><br>
 		
-		En virtud de lo anterior, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, acuerdan dar por concluido el proyecto <strong class="text-uppercase">"{{ $project->project_name }}"</strong> sin pendientes o reclamaciones entre ellos, así como alguna acción presente o futura relacionada con el proyecto.
-	</div>
+		En virtud de lo anterior, las partes involucradas acuerdan dar por concluido el proyecto antes mencionado, sin pendientes o reclamaciones entre ellos, así como cualquier acción presente o futura relacionada con el mismo.	</div>
 
 	<!-- Finiquito signatures -->
 	<div class="mt-6 ml-center mt-center">

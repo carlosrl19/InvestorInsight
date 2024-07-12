@@ -75,7 +75,7 @@ class TransferController extends Controller
             $validatedData['investor_change_date'] = $todayDate;
             $validatedData['investor_old_funds'] = $oldFunds;
             $validatedData['investor_new_funds'] = $investor->investor_balance + $request->transfer_amount;
-            $validatedData['investor_new_funds_comment'] = "TRANSFERENCIA MEDIANTE " . $request->transfer_bank . "- CÓDIGO #" . $generatedCode . '.';
+            $validatedData['investor_new_funds_comment'] = "TRANSFERENCIA MEDIANTE " . $request->transfer_bank . " - CÓDIGO #" . $generatedCode . '.';
          
             // Crea el registro en InvestorFunds usando create
             InvestorFunds::create($validatedData);

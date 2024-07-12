@@ -253,8 +253,8 @@ Historial de inversionista /&nbsp;
                                                 <th style="width: 50px">FECHA</th>
                                                 <th>BANCO</th>
                                                 <th style="width: 120px">TRANSFERENCIA</th>
-                                                <th style="width: 120px">CAPITAL</th>
-                                                <th style="width: 120px">FONDO</th>
+                                                <th style="width: 120px">FONDO ANTERIOR</th>
+                                                <th style="width: 120px">NUEVO CAPITAL</th>
                                                 <th style="width: 400px;">COMENTARIOS AGREGADOS A TRANSFERENCIA</th>
                                             </tr>
                                             </thead>
@@ -264,8 +264,8 @@ Historial de inversionista /&nbsp;
                                                     <td>{{ $transfer->transfer_date }}</td>
                                                     <td class="text-uppercase">{{ $transfer->transfer_bank }}</td>
                                                     <td class="text-green">Lps. {{ number_format($transfer->transfer_amount, 2) }}</td>
-                                                    <td>Lps. {{ number_format($transfer->current_balance, 2) }}</td>
                                                     <td>Lps. {{ number_format($transfer->current_balance - $transfer->transfer_amount, 2) }}</td>
+                                                    <td>Lps. {{ number_format($transfer->current_balance, 2) }}</td>
                                                     <td class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $transfer->transfer_comment }}</td>
                                                 </tr>
                                                 @endforeach

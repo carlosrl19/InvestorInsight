@@ -310,7 +310,7 @@ class ProjectController extends Controller
             $investorFunds->investor_change_date = now();
             $investorFunds->investor_old_funds = $investor->investor_balance - ($investor->pivot->investor_final_profit + $investor->pivot->investor_investment);
             $investorFunds->investor_new_funds = $investor->investor_balance;
-            $investorFunds->investor_new_funds_comment = 'GANANCIA + CAPITAL A FONDO POR PROYECTO ' . $project->project_name . ' - CODIGO #' . $project->project_code . '.';
+            $investorFunds->investor_new_funds_comment = 'GANANCIA + CAPITAL A FONDO POR ' . $project->project_name . ' - CODIGO #' . $project->project_code . '.';
             $investorFunds->save();
 
             // Crear registro de pago para cada inversionista (payment_investors)

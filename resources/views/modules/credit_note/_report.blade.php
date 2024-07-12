@@ -36,11 +36,16 @@
 	<div class="reason-note-title mt-4 mb-2">
 		Motivo de emisión
 	</div>
+	<br>
+	<br>
 
 	<!-- Credit's note readon body -->
 	<div class="reason-note-body">
 		{{ $creditNote->creditNote_description }}
 	</div>
+	<br>
+	<br>
+	<br>
 
 	<!-- Credit's note Robenior signature -->
 	<div class="mt-6 ml-center">
