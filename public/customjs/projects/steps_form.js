@@ -283,7 +283,7 @@ $(document).ready(function () {
             investorInput.addClass("is-valid");
             $("#investor-id-error").hide();
         }
-        // ivestor_id: La razón del por qué es distinto a las demás validaciones es debido a que el select es nu búcle for each de investors
+        // ivestor_id: La razón del por qué es distinto a las demás validaciones es debido a que el select es un búcle for each de investors
 
         if (!transferDate) {
             isValid = false;
