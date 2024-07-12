@@ -92,7 +92,7 @@ class TransferController extends Controller
             DB::rollBack();
             
             // Get errors
-            dd($e->getMessage());
+            //dd($e->getMessage());
             
             return redirect()->back()->withErrors(['error' => 'Ocurrió un error inesperado al intentar guardar la transferencia. Asegúrese de completar todos los campos del formulario. Si el problema persiste, contacte al servicio técnico.'])->withInput();
         }

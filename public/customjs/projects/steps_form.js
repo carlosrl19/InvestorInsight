@@ -351,7 +351,7 @@ $(document).ready(function () {
             }
         }
 
-        if (transferBank == 'FONDOS' && transferAmount > investorBalance){
+        if (transferBank === 'FONDOS' && transferAmount > investorBalance){
             isValid = false;
             transferAmountInput.addClass("is-invalid");
             transferAmountError.text(
