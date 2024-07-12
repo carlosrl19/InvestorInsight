@@ -26,7 +26,7 @@ Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController
 Route::resource('investors_liquidations', 'App\Http\Controllers\InvestorLiquidationsController')->names('investors_liquidations');
 Route::get('investors_liquidations/{id}/report', 'App\Http\Controllers\InvestorLiquidationsController@showLiquidation')->name('investors_liquidations.report'); // Mostrar liquidación de inversionista
 
-// Commission ggent
+// Commission agent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');
 
 // Commission agent payments
@@ -41,6 +41,7 @@ Route::resource('transfer', 'App\Http\Controllers\TransferController')->names('t
 // Credit note
 Route::resource('credit_note', 'App\Http\Controllers\CreditNoteController')->names('credit_note');
 Route::get('credit_note/{id}/report', 'App\Http\Controllers\CreditNoteController@showReport')->name('credit_note.report');
+Route::get('credit_note/{id}/download/report/', 'App\Http\Controllers\CreditNoteController@downloadReport')->name('credit_note.report_download');
 
 // Promissory note investors
 Route::resource('promissory_note', 'App\Http\Controllers\PromissoryNoteController')->names('promissory_note');

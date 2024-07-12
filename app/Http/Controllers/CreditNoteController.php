@@ -69,11 +69,12 @@ class CreditNoteController extends Controller
     
         // Renderizar el PDF
         $pdf->render();
-    
-        // Devolver el PDF en línea
+         
+        $fileName = $creditNote->investor->investor_name . ' - NOTA CRÉDITO (' . $dia . '-' . $mes . '-' . $anio . ').pdf';
+
         return response($pdf->output(), 200)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'inline; filename="PDF NOTA CRÉDITO.pdf"');
+            ->header('Content-Disposition', 'inline; filename="' . $fileName . '"');
     }
      
     public function store(StoreRequest $request)
@@ -123,6 +124,8 @@ class CreditNoteController extends Controller
             $investor->update(['investor_balance' => $newBalance]);
     
             DB::commit();
+
+            session()->flash('credit_note_id', $investor->id);
     
             return redirect()->route('credit_note.index')->with('success', 'Nota crédito creada exitosamente.');
     
@@ -134,5 +137,52 @@ class CreditNoteController extends Controller
             
             return redirect()->back()->withErrors(['error' => 'Ocurrió un error inesperado al intentar guardar la transferencia. Si el problema persiste, contacte al servicio técnico.'])->withInput();
         }
+    }
+
+    public function downloadReport($id) {
+        $creditNote = CreditNote::findOrFail($id);
+
+        // Configurar el locale en Carbon
+        Carbon::setLocale('es');
+
+        // Obtener la fecha actual en español
+        $fecha = Carbon::now()->setTimezone('America/Costa_Rica');
+        $dia = $fecha->format('d');
+        $mes = $fecha->translatedFormat('F'); // 'F' para nombre completo del mes
+        $anio = $fecha->format('Y');
+    
+        // Configuración de opciones para Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        
+        // Opcion que habilita la carga de imagenes
+        $options->set('chroot', realpath(''));
+        
+        // Crear instancia de Dompdf con las opciones configuradas
+        $pdf = new Dompdf($options);
+    
+        // Cargar el contenido de la vista en Dompdf
+        $pdf->loadHtml(view('modules.credit_note._report', compact('creditNote', 'dia', 'mes', 'anio')));
+    
+        // Establecer el tamaño y la orientación del papel
+        $pdf->setPaper('A4', 'portrait');
+    
+        // Renderizar el PDF
+        $pdf->render();
+
+        // Obtener el project_code a partir del promissoryNote_code
+        $investorId = Investor::where('id', $creditNote->investor_id)->first();
+
+        // Obtener el project_name
+        $investor_name = $investorId->investor_name;
+     
+        // Crear el nombre del archivo con el formato deseado
+        $file_name = $investor_name . ' - NOTA CRÉDITO (' . $dia . '-' . $mes . '-' . $anio . ').pdf';
+ 
+        // Devolver el PDF para descarga forzada
+        return response()->streamDownload(function () use ($pdf, $creditNote) {
+            echo $pdf->output();
+        }, $file_name);
     }
 }
