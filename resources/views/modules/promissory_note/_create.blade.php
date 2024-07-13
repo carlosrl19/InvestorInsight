@@ -41,7 +41,7 @@
                                     </span>
                                 @enderror
 
-                                <label class="form-label" for="promissoryNote_emission_date"><small>Fecha de emisión del pagaré</small></label>
+                                <label for="promissoryNote_emission_date"><small>Fecha de emisión del pagaré</small></label>
                             </div>
                         </div>
                         <input type="hidden" name="promissoryNote_status" value="1">
@@ -92,7 +92,7 @@
                                     </span>
                                 @enderror
 
-                                <label class="form-label" for="promissoryNote_final_date"><small>Fecha de pago del pagaré</small></label>
+                                <label for="promissoryNote_final_date"><small>Fecha de pago del pagaré</small></label>
                             </div>
                         </div>
                     </div>

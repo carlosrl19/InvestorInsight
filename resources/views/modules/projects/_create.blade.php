@@ -49,7 +49,7 @@
                                         style="display: none;">
                                         <strong></strong>
                                     </span>
-                                    <label class="form-label" for="project_name"><small>Nombre del
+                                    <label for="project_name"><small>Nombre del
                                             proyecto</small></label>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                         style="display: none;">
                                         <strong></strong>
                                     </span>
-                                    <label class="form-label" for="project_start_date"><small>Fecha inicial del
+                                    <label for="project_start_date"><small>Fecha inicial del
                                             proyecto</small></label>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                         style="display: none;">
                                         <strong></strong>
                                     </span>
-                                    <label class="form-label" for="project_end_date"><small>Fecha de cierre del
+                                    <label for="project_end_date"><small>Fecha de cierre del
                                             proyecto</small></label>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <label class="form-label" for="project_work_days"><small>Días de
+                                    <label for="project_work_days"><small>Días de
                                             trabajo</small></label>
                                 </div>
                                 <span class="invalid-feedback" role="alert" id="work-days-error" style="display: none;">
@@ -225,7 +225,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <label class="form-label" for="transfer_date"><small>Fecha de
+                                    <label for="transfer_date"><small>Fecha de
                                             transferencia</small></label>
                                 </div>
                             </div>
@@ -386,7 +386,7 @@
                                         style="display: none;">
                                         <strong></strong>
                                     </span>
-                                    <label class="form-label" for="project_comment"><small>Comentarios adicionales al
+                                    <label for="project_comment"><small>Comentarios adicionales al
                                             proyecto</small></label>
                                 </div>
                             </div>

@@ -45,7 +45,7 @@
                                     </span>
                                 @enderror
 
-                                <label class="form-label" for="payment_date"><small>Fecha actual</small></label>
+                                <label for="payment_date"><small>Fecha actual</small></label>
                             </div>
                         </div>
                         <div class="col" style="display: none">
@@ -65,7 +65,7 @@
                                     </span>
                                 @enderror
 
-                                <label class="form-label" for="payment_amount"><small>Monto a pagar</small></label>
+                                <label for="payment_amount"><small>Monto a pagar</small></label>
                             </div>
                         </div>
                         <div class="col" style="display: none">

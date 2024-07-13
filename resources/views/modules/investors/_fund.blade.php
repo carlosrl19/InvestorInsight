@@ -27,9 +27,10 @@
                                     </span>
                                 @enderror
 
-                                <label class="form-label" for="investor_change_date"><small>Fecha actual</small></label>
+                                <label for="investor_change_date"><small>Fecha actual</small></label>
                             </div>
                         </div>
+                        
                         <div class="col-6 mb-4">
                             <div class="form-floating">
                                 <input type="number" readonly value="{{ $investor->investor_balance }}"
@@ -41,7 +42,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label class="form-label" for="investor_old_funds">Fondo actual del inversionista</label>
+                                <label for="investor_old_funds">Fondo actual del inversionista</label>
                             </div>
                             <input type="hidden" name="investor_balance" value="{{ $investor->investor_balance }}">
                         </div>
@@ -57,7 +58,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label class="form-label" for="investor_new_funds">Nuevo fondo del inversionista</label>
+                                <label for="investor_new_funds">Nuevo fondo del inversionista</label>
                             </div>
                         </div>
 

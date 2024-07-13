@@ -26,7 +26,7 @@
                                     </span>
                                 @enderror
 
-                                <label class="form-label" for="creditNote_date"><small>Fecha de nota crédito</small></label>
+                                <label for="creditNote_date"><small>Fecha de nota crédito</small></label>
                             </div>
                         </div>
 

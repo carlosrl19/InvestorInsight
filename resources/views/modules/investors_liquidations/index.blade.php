@@ -76,13 +76,13 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="btn btn-sm btn-red" style="font-size: clamp(0.6rem, 3vw, 0.6rem)" href="{{ route('investors_liquidations.report_download', $investorLiquidation)}}">
+                                            <a class="btn btn-sm btn-red" style="font-size: clamp(0.6rem, 3vw, 0.6rem)" href="{{ route('investors_liquidations.report_download', $investorLiquidation)}}" data-toggle="modal" data-target="#pdfModal">
                                                 <img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" 
                                                 src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
                                                 &nbsp;LIQUIDACIÓN&nbsp;&nbsp;
                                             </a>
 
-                                             <!-- PDF Viewer Modal -->
+                                            <!-- PDF Viewer Modal -->
                                             <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">

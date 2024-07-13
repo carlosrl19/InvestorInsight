@@ -35,7 +35,7 @@ class ProjectController extends Controller
         })->get();
         
         $availableInvestors = Investor::where('investor_status', 1)->get();
-        $investors = Investor::get();
+        $investors = Investor::orderBy('investor_name')->get();
 
         $promissoryNote = PromissoryNote::get();
         $commissioners = CommissionAgent::get();
@@ -265,7 +265,7 @@ class ProjectController extends Controller
     public function indexClosed()
     {
         $projects = Project::where('project_status', 2)->with('investors')->get();
-        $investors = Investor::get();
+        $investors = Investor::orderBy('investor_name')->get();
         $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
         $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')

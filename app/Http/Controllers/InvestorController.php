@@ -25,7 +25,7 @@ class InvestorController extends Controller
 {
     public function index()
     {
-        $investors = Investor::get();
+        $investors = Investor::orderBy('investor_name')->get();
         $investorFunds = InvestorFunds::get();
         $investorLiquidations = investorLiquidations::get();
         $commissioners = CommissionAgent::get();

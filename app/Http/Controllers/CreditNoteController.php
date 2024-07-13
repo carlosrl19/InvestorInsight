@@ -20,7 +20,7 @@ class CreditNoteController extends Controller
     public function index()
     {
         $creditNotes = CreditNote::get();
-        $investors = Investor::get();
+        $investors = Investor::orderBy('investor_name')->get();
         $creditNoteCode = strtoupper(Str::random(12)); // Credit note random code
         $creditNoteDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 

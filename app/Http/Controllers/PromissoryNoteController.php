@@ -19,7 +19,7 @@ class PromissoryNoteController extends Controller
     public function index()
     {
         $promissoryNotes = PromissoryNote::get();
-        $investors = Investor::get();
+        $investors = Investor::orderBy('investor_name')->get();
         $promissoryCode = strtoupper(Str::random(12)); // Promissory note random code
         $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
