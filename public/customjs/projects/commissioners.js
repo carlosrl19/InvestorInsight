@@ -27,7 +27,7 @@ function addCommissionerRow(commissionerId, commissionerName) {
     newRow.innerHTML = `
         <td>${commissionerName}</td>
         <td>
-            <input type="number" name="commissioner_commission[]" class="form-control" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Comisión total del comisionista" min="1" required readonly>
+            <input type="number" readonly name="commissioner_commission[]" class="form-control" style="font-size: clamp(0.6rem, 6vh, 0.68rem)" placeholder="Comisión total del comisionista" min="1" required>
             <input type="hidden" name="commissioner_id[]" value="${commissionerId}">
         </td>
         <td>
@@ -39,7 +39,7 @@ function addCommissionerRow(commissionerId, commissionerName) {
     document.querySelector("#project_commissioners_table tbody").appendChild(newRow);
     document.getElementById("commissioner_select").querySelector(`option[value="${commissionerId}"]`).disabled = true;
 
-    const investorProfitInput = document.querySelector('input[name="investor_profit"]');
+    const investorProfitInput = document.querySelector('input[name="investor_profit[]"]');
     if (investorProfitInput) {
         investorProfitInput.dispatchEvent(new Event("input"));
     }
@@ -50,7 +50,7 @@ function removeCommissionerRow(button) {
     document.getElementById("commissioner_select").querySelector(`option[value="${commissionerId}"]`).disabled = false;
     button.closest("tr").remove();
 
-    const investorProfitInput = document.querySelector('input[name="investor_profit"]');
+    const investorProfitInput = document.querySelector('input[name="investor_profit[]"]');
     if (investorProfitInput) {
         investorProfitInput.dispatchEvent(new Event("input"));
     }

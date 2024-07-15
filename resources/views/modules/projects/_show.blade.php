@@ -33,25 +33,51 @@
                                 <div class="col-md-6 text-start">
                                     <p><div class="badge bg-success mt-1"></div>&nbsp; Fecha inicio: {{ $project->project_start_date }}</p>
                                     <p><div class="badge bg-success mt-1"></div>&nbsp; Fecha final: {{ $project->project_end_date }}</p>
-                                    <p><div class="badge bg-success mt-1"></div>&nbsp;
-                                        @foreach($project->investors as $investor)
-                                             Ganancia total: Lps. {{ number_format($investor->pivot->investor_final_profit + $project->project_investment,2) }}
+                                    @php
+                                    $first_investor = true;
+                                    @endphp
+
+                                    @foreach($project->investors as $investor)
+                                        <p>
+                                            <div class="badge bg-success mt-1"></div>&nbsp;
+                                            @if($first_investor)
+                                                Ganancia total: Lps. {{ number_format($investor->pivot->investor_final_profit + $project->project_investment,2) }}
+                                                @php
+                                                    $first_investor = false;
+                                                @endphp
+                                            @else
+                                                5%: Lps. {{ number_format($investor->pivot->investor_final_profit,2) }}
+                                            @endif
                                             <br>
-                                        @endforeach
-                                    </p>
+                                        </p>
+                                    @endforeach
                                 </p>
                                 </div>
                             </div>
+                            
                             <h3>Inversionistas del proyecto</h3>
                             <div class="row">
+                                @php
+                                $investor_count = 0;
+                                @endphp
+
                                 @foreach($project->investors as $investor)
                                     <div class="col mb-3 text-start">
                                         <div class="card">
                                             <div class="card-status-start-md bg-primary"></div>
                                             <div class="card-stamp">
-                                                <div class="card-stamp-icon bg-primary">
-                                                    <img style="filter: invert(100%) sepia(0%) saturate(7441%) hue-rotate(237deg) brightness(118%) contrast(100%);" src="{{ asset('../static/svg/number-1.svg') }}" width="90" height="90">
-                                                </div>
+                                                @php
+                                                    $investor_count++;
+                                                @endphp
+                                                @if($investor_count == 1)
+                                                    <div class="card-stamp-icon bg-primary">
+                                                        <img style="filter: invert(100%) sepia(0%) saturate(7441%) hue-rotate(237deg) brightness(118%) contrast(100%);" src="{{ asset('../static/svg/number-1.svg') }}" width="90" height="90">
+                                                    </div>
+                                                @elseif($investor_count == 2)
+                                                    <div class="card-stamp-icon bg-primary">
+                                                        <img style="filter: invert(100%) sepia(0%) saturate(7441%) hue-rotate(237deg) brightness(118%) contrast(100%);" src="{{ asset('../static/svg/share.svg') }}" width="90" height="90">
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="card-body">
                                                 <a href="{{ route('investor.show', $investor) }}">
@@ -59,7 +85,7 @@
                                                     <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
                                                     <br>
                                                     <span class="badge bg-orange mt-2">Inversión (I): Lps. {{ number_format($investor->pivot->investor_investment) }}</span><br>
-                                                    <span class="badge bg-cyan mt-2">Ganancia (C): Lps. {{ number_format($investor->pivot->investor_profit / 2,2) }}</span>
+                                                    <span class="badge bg-cyan mt-2">Ganancia (C): Lps. {{ number_format($investor->pivot->investor_final_profit + ($investor_count == 1 ? $project->project_investment : 0),2) }}</span>
                                                 </a>
                                             </div>
                                         </div>

@@ -34,26 +34,53 @@
                                 <div class="col-md-6 text-start">
                                     <p><div class="badge bg-success mt-1"></div>&nbsp; Fecha inicio: <?php echo e($project->project_start_date); ?></p>
                                     <p><div class="badge bg-success mt-1"></div>&nbsp; Fecha final: <?php echo e($project->project_end_date); ?></p>
-                                    <p><div class="badge bg-success mt-1"></div>&nbsp;
-                                        <?php $__currentLoopData = $project->investors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $investor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                             Ganancia total: Lps. <?php echo e(number_format($investor->pivot->investor_final_profit + $project->project_investment,2)); ?>
+                                    <?php
+                                    $first_investor = true;
+                                    ?>
 
+                                    <?php $__currentLoopData = $project->investors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $investor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <p>
+                                            <div class="badge bg-success mt-1"></div>&nbsp;
+                                            <?php if($first_investor): ?>
+                                                Ganancia total: Lps. <?php echo e(number_format($investor->pivot->investor_final_profit + $project->project_investment,2)); ?>
+
+                                                <?php
+                                                    $first_investor = false;
+                                                ?>
+                                            <?php else: ?>
+                                                5%: Lps. <?php echo e(number_format($investor->pivot->investor_final_profit,2)); ?>
+
+                                            <?php endif; ?>
                                             <br>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </p>
+                                        </p>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </p>
                                 </div>
                             </div>
+                            
                             <h3>Inversionistas del proyecto</h3>
                             <div class="row">
+                                <?php
+                                $investor_count = 0;
+                                ?>
+
                                 <?php $__currentLoopData = $project->investors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $investor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="col mb-3 text-start">
                                         <div class="card">
                                             <div class="card-status-start-md bg-primary"></div>
                                             <div class="card-stamp">
-                                                <div class="card-stamp-icon bg-primary">
-                                                    <img style="filter: invert(100%) sepia(0%) saturate(7441%) hue-rotate(237deg) brightness(118%) contrast(100%);" src="<?php echo e(asset('../static/svg/number-1.svg')); ?>" width="90" height="90">
-                                                </div>
+                                                <?php
+                                                    $investor_count++;
+                                                ?>
+                                                <?php if($investor_count == 1): ?>
+                                                    <div class="card-stamp-icon bg-primary">
+                                                        <img style="filter: invert(100%) sepia(0%) saturate(7441%) hue-rotate(237deg) brightness(118%) contrast(100%);" src="<?php echo e(asset('../static/svg/number-1.svg')); ?>" width="90" height="90">
+                                                    </div>
+                                                <?php elseif($investor_count == 2): ?>
+                                                    <div class="card-stamp-icon bg-primary">
+                                                        <img style="filter: invert(100%) sepia(0%) saturate(7441%) hue-rotate(237deg) brightness(118%) contrast(100%);" src="<?php echo e(asset('../static/svg/share.svg')); ?>" width="90" height="90">
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                             <div class="card-body">
                                                 <a href="<?php echo e(route('investor.show', $investor)); ?>">
@@ -62,7 +89,7 @@
                                                     <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
                                                     <br>
                                                     <span class="badge bg-orange mt-2">Inversión (I): Lps. <?php echo e(number_format($investor->pivot->investor_investment)); ?></span><br>
-                                                    <span class="badge bg-cyan mt-2">Ganancia (C): Lps. <?php echo e(number_format($investor->pivot->investor_profit / 2,2)); ?></span>
+                                                    <span class="badge bg-cyan mt-2">Ganancia (C): Lps. <?php echo e(number_format($investor->pivot->investor_final_profit + ($investor_count == 1 ? $project->project_investment : 0),2)); ?></span>
                                                 </a>
                                             </div>
                                         </div>
