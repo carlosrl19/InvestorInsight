@@ -15,7 +15,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'commissioner_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:commission_agents',
-            'commissioner_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/|unique:commission_agents',
+            'commissioner_dni' => 'required|string|min:8|max:13|regex:/^[a-zA-Z0-9]+$/|unique:commission_agents',
             'commissioner_phone' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|',
             'commissioner_balance' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
         ];
@@ -25,9 +25,9 @@ class StoreRequest extends FormRequest
     {
         return [
             // Commissioner agent name messages
-            'commissioner_name.required' => 'El nombre es obligatorio.',
-            'commissioner_name.unique' => 'El nombre ya existe.',
-            'commissioner_name.string' => 'El nombre solo debe contener letras.',
+            'commissioner_name.required' => 'El nombre del comisionista es obligatorio.',
+            'commissioner_name.unique' => 'El nombre del comisionista ya existe.',
+            'commissioner_name.string' => 'El nombre del comisionista solo debe contener letras.',
             'commissioner_name.regex' => 'El nombre del comisionista no puede contener números ni símbolos.',
             'commissioner_name.min' => 'El nombre del comisionista debe contener al menos 3 letras.',
             'commissioner_name.max' => 'El nombre del comisionista no puede exceder 55 letras.',
@@ -35,8 +35,8 @@ class StoreRequest extends FormRequest
             // Commissioner agent dni messages
             'commissioner_dni.required' => 'El DNI del comisionista es obligatorio.',
             'commissioner_dni.unique' => 'El DNI del comisionista ya existe.',
-            'commissioner_dni.string' => 'El DNI del comisionista solo debe contener números.',
-            'commissioner_dni.regex' => 'El DNI del comisionista no puede contener letras ni símbolos.',
+            'commissioner_dni.string' => 'El DNI del comisionista solo debe contener números y letras.',
+            'commissioner_dni.regex' => 'El DNI del comisionista no puede contener símbolos.',
             'commissioner_dni.min' => 'El DNI del comisionista debe contener al menos 13 digitos.',
             'commissioner_dni.max' => 'El DNI del comisionista no puede exceder 13 digitos.',
 

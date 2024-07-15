@@ -25,7 +25,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="investor_dni" value="{{ old('investor_dni') }}" id="investor_dni" class="form-control @error('investor_dni') is-invalid @enderror" data-mask="0000000000000" data-mask-visible="true" placeholder="0000000000000" autocomplete="off"/>
+                                <input type="text" oninput="this.value = this.value.toUpperCase()" name="investor_dni" maxlength="13" minlength="8" value="{{ old('investor_dni') }}" id="investor_dni" class="form-control @error('investor_dni') is-invalid @enderror" autocomplete="off"/>
                                 @error('investor_dni')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

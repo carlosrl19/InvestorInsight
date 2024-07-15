@@ -25,6 +25,9 @@ use Carbon\Carbon;
 
 class ProjectController extends Controller
 {
+    /* --------------------------
+        PROJECT'S INDEX FUNCTIONS
+    ----------------------------- */
     public function index()
     {
         $projects = Project::where('project_status', 1)->with('investors')->get();
@@ -61,12 +64,24 @@ class ProjectController extends Controller
         
         return view('modules.projects.index', compact('projects', 'activeProjectsCount', 'total_project_investment', 'investorsWithActivedProjects', 'investors', 'availableInvestors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_commission_payment', 'todayDate',));
     }
-
-    public function create()
+    
+    public function indexClosed()
     {
-        return view('modules.projects._create');
-    }
+        $projects = Project::where('project_status', 2)->with('investors')->get();
+        $investors = Investor::orderBy('investor_name')->get();
+        $total_investor_balance = Investor::sum('investor_balance');
+        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
+        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
+            ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+            ->sum('promissoryNoteCommissioner_amount');
 
+        return view('modules.projects_closed.index', compact('projects', 'investors', 'total_investor_balance', 'total_project_investment', 'total_commissioner_commission_payment'));
+    }
+    // END INDEX FUNCTIONS
+
+    /* --------------------------
+        PROJECT'S STORE FUNCTIONS
+    ----------------------------- */
     public function store(StoreRequest $request)
     {
         $generatedCode = strtoupper(Str::random(12));
@@ -201,13 +216,6 @@ class ProjectController extends Controller
             $investorFunds->investor_new_funds_comment = 'FONDO A CAPITAL DE ' . $validatedData['project_name'] . ' - CODIGO #' . $generatedCode . '.';
             $investorFunds->save();
         }
-
-        /* Suma al investor_balance el valor del transfer_amount cuando el transfer_bank no es FONDOS
-        
-        else {
-            $investor->investor_balance += $validatedData['transfer_amount'];
-        }
-        */
     
         $investor->save();
     
@@ -216,22 +224,11 @@ class ProjectController extends Controller
     
         return redirect()->route('project.index')->with('success', 'Proyecto creado de manera exitosa.');
     }
+    // END PROJECT'S STORE FUNCTIONS
     
-    public function show($id)
-    {
-        $project = Project::findOrFail($id);
-        $transfer = Transfer::findOrFail($id);
-        $investors = $project->investors;
-        $commissioners = $project->commissioners;
-        
-        $total_investor_balance = Investor::sum('investor_balance');
-        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
-        ->sum('promissoryNoteCommissioner_amount');
-
-        return view('modules.projects.show', compact('project', 'transfer', 'investors', 'commissioners', 'total_investor_balance', 'total_commissioner_commission_payment'));
-    }
-    
+    /* --------------------------
+        EXPORTATIONS FUNCTIONS
+    ----------------------------- */
     public function export($id)
     {
         $project = Project::findOrFail($id);
@@ -251,6 +248,7 @@ class ProjectController extends Controller
     
         return Excel::download(new ActiveProjectsExport, 'PROYECTOS ACTIVOS ' . $todayDate . ' - EXCEL.xlsx');
     }
+
     public function exportActiveInvestorProjects($investorId)
     {   
         $investor = Investor::findOrFail($investorId);
@@ -261,20 +259,11 @@ class ProjectController extends Controller
 
         return Excel::download(new ActiveInvestorProjectExport($investorId), 'PROYECTOS ACTIVOS (' . $todayDate . ') - '. $investorName . '.xlsx');
     }
+    // END EXPORTATION FUNCTIONS
 
-    public function indexClosed()
-    {
-        $projects = Project::where('project_status', 2)->with('investors')->get();
-        $investors = Investor::orderBy('investor_name')->get();
-        $total_investor_balance = Investor::sum('investor_balance');
-        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
-            ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
-            ->sum('promissoryNoteCommissioner_amount');
-
-        return view('modules.projects_closed.index', compact('projects', 'investors', 'total_investor_balance', 'total_project_investment', 'total_commissioner_commission_payment'));
-    }
-
+    /* --------------------------
+        PROJECT'S CHANGE STATE FUNCTIONS
+    ----------------------------- */
     public function finishProject(Request $request, Project $project)
     {
         // Validar los datos recibidos
@@ -359,6 +348,45 @@ class ProjectController extends Controller
         return redirect()->route('project.index', compact('project'))->with('success', 'Proyecto finalizado exitosamente.');
     }
 
+    public function closeProject(Request $request, Project $project)
+    {
+        // Validar los datos recibidos
+        $request->validate([
+            'project_close_comment' => 'required|string|min:3|max:255',
+        ], [
+            // Project description messages
+            'project_close_comment.required' => 'El motivo de cierre del proyecto es obligatorio.',
+            'project_close_comment.string' => 'El motivo de cierre del proyecto solo debe contener letras, números y/o símbolos.',
+            'project_close_comment.min' => 'El motivo de cierre del proyecto debe tener al menos 3 caracteres.',
+            'project_close_comment.max' => 'El motivo de cierre del proyecto no puede tener más de 255 caracteres.',
+        ]);
+
+        $project->project_status = '2';
+        $project->project_close_comment = $request->input('project_close_comment');
+        $project->save();
+
+        return redirect()->route('project.index')->with('success', 'Proyecto cerrado correctamente.');
+    }
+    // END PROJECT'S CHANGE STATE FUNCTIONS
+
+    /* --------------------------
+        PROJECT'S SHOW & REPORT FUNCTIONS
+    ----------------------------- */
+    public function show($id)
+    {
+        $project = Project::findOrFail($id);
+        $transfer = Transfer::findOrFail($id);
+        $investors = $project->investors;
+        $commissioners = $project->commissioners;
+        
+        $total_investor_balance = Investor::sum('investor_balance');
+        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
+
+        return view('modules.projects.show', compact('project', 'transfer', 'investors', 'commissioners', 'total_investor_balance', 'total_commissioner_commission_payment'));
+    }
+
     public function showTermination($id)
     {
         // Cargar el proyecto junto con los inversores y comisionados
@@ -400,36 +428,5 @@ class ProjectController extends Controller
             echo $pdf->output();
         }, $project->project_name . ' - FINIQUITO' . '.pdf');
     }
-
-    public function closeProject(Request $request, Project $project)
-    {
-        // Validar los datos recibidos
-        $request->validate([
-            'project_close_comment' => 'required|string|min:3|max:255',
-        ], [
-            // Project description messages
-            'project_close_comment.required' => 'El motivo de cierre del proyecto es obligatorio.',
-            'project_close_comment.string' => 'El motivo de cierre del proyecto solo debe contener letras, números y/o símbolos.',
-            'project_close_comment.min' => 'El motivo de cierre del proyecto debe tener al menos 3 caracteres.',
-            'project_close_comment.max' => 'El motivo de cierre del proyecto no puede tener más de 255 caracteres.',
-        ]);
-
-        $project->project_status = '2';
-        $project->project_close_comment = $request->input('project_close_comment');
-        $project->save();
-
-        return redirect()->route('project.index')->with('success', 'Proyecto cerrado correctamente.');
-    }
-
-    public function edit($id)
-    {
-        $project = Project::findOrFail($id);
-        return view('modules.projects.update', compact('project'));
-    }
-
-    public function destroy($id)
-    {
-        Project::destroy($id);
-        return redirect()->route('project.index')->with('success', 'Proyecto eliminado exitosamente.');
-    }
+    // END PROJECT'S SHOW & REPORT FUNCTIONS
 }

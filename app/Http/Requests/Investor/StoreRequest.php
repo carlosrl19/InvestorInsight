@@ -11,7 +11,7 @@ class StoreRequest extends FormRequest
         return [
             'investor_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:investors',
             'investor_company_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/',
-            'investor_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/',
+            'investor_dni' => 'required|string|min:8|max:13|regex:/^[a-zA-Z0-9]+$/',
             'investor_phone' => 'required|string|min:8|max:11|regex:/^[0-9]+$/',
             'investor_reference_id' => 'numeric|exists:investors,id',
             'investor_balance' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
@@ -38,19 +38,19 @@ class StoreRequest extends FormRequest
             'investor_company_name.max' => 'El nombre de la empresa afiliada no puede exceder 55 letras.',
 
             // Investor dni messages
-            'investor_dni.required' => 'El DNI es obligatorio.',
-            'investor_dni.unique' => 'El DNI ya existe.',
-            'investor_dni.string' => 'El DNI solo debe contener números.',
-            'investor_dni.regex' => 'El DNI no puede contener letras ni símbolos.',
-            'investor_dni.min' => 'El DNI debe contener al menos 13 digitos.',
-            'investor_dni.max' => 'El DNI no puede exceder 13 digitos.',
+            'investor_dni.required' => 'El DNI del inversionista es obligatorio.',
+            'investor_dni.unique' => 'El DNI del inversionista ya existe.',
+            'investor_dni.string' => 'El DNI del inversionista solo debe contener números y letras.',
+            'investor_dni.regex' => 'El DNI del inversionista no puede contener símbolos.',
+            'investor_dni.min' => 'El DNI del inversionista debe contener al menos 8 digitos.',
+            'investor_dni.max' => 'El DNI del inversionista no puede exceder 13 digitos.',
 
             // Investor phone messages
-            'investor_phone.required' => 'El número de teléfono es obligatorio.',
-            'investor_phone.string' => 'El número de teléfono solo debe contener números.',
-            'investor_phone.regex' => 'El número de teléfono no puede contener letras ni símbolos.',
-            'investor_phone.min' => 'El número de teléfono debe contener al menos 8 digitos.',
-            'investor_phone.max' => 'El número de teléfono no puede exceder 11 digitos.',
+            'investor_phone.required' => 'El número de teléfono del inversionista es obligatorio.',
+            'investor_phone.string' => 'El número de teléfono del inversionista solo debe contener números.',
+            'investor_phone.regex' => 'El número de teléfono del inversionista no puede contener letras ni símbolos.',
+            'investor_phone.min' => 'El número de teléfono del inversionista debe contener al menos 8 digitos.',
+            'investor_phone.max' => 'El número de teléfono del inversionista no puede exceder 11 digitos.',
             
             // Investor id messages
             'investor_reference_id.required' => 'El inversionista recomendante es obligatorio.',
