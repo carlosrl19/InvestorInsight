@@ -22,7 +22,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="55" name="commissioner_name" oninput="this.value = this.value.toUpperCase()" value="{{ old('commissioner_name') }}" id="commissioner_name" class="form-control @error('commissioner_name') is-invalid @enderror" autocomplete="off"/>
+                                <input type="text" oninput="this.value = this.value.toUpperCase().replace(/[^A-Z\s]/g, '')" maxlength="55" name="commissioner_name" value="{{ old('commissioner_name') }}" id="commissioner_name" class="form-control @error('commissioner_name') is-invalid @enderror" autocomplete="off"/>
                                 @error('commissioner_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -33,7 +33,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="13" name="commissioner_dni" value="{{ old('commissioner_dni') }}" id="commissioner_dni" class="form-control @error('commissioner_dni') is-invalid @enderror" autocomplete="off"/>
+                                <input type="text" oninput="this.value = this.value.toUpperCase().replace(/\s/g, '')" maxlength="13" name="commissioner_dni" value="{{ old('commissioner_dni') }}" id="commissioner_dni" class="form-control @error('commissioner_dni') is-invalid @enderror" autocomplete="off"/>
                                 @error('commissioner_dni')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -46,7 +46,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="commissioner_phone" value="{{ old('commissioner_phone') }}" id="commissioner_phone" class="form-control @error('commissioner_phone') is-invalid @enderror" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
+                                <input type="text" oninput="this.value = this.value.replace(/\D/g, '')" name="commissioner_phone" value="{{ old('commissioner_phone') }}" id="commissioner_phone" class="form-control @error('commissioner_phone') is-invalid @enderror" autocomplete="off"/>
                                 @error('commissioner_phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

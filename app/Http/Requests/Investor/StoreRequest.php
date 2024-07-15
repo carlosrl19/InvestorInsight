@@ -41,7 +41,7 @@ class StoreRequest extends FormRequest
             'investor_dni.required' => 'El DNI del inversionista es obligatorio.',
             'investor_dni.unique' => 'El DNI del inversionista ya existe.',
             'investor_dni.string' => 'El DNI del inversionista solo debe contener números y letras.',
-            'investor_dni.regex' => 'El DNI del inversionista no puede contener símbolos.',
+            'investor_dni.regex' => 'El DNI del inversionista no puede contener símbolos ni espacios.',
             'investor_dni.min' => 'El DNI del inversionista debe contener al menos 8 digitos.',
             'investor_dni.max' => 'El DNI del inversionista no puede exceder 13 digitos.',
 

@@ -11,7 +11,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="55" name="investor_name" oninput="this.value = this.value.toUpperCase()" value="{{ old('investor_name') }}" id="investor_name" class="form-control @error('investor_name') is-invalid @enderror" autocomplete="off"/>
+                                <input type="text" maxlength="55" name="investor_name" oninput="this.value = this.value.toUpperCase().replace(/[^A-Z\s]/g, '')" value="{{ old('investor_name') }}" id="investor_name" class="form-control @error('investor_name') is-invalid @enderror" autocomplete="off"/>
                                 @error('investor_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -25,7 +25,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" oninput="this.value = this.value.toUpperCase()" name="investor_dni" maxlength="13" minlength="8" value="{{ old('investor_dni') }}" id="investor_dni" class="form-control @error('investor_dni') is-invalid @enderror" autocomplete="off"/>
+                                <input type="text" oninput="this.value = this.value.toUpperCase().replace(/\s/g, '')" name="investor_dni" maxlength="13" minlength="8" value="{{ old('investor_dni') }}" id="investor_dni" class="form-control @error('investor_dni') is-invalid @enderror" autocomplete="off"/>
                                 @error('investor_dni')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" minlength="8" maxlength="11" name="investor_phone" value="{{ old('investor_phone') }}" id="investor_phone" class="form-control @error('investor_phone') is-invalid @enderror" autocomplete="off">
+                                <input type="text" oninput="this.value = this.value.replace(/\D/g, '')" minlength="8" maxlength="11" name="investor_phone" value="{{ old('investor_phone') }}" id="investor_phone" class="form-control @error('investor_phone') is-invalid @enderror" autocomplete="off">
                                 @error('investor_phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -219,7 +219,7 @@ Inversionistas
                                                 <div class="row mb-3 align-items-end">
                                                     <div class="col">
                                                         <div class="form-floating">
-                                                            <input type="text" maxlength="55" oninput="this.value = this.value.toUpperCase()" value="{{ $investor->investor_name }}" name="investor_name" id="investor_name_{{ $investor->id }}" class="form-control @error('investor_name') is-invalid @enderror" placeholder="Ingrese el nombre del inversionista" autocomplete="off"/>
+                                                            <input type="text" maxlength="55" oninput="this.value = this.value.toUpperCase().replace(/[^A-Z\s]/g, '')" value="{{ $investor->investor_name }}" name="investor_name" id="investor_name_{{ $investor->id }}" class="form-control @error('investor_name') is-invalid @enderror" placeholder="Ingrese el nombre del inversionista" autocomplete="off"/>
                                                             @error('investor_name')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
@@ -230,7 +230,7 @@ Inversionistas
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-floating">
-                                                            <input type="text" maxlength="13" value="{{ $investor->investor_dni }}" name="investor_dni" id="investor_dni_{{ $investor->id }}" class="form-control @error('investor_dni') is-invalid @enderror" placeholder="Ingrese el número de identidad" autocomplete="off"/>
+                                                            <input type="text" oninput="this.value = this.value.toUpperCase().replace(/\s/g, '')" maxlength="13" value="{{ $investor->investor_dni }}" name="investor_dni" id="investor_dni_{{ $investor->id }}" class="form-control @error('investor_dni') is-invalid @enderror" placeholder="Ingrese el número de identidad" autocomplete="off"/>
                                                             @error('investor_dni')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
@@ -288,7 +288,7 @@ Inversionistas
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-floating">
-                                                            <input type="text" name="investor_phone" value="{{ $investor->investor_phone }}" id="investor_phone_{{ $investor->id }}" class="form-control @error('investor_phone') is-invalid @enderror" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
+                                                            <input type="text" oninput="this.value = this.value.replace(/\D/g, '')" name="investor_phone" value="{{ $investor->investor_phone }}" id="investor_phone_{{ $investor->id }}" class="form-control @error('investor_phone') is-invalid @enderror" autocomplete="off"/>
                                                             @error('investor_phone')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>

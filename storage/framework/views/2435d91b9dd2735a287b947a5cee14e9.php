@@ -219,7 +219,7 @@ Inversionistas
                                                 <div class="row mb-3 align-items-end">
                                                     <div class="col">
                                                         <div class="form-floating">
-                                                            <input type="text" maxlength="55" oninput="this.value = this.value.toUpperCase()" value="<?php echo e($investor->investor_name); ?>" name="investor_name" id="investor_name_<?php echo e($investor->id); ?>" class="form-control <?php $__errorArgs = ['investor_name'];
+                                                            <input type="text" maxlength="55" oninput="this.value = this.value.toUpperCase().replace(/[^A-Z\s]/g, '')" value="<?php echo e($investor->investor_name); ?>" name="investor_name" id="investor_name_<?php echo e($investor->id); ?>" class="form-control <?php $__errorArgs = ['investor_name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -244,7 +244,7 @@ unset($__errorArgs, $__bag); ?>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-floating">
-                                                            <input type="text" maxlength="13" value="<?php echo e($investor->investor_dni); ?>" name="investor_dni" id="investor_dni_<?php echo e($investor->id); ?>" class="form-control <?php $__errorArgs = ['investor_dni'];
+                                                            <input type="text" oninput="this.value = this.value.toUpperCase().replace(/\s/g, '')" maxlength="13" value="<?php echo e($investor->investor_dni); ?>" name="investor_dni" id="investor_dni_<?php echo e($investor->id); ?>" class="form-control <?php $__errorArgs = ['investor_dni'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -345,14 +345,14 @@ unset($__errorArgs, $__bag); ?>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-floating">
-                                                            <input type="text" name="investor_phone" value="<?php echo e($investor->investor_phone); ?>" id="investor_phone_<?php echo e($investor->id); ?>" class="form-control <?php $__errorArgs = ['investor_phone'];
+                                                            <input type="text" oninput="this.value = this.value.replace(/\D/g, '')" name="investor_phone" value="<?php echo e($investor->investor_phone); ?>" id="investor_phone_<?php echo e($investor->id); ?>" class="form-control <?php $__errorArgs = ['investor_phone'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
+unset($__errorArgs, $__bag); ?>" autocomplete="off"/>
                                                             <?php $__errorArgs = ['investor_phone'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
