@@ -113,27 +113,27 @@ class StoreRequest extends FormRequest
             'project_close_comment.max' => 'El motivo de cierre del proyecto no pueden tener más de 255 caracteres.',
 
             // Investor array id messages
-            'investor_id.required' => 'El ID del inversionista es obligatorio.',
-            'investor_id.numeric' => 'El ID del inversionista debe ser un número.',
-            'investor_id.exists' => 'El inversionista seleccionado no existe.',
+            'investor_id.*.required' => 'El ID del inversionista es obligatorio.',
+            'investor_id.*.numeric' => 'El ID del inversionista debe ser un número.',
+            'investor_id.*.exists' => 'El inversionista seleccionado no existe.',
 
             // Investor array investment messages
-            'investor_investment.required' => 'La inversión del inversionista es obligatoria.',
-            'investor_investment.numeric' => 'La inversión del inversionista debe ser un número.',
-            'investor_investment.min' => 'La inversión del inversionista debe ser al menos 1.',
-            'investor_investment.regex' => 'La inversión del inversionista debe tener hasta dos decimales.',
+            'investor_investment.*.required' => 'La inversión del inversionista es obligatoria.',
+            'investor_investment.*.numeric' => 'La inversión del inversionista debe ser un número.',
+            'investor_investment.*.min' => 'La inversión del inversionista debe ser al menos 1.',
+            'investor_investment.*.regex' => 'La inversión del inversionista debe tener hasta dos decimales.',
 
             // Investor array profit messages
-            'investor_profit.required' => 'La ganancia total del proyecto es obligatorio.',
-            'investor_profit.numeric' => 'La ganancia total del proyecto debe ser un número.',
-            'investor_profit.min' => 'La ganancia total del proyecto debe ser al menos 1.',
-            'investor_profit.regex' => 'La ganancia total del proyecto debe tener hasta dos decimales.',
+            'investor_profit.*.required' => 'La ganancia total del proyecto es obligatorio.',
+            'investor_profit.*.numeric' => 'La ganancia total del proyecto debe ser un número.',
+            'investor_profit.*.min' => 'La ganancia total del proyecto debe ser al menos 1.',
+            'investor_profit.*.regex' => 'La ganancia total del proyecto debe tener hasta dos decimales.',
 
             // Investor array profit messages
-            'investor_final_profit.required' => 'La ganancia del inversionista principal es obligatoria.',
-            'investor_final_profit.numeric' => 'La ganancia del inversionista principal debe ser un número.',
-            'investor_final_profit.min' => 'La ganancia del inversionista principal debe ser al menos 1.',
-            'investor_final_profit.regex' => 'La ganancia del inversionista principal debe tener hasta dos decimales.',
+            'investor_final_profit.*.required' => 'La ganancia del inversionista principal es obligatoria.',
+            'investor_final_profit.*.numeric' => 'La ganancia del inversionista principal debe ser un número.',
+            'investor_final_profit.*.min' => 'La ganancia del inversionista principal debe ser al menos 1.',
+            'investor_final_profit.*.regex' => 'La ganancia del inversionista principal debe tener hasta dos decimales.',
 
             // Commissioner array id messages
             'commissioner_id.*.required' => 'El ID del comisionista es obligatorio.',
@@ -217,9 +217,6 @@ class StoreRequest extends FormRequest
                 $firstInvestorFinalProfit = $firstInvestorProfit * 0.5;
                 $investor1FinalProfit = $investorFinalProfit[0];
                 $investor2FinalProfit = $investorFinalProfit[1];
-
-                // Restar el 5% asignado al segundo inversionista al primer inversionista
-                $investor1FinalProfit -= $firstInvestorFinalProfit * 0.05;
 
                 $expectedInvestor1Profit = $firstInvestorFinalProfit * 0.95;
                 $expectedInvestor2Profit = $firstInvestorFinalProfit * 0.05;
