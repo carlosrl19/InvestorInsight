@@ -134,19 +134,26 @@
   
   // Función para calcular el porcentaje en la tabla del paso 3
   function calculateInvestorFinalProfit() {
+    // Selecciona el input del beneficio del inversor y el input del beneficio final del inversor
     const investorProfitInput = document.querySelector('input[name="investor_profit[]"]');
     const investorFinalProfitInput = document.querySelector('input[name="investor_final_profit[]"]');
+    
+    // Obtiene el valor del beneficio del inversor y lo convierte a un número flotante, si no hay valor, se usa 0
     const investorProfit = parseFloat(investorProfitInput.value) || 0;
-  
+
+    // Inicializa la variable para el total de comisión y obtiene todos los elementos de fila de los comisionistas
     let totalCommission = 0;
     const commissioners = document.querySelectorAll('#project_commissioners_table tbody tr');
     const numCommissioners = commissioners.length;
     const juniorCommission = parseFloat(document.getElementById('commissioner_commission_jr').value) || 0;
-  
+
+    // Itera sobre cada comisionista
     commissioners.forEach((commissioner, index) => {
+      // Encuentra el input de la comisión del comisionista
       const commissionInput = commissioner.querySelector('input[name="commissioner_commission[]"]');
       let commission = 0;
-  
+
+      // Calcula la comisión dependiendo del índice del comisionista
       if (index === 0) {
         commission = numCommissioners === 1 ? 0.5 * investorProfit : 0.9 * juniorCommission;
       } else if (index === 1) {
@@ -154,11 +161,13 @@
       } else {
         commission = (investorProfit - totalCommission) / (numCommissioners - 1);
       }
-  
+
+      // Establece el valor de la comisión en el input y suma la comisión al total
       commissionInput.value = commission.toFixed(2);
       totalCommission += commission;
     });
-  
+
+    // Calcula y establece el beneficio final del inversor como el 50% del beneficio del inversor
     investorFinalProfitInput.value = (0.5 * investorProfit).toFixed(2);
   }
   
