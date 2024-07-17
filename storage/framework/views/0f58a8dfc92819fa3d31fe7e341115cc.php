@@ -105,6 +105,7 @@ Transferencias
                                                     <!-- Dynamic carousel items will be injected here -->
                                                 </div>                                                                    
                                             </div>
+                                            
                                             <div class="carousel-indicators carousel-indicators-thumb mt-2">
                                                 <!-- Dynamic carousel indicators will be injected here -->
                                             </div>
@@ -117,27 +118,6 @@ Transferencias
                         <?php endif; ?>
                     </td>
                 </tr>
-
-                <!-- Modal comprobante -->
-                <div class="modal modal-blur fade" id="imageModal-<?php echo e($transfer->id); ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content" style="border: 2px solid #52524E">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Imagen de comprobante de transferencia</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <?php if(file_exists(public_path('images/transfers/' . $transfer->transfer_img))): ?>
-                                    <img src="<?php echo e(asset('images/transfers/' . $transfer->transfer_img)); ?>" style="min-height: 70vh; max-height: 70vh; width: auto; display: flex; margin: auto" alt="transfer-proof">
-                                <?php else: ?>
-                                    <img src="<?php echo e(asset('images/no-image.png')); ?>" style="min-height: 70vh; max-height: 70vh;; width: auto; display: flex; margin: auto" alt="no image available" title="Sin comprobante">
-                                <?php endif; ?>
-                                <br>
-                                <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Volver</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
