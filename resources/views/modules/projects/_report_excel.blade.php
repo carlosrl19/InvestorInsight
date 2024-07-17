@@ -150,6 +150,7 @@ $hexColor = $randomColor;
                     {{ implode(' ', array_slice(explode(' ', $commissioners[0]->commissioner_name), 0, 1)) }} 50%
                 </td>
             @endif
+            
             <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 250px; text-align: center;">COMENTARIO</td>
         </tr>
         

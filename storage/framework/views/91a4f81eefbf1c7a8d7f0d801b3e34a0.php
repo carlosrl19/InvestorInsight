@@ -1,4 +1,4 @@
-<!-- Excel template used to export all active projects to an investors -->
+<!-- Excel template used to export all active projects to all investors -->
 
 <?php
 // Array de colores
@@ -49,7 +49,7 @@ foreach ($projects as $index => $project) {
 }
 ?>
 
-@foreach($projects as $project)
+<?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <?php $color = $projectColors[$project->id]; ?>
     <table>
         <thead>
@@ -60,40 +60,41 @@ foreach ($projects as $index => $project) {
         <tbody>
             <tr class="header-row">
                 <td></td>
-                @foreach($project->investors as $investor)
-                    <td style="font-size: 14px; width: 100px; font-weight: bold; background-color: #fff; text-align: left; text-decoration: underline;">
-                        PROYECTO {{ explode(' ', $investor->investor_name)[0] }}
-                        @if(count(explode(' ', $investor->investor_name)) > 1)
-                            {{ implode(' ', array_slice(explode(' ', $investor->investor_name), 1)) }}
-                        @endif
-                    </td>
-                @endforeach
+                <?php $__currentLoopData = $project->investors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $investor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <td style="font-size: 14px; width: 100px; font-weight: bold; background-color: #fff; text-align: left; text-decoration: underline;">
+                    PROYECTO <?php echo e(explode(' ', $investor->investor_name)[0]); ?> <?php echo e(explode(' ', $investor->investor_name)[count(explode(' ', $investor->investor_name)) - 1]); ?>
+
+                </td>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                 <td style="background-color: #fff; width: auto;"></td>
                 <td style="background-color: #fff; width: 100px;"></td>
                 <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 160px; text-align: center; text-decoration: underline;">
-                    @if($project->project_status == 0)
+                    <?php if($project->project_status == 0): ?>
                         FINALIZADO
-                    @elseif($project->project_status == 1)
+                    <?php elseif($project->project_status == 1): ?>
                         TRABAJANDO
-                    @elseif($project->project_status == 2)
+                    <?php elseif($project->project_status == 2): ?>
                         CERRADO
-                    @else
+                    <?php else: ?>
                         DESCONOCIDO
-                    @endif
+                    <?php endif; ?>
                 </td>
                 <td style="background-color: #fff; width: 160px;"></td>
                 <td style="background-color: #fff; width: 160px;"></td>
-                @if(isset($project->commissioners[1]))
+                <?php if(isset($project->commissioners[1])): ?>
                     <td style="background-color: #fff; width: 160px;"></td>
                     <td style="background-color: #fff; text-align: center; font-weight: bold;">
-                        #CP-{{ $project->project_code }}
+                        #CP-<?php echo e($project->project_code); ?>
+
                     </td>
-                @else
+                <?php else: ?>
                     <td style="background-color: #fff; text-align: center; font-weight: bold;">
-                        #CP-{{ $project->project_code }}
+                        #CP-<?php echo e($project->project_code); ?>
+
                     </td>
                     <td></td>
-                @endif
+                <?php endif; ?>
             </tr>
 
             <!-- Blank rows 1 -->
@@ -105,13 +106,13 @@ foreach ($projects as $index => $project) {
                 <td style="background-color: #fff"></td>
                 <td style="background-color: #fff"></td>
                 <td style="background-color: #fff"></td>
-                @if(isset($project->commissioners[1]))
+                <?php if(isset($project->commissioners[1])): ?>
                     <td style="background-color: #fff; width: 120px;"></td>
                     <td style="background-color: #fff;"></td>
-                @else
+                <?php else: ?>
                     <td style="background-color: #fff"></td>
                     <td></td>
-                @endif
+                <?php endif; ?>
             </tr>
 
             <!-- Blank rows 2 -->
@@ -123,13 +124,13 @@ foreach ($projects as $index => $project) {
                 <td style="background-color: #fff"></td>
                 <td style="background-color: #fff"></td>
                 <td style="background-color: #fff; width: 120px;"></td>
-                @if(isset($project->commissioners[1]))
+                <?php if(isset($project->commissioners[1])): ?>
                     <td style="background-color: #fff; width: 120px;"></td>
                     <td style="background-color: #fff;"></td>
-                @else
+                <?php else: ?>
                     <td style="background-color: #fff"></td>
                     <td></td>
-                @endif
+                <?php endif; ?>
             </tr>
 
             <!-- Header table -->
@@ -137,61 +138,44 @@ foreach ($projects as $index => $project) {
                 <td></td>
                 <td style="background-color: <?php echo htmlspecialchars($color); ?>; width: 150px"></td>
                 <td></td>
-                <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 90px">CAPITAL</td>
+                <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center;">CAPITAL</td>
                 <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 120px; text-align: center;">GANANCIA TOTAL</td>
-                
-                <!-- Inversionistas  -->
-                @if(isset($project->investors[1]))
+                <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 150px; text-align: center;">
+                    <?php echo e(implode(' ', array_slice(explode(' ', $investor->investor_name), 0, 1))); ?> 50%
+                </td>
+                <?php if(isset($project->commissioners[1])): ?>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        {{ implode(' ', array_slice(explode(' ', $investors->get(1)->investor_name ?? '-'), 0, 1)) }} 5%
-                    </td>
-                    <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        {{ implode(' ', array_slice(explode(' ', $investors[0]->investor_name), 0, 1)) }} 45%
-                    </td>
-                @else
-                    <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 150px; text-align: center;">
-                        {{ implode(' ', array_slice(explode(' ', $investor->investor_name), 0, 1)) }} 50%
-                    </td>
-                @endif
-
-                <!-- Comisionistas  -->
-                @if(isset($project->commissioners[1]))
-                    <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        {{ implode(' ', array_slice(explode(' ', $commissioners->get(1)->commissioner_name ?? '-'), 0, 1)) }} 10%
+                        <?php echo e(implode(' ', array_slice(explode(' ', $project->commissioners->get(1)->commissioner_name ?? '-'), 0, 1))); ?> 10%
                     </td>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        {{ implode(' ', array_slice(explode(' ', $commissioners[0]->commissioner_name), 0, 1)) }} 40%
+                        <?php echo e(implode(' ', array_slice(explode(' ', $project->commissioners[0]->commissioner_name), 0, 1))); ?> 40%
                     </td>
-                @else
+                <?php else: ?>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        {{ implode(' ', array_slice(explode(' ', $commissioners[0]->commissioner_name), 0, 1)) }} 50%
+                        <?php echo e(implode(' ', array_slice(explode(' ', $project->commissioners[0]->commissioner_name), 0, 1))); ?> 50%
                     </td>
-                @endif
+                <?php endif; ?>
                 <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">COMENTARIO</td>
             </tr>
 
             <!-- Content table -->
             <tr>
                 <td></td>
-                <td style="background-color: <?php echo htmlspecialchars($hexColor) ?>; width: 90px"></td>
-                <td style="background-color: #fff; font-size: 12px; font-weight: bold; text-align: left; width: 140px; border-bottom: 1px solid #000;">{{ $project->project_name }}</td>
-                <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000; width: 90px">L. {{ number_format($project->investors->max('pivot.investor_investment'), 2) }}</td>
-                <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000;">L. {{ number_format($project->investors->max('pivot.investor_profit'), 2) }}</td>
-                @if(isset($project->investors[1]))
+                <td style="background-color: <?php echo htmlspecialchars($color); ?>; width: 90px"></td>
+                <td style="background-color: #fff; font-size: 12px; font-weight: bold; text-align: left; width: 140px; border-bottom: 1px solid #000;"><?php echo e($project->project_name); ?></td>
+                <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000;">L. <?php echo e(number_format($project->investors->sum('pivot.investor_investment'), 2)); ?></td>
+                <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000;">L. <?php echo e(number_format($project->investors->sum('pivot.investor_profit'), 2)); ?></td>
+                <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000; width: 100px; text-decoration: underline; font-weight: bold;">L. <?php echo e(number_format($project->investors->sum('pivot.investor_final_profit'), 2)); ?></td>
+                <?php if(isset($project->commissioners[1])): ?>
                     <td style="text-align: center; border-bottom: 1px solid #000; width: 120px; font-weight: bold;">
-                        L. {{ number_format($project->investors[1]->pivot->investor_profit, 2) }}
+                        L. <?php echo e(number_format($project->commissioners[1]->pivot->commissioner_commission, 2)); ?>
+
                     </td>
-                @endif
-                <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000; width: 100px; text-decoration: underline; font-weight: bold;">L. {{ number_format($project->investors->max('pivot.investor_final_profit'), 2) }}</td>
-                @if(isset($project->commissioners[1]))
-                    <td style="text-align: center; border-bottom: 1px solid #000; width: 120px; font-weight: bold;">
-                        L. {{ number_format($project->commissioners[1]->pivot->commissioner_commission, 2) }}
-                    </td>
-                @endif
-                <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000; width: 120px">L. {{ number_format($project->commissioners[0]->pivot->commissioner_commission, 2) }}</td>
-                <td style="color: #1F4E82; text-decoration: underline; text-align: left; border-bottom: 1px solid #000;">{{ $project->project_comment }}</td>
+                <?php endif; ?>
+                <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000; width: 120px">L. <?php echo e(number_format($project->commissioners[0]->pivot->commissioner_commission, 2)); ?></td>
+                <td style="color: #1F4E82; text-decoration: underline; text-align: left; border-bottom: 1px solid #000;"><?php echo e($project->project_comment); ?></td>
             </tr>
         </tbody>
     </table>
     <br>
-@endforeach
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php /**PATH R:\Code\En proceso\InvestorInsight\resources\views/modules/projects/_report_active_projects_excel.blade.php ENDPATH**/ ?>
