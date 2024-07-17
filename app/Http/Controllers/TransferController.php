@@ -40,35 +40,38 @@ class TransferController extends Controller
             // Encuentra al inversionista por su ID
             $investor = Investor::findOrFail($request->investor_id);
             $generatedCode = strtoupper(Str::random(12)); // Genera un código aleatorio de 12 caracteres
-
+    
+            // Procesar y guardar las imágenes
+            $imageNames = [];
+            if ($request->hasFile('transfer_img')) {
+                $images = $request->file('transfer_img');
+                foreach ($images as $image) {
+                    $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+                    $image->move(public_path('images/transfers'), $imageName);
+                    $imageNames[] = $imageName;
+                }
+            }
+    
+            // Convierte el array de nombres de imágenes a JSON
+            $transferImg = !empty($imageNames) ? json_encode($imageNames) : null;
+    
             // Crea la nueva transferencia
             $transfer = Transfer::create([
                 'transfer_code' => $generatedCode,
                 'transfer_bank' => $request->transfer_bank,
                 'investor_id' => $request->investor_id,
                 'transfer_date' => $request->transfer_date,
-                'transfer_img' => $request->transfer_img,
+                'transfer_img' => $transferImg,
                 'transfer_amount' => $request->transfer_amount,
                 'transfer_comment' => $request->transfer_comment,
             ]);
-                
-            // Procesar la imagen
-            if ($request->hasFile('transfer_img')) {
-                $imageName = time().'.'.$request->transfer_img->extension();
-                $request->transfer_img->move(public_path('images/transfers'), $imageName);
-                $transfer->transfer_img = $imageName; // Guarda el nombre de la imagen en el modelo Transfer
-                $transfer->save(); // Guarda los cambios en el modelo Transfer
-            } else {
-                $transfer->transfer_img = 'no-image.png';
-                $transfer->save(); // Guarda los cambios en el modelo Transfer
-            }
-
+    
             // Se registra el cambio en el fondo del inversionista
             $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
-     
+         
             // Guarda los fondos anteriores antes de actualizar
             $oldFunds = $investor->investor_balance;
-         
+             
             // Obtén los datos validados y añade los campos necesarios para InvestorFunds
             $validatedData = $request->validated();
             $validatedData['investor_id'] = $investor->id;
@@ -76,27 +79,28 @@ class TransferController extends Controller
             $validatedData['investor_old_funds'] = $oldFunds;
             $validatedData['investor_new_funds'] = $investor->investor_balance + $request->transfer_amount;
             $validatedData['investor_new_funds_comment'] = "TRANSFERENCIA MEDIANTE " . $request->transfer_bank . " - CÓDIGO #" . $generatedCode . '.';
-         
+    
             // Crea el registro en InvestorFunds usando create
             InvestorFunds::create($validatedData);
-    
+        
             // Actualiza el saldo del inversionista sumando el monto de la transferencia
             $newBalance = $investor->investor_balance + $request->transfer_amount;
             $investor->update(['investor_balance' => $newBalance]);
     
             DB::commit();
-
-            return redirect()->route('transfer.index')->with('success', 'Transferencia creada exitosamente.');
     
+            return redirect()->route('transfer.index')->with('success', 'Transferencia creada exitosamente.');
+        
         } catch (\Exception $e) {
             DB::rollBack();
-            
+
             // Get errors
             //dd($e->getMessage());
-            
+
             return redirect()->back()->withErrors(['error' => 'Ocurrió un error inesperado al intentar guardar la transferencia. Asegúrese de completar todos los campos del formulario. Si el problema persiste, contacte al servicio técnico.'])->withInput();
         }
     }
+    
 
     public function show(Transfer $transfer)
     {
