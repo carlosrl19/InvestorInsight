@@ -131,28 +131,38 @@ class ProjectController extends Controller
             'investor_balance_history' => $validatedData['investor_balance_history'],
         ]);
     
-        // Asociar inversionistas con el proyecto
-        if (is_array($validatedData['investor_id'])) {
-            foreach ($validatedData['investor_id'] as $i => $invId) {
-                $project->investors()->attach($invId, [
-                    'investor_investment' => $validatedData['investor_investment'][$i],
-                    'investor_profit' => $validatedData['investor_profit'][$i],
-                    'investor_final_profit' => $validatedData['investor_final_profit'][$i],
-                ]);
-    
-                // Crear pagaré para cada inversionista del proyecto
-                $promissoryNoteCode = $generatedCode;
-    
-                PromissoryNote::create([
-                    'investor_id' => $invId,
-                    'promissoryNote_emission_date' => $todayDate,
-                    'promissoryNote_final_date' => $project->project_end_date,
-                    'promissoryNote_amount' => $validatedData['investor_investment'][$i] + $validatedData['investor_final_profit'][$i],
-                    'promissoryNote_code' => $promissoryNoteCode,
-                    'promissoryNote_status' => 1,
-                ]);
-            }
-        } else {
+            // Asociar inversionistas con el proyecto
+            if (is_array($validatedData['investor_id'])) {
+                $i = 0;
+                foreach ($validatedData['investor_id'] as $invId) {
+                    $investor_investment = $validatedData['investor_investment'][$i];
+                    
+                    // Establecer investor_investment en 0.00 para el segundo inversionista
+                    if ($i == 1) {
+                        $investor_investment = 0.00;
+                    }
+                    
+                    $project->investors()->attach($invId, [
+                        'investor_investment' => $investor_investment,
+                        'investor_profit' => $validatedData['investor_profit'][$i],
+                        'investor_final_profit' => $validatedData['investor_final_profit'][$i],
+                    ]);
+
+                    // Crear pagaré para cada inversionista del proyecto
+                    $promissoryNoteCode = $generatedCode;
+
+                    PromissoryNote::create([
+                        'investor_id' => $invId,
+                        'promissoryNote_emission_date' => $todayDate,
+                        'promissoryNote_final_date' => $project->project_end_date,
+                        'promissoryNote_amount' => $investor_investment + $validatedData['investor_final_profit'][$i],
+                        'promissoryNote_code' => $promissoryNoteCode,
+                        'promissoryNote_status' => 1,
+                    ]);
+                    
+                    $i++;
+                }
+            } else {
             // Solo hay un inversionista
             $invId = $validatedData['investor_id'];
             $project->investors()->attach($invId, [
