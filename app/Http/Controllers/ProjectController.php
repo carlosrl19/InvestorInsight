@@ -229,9 +229,6 @@ class ProjectController extends Controller
     
         $investor->save();
     
-        // Esto funciona con JS en el project.index que detecta el project->id para el Excel y lo hace descargar automáticamente
-        session()->flash('excel_project_id', $project->id);
-    
         return redirect()->route('project.index')->with('success', 'Proyecto creado de manera exitosa.');
     }
     // END PROJECT'S STORE FUNCTIONS
@@ -349,11 +346,7 @@ class ProjectController extends Controller
         DB::table('promissory_note_commissioners')
             ->where('promissoryNoteCommissioner_code', $project->project_code)
             ->update(['promissoryNoteCommissioner_status' => 0]);
-    
-        // Guardar el ID del proyecto en la sesión para la generación del PDF y Excel
-        // Esto funciona con JS en el project.index que detecta el project->id para el PDF y lo hace descargar automáticamente
-        session()->flash('project_id', $project->id);
-    
+
         // Redirigir con un mensaje de éxito
         return redirect()->route('project.index', compact('project'))->with('success', 'Proyecto finalizado exitosamente.');
     }

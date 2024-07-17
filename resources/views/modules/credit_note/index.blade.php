@@ -45,19 +45,6 @@ Notas crédito
     </div>
     @endif
 
-    <!-- Cuando el credit note se crea -->
-    @if (session('credit_note_id'))
-        <script>
-            window.onload = function() {
-                redirectToCreditNote();
-            }
-
-            function redirectToCreditNote() {
-                window.location.href = "{{ route('credit_note.report_download', session('credit_note_id')) }}";
-            }        
-        </script>
-    @endif
-
 <div class="container-xl">
     <div class="card mb-2">
         <div class="card-body">

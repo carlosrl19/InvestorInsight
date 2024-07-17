@@ -22,7 +22,7 @@
 
 	<!-- Finiquito body -->
 	<div class="body-note mb-4">
-		Por medio del presente documento, <?php $__currentLoopData = $project->investors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $investor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <strong><?php echo e($investor->investor_name); ?></strong> <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, 
+		Por medio del presente documento, <?php if($project->investors->first()): ?> <strong><?php echo e($project->investors->first()->investor_name); ?></strong> <?php endif; ?> y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, 
 		formalizan la conclusión y finalización del proyecto denominado <strong class="text-uppercase">"<?php echo e($project->project_name); ?>"</strong> con una fecha inicial el día <strong><?php echo e($day); ?>/<?php echo e($month); ?>/<?php echo e($year); ?></strong>,
 		y final el día <strong><?php echo e($endDay); ?>/<?php echo e($endMonth); ?>/<?php echo e($endYear); ?></strong>, con un valor total de Lps. <strong><?php echo e(number_format($project->project_investment + $project->investors->sum('pivot.investor_final_profit'),2)); ?></strong>.
 		<br><br>

@@ -21,7 +21,7 @@
 
 	<!-- Finiquito body -->
 	<div class="body-note mb-4">
-		Por medio del presente documento, @foreach($project->investors as $investor) <strong>{{ $investor->investor_name }}</strong> @endforeach y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, 
+		Por medio del presente documento, @if($project->investors->first()) <strong>{{ $project->investors->first()->investor_name }}</strong> @endif y <strong>JUNIOR ALEXIS AYALA GUERRERO</strong>, 
 		formalizan la conclusión y finalización del proyecto denominado <strong class="text-uppercase">"{{ $project->project_name }}"</strong> con una fecha inicial el día <strong>{{ $day }}/{{ $month }}/{{ $year }}</strong>,
 		y final el día <strong>{{ $endDay }}/{{ $endMonth }}/{{ $endYear }}</strong>, con un valor total de Lps. <strong>{{ number_format($project->project_investment + $project->investors->sum('pivot.investor_final_profit'),2) }}</strong>.
 		<br><br>

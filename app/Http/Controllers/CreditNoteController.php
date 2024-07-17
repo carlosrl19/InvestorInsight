@@ -124,8 +124,6 @@ class CreditNoteController extends Controller
             $investor->update(['investor_balance' => $newBalance]);
     
             DB::commit();
-
-            session()->flash('credit_note_id', $investor->id);
     
             return redirect()->route('credit_note.index')->with('success', 'Nota crédito creada exitosamente.');
     

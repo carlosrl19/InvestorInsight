@@ -126,7 +126,7 @@ Comisionistas
                                             </div>
                                             <div class="col">
                                                 <div class="form-floating">
-                                                    <input type="text" maxlength="55" oninput="this.value = this.value.toUpperCase()" value="{{ $commission_agent->commissioner_name }}" name="commissioner_name" id="commissioner_name_{{ $commission_agent->id }}" class="form-control @error('commissioner_name') is-invalid @enderror" placeholder="Ingrese el nombre del comisionista" autocomplete="off"/>
+                                                    <input type="text" oninput="this.value = this.value.toUpperCase().replace(/[^A-Z\s]/g, '')" maxlength="55" oninput="this.value = this.value.toUpperCase()" value="{{ $commission_agent->commissioner_name }}" name="commissioner_name" id="commissioner_name_{{ $commission_agent->id }}" class="form-control @error('commissioner_name') is-invalid @enderror" placeholder="Ingrese el nombre del comisionista" autocomplete="off"/>
                                                     @error('commissioner_name')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -137,7 +137,7 @@ Comisionistas
                                             </div>
                                             <div class="col">
                                                 <div class="form-floating">
-                                                    <input type="text" maxlength="13" value="{{ $commission_agent->commissioner_dni }}" name="commissioner_dni" id="commissioner_dni_{{ $commission_agent->id }}" class="form-control @error('commissioner_dni') is-invalid @enderror" placeholder="Ingrese el número de identidad" autocomplete="off"/>
+                                                    <input type="text" oninput="this.value = this.value.toUpperCase().replace(/\s/g, '')" maxlength="13" value="{{ $commission_agent->commissioner_dni }}" name="commissioner_dni" id="commissioner_dni_{{ $commission_agent->id }}" class="form-control @error('commissioner_dni') is-invalid @enderror" placeholder="Ingrese el número de identidad" autocomplete="off"/>
                                                     @error('commissioner_dni')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -151,7 +151,7 @@ Comisionistas
                                         <div class="row mb-3 align-items-end">
                                             <div class="col">
                                                 <div class="form-floating">
-                                                    <input type="text" name="commissioner_phone" value="{{ $commission_agent->commissioner_phone }}" id="commissioner_phone_{{ $commission_agent->id }}" class="form-control @error('commissioner_phone') is-invalid @enderror" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
+                                                    <input type="text" oninput="this.value = this.value.replace(/\D/g, '')" minlength="8" maxlength="8" name="commissioner_phone" value="{{ $commission_agent->commissioner_phone }}" id="commissioner_phone_{{ $commission_agent->id }}" class="form-control @error('commissioner_phone') is-invalid @enderror" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
                                                     @error('commissioner_phone')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>

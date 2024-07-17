@@ -46,7 +46,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" oninput="this.value = this.value.replace(/\D/g, '')" name="commissioner_phone" value="{{ old('commissioner_phone') }}" id="commissioner_phone" class="form-control @error('commissioner_phone') is-invalid @enderror" autocomplete="off"/>
+                                <input type="text" oninput="this.value = this.value.replace(/\D/g, '')" minlength="8" maxlength="8" name="commissioner_phone" value="{{ old('commissioner_phone') }}" id="commissioner_phone" class="form-control @error('commissioner_phone') is-invalid @enderror" autocomplete="off"/>
                                 @error('commissioner_phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

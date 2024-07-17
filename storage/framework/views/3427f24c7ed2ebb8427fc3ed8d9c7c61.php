@@ -93,42 +93,6 @@ Proyectos activos
     </div>
     <?php endif; ?>
 
-    <!-- Cuando el proyecto se crea -->
-    <?php if(session('excel_project_id')): ?>
-        <script>
-            window.onload = function() {
-                redirectToExcel();
-            }
-
-            function redirectToExcel() {
-                window.location.href = "<?php echo e(route('project.excel', session('excel_project_id'))); ?>";
-                setTimeout(redirectoToPromissoryNote, 1000);
-            }
-
-            function redirectoToPromissoryNote() {
-                window.location.href = "<?php echo e(route('promissory_note.report_download', session('excel_project_id'))); ?>";
-            }
-        </script>
-    <?php endif; ?>
-
-    <!-- Cuando el proyecto se finaliza -->
-    <?php if(session('project_id')): ?>
-        <script>
-            window.onload = function() {
-                redirectToTermination();
-            };
-
-            function redirectToTermination() {
-                window.location.href = "<?php echo e(route('project.termination', session('project_id'))); ?>";
-                setTimeout(redirectToExcel, 1000); // Descarga archivo Excel al segundo (1000 milisegundos)
-            }
-
-            function redirectToExcel() {
-                window.location.href = "<?php echo e(route('project.excel', session('project_id'))); ?>";
-            }
-        </script>
-    <?php endif; ?>
-
 <div class="container-xl">
     <div class="card mb-2">
         <div class="card-body">
@@ -146,7 +110,7 @@ Proyectos activos
                         <th>Fecha <br>inicio</th>
                         <th>Fecha <br>final</th>
                         <th>Días</th>
-                        <th>Nombre <br>inversionista</th>
+                        <th>Nombre <br>inversionista(s)</th>
                         <th>Monto <br>inversión</th>
                         <th>Ganancia <br>proyecto</th>
                         <th>Exportar <br> excel</th>
