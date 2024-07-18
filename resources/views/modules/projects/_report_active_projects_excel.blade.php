@@ -36,6 +36,7 @@ foreach ($projects as $index => $project) {
                 <th></th>
             </tr>
         </thead>
+
         <tbody>
             <tr class="header-row">
                 <td></td>
@@ -46,19 +47,35 @@ foreach ($projects as $index => $project) {
                     </td>
                 @endforeach
 
-                <td style="background-color: #fff; width: auto;"></td>
-                <td style="background-color: #fff; width: 100px;"></td>
-                <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 160px; text-align: center; text-decoration: underline;">
-                    @if($project->project_status == 0)
-                        FINALIZADO
-                    @elseif($project->project_status == 1)
-                        TRABAJANDO
-                    @elseif($project->project_status == 2)
-                        CERRADO
-                    @else
-                        DESCONOCIDO
-                    @endif
-                </td>
+                @if(isset($project->investors[1]))
+                    <td style="background-color: #fff; width: 100px;"></td>
+                    <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 160px; text-align: center; text-decoration: underline;">
+                        @if($project->project_status == 0)
+                            FINALIZADO
+                        @elseif($project->project_status == 1)
+                            TRABAJANDO
+                        @elseif($project->project_status == 2)
+                            CERRADO
+                        @else
+                            DESCONOCIDO
+                        @endif
+                    </td>
+                    <td style="background-color: #fff; width: auto;"></td>
+                @else
+                    <td style="background-color: #fff; width: auto;"></td>
+                    <td style="background-color: #fff; width: 100px;"></td>
+                    <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 160px; text-align: center; text-decoration: underline;">
+                        @if($project->project_status == 0)
+                            FINALIZADO
+                        @elseif($project->project_status == 1)
+                            TRABAJANDO
+                        @elseif($project->project_status == 2)
+                            CERRADO
+                        @else
+                            DESCONOCIDO
+                        @endif
+                    </td>
+                @endif
                 <td style="background-color: #fff; width: 160px;"></td>
                 <td style="background-color: #fff; width: 160px;"></td>
                 @if(isset($project->commissioners[1]))

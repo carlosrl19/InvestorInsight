@@ -41,7 +41,12 @@ class ActiveProjectsExport implements FromView, WithProperties, WithEvents
         return [
             AfterSheet::class => function(AfterSheet $event) {
                 $sheet = $event->sheet->getDelegate();
-                $sheet->mergeCells('B2:D2'); // La celda B2 llega hasta la celda D2
+                $startRow = 2; // Inicio de la fila a partir de la cual se realizará el merge
+                $endRow = $sheet->getHighestRow(); // Obtener la última fila modificada
+                while ($startRow <= $endRow) {
+                    $sheet->mergeCells('B' . $startRow . ':D' . $startRow);
+                    $startRow += 8;
+                }
             },
         ];
     }

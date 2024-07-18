@@ -147,14 +147,14 @@ foreach ($projects as $index => $project) {
                 <!-- Inversionistas  -->
                 <?php if(isset($project->investors[1])): ?>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        <?php echo e(implode(' ', array_slice(explode(' ', $investor[0]->investor_name ?? '-'), 0, 1))); ?> 5%
+                        <?php echo e(implode(' ', array_slice(explode(' ', $investors->get(1)->investor_name ?? '-'), 0, 1))); ?> 5%
                     </td>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        <?php echo e(implode(' ', array_slice(explode(' ', $investor[0]->investor_name), 0, 1))); ?> 45%
+                        <?php echo e(implode(' ', array_slice(explode(' ', $investors[0]->investor_name), 0, 1))); ?> 45%
                     </td>
                 <?php else: ?>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 150px; text-align: center;">
-                        <?php echo e(implode(' ', array_slice(explode(' ', $investor->investor_name), 0, 1))); ?> 50% - asldkmalsd
+                        <?php echo e(implode(' ', array_slice(explode(' ', $investor->investor_name), 0, 1))); ?> 50%
                     </td>
                 <?php endif; ?>
 

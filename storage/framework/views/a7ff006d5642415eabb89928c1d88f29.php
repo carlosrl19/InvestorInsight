@@ -36,34 +36,47 @@ foreach ($projects as $index => $project) {
                 <th></th>
             </tr>
         </thead>
+
         <tbody>
             <tr class="header-row">
                 <td></td>
-                <?php if(isset($project->investors[1])): ?>
+                
+                <?php $__currentLoopData = $project->investors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $investor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <td style="font-size: 14px; width: 100px; font-weight: bold; background-color: #fff; text-align: left; text-decoration: underline;">
                         PROYECTO <?php echo e(explode(' ', $investor->investor_name)[0]); ?> <?php echo e(explode(' ', $investor->investor_name)[count(explode(' ', $investor->investor_name)) - 1]); ?>
 
                     </td>
-                <?php else: ?>
-                    <td style="font-size: 14px; width: 100px; font-weight: bold; background-color: #fff; text-align: left; text-decoration: underline;">
-                        PROYECTO <?php echo e(explode(' ', $investor->investor_name)[0]); ?> <?php echo e(explode(' ', $investor->investor_name)[count(explode(' ', $investor->investor_name)) - 1]); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
+                <?php if(isset($project->investors[1])): ?>
+                    <td style="background-color: #fff; width: 100px;"></td>
+                    <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 160px; text-align: center; text-decoration: underline;">
+                        <?php if($project->project_status == 0): ?>
+                            FINALIZADO
+                        <?php elseif($project->project_status == 1): ?>
+                            TRABAJANDO
+                        <?php elseif($project->project_status == 2): ?>
+                            CERRADO
+                        <?php else: ?>
+                            DESCONOCIDO
+                        <?php endif; ?>
+                    </td>
+                    <td style="background-color: #fff; width: auto;"></td>
+                <?php else: ?>
+                    <td style="background-color: #fff; width: auto;"></td>
+                    <td style="background-color: #fff; width: 100px;"></td>
+                    <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 160px; text-align: center; text-decoration: underline;">
+                        <?php if($project->project_status == 0): ?>
+                            FINALIZADO
+                        <?php elseif($project->project_status == 1): ?>
+                            TRABAJANDO
+                        <?php elseif($project->project_status == 2): ?>
+                            CERRADO
+                        <?php else: ?>
+                            DESCONOCIDO
+                        <?php endif; ?>
                     </td>
                 <?php endif; ?>
-
-                <td style="background-color: #fff; width: auto;"></td>
-                <td style="background-color: #fff; width: 100px;"></td>
-                <td style="font-size: 12px; font-weight: bold; background-color: #FFF455; width: 160px; text-align: center; text-decoration: underline;">
-                    <?php if($project->project_status == 0): ?>
-                        FINALIZADO
-                    <?php elseif($project->project_status == 1): ?>
-                        TRABAJANDO
-                    <?php elseif($project->project_status == 2): ?>
-                        CERRADO
-                    <?php else: ?>
-                        DESCONOCIDO
-                    <?php endif; ?>
-                </td>
                 <td style="background-color: #fff; width: 160px;"></td>
                 <td style="background-color: #fff; width: 160px;"></td>
                 <?php if(isset($project->commissioners[1])): ?>
