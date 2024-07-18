@@ -147,28 +147,28 @@ foreach ($projects as $index => $project) {
                 <!-- Inversionistas  -->
                 <?php if(isset($project->investors[1])): ?>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        <?php echo e(implode(' ', array_slice(explode(' ', $investors->get(1)->investor_name ?? '-'), 0, 1))); ?> 5%
+                        <?php echo e(implode(' ', array_slice(explode(' ', $project->investors->get(1)->investor_name ?? '-'), 0, 1))); ?> 5%
                     </td>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        <?php echo e(implode(' ', array_slice(explode(' ', $investors[0]->investor_name), 0, 1))); ?> 45%
+                        <?php echo e(implode(' ', array_slice(explode(' ', $project->investors[0]->investor_name), 0, 1))); ?> 45%
                     </td>
                 <?php else: ?>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 150px; text-align: center;">
-                        <?php echo e(implode(' ', array_slice(explode(' ', $investor->investor_name), 0, 1))); ?> 50%
+                        <?php echo e(implode(' ', array_slice(explode(' ', $project->investors[0]->investor_name), 0, 1))); ?> 50%
                     </td>
                 <?php endif; ?>
 
                 <!-- Comisionistas  -->
                 <?php if(isset($project->commissioners[1])): ?>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        <?php echo e(implode(' ', array_slice(explode(' ', $commissioners->get(1)->commissioner_name ?? '-'), 0, 1))); ?> 10%
+                        <?php echo e(implode(' ', array_slice(explode(' ', $project->commissioners->get(1)->commissioner_name ?? '-'), 0, 1))); ?> 10%
                     </td>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        <?php echo e(implode(' ', array_slice(explode(' ', $commissioners[0]->commissioner_name), 0, 1))); ?> 40%
+                        <?php echo e(implode(' ', array_slice(explode(' ', $project->commissioners[0]->commissioner_name), 0, 1))); ?> 40%
                     </td>
                 <?php else: ?>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        <?php echo e(implode(' ', array_slice(explode(' ', $commissioners[0]->commissioner_name), 0, 1))); ?> 50%
+                        <?php echo e(implode(' ', array_slice(explode(' ', $project->commissioners[0]->commissioner_name), 0, 1))); ?> 50%
                     </td>
                 <?php endif; ?>
                 <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">COMENTARIO</td>
@@ -177,7 +177,7 @@ foreach ($projects as $index => $project) {
             <!-- Content table -->
             <tr>
                 <td></td>
-                <td style="background-color: <?php echo htmlspecialchars($hexColor) ?>; width: 90px"></td>
+                <td style="background-color: <?php echo htmlspecialchars($color) ?>; width: 90px"></td>
                 <td style="background-color: #fff; font-size: 12px; font-weight: bold; text-align: left; width: 140px; border-bottom: 1px solid #000;"><?php echo e($project->project_name); ?></td>
                 <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000; width: 90px">L. <?php echo e(number_format($project->investors->max('pivot.investor_investment'), 2)); ?></td>
                 <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000;">L. <?php echo e(number_format($project->investors->max('pivot.investor_profit'), 2)); ?></td>

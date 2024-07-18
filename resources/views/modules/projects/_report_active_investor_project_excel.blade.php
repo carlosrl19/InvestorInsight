@@ -143,28 +143,28 @@ foreach ($projects as $index => $project) {
                 <!-- Inversionistas  -->
                 @if(isset($project->investors[1]))
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        {{ implode(' ', array_slice(explode(' ', $investors->get(1)->investor_name ?? '-'), 0, 1)) }} 5%
+                        {{ implode(' ', array_slice(explode(' ', $project->investors->get(1)->investor_name ?? '-'), 0, 1)) }} 5%
                     </td>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        {{ implode(' ', array_slice(explode(' ', $investors[0]->investor_name), 0, 1)) }} 45%
+                        {{ implode(' ', array_slice(explode(' ', $project->investors[0]->investor_name), 0, 1)) }} 45%
                     </td>
                 @else
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; width: 150px; text-align: center;">
-                        {{ implode(' ', array_slice(explode(' ', $investor->investor_name), 0, 1)) }} 50%
+                        {{ implode(' ', array_slice(explode(' ', $project->investors[0]->investor_name), 0, 1)) }} 50%
                     </td>
                 @endif
 
                 <!-- Comisionistas  -->
                 @if(isset($project->commissioners[1]))
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        {{ implode(' ', array_slice(explode(' ', $commissioners->get(1)->commissioner_name ?? '-'), 0, 1)) }} 10%
+                        {{ implode(' ', array_slice(explode(' ', $project->commissioners->get(1)->commissioner_name ?? '-'), 0, 1)) }} 10%
                     </td>
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        {{ implode(' ', array_slice(explode(' ', $commissioners[0]->commissioner_name), 0, 1)) }} 40%
+                        {{ implode(' ', array_slice(explode(' ', $project->commissioners[0]->commissioner_name), 0, 1)) }} 40%
                     </td>
                 @else
                     <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">
-                        {{ implode(' ', array_slice(explode(' ', $commissioners[0]->commissioner_name), 0, 1)) }} 50%
+                        {{ implode(' ', array_slice(explode(' ', $project->commissioners[0]->commissioner_name), 0, 1)) }} 50%
                     </td>
                 @endif
                 <td style="background-color: #fff; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">COMENTARIO</td>
@@ -173,7 +173,7 @@ foreach ($projects as $index => $project) {
             <!-- Content table -->
             <tr>
                 <td></td>
-                <td style="background-color: <?php echo htmlspecialchars($hexColor) ?>; width: 90px"></td>
+                <td style="background-color: <?php echo htmlspecialchars($color) ?>; width: 90px"></td>
                 <td style="background-color: #fff; font-size: 12px; font-weight: bold; text-align: left; width: 140px; border-bottom: 1px solid #000;">{{ $project->project_name }}</td>
                 <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000; width: 90px">L. {{ number_format($project->investors->max('pivot.investor_investment'), 2) }}</td>
                 <td style="text-align: center; font-weight: bold; border-bottom: 1px solid #000;">L. {{ number_format($project->investors->max('pivot.investor_profit'), 2) }}</td>
