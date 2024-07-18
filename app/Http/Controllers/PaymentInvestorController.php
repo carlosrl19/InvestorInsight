@@ -17,7 +17,7 @@ class PaymentInvestorController extends Controller
     public function index()
     {
         $payments = PaymentInvestor::with(['promissoryNoteInvestor.investor'])->get();
-        $promissoryNoteInvestors = PromissoryNote::get();
+        $promissoryNoteInvestors = PromissoryNote::where('promissoryNote_status', 0)->get();
         
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 

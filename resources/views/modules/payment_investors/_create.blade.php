@@ -13,9 +13,9 @@
                         <div class="col">
                             <div class="form-floating">
                                 <select name="promissoryNote_id" id="promissoryNote_id" class="form-control select2-promissoryNotes" style="width: 100%" onchange="updatePaymentDetails()">
-                                    @if ($promissoryNoteInvestors->where('promissoryNote_status', 1)->count() > 0)
+                                    @if ($promissoryNoteInvestors->where('promissoryNote_status', 0)->count() > 0)
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
-                                        @forelse ($promissoryNoteInvestors->where('promissoryNote_status', 1) as $promissoryNoteInvestor)
+                                        @forelse ($promissoryNoteInvestors->where('promissoryNote_status', 0) as $promissoryNoteInvestor)
                                             <option value="{{ $promissoryNoteInvestor->id }}" data-investor-id="{{ $promissoryNoteInvestor->investor_id }}">
                                                 {{ $promissoryNoteInvestor->promissoryNote_code }} - Lps. {{ number_format($promissoryNoteInvestor->promissoryNote_amount, 2) }}
                                             </option>

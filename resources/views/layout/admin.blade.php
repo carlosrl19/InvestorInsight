@@ -147,9 +147,6 @@
                         <a class="dropdown-item" href="{{ route("commission_agent.index")}}">
                           <small>->&nbsp;</small>Comisionistas
                         </a> 
-                        <a class="dropdown-item" href="{{ route("moneylender.index")}}">
-                          <small>->&nbsp;</small>Prestamistas
-                        </a>                        
                       </div>
                     </div>
                   </div>
@@ -200,7 +197,13 @@
                   </a>
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
-                      <div class="dropdown-menu-column">                      
+                      <div class="dropdown-menu-column">     
+                        <a class="dropdown-item" href="">
+                          <small>->&nbsp;</small>Prestamistas (sin programar)
+                        </a>
+                        <a class="dropdown-item" href="">
+                          <small>->&nbsp;</small>Facturas (sin programar)
+                        </a>                        
                         <a class="dropdown-item" href="{{ route('payments_investor.index') }}">
                           <small>->&nbsp;</small>Pagos inversionistas
                         </a>

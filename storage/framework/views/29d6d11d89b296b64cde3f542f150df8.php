@@ -13,9 +13,9 @@
                         <div class="col">
                             <div class="form-floating">
                                 <select name="promissoryNote_id" id="promissoryNote_id" class="form-control select2-promissoryNotes" style="width: 100%" onchange="updatePaymentDetails()">
-                                    <?php if($promissoryNoteInvestors->where('promissoryNote_status', 1)->count() > 0): ?>
+                                    <?php if($promissoryNoteInvestors->where('promissoryNote_status', 0)->count() > 0): ?>
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
-                                        <?php $__empty_1 = true; $__currentLoopData = $promissoryNoteInvestors->where('promissoryNote_status', 1); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNoteInvestor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                        <?php $__empty_1 = true; $__currentLoopData = $promissoryNoteInvestors->where('promissoryNote_status', 0); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNoteInvestor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                             <option value="<?php echo e($promissoryNoteInvestor->id); ?>" data-investor-id="<?php echo e($promissoryNoteInvestor->investor_id); ?>">
                                                 <?php echo e($promissoryNoteInvestor->promissoryNote_code); ?> - Lps. <?php echo e(number_format($promissoryNoteInvestor->promissoryNote_amount, 2)); ?>
 
