@@ -63,8 +63,15 @@ foreach ($projects as $index => $project) {
                 @foreach($project->investors as $investor)
                     <td style="font-size: 14px; width: 100px; font-weight: bold; background-color: #fff; text-align: left; text-decoration: underline;">
                         PROYECTO {{ explode(' ', $investor->investor_name)[0] }}
-                        @if(count(explode(' ', $investor->investor_name)) > 1)
-                            {{ implode(' ', array_slice(explode(' ', $investor->investor_name), 1)) }}
+                        @php
+                            $investorNameArray = explode(' ', $investor->investor_name);
+                            $lastWord = end($investorNameArray);
+                            $numWords = count($investorNameArray);
+                        @endphp
+                        @if($numWords > 1)
+                            {{ $lastWord }}
+                        @else
+                            {{ $investor->investor_name }}
                         @endif
                     </td>
                 @endforeach

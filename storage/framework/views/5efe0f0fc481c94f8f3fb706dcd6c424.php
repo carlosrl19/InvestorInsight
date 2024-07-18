@@ -64,8 +64,16 @@ foreach ($projects as $index => $project) {
                     <td style="font-size: 14px; width: 100px; font-weight: bold; background-color: #fff; text-align: left; text-decoration: underline;">
                         PROYECTO <?php echo e(explode(' ', $investor->investor_name)[0]); ?>
 
-                        <?php if(count(explode(' ', $investor->investor_name)) > 1): ?>
-                            <?php echo e(implode(' ', array_slice(explode(' ', $investor->investor_name), 1))); ?>
+                        <?php
+                            $investorNameArray = explode(' ', $investor->investor_name);
+                            $lastWord = end($investorNameArray);
+                            $numWords = count($investorNameArray);
+                        ?>
+                        <?php if($numWords > 1): ?>
+                            <?php echo e($lastWord); ?>
+
+                        <?php else: ?>
+                            <?php echo e($investor->investor_name); ?>
 
                         <?php endif; ?>
                     </td>
