@@ -73,10 +73,22 @@ class PromissoryNoteCommissionerController extends Controller
         // Crear instancia de Dompdf con las opciones configuradas
         $pdf = new Dompdf($options);
 
+        // Obtener el monto del pagaré con centavos
+        $monto = $promissoryNoteCommissioner->promissoryNoteCommissioner_amount;
+    
+        // Separar la parte entera y la parte decimal
+        $parteEntera = floor($monto);
+        $parteCentavos = round(($monto - $parteEntera) * 100);
+           
         // Formateador de números a letras
         $formatter = new NumeroALetras();
-        $amountLetras = $formatter->toWords($promissoryNoteCommissioner->promissoryNoteCommissioner_amount);
-    
+        $amountLetras = $formatter->toWords($parteEntera);
+
+        // Agregar la parte de los centavos a la cadena de letras
+        if ($parteCentavos > 0) {
+            $amountLetras .= " con $parteCentavos/100 CENTAVOS";
+        }
+           
         // Cargar el contenido de la vista en Dompdf
         $pdf->loadHtml(view('modules.promissory_note_commissioner._report', compact('promissoryNoteCommissioner', 'amountLetras', 'dia', 'mes', 'anio')));
     

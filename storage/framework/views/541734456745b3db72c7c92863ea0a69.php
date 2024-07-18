@@ -1,33 +1,33 @@
-<title>#PG-{{ $promissoryNoteCommissioner->promissoryNoteCommissioner_code }}</title>
+<title>#PG-<?php echo e($promissoryNoteCommissioner->promissoryNoteCommissioner_code); ?></title>
 
 <div class="main">
 
 	<!-- Code container -->
 	<div class="code-container-right">
-		<span class="text-bold">#PG-{{ $promissoryNoteCommissioner->promissoryNoteCommissioner_code }}</span>
+		<span class="text-bold">#PG-<?php echo e($promissoryNoteCommissioner->promissoryNoteCommissioner_code); ?></span>
 	</div>
 
     <!-- Promissory note title -->
-    <div class="title-note title-top-margin">PAGARE L. {{ number_format($promissoryNoteCommissioner->promissoryNoteCommissioner_amount,2)}}</div>
+    <div class="title-note title-top-margin">PAGARE L. <?php echo e(number_format($promissoryNoteCommissioner->promissoryNoteCommissioner_amount,2)); ?></div>
 
     <!-- Promissory note body -->
     <div class="body-note mt-6 mb-4">Yo: <strong class="text-underline">JUNIOR ALEXIS AYALA GUERRERO</strong>, mayor de edad, hondureño, soltero y
         comerciante, con documento Nacional de identificación número <strong
             class="text-underline">0801199907469</strong>,
         con domicilio en la ciudad de San Pedro Sula, departamento de Cortés, Honduras, <strong>PAGARÉ
-            INCONDICIONALMENTE</strong> la cantidad de <strong class="text-underline">{{$amountLetras}} EXACTO</strong>
-        (<strong class="text-underline">L. {{ number_format($promissoryNoteCommissioner->promissoryNoteCommissioner_amount, 2) }}</strong>)
-        a favor de <strong class="text-uppercase text-underline">{{ $promissoryNoteCommissioner->commissioner->commissioner_name }}</strong>, mayor de
+            INCONDICIONALMENTE</strong> la cantidad de <strong class="text-underline"><?php echo e($amountLetras); ?> EXACTO</strong>
+        (<strong class="text-underline">L. <?php echo e(number_format($promissoryNoteCommissioner->promissoryNoteCommissioner_amount, 2)); ?></strong>)
+        a favor de <strong class="text-uppercase text-underline"><?php echo e($promissoryNoteCommissioner->commissioner->commissioner_name); ?></strong>, mayor de
         edad, hondureño y con documento Nacional de identificación número <strong
-            class="text-underline">{{ $promissoryNoteCommissioner->commissioner->commissioner_dni }}</strong>, pago que haré efectivo el día <strong
-            class="text-uppercase text-underline">{{ \Carbon\Carbon::parse($promissoryNoteCommissioner->promissoryNoteCommissioner_final_date)->translatedFormat('d F Y') }}</strong>
+            class="text-underline"><?php echo e($promissoryNoteCommissioner->commissioner->commissioner_dni); ?></strong>, pago que haré efectivo el día <strong
+            class="text-uppercase text-underline"><?php echo e(\Carbon\Carbon::parse($promissoryNoteCommissioner->promissoryNoteCommissioner_final_date)->translatedFormat('d F Y')); ?></strong>
         (<strong
-            class="text-underline">{{ \Carbon\Carbon::parse($promissoryNoteCommissioner->promissoryNoteCommissioner_final_date)->translatedFormat('d/m/Y') }}</strong>).
+            class="text-underline"><?php echo e(\Carbon\Carbon::parse($promissoryNoteCommissioner->promissoryNoteCommissioner_final_date)->translatedFormat('d/m/Y')); ?></strong>).
 
         <br>
         <br>
         En fe de lo anterior, firmo el presente <strong>PAGARÉ</strong> en la ciudad de San Pedro Sula, del departamento
-        de Cortés a los {{ $dia }} días del mes de {{ $mes }} del año {{ $anio }}.
+        de Cortés a los <?php echo e($dia); ?> días del mes de <?php echo e($mes); ?> del año <?php echo e($anio); ?>.
     </div>
     <br>
 
@@ -135,4 +135,4 @@
     .footer {
         font-size: 10px;
     }
-</style>
+</style><?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight\resources\views/modules/promissory_note_commissioner/_report.blade.php ENDPATH**/ ?>

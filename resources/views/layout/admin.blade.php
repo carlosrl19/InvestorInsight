@@ -245,7 +245,7 @@
                               <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. {{ number_format($total_commissioner_commission_payment,2) }}</td>
                             </tr>
                             <tr>
-                              <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Proyectos en proceso</td>
+                              <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Inversión de proyectos en proceso</td>
                               <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. {{ number_format($total_project_investment,2) }}</td>
                             </tr>
                           </tbody>
@@ -262,16 +262,16 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Proyectos finalizados</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. {{ number_format($total_project_investment_terminated,2) }}</td>
-                            </tr>
-                            <tr>
                               <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pagos a inversionistas</td>
                               <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. {{ number_format($total_investor_profit_paid,2) }}</td>
                             </tr>
                             <tr>
                               <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pagos a comisionistas</td>
                               <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. {{ number_format($total_commissioner_commission_paid,2) }}</td>
+                            </tr>
+                            <tr>
+                              <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Inversión de proyectos finalizados</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. {{ number_format($total_project_investment_terminated,2) }}</td>
                             </tr>
                           </tbody>
                         </table>

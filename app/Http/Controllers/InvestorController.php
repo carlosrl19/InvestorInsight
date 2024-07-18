@@ -92,8 +92,22 @@ class InvestorController extends Controller
         
         $creditNotes = CreditNote::where('investor_id', $investor->id)->orderBy('creditNote_date')->get();
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
+        $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
+
         $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
         ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
+
+        $total_investor_profit_payment = DB::table('promissory_notes')
+        ->where('promissory_notes.promissoryNote_status', 1)
+        ->sum('promissoryNote_amount');
+
+        $total_investor_profit_paid = DB::table('promissory_notes')
+        ->where('promissory_notes.promissoryNote_status', 0)
+        ->sum('promissoryNote_amount');
+
+        $total_commissioner_commission_paid = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
         ->sum('promissoryNoteCommissioner_amount');
     
         // Cargar el inversor de referencia
@@ -162,7 +176,22 @@ class InvestorController extends Controller
             ->select('projects.project_name', 'projects.project_code', 'projects.project_investment', 'project_investor.investor_investment', 'project_investor.investor_final_profit', 'project_investor.investor_profit')
             ->get();
     
-        return view('modules.investors.show', compact('investor', 'investorFunds', 'transfers', 'creditNotes', 'referenceInvestor', 'activeProjects', 'completedProjects', 'total_project_investment',  'total_commissioner_commission_payment'));
+        return view('modules.investors.show', compact(
+            'investor',
+            'investorFunds',
+            'transfers', 
+            'creditNotes', 
+            'referenceInvestor', 
+            'activeProjects', 
+            'completedProjects', 
+            'total_project_investment',
+            'total_project_investment_terminated',
+            'total_commissioner_commission_payment',
+            'total_investor_profit_payment',
+            'total_investor_profit_paid',
+            'total_commissioner_commission_paid',
+
+        ));
     }
 
     public function edit($id)

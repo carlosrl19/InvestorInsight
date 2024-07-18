@@ -6,7 +6,6 @@ use App\Http\Requests\PromissoryNote\StoreRequest;
 use App\Models\PromissoryNote;
 use App\Models\Project;
 use App\Models\Investor;
-use App\Models\CommissionAgent;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use Carbon\Carbon;

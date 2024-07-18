@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('promissory_note_commissioners', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('commissioner_id');
-            $table->decimal('promissoryNoteCommissioner_amount', 10,0);
+            $table->decimal('promissoryNoteCommissioner_amount', 10,2);
             $table->date('promissoryNoteCommissioner_emission_date');
             $table->date('promissoryNoteCommissioner_final_date');
             $table->string('promissoryNoteCommissioner_code');

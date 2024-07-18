@@ -304,6 +304,14 @@ Dashboard
         window.ApexCharts && (new ApexCharts(document.getElementById('chart-mentions'), {
             chart: {
                 type: "area",
+				dropShadow: {
+					enabled: true,
+					color: '#000',
+					top: 18,
+					left: 7,
+					blur: 10,
+					opacity: 0.2
+				},				
                 fontFamily: 'inherit',
                 height: 240,
                 parentHeightOffset: 0,
@@ -324,6 +332,9 @@ Dashboard
                 },
                 stacked: false,
             },
+			stroke: {
+			curve: 'smooth'
+			},
             dataLabels: {
                 enabled: false,
             },

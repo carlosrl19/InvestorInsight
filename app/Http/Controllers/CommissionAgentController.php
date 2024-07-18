@@ -18,6 +18,7 @@ class CommissionAgentController extends Controller
 
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
         $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
+        
         $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
         ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
         ->sum('promissoryNoteCommissioner_amount');
@@ -66,8 +67,22 @@ class CommissionAgentController extends Controller
     {
         $commissioner = CommissionAgent::findOrFail($id);
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
+        $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
+
         $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
         ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
+
+        $total_investor_profit_payment = DB::table('promissory_notes')
+        ->where('promissory_notes.promissoryNote_status', 1)
+        ->sum('promissoryNote_amount');
+
+        $total_investor_profit_paid = DB::table('promissory_notes')
+        ->where('promissory_notes.promissoryNote_status', 0)
+        ->sum('promissoryNote_amount');
+
+        $total_commissioner_commission_paid = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
         ->sum('promissoryNoteCommissioner_amount');
 
         $transfers = DB::table('project_commissioner')
@@ -86,7 +101,18 @@ class CommissionAgentController extends Controller
         ->where('projects.project_status', 0)
         ->get();
         
-        return view('modules.commission_agent.show', compact('commissioner', 'transfers', 'activeProjects', 'total_project_investment', 'completedProjects',  'total_commissioner_commission_payment'));
+        return view('modules.commission_agent.show', compact(
+            'commissioner',
+            'transfers',
+            'activeProjects',
+            'total_project_investment',
+            'total_project_investment_terminated',
+            'total_investor_profit_payment',
+            'total_investor_profit_paid',
+            'total_commissioner_commission_paid',
+            'completedProjects', 
+            'total_commissioner_commission_payment'
+        ));
     }
 
 
