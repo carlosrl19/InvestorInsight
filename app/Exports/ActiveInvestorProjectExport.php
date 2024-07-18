@@ -29,7 +29,7 @@ class ActiveInvestorProjectExport implements FromView, WithProperties, WithEvent
             ->orderBy('project_investment', 'desc')
             ->get();
 
-        return view('modules.projects._report_active_projects_excel', [
+        return view('modules.projects._report_active_investor_project_excel', [
             'projects' => $projects,
         ]);
     }
