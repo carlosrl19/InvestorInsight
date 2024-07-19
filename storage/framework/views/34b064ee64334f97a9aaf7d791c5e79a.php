@@ -20,14 +20,14 @@ Pagos comisionistas
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('create'); ?>
-<div style="background-color: orange; color: #fff; border-radius: 10px; padding: 3px 9px 3px 0px">
+<div style="background-color: tomato; color: #fff; border-radius: 10px; padding: 3px 9px 3px 9px">
     <a onclick="showList()">
-        <img alt="image" id="list-active" width="25" src="<?php echo e(asset('static/svg/calendar.svg')); ?>">
+        <img style="filter: brightness(0) saturate(100%) invert(89%) sepia(100%) saturate(1%) hue-rotate(258deg) brightness(104%) contrast(101%);" alt="image" id="list-active" width="25" src="<?php echo e(asset('static/svg/calendar.svg')); ?>">
         &nbsp; Modo lista
     </a>
     &nbsp;&nbsp;
     <a onclick="showCalendar()">
-        <img alt="image" id="calendar-active" width="25" src="<?php echo e(asset('static/svg/list.svg')); ?>">
+        <img style="filter: brightness(0) saturate(100%) invert(89%) sepia(100%) saturate(1%) hue-rotate(258deg) brightness(104%) contrast(101%);" alt="image" id="calendar-active" width="25" src="<?php echo e(asset('static/svg/list.svg')); ?>">
         &nbsp; Modo calendario
     </a>
 </div>
@@ -93,6 +93,20 @@ Pagos comisionistas
             </div>
         </div>
     </div>
+
+    <div class="modal modal-blur fade" id="modalInfo" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalInfoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalInfoLabel">Información del Pago</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Aquí se mostrará la información -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php echo $__env->make('modules.payment_commissioners._create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -112,6 +126,15 @@ Pagos comisionistas
                 right: 'today',
                 center: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
+            buttonText: {
+                today: 'Hoy',
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                list: 'Lista'
+            },
+            allDayText: 'Todo el día',
+            locales: 'es',
             selectable: true,
             editable: false,
             nowIndicator: true,
@@ -119,17 +142,26 @@ Pagos comisionistas
             events: [
                <?php $__currentLoopData = $payments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                {
-                    title: '<?php echo e($payment->payment_code); ?>',
+                    title: 'L. <?php echo e(number_format($payment->payment_amount, 2)); ?>',
                     start: '<?php echo e($payment->payment_date); ?>',
                     extendedProps: {
                         paymentCode: '<?php echo e($payment->payment_code); ?>',
                         paymentAmount: 'Lps. <?php echo e(number_format($payment->payment_amount, 2)); ?>',
                         paymentDate: '<?php echo e($payment->payment_date); ?>',
                         commissionerName: '<?php echo e($payment->commissioner->commissioner_name); ?>',
+                        commissionerId: '<?php echo e($payment->commissioner_id); ?>'
                     }
                },
                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
            ],
+
+            eventDidMount: function(info) {
+                // Cambiar el color del evento si commissionerId es 1
+                if (info.event.extendedProps.commissionerId == 1) {
+                    info.el.style.backgroundColor = '#AE0773'; // Color de fondo
+                    info.el.style.borderColor = '#AE0773'; // Color del borde
+                }
+            },
 
             eventClick: function(info) {
                 // Obtener la información del evento
@@ -140,10 +172,10 @@ Pagos comisionistas
 
                 // Mostrar la información en un modal
                 $('#modalInfo .modal-body').html(`
-                    <strong>Código de Pago:</strong> #${paymentCode}<br>
-                    <strong>Monto:</strong> ${paymentAmount}<br>
-                    <strong>Fecha:</strong> ${paymentDate}<br>
-                    <strong>Comisionista:</strong> ${commissionerName}<br>
+                    <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Código de Pago:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">#${paymentCode}</span><br>
+                    <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Monto:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${paymentAmount}</span><br>
+                    <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Fecha:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${paymentDate}</span><br>
+                    <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Comisionista:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${commissionerName}</span><br>
                 `);
                 $('#modalInfo').modal('show');
            }
