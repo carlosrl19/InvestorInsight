@@ -46,26 +46,10 @@
                 data-bs-toggle="tooltip" data-bs-placement="bottom">
                 <img src="<?php echo e(asset('../static/svg/moon.svg')); ?>" width="20" height="20">
               </a>
-
               <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Activar modo claro"
                 data-bs-toggle="tooltip" data-bs-placement="bottom">
                 <img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(73deg) brightness(103%) contrast(103%);" src="<?php echo e(asset('../static/svg/sun.svg')); ?>" width="20" height="20">
               </a>
-              <div class="nav-item dropdown d-none d-md-flex me-3">
-                <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1"
-                  aria-label="Show notifications">
-                  <img style="filter: invert(14%) sepia(81%) saturate(3491%) hue-rotate(346deg) brightness(107%) contrast(83%);" src="<?php echo e(asset('../static/svg/bell.svg')); ?>" width="20" height="20">
-                  <span class="badge bg-red"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
-                  <div class="card" style="width: 50vh;">
-                    <div class="card-header">
-                      <h4 class="card-title">Pendientes</h4>
-                    </div>
-                    <?php echo $__env->yieldContent('notification_navbar'); ?>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="nav-item dropdown">
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"

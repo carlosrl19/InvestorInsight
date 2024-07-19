@@ -77,9 +77,9 @@ Historial de inversionista /&nbsp;
                 <div class="card" style="min-height: auto; max-height: 20rem">
                     <div class="card-header">
                         <h3 class="card-title">Historial de cambios en fondo de inversionista</h3>
-                        <a href="<?php echo e(route('investors_funds.excel', $investor)); ?>" class="badge bg-teal me-1 text-white" style="margin-left: 10px">
+                        <a href="<?php echo e(route('investors_funds.excel', $investor)); ?>" class="badge bg-teal me-1 text-white" style="margin-left: 10px;">
                             <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="<?php echo e(asset('../static/svg/file-spreadsheet.svg')); ?>" width="20" height="20" alt="">
-                            EXCEL
+                            EXPORTAR EXCEL
                         </a>
                     </div>
                     <div class="card-body card-body-scrollable card-body-scrollable-shadow">

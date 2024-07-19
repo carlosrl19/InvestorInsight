@@ -1,43 +1,41 @@
-@extends('layout.admin')
-
-@section('head')
+<?php $__env->startSection('head'); ?>
 
 <!-- Datatable CSS -->
-<link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('css/datatable.css') }}" rel="stylesheet">
+<link href="<?php echo e(asset('vendor/datatables/css/jquery.dataTables.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(asset('vendor/datatables/css/buttons.dataTables.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(asset('css/datatable.css')); ?>" rel="stylesheet">
 
 <!-- Select2 -->
-<link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
+<link rel="stylesheet" href="<?php echo e(asset('vendor/select2/select2.min.css')); ?>">
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('pretitle')
+<?php $__env->startSection('pretitle'); ?>
 Listado principal
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('title')
+<?php $__env->startSection('title'); ?>
 Pagarés comisionistas
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
-    @if(session('success'))
+    <?php if(session('success')): ?>
     <div class="alert alert-success alert-dismissible fade show" style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="4000">
-        <strong>{{ session('success') }}</strong>
+        <strong><?php echo e(session('success')); ?></strong>
     </div>
-    @endif
+    <?php endif; ?>
     
-    @if ($errors->any())
+    <?php if($errors->any()): ?>
     <div class="alert alert-danger alert-dismissible" alert-dismissible fade show" style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="10000">
         <strong>El formulario contiene los siguientes errores:</strong>
         <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
+            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <li><?php echo e($error); ?></li>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ul>
     </div>
-    @endif
+    <?php endif; ?>
 
 <div class="container-xl">
     <div class="card mb-2">
@@ -60,38 +58,39 @@ Pagarés comisionistas
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($promissoryNotesCommissioner as $promissoryNote)
+                    <?php $__currentLoopData = $promissoryNotesCommissioner; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr class="text-center">
-                        <td>#{{ $promissoryNote->promissoryNoteCommissioner_code }}</td>
-                        <td>{{ $promissoryNote->promissoryNoteCommissioner_emission_date }}</td>
-                        <td>{{ $promissoryNote->promissoryNoteCommissioner_final_date }}</td>
+                        <td>#<?php echo e($promissoryNote->promissoryNoteCommissioner_code); ?></td>
+                        <td><?php echo e($promissoryNote->promissoryNoteCommissioner_emission_date); ?></td>
+                        <td><?php echo e($promissoryNote->promissoryNoteCommissioner_final_date); ?></td>
                         <td>
-                            <a href="{{ route('commission_agent.show', $promissoryNote) }}">{{ $promissoryNote->commissioner->commissioner_name }}
+                            <a href="<?php echo e(route('commission_agent.show', $promissoryNote)); ?>"><?php echo e($promissoryNote->commissioner->commissioner_name); ?>
+
                                 <small>
                                     <sup>
-                                    <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+                                    <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
                                     </sup>
                                 </small>
                             </a>
                         </td>
-                        <td>Lps. {{ number_format($promissoryNote->promissoryNoteCommissioner_amount,2) }}</td>
+                        <td>Lps. <?php echo e(number_format($promissoryNote->promissoryNoteCommissioner_amount,2)); ?></td>
                         <td>
-                            @if($promissoryNote->promissoryNoteCommissioner_status == '1')
+                            <?php if($promissoryNote->promissoryNoteCommissioner_status == '1'): ?>
                                 <span class="badge bg-orange me-1"></span>  Emitido / Sin pagar
-                            @elseif($promissoryNote->promissoryNoteCommissioner_status == '0')
+                            <?php elseif($promissoryNote->promissoryNoteCommissioner_status == '0'): ?>
                                 <span class="badge bg-success me-1"></span>  Emitido / Pagado
-                            @else
+                            <?php else: ?>
                                 <span class="badge bg-red me-1"></span> Estado inválido
-                            @endif
+                            <?php endif; ?>
                         </td>
                         <td>
-                            <a href="{{ route('promissory_note_commissioner.report', $promissoryNote->id) }}" style="font-size: clamp(0.6rem, 3vw, 0.65rem);" class="btn btn-sm btn-red" data-toggle="modal" data-target="#pdfModal">
-                            &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
+                            <a href="<?php echo e(route('promissory_note_commissioner.report', $promissoryNote->id)); ?>" style="font-size: clamp(0.6rem, 3vw, 0.65rem);" class="btn btn-sm btn-red" data-toggle="modal" data-target="#pdfModal">
+                            &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="<?php echo e(asset('../static/svg/file-text.svg')); ?>" width="20" height="20" alt="">
                             &nbsp;PAGARÉ
                             </a>
                         </td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
 
@@ -113,17 +112,17 @@ Pagarés comisionistas
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 
 <!-- Alert fade closer script-->
-<script src="{{ asset('customjs/alert_closer.js')}}"></script>
+<script src="<?php echo e(asset('customjs/alert_closer.js')); ?>"></script>
 
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-<script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_transfer.js') }}"></script>
+<script src="<?php echo e(asset('vendor/datatables/js/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/datatable/dt_transfer.js')); ?>"></script>
 
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -139,4 +138,5 @@ Pagarés comisionistas
         $(this).find('#pdf-frame').attr('src', '');
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight - experimental\resources\views/modules/promissory_note_commissioner/index.blade.php ENDPATH**/ ?>
