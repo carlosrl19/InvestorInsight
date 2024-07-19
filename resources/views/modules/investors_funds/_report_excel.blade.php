@@ -14,9 +14,9 @@
             <td style="background-color: #fff; width: auto;"></td>
             <td style="background-color: #fff; width: 100px;"></td>
             <td style="background-color: #fff; width: 160px;"></td>
-            <td style="background-color: #fff; width: 160px;"></td>
-            <td style="background-color: #fff; width: 160px;"></td>
-            <td style="background-color: #fff; width: 160px;"></td>
+            <td style="background-color: #fff; width: 200px;"></td>
+            <td style="background-color: #fff; width: 200px;"></td>
+            <td style="background-color: #fff; width: 200px;"></td>
         </tr>
 
         <!-- Blank rows 1 -->
