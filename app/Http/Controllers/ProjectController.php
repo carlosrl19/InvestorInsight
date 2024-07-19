@@ -103,6 +103,8 @@ class ProjectController extends Controller
     
             // Restar el transfer_amount del investor_balance_history
             $validatedData['investor_balance_history'] -= $validatedData['transfer_amount'];
+        } else {
+            return redirect()->back()->withErrors(['transfer_bank' => 'Solamente se permite utilizar los fondos del inversionista para realizar una inversión.'])->withInput();
         }
     
         // Verificar que el investor_profit no sea mayor que el investor_investment

@@ -42,13 +42,13 @@ class PromissoryNoteController extends Controller
 
     public function showReport($id) {
         $promissoryNote = PromissoryNote::findOrFail($id);
-
+    
         // Configurar el locale en Carbon
         Carbon::setLocale('es');
-
+    
         // Obtener la fecha actual en español
         $fechaFinal = Carbon::parse($promissoryNote->promissoryNote_emission_date); 
-
+    
         $dia = $fechaFinal->format('d');
         $mes = $fechaFinal->translatedFormat('F'); // 'F' para nombre completo del mes
         $anio = $fechaFinal->format('Y');
@@ -57,16 +57,26 @@ class PromissoryNoteController extends Controller
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isRemoteEnabled', true);
-        
-        // Opcion que habilita la carga de imagenes
         $options->set('chroot', realpath(''));
-        
+    
         // Crear instancia de Dompdf con las opciones configuradas
         $pdf = new Dompdf($options);
-
+    
+        // Obtener el monto del pagaré con centavos
+        $monto = $promissoryNote->promissoryNote_amount;
+    
+        // Separar la parte entera y la parte decimal
+        $parteEntera = floor($monto);
+        $parteCentavos = round(($monto - $parteEntera) * 100);
+    
         // Formateador de números a letras
         $formatter = new NumeroALetras();
-        $amountLetras = $formatter->toWords($promissoryNote->promissoryNote_amount);
+        $amountLetras = $formatter->toWords($parteEntera);
+    
+        // Agregar la parte de los centavos a la cadena de letras
+        if ($parteCentavos > 0) {
+            $amountLetras .= " con $parteCentavos/100 CENTAVOS";
+        }
     
         // Cargar el contenido de la vista en Dompdf
         $pdf->loadHtml(view('modules.promissory_note._report', compact('promissoryNote', 'amountLetras', 'dia', 'mes', 'anio')));
