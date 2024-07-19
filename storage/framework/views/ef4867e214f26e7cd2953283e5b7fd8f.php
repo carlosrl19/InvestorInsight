@@ -1,33 +1,31 @@
-@extends('layout.admin')
-
-@section('head')
+<?php $__env->startSection('head'); ?>
 <!-- Datatable CSS -->
-<link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
-@endsection
+<link href="<?php echo e(asset('vendor/datatables/css/jquery.dataTables.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(asset('vendor/datatables/css/buttons.dataTables.min.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
 
-@section('pretitle')
+<?php $__env->startSection('pretitle'); ?>
 Inversionistas
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('create')
+<?php $__env->startSection('create'); ?>
 <button class="btn" onclick="goBack()" style="background-color: transparent; margin-right: 5px">
-    &nbsp;<img src="{{ asset('../static/svg/arrow-back-up.svg') }}" width="20" height="20">&nbsp;
+    &nbsp;<img src="<?php echo e(asset('../static/svg/arrow-back-up.svg')); ?>" width="20" height="20">&nbsp;
     Volver
 </button>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('title')
+<?php $__env->startSection('title'); ?>
 Historial de inversionista /&nbsp;
-<b class="text-muted">{{ $investor->investor_name }}&nbsp;</b>
-    @if($investor->investor_status == 3)/&nbsp;
+<b class="text-muted"><?php echo e($investor->investor_name); ?>&nbsp;</b>
+    <?php if($investor->investor_status == 3): ?>/&nbsp;
         <span class="status-dot status-dot-animated bg-red d-block"></span>&nbsp;
         <span style="color: rgb(231, 0, 0); font-style: italic; font-size: clamp(0.7rem, 3vw, 0.8rem)">LIQUIDADO</span>
-    @endif
+    <?php endif; ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container-xl">
         <!-- General information about investor -->
         <div class="row mb-2">
@@ -35,7 +33,7 @@ Historial de inversionista /&nbsp;
                 <div class="card mb-2">
                     <div class="card-body d-flex align-items-center">
                         <div class="col-auto me-4">
-                            <img src="{{ asset('../static/svg/user-scan.svg') }}" width="90" height="90" alt="">
+                            <img src="<?php echo e(asset('../static/svg/user-scan.svg')); ?>" width="90" height="90" alt="">
                         </div>
                         <div class="col">
                             <div class="accordion" id="accordion-example">
@@ -47,22 +45,22 @@ Historial de inversionista /&nbsp;
                                     </h2>
                                     <div id="collapse-1" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
                                         <div class="accordion-body pt-0">
-                                            <strong>{{ $investor->investor_name }}</strong> es un inversionista con número de identidad <strong>{{ $investor->investor_dni }}</strong>, número de teléfono <strong>{{ $investor->investor_phone }}</strong>.
+                                            <strong><?php echo e($investor->investor_name); ?></strong> es un inversionista con número de identidad <strong><?php echo e($investor->investor_dni); ?></strong>, número de teléfono <strong><?php echo e($investor->investor_phone); ?></strong>.
                                             Recomendado por
                                             <strong>
-                                                @if($referenceInvestor)
-                                                    <a href="{{ route('investor.show', ['investor' => $referenceInvestor->id]) }}">
-                                                        <strong>{{ $referenceInvestor->investor_name }}</strong>&nbsp;<img style="margin-bottom: 0.4vh; filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+                                                <?php if($referenceInvestor): ?>
+                                                    <a href="<?php echo e(route('investor.show', ['investor' => $referenceInvestor->id])); ?>">
+                                                        <strong><?php echo e($referenceInvestor->investor_name); ?></strong>&nbsp;<img style="margin-bottom: 0.4vh; filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
                                                     </a>
-                                                @else
+                                                <?php else: ?>
                                                     <strong class="text-red">(no tiene recomendación)</strong>,
-                                                @endif
+                                                <?php endif; ?>
                                             </strong>
-                                            @if($investor->investor_status != 3)
-                                            tiene un fondo monetario de Lps. <strong>{{ number_format($investor->investor_balance,2) }}</strong>. Fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
-                                            @else
-                                            fue ingresado al sistema en la fecha <strong>{{ $investor->created_at }}</strong>.
-                                            @endif
+                                            <?php if($investor->investor_status != 3): ?>
+                                            tiene un fondo monetario de Lps. <strong><?php echo e(number_format($investor->investor_balance,2)); ?></strong>. Fue ingresado al sistema en la fecha <strong><?php echo e($investor->created_at); ?></strong>.
+                                            <?php else: ?>
+                                            fue ingresado al sistema en la fecha <strong><?php echo e($investor->created_at); ?></strong>.
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -79,8 +77,8 @@ Historial de inversionista /&nbsp;
                 <div class="card" style="min-height: auto; max-height: 20rem">
                     <div class="card-header">
                         <h3 class="card-title">Historial de cambios en fondo de inversionista</h3>
-                        <a href="{{ route('investors_funds.excel', $investor) }}" class="badge bg-teal me-1 text-white" style="margin-left: 10px">
-                            <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-spreadsheet.svg') }}" width="20" height="20" alt="">
+                        <a href="<?php echo e(route('investors_funds.excel', $investor)); ?>" class="badge bg-teal me-1 text-white" style="margin-left: 10px">
+                            <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="<?php echo e(asset('../static/svg/file-spreadsheet.svg')); ?>" width="20" height="20" alt="">
                             EXCEL
                         </a>
                     </div>
@@ -99,51 +97,54 @@ Historial de inversionista /&nbsp;
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse ($investorFunds as $investor)
-                                                @if($investor->investor_new_funds_comment != 'LIQUIDACIÓN AL INVERSIONISTA.')
+                                            <?php $__empty_1 = true; $__currentLoopData = $investorFunds; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $investor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                                <?php if($investor->investor_new_funds_comment != 'LIQUIDACIÓN AL INVERSIONISTA.'): ?>
                                                 <tr>
-                                                    <td>{{ $investor->investor_change_date }}</td>
+                                                    <td><?php echo e($investor->investor_change_date); ?></td>
                                                                                                     
-                                                    @if($investor->investor_new_funds - $investor->investor_old_funds < 0)
+                                                    <?php if($investor->investor_new_funds - $investor->investor_old_funds < 0): ?>
                                                         <td class="text-red">
-                                                            <img style="filter: brightness(0) saturate(100%) invert(27%) sepia(21%) saturate(6806%) hue-rotate(340deg) brightness(100%) contrast(86%);" src="{{ asset('../static/svg/arrow-down.svg') }}" width="12" height="12" alt="">
-                                                            L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}
+                                                            <img style="filter: brightness(0) saturate(100%) invert(27%) sepia(21%) saturate(6806%) hue-rotate(340deg) brightness(100%) contrast(86%);" src="<?php echo e(asset('../static/svg/arrow-down.svg')); ?>" width="12" height="12" alt="">
+                                                            L. <?php echo e(number_format($investor->investor_new_funds - $investor->investor_old_funds,2)); ?>
+
                                                         </td>
-                                                    @else
+                                                    <?php else: ?>
                                                         <td class="text-success">
-                                                            <img style="filter: brightness(0) saturate(100%) invert(53%) sepia(52%) saturate(632%) hue-rotate(78deg) brightness(96%) contrast(93%);" src="{{ asset('../static/svg/arrow-up.svg') }}" width="12" height="12" alt="">
-                                                            L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}
+                                                            <img style="filter: brightness(0) saturate(100%) invert(53%) sepia(52%) saturate(632%) hue-rotate(78deg) brightness(96%) contrast(93%);" src="<?php echo e(asset('../static/svg/arrow-up.svg')); ?>" width="12" height="12" alt="">
+                                                            L. <?php echo e(number_format($investor->investor_new_funds - $investor->investor_old_funds,2)); ?>
+
                                                         </td>
-                                                    @endif
+                                                    <?php endif; ?>
 
-                                                    <td>L. {{ number_format($investor->investor_old_funds, 2) }}</td>
-                                                    <td>L. {{ number_format($investor->investor_new_funds,2) }}</td>
-                                                    <td>{{ $investor->investor_new_funds_comment }}</td>
+                                                    <td>L. <?php echo e(number_format($investor->investor_old_funds, 2)); ?></td>
+                                                    <td>L. <?php echo e(number_format($investor->investor_new_funds,2)); ?></td>
+                                                    <td><?php echo e($investor->investor_new_funds_comment); ?></td>
                                                 </tr>
-                                                @else
+                                                <?php else: ?>
                                                 <tr style="background-color: #c649492f;">
-                                                    <td>{{ $investor->investor_change_date }}</td>
+                                                    <td><?php echo e($investor->investor_change_date); ?></td>
                                                                                                     
-                                                    @if($investor->investor_new_funds - $investor->investor_old_funds < 0)
+                                                    <?php if($investor->investor_new_funds - $investor->investor_old_funds < 0): ?>
                                                         <td class="text-red">
-                                                            <img style="filter: brightness(0) saturate(100%) invert(27%) sepia(21%) saturate(6806%) hue-rotate(340deg) brightness(100%) contrast(86%);" src="{{ asset('../static/svg/arrow-down.svg') }}" width="12" height="12" alt="">
-                                                            L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
-                                                    @else
-                                                        <td class="text-success">L. {{ number_format($investor->investor_new_funds - $investor->investor_old_funds,2) }}</td>
-                                                    @endif
+                                                            <img style="filter: brightness(0) saturate(100%) invert(27%) sepia(21%) saturate(6806%) hue-rotate(340deg) brightness(100%) contrast(86%);" src="<?php echo e(asset('../static/svg/arrow-down.svg')); ?>" width="12" height="12" alt="">
+                                                            L. <?php echo e(number_format($investor->investor_new_funds - $investor->investor_old_funds,2)); ?></td>
+                                                    <?php else: ?>
+                                                        <td class="text-success">L. <?php echo e(number_format($investor->investor_new_funds - $investor->investor_old_funds,2)); ?></td>
+                                                    <?php endif; ?>
 
-                                                    <td>L. {{ number_format($investor->investor_old_funds, 2) }}</td>
-                                                    <td>L. {{ number_format($investor->investor_new_funds,2) }}</td>
+                                                    <td>L. <?php echo e(number_format($investor->investor_old_funds, 2)); ?></td>
+                                                    <td>L. <?php echo e(number_format($investor->investor_new_funds,2)); ?></td>
                                                     <td>
-                                                        <span class="text-red"></span> {{ $investor->investor_new_funds_comment }}
+                                                        <span class="text-red"></span> <?php echo e($investor->investor_new_funds_comment); ?>
+
                                                     </td>
                                                 </tr>
-                                                @endif
-                                                @empty
+                                                <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                                 <tr>
                                                     <td colspan="5" style="text-align: center;">No se encontraron registros de cambios en fondos para mostrar.</td>
                                                 </tr>
-                                            @endforelse
+                                            <?php endif; ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -176,14 +177,14 @@ Historial de inversionista /&nbsp;
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($activeProjects as $project)
+                                            <?php $__currentLoopData = $activeProjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
-                                                <td>#{{ $project->project_code }}</td>
-                                                <td>{{ $project->project_name }}</td>
-                                                <td>L. {{ number_format($project->investor_investment, 2) }}</td>
-                                                <td>L. {{ number_format($project->investor_final_profit + $project->investor_investment, 2) }}</td>
+                                                <td>#<?php echo e($project->project_code); ?></td>
+                                                <td><?php echo e($project->project_name); ?></td>
+                                                <td>L. <?php echo e(number_format($project->investor_investment, 2)); ?></td>
+                                                <td>L. <?php echo e(number_format($project->investor_final_profit + $project->investor_investment, 2)); ?></td>
                                             </tr>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -192,7 +193,7 @@ Historial de inversionista /&nbsp;
                     </div>
                     <div class="card-footer" style="background-color: #95D2B3; padding: 10px; border: 4px solid #fff; justify-content: space-between;">
                         <span style="margin-left: 5%; font-weight: bold;">TOTAL GANANCIA EN PROCESO</span>
-                        <span style="float: right; margin-right: 7%; color: #fff; font-size: clamp(0.7rem, 3vw, 0.8rem)">L. {{ number_format($activeProjects->sum('investor_investment') + $activeProjects->sum('investor_final_profit'), 2) }}</span>
+                        <span style="float: right; margin-right: 7%; color: #fff; font-size: clamp(0.7rem, 3vw, 0.8rem)">L. <?php echo e(number_format($activeProjects->sum('investor_investment') + $activeProjects->sum('investor_final_profit'), 2)); ?></span>
                     </div>
                 </div>
             </div>
@@ -217,14 +218,14 @@ Historial de inversionista /&nbsp;
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($completedProjects as $project)
+                                            <?php $__currentLoopData = $completedProjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr>
-                                                    <td>#{{ $project->project_code }}</td>
-                                                    <td>{{ $project->project_name }}</td>
-                                                    <td>L. {{ number_format($project->investor_investment, 2) }}</td>
-                                                    <td>L. {{ number_format($project->investor_final_profit + $project->investor_investment, 2) }}</td>
+                                                    <td>#<?php echo e($project->project_code); ?></td>
+                                                    <td><?php echo e($project->project_name); ?></td>
+                                                    <td>L. <?php echo e(number_format($project->investor_investment, 2)); ?></td>
+                                                    <td>L. <?php echo e(number_format($project->investor_final_profit + $project->investor_investment, 2)); ?></td>
                                                 </tr>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -233,7 +234,7 @@ Historial de inversionista /&nbsp;
                     </div>
                     <div class="card-footer" style="background-color: #95D2B3; padding: 10px; border: 4px solid #fff; justify-content: space-between;">
                         <span style="margin-left: 5%; font-weight: bold;">TOTAL GANANCIA DE PROYECTOS</span>
-                        <span style="float: right; margin-right: 7%; color: #fff; font-size: clamp(0.7rem, 3vw, 0.8rem)">L. {{ number_format($completedProjects->sum('investor_investment') + $completedProjects->sum('investor_final_profit'), 2) }}</span>
+                        <span style="float: right; margin-right: 7%; color: #fff; font-size: clamp(0.7rem, 3vw, 0.8rem)">L. <?php echo e(number_format($completedProjects->sum('investor_investment') + $completedProjects->sum('investor_final_profit'), 2)); ?></span>
                     </div>
                 </div>
             </div>
@@ -263,16 +264,16 @@ Historial de inversionista /&nbsp;
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($transfers as $transfer)
+                                                <?php $__currentLoopData = $transfers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transfer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr>
-                                                    <td>{{ $transfer->transfer_date }}</td>
-                                                    <td class="text-uppercase">{{ $transfer->transfer_bank }}</td>
-                                                    <td class="text-green">Lps. {{ number_format($transfer->transfer_amount, 2) }}</td>
-                                                    <td>Lps. {{ number_format($transfer->current_balance - $transfer->transfer_amount, 2) }}</td>
-                                                    <td>Lps. {{ number_format($transfer->current_balance, 2) }}</td>
-                                                    <td class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $transfer->transfer_comment }}</td>
+                                                    <td><?php echo e($transfer->transfer_date); ?></td>
+                                                    <td class="text-uppercase"><?php echo e($transfer->transfer_bank); ?></td>
+                                                    <td class="text-green">Lps. <?php echo e(number_format($transfer->transfer_amount, 2)); ?></td>
+                                                    <td>Lps. <?php echo e(number_format($transfer->current_balance - $transfer->transfer_amount, 2)); ?></td>
+                                                    <td>Lps. <?php echo e(number_format($transfer->current_balance, 2)); ?></td>
+                                                    <td class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo e($transfer->transfer_comment); ?></td>
                                                 </tr>
-                                                @endforeach
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -307,15 +308,15 @@ Historial de inversionista /&nbsp;
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($creditNotes as $creditNote)
+                                    <?php $__currentLoopData = $creditNotes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $creditNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td>{{ $creditNote->creditNote_date }}</td>
-                                        <td class="text-red">Lps. {{ number_format($creditNote->creditNote_amount, 2) }}</td>
-                                        <td>Lps. {{ number_format($creditNote->current_balance + $creditNote->creditNote_amount, 2) }}</td>
-                                        <td>Lps. {{ number_format($creditNote->current_balance, 2) }}</td>
-                                        <td class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $creditNote->creditNote_description }}</td>
+                                        <td><?php echo e($creditNote->creditNote_date); ?></td>
+                                        <td class="text-red">Lps. <?php echo e(number_format($creditNote->creditNote_amount, 2)); ?></td>
+                                        <td>Lps. <?php echo e(number_format($creditNote->current_balance + $creditNote->creditNote_amount, 2)); ?></td>
+                                        <td>Lps. <?php echo e(number_format($creditNote->current_balance, 2)); ?></td>
+                                        <td class="text-muted" style="max-width: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo e($creditNote->creditNote_description); ?></td>
                                     </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -327,14 +328,15 @@ Historial de inversionista /&nbsp;
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 <!-- Redirect button -->
-<script src="{{ asset('customjs/return_redirect.js')}}"></script>
+<script src="<?php echo e(asset('customjs/return_redirect.js')); ?>"></script>
 
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-<script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_history.js')}}"></script>
-@endsection
+<script src="<?php echo e(asset('vendor/datatables/js/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/datatable/dt_history.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight - experimental\resources\views/modules/investors/show.blade.php ENDPATH**/ ?>

@@ -21,6 +21,7 @@ Route::get('payments_investor/{id}/report', 'App\Http\Controllers\PaymentInvesto
 
 // Investor funds
 Route::resource('investors_funds', 'App\Http\Controllers\InvestorFundsController')->names('investors_funds');
+Route::get('investors_funds/{id}/excel', 'App\Http\Controllers\InvestorFundsController@export')->name('investors_funds.excel');
 
 // Investor liquidations
 Route::resource('investors_liquidations', 'App\Http\Controllers\InvestorLiquidationsController')->names('investors_liquidations');

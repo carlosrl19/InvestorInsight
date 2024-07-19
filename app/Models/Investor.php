@@ -31,8 +31,7 @@ class Investor extends Model
 
     public function investor_funds()
     {
-        return $this->hasMany(InvestorFunds::class, 'investor_id')
-                    ->onDelete('cascade');
+        return $this->hasMany(InvestorFunds::class, 'investor_id');
     }
 
     public function investor_liquidations()
