@@ -1,17 +1,17 @@
-<title>PAGO DE COMISIÓN - #PI-{{ $paymentInvestor->payment_code }}</title>
+<title>PAGO DE COMISIÓN - #PI-<?php echo e($paymentInvestor->payment_code); ?></title>
 
 <div class="main">
 
 	<!-- Date container  -->
 	<div class="code-container-left">
-		<span class="text-uppercase">{{ $dia }} de {{ $mes }} de {{ $anio }}</span><br>
+		<span class="text-uppercase"><?php echo e($dia); ?> de <?php echo e($mes); ?> de <?php echo e($anio); ?></span><br>
 		<span class="text-bold text-uppercase">INVERSIONES ROBENIOR</span><br>
 		<span class="text-uppercase">San Pedro Sula, Honduras, CA</span>
 	</div>
 
 	<!-- Code container -->
 	<div class="code-container-right">
-		<span class="text-bold">#PI-{{ $paymentInvestor->payment_code }}</span>
+		<span class="text-bold">#PI-<?php echo e($paymentInvestor->payment_code); ?></span>
 	</div>
 	
 	<!-- Payment title -->
@@ -21,9 +21,9 @@
 
 	<!-- Payment body -->
 	<div class="body-note mt-4 mb-4">
-		Por la presente, se emite el siguiente reporte de pago de comisión a favor del inversionista <strong>{{ $paymentInvestor->investor->investor_name }}</strong>, identificado con su número de identidad 
-		<strong>{{ $paymentInvestor->investor->investor_dni }}</strong>, número de teléfono <strong>{{ $paymentInvestor->investor->investor_phone }}</strong>, con un valor total de Lps. 
-        <strong>{{ number_format($projectInvestor->investor_final_profit, 2) }}</strong> por concepto del proyecto llamado <strong>{{ $project->project_name }}</strong> con fecha de inicio el día <strong>{{ $project->project_start_date }}</strong> y fecha de finalización <strong>{{ $project->project_end_date }}</strong>.
+		Por la presente, se emite el siguiente reporte de pago de comisión a favor del inversionista <strong><?php echo e($paymentInvestor->investor->investor_name); ?></strong>, identificado con su número de identidad 
+		<strong><?php echo e($paymentInvestor->investor->investor_dni); ?></strong>, número de teléfono <strong><?php echo e($paymentInvestor->investor->investor_phone); ?></strong>, con un valor total de Lps. 
+        <strong><?php echo e(number_format($projectInvestor->investor_final_profit, 2)); ?></strong> por concepto del proyecto llamado <strong><?php echo e($project->project_name); ?></strong> con fecha de inicio el día <strong><?php echo e($project->project_start_date); ?></strong> y fecha de finalización <strong><?php echo e($project->project_end_date); ?></strong>.
 		<br>
 		<br>
 		<br>
@@ -133,4 +133,4 @@
 	.text-red{
 		color: red;
 	}
-</style>
+</style><?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight\resources\views/modules/payment_investors/_report.blade.php ENDPATH**/ ?>
