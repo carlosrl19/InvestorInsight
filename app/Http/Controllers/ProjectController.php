@@ -43,11 +43,23 @@ class ProjectController extends Controller
         $promissoryNote = PromissoryNote::get();
         $commissioners = CommissionAgent::get();
         $generatedCode = strtoupper(Str::random(12)); // Random code
-        $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
+        $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
         
         $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
         ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
+
+        $total_investor_profit_payment = DB::table('promissory_notes')
+        ->where('promissory_notes.promissoryNote_status', 1)
+        ->sum('promissoryNote_amount');
+
+        $total_investor_profit_paid = DB::table('promissory_notes')
+        ->where('promissory_notes.promissoryNote_status', 0)
+        ->sum('promissoryNote_amount');
+
+        $total_commissioner_commission_paid = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
         ->sum('promissoryNoteCommissioner_amount');
 
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
@@ -62,20 +74,35 @@ class ProjectController extends Controller
             }
         }
         
-        return view('modules.projects.index', compact('projects', 'activeProjectsCount', 'total_project_investment', 'investorsWithActivedProjects', 'investors', 'availableInvestors', 'commissioners', 'promissoryNote', 'generatedCode', 'total_investor_balance', 'total_commissioner_commission_payment', 'todayDate',));
+        return view('modules.projects.index', compact(
+            'projects',
+            'activeProjectsCount',
+            'total_project_investment',
+            'total_project_investment_terminated',
+            'investorsWithActivedProjects',
+            'investors',
+            'availableInvestors',
+            'commissioners',
+            'promissoryNote',
+            'generatedCode',
+            'total_commissioner_commission_payment',
+            'total_investor_profit_payment',
+            'total_investor_profit_paid',
+            'total_commissioner_commission_paid',
+            'todayDate'
+        ));
     }
     
     public function indexClosed()
     {
         $projects = Project::where('project_status', 2)->with('investors')->get();
         $investors = Investor::orderBy('investor_name')->get();
-        $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
         $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
             ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
             ->sum('promissoryNoteCommissioner_amount');
 
-        return view('modules.projects_closed.index', compact('projects', 'investors', 'total_investor_balance', 'total_project_investment', 'total_commissioner_commission_payment'));
+        return view('modules.projects_closed.index', compact('projects', 'investors',  'total_project_investment', 'total_commissioner_commission_payment'));
     }
     // END INDEX FUNCTIONS
 
@@ -384,12 +411,11 @@ class ProjectController extends Controller
         $investors = $project->investors;
         $commissioners = $project->commissioners;
         
-        $total_investor_balance = Investor::sum('investor_balance');
         $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
         ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
         ->sum('promissoryNoteCommissioner_amount');
 
-        return view('modules.projects.show', compact('project', 'transfer', 'investors', 'commissioners', 'total_investor_balance', 'total_commissioner_commission_payment'));
+        return view('modules.projects.show', compact('project', 'transfer', 'investors', 'commissioners',  'total_commissioner_commission_payment'));
     }
 
     public function showTermination($id)

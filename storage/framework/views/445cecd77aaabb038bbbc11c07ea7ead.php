@@ -222,32 +222,59 @@
                       <strong>ROBENIOR</strong>
                     </span>
                   </a>
-                  <div class="dropdown-menu">
+                  <div class="dropdown-menu" style="width: 20.5vw">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="">
-                          <small>->&nbsp;</small>
-                            Pago comisiones
-                            <span style="width: 12vh"></span>
-                            <small style="margin-left: auto">
-                              <strong class="text-success">Lps. <?php echo e(number_format($total_commissioner_commission_payment,2)); ?></strong>
-                            </small>
+                        <a class="dropdown-item">
+                          <strong style="margin: auto;">MOVIMIENTOS ACTIVOS</strong>
                         </a>
-                        <a class="dropdown-item" href="">
-                          <small>->&nbsp;</small>
-                            Fondos sin invertir
-                            <small style="margin-left: auto">
-                              <strong class="text-success">Lps. <?php echo e(number_format($total_investor_balance,2)); ?></strong>
-                            </small>
+                        <table class="table table-bordered" style="margin-left: 0.3vw; width: 19.9vw">
+                          <thead>
+                            <tr>
+                              <th style="border-left: 1px solid green;">DESCRIPCIÓN</th>
+                              <th>MONTO</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pago a inversionistas</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_investor_profit_payment,2)); ?></td>
+                            </tr>
+                            <tr>
+                              <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pago a comisionistas</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_commissioner_commission_payment,2)); ?></td>
+                            </tr>
+                            <tr>
+                              <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Proyectos en proceso</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_project_investment,2)); ?></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <a class="dropdown-item">
+                          <strong style="margin: auto;">MOVIMIENTOS PASADOS</strong>
                         </a>
-                        <a class="dropdown-item" href="">
-                          <small>->&nbsp;</small>
-                            Inversión proyectos
-                          <small style="margin-left: auto">
-                            <strong class="text-success">Lps. <?php echo e(number_format($total_project_investment,2)); ?></strong>
-                          </small>
-                        </a>
-                        <small></small>
+                        <table class="table table-bordered" style="margin-left: 0.3vw; width: 19.9vw">
+                          <thead>
+                            <tr>
+                              <th style="border-left: 1px solid red;">DESCRIPCIÓN</th>
+                              <th>MONTO</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Proyectos finalizados</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_project_investment_terminated,2)); ?></td>
+                            </tr>
+                            <tr>
+                              <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pagos a inversionistas</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_investor_profit_paid,2)); ?></td>
+                            </tr>
+                            <tr>
+                              <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pagos a comisionistas</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_commissioner_commission_paid,2)); ?></td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>

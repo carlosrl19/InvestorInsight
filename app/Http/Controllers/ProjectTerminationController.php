@@ -18,10 +18,22 @@ class ProjectTerminationController extends Controller
 {
     public function index(){
         $projects = Project::where('project_status', 0)->with('investors')->get();
-        $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
+        $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
         $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
         ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+        ->sum('promissoryNoteCommissioner_amount');
+
+        $total_investor_profit_payment = DB::table('promissory_notes')
+        ->where('promissory_notes.promissoryNote_status', 1)
+        ->sum('promissoryNote_amount');
+
+        $total_investor_profit_paid = DB::table('promissory_notes')
+        ->where('promissory_notes.promissoryNote_status', 0)
+        ->sum('promissoryNote_amount');
+
+        $total_commissioner_commission_paid = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
         ->sum('promissoryNoteCommissioner_amount');
 
         $payments = PaymentInvestor::with(['promissoryNoteInvestor.investor'])->get();
@@ -30,7 +42,20 @@ class ProjectTerminationController extends Controller
         $generatedCode = strtoupper(Str::random(12)); // Random code
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
-        return view('modules.terminations.index', compact('projects', 'total_project_investment', 'total_investor_balance', 'total_commissioner_commission_payment', 'payments', 'promissoryNoteInvestors', 'promissoryNoteCommissioners', 'generatedCode', 'todayDate'));
+        return view('modules.terminations.index', compact(
+            'projects',
+            'total_project_investment',
+            'total_project_investment_terminated',
+            'total_commissioner_commission_payment',
+            'total_investor_profit_payment',
+            'total_investor_profit_paid',
+            'total_commissioner_commission_paid',
+            'payments',
+            'promissoryNoteInvestors',
+            'promissoryNoteCommissioners',
+            'generatedCode',
+            'todayDate'
+        ));
     }
 
     public function showTermination($id) {

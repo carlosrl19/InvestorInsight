@@ -24,13 +24,36 @@ class CreditNoteController extends Controller
         $creditNoteCode = strtoupper(Str::random(12)); // Credit note random code
         $creditNoteDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
-        $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
+        $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
         $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
         ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
         ->sum('promissoryNoteCommissioner_amount');
 
-        return view('modules.credit_note.index', compact('creditNotes', 'investors', 'creditNoteCode', 'creditNoteDate', 'total_investor_balance', 'total_project_investment', 'total_commissioner_commission_payment'));
+        $total_investor_profit_payment = DB::table('promissory_notes')
+        ->where('promissory_notes.promissoryNote_status', 1)
+        ->sum('promissoryNote_amount');
+
+        $total_investor_profit_paid = DB::table('promissory_notes')
+        ->where('promissory_notes.promissoryNote_status', 0)
+        ->sum('promissoryNote_amount');
+
+        $total_commissioner_commission_paid = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
+        ->sum('promissoryNoteCommissioner_amount');
+
+        return view('modules.credit_note.index', compact(
+            'creditNotes',
+            'investors',
+            'creditNoteCode',
+            'creditNoteDate',
+            'total_project_investment',
+            'total_project_investment_terminated',
+            'total_commissioner_commission_payment',
+            'total_investor_profit_payment',
+            'total_investor_profit_paid',
+            'total_commissioner_commission_paid'
+        ));
     }
 
     public function create()

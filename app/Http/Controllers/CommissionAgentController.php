@@ -16,15 +16,36 @@ class CommissionAgentController extends Controller
     {
         $commission_agents = CommissionAgent::get();
 
-        $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
+        $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
         $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
         ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
         ->sum('promissoryNoteCommissioner_amount');
         
         $commissioner_balance = 0.00;
 
-        return view('modules.commission_agent.index', compact('commission_agents', 'total_project_investment', 'total_investor_balance', 'total_commissioner_commission_payment', 'commissioner_balance'));
+        $total_investor_profit_payment = DB::table('promissory_notes')
+        ->where('promissory_notes.promissoryNote_status', 1)
+        ->sum('promissoryNote_amount');
+
+        $total_investor_profit_paid = DB::table('promissory_notes')
+        ->where('promissory_notes.promissoryNote_status', 0)
+        ->sum('promissoryNote_amount');
+
+        $total_commissioner_commission_paid = DB::table('promissory_note_commissioners')
+        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
+        ->sum('promissoryNoteCommissioner_amount');
+
+        return view('modules.commission_agent.index', compact(
+            'commission_agents',
+            'total_project_investment',
+            'total_project_investment_terminated',
+            'total_commissioner_commission_payment',
+            'total_investor_profit_payment',
+            'total_investor_profit_paid',
+            'total_commissioner_commission_paid',
+            'commissioner_balance'
+        ));
     }
 
 
@@ -44,7 +65,6 @@ class CommissionAgentController extends Controller
     public function show($id)
     {
         $commissioner = CommissionAgent::findOrFail($id);
-        $total_investor_balance = Investor::sum('investor_balance');
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
         $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
         ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
@@ -66,7 +86,7 @@ class CommissionAgentController extends Controller
         ->where('projects.project_status', 0)
         ->get();
         
-        return view('modules.commission_agent.show', compact('commissioner', 'transfers', 'activeProjects', 'total_project_investment', 'completedProjects', 'total_investor_balance', 'total_commissioner_commission_payment'));
+        return view('modules.commission_agent.show', compact('commissioner', 'transfers', 'activeProjects', 'total_project_investment', 'completedProjects',  'total_commissioner_commission_payment'));
     }
 
 
