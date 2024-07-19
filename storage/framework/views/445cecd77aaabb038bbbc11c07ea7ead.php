@@ -165,9 +165,6 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="<?php echo e(route('termination.index')); ?>">
-                          <small>->&nbsp;</small>Finiquitos
-                        </a>
                         <a class="dropdown-item" href="<?php echo e(route('credit_note.index')); ?>">
                           <small>->&nbsp;</small>Notas crédito
                         </a>
