@@ -17,7 +17,7 @@
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
                                         @forelse ($promissoryNoteInvestors->where('promissoryNote_status', 0) as $promissoryNoteInvestor)
                                             <option value="{{ $promissoryNoteInvestor->id }}" data-investor-id="{{ $promissoryNoteInvestor->investor_id }}">
-                                                {{ $promissoryNoteInvestor->promissoryNote_code }} - Lps. {{ number_format($promissoryNoteInvestor->promissoryNote_amount, 2) }}
+                                                #{{ $promissoryNoteInvestor->promissoryNote_code }} - {{ $promissoryNoteInvestor->project->project_name }} - Lps. {{ number_format($promissoryNoteInvestor->promissoryNote_amount, 2) }}
                                             </option>
                                         @empty
                                         @endforelse
@@ -28,6 +28,7 @@
                                 <label for="promissoryNote_id">Pagarés pendientes de pago</label>
                             </div>
                         </div>
+
                         <div class="col" style="display: none">
                             <div class="form-floating">
                                 <input type="datetime-local" 
@@ -48,6 +49,7 @@
                                 <label for="payment_date"><small>Fecha actual</small></label>
                             </div>
                         </div>
+
                         <div class="col" style="display: none">
                             <div class="form-floating">
                                 <input type="number" 
@@ -68,6 +70,7 @@
                                 <label for="payment_amount"><small>Monto a pagar</small></label>
                             </div>
                         </div>
+
                         <div class="col" style="display: none">
                             <div class="form-floating">
                                 <input type="text" 
@@ -85,6 +88,7 @@
                                 <label for="payment_code">Código pago</label>
                             </div>
                         </div>
+                        
                         <input type="hidden" name="investor_id" id="investor_id" value="">
                     </div>
                     <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Cancelar</button>

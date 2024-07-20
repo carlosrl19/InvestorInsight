@@ -17,8 +17,15 @@ class PaymentInvestorController extends Controller
     public function index()
     {
         $payments = PaymentInvestor::with(['promissoryNoteInvestor.investor'])->get();
-        $promissoryNoteInvestors = PromissoryNote::where('promissoryNote_status', 0)->get();
         
+        // Obtener los códigos de proyectos activos
+        $activeProjectCodes = Project::where('project_status', 0)->pluck('project_code');
+
+        // Filtrar los Promissory Notes que tengan un código que coincida con los códigos de proyectos activos
+        $promissoryNoteInvestors = PromissoryNote::where('promissoryNote_status', 0)
+            ->whereIn('promissoryNote_code', $activeProjectCodes)
+            ->get();
+            
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
 
         $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
@@ -51,7 +58,7 @@ class PaymentInvestorController extends Controller
             'total_commissioner_commission_paid'
         ));
     }
-
+    
     public function store(StoreRequest $request)
     {
         // Guardar el nuevo pago

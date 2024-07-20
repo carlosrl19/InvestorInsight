@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class PromissoryNote extends Model
 {
-    public function investor(){
-        return $this->belongsTo(Investor::class, 'investor_id', 'id');
-    }
-
     protected $fillable = [
         'investor_id',
         'promissoryNote_emission_date',
@@ -18,4 +14,14 @@ class PromissoryNote extends Model
         'promissoryNote_code',
         'promissoryNote_status',
     ];
+
+    public function investor(){
+        return $this->belongsTo(Investor::class, 'investor_id', 'id');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'promissoryNote_code', 'project_code');
+    }
+
 }
