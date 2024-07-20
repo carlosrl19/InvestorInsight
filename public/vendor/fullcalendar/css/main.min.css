@@ -290,6 +290,7 @@ a.fc-event:hover {
 .fc .fc-scrollgrid,
 .fc .fc-scrollgrid table {
     width: 100%;
+    max-height: 23rem;
     table-layout: fixed;
 }
 .fc .fc-scrollgrid table {
@@ -346,6 +347,7 @@ a.fc-event:hover {
 .fc .fc-view-harness {
     flex-grow: 1;
     position: relative;
+    max-height: 23rem;
 }
 .fc .fc-bg-event,
 .fc .fc-highlight,

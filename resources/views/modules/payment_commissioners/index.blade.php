@@ -22,13 +22,13 @@ Pagos comisionistas
 @endsection
 
 @section('create')
-<div style="background-color: tomato; color: #fff; border-radius: 10px; padding: 3px 9px 3px 9px">
-    <a onclick="showList()">
+<div style="background-color: tomato; color: #fff; border-radius: 4px; padding: 3px 9px 3px 9px">
+    <a class="btn btn-sm bg-orange text-white" id="btn-list" style="font-size: clamp(0.6rem, 3vw, 0.65rem)" onclick="showList()">
         <img style="filter: brightness(0) saturate(100%) invert(89%) sepia(100%) saturate(1%) hue-rotate(258deg) brightness(104%) contrast(101%);" alt="image" id="list-active" width="25" src="{{ asset('static/svg/calendar.svg') }}">
         &nbsp; Modo lista
     </a>
     &nbsp;&nbsp;
-    <a onclick="showCalendar()">
+    <a class="btn btn-sm bg-orange text-white" id="btn-calendar" style="font-size: clamp(0.6rem, 3vw, 0.65rem)" onclick="showCalendar()">
         <img style="filter: brightness(0) saturate(100%) invert(89%) sepia(100%) saturate(1%) hue-rotate(258deg) brightness(104%) contrast(101%);" alt="image" id="calendar-active" width="25" src="{{ asset('static/svg/list.svg') }}">
         &nbsp; Modo calendario
     </a>
@@ -71,7 +71,9 @@ Pagos comisionistas
                     <th>CÓDIGO</th>
                     <th>FECHA HORA</th>
                     <th>NOMBRE COMISIONISTA</th>
+                    <th>NOMBRE PROYECTO</th>
                     <th>MONTO TOTAL</th>
+                    <th>EXPORTAR <br>REPORTE DE PAGO</th>
                 </tr>
             </thead>
             <tbody>
@@ -80,14 +82,44 @@ Pagos comisionistas
                     <td>#{{ $payment->payment_code }}</td>
                     <td>{{ $payment->payment_date }}</td>
                     <td>{{ $payment->commissioner->commissioner_name }}</td>
+                    <td>{{ $payment->project->project_name }}</td>
                     <td class="text-red">Lps. {{ number_format($payment->payment_amount,2) }}</td>
+                    
+                    @if($payment->commissioner->id == 1)
+                        <td class="text-red">
+                            No necesario
+                        </td>
+                    @else
+                        <td class="text-red">
+                            <a href="{{ route('payments_commissioner.report', $payment->id) }}" class="badge bg-red me-1 text-white" data-toggle="modal" data-target="#pdfModal">
+                                <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
+                                REPORTE DE PAGO
+                            </a>
+                        </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        
+        <!-- PDF Viewer Modal -->
+        <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pdfModalLabel">Previsualización de reporte de pago de comisión</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe id="pdf-frame" style="width:100%; height:500px;" src=""></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
       </div>
     </div>
 
+    <!-- Calendar style container -->
     <div class="card mt-3 card-calendar">
         <div class="card-body">
             <div id="calendar-container" class="fullcalendar">
@@ -96,6 +128,7 @@ Pagos comisionistas
         </div>
     </div>
 
+    <!-- Calendar's information modal -->
     <div class="modal modal-blur fade" id="modalInfo" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalInfoLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -115,6 +148,7 @@ Pagos comisionistas
 @endsection
 
 @section('scripts')
+
 <!-- Fullcalendar -->
 <script src="{{ asset('customjs/fullcalendar/fullcalendar-config.js') }}"></script>
 <script src="{{ asset('vendor/fullcalendar/js/main.min.js') }}"></script>
@@ -151,6 +185,7 @@ Pagos comisionistas
                         paymentAmount: 'Lps. {{ number_format($payment->payment_amount, 2) }}',
                         paymentDate: '{{ $payment->payment_date }}',
                         commissionerName: '{{ $payment->commissioner->commissioner_name }}',
+                        projectName: '{{ $payment->project->project_name }}',
                         commissionerId: '{{ $payment->commissioner_id }}'
                     }
                },
@@ -167,6 +202,7 @@ Pagos comisionistas
 
             eventClick: function(info) {
                 // Obtener la información del evento
+                var projectName = info.event.extendedProps.projectName;
                 var paymentCode = info.event.extendedProps.paymentCode;
                 var paymentAmount = info.event.extendedProps.paymentAmount;
                 var paymentDate = info.event.extendedProps.paymentDate;
@@ -174,7 +210,8 @@ Pagos comisionistas
 
                 // Mostrar la información en un modal
                 $('#modalInfo .modal-body').html(`
-                    <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Código de Pago:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">#${paymentCode}</span><br>
+                    <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Código:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">#${paymentCode}</span><br>
+                    <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Proyecto:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${projectName}</span><br>
                     <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Monto:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${paymentAmount}</span><br>
                     <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Fecha:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${paymentDate}</span><br>
                     <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Comisionista:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${commissionerName}</span><br>
@@ -197,4 +234,22 @@ Pagos comisionistas
 <!-- Select2 -->
 <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
 <script src="{{ asset('customjs/select2/s2_init.js') }}"></script>
+
+
+<!-- PDF view -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $('#pdfModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var url = button.attr('href'); // Extraer la información de los atributos data-*
+        var modal = $(this);
+        modal.find('#pdf-frame').attr('src', url);
+    });
+    $('#pdfModal').on('hidden.bs.modal', function (e) {
+        $(this).find('#pdf-frame').attr('src', '');
+    });
+</script>
+
 @endsection

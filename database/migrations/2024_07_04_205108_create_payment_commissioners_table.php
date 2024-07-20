@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('commissioner_id')->references('id')->on('commission_agents')->onDelete('cascade');
             $table->unsignedBigInteger('promissoryNote_id');
             $table->foreign('promissoryNote_id')->references('id')->on('promissory_note_commissioners')->onDelete('cascade');
+            $table->unsignedBigInteger('project_id');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->timestamps();
         });
     }

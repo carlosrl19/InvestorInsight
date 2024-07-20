@@ -12,6 +12,7 @@ class PaymentCommissioner extends Model
         'payment_date',
         'promissoryNote_id',
         'commissioner_id',
+        'project_id',
     ];
     
     public function commissioner()
@@ -22,5 +23,10 @@ class PaymentCommissioner extends Model
     public function promissoryNoteCommissioner()
     {
         return $this->belongsTo(PromissoryNoteCommissioner::class, 'promissoryNoteCommissioner_id');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
     }
 }

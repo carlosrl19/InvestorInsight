@@ -360,6 +360,7 @@ class ProjectController extends Controller
             $commissionerPayment->commissioner_id = $commissioner->id;
             $promissoryNoteId = PromissoryNote::where('promissoryNote_code', $project->project_code)->value('id');
             $commissionerPayment->promissoryNote_id = $promissoryNoteId;
+            $commissionerPayment->project_id = $project->id;
             $commissionerPayment->payment_code = $project->project_code;
             $commissionerPayment->payment_amount = $commissioner->pivot->commissioner_commission;
             $commissionerPayment->payment_date = now();

@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PaymentCommissioner\StoreRequest;
 use App\Models\PaymentCommissioner;
-use App\Models\Investor;
 use App\Models\Project;
 use App\Models\PromissoryNoteCommissioner;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Dompdf\Options;
+use Dompdf\Dompdf;
 
 class PaymentCommissionerController extends Controller
 {
@@ -48,7 +49,6 @@ class PaymentCommissionerController extends Controller
             'total_commissioner_commission_paid'
         ));
     }
-
     public function store(StoreRequest $request)
     {
         // Guardar el nuevo pago
@@ -60,4 +60,58 @@ class PaymentCommissionerController extends Controller
 
         return redirect()->route('payments_commissioner.index')->with('success', 'Pago registrado correctamente.');
     }
+
+    public function showReport($id) {
+        $paymentCommissioner = PaymentCommissioner::findOrFail($id);
+    
+        // Obtener el commissioner_commission del project_commissioner asociado usando DB::table
+        $projectCommissioner = DB::table('project_commissioner')
+            ->where('project_id', $paymentCommissioner->project_id)
+            ->where('commissioner_id', $paymentCommissioner->commissioner_id)
+            ->first();
+    
+        // Obtener los datos del proyecto asociado al payment_investor
+        $project = DB::table('projects')
+            ->where('id', $paymentCommissioner->project_id)
+            ->first();
+    
+        // Configurar el locale en Carbon
+        Carbon::setLocale('es');
+    
+        // Obtener la fecha actual en español
+        $fecha = Carbon::now()->setTimezone('America/Costa_Rica');
+        $dia = $fecha->format('d');
+        $mes = $fecha->translatedFormat('F'); // 'F' para nombre completo del mes
+        $anio = $fecha->format('Y');
+    
+        // Configuración de opciones para Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $options->set('chroot', realpath(''));
+    
+        // Crear instancia de Dompdf con las opciones configuradas
+        $pdf = new Dompdf($options);
+    
+        // Cargar el contenido de la vista en Dompdf
+        $pdf->loadHtml(view('modules.payment_commissioners._report', compact(
+            'paymentCommissioner',
+            'projectCommissioner',
+            'project',
+            'dia',
+            'mes',
+            'anio'
+        )));
+    
+        // Establecer el tamaño y la orientación del papel
+        $pdf->setPaper('A4', 'portrait');
+    
+        // Renderizar el PDF
+        $pdf->render();
+    
+        // Devolver el PDF en línea
+        return response($pdf->output(), 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'inline; filename="PDF REPORTE DE PAGO.pdf"');
+    }  
 }

@@ -33,6 +33,7 @@ Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentControl
 
 // Commission agent payments
 Route::resource('payments_commissioner', 'App\Http\Controllers\PaymentCommissionerController')->names('payments_commissioner');
+Route::get('payments_commissioner/{id}/report', 'App\Http\Controllers\PaymentCommissionerController@showReport')->name('payments_commissioner.report');
 
 // Moneylender payments
 Route::resource('moneylender', 'App\Http\Controllers\MoneylenderController')->names('moneylender');
