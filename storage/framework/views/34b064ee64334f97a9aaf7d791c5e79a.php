@@ -131,7 +131,7 @@ Pagos comisionistas
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalInfoLabel">Información del Pago</h5>
+                    <h5 class="modal-title" id="modalInfoLabel">Más información</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -146,6 +146,34 @@ Pagos comisionistas
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
+<!-- Alert fade closer script-->
+<script src="<?php echo e(asset('customjs/alert_closer.js')); ?>"></script>
+
+<!-- Datatable -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+<script src="<?php echo e(asset('vendor/datatables/js/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/datatable/dt_transfer.js')); ?>"></script>
+
+<!-- Select2 -->
+<script src="<?php echo e(asset('vendor/select2/select2.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/select2/s2_init.js')); ?>"></script>
+
+
+<!-- PDF view -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $('#pdfModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var url = button.attr('href'); // Extraer la información de los atributos data-*
+        var modal = $(this);
+        modal.find('#pdf-frame').attr('src', url);
+    });
+    $('#pdfModal').on('hidden.bs.modal', function (e) {
+        $(this).find('#pdf-frame').attr('src', '');
+    });
+</script>
 
 <!-- Fullcalendar -->
 <script src="<?php echo e(asset('customjs/fullcalendar/fullcalendar-config.js')); ?>"></script>
@@ -208,46 +236,19 @@ Pagos comisionistas
 
                 // Mostrar la información en un modal
                 $('#modalInfo .modal-body').html(`
-                    <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Código:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">#${paymentCode}</span><br>
-                    <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Proyecto:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${projectName}</span><br>
-                    <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Monto:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${paymentAmount}</span><br>
-                    <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Fecha:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${paymentDate}</span><br>
-                    <strong style="font-size: clamp(0.6rem, 3vw, 0.8rem)">Comisionista:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${commissionerName}</span><br>
+                    <div style="text-align: center; border: 2px solid green; padding: 10px; background-color: #A8E2C0;">
+                        <p style="font-size: 16px; font-weight: bold;">DETALLES DEL PAGO <span style="text-decoration: underline;">#${paymentCode}</span></p>
+                        <strong style="line-height: 1.8; font-size: clamp(0.6rem, 3vw, 0.8rem);">Nombre del proyecto:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${projectName}</span><br>
+                        <strong style="line-height: 1.8; font-size: clamp(0.6rem, 3vw, 0.8rem);">Comisionista:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${commissionerName}</span><br>
+                        <strong style="line-height: 1.8; font-size: clamp(0.6rem, 3vw, 0.8rem);">Monto de pago:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${paymentAmount}</span><br>
+                        <strong style="line-height: 1.8; font-size: clamp(0.6rem, 3vw, 0.8rem);">Fecha de pago:</strong> <span style="font-size: clamp(0.6rem, 3vw, 0.8rem">${paymentDate}</span><br>
+                    </div>
                 `);
                 $('#modalInfo').modal('show');
            }
        });
        calendar.render();
    });
-</script>
-
-<!-- Alert fade closer script-->
-<script src="<?php echo e(asset('customjs/alert_closer.js')); ?>"></script>
-
-<!-- Datatable -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-<script src="<?php echo e(asset('vendor/datatables/js/jquery.dataTables.min.js')); ?>"></script>
-<script src="<?php echo e(asset('customjs/datatable/dt_transfer.js')); ?>"></script>
-
-<!-- Select2 -->
-<script src="<?php echo e(asset('vendor/select2/select2.min.js')); ?>"></script>
-<script src="<?php echo e(asset('customjs/select2/s2_init.js')); ?>"></script>
-
-
-<!-- PDF view -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script>
-    $('#pdfModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Botón que activó el modal
-        var url = button.attr('href'); // Extraer la información de los atributos data-*
-        var modal = $(this);
-        modal.find('#pdf-frame').attr('src', url);
-    });
-    $('#pdfModal').on('hidden.bs.modal', function (e) {
-        $(this).find('#pdf-frame').attr('src', '');
-    });
 </script>
 
 <?php $__env->stopSection(); ?>
