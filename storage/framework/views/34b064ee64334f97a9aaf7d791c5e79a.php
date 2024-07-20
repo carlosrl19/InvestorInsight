@@ -70,7 +70,7 @@ Pagos comisionistas
                     <th>FECHA HORA</th>
                     <th>NOMBRE COMISIONISTA</th>
                     <th>NOMBRE PROYECTO</th>
-                    <th>MONTO TOTAL</th>
+                    <th>MONTO A PAGAR</th>
                     <th>EXPORTAR <br>REPORTE DE PAGO</th>
                 </tr>
             </thead>

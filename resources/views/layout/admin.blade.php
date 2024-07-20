@@ -210,7 +210,10 @@
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
                         <a class="dropdown-item">
-                          <strong style="margin: auto;">MOVIMIENTOS ACTIVOS</strong>
+                          <strong style="margin: auto;">
+                            <img style="filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(3039%) hue-rotate(135deg) brightness(92%) contrast(84%);" src="{{ asset('../static/svg/arrows-up.svg') }}" width="20" height="20" alt="">
+                              MOVIMIENTOS ACTIVOS
+                          </strong>
                         </a>
                         <table class="table table-bordered" style="margin-left: 0.3vw; width: 19.9vw">
                           <thead>
@@ -235,7 +238,10 @@
                           </tbody>
                         </table>
                         <a class="dropdown-item">
-                          <strong style="margin: auto;">MOVIMIENTOS PASADOS</strong>
+                          <strong style="margin: auto;">
+                            <img style="filter: brightness(0) saturate(100%) invert(28%) sepia(35%) saturate(4731%) hue-rotate(334deg) brightness(89%) contrast(95%);" src="{{ asset('../static/svg/arrows-up.svg') }}" width="20" height="20" alt="">
+                              MOVIMIENTOS PASADOS
+                          </strong>
                         </a>
                         <table class="table table-bordered" style="margin-left: 0.3vw; width: 19.9vw">
                           <thead>
