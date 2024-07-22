@@ -62,6 +62,7 @@ Pagarés inversionistas
                 <thead>
                     <tr class="text-center">
                         <th>CÓDIGO</th>
+                        <th>PROYECTO</th>
                         <th>FECHA EMISIÓN</th>
                         <th>FECHA PAGO</th>
                         <th>NOMBRE INVERSIONISTA</th>
@@ -74,6 +75,7 @@ Pagarés inversionistas
                     @foreach($promissoryNotes as $promissoryNote)
                         <tr class="text-center">
                             <td>#{{ $promissoryNote->promissoryNote_code }}</td>
+                            <td>{{ $promissoryNote->project->project_name }}</td>
                             <td>{{ $promissoryNote->promissoryNote_emission_date }}</td>
                             <td>{{ $promissoryNote->promissoryNote_final_date }}</td>
                             <td>

@@ -1,4 +1,4 @@
-<title>PAGO DE COMISIÓN - #PI-<?php echo e($paymentCommissioner->payment_code); ?></title>
+<title>PAGO DE COMISIÓN - #PC-<?php echo e($paymentCommissioner->payment_code); ?></title>
 
 <div class="main">
 
@@ -6,7 +6,9 @@
 	<div class="code-container-left">
 		<span class="text-uppercase"><?php echo e($dia); ?> de <?php echo e($mes); ?> de <?php echo e($anio); ?></span><br>
 		<span class="text-bold text-uppercase">INVERSIONES ROBENIOR</span><br>
-		<span class="text-uppercase">San Pedro Sula, Honduras, CA</span>
+		<span class="text-uppercase">
+			San Pedro Sula, Honduras, CA
+		</span>
 	</div>
 
 	<!-- Code container -->

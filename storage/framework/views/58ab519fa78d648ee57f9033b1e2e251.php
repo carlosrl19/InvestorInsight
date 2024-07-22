@@ -49,6 +49,7 @@ Pagarés comisionistas
                 <thead>
                     <tr class="text-center">
                         <th>CÓDIGO</th>
+                        <th>PROYECTO</th>
                         <th>FECHA EMISIÓN</th>
                         <th>FECHA PAGO</th>
                         <th>COMISIONISTA</th>
@@ -61,6 +62,7 @@ Pagarés comisionistas
                     <?php $__currentLoopData = $promissoryNotesCommissioner; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr class="text-center">
                         <td>#<?php echo e($promissoryNote->promissoryNoteCommissioner_code); ?></td>
+                        <td><?php echo e($promissoryNote->project->project_name); ?></td>
                         <td><?php echo e($promissoryNote->promissoryNoteCommissioner_emission_date); ?></td>
                         <td><?php echo e($promissoryNote->promissoryNoteCommissioner_final_date); ?></td>
                         <td>

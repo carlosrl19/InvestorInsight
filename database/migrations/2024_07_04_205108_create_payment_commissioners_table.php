@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('payment_code');
             $table->decimal('payment_amount', 10,2);
-            $table->date('payment_date');
+            $table->dateTime('payment_date');
             $table->unsignedBigInteger('commissioner_id');
             $table->foreign('commissioner_id')->references('id')->on('commission_agents')->onDelete('cascade');
             $table->unsignedBigInteger('promissoryNote_id');

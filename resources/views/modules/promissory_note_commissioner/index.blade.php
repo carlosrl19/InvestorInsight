@@ -51,6 +51,7 @@ Pagarés comisionistas
                 <thead>
                     <tr class="text-center">
                         <th>CÓDIGO</th>
+                        <th>PROYECTO</th>
                         <th>FECHA EMISIÓN</th>
                         <th>FECHA PAGO</th>
                         <th>COMISIONISTA</th>
@@ -63,6 +64,7 @@ Pagarés comisionistas
                     @foreach($promissoryNotesCommissioner as $promissoryNote)
                     <tr class="text-center">
                         <td>#{{ $promissoryNote->promissoryNoteCommissioner_code }}</td>
+                        <td>{{ $promissoryNote->project->project_name }}</td>
                         <td>{{ $promissoryNote->promissoryNoteCommissioner_emission_date }}</td>
                         <td>{{ $promissoryNote->promissoryNoteCommissioner_final_date }}</td>
                         <td>
