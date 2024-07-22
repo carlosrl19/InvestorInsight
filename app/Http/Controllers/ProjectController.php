@@ -30,50 +30,94 @@ class ProjectController extends Controller
     ----------------------------- */
     public function index()
     {
-        $projects = Project::where('project_status', 1)->with('investors')->get();
-        $activeProjectsCount = Project::where('project_status', 1)->count();
-        
-        $investorsWithActivedProjects = Investor::whereHas('projects', function($query) {
-            $query->where('project_status', 1);
-        })->get();
-        
-        $availableInvestors = Investor::where('investor_status', 1)->get();
-        $investors = Investor::orderBy('investor_name')->get();
+        // Iniciar el temporizador
+        $startTime = microtime(true);
 
-        $promissoryNote = PromissoryNote::get();
-        $commissioners = CommissionAgent::get();
-        $generatedCode = strtoupper(Str::random(12)); // Random code
-        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
-        
-        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
-        ->sum('promissoryNoteCommissioner_amount');
-
-        $total_investor_profit_payment = DB::table('promissory_notes')
-        ->where('promissory_notes.promissoryNote_status', 1)
-        ->sum('promissoryNote_amount');
-
-        $total_investor_profit_paid = DB::table('promissory_notes')
-        ->where('promissory_notes.promissoryNote_status', 0)
-        ->sum('promissoryNote_amount');
-
-        $total_commissioner_commission_paid = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
-        ->sum('promissoryNoteCommissioner_amount');
-
+        // Almacenar en caché los proyectos activos
+        $projects = cache()->remember('active_projects', 60, function () {
+            return Project::where('project_status', 1)->with('investors')->get();
+        });
+    
+        // Contar proyectos activos
+        $activeProjectsCount = cache()->remember('active_projects_count', 60, function () {
+            return Project::where('project_status', 1)->count();
+        });
+    
+        // Inversores con proyectos activos
+        $investorsWithActivedProjects = cache()->remember('investors_with_active_projects', 60, function () {
+            return Investor::whereHas('projects', function($query) {
+                $query->where('project_status', 1);
+            })->get();
+        });
+    
+        // Inversores disponibles
+        $availableInvestors = cache()->remember('available_investors', 60, function () {
+            return Investor::where('investor_status', 1)->get();
+        });
+    
+        // Inversores ordenados
+        $investors = cache()->remember('investors', 60, function () {
+            return Investor::orderBy('investor_name')->get();
+        });
+    
+        // Notas promisorios
+        $promissoryNote = cache()->remember('promissory_notes', 60, function () {
+            return PromissoryNote::get();
+        });
+    
+        // Comisionistas
+        $commissioners = cache()->remember('commissioners', 60, function () {
+            return CommissionAgent::get();
+        });
+    
+        // Código generado
+        $generatedCode = strtoupper(Str::random(12)); // Código aleatorio
+    
+        // Sumas de inversiones
+        $total_project_investment = cache()->remember('total_project_investment', 60, function () {
+            return Project::where('project_status', 1)->sum('project_investment');
+        });
+    
+        $total_project_investment_terminated = cache()->remember('total_project_investment_terminated', 60, function () {
+            return Project::where('project_status', 0)->sum('project_investment');
+        });
+    
+        // Comisiones pagadas
+        $total_commissioner_commission_payment = cache()->remember('total_commissioner_commission_payment', 60, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+    
+        $total_investor_profit_payment = cache()->remember('total_investor_profit_payment', 60, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 1)
+                ->sum('promissoryNote_amount');
+        });
+    
+        $total_investor_profit_paid = cache()->remember('total_investor_profit_paid', 60, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 0)
+                ->sum('promissoryNote_amount');
+        });
+    
+        $total_commissioner_commission_paid = cache()->remember('total_commissioner_commission_paid', 60, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+    
         $todayDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
-        
+    
         // Calcular días restantes para cada proyecto
         foreach ($projects as $project) {
             $daysRemaining = now()->diffInDays($project->project_end_date, false) + 2;
-            if ($daysRemaining <= 0) {
-                $project->days_remaining = '0';
-            } else {
-                $project->days_remaining = $daysRemaining;
-            }
+            $project->days_remaining = max($daysRemaining, 0);
         }
-        
+
+        // Calcular el tiempo de carga
+        $loadTime = microtime(true) - $startTime;
+    
         return view('modules.projects.index', compact(
             'projects',
             'activeProjectsCount',
@@ -89,7 +133,8 @@ class ProjectController extends Controller
             'total_investor_profit_payment',
             'total_investor_profit_paid',
             'total_commissioner_commission_paid',
-            'todayDate'
+            'todayDate',
+            'loadTime'
         ));
     }
     

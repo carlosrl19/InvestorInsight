@@ -10,7 +10,7 @@
 @endsection
 
 @section('pretitle')
-Listado principal
+Listado principal <small>(Tiempo de carga: {{ number_format($loadTime, 2) }} segundos)</small>
 @endsection
 
 @section('title')
@@ -18,14 +18,6 @@ Inversionistas
 @endsection
 
 @section('create')
-<a href="#" class="btn bg-green text-white" style="font-size: clamp(0.6rem, 3vw, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-liquidations">
-    <img style="filter: brightness(0) saturate(100%) invert(89%) sepia(100%) saturate(1%) hue-rotate(258deg) brightness(104%) contrast(101%);" src="{{ asset('static/svg/user-down.svg') }}" width="16" height="16" alt="">&nbsp;Historial de liquidaciones
-</a>
-
-<a href="#" class="btn btn-orange" style="font-size: clamp(0.6rem, 3vw, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-funds">
-    $ Historial de cambios en fondos
-</a>
-
 <a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-team">
     + Nuevo inversionista
 </a>
@@ -455,8 +447,6 @@ Inversionistas
     </div>
 
 @include('modules.investors._create')
-@include('modules.investors_funds.index')
-@include('modules.investors_liquidations.index')
 
 @endsection
 

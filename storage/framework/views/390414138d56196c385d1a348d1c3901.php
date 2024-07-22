@@ -1,49 +1,47 @@
-@extends('layout.admin')
-
-@section('head')
+<?php $__env->startSection('head'); ?>
 
 <!-- Datatable CSS -->
-<link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('css/datatable.css') }}" rel="stylesheet">
+<link href="<?php echo e(asset('vendor/datatables/css/jquery.dataTables.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(asset('vendor/datatables/css/buttons.dataTables.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(asset('css/datatable.css')); ?>" rel="stylesheet">
 
 <!-- Select2 -->
-<link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
+<link rel="stylesheet" href="<?php echo e(asset('vendor/select2/select2.min.css')); ?>">
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('pretitle')
-Listado principal <small>(Tiempo de carga: {{ number_format($loadTime, 2) }} segundos)</small>
-@endsection
+<?php $__env->startSection('pretitle'); ?>
+Listado principal <small>(Tiempo de carga: <?php echo e(number_format($loadTime, 2)); ?> segundos)</small>
+<?php $__env->stopSection(); ?>
 
-@section('title')
+<?php $__env->startSection('title'); ?>
 Transferencias
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('create')
+<?php $__env->startSection('create'); ?>
 <a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-team">
     + Nuevo transferencia
 </a>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
-    @if(session('success'))
+    <?php if(session('success')): ?>
     <div class="alert alert-success alert-dismissible fade show" style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="4000">
-        <strong>{{ session('success') }}</strong>
+        <strong><?php echo e(session('success')); ?></strong>
     </div>
-    @endif
+    <?php endif; ?>
     
-    @if ($errors->any())
+    <?php if($errors->any()): ?>
     <div class="alert alert-danger alert-dismissible" alert-dismissible fade show" style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="10000">
         <strong>El formulario contiene los siguientes errores:</strong>
         <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
+            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <li><?php echo e($error); ?></li>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ul>
     </div>
-    @endif
+    <?php endif; ?>
 
 <div class="container-xl">
     <div class="card mb-2">
@@ -66,30 +64,31 @@ Transferencias
                 </tr>
             </thead>
             <tbody>
-                @foreach($transfers as $transfer)
+                <?php $__currentLoopData = $transfers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transfer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr class="text-center">
-                    <td>#{{ $transfer->transfer_code }}</td>
+                    <td>#<?php echo e($transfer->transfer_code); ?></td>
                     <td>
-                        <a href="{{ route('investor.show', $transfer->investor_id) }}">{{ $transfer->investor->investor_name }}
+                        <a href="<?php echo e(route('investor.show', $transfer->investor_id)); ?>"><?php echo e($transfer->investor->investor_name); ?>
+
                             <small>
 						    	<sup>
-                                    <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+                                    <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
 						    	</sup>
 						    </small>
                         </a>
                     </td>
-                    <td>{{ $transfer->transfer_date }}</td>
-                    <td class="text-uppercase">{{ $transfer->transfer_bank }}</td>
-                    <td>Lps. {{ number_format($transfer->transfer_amount,2) }}</td>
-                    <td>{{ $transfer->transfer_comment }}</td>
+                    <td><?php echo e($transfer->transfer_date); ?></td>
+                    <td class="text-uppercase"><?php echo e($transfer->transfer_bank); ?></td>
+                    <td>Lps. <?php echo e(number_format($transfer->transfer_amount,2)); ?></td>
+                    <td><?php echo e($transfer->transfer_comment); ?></td>
                     <td>
-                        @if ($transfer->transfer_img)
+                        <?php if($transfer->transfer_img): ?>
                             <div class="d-flex flex-wrap justify-content-center">
-                                @foreach (json_decode($transfer->transfer_img) as $image)
+                                <?php $__currentLoopData = json_decode($transfer->transfer_img); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="mx-2 my-1">
-                                        <img id="image-preview" style="border: 1px solid #e3e3e3; border-radius: 5px; padding: 5px;" src="{{ asset('images/transfers/'. $image) }}" alt="Comprobante de transferencia" width="30" height="30">
+                                        <img id="image-preview" style="border: 1px solid #e3e3e3; border-radius: 5px; padding: 5px;" src="<?php echo e(asset('images/transfers/'. $image)); ?>" alt="Comprobante de transferencia" width="30" height="30">
                                     </div>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
 
                             <!-- Full viewer with carousel -->
@@ -114,20 +113,20 @@ Transferencias
                                     </div>
                                 </div>
                             </div>
-                        @else
+                        <?php else: ?>
                             No hay imágenes
-                        @endif
+                        <?php endif; ?>
                     </td>
                 </tr>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
       </div>
     </div>
 </div>
 
-@include('modules.transfer._create')
-@endsection
+<?php echo $__env->make('modules.transfer._create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
 <style>
     .carousel-img {
@@ -141,15 +140,15 @@ Transferencias
     }
 </style>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 
 <!-- Alert fade closer script-->
-<script src="{{ asset('customjs/alert_closer.js')}}"></script>
+<script src="<?php echo e(asset('customjs/alert_closer.js')); ?>"></script>
 
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-<script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_transfer.js') }}"></script>
+<script src="<?php echo e(asset('vendor/datatables/js/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/datatable/dt_transfer.js')); ?>"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -207,4 +206,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/carlos/Code/En proceso/InvestorInsight/resources/views/modules/transfer/index.blade.php ENDPATH**/ ?>

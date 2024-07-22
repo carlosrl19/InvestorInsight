@@ -8,34 +8,59 @@ use App\Models\CommissionAgent;
 use App\Models\Investor;
 use App\Models\Project;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class CommissionAgentController extends Controller
 {
 
     public function index()
     {
-        $commission_agents = CommissionAgent::get();
-
-        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
-        
-        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
-        ->sum('promissoryNoteCommissioner_amount');
-        
+        // Iniciar el temporizador
+        $startTime = microtime(true);
+    
+        // Tiempo de caché en minutos
+        $cacheTime = 60; // 1 hora
+    
+        $commission_agents = Cache::remember('commission_agents', $cacheTime, function () {
+            return CommissionAgent::get();
+        });
+    
+        $total_project_investment = Cache::remember('total_project_investment', $cacheTime, function () {
+            return Project::where('project_status', 1)->sum('project_investment');
+        });
+    
+        $total_project_investment_terminated = Cache::remember('total_project_investment_terminated', $cacheTime, function () {
+            return Project::where('project_status', 0)->sum('project_investment');
+        });
+    
+        $total_commissioner_commission_payment = Cache::remember('total_commissioner_commission_payment', $cacheTime, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+    
         $commissioner_balance = 0.00;
-
-        $total_investor_profit_payment = DB::table('promissory_notes')
-        ->where('promissory_notes.promissoryNote_status', 1)
-        ->sum('promissoryNote_amount');
-
-        $total_investor_profit_paid = DB::table('promissory_notes')
-        ->where('promissory_notes.promissoryNote_status', 0)
-        ->sum('promissoryNote_amount');
-
-        $total_commissioner_commission_paid = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
-        ->sum('promissoryNoteCommissioner_amount');
+    
+        $total_investor_profit_payment = Cache::remember('total_investor_profit_payment', $cacheTime, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 1)
+                ->sum('promissoryNote_amount');
+        });
+    
+        $total_investor_profit_paid = Cache::remember('total_investor_profit_paid', $cacheTime, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 0)
+                ->sum('promissoryNote_amount');
+        });
+    
+        $total_commissioner_commission_paid = Cache::remember('total_commissioner_commission_paid', $cacheTime, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+        
+        // Calcular el tiempo de carga
+        $loadTime = microtime(true) - $startTime;
 
         return view('modules.commission_agent.index', compact(
             'commission_agents',
@@ -45,16 +70,15 @@ class CommissionAgentController extends Controller
             'total_investor_profit_payment',
             'total_investor_profit_paid',
             'total_commissioner_commission_paid',
-            'commissioner_balance'
+            'commissioner_balance',
+            'loadTime'
         ));
     }
-
 
     public function create()
     {
         //
     }
-
 
     public function store(StoreRequest $request)
     {
