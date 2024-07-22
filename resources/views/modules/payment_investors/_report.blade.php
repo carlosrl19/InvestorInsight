@@ -1,4 +1,4 @@
-<title>PAGO DE COMISIÓN - #PI-{{ $paymentInvestor->payment_code }}</title>
+<title>PAGO DE COMISIÓN - #PC-{{ $paymentInvestor->payment_code }}</title>
 
 <div class="main">
 

@@ -1,4 +1,4 @@
-<title>PAGO DE COMISIÓN - #PI-<?php echo e($paymentInvestor->payment_code); ?></title>
+<title>PAGO DE COMISIÓN - #PC-<?php echo e($paymentInvestor->payment_code); ?></title>
 
 <div class="main">
 

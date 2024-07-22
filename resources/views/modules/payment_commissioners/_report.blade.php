@@ -1,4 +1,4 @@
-<title>PAGO DE COMISIÓN - #PI-{{ $paymentCommissioner->payment_code }}</title>
+<title>PAGO DE COMISIÓN - #PC-{{ $paymentCommissioner->payment_code }}</title>
 
 <div class="main">
 
@@ -6,7 +6,9 @@
 	<div class="code-container-left">
 		<span class="text-uppercase">{{ $dia }} de {{ $mes }} de {{ $anio }}</span><br>
 		<span class="text-bold text-uppercase">INVERSIONES ROBENIOR</span><br>
-		<span class="text-uppercase">San Pedro Sula, Honduras, CA</span>
+		<span class="text-uppercase">
+			San Pedro Sula, Honduras, CA
+		</span>
 	</div>
 
 	<!-- Code container -->
