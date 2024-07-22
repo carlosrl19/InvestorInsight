@@ -67,6 +67,7 @@ Pagarés inversionistas
                         <th>MONTO PAGARÉ</th>
                         <th>ESTADO PAGARÉ</th>
                         <th>EXPORTAR PAGARÉ</th>
+                        <th>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,6 +104,19 @@ Pagarés inversionistas
                                     &nbsp;PAGARÉ
                                 </a>
                             </td>
+                            <?php if($promissoryNote->promissoryNote_status == '1'): ?>
+                                <td>
+                                    <a href="<?php echo e(route('promissory_note.report', $promissoryNote->id)); ?>" class="btn btn-sm btn-success"
+                                        data-toggle="modal" data-target="#pdfModal" style="padding-right: 20px; font-size: clamp(0.6rem, 3vw, 0.7rem)">
+                                        &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="<?php echo e(asset('../static/svg/currency-dollar.svg')); ?>" width="20" height="20" alt="">
+                                        &nbsp;PAGAR
+                                    </a>
+                                </td>
+                            <?php else: ?>
+                                <td>
+                                    <span class="text-red me-1"> Pago realizado</span>
+                                </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>

@@ -200,7 +200,7 @@ Proyectos activos
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-8">
-                                                        ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Finalizado"? Utilize esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
+                                                        ¿Desea cambiar el estado del proyecto denominado <b>"{{ $project->project_name }}"</b> a "Finalizado"? Utilize esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
                                                         Es necesario que ingrese la fecha en la que el proyecto ha finalizado sus labores, así como el comprobante de pago de la transferencia del inversionista para el proyecto.
                                                         
                                                         <p class="mt-2" style="background-color: #e3e3e3; border-radius: 10px; padding: 10px">
@@ -317,7 +317,7 @@ Proyectos activos
                                         <form action="{{ route('project.close', $project->id) }}" method="POST">
                                             @csrf
                                             <div class="modal-body">
-                                                ¿Desea cambiar el estado del proyecto <b>{{ $project->project_name }}</b> a "Cerrado"? Utilice esta opción únicamente cuando un proyecto tenga conflictos para llevarse a cabo y no se pueda seguir con el mismo.
+                                                ¿Desea cambiar el estado del proyecto denominado <b>"{{ $project->project_name }}"</b> a "Cerrado"? Utilice esta opción únicamente cuando un proyecto tenga conflictos para llevarse a cabo y no se pueda seguir con el mismo.
 
                                                 <div class="form-floating mt-4 mb-2">
                                                     <textarea type="text" class="form-control" style="overflow: hidden; height: 100px; resize: none" name="project_close_comment" id="project_close_comment"></textarea>

@@ -9,13 +9,13 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-8">
-                        <form action="{{ route('transfer.store') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
+                        <form action="<?php echo e(route('transfer.store')); ?>" method="POST" enctype="multipart/form-data">
+                            <?php echo csrf_field(); ?>
                             <div class="row mb-3 align-items-end">
                                 <div class="col" style="display: none;">
                                     <div class="form-floating">
                                         <input type="text" maxlength="35" name="transfer_code"
-                                            value="{{ $generatedCode }}" id="transfer_code"
+                                            value="<?php echo e($generatedCode); ?>" id="transfer_code"
                                             class="form-control text-uppercase" readonly>
                                         <label for="transfer_code">Código de transferencia</label>
                                     </div>
@@ -25,17 +25,31 @@
                                 <div class="col" style="display: none;">
                                     <div class="form-floating">
                                         <input type="datetime-local" name="transfer_date" style="font-size: 10px;"
-                                            value="{{ Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s') }}"
+                                            value="<?php echo e(Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')); ?>"
                                             id="transfer_date"
-                                            min="{{ Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s') }}"
-                                            max="{{ Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s') }}"
-                                            class="form-control @error('transfer_date') is-invalid @enderror"
+                                            min="<?php echo e(Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')); ?>"
+                                            max="<?php echo e(Carbon\Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s')); ?>"
+                                            class="form-control <?php $__errorArgs = ['transfer_date'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                                             readonly />
-                                        @error('transfer_date')
+                                        <?php $__errorArgs = ['transfer_date'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong><?php echo e($message); ?></strong>
                                             </span>
-                                        @enderror
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                         <label for="transfer_date"><small>Fecha de
                                                 transferencia</small></label>
                                     </div>
@@ -46,12 +60,13 @@
                                         <select style="font-size: clamp(0.7rem, 3vw, 0.75rem)" class="form-select" id="investor_id" name="investor_id"
                                             style="width: 100%;">
                                             <option selected disabled>Seleccione un inversionista</option>
-                                            @foreach ($investors as $investor)
-                                                <option value="{{ $investor->id }}"
-                                                    {{ old('investor_id') == $investor->id ? 'selected' : '' }}>
-                                                    {{ $investor->investor_name }}
+                                            <?php $__currentLoopData = $investors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $investor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($investor->id); ?>"
+                                                    <?php echo e(old('investor_id') == $investor->id ? 'selected' : ''); ?>>
+                                                    <?php echo e($investor->investor_name); ?>
+
                                                 </option>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                         <label for="investor_id">Inversionistas</label>
                                     </div>
@@ -60,25 +75,39 @@
                                 <div class="col">
                                     <div class="form-floating">
                                         <select style="font-size: clamp(0.7rem, 3vw, 0.75rem)" name="transfer_bank" id="select-optgroups"
-                                            class="form-control @error('transfer_bank') is-invalid @enderror"
+                                            class="form-control <?php $__errorArgs = ['transfer_bank'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                                             autocomplete="off">
                                             <option selected disabled>Seleccione un método de pago</option>
                                             <optgroup label="Otros métodos">
-                                                @foreach (['VARIOS MÉTODOS/TRANSFERENCIAS', 'REMESAS', 'EFECTIVO', 'TARJETA'] as $method)
-                                                    <option value="{{ $method }}">{{ $method }}</option>
-                                                @endforeach
+                                                <?php $__currentLoopData = ['VARIOS MÉTODOS/TRANSFERENCIAS', 'REMESAS', 'EFECTIVO', 'TARJETA']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $method): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($method); ?>"><?php echo e($method); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </optgroup>
                                             <optgroup label="Bancos">
-                                                @foreach (['BAC CREDOMATIC', 'BANCO ATLÁNTIDA', 'BANCO AZTECA', 'BANCO CUSCATLAN', 'BANRURAL', 'BANCO CENTRAL', 'BANTRABHN', 'BANCO DE OCCIDENTE', 'DAVIVIENDA', 'FICENSA', 'FICOHSA', 'BANHCAFE', 'LAFISE', 'BANPAIS', 'BANCO POPULAR', 'BANCO PROMÉRICA'] as $bank)
-                                                    <option value="{{ $bank }}">{{ $bank }}</option>
-                                                @endforeach
+                                                <?php $__currentLoopData = ['BAC CREDOMATIC', 'BANCO ATLÁNTIDA', 'BANCO AZTECA', 'BANCO CUSCATLAN', 'BANRURAL', 'BANCO CENTRAL', 'BANTRABHN', 'BANCO DE OCCIDENTE', 'DAVIVIENDA', 'FICENSA', 'FICOHSA', 'BANHCAFE', 'LAFISE', 'BANPAIS', 'BANCO POPULAR', 'BANCO PROMÉRICA']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bank): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($bank); ?>"><?php echo e($bank); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </optgroup>
                                         </select>
-                                        @error('transfer_bank')
+                                        <?php $__errorArgs = ['transfer_bank'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong><?php echo e($message); ?></strong>
                                             </span>
-                                        @enderror
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                         <span class="invalid-feedback" role="alert" id="transfer-bank-error"
                                             style="display: none;">
                                             <strong></strong>
@@ -90,13 +119,27 @@
                                 <div class="col">
                                     <div class="form-floating">
                                         <input type="number" step="any" name="transfer_amount"
-                                            value="{{ old('transfer_amount') }}" id="transfer_amount"
-                                            class="form-control @error('transfer_amount') is-invalid @enderror" />
-                                        @error('transfer_amount')
+                                            value="<?php echo e(old('transfer_amount')); ?>" id="transfer_amount"
+                                            class="form-control <?php $__errorArgs = ['transfer_amount'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" />
+                                        <?php $__errorArgs = ['transfer_amount'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong><?php echo e($message); ?></strong>
                                             </span>
-                                        @enderror
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                         <label for="transfer_amount">Monto de transferencia</label>
                                     </div>
                                 </div>
@@ -105,13 +148,27 @@
                             <div class="row mb-3 align-items-end">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <textarea oninput="this.value = this.value.toUpperCase()" class="form-control @error('transfer_comment') is-invalid @enderror" autocomplete="off" maxlength="255"
-                                            name="transfer_comment" id="transfer_comment" style="resize: none; height: 100px">{{ old('transfer_comment') }}</textarea>
-                                        @error('transfer_comment')
+                                        <textarea oninput="this.value = this.value.toUpperCase()" class="form-control <?php $__errorArgs = ['transfer_comment'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" autocomplete="off" maxlength="255"
+                                            name="transfer_comment" id="transfer_comment" style="resize: none; height: 100px"><?php echo e(old('transfer_comment')); ?></textarea>
+                                        <?php $__errorArgs = ['transfer_comment'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong><?php echo e($message); ?></strong>
                                             </span>
-                                        @enderror
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                         <label for="transfer_comment">Comentarios</label>
                                     </div>
                                 </div>
@@ -121,7 +178,14 @@
                                 <div class="col">
                                     <div class="form-floating">
                                         <input multiple style="font-size: clamp(0.6rem, 3vw, 0.7rem);" type="file" accept="image/*"
-                                            class="form-control @error('transfer_img') is-invalid @enderror"
+                                            class="form-control <?php $__errorArgs = ['transfer_img'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                                             id="transfer_img" name="transfer_img[]" alt="transfer-proof"
                                             onchange="previewImage(event)">
                                         <label for="transfer_img">Comprobante(s) de transferencia</label>
@@ -233,3 +297,4 @@
         opacity: 1;
     }
 </style>
+<?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight - experimental\resources\views/modules/transfer/_create.blade.php ENDPATH**/ ?>
