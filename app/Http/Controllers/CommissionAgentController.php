@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommissionAgent\StoreRequest;
 use App\Http\Requests\CommissionAgent\UpdateRequest;
+
 use App\Models\CommissionAgent;
-use App\Models\Investor;
 use App\Models\Project;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 
@@ -86,45 +87,75 @@ class CommissionAgentController extends Controller
         return redirect()->route('commission_agent.index')->with('success', 'Comisionista creado exitosamente.');
     }
 
-
     public function show($id)
     {
-        $commissioner = CommissionAgent::findOrFail($id);
-        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
+        // Iniciar el temporizador
+        $startTime = microtime(true);
+    
+        // Tiempo de caché en minutos
+        $cacheTime = 60; // 1 hora
+    
+        $commissioner = Cache::remember("commissioner_{$id}", $cacheTime, function () use ($id) {
+            return CommissionAgent::findOrFail($id);
+        });
+    
+        $total_project_investment = Cache::remember('total_project_investment', $cacheTime, function () {
+            return Project::where('project_status', 1)->sum('project_investment');
+        });
+    
+        $total_project_investment_terminated = Cache::remember('total_project_investment_terminated', $cacheTime, function () {
+            return Project::where('project_status', 0)->sum('project_investment');
+        });
+    
+        $total_commissioner_commission_payment = Cache::remember('total_commissioner_commission_payment', $cacheTime, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+    
+        $total_investor_profit_payment = Cache::remember('total_investor_profit_payment', $cacheTime, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 1)
+                ->sum('promissoryNote_amount');
+        });
+    
+        $total_investor_profit_paid = Cache::remember('total_investor_profit_paid', $cacheTime, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 0)
+                ->sum('promissoryNote_amount');
+        });
+    
+        $total_commissioner_commission_paid = Cache::remember('total_commissioner_commission_paid', $cacheTime, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+    
+        $transfers = Cache::remember("transfers_commissioner_{$id}", $cacheTime, function () use ($commissioner) {
+            return DB::table('project_commissioner')
+                ->where('commissioner_id', $commissioner->id)
+                ->get();
+        });
+    
+        $activeProjects = Cache::remember("active_projects_commissioner_{$id}", $cacheTime, function () use ($commissioner) {
+            return DB::table('project_commissioner')
+                ->join('projects', 'project_commissioner.project_id', '=', 'projects.id')
+                ->where('project_commissioner.commissioner_id', $commissioner->id)
+                ->where('projects.project_status', 1)
+                ->get();
+        });
+    
+        $completedProjects = Cache::remember("completed_projects_commissioner_{$id}", $cacheTime, function () use ($commissioner) {
+            return DB::table('project_commissioner')
+                ->join('projects', 'project_commissioner.project_id', '=', 'projects.id')
+                ->where('project_commissioner.commissioner_id', $commissioner->id)
+                ->where('projects.project_status', 0)
+                ->get();
+        });
 
-        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
-        ->sum('promissoryNoteCommissioner_amount');
-
-        $total_investor_profit_payment = DB::table('promissory_notes')
-        ->where('promissory_notes.promissoryNote_status', 1)
-        ->sum('promissoryNote_amount');
-
-        $total_investor_profit_paid = DB::table('promissory_notes')
-        ->where('promissory_notes.promissoryNote_status', 0)
-        ->sum('promissoryNote_amount');
-
-        $total_commissioner_commission_paid = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
-        ->sum('promissoryNoteCommissioner_amount');
-
-        $transfers = DB::table('project_commissioner')
-        ->where('commissioner_id', $commissioner->id)
-        ->get();
-
-        $activeProjects = DB::table('project_commissioner')
-        ->join('projects', 'project_commissioner.project_id', '=', 'projects.id')
-        ->where('project_commissioner.commissioner_id', $commissioner->id)
-        ->where('projects.project_status', 1)
-        ->get();
-
-        $completedProjects = DB::table('project_commissioner')
-        ->join('projects', 'project_commissioner.project_id', '=', 'projects.id')
-        ->where('project_commissioner.commissioner_id', $commissioner->id)
-        ->where('projects.project_status', 0)
-        ->get();
-        
+        // Calcular el tiempo de carga
+        $loadTime = microtime(true) - $startTime;
+    
         return view('modules.commission_agent.show', compact(
             'commissioner',
             'transfers',
@@ -135,10 +166,10 @@ class CommissionAgentController extends Controller
             'total_investor_profit_paid',
             'total_commissioner_commission_paid',
             'completedProjects', 
-            'total_commissioner_commission_payment'
+            'total_commissioner_commission_payment',
+            'loadTime'
         ));
     }
-
 
     public function edit($id)
     {

@@ -11,7 +11,7 @@
 @endsection
 
 @section('pretitle')
-Panel principal <small>(Tiempo de carga: {{ number_format($loadTime, 2) }} segundos)</small>
+Panel principal <small>({{ number_format($loadTime, 2) }} segundos)</small>
 @endsection
 
 @section('title')

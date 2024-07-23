@@ -49,7 +49,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('pretitle'); ?>
-Listado principal <small>(Tiempo de carga: <?php echo e(number_format($loadTime, 2)); ?> segundos)</small>
+Listado principal <small>(<?php echo e(number_format($loadTime, 2)); ?> segundos)</small>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('title'); ?>
