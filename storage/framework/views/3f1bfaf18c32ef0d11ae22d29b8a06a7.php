@@ -9,7 +9,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('pretitle'); ?>
-Panel principal
+Panel principal <small>(<?php echo e(number_format($loadTime, 2)); ?> segundos)</small>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('title'); ?>

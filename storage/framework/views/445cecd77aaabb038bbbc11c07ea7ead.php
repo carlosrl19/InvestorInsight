@@ -46,26 +46,10 @@
                 data-bs-toggle="tooltip" data-bs-placement="bottom">
                 <img src="<?php echo e(asset('../static/svg/moon.svg')); ?>" width="20" height="20">
               </a>
-
               <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Activar modo claro"
                 data-bs-toggle="tooltip" data-bs-placement="bottom">
                 <img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(73deg) brightness(103%) contrast(103%);" src="<?php echo e(asset('../static/svg/sun.svg')); ?>" width="20" height="20">
               </a>
-              <div class="nav-item dropdown d-none d-md-flex me-3">
-                <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1"
-                  aria-label="Show notifications">
-                  <img style="filter: invert(14%) sepia(81%) saturate(3491%) hue-rotate(346deg) brightness(107%) contrast(83%);" src="<?php echo e(asset('../static/svg/bell.svg')); ?>" width="20" height="20">
-                  <span class="badge bg-red"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
-                  <div class="card" style="width: 50vh;">
-                    <div class="card-header">
-                      <h4 class="card-title">Pendientes</h4>
-                    </div>
-                    <?php echo $__env->yieldContent('notification_navbar'); ?>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="nav-item dropdown">
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
@@ -171,12 +155,19 @@
                         <a class="dropdown-item" href="<?php echo e(route('transfer.index')); ?>">
                           <small>->&nbsp;</small>Transferencias
                         </a>
-                        <a class="dropdown-item" href="<?php echo e(route('promissory_note.index')); ?>">
-                          <small>->&nbsp;</small>Pagarés inversionistas
-                        </a>
-                        <a class="dropdown-item" href="<?php echo e(route('promissory_note_commissioner.index')); ?>">
-                          <small>->&nbsp;</small>Pagarés comisionistas
-                        </a>
+                        <div class="dropend">
+                          <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                            -> Pagarés
+                          </a>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="<?php echo e(route('promissory_note.index')); ?>">
+                              <small>&nbsp;</small>Inversionistas
+                            </a>
+                            <a class="dropdown-item" href="<?php echo e(route('promissory_note_commissioner.index')); ?>">
+                              <small>&nbsp;</small>Comisionistas
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -226,7 +217,10 @@
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
                         <a class="dropdown-item">
-                          <strong style="margin: auto;">MOVIMIENTOS ACTIVOS</strong>
+                          <strong style="margin: auto;">
+                            <img style="filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(3039%) hue-rotate(135deg) brightness(92%) contrast(84%);" src="<?php echo e(asset('../static/svg/arrows-up.svg')); ?>" width="20" height="20" alt="">
+                              MOVIMIENTOS ACTIVOS
+                          </strong>
                         </a>
                         <table class="table table-bordered" style="margin-left: 0.3vw; width: 19.9vw">
                           <thead>
@@ -251,7 +245,10 @@
                           </tbody>
                         </table>
                         <a class="dropdown-item">
-                          <strong style="margin: auto;">MOVIMIENTOS PASADOS</strong>
+                          <strong style="margin: auto;">
+                            <img style="filter: brightness(0) saturate(100%) invert(28%) sepia(35%) saturate(4731%) hue-rotate(334deg) brightness(89%) contrast(95%);" src="<?php echo e(asset('../static/svg/arrows-up.svg')); ?>" width="20" height="20" alt="">
+                              MOVIMIENTOS PASADOS
+                          </strong>
                         </a>
                         <table class="table table-bordered" style="margin-left: 0.3vw; width: 19.9vw">
                           <thead>

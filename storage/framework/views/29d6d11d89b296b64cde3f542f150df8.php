@@ -17,7 +17,7 @@
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
                                         <?php $__empty_1 = true; $__currentLoopData = $promissoryNoteInvestors->where('promissoryNote_status', 0); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNoteInvestor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                             <option value="<?php echo e($promissoryNoteInvestor->id); ?>" data-investor-id="<?php echo e($promissoryNoteInvestor->investor_id); ?>">
-                                                <?php echo e($promissoryNoteInvestor->promissoryNote_code); ?> - Lps. <?php echo e(number_format($promissoryNoteInvestor->promissoryNote_amount, 2)); ?>
+                                                #<?php echo e($promissoryNoteInvestor->promissoryNote_code); ?> - <?php echo e($promissoryNoteInvestor->project->project_name); ?> - Lps. <?php echo e(number_format($promissoryNoteInvestor->promissoryNote_amount, 2)); ?>
 
                                             </option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
@@ -29,6 +29,7 @@
                                 <label for="promissoryNote_id">Pagarés pendientes de pago</label>
                             </div>
                         </div>
+
                         <div class="col" style="display: none">
                             <div class="form-floating">
                                 <input type="datetime-local" 
@@ -63,6 +64,7 @@ unset($__errorArgs, $__bag); ?>
                                 <label for="payment_date"><small>Fecha actual</small></label>
                             </div>
                         </div>
+
                         <div class="col" style="display: none">
                             <div class="form-floating">
                                 <input type="number" 
@@ -97,6 +99,7 @@ unset($__errorArgs, $__bag); ?>
                                 <label for="payment_amount"><small>Monto a pagar</small></label>
                             </div>
                         </div>
+
                         <div class="col" style="display: none">
                             <div class="form-floating">
                                 <input type="text" 
@@ -128,6 +131,7 @@ unset($__errorArgs, $__bag); ?>
                                 <label for="payment_code">Código pago</label>
                             </div>
                         </div>
+                        
                         <input type="hidden" name="investor_id" id="investor_id" value="">
                     </div>
                     <button type="button" class="btn btn-dark me-auto" data-bs-dismiss="modal">Cancelar</button>

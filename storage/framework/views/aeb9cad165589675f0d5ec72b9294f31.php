@@ -40,16 +40,15 @@
 
                                     <?php $__currentLoopData = $project->investors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $investor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <p>
-                                            <div class="badge bg-success mt-1"></div>&nbsp;
                                             <?php if($first_investor): ?>
+                                            <div class="badge bg-success mt-1"></div>&nbsp;
                                                 Ganancia total: Lps. <?php echo e(number_format($investor->pivot->investor_final_profit + $project->project_investment,2)); ?>
 
                                                 <?php
                                                     $first_investor = false;
                                                 ?>
                                             <?php else: ?>
-                                                5%: Lps. <?php echo e(number_format($investor->pivot->investor_final_profit,2)); ?>
-
+                                                <!-- Nothing -->
                                             <?php endif; ?>
                                             <br>
                                         </p>

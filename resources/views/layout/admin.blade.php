@@ -155,12 +155,19 @@
                         <a class="dropdown-item" href="{{ route('transfer.index') }}">
                           <small>->&nbsp;</small>Transferencias
                         </a>
-                        <a class="dropdown-item" href="{{ route('promissory_note.index') }}">
-                          <small>->&nbsp;</small>Pagarés inversionistas
-                        </a>
-                        <a class="dropdown-item" href="{{ route('promissory_note_commissioner.index') }}">
-                          <small>->&nbsp;</small>Pagarés comisionistas
-                        </a>
+                        <div class="dropend">
+                          <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                            -> Pagarés
+                          </a>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('promissory_note.index') }}">
+                              <small>&nbsp;</small>Inversionistas
+                            </a>
+                            <a class="dropdown-item" href="{{ route('promissory_note_commissioner.index') }}">
+                              <small>&nbsp;</small>Comisionistas
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -18,25 +18,6 @@ Listado principal
 Pagarés comisionistas
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('notification_navbar'); ?>
-<div class="list-group list-group-flush list-group-hoverable">
-    <?php $__currentLoopData = $promissoryNotesCommissioner; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <div class="list-group-item">
-        <div class="row align-items-center">
-            <div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>
-            <div class="col">
-                <a class="text-body d-block" style="font-size: clamp(0.7rem, 6vh, 0.8rem)" id="pnc_code">Pagaré #<?php echo e($promissoryNote->promissoryNoteCommissioner_code); ?></a>
-                <div class="d-block text-muted mt-n1" style="font-size: clamp(0.6rem, 6vh, 0.7rem)">
-                   Fecha de pago <?php echo e($promissoryNote->promissoryNoteCommissioner_final_date); ?>.
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-</div>
-<?php $__env->stopSection(); ?>
-
-
 <?php $__env->startSection('content'); ?>
 
     <?php if(session('success')): ?>
@@ -68,6 +49,7 @@ Pagarés comisionistas
                 <thead>
                     <tr class="text-center">
                         <th>CÓDIGO</th>
+                        <th>PROYECTO</th>
                         <th>FECHA EMISIÓN</th>
                         <th>FECHA PAGO</th>
                         <th>COMISIONISTA</th>
@@ -80,6 +62,7 @@ Pagarés comisionistas
                     <?php $__currentLoopData = $promissoryNotesCommissioner; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr class="text-center">
                         <td>#<?php echo e($promissoryNote->promissoryNoteCommissioner_code); ?></td>
+                        <td><?php echo e($promissoryNote->project->project_name); ?></td>
                         <td><?php echo e($promissoryNote->promissoryNoteCommissioner_emission_date); ?></td>
                         <td><?php echo e($promissoryNote->promissoryNoteCommissioner_final_date); ?></td>
                         <td>
@@ -146,6 +129,7 @@ Pagarés comisionistas
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
     $('#pdfModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que activó el modal

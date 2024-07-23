@@ -18,26 +18,8 @@ Listado principal
 Pagarés inversionistas
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('notification_navbar'); ?>
-<div class="list-group list-group-flush list-group-hoverable">
-    <?php $__currentLoopData = $promissoryNotes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <div class="list-group-item">
-        <div class="row align-items-center">
-            <div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>
-            <div class="col">
-                <a href="#" class="text-body d-block" style="font-size: clamp(0.7rem, 6vh, 0.8rem)">Pagaré #<?php echo e($promissoryNote->promissoryNote_code); ?></a>
-                <div class="d-block text-muted mt-n1" style="font-size: clamp(0.6rem, 6vh, 0.7rem)">
-                   Fecha de pago <?php echo e($promissoryNote->promissoryNote_final_date); ?>.
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-</div>
-<?php $__env->stopSection(); ?>
-
 <?php $__env->startSection('create'); ?>
-<a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal"
+<a href="#" class="btn btn-primary" style="display: none; font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal"
     data-bs-target="#modal-team">
     + Nuevo pagaré
 </a>
@@ -78,6 +60,7 @@ Pagarés inversionistas
                 <thead>
                     <tr class="text-center">
                         <th>CÓDIGO</th>
+                        <th>PROYECTO</th>
                         <th>FECHA EMISIÓN</th>
                         <th>FECHA PAGO</th>
                         <th>NOMBRE INVERSIONISTA</th>
@@ -90,6 +73,7 @@ Pagarés inversionistas
                     <?php $__currentLoopData = $promissoryNotes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr class="text-center">
                             <td>#<?php echo e($promissoryNote->promissoryNote_code); ?></td>
+                            <td><?php echo e($promissoryNote->project->project_name); ?></td>
                             <td><?php echo e($promissoryNote->promissoryNote_emission_date); ?></td>
                             <td><?php echo e($promissoryNote->promissoryNote_final_date); ?></td>
                             <td>
