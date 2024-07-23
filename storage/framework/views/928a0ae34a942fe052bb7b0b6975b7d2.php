@@ -15,7 +15,13 @@ Listado principal
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('title'); ?>
-Pagarés comisionistas
+Notas crédito
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('create'); ?>
+<a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-team">
+    + Nuevo nota crédito
+</a>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -49,46 +55,34 @@ Pagarés comisionistas
                 <thead>
                     <tr class="text-center">
                         <th>CÓDIGO</th>
-                        <th>PROYECTO</th>
                         <th>FECHA EMISIÓN</th>
-                        <th>FECHA PAGO</th>
-                        <th>COMISIONISTA</th>
-                        <th>MONTO PAGARÉ</th>
-                        <th>ESTADO PAGARÉ</th>
-                        <th>EXPORTAR PAGARÉ</th>
+                        <th>INVERSIONISTA</th>
+                        <th>MONTO NOTA CRÉDITO</th>
+                        <th>COMENTARIO / MOTIVO DE NOTA CRÉDITO</th>
+                        <th>EXPORTAR NOTA CRÉDITO</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $__currentLoopData = $promissoryNotesCommissioner; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $creditNotes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $creditNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr class="text-center">
-                        <td>#<?php echo e($promissoryNote->promissoryNoteCommissioner_code); ?></td>
-                        <td><?php echo e($promissoryNote->project->project_name); ?></td>
-                        <td><?php echo e($promissoryNote->promissoryNoteCommissioner_emission_date); ?></td>
-                        <td><?php echo e($promissoryNote->promissoryNoteCommissioner_final_date); ?></td>
+                        <td><?php echo e($creditNote->creditNote_code); ?></td>
+                        <td><?php echo e($creditNote->creditNote_date); ?></td>
                         <td>
-                            <a href="<?php echo e(route('commission_agent.show', $promissoryNote)); ?>"><?php echo e($promissoryNote->commissioner->commissioner_name); ?>
+                            <a href="<?php echo e(route('investor.show', $creditNote->investor_id)); ?>"><?php echo e($creditNote->investor->investor_name); ?>
 
                                 <small>
                                     <sup>
-                                    <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
+                                        <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
                                     </sup>
                                 </small>
                             </a>
                         </td>
-                        <td>Lps. <?php echo e(number_format($promissoryNote->promissoryNoteCommissioner_amount,2)); ?></td>
+                        <td>Lps. <?php echo e(number_format($creditNote->creditNote_amount,2)); ?></td>
+                        <td style="max-width: 50px;"><?php echo e($creditNote->creditNote_description); ?></td>
                         <td>
-                            <?php if($promissoryNote->promissoryNoteCommissioner_status == '1'): ?>
-                                <span class="badge bg-orange me-1"></span>  Emitido / Sin pagar
-                            <?php elseif($promissoryNote->promissoryNoteCommissioner_status == '0'): ?>
-                                <span class="badge bg-success me-1"></span>  Emitido / Pagado
-                            <?php else: ?>
-                                <span class="badge bg-red me-1"></span> Estado inválido
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <a href="<?php echo e(route('promissory_note_commissioner.report', $promissoryNote->id)); ?>" style="font-size: clamp(0.6rem, 3vw, 0.65rem);" class="btn btn-sm btn-red" data-toggle="modal" data-target="#pdfModal">
-                            &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="<?php echo e(asset('../static/svg/file-text.svg')); ?>" width="20" height="20" alt="">
-                            &nbsp;PAGARÉ
+                            <a href="<?php echo e(route('credit_note.report', $creditNote->id)); ?>" style="font-size: clamp(0.6rem, 3vw, 0.65rem);" class="btn btn-sm btn-red" data-toggle="modal" data-target="#pdfModal">
+                                &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="<?php echo e(asset('../static/svg/file-text.svg')); ?>" width="20" height="20" alt="">
+                                &nbsp;NOTA CRÉDITO
                             </a>
                         </td>
                     </tr>
@@ -96,12 +90,12 @@ Pagarés comisionistas
                 </tbody>
             </table>
 
-            <!-- Modal -->
-            <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+            <!-- PDF Viewer Modal -->
+            <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="pdfModalLabel">Previsualización de pagaré</h5>
+                            <h5 class="modal-title" id="pdfModalLabel">Previsualización de nota crédito</h5>
                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -114,6 +108,7 @@ Pagarés comisionistas
     </div>
 </div>
 
+<?php echo $__env->make('modules.credit_note._create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
@@ -124,7 +119,11 @@ Pagarés comisionistas
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="<?php echo e(asset('vendor/datatables/js/jquery.dataTables.min.js')); ?>"></script>
-<script src="<?php echo e(asset('customjs/datatable/dt_transfer.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/datatable/dt_credit_note.js')); ?>"></script>
+
+<!-- Select2 -->
+<script src="<?php echo e(asset('vendor/select2/select2.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/select2/s2_init.js')); ?>"></script>
 
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -142,4 +141,4 @@ Pagarés comisionistas
     });
 </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/carlos/Code/En proceso/InvestorInsight/resources/views/modules/promissory_note_commissioner/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight\resources\views/modules/credit_note/index.blade.php ENDPATH**/ ?>

@@ -157,7 +157,7 @@
                         </a>
                         <div class="dropend">
                           <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
-                            -> Pagarés
+                            -> Historial de pagarés
                           </a>
                           <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ route('promissory_note.index') }}">
@@ -191,13 +191,20 @@
                         </a>
                         <a class="dropdown-item" href="">
                           <small>->&nbsp;</small>Facturas (sin programar)
-                        </a>                        
-                        <a class="dropdown-item" href="{{ route('payments_investor.index') }}">
-                          <small>->&nbsp;</small>Pagos inversionistas
                         </a>
-                        <a class="dropdown-item" href="{{ route('payments_commissioner.index') }}">
-                          <small>->&nbsp;</small>Pagos comisionistas
-                        </a>
+                        <div class="dropend">
+                          <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                            -> Historial de pagos
+                          </a>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('payments_investor.index') }}">
+                              <small>->&nbsp;</small>Pagos inversionistas
+                            </a>
+                            <a class="dropdown-item" href="{{ route('payments_commissioner.index') }}">
+                              <small>->&nbsp;</small>Pagos comisionistas
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -156,4 +156,4 @@ unset($__errorArgs, $__bag); ?>
    </div>
 </div>
 
-<script src="<?php echo e(asset('customjs/investors/investor_balance.js')); ?>"></script><?php /**PATH /home/carlos/Code/En proceso/InvestorInsight/resources/views/modules/credit_note/_create.blade.php ENDPATH**/ ?>
+<script src="<?php echo e(asset('customjs/investors/investor_balance.js')); ?>"></script><?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight\resources\views/modules/credit_note/_create.blade.php ENDPATH**/ ?>

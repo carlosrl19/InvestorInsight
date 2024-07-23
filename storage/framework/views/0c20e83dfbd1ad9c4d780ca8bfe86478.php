@@ -19,6 +19,11 @@ Pagos inversionistas
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('create'); ?>
+<a href="#" class="btn btn-orange" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#promissoryInvestorNotesModal">
+    <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%); margin-right: 5px" src="<?php echo e(asset('../static/svg/file-spreadsheet.svg')); ?>" width="20" height="20" alt="">
+    Historial de pagarés
+</a>
+
 <a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-payment">
     + Nuevo pago
 </a>
@@ -51,7 +56,7 @@ Pagos inversionistas
     </div>
     <div class="card">
       <div class="card-body">
-        <table id="example" class="display table table-bordered">
+        <table id="payment_investor_table" class="display table table-bordered">
             <thead>
                 <tr class="text-center">
                     <th>CÓDIGO</th>
@@ -106,6 +111,7 @@ Pagos inversionistas
 </div>
 
 <?php echo $__env->make('modules.payment_investors._create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('modules.promissory_note._index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
@@ -116,7 +122,7 @@ Pagos inversionistas
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="<?php echo e(asset('vendor/datatables/js/jquery.dataTables.min.js')); ?>"></script>
-<script src="<?php echo e(asset('customjs/datatable/dt_transfer.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/datatable/dt_investor_payment.js')); ?>"></script>
 
 <!-- Select2 -->
 <script src="<?php echo e(asset('vendor/select2/select2.min.js')); ?>"></script>

@@ -61,4 +61,4 @@
 </body>
 
 </html>
-<?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight - experimental\resources\views/errors/table_not_found.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight\resources\views/errors/table_not_found.blade.php ENDPATH**/ ?>
