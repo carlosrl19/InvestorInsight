@@ -5,7 +5,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('pretitle'); ?>
-Inversionistas
+Inversionistas <small>(Tiempo de carga: <?php echo e(number_format($loadTime, 2)); ?> segundos)</small>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('create'); ?>

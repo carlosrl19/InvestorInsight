@@ -141,14 +141,17 @@ Proyectos activos
                             <td><?php echo e($project->project_end_date); ?></td>
                             <td style="text-align: center;"><?php echo e($project->days_remaining); ?></td> <!-- Get it from Controller -->
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; font-size: clamp(0.6rem, 3vw, 0.65rem);">
-                                <?php $__currentLoopData = $project->investors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $investor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $project->investors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $investor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($key === 0): ?>
                                     <a title="<?php echo e($investor->investor_name); ?>" data-bs-toggle="tooltip" data-bs-placement="top" href="<?php echo e(route('investor.show', $investor)); ?>"><?php echo e($investor->investor_name); ?>
 
                                     <small>
                                         <sup>
                                             <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
                                         </sup>
-                                    </small><br>
+                                    </small>
+
+                                    <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </a>
                             </td>

@@ -142,13 +142,16 @@ Proyectos activos
                             <td>{{ $project->project_end_date }}</td>
                             <td style="text-align: center;">{{ $project->days_remaining  }}</td> <!-- Get it from Controller -->
                             <td style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; font-size: clamp(0.6rem, 3vw, 0.65rem);">
-                                @foreach ($project->investors as $investor)
+                                @foreach ($project->investors as $key => $investor)
+                                    @if ($key === 0)
                                     <a title="{{ $investor->investor_name }}" data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('investor.show', $investor) }}">{{ $investor->investor_name }}
                                     <small>
                                         <sup>
                                             <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
                                         </sup>
-                                    </small><br>
+                                    </small>
+
+                                    @endif
                                 @endforeach
                                 </a>
                             </td>

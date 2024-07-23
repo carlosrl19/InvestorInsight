@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\Investor\StoreRequest;
 use App\Http\Requests\Investor\UpdateRequest;
 use App\Http\Requests\InvestorFunds\StoreInverstorFundsRequest;
@@ -11,6 +10,7 @@ use App\Http\Requests\InvestorLiquidations\StoreInvestorLiquidationsRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 use App\Models\CommissionAgent;
 use App\Models\CreditNote;
@@ -19,8 +19,8 @@ use App\Models\InvestorFunds;
 use App\Models\InvestorLiquidations;
 use App\Models\Transfer;
 use App\Models\Project;
+
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 
@@ -121,69 +121,98 @@ class InvestorController extends Controller
 
     public function show($id)
     {
-        $investor = Investor::findOrFail($id);
-        $investorFunds = InvestorFunds::where('investor_id', '=', $id)->orderBy('created_at')->get(); 
-
-        $transfers = Transfer::where('investor_id', $investor->id)->where('transfer_bank', '!=', 'FONDOS')->orderBy('transfer_date')->get();
-        
-        $creditNotes = CreditNote::where('investor_id', $investor->id)->orderBy('creditNote_date')->get();
-        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
-
-        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
-        ->sum('promissoryNoteCommissioner_amount');
-
-        $total_investor_profit_payment = DB::table('promissory_notes')
-        ->where('promissory_notes.promissoryNote_status', 1)
-        ->sum('promissoryNote_amount');
-
-        $total_investor_profit_paid = DB::table('promissory_notes')
-        ->where('promissory_notes.promissoryNote_status', 0)
-        ->sum('promissoryNote_amount');
-
-        $total_commissioner_commission_paid = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
-        ->sum('promissoryNoteCommissioner_amount');
+        // Iniciar el temporizador
+        $startTime = microtime(true);
     
-        // Cargar el inversor de referencia
-        $referenceInvestor = Investor::find($investor->investor_reference_id);
+        // Tiempo de caché en minutos
+        $cacheTime = 60; // 1 hora
     
-        // Combine transfers and credit notes in a single collection and order them by date
-        $events = collect();
+        $investor = Cache::remember("investor_{$id}", $cacheTime, function () use ($id) {
+            return Investor::findOrFail($id);
+        });
     
-        foreach ($transfers as $transfer) {
-            $events->push((object) [
-                'date' => $transfer->transfer_date,
-                'type' => 'transfer',
-                'amount' => $transfer->transfer_amount,
-                'description' => $transfer->transfer_description,
-                'bank' => $transfer->transfer_bank,
-                'original_model' => $transfer
-            ]);
-        }
+        $investorFunds = Cache::remember("investor_funds_{$id}", $cacheTime, function () use ($id) {
+            return InvestorFunds::where('investor_id', '=', $id)->orderBy('created_at')->get();
+        });
     
-        foreach ($creditNotes as $creditNote) {
-            $events->push((object) [
-                'date' => $creditNote->creditNote_date,
-                'type' => 'creditNote',
-                'amount' => -$creditNote->creditNote_amount,
-                'description' => $creditNote->creditNote_description,
-                'bank' => null,
-                'original_model' => $creditNote
-            ]);
-        }
+        $transfers = Cache::remember("transfers_{$id}", $cacheTime, function () use ($investor) {
+            return Transfer::where('investor_id', $investor->id)->where('transfer_bank', '!=', 'FONDOS')->orderBy('transfer_date')->get();
+        });
     
-        $events = $events->sortBy('date');
+        $creditNotes = Cache::remember("credit_notes_{$id}", $cacheTime, function () use ($investor) {
+            return CreditNote::where('investor_id', $investor->id)->orderBy('creditNote_date')->get();
+        });
     
-        // Calculate the current balance from zero, reflecting all transactions
+        $total_project_investment = Cache::remember('total_project_investment', $cacheTime, function () {
+            return Project::where('project_status', 1)->sum('project_investment');
+        });
+    
+        $total_project_investment_terminated = Cache::remember('total_project_investment_terminated', $cacheTime, function () {
+            return Project::where('project_status', 0)->sum('project_investment');
+        });
+    
+        $total_commissioner_commission_payment = Cache::remember('total_commissioner_commission_payment', $cacheTime, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+    
+        $total_investor_profit_payment = Cache::remember('total_investor_profit_payment', $cacheTime, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 1)
+                ->sum('promissoryNote_amount');
+        });
+    
+        $total_investor_profit_paid = Cache::remember('total_investor_profit_paid', $cacheTime, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 0)
+                ->sum('promissoryNote_amount');
+        });
+    
+        $total_commissioner_commission_paid = Cache::remember('total_commissioner_commission_paid', $cacheTime, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+    
+        $referenceInvestor = Cache::remember("reference_investor_{$investor->investor_reference_id}", $cacheTime, function () use ($investor) {
+            return Investor::find($investor->investor_reference_id);
+        });
+    
+        $events = Cache::remember("events_{$id}", $cacheTime, function () use ($transfers, $creditNotes) {
+            $events = collect();
+    
+            foreach ($transfers as $transfer) {
+                $events->push((object)[
+                    'date' => $transfer->transfer_date,
+                    'type' => 'transfer',
+                    'amount' => $transfer->transfer_amount,
+                    'description' => $transfer->transfer_description,
+                    'bank' => $transfer->transfer_bank,
+                    'original_model' => $transfer
+                ]);
+            }
+    
+            foreach ($creditNotes as $creditNote) {
+                $events->push((object)[
+                    'date' => $creditNote->creditNote_date,
+                    'type' => 'creditNote',
+                    'amount' => -$creditNote->creditNote_amount,
+                    'description' => $creditNote->creditNote_description,
+                    'bank' => null,
+                    'original_model' => $creditNote
+                ]);
+            }
+    
+            return $events->sortBy('date');
+        });
+    
         $currentBalance = 0;
         foreach ($events as $event) {
             $currentBalance += $event->amount;
             $event->current_balance = $currentBalance;
         }
     
-        // Separate the events into transfers and credit notes again for displaying in tables
         $transfers = $events->where('type', 'transfer')->map(function ($event) {
             $transfer = $event->original_model;
             $transfer->current_balance = $event->current_balance;
@@ -196,37 +225,42 @@ class InvestorController extends Controller
             return $creditNote;
         });
     
-        // Recuperar los proyectos activos del inversionista
-        $activeProjects = DB::table('projects')
-            ->join('project_investor', 'projects.id', '=', 'project_investor.project_id')
-            ->where('project_investor.investor_id', $id)
-            ->where('projects.project_status', 1)
-            ->select('projects.project_name', 'projects.project_code', 'projects.project_investment', 'project_investor.investor_investment', 'project_investor.investor_profit', 'project_investor.investor_final_profit')
-            ->get();
+        $activeProjects = Cache::remember("active_projects_{$id}", $cacheTime, function () use ($id) {
+            return DB::table('projects')
+                ->join('project_investor', 'projects.id', '=', 'project_investor.project_id')
+                ->where('project_investor.investor_id', $id)
+                ->where('projects.project_status', 1)
+                ->select('projects.project_name', 'projects.project_code', 'projects.project_investment', 'project_investor.investor_investment', 'project_investor.investor_profit', 'project_investor.investor_final_profit')
+                ->get();
+        });
     
-        // Recuperar los proyectos finalizados del inversionista
-        $completedProjects = DB::table('projects')
-            ->join('project_investor', 'projects.id', '=', 'project_investor.project_id')
-            ->where('project_investor.investor_id', $id)
-            ->where('projects.project_status', 0)
-            ->select('projects.project_name', 'projects.project_code', 'projects.project_investment', 'project_investor.investor_investment', 'project_investor.investor_final_profit', 'project_investor.investor_profit')
-            ->get();
+        $completedProjects = Cache::remember("completed_projects_{$id}", $cacheTime, function () use ($id) {
+            return DB::table('projects')
+                ->join('project_investor', 'projects.id', '=', 'project_investor.project_id')
+                ->where('project_investor.investor_id', $id)
+                ->where('projects.project_status', 0)
+                ->select('projects.project_name', 'projects.project_code', 'projects.project_investment', 'project_investor.investor_investment', 'project_investor.investor_final_profit', 'project_investor.investor_profit')
+                ->get();
+        });
+    
+        // Calcular el tiempo de carga
+        $loadTime = microtime(true) - $startTime;
     
         return view('modules.investors.show', compact(
             'investor',
             'investorFunds',
-            'transfers', 
-            'creditNotes', 
-            'referenceInvestor', 
-            'activeProjects', 
-            'completedProjects', 
+            'transfers',
+            'creditNotes',
+            'referenceInvestor',
+            'activeProjects',
+            'completedProjects',
             'total_project_investment',
             'total_project_investment_terminated',
             'total_commissioner_commission_payment',
             'total_investor_profit_payment',
             'total_investor_profit_paid',
             'total_commissioner_commission_paid',
-
+            'loadTime'
         ));
     }
 

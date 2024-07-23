@@ -7,7 +7,7 @@
 @endsection
 
 @section('pretitle')
-Inversionistas
+Inversionistas <small>(Tiempo de carga: {{ number_format($loadTime, 2) }} segundos)</small>
 @endsection
 
 @section('create')

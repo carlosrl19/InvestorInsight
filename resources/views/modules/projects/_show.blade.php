@@ -39,14 +39,14 @@
 
                                     @foreach($project->investors as $investor)
                                         <p>
-                                            <div class="badge bg-success mt-1"></div>&nbsp;
                                             @if($first_investor)
+                                            <div class="badge bg-success mt-1"></div>&nbsp;
                                                 Ganancia total: Lps. {{ number_format($investor->pivot->investor_final_profit + $project->project_investment,2) }}
                                                 @php
                                                     $first_investor = false;
                                                 @endphp
                                             @else
-                                                5%: Lps. {{ number_format($investor->pivot->investor_final_profit,2) }}
+                                                <!-- Nothing -->
                                             @endif
                                             <br>
                                         </p>
