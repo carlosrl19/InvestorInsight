@@ -23,7 +23,7 @@ Pagos inversionistas
 @section('create')
 <a href="#" class="btn btn-orange" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-promissoryInvestorNotes">
     <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%); margin-right: 5px" src="{{ asset('../static/svg/receipt.svg') }}" width="20" height="20" alt="">
-    Historial de pagarés
+    Pagarés
 </a>
 
 <a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-payment">

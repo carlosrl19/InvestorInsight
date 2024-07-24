@@ -28,4 +28,4 @@
             </form>
         </div>
     </div>
-</div><?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight\resources\views/modules/investors/_delete.blade.php ENDPATH**/ ?>
+</div><?php /**PATH /home/carlos/Code/InvestorInsight/resources/views/modules/investors/_delete.blade.php ENDPATH**/ ?>

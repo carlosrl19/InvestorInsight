@@ -23,21 +23,6 @@ Inversionistas
 
 <?php $__env->startSection('content'); ?>
 
-    <!-- Cuando el inversionista se liquida 
-    <?php if(session('investor_liquidation')): ?>
-        <script>
-            window.onload = function() {
-                redirectToLiquidation();
-            }
-
-            function redirectToLiquidation() {
-                window.location.href = "<?php echo e(route('investor.liquidation_download', session('investor_liquidation'))); ?>";
-            }
-        </script>
-    <?php endif; ?>
-
-    -->
-
     <?php if(session('success')): ?>
     <div class="alert alert-success alert-dismissible fade show" style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="4000">
         <strong><?php echo e(session('success')); ?></strong>
@@ -101,7 +86,7 @@ Inversionistas
                                 <?php endif; ?>
 
                                 <td>
-                                    <?php if($investor->investor_reference): ?>
+                                    <?php if($investor->investoxefr_reference): ?>
                                         <a href="<?php echo e(route('investor.show', ['investor' => $investor->investor_reference->id])); ?>">
                                             <?php echo e($investor->investor_reference->investor_name); ?>
 
@@ -607,4 +592,4 @@ unset($__errorArgs, $__bag); ?>"" id="liquidation_payment_imgs" name="liquidatio
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight\resources\views/modules/investors/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/carlos/Code/InvestorInsight/resources/views/modules/investors/index.blade.php ENDPATH**/ ?>

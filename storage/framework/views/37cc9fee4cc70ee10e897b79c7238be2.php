@@ -46,4 +46,4 @@
     <script src="./dist/js/tabler.min.js?1684106062" defer></script>
     <script src="./dist/js/demo.min.js?1684106062" defer></script>
   </body>
-</html><?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight\resources\views/errors/404.blade.php ENDPATH**/ ?>
+</html><?php /**PATH /home/carlos/Code/InvestorInsight/resources/views/errors/404.blade.php ENDPATH**/ ?>

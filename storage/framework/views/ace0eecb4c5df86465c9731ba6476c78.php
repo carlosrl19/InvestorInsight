@@ -155,19 +155,6 @@
                         <a class="dropdown-item" href="<?php echo e(route('transfer.index')); ?>">
                           <small>->&nbsp;</small>Transferencias
                         </a>
-                        <div class="dropend">
-                          <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
-                            -> Historial de pagarés
-                          </a>
-                          <div class="dropdown-menu">
-                            <a class="dropdown-item" href="<?php echo e(route('promissory_note.index')); ?>">
-                              <small>&nbsp;</small>Inversionistas
-                            </a>
-                            <a class="dropdown-item" href="<?php echo e(route('promissory_note_commissioner.index')); ?>">
-                              <small>&nbsp;</small>Comisionistas
-                            </a>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -342,4 +329,4 @@
   <?php echo $__env->yieldContent('scripts'); ?>
 </body>
 
-</html><?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight\resources\views/layout/admin.blade.php ENDPATH**/ ?>
+</html><?php /**PATH /home/carlos/Code/InvestorInsight/resources/views/layout/admin.blade.php ENDPATH**/ ?>

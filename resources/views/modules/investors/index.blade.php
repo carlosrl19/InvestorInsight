@@ -25,21 +25,6 @@ Inversionistas
 
 @section('content')
 
-    <!-- Cuando el inversionista se liquida 
-    @if (session('investor_liquidation'))
-        <script>
-            window.onload = function() {
-                redirectToLiquidation();
-            }
-
-            function redirectToLiquidation() {
-                window.location.href = "{{ route('investor.liquidation_download', session('investor_liquidation')) }}";
-            }
-        </script>
-    @endif
-
-    -->
-
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="4000">
         <strong>{{ session('success') }}</strong>
@@ -102,7 +87,7 @@ Inversionistas
                                 @endif
 
                                 <td>
-                                    @if($investor->investor_reference)
+                                    @if($investor->investoxefr_reference)
                                         <a href="{{ route('investor.show', ['investor' => $investor->investor_reference->id]) }}">
                                             {{ $investor->investor_reference->investor_name }}
                                             <small>

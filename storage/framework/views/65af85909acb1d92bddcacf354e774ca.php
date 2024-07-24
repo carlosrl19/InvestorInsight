@@ -414,4 +414,4 @@ Dashboard
     });
 </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight\resources\views/modules/dashboard/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/carlos/Code/InvestorInsight/resources/views/modules/dashboard/index.blade.php ENDPATH**/ ?>

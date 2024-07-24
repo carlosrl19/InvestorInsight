@@ -61,16 +61,16 @@
                             </table>
 
                             <!-- Modal -->
-                            <div class="modal fade modal-blur" id="pdfModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
-                                role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                            <div class="modal fade modal-blur" id="pdfPromissoryNote" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                                role="dialog" aria-labelledby="pdfPromissoryNoteLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="pdfModalLabel">Previsualización de pagaré</h5>
+                                            <h5 class="modal-title" id="pdfPromissoryNoteLabel">Previsualización de pagaré</h5>
                                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <iframe id="pdf-frame" style="width:100%; height:500px;" src=""></iframe>
+                                            <iframe id="pdf-promissory_note" style="width:100%; height:500px;" src=""></iframe>
                                         </div>
                                     </div>
                                 </div>
@@ -92,13 +92,13 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    $('#pdfModal').on('show.bs.modal', function (event) {
+    $('#pdfPromissoryNote').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que activó el modal
         var url = button.attr('href'); // Extraer la información de los atributos data-*
         var modal = $(this);
-        modal.find('#pdf-frame').attr('src', url);
+        modal.find('#pdf-promissory_note').attr('src', url);
     });
-    $('#pdfModal').on('hidden.bs.modal', function (e) {
-        $(this).find('#pdf-frame').attr('src', '');
+    $('#pdfPromissoryNote').on('hidden.bs.modal', function (e) {
+        $(this).find('#pdf-promissory_note').attr('src', '');
     });
 </script>

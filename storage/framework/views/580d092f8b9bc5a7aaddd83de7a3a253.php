@@ -172,4 +172,4 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
    </div>
-</div><?php /**PATH C:\Users\Carlos Rodriguez\Desktop\Code\InvestorInsight\resources\views/modules/investors/_create.blade.php ENDPATH**/ ?>
+</div><?php /**PATH /home/carlos/Code/InvestorInsight/resources/views/modules/investors/_create.blade.php ENDPATH**/ ?>
