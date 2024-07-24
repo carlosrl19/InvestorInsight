@@ -1,30 +1,28 @@
-@extends('layout.admin')
-
-@section('head')
+<?php $__env->startSection('head'); ?>
 
 <!-- Datatable CSS -->
-<link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('css/datatable.css') }}" rel="stylesheet">
+<link href="<?php echo e(asset('vendor/datatables/css/jquery.dataTables.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(asset('vendor/datatables/css/buttons.dataTables.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(asset('css/datatable.css')); ?>" rel="stylesheet">
 
 <!-- Select2 -->
-<link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
+<link rel="stylesheet" href="<?php echo e(asset('vendor/select2/select2.min.css')); ?>">
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('pretitle')
+<?php $__env->startSection('pretitle'); ?>
 Listado principal
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('title')
+<?php $__env->startSection('title'); ?>
 Pagos inversionistas
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('create')
+<?php $__env->startSection('create'); ?>
 <a href="#" class="btn btn-orange" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal"
     data-bs-target="#modal-promissoryInvestorNotes">
     <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%); margin-right: 5px"
-        src="{{ asset('../static/svg/receipt.svg') }}" width="20" height="20" alt="">
+        src="<?php echo e(asset('../static/svg/receipt.svg')); ?>" width="20" height="20" alt="">
     Pagarés
 </a>
 
@@ -32,30 +30,30 @@ Pagos inversionistas
     data-bs-target="#modal-payment">
     + Nuevo pago
 </a>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
-@if(session('success'))
+<?php if(session('success')): ?>
     <div class="alert alert-success alert-dismissible fade show"
         style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert"
         data-auto-dismiss="4000">
-        <strong>{{ session('success') }}</strong>
+        <strong><?php echo e(session('success')); ?></strong>
     </div>
-@endif
+<?php endif; ?>
 
-@if ($errors->any())
+<?php if($errors->any()): ?>
     <div class="alert alert-danger alert-dismissible" alert-dismissible fade show"
         style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert"
         data-auto-dismiss="10000">
         <strong>El formulario contiene los siguientes errores:</strong>
         <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
+            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <li><?php echo e($error); ?></li>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ul>
     </div>
-@endif
+<?php endif; ?>
 
 <div class="container-xl">
     <div class="card mb-2">
@@ -76,30 +74,31 @@ Pagos inversionistas
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($payments as $payment)
+                    <?php $__currentLoopData = $payments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr class="text-center">
-                            <td>#{{ $payment->payment_code }}</td>
-                            <td>{{ $payment->payment_date }}</td>
+                            <td>#<?php echo e($payment->payment_code); ?></td>
+                            <td><?php echo e($payment->payment_date); ?></td>
                             <td>
-                                <a href="{{ route('investor.show', $payment->investor) }}">{{ $payment->investor->investor_name }}
+                                <a href="<?php echo e(route('investor.show', $payment->investor)); ?>"><?php echo e($payment->investor->investor_name); ?>
+
                                     <small>
                                         <sup>
                                             <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);"
-                                                src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+                                                src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
                                         </sup>
                                     </small>
                             </td>
-                            <td class="text-red">Lps. {{ number_format($payment->payment_amount, 2) }}</td>
+                            <td class="text-red">Lps. <?php echo e(number_format($payment->payment_amount, 2)); ?></td>
                             <td class="text-red">
-                                <a href="{{ route('payments_investor.report', $payment->id) }}"
+                                <a href="<?php echo e(route('payments_investor.report', $payment->id)); ?>"
                                     class="badge bg-red me-1 text-white" data-toggle="modal" data-target="#pdfModal">
                                     <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);"
-                                        src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
+                                        src="<?php echo e(asset('../static/svg/file-text.svg')); ?>" width="20" height="20" alt="">
                                     REPORTE DE PAGO
                                 </a>
                             </td>
                         </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
 
@@ -123,23 +122,23 @@ Pagos inversionistas
     </div>
 </div>
 
-@include('modules.payment_investors._create')
-@include('modules.promissory_note._index')
-@endsection
+<?php echo $__env->make('modules.payment_investors._create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('modules.promissory_note._index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 
 <!-- Alert fade closer script-->
-<script src="{{ asset('customjs/alert_closer.js')}}"></script>
+<script src="<?php echo e(asset('customjs/alert_closer.js')); ?>"></script>
 
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-<script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_investor_payments.js') }}"></script>
+<script src="<?php echo e(asset('vendor/datatables/js/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/datatable/dt_investor_payments.js')); ?>"></script>
 
 <!-- Select2 -->
-<script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
-<script src="{{ asset('customjs/select2/s2_init.js') }}"></script>
+<script src="<?php echo e(asset('vendor/select2/select2.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/select2/s2_init.js')); ?>"></script>
 
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -157,4 +156,5 @@ Pagos inversionistas
     });
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/carlos/Code/InvestorInsight/resources/views/modules/payment_investors/index.blade.php ENDPATH**/ ?>

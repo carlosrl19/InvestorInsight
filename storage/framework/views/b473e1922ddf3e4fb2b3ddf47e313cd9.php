@@ -23,40 +23,41 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($promissoryNotes as $promissoryNote)
+                                    <?php $__currentLoopData = $promissoryNotes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr class="text-center">
-                                            <td>#{{ $promissoryNote->promissoryNote_code }}</td>
-                                            <td>{{ $promissoryNote->project->project_name }}</td>
-                                            <td>{{ $promissoryNote->promissoryNote_emission_date }}</td>
-                                            <td>{{ $promissoryNote->promissoryNote_final_date }}</td>
+                                            <td>#<?php echo e($promissoryNote->promissoryNote_code); ?></td>
+                                            <td><?php echo e($promissoryNote->project->project_name); ?></td>
+                                            <td><?php echo e($promissoryNote->promissoryNote_emission_date); ?></td>
+                                            <td><?php echo e($promissoryNote->promissoryNote_final_date); ?></td>
                                             <td>
-                                                <a href="{{ route('investor.show', $promissoryNote->investor) }}">{{ $promissoryNote->investor->investor_name }}
+                                                <a href="<?php echo e(route('investor.show', $promissoryNote->investor)); ?>"><?php echo e($promissoryNote->investor->investor_name); ?>
+
                                                     <small>
                                                         <sup>
-                                                            <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+                                                            <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
                                                         </sup>
                                                     </small>
                                                 </a>
                                             </td>
-                                            <td>Lps. {{ number_format($promissoryNote->promissoryNote_amount, 2) }}</td>
+                                            <td>Lps. <?php echo e(number_format($promissoryNote->promissoryNote_amount, 2)); ?></td>
                                             <td>
-                                                @if($promissoryNote->promissoryNote_status == '1')
+                                                <?php if($promissoryNote->promissoryNote_status == '1'): ?>
                                                     <span class="badge bg-orange me-1"></span> Emitido / Sin pagar
-                                                @elseif($promissoryNote->promissoryNote_status == '0')
+                                                <?php elseif($promissoryNote->promissoryNote_status == '0'): ?>
                                                     <span class="badge bg-success me-1"></span> Emitido / Pagado
-                                                @else
+                                                <?php else: ?>
                                                     <span class="badge bg-red me-1"></span> Estado inválido
-                                                @endif
+                                                <?php endif; ?>
                                             </td>
                                             <td>
-                                                <a href="{{ route('promissory_note.report', $promissoryNote->id) }}" class="btn btn-sm btn-red"
+                                                <a href="<?php echo e(route('promissory_note.report', $promissoryNote->id)); ?>" class="btn btn-sm btn-red"
                                                     data-toggle="modal" data-target="#pdfPromissoryNote" style="padding-right: 20px; font-size: clamp(0.6rem, 3vw, 0.7rem)">
-                                                    &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
+                                                    &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="<?php echo e(asset('../static/svg/file-text.svg')); ?>" width="20" height="20" alt="">
                                                     &nbsp;PAGARÉ
                                                 </a>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
 
@@ -85,8 +86,8 @@
 
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-<script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_promissoryNotes.js') }}"></script>
+<script src="<?php echo e(asset('vendor/datatables/js/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/datatable/dt_promissoryNotes.js')); ?>"></script>
 
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -102,3 +103,4 @@
         $(this).find('#pdf-promissory_note').attr('src', '');
     });
 </script>
+<?php /**PATH /home/carlos/Code/InvestorInsight/resources/views/modules/promissory_note/_index.blade.php ENDPATH**/ ?>
