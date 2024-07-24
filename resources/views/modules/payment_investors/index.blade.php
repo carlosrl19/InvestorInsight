@@ -21,8 +21,8 @@ Pagos inversionistas
 @endsection
 
 @section('create')
-<a href="#" class="btn btn-orange" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#promissoryInvestorNotesModal">
-    <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%); margin-right: 5px" src="{{ asset('../static/svg/file-spreadsheet.svg') }}" width="20" height="20" alt="">
+<a href="#" class="btn btn-orange" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-promissoryInvestorNotes">
+    <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%); margin-right: 5px" src="{{ asset('../static/svg/receipt.svg') }}" width="20" height="20" alt="">
     Historial de pagarés
 </a>
 
@@ -58,7 +58,7 @@ Pagos inversionistas
     </div>
     <div class="card">
       <div class="card-body">
-        <table id="payment_investor_table" class="display table table-bordered">
+        <table id="investorPayments" class="display table table-bordered">
             <thead>
                 <tr class="text-center">
                     <th>CÓDIGO</th>
@@ -123,7 +123,7 @@ Pagos inversionistas
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_investor_payment.js') }}"></script>
+<script src="{{ asset('customjs/datatable/dt_investor_payments.js') }}"></script>
 
 <!-- Select2 -->
 <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>

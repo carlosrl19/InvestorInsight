@@ -5,9 +5,6 @@
 <link href="<?php echo e(asset('vendor/datatables/css/buttons.dataTables.min.css')); ?>" rel="stylesheet">
 <link href="<?php echo e(asset('css/datatable.css')); ?>" rel="stylesheet">
 
-<!-- Select2 -->
-<link rel="stylesheet" href="<?php echo e(asset('vendor/select2/select2.min.css')); ?>">
-
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('pretitle'); ?>

@@ -21,6 +21,8 @@ class PaymentInvestorController extends Controller
         // Obtener los códigos de proyectos activos
         $activeProjectCodes = Project::where('project_status', 0)->pluck('project_code');
 
+        $promissoryNotes = PromissoryNote::get();
+
         // Filtrar los Promissory Notes que tengan un código que coincida con los códigos de proyectos activos
         $promissoryNoteInvestors = PromissoryNote::where('promissoryNote_status', 0)
             ->whereIn('promissoryNote_code', $activeProjectCodes)
@@ -48,6 +50,7 @@ class PaymentInvestorController extends Controller
 
         return view('modules.payment_investors.index', compact(
             'payments',
+            'promissoryNotes',
             'promissoryNoteInvestors',
             'todayDate',
             'total_project_investment',

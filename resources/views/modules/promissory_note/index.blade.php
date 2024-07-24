@@ -7,9 +7,6 @@
 <link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/datatable.css') }}" rel="stylesheet">
 
-<!-- Select2 -->
-<link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
-
 @endsection
 
 @section('pretitle')
