@@ -13,7 +13,6 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>CÓDIGO</th>
-                                        <th>PROYECTO</th>
                                         <th>FECHA EMISIÓN</th>
                                         <th>FECHA PAGO</th>
                                         <th>NOMBRE <br>INVERSIONISTA</th>
@@ -26,7 +25,6 @@
                                     <?php $__currentLoopData = $promissoryNotes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr class="text-center">
                                             <td>#<?php echo e($promissoryNote->promissoryNote_code); ?></td>
-                                            <td><?php echo e($promissoryNote->project->project_name); ?></td>
                                             <td><?php echo e($promissoryNote->promissoryNote_emission_date); ?></td>
                                             <td><?php echo e($promissoryNote->promissoryNote_final_date); ?></td>
                                             <td>

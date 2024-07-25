@@ -5,19 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\CommissionAgent;
 use Illuminate\Http\Request;
 use App\Http\Requests\Project\StoreRequest;
+
 use App\Models\Investor;
 use App\Models\InvestorFunds;
 use App\Models\Project;
 use App\Models\Transfer;
 use App\Models\PromissoryNote;
 use App\Models\PromissoryNoteCommissioner;
+use App\Models\PaymentCommissioner;
+use App\Models\PaymentInvestor;
+
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+
 use App\Exports\CustomExport;
 use App\Exports\ActiveProjectsExport;
 use App\Exports\ActiveInvestorProjectExport;
-use App\Models\PaymentCommissioner;
-use App\Models\PaymentInvestor;
+
 use Maatwebsite\Excel\Facades\Excel;
 use Dompdf\Options;
 use Dompdf\Dompdf;
@@ -140,14 +145,62 @@ class ProjectController extends Controller
     
     public function indexClosed()
     {
-        $projects = Project::where('project_status', 2)->with('investors')->get();
-        $investors = Investor::orderBy('investor_name')->get();
-        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
-            ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
-            ->sum('promissoryNoteCommissioner_amount');
+        // Tiempo de caché en minutos
+        $cacheTime = 60; // 1 hora
+    
+        $projects = Cache::remember('closed_projects', $cacheTime, function () {
+            return Project::where('project_status', 2)->with('investors')->get();
+        });
+    
+        $investors = Cache::remember('investors_ordered', $cacheTime, function () {
+            return Investor::orderBy('investor_name')->get();
+        });
 
-        return view('modules.projects_closed.index', compact('projects', 'investors',  'total_project_investment', 'total_commissioner_commission_payment'));
+        // Sumas de inversiones
+        $total_project_investment = cache()->remember('total_project_investment', 60, function () {
+            return Project::where('project_status', 1)->sum('project_investment');
+        });
+
+        $total_project_investment_terminated = cache()->remember('total_project_investment_terminated', 60, function () {
+            return Project::where('project_status', 0)->sum('project_investment');
+        });
+
+        // Comisiones pagadas
+        $total_commissioner_commission_payment = cache()->remember('total_commissioner_commission_payment', 60, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+
+        $total_investor_profit_payment = cache()->remember('total_investor_profit_payment', 60, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 1)
+                ->sum('promissoryNote_amount');
+        });
+
+        $total_investor_profit_paid = cache()->remember('total_investor_profit_paid', 60, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 0)
+                ->sum('promissoryNote_amount');
+        });
+
+        $total_commissioner_commission_paid = cache()->remember('total_commissioner_commission_paid', 60, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+    
+        return view('modules.projects_closed.index', compact(
+            'projects',
+            'investors',
+            'total_project_investment',
+            'total_project_investment_terminated',
+            'total_commissioner_commission_payment',
+            'total_investor_profit_payment',
+            'total_investor_profit_paid',
+            'total_commissioner_commission_paid'
+
+        ));
     }
     // END INDEX FUNCTIONS
 

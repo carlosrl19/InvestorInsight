@@ -29,8 +29,8 @@
         searching: true,
         lengthChange: true,
         aLengthMenu: [
-            [10, 20, 50],
-            [10, 20, 50]
+            [5, 10, 20],
+            [5, 10, 20]
         ],
     });
 })(jQuery);

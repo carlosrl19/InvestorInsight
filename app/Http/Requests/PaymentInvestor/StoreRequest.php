@@ -20,6 +20,7 @@ class StoreRequest extends FormRequest
             'payment_date' => 'required|date:Y-m-d H:i:s',
             'promissoryNote_id' => 'required|numeric|exists:promissory_notes,id',
             'investor_id' => 'required|numeric|exists:investors,id',
+            'project_id' => 'required|numeric|exists:projects,id',
         ];
     }
 
@@ -52,6 +53,11 @@ class StoreRequest extends FormRequest
             'investor_id.required' => 'El inversionista es obligatorio.',
             'investor_id.numeric' => 'El id del inversionista seleccionado solo debe contener números.',
             'investor_id.exists' => 'El inversionista seleccionado no existe en la base de datos.',
+            
+            // Project id messages
+            'project_id.required' => 'El proyecto es obligatorio.',
+            'project_id.numeric' => 'El id del proyecto seleccionado solo debe contener números.',
+            'project_id.exists' => 'El proyecto vinculado no existe en la base de datos.',
         ];
     }
 }

@@ -24,10 +24,4 @@ class PaymentInvestor extends Model
     {
         return $this->belongsTo(PromissoryNote::class, 'promissoryNote_id');
     }
-
-    public function project()
-    {
-        return $this->investor->belongsToMany(Project::class, 'project_investor')
-            ->withPivot('investor_investment', 'investor_profit', 'investor_final_profit');
-    }
 }

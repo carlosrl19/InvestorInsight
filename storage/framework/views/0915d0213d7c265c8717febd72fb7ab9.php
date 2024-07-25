@@ -17,7 +17,7 @@
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
                                         <?php $__empty_1 = true; $__currentLoopData = $promissoryNoteInvestors->where('promissoryNote_status', 0); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNoteInvestor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                             <option value="<?php echo e($promissoryNoteInvestor->id); ?>" data-investor-id="<?php echo e($promissoryNoteInvestor->investor_id); ?>">
-                                                #<?php echo e($promissoryNoteInvestor->promissoryNote_code); ?> - <?php echo e($promissoryNoteInvestor->project->project_name); ?> - Lps. <?php echo e(number_format($promissoryNoteInvestor->promissoryNote_amount, 2)); ?>
+                                                <?php echo e($promissoryNoteInvestor->promissoryNote_code); ?> - <?php echo e($promissoryNoteInvestor->project->project_name); ?> - Lps. <?php echo e(number_format($promissoryNoteInvestor->promissoryNote_amount, 2)); ?>
 
                                             </option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

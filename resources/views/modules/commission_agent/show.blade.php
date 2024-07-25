@@ -59,7 +59,7 @@ Historial de comisionista /&nbsp;
                         <h3 class="card-title">Proyectos en proceso</h3>
                         <a href="{{ route('commission_agent.excel_active_projects', $commissioner) }}" class="badge bg-teal me-1 text-white" style="margin-left: 10px;">
                             <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-spreadsheet.svg') }}" width="20" height="20" alt="">
-                            EXCEL
+                            EXPORTAR EXCEL
                         </a>
                     </div>
                     <div class="card-body card-body-scrollable card-body-scrollable-shadow">
@@ -102,7 +102,7 @@ Historial de comisionista /&nbsp;
                         <h3 class="card-title">Proyectos finalizados</h3>
                         <a href="{{ route('commission_agent.excel_terminated_projects', $commissioner) }}" class="badge bg-teal me-1 text-white" style="margin-left: 10px;">
                             <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-spreadsheet.svg') }}" width="20" height="20" alt="">
-                            EXCEL
+                            EXPORTAR EXCEL
                         </a>
                     </div>
                     <div class="card-body card-body-scrollable card-body-scrollable-shadow">

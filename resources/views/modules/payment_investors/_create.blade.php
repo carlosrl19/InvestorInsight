@@ -17,7 +17,7 @@
                                         <option value="" selected disabled>Seleccione el pagaré a pagar</option>
                                         @forelse ($promissoryNoteInvestors->where('promissoryNote_status', 0) as $promissoryNoteInvestor)
                                             <option value="{{ $promissoryNoteInvestor->id }}" data-investor-id="{{ $promissoryNoteInvestor->investor_id }}">
-                                                #{{ $promissoryNoteInvestor->promissoryNote_code }} - {{ $promissoryNoteInvestor->project->project_name }} - Lps. {{ number_format($promissoryNoteInvestor->promissoryNote_amount, 2) }}
+                                                {{ $promissoryNoteInvestor->promissoryNote_code }} - {{ $promissoryNoteInvestor->project->project_name }} - Lps. {{ number_format($promissoryNoteInvestor->promissoryNote_amount, 2) }}
                                             </option>
                                         @empty
                                         @endforelse
