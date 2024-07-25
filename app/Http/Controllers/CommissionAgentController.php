@@ -7,6 +7,9 @@ use App\Http\Requests\CommissionAgent\UpdateRequest;
 
 use App\Models\CommissionAgent;
 use App\Models\Project;
+use App\Exports\ActiveCommissionerProjectsExport;
+use App\Exports\TerminatedCommissionerProjectsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
@@ -74,11 +77,6 @@ class CommissionAgentController extends Controller
             'commissioner_balance',
             'loadTime'
         ));
-    }
-
-    public function create()
-    {
-        //
     }
 
     public function store(StoreRequest $request)
@@ -175,8 +173,7 @@ class CommissionAgentController extends Controller
     {
         $commission_agent = CommissionAgent::findOrFail($id);
         return view('modules.commission_agent.index', compact('commission_agent'));
-    }    
-
+    }
 
     public function update(UpdateRequest $request, CommissionAgent $commissionAgent)
     {
@@ -195,5 +192,21 @@ class CommissionAgentController extends Controller
         $commissionAgent->delete();
     
         return redirect()->route('commission_agent.index')->with('success', 'Comisionista eliminado exitosamente.');
+    }
+
+    public function exportActiveProjects($id)
+    {
+        $commissioner = CommissionAgent::findOrFail($id);
+        $commissionerName = $commissioner->commissioner_name;
+
+        return Excel::download(new ActiveCommissionerProjectsExport($id), 'COMISIONISTA ' . $commissionerName . ' - HISTORIAL DE PROYECTOS ACTIVOS.xlsx');        
+    }
+
+    public function exportTerminatedProjects($id)
+    {
+        $commissioner = CommissionAgent::findOrFail($id);
+        $commissionerName = $commissioner->commissioner_name;
+
+        return Excel::download(new TerminatedCommissionerProjectsExport($id), 'COMISIONISTA ' . $commissionerName . ' - HISTORIAL DE PROYECTOS FINALIZADOS.xlsx');        
     }
 }

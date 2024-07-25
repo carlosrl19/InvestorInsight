@@ -30,6 +30,8 @@ Route::get('investors_liquidations/{id}/report/download', 'App\Http\Controllers\
 
 // Commission agent
 Route::resource('commission_agent', 'App\Http\Controllers\CommissionAgentController')->names('commission_agent');
+Route::get('commission_agent/{id}/active_projects/excel', 'App\Http\Controllers\CommissionAgentController@exportActiveProjects')->name('commission_agent.excel_active_projects');
+Route::get('commission_agent/{id}/terminated_projects/excel', 'App\Http\Controllers\CommissionAgentController@exportTerminatedProjects')->name('commission_agent.excel_terminated_projects');
 
 // Commission agent payments
 Route::resource('payments_commissioner', 'App\Http\Controllers\PaymentCommissionerController')->names('payments_commissioner');
