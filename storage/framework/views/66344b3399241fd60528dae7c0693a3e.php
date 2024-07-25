@@ -52,12 +52,12 @@ Inversionistas
                     <thead>
                         <tr class="text-center">
                             <th>ID</th>
-                            <th>NOMBRE INVERSIONISTA</th>
-                            <th>EMPRESA</th>
+                            <th>NOMBRE <br>INVERSIONISTA</th>
+                            <th>EMPRESA <br>AFILIADA</th>
                             <th>Nº IDENTIDAD</th>
-                            <th>Nº TELÉFONO</th>
+                            <th>Nº TELEFOON</th>
                             <th>FONDO MONETARIO</th>
-                            <th>RECOMENDACIÓN</th>
+                            <th>RECOMENDACION</th>
                             <th>ESTADO</th>
                             <th style="width: 8vh">ACCIONES</th>
                         </tr>
@@ -130,12 +130,14 @@ Inversionistas
                                                         &nbsp;Actualizar información
                                                     </a>
 
+                                                    <!-- 
                                                     <?php if($investor->investor_status == 1): ?>
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-fund<?php echo e($investor->id); ?>">
                                                         <img style="filter: invert(42%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(99%) contrast(93%);" src="<?php echo e(asset('../static/svg/coins.svg')); ?>" width="20" height="20" alt="">
                                                         &nbsp;Agregar fondo
                                                     </a>
                                                     <?php endif; ?>
+                                                    -->
                                                     
                                                     <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo e($investor->id); ?>">
                                                         <img style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);" src="<?php echo e(asset('../static/svg/trash.svg')); ?>" width="20" height="20" alt="">

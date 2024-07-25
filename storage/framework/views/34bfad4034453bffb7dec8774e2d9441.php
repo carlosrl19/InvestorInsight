@@ -66,9 +66,9 @@ Pagos inversionistas
             <table id="investorPayments" class="display table table-bordered">
                 <thead>
                     <tr class="text-center">
-                        <th>CÓDIGO</th>
-                        <th>FECHA HORA</th>
-                        <th>NOMBRE INVERSIONISTA</th>
+                        <th>CODIGO <br>PAGO</th>
+                        <th>FECHA / HORA <br>PAGO</th>
+                        <th>NOMBRE <br>INVERSIONISTA</th>
                         <th>MONTO A PAGAR</th>
                         <th>REPORTE DE PAGO <br>DE COMISIÓN</th>
                     </tr>

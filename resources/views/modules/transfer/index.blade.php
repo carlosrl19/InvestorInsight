@@ -56,13 +56,13 @@ Transferencias
         <table id="example" class="display table table-bordered">
             <thead>
                 <tr class="text-center">
-                    <th>Código</th>
-                    <th>Inversionista</th>
-                    <th>Fecha Hora</th>
-                    <th>Banco transferencia</th>
-                    <th>Monto transferencia</th>
-                    <th>Motivo</th>
-                    <th>Comprobante</th>
+                    <th>CODIGO <br>TRANSFERENCIA</th>
+                    <th>NOMBRE <br>INVERSIONISTA</th>
+                    <th>FECHA / HORA <br>TRANSFERENCIA</th>
+                    <th>BANCO <br>TRANSFERENCIA</th>
+                    <th>MONTO <br>TRANSFERENCIA</th>
+                    <th>COMENTARIOS <br>TRANSFERENCIA</th>
+                    <th>IMAGEN <br>COMPROBANTE</th>
                 </tr>
             </thead>
             <tbody>

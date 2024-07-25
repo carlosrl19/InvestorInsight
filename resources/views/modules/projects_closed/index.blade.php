@@ -31,16 +31,16 @@ Proyectos cerrados
         <div class="card-body">
             <table id="example" class="display table table-bordered" style="width: 100%;">
                 <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Nombre proyecto</th>
-                        <th>Inicio</th>
-                        <th>Final</th>
-                        <th>Inversionista</th>
-                        <th>Inversión</th>
-                        <th>Ganancia</th>
-                        <th>Estado</th>
-                        <th>Motivo de cierre</th>
+                    <tr style="text-align: center;">
+                        <th>CODIGO <br>PROYECTO</th>
+                        <th>NOMBRE <br>PROYECTO</th>
+                        <th>FECHA <br>INICIAL</th>
+                        <th>FECHA <br>FINAL</th>
+                        <th>NOMBRE <br>INVERSIONISTA</th>
+                        <th>MONTO <br>INVERSION</th>
+                        <th>GANANCIA <br>TOTAL</th>
+                        <th>ESTADO <br>PROYECTO</th>
+                        <th>MOTIVO <br>CIERRE</th>
                     </tr>
                 </thead>
                 @php

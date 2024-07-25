@@ -11,7 +11,7 @@
                 .eq(0)
                 .each(function (colIdx) {
                     // Verifica si la columna actual no es la última
-                    if (colIdx < api.columns().eq(0).length) {
+                    if (colIdx < api.columns().eq(0).length - 1) {
                         var column = api.column(colIdx);
                         var title = $(column.header()).text();
 

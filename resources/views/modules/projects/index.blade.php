@@ -107,17 +107,17 @@ Proyectos activos
             <table id="example" class="display nowrap table table-bordered" style="width: 100%;">
                 <thead>
                     <tr style="text-align: center;">
-                        <th>Código <br>proyecto</th>
-                        <th>Nombre <br>proyecto</th>
-                        <th>Fecha <br>inicio</th>
-                        <th>Fecha <br>final</th>
-                        <th>Días</th>
-                        <th>Nombre <br>inversionista(s)</th>
-                        <th>Monto <br>inversión</th>
-                        <th>Ganancia <br>proyecto</th>
-                        <th>Exportar <br> excel</th>
-                        <th>Estado <br>proyecto</th>
-                        <th>Más <br>acciones</th>
+                        <th>CODIGO <br>PROYECTO</th>
+                        <th>NOMBRE <br>PROYECTO</th>
+                        <th>FECHA <br>INICIO</th>
+                        <th>FECHA <br>FINAL</th>
+                        <th>DIAS <br>RESTANTES</th>
+                        <th>NOMBRE <br>INVERSIONISTA</th>
+                        <th>MONTO <br>INVERSION</th>
+                        <th>GANANCIA <br>PROYECTO</th>
+                        <th>EXPORTAR <br> EXCEL</th>
+                        <th>ESTADO <br>PROYECTO</th>
+                        <th>MAS <br>ACCIONES</th>
                     </tr>
                 </thead>
                 @php

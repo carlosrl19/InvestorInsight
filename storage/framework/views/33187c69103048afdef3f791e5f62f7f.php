@@ -37,15 +37,15 @@ Proyectos finiquitados
             <table id="example" class="display table table-bordered" style="width: 100%;">
                 <thead>
                     <tr style="text-align: center;">
-                        <th>Código <br> proyecto</th>
-                        <th>Nombre <br> proyecto</th>
-                        <th>Feha <br> inicio</th>
-                        <th>Fecha <br> final</th>
-                        <th>Nombre <br> inversionista(s)</th>
-                        <th>Monto <br> Inversión</th>
-                        <th>Ganancia <br> proyecto</th>
-                        <th>Exportar <br> Finiquito</th>
-                        <th>Estado <br> proyecto</th>
+                        <th>CODIGO <br>PROYECTO</th>
+                        <th>NOMBRE <br>PROYECTO</th>
+                        <th>FECHA <br>INICIAL</th>
+                        <th>FECHA <br>FINAL</th>
+                        <th>NOMBRE <br>INVERSIONISTA</th>
+                        <th>MONTO <br>INVERSION</th>
+                        <th>GANANCIA <br>PROYECTO</th>
+                        <th>EXPORTAR <br>FINIQUITO</th>
+                        <th>ESTADO <br>PROYECTO</th>
                     </tr>
                 </thead>
                 <?php

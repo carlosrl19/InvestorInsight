@@ -1,49 +1,47 @@
-@extends('layout.admin')
-
-@section('head')
+<?php $__env->startSection('head'); ?>
 
 <!-- Datatable CSS -->
-<link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('css/datatable.css') }}" rel="stylesheet">
+<link href="<?php echo e(asset('vendor/datatables/css/jquery.dataTables.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(asset('vendor/datatables/css/buttons.dataTables.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(asset('css/datatable.css')); ?>" rel="stylesheet">
 
 <!-- Select2 -->
-<link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
+<link rel="stylesheet" href="<?php echo e(asset('vendor/select2/select2.min.css')); ?>">
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('pretitle')
+<?php $__env->startSection('pretitle'); ?>
 Listado principal
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('title')
+<?php $__env->startSection('title'); ?>
 Notas crédito
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('create')
+<?php $__env->startSection('create'); ?>
 <a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-team">
     + Nuevo nota crédito
 </a>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
-    @if(session('success'))
+    <?php if(session('success')): ?>
     <div class="alert alert-success alert-dismissible fade show" style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="4000">
-        <strong>{{ session('success') }}</strong>
+        <strong><?php echo e(session('success')); ?></strong>
     </div>
-    @endif
+    <?php endif; ?>
     
-    @if ($errors->any())
+    <?php if($errors->any()): ?>
     <div class="alert alert-danger alert-dismissible" alert-dismissible fade show" style="margin-right: 10vh; margin-left: 10vh; font-size: clamp(0.6rem, 3.2vw, 0.8rem);" role="alert" data-auto-dismiss="10000">
         <strong>El formulario contiene los siguientes errores:</strong>
         <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
+            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <li><?php echo e($error); ?></li>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ul>
     </div>
-    @endif
+    <?php endif; ?>
 
 <div class="container-xl">
     <div class="card mb-2">
@@ -65,29 +63,30 @@ Notas crédito
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($creditNotes as $creditNote)
+                    <?php $__currentLoopData = $creditNotes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $creditNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr class="text-center">
-                        <td>{{ $creditNote->creditNote_code }}</td>
-                        <td>{{ $creditNote->creditNote_date }}</td>
+                        <td><?php echo e($creditNote->creditNote_code); ?></td>
+                        <td><?php echo e($creditNote->creditNote_date); ?></td>
                         <td>
-                            <a href="{{ route('investor.show', $creditNote->investor_id) }}">{{ $creditNote->investor->investor_name }}
+                            <a href="<?php echo e(route('investor.show', $creditNote->investor_id)); ?>"><?php echo e($creditNote->investor->investor_name); ?>
+
                                 <small>
                                     <sup>
-                                        <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+                                        <img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
                                     </sup>
                                 </small>
                             </a>
                         </td>
-                        <td>Lps. {{ number_format($creditNote->creditNote_amount,2) }}</td>
-                        <td style="max-width: 50px;">{{ $creditNote->creditNote_description }}</td>
+                        <td>Lps. <?php echo e(number_format($creditNote->creditNote_amount,2)); ?></td>
+                        <td style="max-width: 50px;"><?php echo e($creditNote->creditNote_description); ?></td>
                         <td>
-                            <a href="{{ route('credit_note.report', $creditNote->id) }}" style="font-size: clamp(0.6rem, 3vw, 0.65rem);" class="btn btn-sm btn-red" data-toggle="modal" data-target="#pdfModal">
-                                &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="{{ asset('../static/svg/file-text.svg') }}" width="20" height="20" alt="">
+                            <a href="<?php echo e(route('credit_note.report', $creditNote->id)); ?>" style="font-size: clamp(0.6rem, 3vw, 0.65rem);" class="btn btn-sm btn-red" data-toggle="modal" data-target="#pdfModal">
+                                &nbsp;&nbsp;&nbsp;<img style="filter: invert(99%) sepia(43%) saturate(0%) hue-rotate(95deg) brightness(110%) contrast(101%);" src="<?php echo e(asset('../static/svg/file-text.svg')); ?>" width="20" height="20" alt="">
                                 &nbsp;NOTA CRÉDITO
                             </a>
                         </td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
 
@@ -109,22 +108,22 @@ Notas crédito
     </div>
 </div>
 
-@include('modules.credit_note._create')
-@endsection
+<?php echo $__env->make('modules.credit_note._create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 
 <!-- Alert fade closer script-->
-<script src="{{ asset('customjs/alert_closer.js')}}"></script>
+<script src="<?php echo e(asset('customjs/alert_closer.js')); ?>"></script>
 
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-<script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_credit_note.js') }}"></script>
+<script src="<?php echo e(asset('vendor/datatables/js/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/datatable/dt_credit_note.js')); ?>"></script>
 
 <!-- Select2 -->
-<script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
-<script src="{{ asset('customjs/select2/s2_init.js') }}"></script>
+<script src="<?php echo e(asset('vendor/select2/select2.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/select2/s2_init.js')); ?>"></script>
 
 <!-- PDF view -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -141,4 +140,5 @@ Notas crédito
         $(this).find('#pdf-frame').attr('src', '');
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/carlos/Code/InvestorInsight/resources/views/modules/credit_note/index.blade.php ENDPATH**/ ?>
