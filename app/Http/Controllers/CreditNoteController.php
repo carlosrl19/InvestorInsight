@@ -2,46 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;      
-use App\Models\CreditNote;
+use Illuminate\Support\Facades\Cache;      
+
 use App\Http\Requests\CreditNote\StoreRequest;
+
+use App\Models\CreditNote;
 use App\Models\Investor;
 use App\Models\InvestorFunds;
 use App\Models\Project;
-use App\Models\CommissionAgent;
+
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 
 class CreditNoteController extends Controller
 {
     public function index()
     {
-        $creditNotes = CreditNote::get();
-        $investors = Investor::orderBy('investor_name')->get();
+        // Tiempo de caché en minutos
+        $cacheTime = 60; // 1 hora
+    
+        $creditNotes = Cache::remember('credit_notes', $cacheTime, function () {
+            return CreditNote::get();
+        });
+    
+        $investors = Cache::remember('investors_ordered', $cacheTime, function () {
+            return Investor::orderBy('investor_name')->get();
+        });
+    
         $creditNoteCode = strtoupper(Str::random(12)); // Credit note random code
         $creditNoteDate = Carbon::now()->setTimezone('America/Costa_Rica')->format('Y-m-d H:i:s');
-
-        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
-        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
-        ->sum('promissoryNoteCommissioner_amount');
-
-        $total_investor_profit_payment = DB::table('promissory_notes')
-        ->where('promissory_notes.promissoryNote_status', 1)
-        ->sum('promissoryNote_amount');
-
-        $total_investor_profit_paid = DB::table('promissory_notes')
-        ->where('promissory_notes.promissoryNote_status', 0)
-        ->sum('promissoryNote_amount');
-
-        $total_commissioner_commission_paid = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
-        ->sum('promissoryNoteCommissioner_amount');
-
+    
+        $total_project_investment = Cache::remember('total_project_investment_active', $cacheTime, function () {
+            return Project::where('project_status', 1)->sum('project_investment');
+        });
+    
+        $total_project_investment_terminated = Cache::remember('total_project_investment_terminated', $cacheTime, function () {
+            return Project::where('project_status', 0)->sum('project_investment');
+        });
+    
+        $total_commissioner_commission_payment = Cache::remember('total_commissioner_commission_payment_active', $cacheTime, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+    
+        $total_investor_profit_payment = Cache::remember('total_investor_profit_payment_active', $cacheTime, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 1)
+                ->sum('promissoryNote_amount');
+        });
+    
+        $total_investor_profit_paid = Cache::remember('total_investor_profit_paid', $cacheTime, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 0)
+                ->sum('promissoryNote_amount');
+        });
+    
+        $total_commissioner_commission_paid = Cache::remember('total_commissioner_commission_paid', $cacheTime, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+    
         return view('modules.credit_note.index', compact(
             'creditNotes',
             'investors',
@@ -54,7 +79,7 @@ class CreditNoteController extends Controller
             'total_investor_profit_paid',
             'total_commissioner_commission_paid'
         ));
-    }
+    }    
 
     public function create()
     {

@@ -6,50 +6,79 @@ use App\Http\Requests\PromissoryNote\StoreRequest;
 use App\Models\PromissoryNote;
 use App\Models\Project;
 use App\Models\Investor;
+
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
+
 use Luecano\NumeroALetras\NumeroALetras;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class PromissoryNoteController extends Controller
 {
     public function index()
     {
-        $promissoryNotes = PromissoryNote::get();
-        $investors = Investor::orderBy('investor_name')->get();
+        // Tiempo de caché en minutos
+        $cacheTime = 60; // 1 hora
+    
+        $promissoryNotes = Cache::remember('promissory_notes', $cacheTime, function () {
+            return PromissoryNote::get();
+        });
+    
+        $investors = Cache::remember('investors', $cacheTime, function () {
+            return Investor::orderBy('investor_name')->get();
+        });
+    
         $promissoryCode = strtoupper(Str::random(12)); // Promissory note random code
-        $total_project_investment = Project::where('project_status', 1)->sum('project_investment');
-        $total_project_investment_terminated = Project::where('project_status', 0)->sum('project_investment');
-        $total_commissioner_commission_payment = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
-        ->sum('promissoryNoteCommissioner_amount');
-
-        $total_investor_profit_payment = DB::table('promissory_notes')
-        ->where('promissory_notes.promissoryNote_status', 1)
-        ->sum('promissoryNote_amount');
-
-        $total_investor_profit_paid = DB::table('promissory_notes')
-        ->where('promissory_notes.promissoryNote_status', 0)
-        ->sum('promissoryNote_amount');
-
-        $total_commissioner_commission_paid = DB::table('promissory_note_commissioners')
-        ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
-        ->sum('promissoryNoteCommissioner_amount');
-
+    
+        $total_project_investment = Cache::remember('total_project_investment_active', $cacheTime, function () {
+            return Project::where('project_status', 1)->sum('project_investment');
+        });
+    
+        $total_project_investment_terminated = Cache::remember('total_project_investment_terminated', $cacheTime, function () {
+            return Project::where('project_status', 0)->sum('project_investment');
+        });
+    
+        $total_commissioner_commission_payment = Cache::remember('total_commissioner_commission_payment_active', $cacheTime, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 1)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+    
+        $total_investor_profit_payment = Cache::remember('total_investor_profit_payment_active', $cacheTime, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 1)
+                ->sum('promissoryNote_amount');
+        });
+    
+        $total_investor_profit_paid = Cache::remember('total_investor_profit_paid', $cacheTime, function () {
+            return DB::table('promissory_notes')
+                ->where('promissory_notes.promissoryNote_status', 0)
+                ->sum('promissoryNote_amount');
+        });
+    
+        $total_commissioner_commission_paid = Cache::remember('total_commissioner_commission_paid', $cacheTime, function () {
+            return DB::table('promissory_note_commissioners')
+                ->where('promissory_note_commissioners.promissoryNoteCommissioner_status', 0)
+                ->sum('promissoryNoteCommissioner_amount');
+        });
+    
         return view("modules.promissory_note.index", compact(
-            'promissoryNotes', 
-            'investors', 
-            'promissoryCode', 
-            'total_project_investment', 
-            'total_project_investment_terminated', 
+            'promissoryNotes',
+            'investors',
+            'promissoryCode',
+            'total_project_investment',
+            'total_project_investment_terminated',
             'total_commissioner_commission_payment',
             'total_investor_profit_payment',
             'total_investor_profit_paid',
             'total_commissioner_commission_paid'
         ));
     }
+    
+
     public function create()
     {
         return view('modules.promissory_note._create');
@@ -113,7 +142,6 @@ class PromissoryNoteController extends Controller
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="PDF PAGARÉ.pdf"');
     }
-
     public function downloadReport($id) {
         $promissoryNote = PromissoryNote::findOrFail($id);
 
