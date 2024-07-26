@@ -9,6 +9,7 @@ Route::get('/', function () {
 
 // Dashboard
 Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard.index');
+Route::get('dashboard/report', 'App\Http\Controllers\DashboardController@generalExport')->name('dashboard.general_export');
 
 // Investor
 Route::resource('investor', 'App\Http\Controllers\InvestorController')->names('investor');
