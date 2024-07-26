@@ -57,7 +57,7 @@ Inversionistas
                             <th>NOMBRE <br>INVERSIONISTA</th>
                             <th>EMPRESA <br>AFILIADA</th>
                             <th>Nº IDENTIDAD</th>
-                            <th>Nº TELEFOON</th>
+                            <th>Nº TELEFONO</th>
                             <th>FONDO MONETARIO</th>
                             <th>RECOMENDACION</th>
                             <th>ESTADO</th>
@@ -80,6 +80,7 @@ Inversionistas
                                 <td>{{ $investor->investor_company_name }}</td>
                                 <td>{{ $investor->investor_dni }}</td>
                                 <td>{{ $investor->investor_phone }}</td>
+
                                 @if($investor->investor_balance <= 0)
                                     <td><span class="text-light badge bg-red">Lps. {{ number_format($investor->investor_balance,2) }}</span></td>
                                 @else
@@ -87,7 +88,7 @@ Inversionistas
                                 @endif
 
                                 <td>
-                                    @if($investor->investoxefr_reference)
+                                    @if($investor->investor_reference)
                                         <a href="{{ route('investor.show', ['investor' => $investor->investor_reference->id]) }}">
                                             {{ $investor->investor_reference->investor_name }}
                                             <small>

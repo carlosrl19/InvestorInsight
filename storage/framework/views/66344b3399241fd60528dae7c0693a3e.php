@@ -55,7 +55,7 @@ Inversionistas
                             <th>NOMBRE <br>INVERSIONISTA</th>
                             <th>EMPRESA <br>AFILIADA</th>
                             <th>Nº IDENTIDAD</th>
-                            <th>Nº TELEFOON</th>
+                            <th>Nº TELEFONO</th>
                             <th>FONDO MONETARIO</th>
                             <th>RECOMENDACION</th>
                             <th>ESTADO</th>
@@ -79,6 +79,7 @@ Inversionistas
                                 <td><?php echo e($investor->investor_company_name); ?></td>
                                 <td><?php echo e($investor->investor_dni); ?></td>
                                 <td><?php echo e($investor->investor_phone); ?></td>
+
                                 <?php if($investor->investor_balance <= 0): ?>
                                     <td><span class="text-light badge bg-red">Lps. <?php echo e(number_format($investor->investor_balance,2)); ?></span></td>
                                 <?php else: ?>
@@ -86,7 +87,7 @@ Inversionistas
                                 <?php endif; ?>
 
                                 <td>
-                                    <?php if($investor->investoxefr_reference): ?>
+                                    <?php if($investor->investor_reference): ?>
                                         <a href="<?php echo e(route('investor.show', ['investor' => $investor->investor_reference->id])); ?>">
                                             <?php echo e($investor->investor_reference->investor_name); ?>
 
