@@ -114,7 +114,6 @@ Inversionistas
                                 </td>
                                 <td>
                                     <?php echo $__env->make('modules.investors._delete', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                    <?php echo $__env->make('modules.investors._fund', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                     
                                     <?php if($investor->id != 1): ?>
                                         <?php if($investor->investor_status != 3): ?>

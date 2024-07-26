@@ -114,7 +114,6 @@ Inversionistas
                                 </td>
                                 <td>
                                     @include('modules.investors._delete')
-                                    @include('modules.investors._fund')
                                     
                                     @if($investor->id != 1)
                                         @if($investor->investor_status != 3)

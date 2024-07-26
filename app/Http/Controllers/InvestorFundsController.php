@@ -13,7 +13,7 @@ class InvestorFundsController extends Controller
 
     public function index()
     {
-        $investorFunds = InvestorFunds::latest(20)->get();
+        $investorFunds = InvestorFunds::get();
 
         return view('modules.investors_funds.index', compact('investorFunds'));
     }
