@@ -75,7 +75,6 @@ class PaymentCommissionerController extends Controller
             'total_commissioner_commission_paid'
         ));
     }
-    
 
     public function store(StoreRequest $request)
     {
@@ -141,5 +140,5 @@ class PaymentCommissionerController extends Controller
         return response($pdf->output(), 200)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="PDF REPORTE DE PAGO.pdf"');
-    }  
+    }
 }

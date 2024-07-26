@@ -181,14 +181,14 @@
                         </a>
                         <div class="dropend">
                           <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
-                            -> Historial de pagos
+                            -> Pago de comisiones
                           </a>
                           <div class="dropdown-menu">
                             <a class="dropdown-item" href="<?php echo e(route('payments_investor.index')); ?>">
-                              <small>->&nbsp;</small>Pagos inversionistas
+                              <small>->&nbsp;</small>Comisión inversionistas
                             </a>
                             <a class="dropdown-item" href="<?php echo e(route('payments_commissioner.index')); ?>">
-                              <small>->&nbsp;</small>Pagos comisionistas
+                              <small>->&nbsp;</small>Comisión  comisionistas
                             </a>
                           </div>
                         </div>
