@@ -209,7 +209,7 @@ Dashboard
 				<div class="col-12">
 					<div class="card" style="height: 28rem">
 						<div class="card-header">
-							<h3 class="card-title">Ultimos fondos de proyecto<sup class="text-muted"> (últimos 25)</sup>
+							<h3 class="card-title">Ultimos movimientos / transferencias<sup class="text-muted"> (últimos 25)</sup>
 							</h3>
 						</div>
 						<div class="card-body card-body-scrollable card-body-scrollable-shadow">
