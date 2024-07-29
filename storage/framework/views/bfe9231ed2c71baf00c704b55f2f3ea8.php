@@ -19,11 +19,11 @@
                     PROYECTOS INGRESADOS ESTE MES
                 </td>
                 <td style="background-color: #fff; width: auto;"></td>
-                <td style="background-color: #fff; width: 397px;"></td>
+                <td style="background-color: #fff; width: 347px;"></td>
                 <td style="background-color: #fff; width: 160px;"></td>
-                <td style="background-color: #fff; width: 200px;"></td>
-                <td style="background-color: #fff; width: 200px;"></td>
-                <td style="background-color: #fff; width: 200px;"></td>
+                <td style="background-color: #fff; width: 120px;"></td>
+                <td style="background-color: #fff; width: 120px;"></td>
+                <td style="background-color: #fff; width: 120px;"></td>
             </tr>
             
             <!-- Blank rows -->
@@ -40,13 +40,12 @@
             <!-- Header table -->
             <tr>
                 <td></td>
-                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 140px">FECHA</td>
-                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 140px">CODIGO</td>
-                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; min-width: 397px;">NOMBRE PROYECTO</td>
-                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center;">INVERSION</td>
-                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">FECHA INICIO</td>
-                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">FECHA FINAL</td>
-                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">DIAS TRABAJO</td>
+                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 12px; font-weight: bold; text-align: center; width: 140px">FECHA</td>
+                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 12px; font-weight: bold; text-align: center; width: 140px">CODIGO</td>
+                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 12px; font-weight: bold; text-align: center; min-width: 347px;">NOMBRE PROYECTO</td>
+                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 12px; font-weight: bold; text-align: center;">INVERSION</td>
+                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 12px; font-weight: bold; text-align: center; width: 120px;">FECHA INICIO / FINAL</td>
+                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 12px; font-weight: bold; text-align: center; width: 120px;">DIAS TRABAJO</td>
             </tr>
             <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
@@ -55,11 +54,20 @@
                 <td style="text-align: center;"><?php echo e($project->project_code); ?></td>
                 <td style="text-align: center;"><?php echo e($project->project_name); ?></td>
                 <td style="text-align: center;"><?php echo e(number_format($project->project_investment,2)); ?></td>
-                <td style="text-align: center;"><?php echo e($project->project_start_date); ?></td>
-                <td style="text-align: center;"><?php echo e($project->project_end_date); ?></td>
+                <td style="text-align: center;"><?php echo e($project->project_start_date); ?> / <?php echo e($project->project_end_date); ?></td>
                 <td style="text-align: center;"><?php echo e($project->project_work_days); ?> días</td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="background-color: #cce0f8; border-top: 1px solid #000; text-align: center; font-weight: bold;"><?php echo e(number_format($totalProjectInvestment,2)); ?></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 
@@ -79,9 +87,9 @@
                 <td style="background-color: #fff; width: auto;"></td>
                 <td style="background-color: #fff; width: 100px;"></td>
                 <td style="background-color: #fff; width: 160px;"></td>
-                <td style="background-color: #fff; width: 200px;"></td>
-                <td style="background-color: #fff; width: 200px;"></td>
-                <td style="background-color: #fff; width: 200px;"></td>
+                <td style="background-color: #fff; width: 120px;"></td>
+                <td style="background-color: #fff; width: 120px;"></td>
+                <td style="background-color: #fff; width: 120px;"></td>
             </tr>
             <!-- Blank rows 1 -->
             <tr>
@@ -110,6 +118,7 @@
                 <td></td>
                 <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 140px">FECHA</td>
                 <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 120px;">BANCO</td>
+                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 140px">INVERSIONISTA</td>
                 <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 140px">MONTO</td>
                 <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center;">MOTIVO / COMENTARIO DEL MOVIMIENTO</td>
                 <td style="border: 1px solid #000; background-color: #cce0f8"></td>
@@ -124,7 +133,8 @@
                 <?php else: ?>
                     <td style="text-align: center;">VARIOS</td>
                 <?php endif; ?>
-                <td style="text-align: center;"><?php echo e($transfer->transfer_amount); ?></td>
+                <td style="text-align: center;"><?php echo e($transfer->investor->investor_name); ?></td>
+                <td style="text-align: center;"><?php echo e(number_format($transfer->transfer_amount,2)); ?></td>
                 <td style="text-align: center;"><?php echo e($transfer->transfer_comment); ?></td>
                 <td></td>
                 <td></td>
@@ -134,8 +144,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td style="background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center;"><?php echo e($totalTransferAmount); ?></td>
                 <td></td>
+                <td style="background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center;"><?php echo e($totalTransferAmount); ?></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -156,7 +166,7 @@
                     PAGARÉS DE PROYECTOS DEL MES
                 </td>
                 <td style="background-color: #fff; width: auto;"></td>
-                <td style="background-color: #fff; width: 397px;"></td>
+                <td style="background-color: #fff; width: 347px;"></td>
                 <td style="background-color: #fff; width: 160px;"></td>
                 <td style="background-color: #fff; width: 200px;"></td>
                 <td style="background-color: #fff; width: 200px;"></td>
@@ -189,7 +199,7 @@
                 <td></td>
                 <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 140px">FECHA EMISIÓN</td>
                 <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 140px">FECHA LIMITE PAGO</td>
-                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 397px;">INVERSIONISTA</td>
+                <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 347px;">INVERSIONISTA</td>
                 <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center; width: 140px">MONTO</td>
                 <td style="border: 1px solid #000; background-color: #cce0f8; font-size: 11px; font-weight: bold; text-align: center;">MOTIVO / COMENTARIO DEL MOVIMIENTO</td>
                 <td style="border: 1px solid #000; background-color: #cce0f8"></td>
