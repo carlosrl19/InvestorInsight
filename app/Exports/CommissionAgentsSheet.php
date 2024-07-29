@@ -1,35 +1,30 @@
-<?php 
+<?php
 
 namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromView;
-use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Illuminate\Contracts\View\View;
 
-use App\Models\Transfer;
-use App\Models\InvestorFunds;
+use App\Models\CommissionAgent;
 
-class TransfersSheet implements FromView, WithEvents, WithTitle
+class CommissionAgentsSheet implements FromView, WithEvents, WithTitle
 {
     public function view(): View
     {
-        $currentMonth = date('m');
-        $currentYear = date('Y');
-
-        $founds = InvestorFunds::whereMonth('created_at', $currentMonth)
-            ->whereYear('created_at', $currentYear)
+        $commissioners = CommissionAgent::orderBy('commissioner_balance','desc')
             ->get();
 
-        return view('modules.dashboard._transfers_report', [
-            'founds' => $founds,
+        return view('modules.dashboard._commissioners_report', [
+            'commissioners' => $commissioners,
         ]);
     }
 
     public function title(): string
     {
-        return 'MOVIMIENTOS'; // Nombre de la hoja
+        return 'COMISIONISTAS'; // Nombre de la hoja
     }
 
     public function registerEvents(): array
@@ -42,8 +37,8 @@ class TransfersSheet implements FromView, WithEvents, WithTitle
                 $endRow = $sheet->getHighestRow();
 
                 while ($startRow <= $endRow) {
-                    $sheet->mergeCells('B' . $headerStartRow . ':M' . $headerStartRow);
-                    $sheet->mergeCells('G' . $startRow . ':M' . $startRow);
+                    $sheet->mergeCells('B' . $headerStartRow . ':F' . $headerStartRow);
+                    $sheet->mergeCells('C' . $startRow . ':D' . $startRow);
                     $startRow++; // Incrementar startRow para evitar bucle infinito
                 }
             },

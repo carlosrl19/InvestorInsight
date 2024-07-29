@@ -4,11 +4,12 @@ namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Illuminate\Contracts\View\View;
 use App\Models\PromissoryNote;
 
-class PromissoryNotesSheet implements FromView, WithEvents
+class PromissoryNotesSheet implements FromView, WithEvents, WithTitle
 {
     public function view(): View
     {
@@ -28,6 +29,11 @@ class PromissoryNotesSheet implements FromView, WithEvents
             'promissory_notes' => $promissory_notes,
             'totalPromissoriesAmount' => $totalPromissoriesAmount,
         ]);
+    }
+
+    public function title(): string
+    {
+        return 'PAGARES'; // Nombre de la hoja
     }
 
     public function registerEvents(): array

@@ -6,9 +6,10 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use App\Models\Project;
 use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class ProjectsSheet implements FromView, WithEvents
+class ProjectsSheet implements FromView, WithEvents, WithTitle
 {
     public function view(): View
     {
@@ -32,6 +33,11 @@ class ProjectsSheet implements FromView, WithEvents
             'projects' => $projects,
             'totalProjectInvestment' => $totalProjectInvestment,
         ]);
+    }
+
+    public function title(): string
+    {
+        return 'INVERSION EN PROYECTOS'; // Nombre de la hoja
     }
 
     public function registerEvents(): array
