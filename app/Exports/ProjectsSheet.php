@@ -37,7 +37,7 @@ class ProjectsSheet implements FromView, WithEvents, WithTitle
 
     public function title(): string
     {
-        return 'INVERSION EN PROYECTOS'; // Nombre de la hoja
+        return 'INVERSION PROYECTOS (MES ACTUAL)'; // Nombre de la hoja
     }
 
     public function registerEvents(): array

@@ -33,7 +33,7 @@ class PromissoryNotesSheet implements FromView, WithEvents, WithTitle
 
     public function title(): string
     {
-        return 'PAGARES'; // Nombre de la hoja
+        return 'PAGARES (PENDIENTES)'; // Nombre de la hoja
     }
 
     public function registerEvents(): array

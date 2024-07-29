@@ -32,18 +32,18 @@
         <tr>
             <td></td>
             <td
-                style="border: 1px solid #000; background-color: #E69C46; font-size: 12px; font-weight: bold; text-align: center; width: 290px;">
+                style="border: 1px solid #000; background-color: #FFD966; font-size: 12px; font-weight: bold; text-align: center; width: 290px;">
                 PROYECTO</td>
             <td></td> <!-- Merge con td anterior -->
             <td
-                style="border: 1px solid #000; background-color: #E69C46; font-size: 12px; font-weight: bold; text-align: center; width: 290px">
+                style="border: 1px solid #000; background-color: #FFD966; font-size: 12px; font-weight: bold; text-align: center; width: 290px">
                 NOMBRE INVERSIONISTA</td>
             <td></td>
             <td
-                style="border: 1px solid #000; background-color: #E69C46; font-size: 12px; font-weight: bold; text-align: center; min-width: 120px;">
+                style="border: 1px solid #000; background-color: #FFD966; font-size: 12px; font-weight: bold; text-align: center; min-width: 120px;">
                 INVERSION</td>
             <td
-                style="border: 1px solid #000; background-color: #E69C46; font-size: 12px; font-weight: bold; text-align: center; min-width: 120px;">
+                style="border: 1px solid #000; background-color: #FFD966; font-size: 12px; font-weight: bold; text-align: center; min-width: 120px;">
                 COMISION</td>
         </tr>
         @foreach($investorCommissions as $investorCommission)
@@ -57,8 +57,8 @@
                 <td></td> <!-- Merge con td anterior -->
                 <td style="border: 1px solid #000; text-align: center;">{{ $investorCommission->investor_name }}</td>
                 <td></td> <!-- Merge con td anterior -->
-                <td style="border: 1px solid #000; text-align: center; background-color: #F8E4CC;">L. {{ number_format($investorCommission->investor_investment, 2) }}</td>
-                <td style="border: 1px solid #000; text-align: center; background-color: #F8E4CC;">L. {{ number_format($investorCommission->investor_final_profit, 2) }}</td>
+                <td style="border: 1px solid #000; text-align: center; background-color: #FFF3D1;">L. {{ number_format($investorCommission->investor_investment, 2) }}</td>
+                <td style="border: 1px solid #000; text-align: center; background-color: #FFF3D1;">L. {{ number_format($investorCommission->investor_final_profit, 2) }}</td>
             </tr>
         @endforeach
             <tr>
@@ -67,8 +67,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td style="background-color: #E69C46; font-weight: bold; border: 1px solid #000; text-align: center;">L. {{ number_format($totalInvestorInvestment, 2) }}</td>
-                <td style="background-color: #E69C46; font-weight: bold; border: 1px solid #000; text-align: center;">L. {{ number_format($totalInvestorCommissions, 2) }}</td>
+                <td style="background-color: #FFD966; font-weight: bold; border: 1px solid #000; text-align: center;">L. {{ number_format($totalInvestorInvestment, 2) }}</td>
+                <td style="background-color: #FFD966; font-weight: bold; border: 1px solid #000; text-align: center;">L. {{ number_format($totalInvestorCommissions, 2) }}</td>
             </tr>
     </tbody>
 </table>
@@ -108,15 +108,15 @@
         <tr>
             <td></td>
             <td
-                style="border: 1px solid #000; background-color: #E69C46; font-size: 12px; font-weight: bold; text-align: center; width: 290px;">
+                style="border: 1px solid #000; background-color: #E06666; font-size: 12px; font-weight: bold; text-align: center; width: 290px;">
                 PROYECTO</td>
             <td></td> <!-- Merge con td anterior -->
             <td
-                style="border: 1px solid #000; background-color: #E69C46; font-size: 12px; font-weight: bold; text-align: center; width: 290px">
+                style="border: 1px solid #000; background-color: #E06666; font-size: 12px; font-weight: bold; text-align: center; width: 290px">
                 NOMBRE COMISIONISTA</td>
             <td></td>
             <td
-                style="border: 1px solid #000; background-color: #E69C46; font-size: 12px; font-weight: bold; text-align: center; min-width: 120px;">
+                style="border: 1px solid #000; background-color: #E06666; font-size: 12px; font-weight: bold; text-align: center; min-width: 120px;">
                 COMISION</td>
         </tr>
         @foreach($commissionerCommissions as $commissionerCommission)
@@ -126,7 +126,7 @@
                 <td></td> <!-- Merge con td anterior -->
                 <td style="border: 1px solid #000; text-align: center;">{{ $commissionerCommission->commissioner_name }}</td>
                 <td></td> <!-- Merge con td anterior -->
-                <td style="border: 1px solid #000; text-align: center; background-color: #F8E4CC">L. {{ number_format($commissionerCommission->commissioner_commission, 2) }}</td>
+                <td style="border: 1px solid #000; text-align: center; background-color: #F8E0E0">L. {{ number_format($commissionerCommission->commissioner_commission, 2) }}</td>
             </tr>
         @endforeach
             <tr>
@@ -135,7 +135,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td style="background-color: #E69C46; font-weight: bold; border: 1px solid #000; text-align: center;">L. {{ number_format($totalCommissionerCommissions, 2) }}</td>
+                <td style="background-color: #E06666; font-weight: bold; border: 1px solid #000; text-align: center;">L. {{ number_format($totalCommissionerCommissions, 2) }}</td>
             </tr>
     </tbody>
 </table>
