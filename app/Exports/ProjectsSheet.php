@@ -5,8 +5,10 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use App\Models\Project;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class ProjectsSheet implements FromView
+class ProjectsSheet implements FromView, WithEvents
 {
     public function view(): View
     {
@@ -21,8 +23,7 @@ class ProjectsSheet implements FromView
                 return $project->investors->pluck('investor_name')->join(',');
             });
 
-        $totalProjectInvestment = Project::with('investors')
-            ->whereMonth('created_at', $currentMonth)
+        $totalProjectInvestment = Project::whereMonth('created_at', $currentMonth)
             ->whereYear('created_at', $currentYear)
             ->get()
             ->sum('project_investment');
@@ -31,5 +32,25 @@ class ProjectsSheet implements FromView
             'projects' => $projects,
             'totalProjectInvestment' => $totalProjectInvestment,
         ]);
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function(AfterSheet $event) {
+                $sheet = $event->sheet->getDelegate();
+                $startRow = 5; // Inicio de la fila a partir de la cual se realizará el merge
+                $headerStartRow = 2;
+                $headerInvestorName = 4;
+                $endRow = $sheet->getHighestRow();
+
+                while ($startRow <= $endRow) {
+                    $sheet->mergeCells('B' . $headerStartRow . ':H' . $headerStartRow);
+                    $sheet->mergeCells('D' . $startRow . ':E' . $startRow);
+                    $sheet->mergeCells('D' . $headerInvestorName . ':E' . $headerInvestorName);
+                    $startRow++; // Incrementar startRow para evitar bucle infinito
+                }
+            },
+        ];
     }
 }

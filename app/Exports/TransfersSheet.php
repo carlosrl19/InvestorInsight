@@ -4,9 +4,11 @@ namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
 use App\Models\Transfer;
 
-class TransfersSheet implements FromView
+class TransfersSheet implements FromView, WithEvents
 {
     public function view(): View
     {
@@ -27,5 +29,23 @@ class TransfersSheet implements FromView
             'transfers' => $transfers,
             'totalTransferAmount' => $totalTransferAmount,
         ]);
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function(AfterSheet $event) {
+                $sheet = $event->sheet->getDelegate();
+                $startRow = 4; // Inicio de la fila a partir de la cual se realizará el merge
+                $headerStartRow = 2;
+                $endRow = $sheet->getHighestRow();
+
+                while ($startRow <= $endRow) {
+                    $sheet->mergeCells('B' . $headerStartRow . ':M' . $headerStartRow);
+                    $sheet->mergeCells('F' . $startRow . ':M' . $startRow);
+                    $startRow++; // Incrementar startRow para evitar bucle infinito
+                }
+            },
+        ];
     }
 }

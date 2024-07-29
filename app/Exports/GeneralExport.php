@@ -14,4 +14,12 @@ class GeneralExport implements WithMultipleSheets
             new PromissoryNotesSheet(),
         ];
     }
+
+    public function properties(): array
+    {
+        return [
+            'title' => 'REPORTE GENERAL',
+            'creator' => 'Investor Insight',
+        ];
+    }
 }
