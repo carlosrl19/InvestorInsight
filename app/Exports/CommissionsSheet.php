@@ -22,6 +22,7 @@ class CommissionsSheet implements FromView, WithEvents, WithTitle
         ->select(
             'project_investor.*', // Todos los campos de project_investor
             'projects.project_name', // Nombre del proyecto
+            'projects.project_code', // Código del proyecto
             'investors.investor_name' // Nombre del inversor
         )
         ->get();
@@ -41,6 +42,7 @@ class CommissionsSheet implements FromView, WithEvents, WithTitle
             ->select(
                 'project_commissioner.*', // Todos los campos de project_commissioner
                 'projects.project_name', // Nombre del proyecto
+                'projects.project_code', // Código del proyecto
                 'commission_agents.commissioner_name' // Nombre del comisionista
             )
             ->get();
@@ -78,6 +80,30 @@ class CommissionsSheet implements FromView, WithEvents, WithTitle
                     $sheet->mergeCells('B' . $startRow . ':C' . $startRow);
                     $sheet->mergeCells('D' . $startRow . ':E' . $startRow);
                     $startRow++; // Incrementar startRow para evitar bucle infinito
+                }
+
+                // Buscar la fila que contiene el texto específico
+                for ($row = 1; $row <= $endRow; $row++) {
+                    $cellValue = $sheet->getCell('B' . $row)->getValue();
+                    if ($cellValue === 'COMISIONES A FAVOR DE COMISIONISTAS') {
+                        // Realizar el merge de B a F en la fila encontrada
+                        $sheet->mergeCells('B' . $row . ':F' . $row);
+                        $sheet->getStyle('B' . $row . ':F' . $row)->applyFromArray([
+                            'font' => [
+                                'bold' => true,
+                                'size' => 16,
+                            ],
+                            'alignment' => [
+                                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                            ],
+                            /*
+                            'fill' => [
+                                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                                'startColor' => ['argb' => 'FFFFFF00'], // Color de fondo (ejemplo)
+                            ], */
+                        ]);
+                        break; // Salir del bucle una vez encontrado
+                    }
                 }
             },
         ];

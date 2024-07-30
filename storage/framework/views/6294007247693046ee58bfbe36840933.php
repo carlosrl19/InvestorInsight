@@ -33,6 +33,9 @@
             <td></td>
             <td
                 style="border: 1px solid #000; background-color: #FFD966; font-size: 12px; font-weight: bold; text-align: center; width: 290px;">
+                CODIGO</td>
+            <td
+                style="border: 1px solid #000; background-color: #FFD966; font-size: 12px; font-weight: bold; text-align: center; width: 290px;">
                 PROYECTO</td>
             <td></td> <!-- Merge con td anterior -->
             <td
@@ -49,6 +52,7 @@
         <?php $__currentLoopData = $investorCommissions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $investorCommission): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
                 <td></td>
+                <td style="border: 1px solid #000; text-align: center;"><?php echo e($investorCommission->project_code); ?></td>
                 <?php if($investorCommission->investor_investment == 0): ?>
                     <td style="border: 1px solid #000; text-align: center;"><?php echo e($investorCommission->project_name); ?>&nbsp;<b>(5%)</b></td>    
                 <?php else: ?>
