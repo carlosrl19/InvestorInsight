@@ -1,35 +1,33 @@
-@extends('layout.admin')
-
-@section('head')
+<?php $__env->startSection('head'); ?>
 <!-- Datatable CSS -->
-<link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
-@endsection
+<link href="<?php echo e(asset('vendor/datatables/css/jquery.dataTables.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(asset('vendor/datatables/css/buttons.dataTables.min.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
 
-@section('pretitle')
+<?php $__env->startSection('pretitle'); ?>
 Prestamistas
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('create')
+<?php $__env->startSection('create'); ?>
 <button class="btn" onclick="goBack()" style="background-color: transparent; margin-right: 5px">
-    &nbsp;<img src="{{ asset('../static/svg/arrow-back-up.svg') }}" width="20" height="20">&nbsp;
+    &nbsp;<img src="<?php echo e(asset('../static/svg/arrow-back-up.svg')); ?>" width="20" height="20">&nbsp;
     Volver
 </button>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('title')
+<?php $__env->startSection('title'); ?>
 Historial de prestamista /&nbsp;
-<b class="text-muted">{{ $moneylender->moneylender_name }}</b>
-@endsection
+<b class="text-muted"><?php echo e($moneylender->moneylender_name); ?></b>
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container-xl">
         <div class="row mb-3">
             <div class="col-12">
                 <div class="card mb-2">
                     <div class="card-body d-flex align-items-center">
                         <div class="col-auto me-4">
-                            <img src="{{ asset('../static/svg/user-pentagon.svg') }}" width="90" height="90" alt="moneylender-image">
+                            <img src="<?php echo e(asset('../static/svg/user-pentagon.svg')); ?>" width="90" height="90" alt="moneylender-image">
                         </div>
                         <div class="col">
                             <div class="accordion" id="accordion-example">
@@ -41,7 +39,7 @@ Historial de prestamista /&nbsp;
                                     </h2>
                                     <div id="collapse-1" class="accordion-collapse collapse show" data-bs-parent="#accordion-example">
                                         <div class="accordion-body pt-0">
-                                            <strong>{{ $moneylender->moneylender_name }}</strong> es un prestamista con número de identidad <strong>{{ $moneylender->moneylender_dni }}</strong>, número de teléfono <strong>{{ $moneylender->moneylender_phone }}</strong></strong>. Fue ingresado al sistema en la fecha <strong>{{ $moneylender->created_at }}</strong>.
+                                            <strong><?php echo e($moneylender->moneylender_name); ?></strong> es un prestamista con número de identidad <strong><?php echo e($moneylender->moneylender_dni); ?></strong>, número de teléfono <strong><?php echo e($moneylender->moneylender_phone); ?></strong></strong>. Fue ingresado al sistema en la fecha <strong><?php echo e($moneylender->created_at); ?></strong>.
                                         </div>
                                     </div>
                                 </div>
@@ -110,14 +108,15 @@ Historial de prestamista /&nbsp;
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 <!-- Redirect button -->
-<script src="{{ asset('customjs/return_redirect.js')}}"></script>
+<script src="<?php echo e(asset('customjs/return_redirect.js')); ?>"></script>
 
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-<script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_moneylender.js')}}"></script>
-@endsection
+<script src="<?php echo e(asset('vendor/datatables/js/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/datatable/dt_moneylender.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/carlos/Code/InvestorInsight/resources/views/modules/moneylenders/show.blade.php ENDPATH**/ ?>

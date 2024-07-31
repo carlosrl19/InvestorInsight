@@ -173,8 +173,8 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">     
-                        <a class="dropdown-item" href="">
-                          <small>->&nbsp;</small>Prestamistas (sin programar)
+                        <a class="dropdown-item" href="<?php echo e(route('moneylender.index')); ?>">
+                          <small>->&nbsp;</small>Prestamistas
                         </a>
                         <div class="dropend">
                           <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >

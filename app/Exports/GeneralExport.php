@@ -10,11 +10,11 @@ class GeneralExport implements WithMultipleSheets
     {
         return [
             new ProjectsSheet(),
+            new TransfersSheet(),
             new CommissionsSheet(),
+            new PromissoryNotesSheet(),
             new InvestorsSheet(),
             new CommissionAgentsSheet(),
-            new TransfersSheet(),
-            new PromissoryNotesSheet(),
         ];
     }
 

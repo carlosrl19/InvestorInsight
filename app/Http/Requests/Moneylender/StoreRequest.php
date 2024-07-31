@@ -16,7 +16,7 @@ class StoreRequest extends FormRequest
         return [
             'moneylender_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:moneylenders',
             'moneylender_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/|unique:moneylenders',
-            'moneylender_phone' => 'required|string|min:8|max:8|regex:/^[0-9]+$/|',
+            'moneylender_phone' => 'required|string|min:8|max:11|regex:/^[0-9]+$/|',
             'moneylender_description' => 'required|string|min:3|max:255',
         ];
     }
@@ -46,7 +46,7 @@ class StoreRequest extends FormRequest
             'moneylender_phone.string' => 'El número de teléfono del prestamista solo debe contener números.',
             'moneylender_phone.regex' => 'El número de teléfono del prestamista no puede contener letras ni símbolos.',
             'moneylender_phone.min' => 'El número de teléfono del prestamista debe contener al menos 8 digitos.',
-            'moneylender_phone.max' => 'El número de teléfono del prestamista no puede exceder 8 digitos.',
+            'moneylender_phone.max' => 'El número de teléfono del prestamista no puede exceder 11 digitos.',
 
             // Moneylender description messages
             'moneylender_description.required' => 'La descripción del prestamista es obligatoria.',

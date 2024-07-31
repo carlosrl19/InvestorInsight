@@ -22,7 +22,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" maxlength="13" name="moneylender_dni" value="{{ old('moneylender_dni') }}" id="moneylender_dni" class="form-control @error('moneylender_dni') is-invalid @enderror" autocomplete="off"/>
+                                <input type="text" oninput="this.value = this.value.toUpperCase().replace(/\s/g, '')" maxlength="13" name="moneylender_dni" value="{{ old('moneylender_dni') }}" id="moneylender_dni" class="form-control @error('moneylender_dni') is-invalid @enderror" autocomplete="off"/>
                                 @error('moneylender_dni')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -35,7 +35,7 @@
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="moneylender_phone" value="{{ old('moneylender_phone') }}" id="moneylender_phone" class="form-control @error('moneylender_phone') is-invalid @enderror" data-mask="00000000" data-mask-visible="true" placeholder="00000000" autocomplete="off"/>
+                                <input type="text" name="moneylender_phone" oninput="this.value = this.value.replace(/\D/g, '')" minlength="8" maxlength="11" value="{{ old('moneylender_phone') }}" id="moneylender_phone" class="form-control @error('moneylender_phone') is-invalid @enderror" autocomplete="off"/>
                                 @error('moneylender_phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
