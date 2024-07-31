@@ -176,9 +176,6 @@
                         <a class="dropdown-item" href="">
                           <small>->&nbsp;</small>Prestamistas (sin programar)
                         </a>
-                        <a class="dropdown-item" href="">
-                          <small>->&nbsp;</small>Facturas (sin programar)
-                        </a>
                         <div class="dropend">
                           <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                             -> Pago de comisiones
