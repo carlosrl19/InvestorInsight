@@ -8,7 +8,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('pretitle'); ?>
-Listado principal
+Listado principal <small>(<?php echo e(number_format($loadTime, 2)); ?> segundos)</small>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('title'); ?>

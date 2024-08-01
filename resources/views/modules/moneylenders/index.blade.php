@@ -10,7 +10,7 @@
 @endsection
 
 @section('pretitle')
-Listado principal
+Listado principal <small>({{ number_format($loadTime, 2) }} segundos)</small>
 @endsection
 
 @section('title')
