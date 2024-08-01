@@ -55,7 +55,7 @@ Prestamistas
     </div>
     <div class="card">
         <div class="card-body">
-            <table id="exampleMoneylender" class="display table table-bordered">
+            <table id="moneylenders" class="display table table-bordered">
                 <thead>
                     <tr style="text-align: center;">
                         <th>ID</th>
@@ -94,6 +94,10 @@ Prestamistas
                                         <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-update-{{ $moneylender->id }}">
                                             <img style="filter: invert(42%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(99%) contrast(93%);" src="{{ asset('../static/svg/edit.svg') }}" width="20" height="20" alt="">
                                             &nbsp;Actualizar información
+                                        </a>
+                                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-update-{{ $moneylender->id }}">
+                                            <img style="filter: invert(42%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(99%) contrast(93%);" src="{{ asset('../static/svg/edit.svg') }}" width="20" height="20" alt="">
+                                            &nbsp;Solicitar préstamo
                                         </a>
                                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $moneylender->id }}">
                                             <img style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);" src="{{ asset('../static/svg/trash.svg') }}" width="20" height="20" alt="">
