@@ -17,7 +17,6 @@ class CreditNote extends Model
             ->withTimestamps();
     }
 
-
     protected $fillable = [
         'creditNote_date',
         'investor_id',
