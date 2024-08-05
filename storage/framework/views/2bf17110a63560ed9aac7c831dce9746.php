@@ -34,4 +34,4 @@
             </div>
         </div>
     </div>
-</div>
+</div><?php /**PATH /home/carlos/Code/InvestorInsight (Copiar)/resources/views/modules/moneylender_loans/index.blade.php ENDPATH**/ ?>

@@ -9,27 +9,6 @@
                 <form action="{{ route('moneylender_loans.store')}}" method="POST">
                     @csrf
                     <div class="row mb-3 align-items-end">
-                        <div class="col" style="display: none">
-                            <div class="form-floating">
-                                <input type="date" 
-                                    name="loan_date" 
-                                    style="font-size: 10px;" 
-                                    value="{{ $loanDate }}" 
-                                    id="loan_date"
-                                    min="{{ $loanDate }}" 
-                                    max="{{ $loanDate }}" 
-                                    class="form-control @error('loan_date') is-invalid @enderror" 
-                                    readonly />
-                                @error('loan_date')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
-                                <label for="loan_date"><small>Fecha de emisión del préstamo</small></label>
-                            </div>
-                        </div>
-
                         <div class="col-lg-6">
                             <div class="form-floating">
                                 <select class="form-select" id="moneylender_id" name="moneylender_id" style="width: 100%;">

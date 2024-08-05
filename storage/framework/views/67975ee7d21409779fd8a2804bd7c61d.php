@@ -7,10 +7,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Investor Insight</title>
   <!-- CSS files -->
-  <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet" />
-  <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet" />
-  <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet" />
-  @yield('head')
+  <link href="<?php echo e(asset('dist/css/tabler.min.css')); ?>" rel="stylesheet" />
+  <link href="<?php echo e(asset('dist/css/tabler-vendors.min.css')); ?>" rel="stylesheet" />
+  <link href="<?php echo e(asset('dist/css/demo.min.css')); ?>" rel="stylesheet" />
+  <?php echo $__env->yieldContent('head'); ?>
   <style>
     @import url('https://rsms.me/inter/inter.css');
 
@@ -25,7 +25,7 @@
 </head>
 
 <body>
-  <script src="{{ asset('dist/js/demo-theme.min.js') }}"></script>
+  <script src="<?php echo e(asset('dist/js/demo-theme.min.js')); ?>"></script>
   <div class="page">
     <!-- Navbar -->
     <div class="sticky-top">
@@ -37,18 +37,18 @@
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a>
-              <img src="{{ asset('static/logo.png') }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+              <img src="<?php echo e(asset('static/logo.png')); ?>" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
           </h1>
           <div class="navbar-nav flex-row order-md-last">
             <div class="d-none d-md-flex">
               <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Activar modo oscuro"
                 data-bs-toggle="tooltip" data-bs-placement="bottom">
-                <img src="{{ asset('../static/svg/moon.svg') }}" width="20" height="20">
+                <img src="<?php echo e(asset('../static/svg/moon.svg')); ?>" width="20" height="20">
               </a>
               <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Activar modo claro"
                 data-bs-toggle="tooltip" data-bs-placement="bottom">
-                <img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(73deg) brightness(103%) contrast(103%);" src="{{ asset('../static/svg/sun.svg') }}" width="20" height="20">
+                <img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(73deg) brightness(103%) contrast(103%);" src="<?php echo e(asset('../static/svg/sun.svg')); ?>" width="20" height="20">
               </a>
             </div>
             <div class="nav-item dropdown">
@@ -74,10 +74,10 @@
             <div class="container-xl">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ route('dashboard.index')}}">
+                  <a class="nav-link" href="<?php echo e(route('dashboard.index')); ?>">
                     <span
                       class="nav-link-icon d-md-none d-lg-inline-block">
-                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="{{ asset('../static/svg/dashboard.svg') }}" width="20" height="20">
+                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="<?php echo e(asset('../static/svg/dashboard.svg')); ?>" width="20" height="20">
                     </span>
                     <span class="nav-link-title">
                       Dashboard
@@ -89,7 +89,7 @@
                     data-bs-auto-close="outside" role="button" aria-expanded="false">
                     <span
                       class="nav-link-icon d-md-none d-lg-inline-block">
-                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="{{ asset('../static/svg/building-fortress.svg') }}" width="20" height="20">
+                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="<?php echo e(asset('../static/svg/building-fortress.svg')); ?>" width="20" height="20">
                     </span>
                     <span class="nav-link-title">
                       Proyectos
@@ -98,13 +98,13 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="{{ route('project.index') }}">
+                        <a class="dropdown-item" href="<?php echo e(route('project.index')); ?>">
                           <small>->&nbsp;</small>Proyectos activos
                         </a>
-                        <a class="dropdown-item" href="{{ route('termination.index') }}">
+                        <a class="dropdown-item" href="<?php echo e(route('termination.index')); ?>">
                           <small>->&nbsp;</small>Proyectos finiquitados
                         </a>
-                        <a class="dropdown-item" href="{{ route('project.closed') }}">
+                        <a class="dropdown-item" href="<?php echo e(route('project.closed')); ?>">
                           <small>->&nbsp;</small>Proyectos cerrados
                         </a>
                       </div>
@@ -116,7 +116,7 @@
                     data-bs-auto-close="outside" role="button" aria-expanded="false">
                     <span
                       class="nav-link-icon d-md-none d-lg-inline-block">
-                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="{{ asset('../static/svg/users-group.svg') }}" width="20" height="20">
+                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="<?php echo e(asset('../static/svg/users-group.svg')); ?>" width="20" height="20">
                       </span>
                     <span class="nav-link-title">
                       Recursos humanos
@@ -125,10 +125,10 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="{{ route("investor.index")}}">
+                        <a class="dropdown-item" href="<?php echo e(route("investor.index")); ?>">
                           <small>->&nbsp;</small>Inversionistas
                         </a>
-                        <a class="dropdown-item" href="{{ route("commission_agent.index")}}">
+                        <a class="dropdown-item" href="<?php echo e(route("commission_agent.index")); ?>">
                           <small>->&nbsp;</small>Comisionistas
                         </a> 
                       </div>
@@ -140,7 +140,7 @@
                     data-bs-auto-close="outside" role="button" aria-expanded="false">
                     <span
                       class="nav-link-icon d-md-none d-lg-inline-block">
-                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="{{ asset('../static/svg/report.svg') }}" width="20" height="20">
+                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="<?php echo e(asset('../static/svg/report.svg')); ?>" width="20" height="20">
                       </span>
                     <span class="nav-link-title">
                       Reportes
@@ -149,10 +149,10 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="{{ route('credit_note.index') }}">
+                        <a class="dropdown-item" href="<?php echo e(route('credit_note.index')); ?>">
                           <small>->&nbsp;</small>Notas crédito
                         </a>
-                        <a class="dropdown-item" href="{{ route('transfer.index') }}">
+                        <a class="dropdown-item" href="<?php echo e(route('transfer.index')); ?>">
                           <small>->&nbsp;</small>Transferencias
                         </a>
                       </div>
@@ -164,7 +164,7 @@
                     data-bs-auto-close="outside" role="button" aria-expanded="false">
                     <span
                       class="nav-link-icon d-md-none d-lg-inline-block">
-                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="{{ asset('../static/svg/coins.svg') }}" width="20" height="20">
+                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="<?php echo e(asset('../static/svg/coins.svg')); ?>" width="20" height="20">
                       </span>
                     <span class="nav-link-title">
                       Contabilidad
@@ -173,15 +173,18 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">     
+                        <a class="dropdown-item" href="<?php echo e(route('moneylender.index')); ?>">
+                          <small>->&nbsp;</small>Prestamistas
+                        </a>
                         <div class="dropend">
                           <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                             -> Pago de comisiones
                           </a>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('payments_investor.index') }}">
+                            <a class="dropdown-item" href="<?php echo e(route('payments_investor.index')); ?>">
                               <small>->&nbsp;</small>Comisión inversionistas
                             </a>
-                            <a class="dropdown-item" href="{{ route('payments_commissioner.index') }}">
+                            <a class="dropdown-item" href="<?php echo e(route('payments_commissioner.index')); ?>">
                               <small>->&nbsp;</small>Comisión  comisionistas
                             </a>
                           </div>
@@ -195,7 +198,7 @@
                     data-bs-auto-close="outside" role="button" aria-expanded="false">
                     <span
                       class="text-red nav-link-icon d-md-none d-lg-inline-block">
-                      <img style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);" src="{{ asset('../static/svg/circle-letter-r.svg') }}" width="20" height="20">
+                      <img style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);" src="<?php echo e(asset('../static/svg/circle-letter-r.svg')); ?>" width="20" height="20">
                     </span>
                     <span class="nav-link-title">
                       <strong>ROBENIOR</strong>
@@ -206,7 +209,7 @@
                       <div class="dropdown-menu-column">
                         <a class="dropdown-item">
                           <strong style="margin: auto;">
-                            <img style="filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(3039%) hue-rotate(135deg) brightness(92%) contrast(84%);" src="{{ asset('../static/svg/arrows-up.svg') }}" width="20" height="20" alt="">
+                            <img style="filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(3039%) hue-rotate(135deg) brightness(92%) contrast(84%);" src="<?php echo e(asset('../static/svg/arrows-up.svg')); ?>" width="20" height="20" alt="">
                               MOVIMIENTOS ACTIVOS
                           </strong>
                         </a>
@@ -220,21 +223,21 @@
                           <tbody>
                             <tr>
                               <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pago a inversionistas</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. {{ number_format($total_investor_profit_payment,2) }}</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_investor_profit_payment,2)); ?></td>
                             </tr>
                             <tr>
                               <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pago a comisionistas</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. {{ number_format($total_commissioner_commission_payment,2) }}</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_commissioner_commission_payment,2)); ?></td>
                             </tr>
                             <tr>
                               <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Inversión de proyectos en proceso</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. {{ number_format($total_project_investment,2) }}</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_project_investment,2)); ?></td>
                             </tr>
                           </tbody>
                         </table>
                         <a class="dropdown-item">
                           <strong style="margin: auto;">
-                            <img style="filter: brightness(0) saturate(100%) invert(28%) sepia(35%) saturate(4731%) hue-rotate(334deg) brightness(89%) contrast(95%);" src="{{ asset('../static/svg/arrows-up.svg') }}" width="20" height="20" alt="">
+                            <img style="filter: brightness(0) saturate(100%) invert(28%) sepia(35%) saturate(4731%) hue-rotate(334deg) brightness(89%) contrast(95%);" src="<?php echo e(asset('../static/svg/arrows-up.svg')); ?>" width="20" height="20" alt="">
                               MOVIMIENTOS PASADOS
                           </strong>
                         </a>
@@ -248,15 +251,15 @@
                           <tbody>
                             <tr>
                               <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pagos a inversionistas</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. {{ number_format($total_investor_profit_paid,2) }}</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_investor_profit_paid,2)); ?></td>
                             </tr>
                             <tr>
                               <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pagos a comisionistas</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. {{ number_format($total_commissioner_commission_paid,2) }}</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_commissioner_commission_paid,2)); ?></td>
                             </tr>
                             <tr>
                               <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Inversión de proyectos finalizados</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. {{ number_format($total_project_investment_terminated,2) }}</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_project_investment_terminated,2)); ?></td>
                             </tr>
                           </tbody>
                         </table>
@@ -278,16 +281,16 @@
             <div class="col">
               <!-- Page pre-title -->
               <div class="page-pretitle">
-                @yield('pretitle')
+                <?php echo $__env->yieldContent('pretitle'); ?>
               </div>
               <h2 class="page-title">
-                @yield('title')
+                <?php echo $__env->yieldContent('title'); ?>
               </h2>
             </div>
             <!-- Page title actions -->
             <div class="col-auto ms-auto d-print-none">
               <div class="btn-list">
-                @yield('create')
+                <?php echo $__env->yieldContent('create'); ?>
               </div>
             </div>
           </div>
@@ -295,20 +298,20 @@
       </div>
       <!-- Page body -->
       <div class="page-body">
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
       </div>
       <footer class="footer footer-transparent d-print-none">
         <div class="container-xl">
           <div class="row text-center align-items-center flex-row-reverse">
             <div class="col-lg-auto ms-lg-auto">
               <ul class="list-inline list-inline-dots mb-0">
-                @yield('footer_right')
+                <?php echo $__env->yieldContent('footer_right'); ?>
               </ul>
             </div>
             <div class="col-12 col-lg-auto mt-3 mt-lg-0">
               <ul class="list-inline list-inline-dots mb-0">
                 <li class="list-inline-item">
-                  @yield('footer_left')
+                  <?php echo $__env->yieldContent('footer_left'); ?>
                 </li>
               </ul>
             </div>
@@ -318,9 +321,9 @@
     </div>
   </div>
   <!-- Tabler Core -->
-  <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
-  <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
-  @yield('scripts')
+  <script src="<?php echo e(asset('dist/js/tabler.min.js')); ?>" defer></script>
+  <script src="<?php echo e(asset('dist/js/demo.min.js')); ?>" defer></script>
+  <?php echo $__env->yieldContent('scripts'); ?>
 </body>
 
-</html>
+</html><?php /**PATH /home/carlos/Code/InvestorInsight (Copiar)/resources/views/layout/admin.blade.php ENDPATH**/ ?>

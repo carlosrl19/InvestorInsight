@@ -1,18 +1,18 @@
-<div class="modal modal-blur fade" data-bs-backdrop="static" data-bs-keyboard="false" id="deleteModal{{ $moneylender->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $moneylender->id }}" aria-hidden="true">
+<div class="modal modal-blur fade" data-bs-backdrop="static" data-bs-keyboard="false" id="deleteModal<?php echo e($moneylender->id); ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel<?php echo e($moneylender->id); ?>" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #883939">
             <div class="modal-header">
                 <h5 class="modal-title">Confirmar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('moneylender.destroy', $moneylender->id) }}"
+            <form action="<?php echo e(route('moneylender.destroy', $moneylender->id)); ?>"
                 method="POST">
-                @csrf
-                @method('DELETE')
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('DELETE'); ?>
                 <div class="modal-body">
                     <div style="border: 2px solid red; padding: 10px; background-color: #f8d7da;">
                         <p style="font-size: 16px; font-weight: bold;">¡ADVERTENCIA!</p>
-                        <p>Está a punto de tomar una acción permanente e irreversible: eliminar por completo al prestamista <strong style="text-transform: uppercase">{{ $moneylender->moneylender_name }}</strong>. 
+                        <p>Está a punto de tomar una acción permanente e irreversible: eliminar por completo al prestamista <strong style="text-transform: uppercase"><?php echo e($moneylender->moneylender_name); ?></strong>. 
                         Esto borrará todo rastro de su actividad y cualquier otro dato relacionado.</p>
                         
                         <p>Antes de proceder, se recomienda verificar cuidadosamente que esta es la acción correcta. Una vez eliminado, no habrá forma de recuperar la información del prestamista.</p>
@@ -28,4 +28,4 @@
             </form>
         </div>
     </div>
-</div>
+</div><?php /**PATH /home/carlos/Code/InvestorInsight (Copiar)/resources/views/modules/moneylenders/_delete.blade.php ENDPATH**/ ?>

@@ -1,24 +1,22 @@
-@extends('layout.admin')
-
-@section('head')
+<?php $__env->startSection('head'); ?>
 <!-- Datatable CSS -->
-<link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('vendor/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
+<link href="<?php echo e(asset('vendor/datatables/css/jquery.dataTables.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(asset('vendor/datatables/css/buttons.dataTables.min.css')); ?>" rel="stylesheet">
 
 <!-- Apexchart -->
-<link href="{{ asset('dist/libs/apexcharts/dist/apexcharts.css') }}" rel="stylesheet">
+<link href="<?php echo e(asset('dist/libs/apexcharts/dist/apexcharts.css')); ?>" rel="stylesheet">
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('pretitle')
-Panel principal <small>({{ number_format($loadTime, 2) }} segundos)</small>
-@endsection
+<?php $__env->startSection('pretitle'); ?>
+Panel principal <small>(<?php echo e(number_format($loadTime, 2)); ?> segundos)</small>
+<?php $__env->stopSection(); ?>
 
-@section('title')
+<?php $__env->startSection('title'); ?>
 Dashboard
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-xl">
 	<div class="row row-deck row-cards">
 		<div class="col-12">
@@ -30,19 +28,19 @@ Dashboard
 								<div class="col-auto">
 									<span
 										class="bg-primary text-white avatar">
-											<img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(158deg) brightness(103%) contrast(103%);" src="{{ asset('../static/svg/users-group.svg') }}" width="20" height="20">
+											<img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(158deg) brightness(103%) contrast(103%);" src="<?php echo e(asset('../static/svg/users-group.svg')); ?>" width="20" height="20">
 										</span>
 								</div>
 								<div class="col">
 									<div class="font-weight-medium">
-										@if($investor = 1)
-											{{ $investors }} inversionista<br>
-										@else
-											{{ $investors }} inversionistas<br>
-										@endif
+										<?php if($investor = 1): ?>
+											<?php echo e($investors); ?> inversionista<br>
+										<?php else: ?>
+											<?php echo e($investors); ?> inversionistas<br>
+										<?php endif; ?>
 									</div>
 									<div class="text-muted">
-										{{ $commissioner }} comisionistas
+										<?php echo e($commissioner); ?> comisionistas
 									</div>
 								</div>
 							</div>
@@ -56,11 +54,12 @@ Dashboard
 								<div class="col-auto">
 									<span
 										class="bg-cyan text-white avatar">
-										<img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(158deg) brightness(103%) contrast(103%);" src="{{ asset('../static/svg/building-skyscraper.svg') }}" width="20" height="20">
+										<img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(158deg) brightness(103%) contrast(103%);" src="<?php echo e(asset('../static/svg/building-skyscraper.svg')); ?>" width="20" height="20">
 								</div>
 								<div class="col">
 									<div class="font-weight-medium">
-										{{ $activeProjectsCount }}
+										<?php echo e($activeProjectsCount); ?>
+
 									</div>
 									<div class="text-muted">
 										Nº proyectos activos
@@ -77,11 +76,12 @@ Dashboard
 								<div class="col-auto">
 									<span
 										class="bg-success text-white avatar">
-										<img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(158deg) brightness(103%) contrast(103%);" src="{{ asset('../static/svg/clock-check.svg') }}" width="20" height="20">
+										<img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(158deg) brightness(103%) contrast(103%);" src="<?php echo e(asset('../static/svg/clock-check.svg')); ?>" width="20" height="20">
 								</div>
 								<div class="col">
 									<div class="font-weight-medium">
-										{{ $completedProjectsCount }}
+										<?php echo e($completedProjectsCount); ?>
+
 									</div>
 									<div class="text-muted">
 										Nº proyectos completados
@@ -98,11 +98,12 @@ Dashboard
 								<div class="col-auto">
 									<span
 										class="bg-red text-white avatar">
-										<img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(158deg) brightness(103%) contrast(103%);" src="{{ asset('../static/svg/clock-off.svg') }}" width="20" height="20">
+										<img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(158deg) brightness(103%) contrast(103%);" src="<?php echo e(asset('../static/svg/clock-off.svg')); ?>" width="20" height="20">
 								</div>
 								<div class="col">
 									<div class="font-weight-medium">
-										{{ $closedProjectsCount }}
+										<?php echo e($closedProjectsCount); ?>
+
 									</div>
 									<div class="text-muted">
 										Nº proyectos cerrados
@@ -120,7 +121,7 @@ Dashboard
 							<div class="row align-items-center">
 								<div class="col-auto">
 									<span class="bg-orange text-white avatar">
-										<img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(158deg) brightness(103%) contrast(103%);" src="{{ asset('../static/svg/report.svg') }}" width="20" height="20">
+										<img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(158deg) brightness(103%) contrast(103%);" src="<?php echo e(asset('../static/svg/report.svg')); ?>" width="20" height="20">
 									</span>
 								</div>
 								<div class="col">
@@ -132,8 +133,8 @@ Dashboard
 									</div>
 								</div>
 								<div style="margin-right: -35vh;" class="col">
-									<a href="{{ route('dashboard.general_export')}}" class="badge bg-teal me-1 text-white" style="padding-right: 10px">
-                                	    <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-spreadsheet.svg') }}" width="20" height="20" alt="">
+									<a href="<?php echo e(route('dashboard.general_export')); ?>" class="badge bg-teal me-1 text-white" style="padding-right: 10px">
+                                	    <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="<?php echo e(asset('../static/svg/file-spreadsheet.svg')); ?>" width="20" height="20" alt="">
                                 	    EXCEL GENERAL
                                 	</a>
 								</div>
@@ -175,22 +176,23 @@ Dashboard
 												</tr>
 											</thead>
 											<tbody>
-												@foreach ($promissoryNotes as $promissoryNote)												
+												<?php $__currentLoopData = $promissoryNotes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promissoryNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>												
 													<tr>
-														<td>#{{ $promissoryNote->promissoryNote_code }}</td>
-														<td>{{ $promissoryNote->promissoryNote_final_date }}</td>
+														<td>#<?php echo e($promissoryNote->promissoryNote_code); ?></td>
+														<td><?php echo e($promissoryNote->promissoryNote_final_date); ?></td>
 														<td>
-															<a href="{{ route('investor.show', $promissoryNote->investor_id) }}">{{ $promissoryNote->investor->investor_name }}
+															<a href="<?php echo e(route('investor.show', $promissoryNote->investor_id)); ?>"><?php echo e($promissoryNote->investor->investor_name); ?>
+
 																<small>
 																	<sup>
-																		<img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+																		<img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
 																	</sup>
 																</small>
 															</a>
 														</td>
-														<td>Lps. {{ number_format($promissoryNote->promissoryNote_amount,2) }}</td>
+														<td>Lps. <?php echo e(number_format($promissoryNote->promissoryNote_amount,2)); ?></td>
 													</tr>
-												@endforeach
+												<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 											</tbody>
 										</table>
 									</div>
@@ -224,22 +226,23 @@ Dashboard
 												</tr>
 											</thead>
 											<tbody>
-												@foreach ($transfers as $transfer)												
+												<?php $__currentLoopData = $transfers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transfer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>												
 													<tr>
-														<td>{{ $transfer->transfer_date }}</td>
+														<td><?php echo e($transfer->transfer_date); ?></td>
 														<td>
-															<a href="{{ route('investor.show', $transfer->investor_id) }}">{{ $transfer->investor->investor_name }}
+															<a href="<?php echo e(route('investor.show', $transfer->investor_id)); ?>"><?php echo e($transfer->investor->investor_name); ?>
+
 																<small>
 																	<sup>
-																		<img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+																		<img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
 																	</sup>
 																</small>
 															</a>
 														</td>
-														<td>{{ $transfer->transfer_bank }}</td>
-														<td class="text-green">Lps. {{ number_format($transfer->transfer_amount, 2) }}</td>
+														<td><?php echo e($transfer->transfer_bank); ?></td>
+														<td class="text-green">Lps. <?php echo e(number_format($transfer->transfer_amount, 2)); ?></td>
 													</tr>
-												@endforeach
+												<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 											</tbody>
 										</table>
 									</div>
@@ -271,22 +274,23 @@ Dashboard
 												</tr>
 											</thead>
 											<tbody>
-												@foreach ($creditNotes as $creditNote)												
+												<?php $__currentLoopData = $creditNotes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $creditNote): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>												
 													<tr>
-														<td>{{ $creditNote->creditNote_date }}</td>
+														<td><?php echo e($creditNote->creditNote_date); ?></td>
 														<td>
 															<a
-																href="{{ route('investor.show', $creditNote->investor_id) }}">{{ $creditNote->investor->investor_name }}
+																href="<?php echo e(route('investor.show', $creditNote->investor_id)); ?>"><?php echo e($creditNote->investor->investor_name); ?>
+
 																<small>
 																	<sup>
-																		<img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="{{ asset('../static/svg/link.svg') }}" width="20" height="20" alt="">
+																		<img style="filter: invert(38%) sepia(58%) saturate(6939%) hue-rotate(204deg) brightness(94%) contrast(72%);" src="<?php echo e(asset('../static/svg/link.svg')); ?>" width="20" height="20" alt="">
 																	</sup>
 																</small>
 															</a>
 														</td>
-														<td class="text-red">Lps. {{ number_format($creditNote->creditNote_amount, 2) }}</td>
+														<td class="text-red">Lps. <?php echo e(number_format($creditNote->creditNote_amount, 2)); ?></td>
 													</tr>
-												@endforeach
+												<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 											</tbody>
 										</table>
 									</div>
@@ -299,31 +303,31 @@ Dashboard
 		</div>
 	</div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-<script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customjs/datatable/dt_history.js')}}"></script>
+<script src="<?php echo e(asset('vendor/datatables/js/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('customjs/datatable/dt_history.js')); ?>"></script>
 
 <!-- Libs JS -->
-<script src="{{ asset('dist/libs/apexcharts/dist/apexcharts.min.js') }}" defer></script>
+<script src="<?php echo e(asset('dist/libs/apexcharts/dist/apexcharts.min.js')); ?>" defer></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        @php
+        <?php
             $paymentAmounts = $payments->pluck('payment_amount');
             $paymentDates = $payments->pluck('created_at');
             $projectNames = $payments->pluck('project_name');
             $projectInvestments = $payments->pluck('project_investment');
-        @endphp
+        ?>
 
-        var paymentAmounts = @json($paymentAmounts);
-        var paymentDates = @json($paymentDates);
-        var projectNames = @json($projectNames);
-        var projectInvestments = @json($projectInvestments);
+        var paymentAmounts = <?php echo json_encode($paymentAmounts, 15, 512) ?>;
+        var paymentDates = <?php echo json_encode($paymentDates, 15, 512) ?>;
+        var projectNames = <?php echo json_encode($projectNames, 15, 512) ?>;
+        var projectInvestments = <?php echo json_encode($projectInvestments, 15, 512) ?>;
 
         // Función para formatear números con separadores de miles y dos decimales
         function numberWithCommas(x) {
@@ -438,4 +442,5 @@ Dashboard
         })).render();
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/carlos/Code/InvestorInsight (Copiar)/resources/views/modules/dashboard/index.blade.php ENDPATH**/ ?>

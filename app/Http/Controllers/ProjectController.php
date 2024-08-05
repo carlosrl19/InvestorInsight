@@ -560,17 +560,4 @@ class ProjectController extends Controller
         }, $project->project_name . ' - FINIQUITO' . '.pdf');
     }
     // END PROJECT'S SHOW & REPORT FUNCTIONS
-
-
-    /* --------------------------
-        PROJECT'S FILTER REPORT FUNCTIONS
-    ----------------------------- */
-    public function exportFilterDates(Request $request)
-    {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        $fileName = 'Nombre_del_Libro.xlsx'; // Aquí defines el nombre del libro
-
-        return Excel::download(new ProjectsSheet($startDate, $endDate), $fileName);
-    }
 }
