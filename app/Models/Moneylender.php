@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Moneylender extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'moneylender_name',
+        'moneylender_company_name',
+        'moneylender_dni',
+        'moneylender_phone',
+    ];
 }
