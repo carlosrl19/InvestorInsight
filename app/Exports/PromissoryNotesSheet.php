@@ -14,23 +14,16 @@ class PromissoryNotesSheet implements FromView, WithEvents, WithTitle
 {
     public function view(): View
     {
-        $currentMonth = date('m');
-        $currentYear = date('Y');
-
-        $promissory_notes = PromissoryNote::whereMonth('created_at', $currentMonth)
-            ->whereYear('created_at', $currentYear)
+        $promissory_notes = PromissoryNote::where('promissoryNote_status', 1)
             ->get();
         
-        $promissory_notes_commissioners = PromissoryNoteCommissioner::whereMonth('created_at', $currentMonth)
-            ->whereYear('created_at', $currentYear)
+        $promissory_notes_commissioners = PromissoryNoteCommissioner::where('promissoryNoteCommissioner_status', 1)
             ->get();
         
-        $totalPromissoriesAmount = PromissoryNote::whereMonth('created_at', $currentMonth)
-            ->whereYear('created_at', $currentYear)
+        $totalPromissoriesAmount = PromissoryNote::where('promissoryNote_status', 1)
             ->sum('promissoryNote_amount');
         
-        $totalPromissoriesCommissionerAmount = PromissoryNoteCommissioner::whereMonth('created_at', $currentMonth)
-            ->whereYear('created_at', $currentYear)
+        $totalPromissoriesCommissionerAmount = PromissoryNoteCommissioner::where('promissoryNoteCommissioner_status', 1)
             ->sum('promissoryNoteCommissioner_amount');
 
 

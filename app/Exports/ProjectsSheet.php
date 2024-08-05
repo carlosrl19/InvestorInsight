@@ -13,19 +13,14 @@ class ProjectsSheet implements FromView, WithEvents, WithTitle
 {
     public function view(): View
     {
-        $currentMonth = date('m');
-        $currentYear = date('Y');
-
         $projects = Project::with('investors')
-            ->whereMonth('created_at', $currentMonth)
-            ->whereYear('created_at', $currentYear)
+            ->where('project_status', 1)
             ->get()
             ->sortBy(function ($project) {
                 return $project->investors->pluck('investor_name')->join(',');
             });
 
-        $totalProjectInvestment = Project::whereMonth('created_at', $currentMonth)
-            ->whereYear('created_at', $currentYear)
+        $totalProjectInvestment = Project::where('project_status', 1)
             ->get()
             ->sum('project_investment');
 
@@ -37,7 +32,7 @@ class ProjectsSheet implements FromView, WithEvents, WithTitle
 
     public function title(): string
     {
-        return 'INVERSION PROYECTOS (MES ACTUAL)'; // Nombre de la hoja
+        return 'INVERSION PROYECTOS'; // Nombre de la hoja
     }
 
     public function registerEvents(): array
