@@ -6,21 +6,56 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="<?php echo e(route('moneylender_loans.store')); ?>" method="POST">
+                <form action="<?php echo e(route('credit_note.store')); ?>" method="POST">
                     <?php echo csrf_field(); ?>
                     <div class="row mb-3 align-items-end">
+                       <div class="col" style="display: none">
+                            <div class="form-floating">
+                                <input type="datetime-local" 
+                                    name="creditNote_date" 
+                                    style="font-size: 10px;" 
+                                    value="<?php echo e($creditNoteDate); ?>" 
+                                    id="creditNote_date"
+                                    min="<?php echo e($creditNoteDate); ?>" 
+                                    max="<?php echo e($creditNoteDate); ?>" 
+                                    class="form-control <?php $__errorArgs = ['creditNote_date'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" 
+                                    readonly />
+                                <?php $__errorArgs = ['creditNote_date'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+
+                                <label for="creditNote_date"><small>Fecha de nota crédito</small></label>
+                            </div>
+                        </div>
+
                         <div class="col-lg-6">
                             <div class="form-floating">
-                                <select class="form-select" id="moneylender_id" name="moneylender_id" style="width: 100%;">
+                                <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;">
                                     <option value="" selected disabled>Seleccione un inversionista</option>
                                     <?php $__currentLoopData = $investors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $investor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($investor->id); ?>" data-balance="<?php echo e($investor->investor_balance); ?>" <?php echo e(old('moneylender_id') == $investor->id ? 'selected' : ''); ?>>
+                                        <option value="<?php echo e($investor->id); ?>" data-balance="<?php echo e($investor->investor_balance); ?>" <?php echo e(old('investor_id') == $investor->id ? 'selected' : ''); ?>>
                                             <?php echo e($investor->investor_name); ?>
 
                                         </option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
-                                <label for="moneylender_id">Inversionistas</label>
+                                <label for="investor_id">Inversionistas</label>
                             </div>
                         </div>
                         

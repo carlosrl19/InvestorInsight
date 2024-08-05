@@ -6,20 +6,41 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('moneylender_loans.store')}}" method="POST">
+                <form action="{{ route('credit_note.store')}}" method="POST">
                     @csrf
                     <div class="row mb-3 align-items-end">
+                       <div class="col" style="display: none">
+                            <div class="form-floating">
+                                <input type="datetime-local" 
+                                    name="creditNote_date" 
+                                    style="font-size: 10px;" 
+                                    value="{{ $creditNoteDate }}" 
+                                    id="creditNote_date"
+                                    min="{{ $creditNoteDate }}" 
+                                    max="{{ $creditNoteDate }}" 
+                                    class="form-control @error('creditNote_date') is-invalid @enderror" 
+                                    readonly />
+                                @error('creditNote_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                                <label for="creditNote_date"><small>Fecha de nota crédito</small></label>
+                            </div>
+                        </div>
+
                         <div class="col-lg-6">
                             <div class="form-floating">
-                                <select class="form-select" id="moneylender_id" name="moneylender_id" style="width: 100%;">
+                                <select class="form-select" id="investor_id" name="investor_id" style="width: 100%;">
                                     <option value="" selected disabled>Seleccione un inversionista</option>
                                     @foreach ($investors as $investor)
-                                        <option value="{{ $investor->id }}" data-balance="{{ $investor->investor_balance }}" {{ old('moneylender_id') == $investor->id ? 'selected' : '' }}>
+                                        <option value="{{ $investor->id }}" data-balance="{{ $investor->investor_balance }}" {{ old('investor_id') == $investor->id ? 'selected' : '' }}>
                                             {{ $investor->investor_name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                <label for="moneylender_id">Inversionistas</label>
+                                <label for="investor_id">Inversionistas</label>
                             </div>
                         </div>
                         

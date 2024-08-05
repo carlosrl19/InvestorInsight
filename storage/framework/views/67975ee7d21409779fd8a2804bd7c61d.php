@@ -171,6 +171,9 @@
                     </span>
                   </a>
                   <div class="dropdown-menu">
+                    <a class="dropdown-item" href="<?php echo e(route('moneylender.index')); ?>">
+                      <small>->&nbsp;</small>Prestamistas
+                    </a>
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">     
                         <div class="dropend">

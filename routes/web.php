@@ -38,6 +38,9 @@ Route::get('commission_agent/{id}/terminated_projects/excel', 'App\Http\Controll
 Route::resource('payments_commissioner', 'App\Http\Controllers\PaymentCommissionerController')->names('payments_commissioner');
 Route::get('payments_commissioner/{id}/report', 'App\Http\Controllers\PaymentCommissionerController@showReport')->name('payments_commissioner.report');
 
+// Moneylender
+Route::resource('moneylender', 'App\Http\Controllers\MoneylenderController')->names('moneylender');
+
 // Transfer
 Route::resource('transfer', 'App\Http\Controllers\TransferController')->names('transfer');
 
