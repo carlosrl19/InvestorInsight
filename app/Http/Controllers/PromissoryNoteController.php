@@ -87,7 +87,7 @@ class PromissoryNoteController extends Controller
     public function store(StoreRequest $request)
     {
         PromissoryNote::create($request->all());
-        return redirect()->route('promissory_note.index')->with('success', 'Pagaré creado exitosamente.');//
+        return redirect()->route('promissory_note.index')->with('success', 'Pagaré creado exitosamente.');
     }
 
     public function showReport($id) {

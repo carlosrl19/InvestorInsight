@@ -51,19 +51,19 @@
                 style="border: 1px solid #000; background-color: #E69C46; font-size: 12px; font-weight: bold; text-align: center; width: 120px;">
                 DIAS TRABAJO</td>
         </tr>
-        @foreach($projects as $project)
+        <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
                 <td></td>
-                <td style="border: 1px solid #000; text-align: center;">{{ $project->project_code }}</td>
-                <td style="border: 1px solid #000; text-align: center;">{{ $project->project_name }}</td>
-                <td style="border: 1px solid #000; text-align: center;">{{ $project->investors->pluck('investor_name')->join(', ') }}</td>
+                <td style="border: 1px solid #000; text-align: center;"><?php echo e($project->project_code); ?></td>
+                <td style="border: 1px solid #000; text-align: center;"><?php echo e($project->project_name); ?></td>
+                <td style="border: 1px solid #000; text-align: center;"><?php echo e($project->investors->pluck('investor_name')->join(', ')); ?></td>
                 <td></td> <!-- Merge con td anterior -->
                 <td style="border: 1px solid #000; text-align: center; background-color: #F8E4CC">
-                    L. {{ number_format($project->project_investment, 2) }}</td>
-                <td style="border: 1px solid #000; text-align: center;">{{ $project->project_start_date }} / {{ $project->project_end_date }}</td>
-                <td style="border: 1px solid #000; text-align: center;">{{ $project->project_work_days }} días</td>
+                    L. <?php echo e(number_format($project->project_investment, 2)); ?></td>
+                <td style="border: 1px solid #000; text-align: center;"><?php echo e($project->project_start_date); ?> / <?php echo e($project->project_end_date); ?></td>
+                <td style="border: 1px solid #000; text-align: center;"><?php echo e($project->project_work_days); ?> días</td>
             </tr>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <tr>
             <td></td>
             <td></td>
@@ -71,9 +71,10 @@
             <td></td>
             <td></td> <!-- Merge con td anterior -->
             <td style="background-color: #E69C46; border-top: 1px solid #000; text-align: center; font-weight: bold;">
-                L. {{ number_format($totalProjectInvestment, 2) }}
+                L. <?php echo e(number_format($totalProjectInvestment, 2)); ?>
+
             </td>
             <td></td>
         </tr>
     </tbody>
-</table>
+</table><?php /**PATH /home/carlos/Code/InvestorInsight (Copiar)/resources/views/modules/dashboard/_projects_report.blade.php ENDPATH**/ ?>
