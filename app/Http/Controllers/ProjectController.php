@@ -58,12 +58,12 @@ class ProjectController extends Controller
     
         // Inversores disponibles
         $availableInvestors = cache()->remember('available_investors', 60, function () {
-            return Investor::where('investor_status', 1)->get();
+            return Investor::where('investor_status', 1)->orderBy('investor_name', 'asc')->get();
         });
     
         // Inversores ordenados
         $investors = cache()->remember('investors', 60, function () {
-            return Investor::orderBy('investor_name')->get();
+            return Investor::orderBy('investor_name', 'asc')->get();
         });
     
         // Notas promisorios
@@ -73,7 +73,7 @@ class ProjectController extends Controller
     
         // Comisionistas
         $commissioners = cache()->remember('commissioners', 60, function () {
-            return CommissionAgent::get();
+            return CommissionAgent::orderBy('commissioner_name', 'asc')->get();
         });
     
         // Código generado
