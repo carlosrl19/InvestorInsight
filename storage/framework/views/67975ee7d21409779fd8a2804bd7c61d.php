@@ -48,7 +48,9 @@
               </a>
               <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Activar modo claro"
                 data-bs-toggle="tooltip" data-bs-placement="bottom">
-                <img style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(73deg) brightness(103%) contrast(103%);" src="<?php echo e(asset('../static/svg/sun.svg')); ?>" width="20" height="20">
+                <img
+                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(73deg) brightness(103%) contrast(103%);"
+                  src="<?php echo e(asset('../static/svg/sun.svg')); ?>" width="20" height="20">
               </a>
             </div>
             <div class="nav-item dropdown">
@@ -75,9 +77,10 @@
               <ul class="navbar-nav">
                 <li class="nav-item">
                   <a class="nav-link" href="<?php echo e(route('dashboard.index')); ?>">
-                    <span
-                      class="nav-link-icon d-md-none d-lg-inline-block">
-                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="<?php echo e(asset('../static/svg/dashboard.svg')); ?>" width="20" height="20">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                      <img
+                        style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);"
+                        src="<?php echo e(asset('../static/svg/dashboard.svg')); ?>" width="20" height="20">
                     </span>
                     <span class="nav-link-title">
                       Dashboard
@@ -87,9 +90,10 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" role="button" aria-expanded="false">
-                    <span
-                      class="nav-link-icon d-md-none d-lg-inline-block">
-                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="<?php echo e(asset('../static/svg/building-fortress.svg')); ?>" width="20" height="20">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                      <img
+                        style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);"
+                        src="<?php echo e(asset('../static/svg/building-fortress.svg')); ?>" width="20" height="20">
                     </span>
                     <span class="nav-link-title">
                       Proyectos
@@ -114,10 +118,11 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" role="button" aria-expanded="false">
-                    <span
-                      class="nav-link-icon d-md-none d-lg-inline-block">
-                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="<?php echo e(asset('../static/svg/users-group.svg')); ?>" width="20" height="20">
-                      </span>
+                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                      <img
+                        style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);"
+                        src="<?php echo e(asset('../static/svg/users-group.svg')); ?>" width="20" height="20">
+                    </span>
                     <span class="nav-link-title">
                       Recursos humanos
                     </span>
@@ -125,12 +130,36 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="<?php echo e(route("investor.index")); ?>">
-                          <small>->&nbsp;</small>Inversionistas
-                        </a>
+                        <div class="dropend">
+                          <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" role="button" aria-expanded="false">
+                            -> Inversionistas
+                          </a>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="<?php echo e(route('investor.future_capital')); ?>">
+                              <small>->&nbsp;</small>Future Capital
+                            </a>
+                            <a class="dropdown-item" href="<?php echo e(route('investor.jaguer')); ?>">
+                              <small>->&nbsp;</small>Jaguer Group S. de R.L.
+                            </a>
+                            <a class="dropdown-item" href="<?php echo e(route('investor.marsella')); ?>">
+                              <small>->&nbsp;</small>Marsella
+                            </a>
+                            <a class="dropdown-item" href="<?php echo e(route('investor.robenior')); ?>">
+                              <small>->&nbsp;</small>Robenior
+                            </a>
+                            <a class="dropdown-item" href="<?php echo e(route('investor.index')); ?>">
+                              <small>->&nbsp;</small>Mostrar todos
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dropdown-menu-columns">
+                      <div class="dropdown-menu-column">
                         <a class="dropdown-item" href="<?php echo e(route("commission_agent.index")); ?>">
                           <small>->&nbsp;</small>Comisionistas
-                        </a> 
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -138,10 +167,11 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" role="button" aria-expanded="false">
-                    <span
-                      class="nav-link-icon d-md-none d-lg-inline-block">
-                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="<?php echo e(asset('../static/svg/report.svg')); ?>" width="20" height="20">
-                      </span>
+                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                      <img
+                        style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);"
+                        src="<?php echo e(asset('../static/svg/report.svg')); ?>" width="20" height="20">
+                    </span>
                     <span class="nav-link-title">
                       Reportes
                     </span>
@@ -162,10 +192,11 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" role="button" aria-expanded="false">
-                    <span
-                      class="nav-link-icon d-md-none d-lg-inline-block">
-                      <img style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);" src="<?php echo e(asset('../static/svg/coins.svg')); ?>" width="20" height="20">
-                      </span>
+                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                      <img
+                        style="filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(98%) contrast(89%);"
+                        src="<?php echo e(asset('../static/svg/coins.svg')); ?>" width="20" height="20">
+                    </span>
                     <span class="nav-link-title">
                       Contabilidad
                     </span>
@@ -175,9 +206,10 @@
                       <small>->&nbsp;</small>Prestamistas
                     </a>
                     <div class="dropdown-menu-columns">
-                      <div class="dropdown-menu-column">     
+                      <div class="dropdown-menu-column">
                         <div class="dropend">
-                          <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                          <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" role="button" aria-expanded="false">
                             -> Pago de comisiones
                           </a>
                           <div class="dropdown-menu">
@@ -185,7 +217,7 @@
                               <small>->&nbsp;</small>Comisión inversionistas
                             </a>
                             <a class="dropdown-item" href="<?php echo e(route('payments_commissioner.index')); ?>">
-                              <small>->&nbsp;</small>Comisión  comisionistas
+                              <small>->&nbsp;</small>Comisión comisionistas
                             </a>
                           </div>
                         </div>
@@ -196,9 +228,10 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" role="button" aria-expanded="false">
-                    <span
-                      class="text-red nav-link-icon d-md-none d-lg-inline-block">
-                      <img style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);" src="<?php echo e(asset('../static/svg/circle-letter-r.svg')); ?>" width="20" height="20">
+                    <span class="text-red nav-link-icon d-md-none d-lg-inline-block">
+                      <img
+                        style="filter: invert(39%) sepia(68%) saturate(5311%) hue-rotate(342deg) brightness(94%) contrast(90%);"
+                        src="<?php echo e(asset('../static/svg/circle-letter-r.svg')); ?>" width="20" height="20">
                     </span>
                     <span class="nav-link-title">
                       <strong>ROBENIOR</strong>
@@ -209,8 +242,10 @@
                       <div class="dropdown-menu-column">
                         <a class="dropdown-item">
                           <strong style="margin: auto;">
-                            <img style="filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(3039%) hue-rotate(135deg) brightness(92%) contrast(84%);" src="<?php echo e(asset('../static/svg/arrows-up.svg')); ?>" width="20" height="20" alt="">
-                              MOVIMIENTOS ACTIVOS
+                            <img
+                              style="filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(3039%) hue-rotate(135deg) brightness(92%) contrast(84%);"
+                              src="<?php echo e(asset('../static/svg/arrows-up.svg')); ?>" width="20" height="20" alt="">
+                            MOVIMIENTOS ACTIVOS
                           </strong>
                         </a>
                         <table class="table table-bordered" style="margin-left: 0.3vw; width: 19.9vw">
@@ -222,23 +257,31 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pago a inversionistas</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_investor_profit_payment,2)); ?></td>
+                              <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pago a
+                                inversionistas</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps.
+                                <?php echo e(number_format($total_investor_profit_payment, 2)); ?></td>
                             </tr>
                             <tr>
-                              <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pago a comisionistas</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_commissioner_commission_payment,2)); ?></td>
+                              <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pago a
+                                comisionistas</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps.
+                                <?php echo e(number_format($total_commissioner_commission_payment, 2)); ?></td>
                             </tr>
                             <tr>
-                              <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Inversión de proyectos en proceso</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_project_investment,2)); ?></td>
+                              <td style="border-left: 1px solid green; font-size: clamp(0.6rem, 3vw, 0.62rem)">Inversión
+                                de proyectos en proceso</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps.
+                                <?php echo e(number_format($total_project_investment, 2)); ?></td>
                             </tr>
                           </tbody>
                         </table>
                         <a class="dropdown-item">
                           <strong style="margin: auto;">
-                            <img style="filter: brightness(0) saturate(100%) invert(28%) sepia(35%) saturate(4731%) hue-rotate(334deg) brightness(89%) contrast(95%);" src="<?php echo e(asset('../static/svg/arrows-up.svg')); ?>" width="20" height="20" alt="">
-                              MOVIMIENTOS PASADOS
+                            <img
+                              style="filter: brightness(0) saturate(100%) invert(28%) sepia(35%) saturate(4731%) hue-rotate(334deg) brightness(89%) contrast(95%);"
+                              src="<?php echo e(asset('../static/svg/arrows-up.svg')); ?>" width="20" height="20" alt="">
+                            MOVIMIENTOS PASADOS
                           </strong>
                         </a>
                         <table class="table table-bordered" style="margin-left: 0.3vw; width: 19.9vw">
@@ -250,16 +293,22 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pagos a inversionistas</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_investor_profit_paid,2)); ?></td>
+                              <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pagos a
+                                inversionistas</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps.
+                                <?php echo e(number_format($total_investor_profit_paid, 2)); ?></td>
                             </tr>
                             <tr>
-                              <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pagos a comisionistas</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_commissioner_commission_paid,2)); ?></td>
+                              <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Pagos a
+                                comisionistas</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps.
+                                <?php echo e(number_format($total_commissioner_commission_paid, 2)); ?></td>
                             </tr>
                             <tr>
-                              <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Inversión de proyectos finalizados</td>
-                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps. <?php echo e(number_format($total_project_investment_terminated,2)); ?></td>
+                              <td style="border-left: 1px solid red; font-size: clamp(0.6rem, 3vw, 0.62rem)">Inversión
+                                de proyectos finalizados</td>
+                              <td style="font-size: clamp(0.6rem, 3vw, 0.62rem)">Lps.
+                                <?php echo e(number_format($total_project_investment_terminated, 2)); ?></td>
                             </tr>
                           </tbody>
                         </table>

@@ -13,6 +13,11 @@ Route::get('dashboard/report', 'App\Http\Controllers\DashboardController@general
 
 // Investor
 Route::resource('investor', 'App\Http\Controllers\InvestorController')->names('investor');
+Route::get('investor/get/future-capital/', 'App\Http\Controllers\InvestorController@indexFutureCapital')->name('investor.future_capital');
+Route::get('investor/get/jaguer/', 'App\Http\Controllers\InvestorController@indexJaguer')->name('investor.jaguer');
+Route::get('investor/get/marsella/', 'App\Http\Controllers\InvestorController@indexMarsella')->name('investor.marsella');
+Route::get('investor/get/robenior/', 'App\Http\Controllers\InvestorController@indexRobenior')->name('investor.robenior');
+
 Route::post('investor/{id}/fund', 'App\Http\Controllers\InvestorController@fund')->name('investor.fund');
 Route::put('investor/{id}/liquidation','App\Http\Controllers\InvestorController@liquidate')->name('investor.liquidate'); // liquidar inversionista
 
