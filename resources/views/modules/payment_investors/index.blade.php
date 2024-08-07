@@ -27,13 +27,6 @@ Pagos inversionistas
         src="{{ asset('../static/svg/receipt.svg') }}" width="20" height="20" alt="">
     Pagarés
 </a>
-
-<!-- 
-<a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal"
-    data-bs-target="#modal-payment">
-    + Nuevo pago
-</a>
--->
 @endsection
 
 @section('content')

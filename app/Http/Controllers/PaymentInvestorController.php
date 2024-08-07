@@ -90,19 +90,6 @@ class PaymentInvestorController extends Controller
         ));
     }
     
-    
-    public function store(StoreRequest $request)
-    {
-        // Guardar el nuevo pago
-        $paymentInvestor = PaymentInvestor::create($request->validated());
-
-        // Actualizar el estado del pagaré correspondiente
-        $promissoryNote = PromissoryNote::findOrFail($request->promissoryNote_id);
-        $promissoryNote->update(['promissoryNote_status' => 0]);
-
-        return redirect()->route('payments_investor.index')->with('success', 'Pago registrado correctamente.');
-    }
-
     public function showReport($id) {
         $paymentInvestor = PaymentInvestor::findOrFail($id);
     

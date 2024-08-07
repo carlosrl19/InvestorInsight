@@ -76,18 +76,6 @@ class PaymentCommissionerController extends Controller
         ));
     }
 
-    public function store(StoreRequest $request)
-    {
-        // Guardar el nuevo pago
-        $paymentCommissioner = PaymentCommissioner::create($request->validated());
-
-        // Actualizar el estado del pagaré correspondiente
-        $promissoryNote = PromissoryNoteCommissioner::findOrFail($request->promissoryNote_id);
-        $promissoryNote->update(['promissoryNoteCommissioner_status' => 0]);
-
-        return redirect()->route('payments_commissioner.index')->with('success', 'Pago registrado correctamente.');
-    }
-
     public function showReport($id) {
         $paymentCommissioner = PaymentCommissioner::findOrFail($id);
     
