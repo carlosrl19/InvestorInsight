@@ -26,10 +26,12 @@ Pagos inversionistas
     Pagarés
 </a>
 
+<!-- 
 <a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal"
     data-bs-target="#modal-payment">
     + Nuevo pago
 </a>
+-->
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>

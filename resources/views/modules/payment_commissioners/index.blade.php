@@ -22,21 +22,31 @@ Pagos comisionistas
 @endsection
 
 @section('create')
-<div style="background-color: tomato; color: #fff; border-radius: 4px; padding: 3px 9px 3px 9px">
-    <a class="btn btn-sm bg-orange text-white" id="btn-list" style="font-size: clamp(0.6rem, 3vw, 0.65rem)" onclick="showList()">
+<div style="background-color: rgb(23, 162, 184); color: #fff; border-radius: 4px; padding: 3px 9px 3px 9px">
+    <a class="btn btn-sm bg-cyan text-white" id="btn-list" style="font-size: clamp(0.6rem, 3vw, 0.65rem)" onclick="showList()">
         <img style="filter: brightness(0) saturate(100%) invert(89%) sepia(100%) saturate(1%) hue-rotate(258deg) brightness(104%) contrast(101%);" alt="image" id="list-active" width="25" src="{{ asset('static/svg/calendar.svg') }}">
         &nbsp; Modo lista
     </a>
     &nbsp;&nbsp;
-    <a class="btn btn-sm bg-orange text-white" id="btn-calendar" style="font-size: clamp(0.6rem, 3vw, 0.65rem)" onclick="showCalendar()">
+    <a class="btn btn-sm bg-cyan text-white" id="btn-calendar" style="font-size: clamp(0.6rem, 3vw, 0.65rem)" onclick="showCalendar()">
         <img style="filter: brightness(0) saturate(100%) invert(89%) sepia(100%) saturate(1%) hue-rotate(258deg) brightness(104%) contrast(101%);" alt="image" id="calendar-active" width="25" src="{{ asset('static/svg/list.svg') }}">
         &nbsp; Modo calendario
     </a>
 </div>
 
+<a href="#" class="btn btn-orange" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal"
+    data-bs-target="#modal-promissoryCommissionerNotes">
+    <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%); margin-right: 5px"
+        src="{{ asset('../static/svg/receipt.svg') }}" width="20" height="20" alt="">
+    Pagarés
+</a>
+
+
+<!-- 
 <a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal" data-bs-target="#modal-payment">
     + Nuevo pago
 </a>
+-->
 @endsection
 
 @section('content')
@@ -145,6 +155,7 @@ Pagos comisionistas
 </div>
 
 @include('modules.payment_commissioners._create')
+@include('modules.promissory_note_commissioner._index')
 @endsection
 
 @section('scripts')
