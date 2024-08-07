@@ -75,35 +75,10 @@ class CommissionsSheet implements FromView, WithEvents, WithTitle
                 $endRow = $sheet->getHighestRow();
 
                 while ($startRow <= $endRow) {
-                    $sheet->mergeCells('B' . $headerStartRow . ':G' . $headerStartRow);
-                    $sheet->mergeCells('I' . $headerStartRow . ':N' . $headerStartRow);
-                    $sheet->mergeCells('B' . $startRow . ':C' . $startRow);
-                    $sheet->mergeCells('D' . $startRow . ':E' . $startRow);
+                    $sheet->mergeCells('B' . $headerStartRow . ':G' . $headerStartRow); // 4ta fila en el excel (header table)
+                    $sheet->mergeCells('B' . $startRow . ':C' . $startRow); //2da fila en el excel (encabezado)
+                    $sheet->mergeCells('D' . $startRow . ':E' . $startRow); // Nombre inversionista
                     $startRow++; // Incrementar startRow para evitar bucle infinito
-                }
-
-                // Buscar la fila que contiene el texto específico
-                for ($row = 1; $row <= $endRow; $row++) {
-                    $cellValue = $sheet->getCell('B' . $row)->getValue();
-                    if ($cellValue === 'COMISIONES A FAVOR DE COMISIONISTAS') {
-                        // Realizar el merge de B a F en la fila encontrada
-                        $sheet->mergeCells('B' . $row . ':F' . $row);
-                        $sheet->getStyle('B' . $row . ':F' . $row)->applyFromArray([
-                            'font' => [
-                                'bold' => true,
-                                'size' => 16,
-                            ],
-                            'alignment' => [
-                                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                            ],
-                            /*
-                            'fill' => [
-                                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                                'startColor' => ['argb' => 'FFFFFF00'], // Color de fondo (ejemplo)
-                            ], */
-                        ]);
-                        break; // Salir del bucle una vez encontrado
-                    }
                 }
             },
         ];

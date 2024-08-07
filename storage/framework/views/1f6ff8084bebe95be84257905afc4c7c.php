@@ -10,7 +10,7 @@
             <td></td>
             <td
                 style="font-size: 16px; width: 100px; font-weight: bold; background-color: #fff; text-align: center; text-decoration: underline;">
-                INVERSION DE PROYECTOS MES ACTUAL
+                INVERSION DE PROYECTOS ACTIVOS
             </td>
             <td style="background-color: #fff; width: 347px;"></td>
             <td style="background-color: #fff; width: 247px;"></td>
