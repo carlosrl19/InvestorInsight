@@ -101,7 +101,7 @@ class TransferController extends Controller
                 $images = $request->file('transfer_img');
                 foreach ($images as $image) {
                     $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
-                    $image->move(public_path('images/transfers'), $imageName);
+                    $image->move(public_path('../public_html/images/transfers'), $imageName);
                     $imageNames[] = $imageName;
                 }
             }

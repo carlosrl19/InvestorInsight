@@ -87,7 +87,7 @@ Transferencias
                             <div class="d-flex flex-wrap justify-content-center">
                                 @foreach (json_decode($transfer->transfer_img) as $image)
                                     <div class="mx-2 my-1">
-                                        <img id="image-preview" style="border: 1px solid #e3e3e3; border-radius: 5px; padding: 5px;" src="{{ asset('images/transfers/'. $image) }}" alt="Comprobante de transferencia" width="30" height="30">
+                                        <img id="image-preview" style="border: 1px solid #e3e3e3; border-radius: 5px; padding: 5px;" src="https://investorinsight.sindicatosideytms.com/images/transfers/{{ $image }}" alt="Comprobante de transferencia" width="30" height="30">
                                     </div>
                                 @endforeach
                             </div>

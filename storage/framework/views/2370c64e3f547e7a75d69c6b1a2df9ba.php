@@ -86,7 +86,7 @@ Transferencias
                             <div class="d-flex flex-wrap justify-content-center">
                                 <?php $__currentLoopData = json_decode($transfer->transfer_img); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="mx-2 my-1">
-                                        <img id="image-preview" style="border: 1px solid #e3e3e3; border-radius: 5px; padding: 5px;" src="<?php echo e(asset('images/transfers/'. $image)); ?>" alt="Comprobante de transferencia" width="30" height="30">
+                                        <img id="image-preview" style="border: 1px solid #e3e3e3; border-radius: 5px; padding: 5px;" src="https://investorinsight.sindicatosideytms.com/images/transfers/<?php echo e($image); ?>" alt="Comprobante de transferencia" width="30" height="30">
                                     </div>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
