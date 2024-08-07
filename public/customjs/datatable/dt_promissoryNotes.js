@@ -12,7 +12,7 @@
 
             // Personaliza el mensaje de búsqueda
             search: "Buscar",
-            searchPlaceholder: "Ingresa tu búsqueda...",
+            searchPlaceholder: "Ingrese el código del pagaré...",
 
             // Personaliza el mensaje de cantidad de filas mostradas
             lengthMenu: "Mostrando _MENU_ registros por página",

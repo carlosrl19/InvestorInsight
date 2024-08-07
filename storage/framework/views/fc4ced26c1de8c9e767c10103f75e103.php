@@ -197,7 +197,7 @@ Proyectos activos
                                                 <div class="row">
                                                     <div class="col-8">
                                                         ¿Desea cambiar el estado del proyecto denominado <b>"<?php echo e($project->project_name); ?>"</b> a "Finalizado"? Utilize esta opción únicamente cuando un proyecto haya concluido de forma exitosa.
-                                                        Es necesario que ingrese la fecha en la que el proyecto ha finalizado sus labores, así como el comprobante de pago de la transferencia del inversionista para el proyecto.
+                                                        Es necesario que ingrese el comprobante de pago del inversionista para el proyecto.
                                                         
                                                         <p class="mt-2" style="background-color: #e3e3e3; border-radius: 10px; padding: 10px">
                                                             <strong>PAGOS: </strong>

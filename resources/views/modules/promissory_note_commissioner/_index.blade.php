@@ -82,6 +82,12 @@
    </div>
 </div>
 
+<style>
+    .dataTables_filter{
+        display: inline;
+    }
+</style>
+
 <!-- Datatable -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>

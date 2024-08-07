@@ -147,7 +147,6 @@ Pagos comisionistas
     </div>
 </div>
 
-@include('modules.payment_commissioners._create')
 @include('modules.promissory_note_commissioner._index')
 @endsection
 

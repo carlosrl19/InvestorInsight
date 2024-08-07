@@ -118,7 +118,6 @@ Pagos inversionistas
     </div>
 </div>
 
-@include('modules.payment_investors._create')
 @include('modules.promissory_note._index')
 @endsection
 

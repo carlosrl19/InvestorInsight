@@ -25,13 +25,6 @@ Pagos inversionistas
         src="<?php echo e(asset('../static/svg/receipt.svg')); ?>" width="20" height="20" alt="">
     Pagarés
 </a>
-
-<!-- 
-<a href="#" class="btn btn-primary" style="font-size: clamp(0.6rem, 6vh, 0.7rem);" data-bs-toggle="modal"
-    data-bs-target="#modal-payment">
-    + Nuevo pago
-</a>
--->
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -124,7 +117,6 @@ Pagos inversionistas
     </div>
 </div>
 
-<?php echo $__env->make('modules.payment_investors._create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('modules.promissory_note._index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
