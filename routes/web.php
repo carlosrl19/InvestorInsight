@@ -48,6 +48,7 @@ Route::resource('moneylender', 'App\Http\Controllers\MoneylenderController')->na
 
 // Moneylender loans
 Route::resource('moneylender/loans', 'App\Http\Controllers\MoneylenderLoansController')->names('moneylender_loans');
+Route::get('moneylender/{id}/payment', 'App\Http\Controllers\MoneylenderLoansController@loanPayment')->name('moneylender_loans.payment');
 
 // Transfer
 Route::resource('transfer', 'App\Http\Controllers\TransferController')->names('transfer');

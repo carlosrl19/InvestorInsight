@@ -72,6 +72,7 @@ Historial de prestamista /&nbsp;
                                                 <th>MONTO TOTAL</th>
                                                 <th>PRESTATARIO</th>
                                                 <th>MOTIVO / COMENTARIO</th>
+                                                <th>PAGAR</th>
                                                 <th>EXPORTAR</th>
                                             </tr>
                                         </thead>
@@ -84,7 +85,17 @@ Historial de prestamista /&nbsp;
                                                     <td>Lps. <?php echo e($loan->loan_total_amount); ?></td>
                                                     <td><?php echo e($loan->commissioner->commissioner_name); ?></td>
                                                     <td><?php echo e($loan->loan_description); ?></td>
-                                                    <td></td>
+                                                    <td>
+                                                        <a href="<?php echo e(route('moneylender_loans.payment', $loan->id)); ?>" class="badge bg-red me-1 text-white">
+                                                            $ REALIZAR PAGO
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="" class="badge bg-teal me-1 text-white">
+                                                            <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="<?php echo e(asset('../static/svg/file-spreadsheet.svg')); ?>" width="20" height="20" alt="">
+                                                            EXCEL
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>

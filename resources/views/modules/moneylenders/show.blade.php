@@ -74,6 +74,7 @@ Historial de prestamista /&nbsp;
                                                 <th>MONTO TOTAL</th>
                                                 <th>PRESTATARIO</th>
                                                 <th>MOTIVO / COMENTARIO</th>
+                                                <th>PAGAR</th>
                                                 <th>EXPORTAR</th>
                                             </tr>
                                         </thead>
@@ -86,7 +87,18 @@ Historial de prestamista /&nbsp;
                                                     <td>Lps. {{ $loan->loan_total_amount }}</td>
                                                     <td>{{ $loan->commissioner->commissioner_name }}</td>
                                                     <td>{{ $loan->loan_description }}</td>
-                                                    <td></td>
+                                                    <td>
+                                                        <a href="{{ route('moneylender_loans.payment', $loan->id) }}" class="badge bg-red me-1 text-white">
+                                                            <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-spreadsheet.svg') }}" width="20" height="20" alt="">
+                                                            REALIZAR PAGO
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="" class="badge bg-teal me-1 text-white">
+                                                            <img style="filter: invert(100%) sepia(0%) saturate(7398%) hue-rotate(181deg) brightness(105%) contrast(102%);" src="{{ asset('../static/svg/file-spreadsheet.svg') }}" width="20" height="20" alt="">
+                                                            EXCEL
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                            @endforeach
                                         </tbody>

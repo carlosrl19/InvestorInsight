@@ -12,7 +12,7 @@
 
             // Personaliza el mensaje de búsqueda
             search: "Buscar",
-            searchPlaceholder: "Ingrese el código del pagaré...",
+            searchPlaceholder: "Ingrese su búsqueda...",
 
             // Personaliza el mensaje de cantidad de filas mostradas
             lengthMenu: "Mostrando _MENU_ registros por página",
@@ -23,6 +23,9 @@
             zeroRecords:
                 "No se encontraron registros que coincidan con la búsqueda.",
         },
+        order: [
+            [3, 'asc']
+        ],
         responsive: true,
         paginate: true,
         info: true,
