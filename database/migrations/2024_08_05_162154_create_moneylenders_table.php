@@ -6,20 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('moneylenders', function (Blueprint $table) {
             $table->id();
+            $table->string('moneylender_name');
+            $table->string('moneylender_company_name');
+            $table->string('moneylender_dni');
+            $table->string('moneylender_phone');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('moneylenders');

@@ -2,7 +2,7 @@
    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="border: 2px solid #52524E">
             <div class="modal-header">
-                <h5 class="modal-title">Agregar nuevo inversionista</h5>
+                <h5 class="modal-title">Agregar nuevo prestamista</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -17,7 +17,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label for="moneylender_name">Nombre del inversionista</label>
+                                <label for="moneylender_name">Nombre del prestamista</label>
                             </div>
                         </div>
                         <input type="hidden" name="moneylender_status" value="1">
@@ -36,7 +36,7 @@
                         </div>
                         <div class="col" style="display: none">
                             <div class="form-floating">
-                                <input type="number" name="moneylender_balance" step="any" readonly value="0.00" title="Si el inversionista tiene fondos existentes y se está agregando al sistema por primera vez, agregue el fondo monetario como una transferencia y agregue el comentario referente a que ya era un fondo existente." data-bs-toggle="tooltip" data-bs-placement="right" id="moneylender_balance" class="form-control @error('moneylender_balance') is-invalid @enderror"/>
+                                <input type="number" name="moneylender_balance" step="any" readonly value="0.00" title="Si el prestamista tiene fondos existentes y se está agregando al sistema por primera vez, agregue el fondo monetario como una transferencia y agregue el comentario referente a que ya era un fondo existente." data-bs-toggle="tooltip" data-bs-placement="right" id="moneylender_balance" class="form-control @error('moneylender_balance') is-invalid @enderror"/>
                                 @error('moneylender_balance')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
