@@ -64,7 +64,7 @@
         responsive: true,
         paginate: true,
         info: true,
-        searching: true,
+        searching: false,
         lengthChange: true,
         aLengthMenu: [
             [10, 20, 50],

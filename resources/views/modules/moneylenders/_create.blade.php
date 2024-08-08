@@ -20,8 +20,8 @@
                                 <label for="moneylender_name">Nombre del prestamista</label>
                             </div>
                         </div>
-                        <input type="hidden" name="moneylender_status" value="1">
                     </div>
+
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">
@@ -34,17 +34,7 @@
                                 <label for="moneylender_dni">Nº identidad</label>
                             </div>
                         </div>
-                        <div class="col" style="display: none">
-                            <div class="form-floating">
-                                <input type="number" name="moneylender_balance" step="any" readonly value="0.00" title="Si el prestamista tiene fondos existentes y se está agregando al sistema por primera vez, agregue el fondo monetario como una transferencia y agregue el comentario referente a que ya era un fondo existente." data-bs-toggle="tooltip" data-bs-placement="right" id="moneylender_balance" class="form-control @error('moneylender_balance') is-invalid @enderror"/>
-                                @error('moneylender_balance')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <label for="moneylender_balance">Fondo monetario</label>
-                            </div>
-                        </div>
+
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" oninput="this.value = this.value.replace(/\D/g, '')" minlength="8" maxlength="11" name="moneylender_phone" value="{{ old('moneylender_phone') }}" id="moneylender_phone" class="form-control @error('moneylender_phone') is-invalid @enderror" autocomplete="off">
@@ -57,6 +47,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <div class="form-floating">

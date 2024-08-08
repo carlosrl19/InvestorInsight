@@ -54,7 +54,6 @@ class StoreRequest extends FormRequest
             'moneylender_company_name.regex' => 'El nombre de la empresa afiliada no puede contener números ni símbolos.',
             'moneylender_company_name.min' => 'El nombre de la empresa afiliada debe contener al menos 3 letras.',
             'moneylender_company_name.max' => 'El nombre de la empresa afiliada no puede exceder 55 letras.',
-
         ];
     }
 }

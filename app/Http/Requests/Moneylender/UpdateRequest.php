@@ -19,7 +19,7 @@ class UpdateRequest extends FormRequest
             'moneylender_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/|unique:moneylenders,moneylender_name,' . $moneylenderId . '',
             'moneylender_dni' => 'required|string|min:13|max:13|regex:/^[0-9]+$/|unique:moneylenders,moneylender_dni,' . $moneylenderId . '',
             'moneylender_phone' => 'required|string|min:8|max:11|regex:/^[0-9]+$/|',
-            'moneylender_description' => 'required|string|min:3|max:255',
+            'moneylender_company_name' => 'required|string|min:3|max:55|regex:/^[^\d]+$/',
         ];
     }
 
@@ -50,11 +50,12 @@ class UpdateRequest extends FormRequest
             'moneylender_phone.min' => 'El número de teléfono del prestamista debe contener al menos 8 digitos.',
             'moneylender_phone.max' => 'El número de teléfono del prestamista no puede exceder 11 digitos.',
 
-            // Moneylender description messages
-            'moneylender_description.required' => 'La descripción del prestamista es obligatoria.',
-            'moneylender_description.string' => 'La descripción del prestamista solo debe contener letras, números y/o símbolos.',
-            'moneylender_description.min' => 'La descripción del prestamista debe tener al menos 3 caracteres.',
-            'moneylender_description.max' => 'La descripción del prestamista no puede tener más de 255 caracteres.',
+            // Company name messages
+            'moneylender_company_name.required' => 'El nombre de la empresa afiliada es obligatorio.',
+            'moneylender_company_name.string' => 'El nombre de la empresa afiliada solo debe contener letras.',
+            'moneylender_company_name.regex' => 'El nombre de la empresa afiliada no puede contener números ni símbolos.',
+            'moneylender_company_name.min' => 'El nombre de la empresa afiliada debe contener al menos 3 letras.',
+            'moneylender_company_name.max' => 'El nombre de la empresa afiliada no puede exceder 55 letras.',
         ];
     }
 }

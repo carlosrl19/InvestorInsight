@@ -46,6 +46,9 @@ Route::get('payments_commissioner/{id}/report', 'App\Http\Controllers\PaymentCom
 // Moneylender
 Route::resource('moneylender', 'App\Http\Controllers\MoneylenderController')->names('moneylender');
 
+// Moneylender loans
+Route::resource('moneylender/loans', 'App\Http\Controllers\MoneylenderLoansController')->names('moneylender_loans');
+
 // Transfer
 Route::resource('transfer', 'App\Http\Controllers\TransferController')->names('transfer');
 

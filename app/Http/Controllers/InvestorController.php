@@ -614,7 +614,6 @@ class InvestorController extends Controller
             )
         );
     }
-
     public function edit($id)
     {
         $investor = Investor::findOrFail($id);

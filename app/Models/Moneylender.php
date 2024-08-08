@@ -12,4 +12,9 @@ class Moneylender extends Model
         'moneylender_dni',
         'moneylender_phone',
     ];
+
+    public function moneylender_loans()
+    {
+        return $this->hasMany(MoneylenderLoans::class, 'moneylender_id');
+    }
 }

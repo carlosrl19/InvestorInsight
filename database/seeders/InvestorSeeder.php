@@ -10,7 +10,6 @@ class InvestorSeeder extends Seeder
 {
     public function run(): void
     {
-
         Investor::create(
             [
                 'investor_name'=>'PIVOTE',
